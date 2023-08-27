@@ -1,0 +1,16 @@
+<html>
+
+<head>
+    <script>
+        fetch("/get-session").then(a => a.json()).then(obj => {
+            console.log(obj)
+            document.getElementById("iframe").setAttribute("src", obj.url)
+        })
+    </script>
+</head>
+
+<body style="padding: 0; margin: 0">
+    <iframe frameborder="0" style="width: 100vw; height: 100vh" id="iframe" />
+</body>
+
+</html>
