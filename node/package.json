@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/node",
-  "version": "0.9.2",
+  "version": "0.9.4",
   "description": "The nodejs SDK for Onvo AI dashboard builder",
   "main": "lib/index.js",
   "scripts": {

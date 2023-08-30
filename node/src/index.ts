@@ -41,18 +41,20 @@ export default class Onvo {
     userId: string;
     parameters?: { [key: string]: any };
   }) {
-    let data: any = await fetch(this.endpoint + "/api/session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": this.apiKey,
-      },
-      body: JSON.stringify({
-        dashboard: dashboardId,
-        user: userId,
-        parameters: parameters,
-      }),
-    }).then((a) => a.json());
+    let data: any = await fetch(
+      this.endpoint + "/api/dashboards/" + dashboardId + "/sessions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": this.apiKey,
+        },
+        body: JSON.stringify({
+          user: userId,
+          parameters: parameters,
+        }),
+      }
+    ).then((a) => a.json());
 
     return this.endpoint + data.url;
   }

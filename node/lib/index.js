@@ -22,14 +22,13 @@ export default class Onvo {
         }).then((a) => a.json());
     }
     async createSession({ dashboardId, userId, parameters, }) {
-        let data = await fetch(this.endpoint + "/api/session", {
+        let data = await fetch(this.endpoint + "/api/dashboards/" + dashboardId + "/sessions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "x-api-key": this.apiKey,
             },
             body: JSON.stringify({
-                dashboard: dashboardId,
                 user: userId,
                 parameters: parameters,
             }),
