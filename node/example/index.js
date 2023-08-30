@@ -1,4 +1,4 @@
-import Onvo from "@onvo/node";
+import Onvo from "../lib/index.js";
 import dotenv from "dotenv";
 import path from "path";
 import express from "express";

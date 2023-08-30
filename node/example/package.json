@@ -9,8 +9,5 @@
   },
   "type": "module",
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@onvo/node": "file:.."
-  }
+  "license": "ISC"
 }
