@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@onvo/node": "file:.."
+    "@onvo/node": "file:../node",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
   }
 }

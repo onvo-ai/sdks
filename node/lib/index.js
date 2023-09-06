@@ -21,8 +21,42 @@ export default class Onvo {
             }),
         }).then((a) => a.json());
     }
-    async createSession({ dashboardId, userId, parameters, }) {
+    async getDashboards() {
+        let data = await fetch(this.endpoint + "/api/dashboards", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-api-key": this.apiKey,
+            },
+        }).then((a) => a.json());
+        return data;
+    }
+    async getReports() {
+        let data = await fetch(this.endpoint + "/api/reports", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-api-key": this.apiKey,
+            },
+        }).then((a) => a.json());
+        return data;
+    }
+    async createDashboardSession({ dashboardId, userId, parameters, }) {
         let data = await fetch(this.endpoint + "/api/dashboards/" + dashboardId + "/sessions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-api-key": this.apiKey,
+            },
+            body: JSON.stringify({
+                user: userId,
+                parameters: parameters,
+            }),
+        }).then((a) => a.json());
+        return this.endpoint + data.url;
+    }
+    async createReportSession({ reportId, userId, parameters, }) {
+        let data = await fetch(this.endpoint + "/api/reports/" + reportId + "/sessions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
