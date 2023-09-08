@@ -1,20 +1,13 @@
 import Onvo from "@onvo/node";
 import dotenv from "dotenv";
-import path from "path";
 import express from "express";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 dotenv.config();
 let onvo = new Onvo("http://localhost:3004", process.env.API_KEY);
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
+app.use(express.static("public"));
 
 app.get("/api/dashboards", async function (req, res) {
   try {
@@ -44,7 +37,7 @@ app.get("/api/dashboards/:id", async function (req, res) {
       },
     });
 
-    let sessionUrl = await onvo.createDashboardSession({
+    let data = await onvo.createDashboardSession({
       dashboardId: req.params.id,
       userId: "123456",
       parameters: {
@@ -52,8 +45,7 @@ app.get("/api/dashboards/:id", async function (req, res) {
         sort: "asc",
       },
     });
-    console.log("URL: ", sessionUrl);
-    res.send(JSON.stringify({ url: sessionUrl }));
+    res.send(JSON.stringify({ url: data.url }));
   } catch (e) {
     console.log(e);
   }
@@ -70,7 +62,7 @@ app.get("/api/reports/:id", async function (req, res) {
       },
     });
 
-    let sessionUrl = await onvo.createReportSession({
+    let data = await onvo.createReportSession({
       reportId: req.params.id,
       userId: "123456",
       parameters: {
@@ -78,8 +70,7 @@ app.get("/api/reports/:id", async function (req, res) {
         sort: "asc",
       },
     });
-    console.log("URL: ", sessionUrl);
-    res.send(JSON.stringify({ url: sessionUrl }));
+    res.send(JSON.stringify({ url: data.url }));
   } catch (e) {
     console.log(e);
   }
