@@ -1,84 +1,40 @@
-# @onvo-ai/node
+# Onvo AI SDKs
 
-The @onvo-ai/node package provides utilities to seamlessly communicate with the Onvo platform, allowing developers to integrate AI-powered dashboards into their products. This README provides an overview of the package's features, installation, and usage instructions.
+This repository contains packages to provides utilities to seamlessly communicate with the Onvo platform, allowing developers to integrate AI-powered dashboards into their products.
 
-### Installation
+You can find the API documentation at https://onvo.ai/support/docs
 
-You can install the package using npm:
+## Server library progress
 
-```bash
-npm install @onvo-ai/node
-```
+#### ✅ [Node.js](https://www.npmjs.com/package/@onvo-ai/node) - Available with an example project
 
-OR
+#### Java - Coming soon
 
-```bash
-yarn add @onvo-ai/node
-```
+#### Ruby - Coming soon
 
-### Getting Started
+#### Go - Coming soon
 
-To begin using the `@onvo-ai/node` package, you'll need to have an API key from the Onvo platform. Ensure that your API key is stored as an environment variable named `API_KEY`.
+#### PHP - Coming soon
 
-### Usage
+## Client library progress
 
-Here's an example of how to use the package to interact with the Onvo platform:
+#### ✅ HTML iframe - Available with example project
 
-```javascript
-const { Onvo } = require("@onvo-ai/node");
+#### HTML web component - Coming soon
 
-// Initialize the Onvo class with your API key
-const onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
+#### React - Coming soon
 
-// Identify a user
-await onvo.identifyUser("123456", {
-  name: "John Appleseed",
-  email: "john@appleseed.com",
-  metadata: {
-    phone_number: "+1 234 5678",
-    organisation_id: "87dfty9872ydq8tg",
-  },
-});
+#### Angular - Coming soon
 
-// Create a session
-const sessionUrl = await onvo.createSession({
-  dashboardId: "ebc7ab74-3fd2-47e6-90df-addaec3a029e",
-  userId: "123456",
-  parameters: {
-    year: 2023,
-    sort: "asc",
-  },
-});
-```
+## We are looking for contributors
 
-### API Reference
+If you are comfortable working in one of the languages and frameworks mentioned above, we would love for you to join us make dashboarding better for all engineers out there. Please do send a PR and we'd be happy to work with you.
 
-**`Onvo(baseUrl, apiKey)`**
-This is the main class that initializes the connection to the Onvo platform.
-
-`baseUrl (string)`: The base URL to the Onvo platform or your self hosted endpoint.
-`apiKey (string)`: Your API key for authentication.
-
----
-
-**`onvo.identifyUser(userId, userData)`**
-Identify a user on the Onvo platform.
-
-`userId (string)`: Unique identifier for the user.
-`userData (object)`: User data including name, email, and metadata.
-
----
-
-**`onvo.createSession(sessionData)`**
-Create a session on the Onvo platform.
-
-`sessionData (object)`: Session data including dashboardId, userId, and other parameters.
-
-### Support
+## Support
 
 For any issues, questions, or feedback, please contact our support team at info@onvo.ai.
 
-### License
+## License
 
 This package is distributed under the MIT License.
 
