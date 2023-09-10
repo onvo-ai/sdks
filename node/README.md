@@ -2,7 +2,7 @@
 
 The @onvo-ai/node package provides utilities to seamlessly communicate with the Onvo platform, allowing developers to integrate AI-powered dashboards into their products. This README provides an overview of the package's features, installation, and usage instructions.
 
-### Installation
+## Installation
 
 You can install the package using npm:
 
@@ -16,11 +16,17 @@ OR
 yarn add @onvo-ai/node
 ```
 
-### Getting Started
+OR
+
+```bash
+bun install @onvo-ai/node
+```
+
+## Getting Started
 
 To begin using the `@onvo-ai/node` package, you'll need to have an API key from the Onvo platform. Ensure that your API key is stored as an environment variable named `API_KEY`.
 
-### Usage
+## Usage
 
 Here's an example of how to use the package to interact with the Onvo platform:
 
@@ -51,34 +57,40 @@ const sessionUrl = await onvo.createSession({
 });
 ```
 
-### API Reference
+## API Reference
 
-**`Onvo(baseUrl, apiKey)`**
-This is the main class that initializes the connection to the Onvo platform.
+**`new Onvo(baseUrl, apiKey)`**
+_This is the main class that initializes the connection to the Onvo platform._
 
-`baseUrl (string)`: The base URL to the Onvo platform or your self hosted endpoint.
-`apiKey (string)`: Your API key for authentication.
-
----
-
-**`onvo.identifyUser(userId, userData)`**
-Identify a user on the Onvo platform.
-
-`userId (string)`: Unique identifier for the user.
-`userData (object)`: User data including name, email, and metadata.
+- `baseUrl (string)`: The base URL to the Onvo platform or your self hosted endpoint.
+- `apiKey (string)`: Your API key for authentication.
 
 ---
 
-**`onvo.createSession(sessionData)`**
-Create a session on the Onvo platform.
+**`await onvo.identifyUser(userId, userData)`**
+_Identify a user on the Onvo platform._
 
-`sessionData (object)`: Session data including dashboardId, userId, and other parameters.
+- `userId (string)`: Unique identifier for the user.
+- `userData (object)`
+  - `name (string)`: Name of the user
+  - `email (string)`: Email id of the user
+  - `metadata: (object)`: _Optional_ Additional data used to fetch the right data source
 
-### Support
+---
+
+**`await onvo.createSession(sessionData)`**
+_Create a session on the Onvo platform._
+
+- `sessionData (object)`
+  - `dashboardId (string)`: The unique identifier of the dashboard
+  - `userId (string)`: The id of user that was identified in the previous step
+  - `parameters (string)`: _Optional_ Additional parameters used to fetch the right data source
+
+## Support
 
 For any issues, questions, or feedback, please contact our support team at info@onvo.ai.
 
-### License
+## License
 
 This package is distributed under the MIT License.
 
