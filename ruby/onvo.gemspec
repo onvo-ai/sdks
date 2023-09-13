@@ -7,9 +7,5 @@ Gem::Specification.new do |s|
   s.authors               = ['Ronnel Davis', 'Bryan Davis']
   s.files                 = ['lib/onvo.rb']
   s.required_ruby_version = '>= 2.6.0'
-  
   s.add_dependency 'httparty', '~> 0.13.7'
-  s.add_development_dependency 'rubocop', '~> 0.60'
-  s.add_development_dependency 'rubocop-performance', '~> 1.5'
-  s.add_development_dependency 'rubocop-rspec', '~> 1.37'
 end
