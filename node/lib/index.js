@@ -23,7 +23,7 @@ export default class Onvo {
             throw new Error(json.message);
         }
     }
-    identifyUser(userId, userData) {
+    upsertEmbedUser(userId, userData) {
         return this.fetchBase("/api/embed-users", "POST", {
             id: userId,
             name: userData.name,
