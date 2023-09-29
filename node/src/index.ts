@@ -30,7 +30,7 @@ export default class Onvo {
     }
   }
 
-  identifyUser(
+  upsertEmbedUser(
     userId: string,
     userData: {
       name: string;
@@ -38,7 +38,7 @@ export default class Onvo {
       metadata: { [key: string]: any };
     }
   ) {
-    return this.fetchBase("/api/users", "POST", {
+    return this.fetchBase("/api/embed-users", "POST", {
       id: userId,
       name: userData.name,
       email: userData.email,

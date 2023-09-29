@@ -1,4 +1,4 @@
-import Onvo from "@onvo/node";
+import Onvo from "../lib/index.js";
 import dotenv from "dotenv";
 import express from "express";
 
@@ -28,7 +28,7 @@ app.get("/api/reports", async function (req, res) {
 
 app.get("/api/dashboards/:id", async function (req, res) {
   try {
-    await onvo.identifyUser("123456", {
+    await onvo.upsertEmbedUser("123456", {
       name: "John appleseed",
       email: "john@appleseed.com",
       metadata: {
@@ -45,6 +45,7 @@ app.get("/api/dashboards/:id", async function (req, res) {
         sort: "asc",
       },
     });
+    console.log(data);
     res.send(JSON.stringify({ url: data.url }));
   } catch (e) {
     console.log(e);
@@ -53,7 +54,7 @@ app.get("/api/dashboards/:id", async function (req, res) {
 
 app.get("/api/reports/:id", async function (req, res) {
   try {
-    await onvo.identifyUser("123456", {
+    await onvo.upsertEmbedUser("123456", {
       name: "John appleseed",
       email: "john@appleseed.com",
       metadata: {
