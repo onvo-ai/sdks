@@ -24,7 +24,7 @@ export default class Onvo {
         }
     }
     identifyUser(userId, userData) {
-        return this.fetchBase("/api/users", "POST", {
+        return this.fetchBase("/api/embed-users", "POST", {
             id: userId,
             name: userData.name,
             email: userData.email,

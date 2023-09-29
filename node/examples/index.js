@@ -1,4 +1,4 @@
-import Onvo from "@onvo/node";
+import Onvo from "../lib/index.js";
 import dotenv from "dotenv";
 import express from "express";
 
@@ -45,6 +45,7 @@ app.get("/api/dashboards/:id", async function (req, res) {
         sort: "asc",
       },
     });
+    console.log(data);
     res.send(JSON.stringify({ url: data.url }));
   } catch (e) {
     console.log(e);
