@@ -28,7 +28,7 @@ app.get("/api/reports", async function (req, res) {
 
 app.get("/api/dashboards/:id", async function (req, res) {
   try {
-    await onvo.identifyUser("123456", {
+    await onvo.upsertEmbedUser("123456", {
       name: "John appleseed",
       email: "john@appleseed.com",
       metadata: {
@@ -54,7 +54,7 @@ app.get("/api/dashboards/:id", async function (req, res) {
 
 app.get("/api/reports/:id", async function (req, res) {
   try {
-    await onvo.identifyUser("123456", {
+    await onvo.upsertEmbedUser("123456", {
       name: "John appleseed",
       email: "john@appleseed.com",
       metadata: {

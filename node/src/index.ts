@@ -30,7 +30,7 @@ export default class Onvo {
     }
   }
 
-  identifyUser(
+  upsertEmbedUser(
     userId: string,
     userData: {
       name: string;
