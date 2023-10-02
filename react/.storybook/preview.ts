@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/react";
 import { withThemeFromJSXProvider } from "@storybook/addon-styling";
-import "../src/components/OnvoWrapper/styles.css";
+import "../src/styles.css";
 
 /* TODO: update import for your custom theme configurations */
 // import { lightTheme, darkTheme } from '../path/to/themes';

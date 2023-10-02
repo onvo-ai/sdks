@@ -3,7 +3,8 @@ import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
-
+import postcss from "rollup-plugin-postcss";
+import tailwind from "rollup-plugin-tailwindcss";
 const packageJson = require("./package.json");
 
 export default [
@@ -25,6 +26,12 @@ export default [
       peerDepsExternal(),
       resolve(),
       commonjs(),
+      tailwind({
+        input: "src/styles.css", // required
+        // Tailor the emitted stylesheet to the bundle by removing any unused CSS
+        // (highly recommended when packaging for distribution).
+        purge: false,
+      }),
       typescript({ tsconfig: "./tsconfig.json" }),
     ],
     external: ["react", "react-dom", "styled-components"],

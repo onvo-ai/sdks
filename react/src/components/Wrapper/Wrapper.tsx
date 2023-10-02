@@ -1,16 +1,15 @@
-"use client";
-
 import React, { createContext, useContext, useMemo, useState } from "react";
-import "./styles.css";
 
 type OnvoWrapperContext = {
   token: string | undefined;
+  baseUrl: string;
   dashboard: string | undefined;
   report: string | undefined;
 };
 
 const Context = createContext<OnvoWrapperContext>({
   token: undefined,
+  baseUrl: "https://dashboard.onvo.ai",
   dashboard: undefined,
   report: undefined,
 });
@@ -31,9 +30,10 @@ function parseJwt(token: string) {
   return JSON.parse(jsonPayload);
 }
 
-const OnvoWrapper: React.FC<{ token: string; children: any }> = ({
+const Wrapper: React.FC<{ token: string; baseUrl: string; children: any }> = ({
   token,
   children,
+  baseUrl = "https://dashboard.onvo.ai",
 }) => {
   let obj = useMemo(() => {
     let dashboard: string | undefined;
@@ -55,8 +55,10 @@ const OnvoWrapper: React.FC<{ token: string; children: any }> = ({
   }, [token]);
 
   return (
-    <Context.Provider value={{ token, ...obj }}>{children}</Context.Provider>
+    <Context.Provider value={{ token, ...obj, baseUrl }}>
+      {children}
+    </Context.Provider>
   );
 };
-export default OnvoWrapper;
+export default Wrapper;
 export const useToken = () => useContext(Context);

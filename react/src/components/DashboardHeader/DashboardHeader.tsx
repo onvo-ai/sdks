@@ -1,24 +1,14 @@
-"use client";
-import {
-  Button,
-  TabGroup,
-  Tab,
-  TabList,
-  TextInput,
-  Metric,
-  Text,
-  Subtitle,
-} from "@tremor/react";
+import { Button, TextInput, Metric, Text } from "@tremor/react";
 
 import React, { useEffect, useState } from "react";
-import { useToken } from "../OnvoWrapper";
+import { useToken } from "../Wrapper";
 
 const DashboardHeader: React.FC = ({}) => {
   //   const router = useRouter();
   //   const editing = useDashboard((state) => state.editing);
   const [editing, setEditing] = useState(false);
   const [dashboard, setDashboard] = useState<any>();
-  const { token, dashboard: dashboardId } = useToken();
+  const { token, dashboard: dashboardId, baseUrl } = useToken();
 
   async function saveChanges(e: any) {
     e.preventDefault();
@@ -41,7 +31,7 @@ const DashboardHeader: React.FC = ({}) => {
   useEffect(() => {
     console.log("TOKEN: ", token);
     if (token) {
-      fetch("http://localhost:3004/api/dashboards/" + dashboardId, {
+      fetch(baseUrl + "/api/dashboards/" + dashboardId, {
         method: "GET",
         headers: {
           "x-api-key": token,
@@ -55,7 +45,7 @@ const DashboardHeader: React.FC = ({}) => {
   }, [token]);
 
   return (
-    <section className="foreground-color sticky z-10 border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 top-0">
+    <section className="onv-dashboard-header foreground-color sticky z-10 border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 top-0">
       <main className="mx-auto max-w-screen-2xl px-6 pt-4 lg:px-8">
         <form onSubmit={saveChanges}>
           <div className="mb-3 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">

@@ -1,8 +1,8 @@
 {
   "name": "@onvo/react",
   "version": "1.0.0",
-  "description": "A demo on how to create a React UI component library using React, Typescript, Rollup, Storybook, Jest and React testing library.",
-  "repository": "https://github.com/Timonwa/demo-ui-library",
+  "description": "The react SDK for Onvo AI dashboard builder",
+  "repository": "https://github.com/onvo-ai/sdks",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types.d.ts",
@@ -13,7 +13,7 @@
     "build-storybook": "storybook build"
   },
   "keywords": [
-    "demo",
+    "onvo",
     "ui",
     "react",
     "library",
@@ -60,6 +60,7 @@
     "rollup": "^3.0.0",
     "rollup-plugin-dts": "^5.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-tailwindcss": "^1.0.0",
     "storybook": "7.4.5",
     "storybook-react-context": "^0.6.0",
     "tailwindcss": "^3.3.3",
