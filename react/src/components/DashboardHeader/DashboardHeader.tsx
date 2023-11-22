@@ -8,7 +8,7 @@ const DashboardHeader: React.FC = ({}) => {
   //   const editing = useDashboard((state) => state.editing);
   const [editing, setEditing] = useState(false);
   const [dashboard, setDashboard] = useState<any>();
-  const { token, dashboard: dashboardId, baseUrl } = useToken();
+  const { backend } = useToken();
 
   async function saveChanges(e: any) {
     e.preventDefault();
@@ -29,20 +29,13 @@ const DashboardHeader: React.FC = ({}) => {
   }
 
   useEffect(() => {
-    console.log("TOKEN: ", token);
-    if (token) {
-      fetch(baseUrl + "/api/dashboards/" + dashboardId, {
-        method: "GET",
-        headers: {
-          "x-api-key": token,
-        },
-      })
-        .then((a) => a.json())
-        .then((a) => {
-          setDashboard(a);
-        });
+    console.log("TOKEN: ", backend);
+    if (backend) {
+      backend.getDashboard().then((a) => {
+        setDashboard(a);
+      });
     }
-  }, [token]);
+  }, [backend]);
 
   return (
     <section className="onv-dashboard-header foreground-color sticky z-10 border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 top-0">

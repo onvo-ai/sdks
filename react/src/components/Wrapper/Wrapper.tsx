@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
+import Backend from "../../backend";
 
 type OnvoWrapperContext = {
   token: string | undefined;
   baseUrl: string;
   dashboard: string | undefined;
   report: string | undefined;
+  backend: Backend | undefined;
 };
 
 const Context = createContext<OnvoWrapperContext>({
@@ -12,6 +14,7 @@ const Context = createContext<OnvoWrapperContext>({
   baseUrl: "https://dashboard.onvo.ai",
   dashboard: undefined,
   report: undefined,
+  backend: undefined,
 });
 
 function parseJwt(token: string) {
@@ -38,6 +41,8 @@ const Wrapper: React.FC<{ token: string; baseUrl: string; children: any }> = ({
   let obj = useMemo(() => {
     let dashboard: string | undefined;
     let report: string | undefined;
+    let backend: Backend | undefined;
+
     if (token) {
       let tokenDecoded = parseJwt(token);
       if (tokenDecoded.app_metadata.dashboard) {
@@ -51,11 +56,12 @@ const Wrapper: React.FC<{ token: string; baseUrl: string; children: any }> = ({
     return {
       dashboard,
       report,
+      backend: new Backend({ baseUrl, token, id: dashboard || "" }),
     };
   }, [token]);
 
   return (
-    <Context.Provider value={{ token, ...obj, baseUrl }}>
+    <Context.Provider value={{ token, baseUrl, ...obj }}>
       {children}
     </Context.Provider>
   );

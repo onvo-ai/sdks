@@ -34,6 +34,7 @@ app.get("/api/dashboards/:id", async function (req, res) {
       metadata: {
         phone_number: "+1 234 5678",
         organisation_id: "87dfty9872ydq8tg",
+        authorization: "Basic ZXJpY2theWUyMkBnbWFpbC5jb206QWN1bWVuMjI=",
       },
     });
 
@@ -77,5 +78,5 @@ app.get("/api/reports/:id", async function (req, res) {
   }
 });
 
-app.listen(3000);
-console.log("Example app running at http://localhost:3000");
+app.listen(3001);
+console.log("Example app running at http://localhost:3001");
