@@ -27,24 +27,20 @@ app.get("/api/reports", async function (req, res) {
 });
 
 app.get("/api/dashboards/:id", async function (req, res) {
+  let authorization = "";
   try {
     await onvo.upsertEmbedUser("123456", {
       name: "John appleseed",
       email: "john@appleseed.com",
       metadata: {
-        phone_number: "+1 234 5678",
-        organisation_id: "87dfty9872ydq8tg",
-        authorization: "Basic ZXJpY2theWUyMkBnbWFpbC5jb206QWN1bWVuMjI=",
+        study_id: 585,
+        group_id: 1234,
       },
     });
 
     let data = await onvo.createDashboardSession({
       dashboardId: req.params.id,
       userId: "123456",
-      parameters: {
-        year: 2023,
-        sort: "asc",
-      },
     });
     console.log(data);
     res.send(JSON.stringify({ url: data.url }));

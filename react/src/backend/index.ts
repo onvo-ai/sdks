@@ -21,5 +21,21 @@ class Backend {
       throw new Error(data.message);
     } else return data;
   }
+
+  async getDashboardWidgets() {
+    let response = await fetch(
+      this.baseUrl + "/api/dashboards/" + this.id + "/widgets",
+      {
+        method: "GET",
+        headers: {
+          "x-api-key": this.token,
+        },
+      }
+    );
+    let data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message);
+    } else return data;
+  }
 }
 export default Backend;
