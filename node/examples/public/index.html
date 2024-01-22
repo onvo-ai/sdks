@@ -1,14 +1,17 @@
 <html>
 
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    <!-- Bootstrap 4 CSS and JavaScript -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <link href="./styles.css" rel="stylesheet" />
     <script src="./themes.js"></script>
+
     <script>
+
         window.onload = () => {
 
             fetch("/api/dashboards").then(a => a.json()).then(arr => {
@@ -36,52 +39,60 @@
         }
 
         function loadReport(id) {
+
+            document.getElementById("iframe").style.display = "none";
+            document.getElementById("loader").style.display = "flex";
             fetch("/api/reports/" + id).then(a => a.json()).then(obj => {
-                console.log(obj)
-                document.getElementById("iframe").setAttribute("src", obj.url)
+                console.log(obj);
+                document.getElementById("iframe").setAttribute("src", obj.url);
+                document.getElementById("iframe").style.display = "block";
             })
         }
         function loadDashboard(id) {
+            document.getElementById("iframe").style.display = "none";
+            document.getElementById("loader").style.display = "flex";
             fetch("/api/dashboards/" + id).then(a => a.json()).then(obj => {
-                console.log(obj)
-                document.getElementById("iframe").setAttribute("src", obj.url)
+                console.log(obj);
+                document.getElementById("iframe").setAttribute("src", obj.url);
+                document.getElementById("iframe").style.display = "block";
             })
         }
+
+        function setLoaded() {
+            document.getElementById("loader").style.display = "none";
+        }
+
     </script>
 </head>
 
 <body style="padding: 0; margin: 0;">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="margin-right: 48px;">Demo Organization</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Settings</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div style="display: flex; flex-direction: row;  height: calc(100vh - 56px);">
-
-        <div class="flex-shrink-0 p-3" style="width: 300px;">
-
+    <div style="display: flex; flex-direction: row;  height: 100vh; width: 100vw; background-color: var(--bs-body-bg);">
+        <div class="flex-shrink-0 p-3" style="width: 300px; background: var(--bs-secondary-bg)">
+            <a href="/"
+                class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+                <img src="https://iconape.com/wp-content/files/sh/336155/png/logo.png" width="40" />
+                <span class="fs-5 fw-semibold" style="margin-left: 8px;">Your org</span>
+            </a>
             <ul class="list-unstyled ps-0">
-
                 <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#dashboard-collapse" aria-expanded="false">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                        Home
+                    </button>
+                    <div class="collapse show" id="home-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#"
+                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a>
+                            </li>
+                            <li><a href="#"
+                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
                         Dashboards
                     </button>
                     <div class="collapse" id="dashboard-collapse">
@@ -90,21 +101,49 @@
                     </div>
                 </li>
                 <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#orders-collapse" aria-expanded="false">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true">
                         Reports
                     </button>
                     <div class="collapse" id="orders-collapse">
+
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="report-list">
                         </ul>
                     </div>
                 </li>
                 <li class="border-top my-3"></li>
-
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                        Account
+                    </button>
+                    <div class="collapse" id="account-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#"
+                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a>
+                            </li>
+                            <li><a href="#"
+                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a>
+                            </li>
+                            <li><a href="#"
+                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a>
+                            </li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign
+                                    out</a></li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
 
-        <iframe frameborder="0" style="width: calc(100vw - 300px); height: 100%;" id="iframe" />
+        <div style="height: 100vh; background-color: var(--bs-body-bg); left: 300px; top: 0px; width: calc(100vw - 300px); position: fixed; align-items: center; justify-content: center;"
+            id="loader">
+            Loading dashboard...
+        </div>
+
+        <iframe frameborder="0" onload="setLoaded();"
+            style="height: 100vh; width: calc(100vw - 300px);  background-color: var(--bs-body-bg); display: none;"
+            id="iframe" />
     </div>
 </body>
 
