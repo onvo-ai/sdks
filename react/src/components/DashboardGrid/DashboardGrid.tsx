@@ -1,26 +1,16 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { useToken } from "../Wrapper";
+import { useMemo } from "react";
 import React from "react";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
 import ChartCard from "./ChartCard";
+import { useDashboard } from "../Dashboard/Dashboard";
 
-const GridLayout: React.FC<{}> = () => {
-  const [dashboard, setDashboard] = useState<any>();
-  const { backend } = useToken();
-  const [widgets, setWidgets] = useState<any[]>([]);
-
-  useEffect(() => {
-    console.log("TOKEN: ", backend);
-    if (backend) {
-      backend.getDashboard().then(setDashboard);
-      backend.getDashboardWidgets().then(setWidgets);
-    }
-  }, [backend]);
+const DashboardGrid: React.FC<{}> = () => {
+  const { dashboard, widgets } = useDashboard();
 
   const ResponsiveGridLayout = useMemo(
     () => WidthProvider(Responsive) as any,
@@ -53,7 +43,7 @@ const GridLayout: React.FC<{}> = () => {
 
   return (
     <div
-      className="font-override background-color relative w-full pb-safe mt-2 bg-gray-50 dark:bg-gray-950"
+      className="font-override background-color relative w-full pb-safe mt-2"
       id="screenshot-content"
     >
       <ResponsiveGridLayout
@@ -96,4 +86,4 @@ const GridLayout: React.FC<{}> = () => {
   );
 };
 
-export default GridLayout;
+export default DashboardGrid;

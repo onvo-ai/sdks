@@ -1,12 +1,13 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import DashboardGrid from "./DashboardGrid";
+import Dashboard from "./Dashboard";
 import Wrapper from "../Wrapper/Wrapper";
-import Dashboard from "../Dashboard/Dashboard";
+import DashboardHeader from "../DashboardHeader/DashboardHeader";
+import DashboardGrid from "../DashboardGrid/DashboardGrid";
 
-const meta: Meta<typeof DashboardGrid> = {
-  component: DashboardGrid,
-  title: "Onvo/DashboardGrid",
+const meta: Meta<typeof Dashboard> = {
+  component: Dashboard,
+  title: "Onvo/Dashboard",
   argTypes: {},
 };
 export default meta;
@@ -17,6 +18,7 @@ export const Primary: Story = (args) => {
   return (
     <Wrapper {...args}>
       <Dashboard id={args.id}>
+        <DashboardHeader />
         <DashboardGrid />
       </Dashboard>
     </Wrapper>

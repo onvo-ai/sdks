@@ -1,24 +1,25 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import Wrapper from "./Wrapper";
-import { Button } from "@tremor/react";
+import DashboardList from "./DashboardList";
+import Wrapper from "../Wrapper/Wrapper";
 
-const meta: Meta<typeof Wrapper> = {
-  component: Wrapper,
-  title: "Onvo/Wrapper",
+const meta: Meta<typeof DashboardList> = {
+  component: DashboardList,
+  title: "Onvo/DashboardList",
   argTypes: {},
 };
 export default meta;
 
-type Story = StoryObj<typeof Wrapper>;
+type Story = StoryObj<typeof DashboardList>;
 
-export const Primary: Story = (args) => (
-  <>
+export const Primary: Story = (args) => {
+  return (
     <Wrapper {...args}>
-      <Button variant="primary">Hello world!</Button>
+      <DashboardList />
     </Wrapper>
-  </>
-);
+  );
+};
+
 Primary.args = {
   token:
     "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFwcF9tZXRhZGF0YSI6eyJyZXBvcnRzIjpbXSwiZGFzaGJvYXJkcyI6WyJmNzJlNTI4YS03NzIyLTRmNjctOTQ5OS04MDZkNzQ3MDE5OTIiXX0sInN1YiI6ImVlNWIwOGM2LTUxNjctNDQyNS1iYmMzLWE3NDZmZTRhN2VhZC0xMjM0NTYiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiaWF0IjoxNzA1ODUzNDAyfQ.64bWIpYFBn8y2WouNjCZ439JKBbSAu2wWOnMOO4MLIg",
