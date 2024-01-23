@@ -50,8 +50,8 @@ export default class Onvo {
     return this.fetchBase("/api/dashboards");
   }
 
-  async getReports() {
-    return this.fetchBase("/api/reports");
+  async getDashboardById(id: string) {
+    return this.fetchBase("/api/dashboards/" + id);
   }
 
   async createDashboardSession({
@@ -65,27 +65,6 @@ export default class Onvo {
   }) {
     let data: any = await this.fetchBase(
       "/api/dashboards/" + dashboardId + "/sessions",
-      "POST",
-      {
-        user: userId,
-        parameters: parameters,
-      }
-    );
-
-    return { ...data, url: this.endpoint + data.url };
-  }
-
-  async createReportSession({
-    reportId,
-    userId,
-    parameters,
-  }: {
-    reportId: string;
-    userId: string;
-    parameters?: { [key: string]: any };
-  }) {
-    let data: any = await this.fetchBase(
-      "/api/reports/" + reportId + "/sessions",
       "POST",
       {
         user: userId,
