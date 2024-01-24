@@ -4,6 +4,28 @@ description: "An account is used to identify a single user on Onvo. Multiple acc
 icon: "user"
 ---
 
-<ParamField path="param" type="string">
-  An example of a parameter field
+### Account fields
+
+<ParamField path="email" type="string" required>
+  The email address associated with the user.
+</ParamField>
+
+<ParamField path="full_name" type="string" required>
+  The full name of the user.
+</ParamField>
+
+<ParamField path="avatar_url" type="string">
+  The URL of the user's avatar image.
+</ParamField>
+
+<ParamField path="id" type="string">
+  The unique identifier for the user.
+</ParamField>
+
+<ParamField path="phone_number" type="string">
+  The phone number associated with the user.
+</ParamField>
+
+<ParamField path="updated_at" type="string">
+  The timestamp indicating when the user's information was last updated.
 </ParamField>

@@ -9,17 +9,21 @@
   "favicon": "/assets/favicon.png",
   "colors": {
     "primary": "#3b82f6",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "light": "#3b82f6",
+    "dark": "#3b82f6",
     "anchors": {
       "from": "#3b82f6",
-      "to": "#0B1229"
+      "to": "#2159b5"
     }
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:info@onvo.ai"
+      "name": "Blog",
+      "url": "https://blog.onvo.ai"
+    },
+    {
+      "name": "Book a demo",
+      "url": "https://www.onvo.ai/book-demo"
     }
   ],
   "topbarCtaButton": {
@@ -77,7 +81,8 @@
         "concepts/sessions",
         "concepts/embed-users",
         "concepts/questions",
-        "concepts/widgets"
+        "concepts/widgets",
+        "concepts/automations"
       ]
     },
     {

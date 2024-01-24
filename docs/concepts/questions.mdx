@@ -4,6 +4,49 @@ description: "A question is exactly what it says, a question asked to a dashboar
 icon: "circle-question"
 ---
 
-<ParamField path="param" type="string">
-  An example of a parameter field
+### Question fields
+
+<ParamField path="account" type="string">
+  The identifier or name of the account associated with the question.
+</ParamField>
+
+<ParamField path="assumptions" type="array" required>
+  An array of strings representing assumptions made in the question.
+</ParamField>
+
+<ParamField path="cache" type="string" required>
+  The cache identifier associated with the question as a stringified json
+  object. This object is a config object for the chart.js library.
+</ParamField>
+
+<ParamField path="code" type="string" required>
+  The code or script related to the question.
+</ParamField>
+
+<ParamField path="created_at" type="string">
+  The timestamp indicating when the question was created.
+</ParamField>
+
+<ParamField path="dashboard" type="string" required>
+  The identifier of the dashboard associated with the question.
+</ParamField>
+
+<ParamField path="embed_user" type="string">
+  The identifier of the embed user associated with the question.
+</ParamField>
+
+<ParamField path="id" type="string">
+  The unique identifier for the question.
+</ParamField>
+
+<ParamField path="output" type="string" required>
+  The output or result of the question.
+</ParamField>
+
+<ParamField path="query" type="string" required>
+  The query or question posed by the user.
+</ParamField>
+
+<ParamField path="team" type="string">
+  The identifier of the team to which the question belongs.
 </ParamField>
