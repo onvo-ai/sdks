@@ -1,0 +1,28 @@
+---
+title: "PostgreSQL"
+description: "SQL is an open-source relational database management system. It is popular for being very beginner friendly and has become one of the most popular database options out there"
+---
+
+![title](/assets/integrations/postgresql.png)
+
+### How do I activate this integration?
+
+To activate the Onvo-PostgreSQL Integration, simply login to your Onvo account, go to Data sources click on “New data source”. You can now choose the option for PostgreSQL DB and click on "Connect". You will then be redirected to a configuration page where you can enter the PostgreSQL credentials and the query needed to get the view you want.
+
+![title](/assets/integrations/postgresql-1.png)
+
+### What can I do with this integration?
+
+You can pull in data from multiple tables/databases as data sources on Onvo to build your dashboards and reports. Any datasource using the PostgreSQL integration will be kept in sync with the underlying data to keep your dashboards live.
+
+You can create beautiful, interactive dashboards using your PostgreSQL data. Just ask for the kind of visualisation you want in natural language to create a widget on the dashboard. You can also ask for data pre-processing before visualisation. We also allow for questions in natural language to your data on PostgreSQL.
+
+![title](/assets/integrations/common-dashboard.png)
+Once you are happy with your dashboard, you can integrate them into your products with the SDK.
+
+### How do I create a dashboard using multiple tables?
+
+On Onvo, you can do this in two ways:
+
+1. You can write an SQL query with a join on a single datasource so that the datasource has all the relevant data to begin with
+2. You can optionally create 2 separate data sources and make sure you mention the field used to correlate the data in the "fields" tab. This will enable the AI to write the necessary code to join the data without having to write complicated join queries.

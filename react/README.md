@@ -1,15 +1,13 @@
-# My Demo UI Library
+# Onvo AI react library
 
-This is a demo UI component library created using React, TypeScript, Rollup, Storybook, Jest, and React Testing Library. It was created for an article update for [LogRocket](https://blog.logrocket.com/author/pelumiakintokun/) on how to create a UI component library in React. You can read the article [here](https://blog.logrocket.com/build-component-library-react-typescript/).
-
-Visit my blog, [Timonwa's Notes](https://blog.timonwa.com), for awesome technical contents like articles, codesnippets, tech goodies, community projects and more.
+This react package can be used to display the list of dashboards available to a user or single dashboard from Onvo AI. The components are also completely customizable.
 
 ## Installation
 
 You can install this demo UI library using npm:
 
 ```
-npm install @timonwa/demo-ui-library
+npm install @onvo-ai/react
 ```
 
 ## Usage
@@ -17,39 +15,54 @@ npm install @timonwa/demo-ui-library
 To use this demo UI library in your project, import the components you need from the library and use them in your React components.
 
 ```jsx
-import React from "react";
-import { Input, Button } from "@timonwa/demo-ui-library";
+import { Wrapper, DashboardList } from "@onvo-ai/react";
+const baseUrl = "https://dashboard.onvo.ai";
 
-function App() {
+const ListPage = () => {
+  const [accessToken, setAccessToken] = useState("");
+  const userId = "123456";
+
+  useEffect(() => {
+    fetch("/api/get-token/" + userId)
+      .then((data) => data.json())
+      .then((data) => {
+        setAccessToken(data.token);
+      });
+  }, []);
+
   return (
-    <div>
-      <Input
-        id="name"
-        disabled={false}
-        label="Enter your name"
-        message="This field is required"
-        error={false}
-        success={false}
-        onChange={(e) => console.log(e.target.value)}
-        placeholder="Enter your name here"
-      />
-      <Button
-        size="medium"
-        primary={true}
-        disabled={false}
-        text="Click me!"
-        onClick={() => alert("Button clicked!")}
-      />
-    </div>
+    <Wrapper baseUrl={baseUrl} token={accessToken}>
+      <DashboardList />
+    </Wrapper>
   );
-}
+};
 
-export default App;
+const DashboardPage = (id) => {
+  const [accessToken, setAccessToken] = useState("");
+  const userId = "123456";
+
+  useEffect(() => {
+    fetch("/api/get-token/" + userId)
+      .then((data) => data.json())
+      .then((data) => {
+        setAccessToken(data.token);
+      });
+  }, []);
+
+  return (
+    <Wrapper baseUrl={baseUrl} token={accessToken}>
+      <Dashboard id={id}>
+        <DashboardHeader />
+        <DashboardGrid />
+      </Dashboard>
+    </Wrapper>
+  );
+};
 ```
 
 ## Contributing
 
-This library is a demo for learning purposes only and is not intended to be contributed to. You can fork the repository and use the code for your personal use or learning.
+You can fork the repository and make a pull request with your changes. Make sure to also update the docs with any relevant changes you have made.
 
 ### Steps
 
@@ -63,11 +76,3 @@ This library is a demo for learning purposes only and is not intended to be cont
 - Commit the changes and push them to your forked repository.
 - Publish the package on [npm](https://www.npmjs.com/).
 - Install and use the package in your project.
-
-## License
-
-This demo UI library is licensed under the [MIT License](https://github.com/Timonwa/demo-ui-library/blob/main/license).
-
-## Connect
-
-More of my articles can be found in [Timonwa's Notes](https://blog.timonwa.com). Connect with me on Twitter: [@timonwa\_](https://twitter.com/timonwa_)

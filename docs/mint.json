@@ -96,6 +96,37 @@
     },
 
     {
+      "group": "Integrations",
+      "pages": [
+        "integrations/overview",
+        "integrations/sql",
+        "integrations/postgresql",
+        "integrations/mongodb",
+        "integrations/firestore",
+        "integrations/google-sheets",
+        "integrations/airtable",
+        "integrations/redshift",
+        "integrations/snowflake",
+        "integrations/big-query",
+        "integrations/zoho-books",
+        "integrations/quickbooks",
+        "integrations/xero",
+        "integrations/tally",
+        "integrations/sage",
+        "integrations/ms-dynamics",
+        "integrations/myob-business",
+        "integrations/wave",
+        "integrations/wafeq",
+        "integrations/salesforce",
+        "integrations/hubspot",
+        "integrations/google-analytics",
+        "integrations/mixpanel",
+        "integrations/segment",
+        "integrations/shopify",
+        "integrations/zoho-people"
+      ]
+    },
+    {
       "group": "Automations",
       "pages": ["apis/automations/run-automations"]
     },

@@ -26,6 +26,9 @@ export default [
       peerDepsExternal(),
       resolve(),
       commonjs(),
+      postcss({
+        extensions: [".css"],
+      }),
       tailwind({
         input: "src/styles.css", // required
         // Tailor the emitted stylesheet to the bundle by removing any unused CSS
