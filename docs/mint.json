@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Onvo AI documentation",
   "logo": {
-    "dark": "/assets/logo-dark.png",
-    "light": "/assets/logo-light.png",
+    "dark": "/assets/logo-dark.svg",
+    "light": "/assets/logo-light.svg",
     "href": "https://onvo.ai"
   },
   "favicon": "/assets/favicon.png",
