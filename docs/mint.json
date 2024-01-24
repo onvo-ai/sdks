@@ -127,14 +127,16 @@
       ]
     },
     {
-      "group": "Automations",
-      "pages": ["apis/automations/run-automations"]
+      "group": "Accounts",
+      "pages": [
+        "apis/accounts/get-all-accounts",
+        "apis/accounts/get-account-by-id"
+      ]
     },
     {
       "group": "Teams",
       "pages": [
         "apis/teams/get-all-teams",
-        "apis/teams/create-team",
         "apis/teams/get-team-by-id",
         "apis/teams/update-team-by-id"
       ]
@@ -142,32 +144,69 @@
     {
       "group": "Dashboards",
       "pages": [
-        "apis/dashboards/get-all-widgets-under-dashboard",
-        "apis/dashboards/create-widget",
-        "apis/dashboards/get-widget-by-id",
-        "apis/dashboards/update-widget-by-id",
-        "apis/dashboards/delete-widget-by-id",
-        "apis/dashboards/get-questions-by-dashboard-id",
-        "apis/dashboards/ask-question-to-dashboard-by-id",
-        "apis/dashboards/upsert-dashboard-session",
         "apis/dashboards/get-all-dashboards",
         "apis/dashboards/create-dashboard",
         "apis/dashboards/get-dashboard-by-id",
         "apis/dashboards/delete-dashboard-by-id",
-        "apis/dashboards/update-dashboard-by-id"
+        "apis/dashboards/update-dashboard-by-id",
+        {
+          "group": "Widgets",
+          "pages": [
+            "apis/dashboards/get-all-widgets-under-dashboard",
+            "apis/dashboards/get-widget-by-id",
+            "apis/dashboards/update-widget-by-id",
+            "apis/dashboards/create-widget",
+            "apis/dashboards/delete-widget-by-id"
+          ]
+        },
+        {
+          "group": "Widgets",
+          "pages": [
+            "apis/dashboards/get-questions-by-dashboard-id",
+            "apis/dashboards/ask-question-to-dashboard-by-id"
+          ]
+        },
+        {
+          "group": "Sessions",
+          "pages": [
+            "apis/dashboards/upsert-dashboard-session",
+            "apis/dashboards/get-all-dashboard-sessions",
+            "apis/dashboards/revoke-dashboard-sessions"
+          ]
+        }
       ]
     },
     {
       "group": "Embed Users",
-      "pages": ["apis/embed-users/upsert-user"]
+      "pages": [
+        "apis/embed-users/get-all-embed-users",
+        "apis/embed-users/upsert-embed-user",
+        "apis/embed-users/get-token",
+        "apis/embed-users/get-embed-user-by-id",
+        "apis/embed-users/delete-embed-user-by-id"
+      ]
     },
     {
       "group": "Datasources",
-      "pages": ["apis/datasources/get-data-source-by-id"]
+      "pages": [
+        "apis/datasources/get-data-source-by-id",
+        "apis/datasources/get-data-source-data-by-id",
+        "apis/datasources/populate-data-source-columns-by-id",
+        "apis/datasources/delete-data-source-by-id",
+        "apis/datasources/create-data-source",
+        "apis/datasources/update-data-source-by-id",
+        "apis/datasources/get-all-data-sources"
+      ]
     },
     {
-      "group": "Accounts",
-      "pages": ["apis/accounts/get-all-accounts"]
+      "group": "Automations",
+      "pages": [
+        "apis/automations/get-all-automations",
+        "apis/automations/create-automation",
+        "apis/automations/get-automation-by-id",
+        "apis/automations/update-automation-by-id",
+        "apis/automations/delete-automation-by-id"
+      ]
     }
   ],
   "openapi": ["openapi.yaml"],
