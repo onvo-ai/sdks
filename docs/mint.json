@@ -1,34 +1,39 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Onvo AI documentation",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/assets/logo-dark.png",
+    "light": "/assets/logo-light.png",
+    "href": "https://onvo.ai"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/assets/favicon.png",
   "colors": {
-    "primary": "#0D9373",
+    "primary": "#3b82f6",
     "light": "#07C983",
     "dark": "#0D9373",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#3b82f6",
+      "to": "#0B1229"
     }
   },
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:info@onvo.ai"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://dashboard.onvo.ai"
   },
   "tabs": [
     {
       "name": "API Reference",
-      "url": "api-reference"
+      "url": "apis"
+    },
+    {
+      "name": "Integrations",
+      "url": "integrations"
     }
   ],
   "anchors": [
@@ -45,38 +50,91 @@
     {
       "name": "Blog",
       "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "url": "https://onvo.ai/blog"
     }
   ],
   "navigation": [
     {
+      "group": "Introduction",
+      "pages": ["introduction/welcome", "introduction/community"]
+    },
+    {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
-    },
-    {
-      "group": "Essentials",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "get-started/creating-first-dashboard",
+        "get-started/managing-multiple-users",
+        "get-started/customising-look-and-feel"
+      ]
+    },
+
+    {
+      "group": "Concepts",
+      "pages": [
+        "concepts/accounts",
+        "concepts/teams",
+        "concepts/dashboards",
+        "concepts/data-sources",
+        "concepts/sessions",
+        "concepts/embed-users",
+        "concepts/questions",
+        "concepts/widgets"
       ]
     },
     {
-      "group": "API Documentation",
-      "pages": ["api-reference/introduction"]
+      "group": "Libraries",
+      "pages": [
+        "libraries/nodejs",
+        "libraries/react",
+        "libraries/ruby",
+        "libraries/rust"
+      ]
+    },
+
+    {
+      "group": "Automations",
+      "pages": ["apis/automations/run-automations"]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Teams",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "apis/teams/get-all-teams",
+        "apis/teams/create-team",
+        "apis/teams/get-team-by-id",
+        "apis/teams/update-team-by-id"
       ]
+    },
+    {
+      "group": "Dashboards",
+      "pages": [
+        "apis/dashboards/get-all-widgets-under-dashboard",
+        "apis/dashboards/create-widget",
+        "apis/dashboards/get-widget-by-id",
+        "apis/dashboards/update-widget-by-id",
+        "apis/dashboards/delete-widget-by-id",
+        "apis/dashboards/get-questions-by-dashboard-id",
+        "apis/dashboards/ask-question-to-dashboard-by-id",
+        "apis/dashboards/upsert-dashboard-session",
+        "apis/dashboards/get-all-dashboards",
+        "apis/dashboards/create-dashboard",
+        "apis/dashboards/get-dashboard-by-id",
+        "apis/dashboards/delete-dashboard-by-id",
+        "apis/dashboards/update-dashboard-by-id"
+      ]
+    },
+    {
+      "group": "Embed Users",
+      "pages": ["apis/embed-users/upsert-user"]
+    },
+    {
+      "group": "Datasources",
+      "pages": ["apis/datasources/get-data-source-by-id"]
+    },
+    {
+      "group": "Accounts",
+      "pages": ["apis/accounts/get-all-accounts"]
     }
   ],
+  "openapi": ["openapi.yaml"],
   "footerSocials": {
     "twitter": "https://twitter.com/mintlify",
     "github": "https://github.com/mintlify",

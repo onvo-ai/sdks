@@ -4,8 +4,7 @@
   "description": "The nodejs SDK for Onvo AI dashboard builder",
   "main": "lib/index.js",
   "scripts": {
-    "build": "tsc",
-    "postinstall": "./node_modules/.bin/local-link"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",

@@ -25,43 +25,21 @@
                     document.getElementById("dashboard-list").appendChild(li);
                 });
             })
-            fetch("/api/reports").then(a => a.json()).then(arr => {
-                arr.forEach(element => {
-                    let li = document.createElement("li");
-                    li.innerText = element.title;
-                    li.onclick = () => {
-                        loadReport(element.id);
-                    }
-                    li.style.cursor = "pointer";
-                    document.getElementById("report-list").appendChild(li);
-                });
-            })
-        }
 
-        function loadReport(id) {
+            function loadDashboard(id) {
+                document.getElementById("iframe").style.display = "none";
+                document.getElementById("loader").style.display = "flex";
+                fetch("/api/dashboards/" + id).then(a => a.json()).then(obj => {
+                    console.log(obj);
+                    document.getElementById("iframe").setAttribute("src", obj.url);
+                    document.getElementById("iframe").style.display = "block";
+                })
+            }
 
-            document.getElementById("iframe").style.display = "none";
-            document.getElementById("loader").style.display = "flex";
-            fetch("/api/reports/" + id).then(a => a.json()).then(obj => {
-                console.log(obj);
-                document.getElementById("iframe").setAttribute("src", obj.url);
-                document.getElementById("iframe").style.display = "block";
-            })
+            function setLoaded() {
+                document.getElementById("loader").style.display = "none";
+            }
         }
-        function loadDashboard(id) {
-            document.getElementById("iframe").style.display = "none";
-            document.getElementById("loader").style.display = "flex";
-            fetch("/api/dashboards/" + id).then(a => a.json()).then(obj => {
-                console.log(obj);
-                document.getElementById("iframe").setAttribute("src", obj.url);
-                document.getElementById("iframe").style.display = "block";
-            })
-        }
-
-        function setLoaded() {
-            document.getElementById("loader").style.display = "none";
-        }
-
     </script>
 </head>
 
@@ -74,22 +52,7 @@
                 <span class="fs-5 fw-semibold" style="margin-left: 8px;">Your org</span>
             </a>
             <ul class="list-unstyled ps-0">
-                <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                        Home
-                    </button>
-                    <div class="collapse show" id="home-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="#"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a>
-                            </li>
-                            <li><a href="#"
-                                    class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
@@ -97,17 +60,6 @@
                     </button>
                     <div class="collapse" id="dashboard-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="dashboard-list">
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                        data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true">
-                        Reports
-                    </button>
-                    <div class="collapse" id="orders-collapse">
-
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" id="report-list">
                         </ul>
                     </div>
                 </li>
