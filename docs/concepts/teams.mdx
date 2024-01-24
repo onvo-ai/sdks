@@ -4,6 +4,32 @@ description: "A team is used to identify a group of users. A team could be used 
 icon: "users"
 ---
 
-<ParamField path="param" type="string">
-  An example of a parameter field
+### Team fields
+
+<ParamField path="name" type="string" required>
+  The name or title of the team.
+</ParamField>
+
+<ParamField path="email" type="string" required>
+  The email address associated with the team.
+</ParamField>
+
+<ParamField path="phone_number" type="string" required>
+  The phone number associated with the team.
+</ParamField>
+
+<ParamField path="logo" type="string" required>
+  The URL or path to the logo image representing the team.
+</ParamField>
+
+<ParamField path="created_at" type="string">
+  The timestamp indicating when the team was created.
+</ParamField>
+
+<ParamField path="id" type="string">
+  The unique identifier for the team.
+</ParamField>
+
+<ParamField path="stripe_id" type="string">
+  The Stripe identifier associated with the team for billing purposes.
 </ParamField>
