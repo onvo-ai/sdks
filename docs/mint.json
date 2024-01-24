@@ -44,17 +44,17 @@
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "url": "/"
     },
     {
       "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
+      "icon": "whatsapp",
+      "url": "https://chat.whatsapp.com/JPt72FNlDeSI6HjdvcYx9s"
     },
     {
       "name": "Blog",
       "icon": "newspaper",
-      "url": "https://onvo.ai/blog"
+      "url": "https://blog.onvo.ai"
     }
   ],
   "navigation": [
@@ -63,7 +63,7 @@
       "pages": ["introduction/welcome", "introduction/community"]
     },
     {
-      "group": "Get Started",
+      "group": "Quickstart",
       "pages": [
         "get-started/creating-first-dashboard",
         "get-started/managing-multiple-users",
@@ -141,8 +141,10 @@
   ],
   "openapi": ["openapi.yaml"],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "twitter": "https://twitter.com/OnvoAI",
+    "github": "https://github.com/onvo-ai",
+    "linkedin": "https://www.linkedin.com/company/onvo",
+    "facebook": "https://www.facebook.com/onvoai",
+    "instagram": "https://www.instagram.com/onvoai"
   }
 }
