@@ -1,0 +1,40 @@
+---
+title: "Managing multiple users"
+description: "This section will walk you through managing multiple users for a single dashboard once embedded in your product"
+---
+
+Now that you have embedded your first dashboard, let us see how to show different users their data on the dashboard they view. In order to do this, we first need to learn about the 2 different ways you can pass data into the system:
+
+User parameters: This is data about the user that usually doesn't change often, like an associated group, authorization tokens or some other data.
+Session parameters: This is data about the session that could change more often, like sorting or filtering preferences.
+
+Using both of these values, you can control what the user sees. Here is a code sample of how to set both of them up:
+
+```JavaScript
+// setting user parameters
+await onvo.upsertEmbedUser("123456", {
+    name: "John appleseed",
+    email: "john@appleseed.com",
+    metadata: {
+        group_id: 585,
+        authorization: "Bearer jgsfchjkhg",
+    },
+});
+
+// setting session parameters
+let session = await onvo.createDashboardSession({
+    dashboardId: "yutc67taci87tads8",
+    userId: "123456",
+    parameters: {
+        year: 2023,
+        sorting: "asc"
+    }
+});
+
+```
+
+Now that you have setup the parameters, let us learn how to use them. In order to only fetch data based on these parameters, head over to the datasources page.
+
+Here, use the parameters you set up as variables in your data fetch request. In this example, we are looking at an Rest API dataset but it will work the same way on any other database or API call. Don't forget to setup a default value for testing purposes.
+
+Now if you load the dashboard for different users, you will see that they only have data that you have setup to show them.
