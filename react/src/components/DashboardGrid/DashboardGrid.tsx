@@ -8,7 +8,6 @@ import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
 import ChartCard from "./ChartCard";
 import { useDashboard } from "../Dashboard/Dashboard";
-import "./styles.css";
 
 const DashboardGrid: React.FC<{}> = () => {
   const { dashboard, widgets } = useDashboard();

@@ -1,5 +1,26 @@
 ---
 title: "Customising the look and feel of embedded dashboards"
 sidebarTitle: "Customising the UI"
-description: "This section will walk you through managing multiple users for a single dashboard once embedded in your product"
+description: "This section will walk you through customizing the look and feel of the dashboard once embedded in your product"
 ---
+
+![title](/assets/customising-ui.png)
+
+### When using an iframe
+
+If you embed dashboards using the iframe method, you can make changes to the UI by heading over to https://dashboard.onvo.ai/dashboards/:dashboard-id/settings. Here you will find multiple options to customise.
+
+![title](/assets/customising-ui-1.png)
+
+### When using the react library
+
+If you are using the react library, you have a few options to customise the interface in the library. You also have endless customisability by changing the styles using css.
+
+```jsx
+<DashboardList variant="list|grid"></DashboardList>
+
+<Dashboard editable={false|true}>
+    <DashboardGrid />
+    <DashboardQuestions />
+</Dashboard>
+```
