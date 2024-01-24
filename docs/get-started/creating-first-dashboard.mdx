@@ -3,25 +3,39 @@ title: "Creating your first dashboard"
 description: "This section will walk you through creating your first dashboard and embedding it using an iframe"
 ---
 
+![title](/assets/creating-dashboard.webp)
+
+### Creating an account
+
 To get started, first create an account at dashboard.onvo.ai. We offer 30 day free trials on our plans so feel free to choose the plan that fits your needs best.
 
-Next, you can connect a datasource, this could be an API request, a database link, an excel/csv file or one of Onvo's many integrated one-click connectors. Just head over to the data sources page and click on `New Data Source`. Now fill in a name, an optional description and the type of data source and click `Connect`.
+### Connect a datasource
 
+Next, you can connect a datasource, this could be an API request, a database link, an excel/csv file or one of Onvo's many integrated one-click connectors. Just head over to the data sources page and click on `New Data Source`. Now fill in a name, an optional description and the type of data source and click `Connect`.
+![title](/assets/creating-dashboard-1.png)
 On the page that appears, you can now fill in the remaining details and click `Save Changes`. The AI now kicks in to try and understand your data source better. Once this step is done, you can fine tune the column descriptions to be more descriptive and make your data more understandable.
+![title](/assets/creating-dashboard-2.png)
+
+### Create a dashboard
 
 With the datasource linked, you can now create a dashboard to visualise the data. Head over to the dashboards page and click on `New Dashboard`. You can now fill in the name of the dashboard, an optional description and pick the data sources you want to use for the dashboard. Then click `Create`.
-
+![title](/assets/creating-dashboard-3.png)
 You can now create widgets on the dashboard by typing what you want in plain English.
+![title](/assets/creating-dashboard-4.png)
+
+### Create an API key
 
 Now that you have a dashboard ready to embed, let's jump into the code.
 
 Begin by creating an API key by going to settings > Developer, filling in a name for your API key and clicking `Generate`.
-
+![title](/assets/creating-dashboard-5.png)
 Save this API key to your env file.
 
 ```PowerShell
 API_KEY=eyJhbGciOiJIUzI1NiJ9.e...
 ```
+
+### Install the backend package
 
 Next, in your backend environment, install the `@onvo-ai/node` package, this lets you authenticate users, setup sessions and fetch the list of dashboards & reports.
 
@@ -45,7 +59,7 @@ bun install @onvo-ai/node
 
 </CodeGroup>
 
-Now initialise the SDK
+### Initialise the SDK
 
 ```JavaScript
 import Onvo from "@onvo-ai/node";
@@ -55,13 +69,17 @@ dotenv.config();
 let onvo = new Onvo("http://localhost:3004", process.env.API_KEY);
 ```
 
+### Using the SDK
+
 You can now fetch the list of dashboards and reports you have with the following API calls:
 
 ```JavaScript
 let dashboards = await onvo.getDashboards();
 ```
 
-To allow a user to view a dashboard, you need to associate a user with the dashboard using a session. To get started, create the user using the following function:
+This returns a list of [Dashboard](/concepts/dashboards) objects.
+
+To allow a user to view a dashboard, you need to associate an [embed user](/concepts/embed-users) with the dashboard using a [Session](/concepts/sessions). To get started, create the embed user using the following function:
 
 ```JavaScript
 await onvo.upsertEmbedUser("123456", {
@@ -83,7 +101,7 @@ let session = await onvo.createDashboardSession({
 });
 ```
 
-The session object looks like the following:
+This returns an object that looks like the following:
 
 ```JSON
 {
