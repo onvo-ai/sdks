@@ -47,7 +47,7 @@ await onvo.upsertEmbedUser("123456", {
 });
 
 // Create a session
-const sessionUrl = await onvo.createSession({
+const sessionUrl = await onvo.upsertDashboardSession({
   dashboardId: "ebc7ab74-3fd2-47e6-90df-addaec3a029e",
   userId: "123456",
   parameters: {
@@ -78,7 +78,7 @@ _Identify a user on the Onvo platform._
 
 ---
 
-**`await onvo.createSession(sessionData)`**
+**`await onvo.upsertDashboardSession(sessionData)`**
 _Create a session on the Onvo platform._
 
 - `sessionData (object)`

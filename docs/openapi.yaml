@@ -6357,7 +6357,7 @@ paths:
                 Success:
                   value:
                     success: true
-    patch:
+    put:
       tags:
         - Datasources
       summary: Update data source by id
