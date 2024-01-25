@@ -160,7 +160,7 @@
           ]
         },
         {
-          "group": "Widgets",
+          "group": "Questions",
           "pages": [
             "apis/dashboards/get-questions-by-dashboard-id",
             "apis/dashboards/ask-question-to-dashboard-by-id"
