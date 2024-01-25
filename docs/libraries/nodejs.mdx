@@ -71,7 +71,7 @@ await onvo.upsertEmbedUser("123456", {
 To create a session linking the user and a dashboard, you can use the following code:
 
 ```JavaScript
-let session = await onvo.createDashboardSession({
+let session = await onvo.upsertDashboardSession({
     dashboardId: <id of dashboard you have received from the previous getDashboards() function>,
     userId: "123456"
 });
