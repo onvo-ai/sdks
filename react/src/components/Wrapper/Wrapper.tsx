@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
-import Backend from "../../backend";
+import Onvo from "@onvo-ai/node";
 
 type OnvoWrapperContext = {
   token: string | undefined;
   baseUrl: string;
-  backend: Backend | undefined;
+  backend: Onvo | undefined;
 };
 
 const Context = createContext<OnvoWrapperContext>({
@@ -18,7 +18,7 @@ const Wrapper: React.FC<{ token: string; baseUrl: string; children: any }> = ({
   children,
   baseUrl = "https://dashboard.onvo.ai",
 }) => {
-  let backend = new Backend({ baseUrl, token });
+  let backend = new Onvo(baseUrl, token);
 
   return (
     <Context.Provider value={{ token, baseUrl, backend }}>

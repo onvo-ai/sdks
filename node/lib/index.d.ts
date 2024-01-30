@@ -1,13 +1,54 @@
-declare class Onvo {
+export default class Onvo {
     apiKey: string;
-    constructor(apiKey: string);
-    identifyUser(userId: string, userMetadata: any): void;
-    createSession(obj: {
-        dashboardId: string;
-        userId: string;
-        parameters: {
+    endpoint: string;
+    constructor(endpoint: string, apiKey: string);
+    fetchBase(url: string, method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE", body?: any): Promise<any>;
+    getAccounts(): Promise<any>;
+    getAccountById(id: string): Promise<any>;
+    getTeams(): Promise<any>;
+    getTeamById(id: string): Promise<any>;
+    getEmbedUsers(): Promise<any>;
+    getEmbedUserById(id: string): Promise<any>;
+    deleteEmbedUserById(id: string): Promise<any>;
+    upsertEmbedUser(userId: string, userData: {
+        name: string;
+        email: string;
+        metadata: {
             [key: string]: any;
         };
-    }): string;
+    }): Promise<any>;
+    getEmbedUserAccessToken(id: string): Promise<any>;
+    getDatasources(): Promise<any>;
+    getDatasourceById(id: string): Promise<any>;
+    getDatasourceDataById(id: string): Promise<any>;
+    populateDatasourceDataById(id: string): Promise<any>;
+    deleteDatasourceById(id: string): Promise<any>;
+    updateDatasourceById(id: string, body: any): Promise<any>;
+    createDatasource(body: any): Promise<any>;
+    getAutomations(): Promise<any>;
+    getAutomationById(id: string): Promise<any>;
+    deleteAutomationById(id: string): Promise<any>;
+    updateAutomationById(id: string, body: any): Promise<any>;
+    createAutomation(body: any): Promise<any>;
+    getDashboards(): Promise<any>;
+    getDashboardById(id: string): Promise<any>;
+    deleteDashboardById(id: string): Promise<any>;
+    updateDashboardById(id: string, body: any): Promise<any>;
+    createDashboard(body: any): Promise<any>;
+    getDashboardWidgets(dashboardId: string): Promise<any>;
+    getDashboardWidgetById(dashboardId: string, widgetId: String): Promise<any>;
+    deleteDashboardWidgetById(dashboardId: string, widgetId: string): Promise<any>;
+    updateDashboardWidgetById(id: string, body: any): Promise<any>;
+    createDashboardWidget(body: any): Promise<any>;
+    getDashboardQuestionsById(dashboardId: string): Promise<any>;
+    askDashboardQuestion(dashboardId: string, query: string): Promise<any>;
+    getDashboardSessionsById(dashboardId: string): Promise<any>;
+    deleteDashboardSessionsById(dashboardId: string): Promise<any>;
+    upsertDashboardSession({ dashboardId, userId, parameters, }: {
+        dashboardId: string;
+        userId: string;
+        parameters?: {
+            [key: string]: any;
+        };
+    }): Promise<any>;
 }
-export default Onvo;
