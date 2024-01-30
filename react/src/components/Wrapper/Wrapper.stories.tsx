@@ -22,5 +22,5 @@ export const Primary: Story = (args) => (
 Primary.args = {
   token:
     "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFwcF9tZXRhZGF0YSI6eyJyZXBvcnRzIjpbXSwiZGFzaGJvYXJkcyI6WyJmNzJlNTI4YS03NzIyLTRmNjctOTQ5OS04MDZkNzQ3MDE5OTIiXX0sInN1YiI6ImVlNWIwOGM2LTUxNjctNDQyNS1iYmMzLWE3NDZmZTRhN2VhZC0xMjM0NTYiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiaWF0IjoxNzA1ODUzNDAyfQ.64bWIpYFBn8y2WouNjCZ439JKBbSAu2wWOnMOO4MLIg",
-  baseUrl: "http://localhost:3004",
+  baseUrl: "https://dashboard.onvo.ai",
 };
