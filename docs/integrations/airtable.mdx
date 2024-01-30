@@ -1,0 +1,69 @@
+---
+title: "Airtable"
+description: "Airtable is a versatile cloud-based platform combining spreadsheet and database functionalities, enabling users to organize and collaborate on structured data with ease. Known for its user-friendly interface, it supports real-time collaboration, file attachments, and seamless integration with other tools."
+---
+
+![title](/assets/integrations/airtable.png)
+
+### How do I activate this integration?
+
+<Steps>
+  <Step title="First Step">
+    Log in to your Onvo account, go to the Integrations page, and click on
+    `Connect` next to the Airtable Database card.
+  </Step>
+  <Step title="Second Step">
+    You will then be taken to a page where you can login into your Airtable
+    account and choose what bases you want to share.
+  </Step>
+  <Step title="Third Step">
+    Once you complete that, you will be taken back to Onvo where you can head
+    over to the Data sources page and click on `New data source`.
+  </Step>
+  <Step title="Fourth Step">
+    Fill in a name for the data source, an optional description, and choose
+    Airtable as the type. Then click on `Connect`.
+  </Step>
+  <Step title="Fifth Step">
+    In the page that appears, choose the base, then choose the table and click
+    on `Save changes`. You should now see your data descriptions and sample data
+    appear.
+  </Step>
+</Steps>
+
+![title](/assets/integrations/airtable-1.png)
+
+### What can I do with this integration?
+
+You can pull in data from multiple tables/databases as data sources on Onvo to build your dashboards and reports. Any datasource using the MySQL integration will be kept in sync with the underlying data to keep your dashboards live.
+
+You can create beautiful, interactive dashboards using your Airtable data. Just ask for the kind of visualisation you want in natural language to create a widget on the dashboard. You can also ask for data pre-processing before visualisation. We also allow for questions in natural language to your data on Airtable.
+
+![title](/assets/integrations/common-dashboard.png)
+Once you are happy with your dashboard, you can integrate them into your products with the SDK.
+
+### How do I create a dashboard using multiple tables?
+
+On Onvo, you can do this by creating 2 separate data sources and make sure you mention the field used to correlate the data in the "fields" tab. This will enable the AI to write the necessary code to join the data without having to write any join queries.
+
+### Config parameters
+
+<ParamField path="baseId" type="string">
+  Identifier for the base (e.g., "base123").
+</ParamField>
+
+<ParamField path="baseName" type="string">
+  Name of the base (e.g., "MyBase").
+</ParamField>
+
+<ParamField path="tableId" type="string">
+  Identifier for the table within the base (e.g., "table456").
+</ParamField>
+
+<ParamField path="tableName" type="string">
+  Name of the table within the base (e.g., "UserData").
+</ParamField>
+
+### Security considerations
+
+It is recommended to only share the bases you want with Onvo to prevent sharing data you did not want to share.

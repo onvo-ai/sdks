@@ -25,7 +25,7 @@ const DashboardGrid: React.FC<{}> = () => {
         data-grid={{ x: i.x, y: i.y, w: i.w, h: i.h }}
       >
         <ChartCard
-          editable={dashboard.settings?.editable}
+          editable={dashboard.settings && dashboard.settings?.editable}
           widget={i}
           onUpdate={() => {
             //router.refresh()
@@ -54,8 +54,8 @@ const DashboardGrid: React.FC<{}> = () => {
         rowHeight={120}
         breakpoints={{ lg: 1280, md: 1024, sm: 768, xs: 640, xxs: 480 }}
         cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
-        isDraggable={dashboard.settings?.editable}
-        isResizable={dashboard.settings?.editable}
+        isDraggable={dashboard.settings && dashboard.settings?.editable}
+        isResizable={dashboard.settings && dashboard.settings?.editable}
         onLayoutChange={(layout: any) => {
           let updatedWidgets = widgets.map((i: any) => {
             let item = layout.find((j: any) => j.i === i.id);

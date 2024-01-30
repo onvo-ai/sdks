@@ -103,7 +103,7 @@
         "integrations/postgresql",
         "integrations/mongodb",
         "integrations/firestore",
-        "integrations/google-sheets",
+        "integrations/google-sheet",
         "integrations/airtable",
         "integrations/redshift",
         "integrations/snowflake",

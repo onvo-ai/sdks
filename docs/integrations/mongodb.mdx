@@ -1,0 +1,70 @@
+---
+title: "MongoDB"
+description: "MongoDB is a NoSQL document database that provides high performance, high availability, and easy scalability. It stores data in flexible, JSON-like documents."
+---
+
+![title](/assets/integrations/mongodb.png)
+
+### How do I activate this integration?
+
+<Steps>
+  <Step title="First Step">
+    Log in to your Onvo account, go to the Integrations page, and click on
+    `Connect` next to the MongoDB Database card.
+  </Step>
+  <Step title="Second Step">
+    You will then be shown a configuration modal where you can enter the MongoDB
+    credentials and click on `Connect MongoDB`.
+  </Step>
+  <Step title="Third Step">
+    Head over to the Data sources page and click on `New data source`.
+  </Step>
+  <Step title="Fourth Step">
+    Fill in a name for the data source, an optional description, and choose
+    MongoDB as the type. Then click on `Connect`.
+  </Step>
+  <Step title="Fifth Step">
+    In the page that appears, fill in the MongoDB query parameters and click on
+    `Save changes`. You should now see your data descriptions and sample data
+    appear.
+  </Step>
+</Steps>
+
+![title](/assets/integrations/mongodb-1.png)
+
+### What can I do with this integration?
+
+You can pull in data from MongoDB collections as data sources on Onvo to build your dashboards and reports. Any data source using the MongoDB integration will be kept in sync with the underlying data to keep your dashboards live.
+
+You can create beautiful, interactive dashboards using your MongoDB data. Just ask for the kind of visualization you want in natural language to create a widget on the dashboard. You can also ask for data pre-processing before visualization. We also allow for questions in natural language to your data on MongoDB.
+
+![title](/assets/integrations/common-dashboard.png)
+Once you are happy with your dashboard, you can integrate them into your products with the SDK.
+
+### How do I create a dashboard using MongoDB data?
+
+On Onvo, you can do this by specifying the MongoDB database and collection in the data source configuration.
+
+### Config parameters
+
+<ParamField path="url" type="string">
+  MongoDB connection URL, including authentication details if required (e.g.,
+  "mongodb://username:password@localhost:27017").
+</ParamField>
+
+<ParamField path="database" type="string">
+  Name of the MongoDB database (e.g., "mydatabase").
+</ParamField>
+
+<ParamField path="collection" type="string">
+  Name of the MongoDB collection to query (e.g., "mycollection").
+</ParamField>
+
+### Security considerations
+
+It is recommended to create a dedicated MongoDB user with read access to the specified database and collection for Onvo integration. Ensure that the provided URL includes authentication details and is secure.
+
+<Note>
+  If you need to whitelist IP addresses, make sure to allow **35.209.78.5** for
+  Onvo AI to access your MongoDB server.
+</Note>

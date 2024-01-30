@@ -5,7 +5,6 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import Backend from "../../backend";
 import { useToken } from "../Wrapper";
 
 type DashboardContext = {
@@ -30,7 +29,7 @@ const Dashboard: React.FC<{ id: string; children: any }> = ({
 
   useEffect(() => {
     if (id && backend) {
-      backend.getDashboard(id).then(setDashboard);
+      backend.getDashboardById(id).then(setDashboard);
       backend.getDashboardWidgets(id).then(setWidgets);
     }
   }, [id, backend]);
