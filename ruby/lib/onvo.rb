@@ -7,8 +7,8 @@ class Onvo
 
   attr_accessor :options
 
-  def initialize(endpoint, api_key)
-    self.class.base_uri endpoint # http://example.io
+  def initialize(endpoint = ENV['ONVO_API_ENDPOINT'], api_key = ENV['ONVO_API_KEY'])
+    self.class.base_uri endpoint
     @options = {
       headers: {
         'x-api-key': api_key,
@@ -34,19 +34,53 @@ class Onvo
     e.full_message(highlight: true, order: :top)
   end
 
-  def organisation_index
-    base_request { self.class.get('/api/organisations', options) }
+  def base_get(subdirectory)
+    base_request { self.class.get(subdirectory, options) }
   end
 
-  def organisation_create(data)
-    base_request { self.class.put('/api/organisations', options.merge(data)) }
+  def base_post(subdirectory)
+    base_request { self.class.post(subdirectory, options) }
   end
 
-  def organisation_show(id)
-    base_request { self.class.get(`/api/organisations/#{id}`, options) }
+  def base_delete(subdirectory)
+    base_request { self.class.delete(subdirectory, options) }
   end
 
-  def organisation_update(id, data)
-    base_request { self.class.put(`/api/organisations/#{id}`, options.merge(data)) }
+  # ------ EOI ------
+
+  # Dashboard endpoints
+  def get_dashboards
+    base_get('/dashboards')
+  end
+
+  # Account endpoints
+  def get_accounts
+    base_get('/accounts')
+  end
+
+  def get_account_by_id(id)
+    base_get(`/accounts/#{id}`)
+  end
+
+  # Team endpoints
+  def get_teams
+    base_get('/teams')
+  end
+
+  def get_team_by_id(id)
+    base_get(`/teams/#{id}`)
+  end
+
+  # Embed user endpoints
+  def get_embed_users
+    base_get('/embed-users')
+  end
+
+  def get_embed_user_by_id(id)
+    base_get(`/embed-users/#{id}`)
+  end
+
+  def delete_embed_user_by_id(id)
+    base_delete(`embed-users/#{id}`)
   end
 end

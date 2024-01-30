@@ -3,19 +3,18 @@ require_relative '../lib/onvo'
 
 class OnvoTest < Minitest::Test
   def setup
-    @sample_endpoint = 'test@example.com'
-    @sample_api_key = 'test_api_key'
-    @onvo = Onvo.new(@sample_endpoint, @sample_api_key)
+    @endpoint = ENV['ONVO_API_ENDPOINT']
+    @api_key = ENV['ONVO_API_KEY']
+    @onvo = Onvo.new(@endpoint, @api_key)
   end
 
   def test_onvo_initializer
     options = {
       headers: {
-        'x-api-key': @sample_api_key,
-        'Content-Type': "application/json"
+        'x-api-key': @api_key,
+        'Content-Type': 'application/json'
       }
     }
     assert_equal options, @onvo.options
-    @onvo.organisation_index
   end
 end
