@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 
 dotenv.config();
-let onvo = new Onvo("http://localhost:3004", process.env.API_KEY);
+let onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
 
 const app = express();
 
