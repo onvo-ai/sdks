@@ -1,0 +1,105 @@
+---
+title: "Node.js library"
+sidebarTitle: "Node.js"
+description: "This section will walk you through some of the objects available when using the Onvo AI platform"
+icon: "node-js"
+---
+
+### Installation
+
+In your backend environment, install the `@onvo-ai/node` package, this lets you authenticate users, setup sessions and fetch the list of dashboards.
+
+<CodeGroup>
+
+```bash npm
+npm install @onvo-ai/node
+```
+
+```bash yarn
+yarn add @onvo-ai/node
+```
+
+```bash pnpm
+pnpm install @onvo-ai/node
+```
+
+```bash bun
+bun install @onvo-ai/node
+```
+
+</CodeGroup>
+
+### Usage
+
+Begin by creating an API key by going to https://dashboard.onvo.ai/settings/developer, filling in a name for your API key and clicking `Generate`.
+
+Save this API key to your env file.
+
+```PowerShell
+API_KEY=eyJhbGciOiJIUzI1NiJ9.e...
+```
+
+Now initialise the SDK
+
+```JavaScript
+import Onvo from "@onvo-ai/node";
+import dotenv from "dotenv";
+
+dotenv.config();
+let onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
+```
+
+You can now fetch the list of dashboards and reports you have with the following API calls:
+
+```JavaScript
+let dashboards = await onvo.getDashboards();
+```
+
+To allow a user to view a dashboard, you need to associate a user with the dashboard using a session. To get started, create the user using the following function:
+
+```JavaScript
+await onvo.upsertEmbedUser("123456", {
+    name: "John appleseed",
+    email: "john@appleseed.com",
+    metadata: {
+        // can contain any other key-pair data you would want to store about the user
+        group_id: 55
+    }
+});
+```
+
+To create a session linking the user and a dashboard, you can use the following code:
+
+```JavaScript
+let session = await onvo.upsertDashboardSession({
+    dashboardId: <id of dashboard you have received from the previous getDashboards() function>,
+    userId: "123456"
+});
+```
+
+The session object looks like the following:
+
+```JSON
+{
+    "id": "1ad893d9-8654-4797-8603-d01186575349",
+    "dashboard": "e0a6ce20-ca31-421e-8764-74cde46e9463",
+    "organisation": "31a05cfd-1275-4c76-8390-20b328a3c4bf",
+    "parameters": {
+        "hello": "world",
+        "testing": 1234567456
+    },
+    "user": "123456",
+    "url": "https://dashboard.onvo.ai/embed/dashboard/e0a6ce20-ca31-421e-8764-74cde46e9463?token=eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFwcF9tZXRhZGF0YSI6eyJkYXNoYm9hcmQiOiJlMGE2Y2UyMC1jYTMxLTQyMWUtODc2NC03NGNkZTQ2ZTk0NjMiLCJzZXNzaW9uIjoiMWFkODkzZDktODY1NC00Nzk3LTg2MDMtZDAxMTg2NTc1MzQ5In0sInN1YiI6IjMxYTA1Y2ZkLTEyNzUtNGM3Ni04MzkwLTIwYjMyOGEzYzRiZi1zdWNjZXNzZnVsbCIsImF1ZCI6ImF1dGhlbnRpY2F0ZWQiLCJpYXQiOjE2OTQxNTU3Mjd9.P_eZloNdX7FN2sVWsANfIrHy5SikE1Zl8NPmAteDIwU"
+}
+```
+
+### Links
+
+<CardGroup cols={2}>
+  <Card title="Github" icon="github">
+    https://github.com/onvo-ai/sdks/tree/main/node
+  </Card>
+  <Card title="NPM" icon="npm">
+    https://www.npmjs.com/package/@onvo-ai/node
+  </Card>
+</CardGroup>

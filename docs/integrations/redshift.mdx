@@ -1,0 +1,83 @@
+---
+title: "Redshift"
+description: "Amazon Redshift is a fully managed, petabyte-scale data warehouse service in the cloud. It allows you to analyze large datasets with high performance and flexibility."
+---
+
+![title](/assets/integrations/redshift.png)
+
+### How do I activate this integration?
+
+<Steps>
+  <Step title="First Step">
+    Log in to your Onvo account, go to the Integrations page, and click on
+    `Connect` next to the Redshift Database card.
+  </Step>
+  <Step title="Second Step">
+    You will then be shown a configuration modal where you can enter the
+    Redshift credentials and click on `Connect Redshift DB`.
+  </Step>
+  <Step title="Third Step">
+    Head over to the Data sources page and click on `New data source`.
+  </Step>
+  <Step title="Fourth Step">
+    Fill in a name for the data source, an optional description, and choose
+    Redshift as the type. Then click on `Connect`.
+  </Step>
+  <Step title="Fifth Step">
+    In the page that appears, fill in the Redshift query parameters and click on
+    `Save changes`. You should now see your data descriptions and sample data
+    appear.
+  </Step>
+</Steps>
+
+![title](/assets/integrations/redshift-1.png)
+
+### What can I do with this integration?
+
+You can pull in data from Amazon Redshift tables as data sources on Onvo to build your dashboards and reports. Any data source using the Redshift integration will be kept in sync with the underlying data to keep your dashboards live.
+
+You can create beautiful, interactive dashboards using your Redshift data. Just ask for the kind of visualization you want in natural language to create a widget on the dashboard. You can also ask for data pre-processing before visualization. We also allow for questions in natural language to your data on Redshift.
+
+![title](/assets/integrations/common-dashboard.png)
+Once you are happy with your dashboard, you can integrate them into your products with the SDK.
+
+### How do I create a dashboard using Redshift data?
+
+On Onvo, you can do this by specifying the Redshift database details and the query to be executed in the data source configuration.
+
+### Config parameters
+
+<ParamField path="host" type="string">
+  Database server address (e.g.,
+  "myredshiftcluster.xxxxxxxxxxx.us-west-2.redshift.amazonaws.com").
+</ParamField>
+
+<ParamField path="port" type="string">
+  Port number for connecting to the Redshift database (e.g., "5439").
+</ParamField>
+
+<ParamField path="user" type="string">
+  Database username for authentication (e.g., "myuser").
+</ParamField>
+
+<ParamField path="password" type="string">
+  Password for connecting to the Redshift database server.
+</ParamField>
+
+<ParamField path="database" type="string">
+  Name of the target Redshift database (e.g., "mydatabase").
+</ParamField>
+
+<ParamField path="query" type="string">
+  SQL query to execute on the Redshift database. Example: "SELECT * FROM mytable
+  WHERE column = 'value'".
+</ParamField>
+
+### Security considerations
+
+It is recommended to set up a separate user on your Redshift database with just read access to the tables you require for your dashboard. In addition, if possible, restrict the incoming IP addresses to the database.
+
+<Note>
+  If you do restrict access by IP addresses, make sure to whitelist
+  **35.209.78.5** for Onvo AI to access your Redshift database.
+</Note>

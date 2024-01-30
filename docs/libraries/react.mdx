@@ -1,0 +1,121 @@
+---
+title: "React library"
+sidebarTitle: "React"
+description: "The react package can be used to display the list of dashboards available to a user or single dashboard. The components are also completely customizable."
+icon: "react"
+---
+
+### Installation
+
+In your frontend environment, install the `@onvo-ai/react` package, this lets you display the list of dashboards and individual dashboards.
+
+<CodeGroup>
+
+```bash npm
+npm install @onvo-ai/react
+```
+
+```bash yarn
+yarn add @onvo-ai/react
+```
+
+```bash pnpm
+pnpm install @onvo-ai/react
+```
+
+```bash bun
+bun install @onvo-ai/react
+```
+
+</CodeGroup>
+
+### Usage
+
+Begin by creating an API key by going to https://dashboard.onvo.ai/settings/developer, filling in a name for your API key and clicking `Generate`. Use this token to setup a backend endpoint that can fetch the user access token from a secure environment.
+
+<CodeGroup>
+
+```jsx app.tsx
+import { Wrapper, DashboardList } from "@onvo-ai/react";
+const baseUrl = "https://dashboard.onvo.ai";
+
+const ListPage = () => {
+  const [accessToken, setAccessToken] = useState("");
+  const userId = "123456";
+
+  useEffect(() => {
+    fetch("/api/get-token/" + userId)
+      .then((data) => data.json())
+      .then((data) => {
+        setAccessToken(data.token);
+      });
+  }, []);
+
+  return (
+    <Wrapper baseUrl={baseUrl} token={accessToken}>
+      <DashboardList />
+    </Wrapper>
+  );
+};
+
+const DashboardPage = (id) => {
+  const [accessToken, setAccessToken] = useState("");
+  const userId = "123456";
+
+  useEffect(() => {
+    fetch("/api/get-token/" + userId)
+      .then((data) => data.json())
+      .then((data) => {
+        setAccessToken(data.token);
+      });
+  }, []);
+
+  return (
+    <Wrapper baseUrl={baseUrl} token={accessToken}>
+      <Dashboard id={id}>
+        <DashboardHeader />
+        <DashboardGrid />
+      </Dashboard>
+    </Wrapper>
+  );
+};
+```
+
+```javascript backend.js
+import Onvo from "@onvo-ai/node";
+import dotenv from "dotenv";
+import express from "express";
+
+dotenv.config();
+let onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
+
+const app = express();
+
+app.use(express.static("public"));
+
+app.get("/api/get-token/:id", async function (req, res) {
+  try {
+    let data = await onvo.getEmbedUserToken(req.params.id);
+    res.send(JSON.stringify(data));
+  } catch (e) {
+    console.log(e);
+  }
+});
+```
+
+```PowerShell .env
+API_KEY=eyJhbGciOiJIUzI1NiJ9.e...
+```
+
+</CodeGroup>
+
+### Links
+
+<CardGroup cols={2}>
+  <Card title="Github" icon="github">
+    https://github.com/onvo-ai/sdks/tree/main/react
+  </Card>
+  <Card title="NPM" icon="npm">
+    https://www.npmjs.com/package/@onvo-ai/react
+  </Card>
+</CardGroup>

@@ -1,0 +1,200 @@
+---
+title: "Data sources"
+description: "A data source identifies some data stream that can be used to build dashboards. It could be an API, a file, or one of our many integrations."
+icon: "database"
+---
+
+### Data source fields
+
+<ParamField path="title" type="string" required>
+  The title or name of the datasource.
+</ParamField>
+
+<ParamField path="description" type="string">
+  A description of the datasource.
+</ParamField>
+
+<ParamField path="created_at" type="string">
+  The timestamp indicating when the datasource was created.
+</ParamField>
+
+<ParamField path="created_by" type="string">
+  The identifier of the user who created the datasource.
+</ParamField>
+
+<ParamField path="id" type="string">
+  The unique identifier for the datasource.
+</ParamField>
+
+<ParamField path="columns" type="array" required>
+  An array of objects representing columns in the datasource. Each object has a
+  'title' and 'description'.
+  <Expandable title="properties">
+    <ParamField path="title" type="string">
+      An array of objects representing columns in the datasource. Each object
+      has a 'title' and 'description'.
+    </ParamField>
+    <ParamField path="description" type="string">
+      An array of objects representing columns in the datasource. Each object
+      has a 'title' and 'description'.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField path="config" type="Object" required>
+  The configuration object associated with the datasource.
+  <CodeGroup>
+
+```typescript api
+{
+    url: string;
+    type: "json" | "csv" | "xml" | "excel";
+    method: "GET" | "POST";
+    headers?: string;
+    body?: string;
+    transform?: string;
+}
+```
+
+```typescript file
+{
+  url: string;
+  filename: string;
+  type: "json" | "csv" | "xml" | "excel";
+}
+```
+
+```typescript redshift
+{
+  host: string;
+  port: string;
+  user: string;
+  password: string;
+  database: string;
+  query: string;
+}
+```
+
+```typescript sql
+{
+  host: string;
+  user: string;
+  password: string;
+  database: string;
+  query: string;
+}
+```
+
+```typescript postgresql
+{
+  host: string;
+  port: string;
+  database: string;
+  user: string;
+  password: string;
+  query: string;
+}
+```
+
+```typescript mongodb
+{
+  url: string;
+  database: string;
+  collection: string;
+}
+```
+
+```typescript airtable
+{
+  baseId: string;
+  baseName: string;
+  tableId: string;
+  tableName: string;
+}
+```
+
+```typescript google-sheet
+{
+  docId: string;
+  sheetId: number;
+  sheetName: string;
+}
+```
+
+```typescript zoho-people
+{
+  product: string;
+  module: string;
+}
+```
+
+```typescript firestore
+{
+  type: string;
+  project_id: string;
+  private_key_id: string;
+  private_key: string;
+  client_email: string;
+  client_id: string;
+  auth_uri: string;
+  token_uri: string;
+  auth_provider_x509_cert_url: string;
+  client_x509_cert_url: string;
+  universe_domain: string;
+  databaseURL: string;
+  collection: string;
+}
+```
+
+```typescript rootfi
+{
+  company_id: number;
+  resource: string;
+}
+```
+
+    </CodeGroup>
+
+</ParamField>
+
+<ParamField path="last_updated_at" type="string">
+  The timestamp indicating when the datasource was last updated.
+</ParamField>
+
+<ParamField path="last_updated_by" type="string">
+  The identifier of the user who last updated the datasource.
+</ParamField>
+
+<ParamField path="parameters" type="array" required default="[]">
+  An array of objects representing parameters in the datasource. Each object has
+  an 'id' and 'default'.
+  <Expandable title="properties">
+    <ParamField path="id" type="string">
+      An array of objects representing columns in the datasource. Each object
+      has a 'title' and 'description'.
+    </ParamField>
+    <ParamField path="default" type="string">
+      An array of objects representing columns in the datasource. Each object
+      has a 'title' and 'description'.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField path="sample_data" type="string">
+  Sample data associated with the datasource.
+</ParamField>
+
+<ParamField path="size" type="number">
+  The size of the datasource in kB.
+</ParamField>
+
+<ParamField path="source" type="string" required>
+  The source of the datasource. It can be of type `api`, `file`, `mongodb`,
+  `sql`, `redshift`, `postgresql`, `firestore`, `airtable`, `google-sheet`,
+  `zoho-people`, `quickbooks`, `zoho-books`, `zero`, `sage`, `tally`, `wafeq`,
+  `wave`, `myob` or `ms-dynamics`
+</ParamField>
+
+<ParamField path="team" type="string">
+  The identifier of the team to which the datasource belongs.
+</ParamField>

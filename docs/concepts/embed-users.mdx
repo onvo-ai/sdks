@@ -1,0 +1,44 @@
+---
+title: "Embed users"
+description: "An embed user is a user of the dashboards when embedded in your product. These users are different from accounts in that they would not be able to login to the Onvo platform and do not need credentials to access the data."
+icon: "user-shield"
+---
+
+### Embed user fields
+
+<ParamField path="name" type="string" required>
+  The name of the embed user.
+</ParamField>
+
+<ParamField path="email" type="string" required>
+  The email address associated with the embed user.
+</ParamField>
+
+<ParamField path="created_at" type="string">
+  The timestamp indicating when the embed user was created.
+</ParamField>
+
+<ParamField path="id" type="string" required>
+  The unique identifier for the embed user.
+</ParamField>
+
+<ParamField path="last_updated_at" type="string">
+  The timestamp indicating when the embed user was last updated.
+</ParamField>
+
+<ParamField path="metadata" type="object">
+  Additional metadata associated with the embed user as a json object with
+  key-pair values.
+    <CodeGroup>
+  ```json example
+    {
+        "group_id": 55,
+        "authorization": "Bearer di7qwe6tiew786"
+    }
+  ```  
+  </CodeGroup>
+</ParamField>
+
+<ParamField path="team" type="string">
+  The identifier of the team to which the embed user belongs.
+</ParamField>

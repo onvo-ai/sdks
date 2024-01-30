@@ -1,0 +1,220 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Onvo AI documentation",
+  "logo": {
+    "dark": "/assets/logo-dark.svg",
+    "light": "/assets/logo-light.svg",
+    "href": "https://onvo.ai"
+  },
+  "favicon": "/assets/favicon.png",
+  "colors": {
+    "primary": "#3b82f6",
+    "light": "#3b82f6",
+    "dark": "#3b82f6",
+    "anchors": {
+      "from": "#3b82f6",
+      "to": "#2159b5"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Blog",
+      "url": "https://blog.onvo.ai"
+    },
+    {
+      "name": "Book a demo",
+      "url": "https://www.onvo.ai/book-demo"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://dashboard.onvo.ai"
+  },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "apis"
+    },
+    {
+      "name": "Integrations",
+      "url": "integrations"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Documentation",
+      "icon": "book-open-cover",
+      "url": "/"
+    },
+    {
+      "name": "Community",
+      "icon": "whatsapp",
+      "url": "https://chat.whatsapp.com/JPt72FNlDeSI6HjdvcYx9s"
+    },
+    {
+      "name": "Blog",
+      "icon": "newspaper",
+      "url": "https://blog.onvo.ai"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Introduction",
+      "pages": ["introduction/welcome", "introduction/community"]
+    },
+    {
+      "group": "Quickstart",
+      "pages": [
+        "get-started/creating-first-dashboard",
+        "get-started/managing-multiple-users",
+        "get-started/customising-look-and-feel"
+      ]
+    },
+
+    {
+      "group": "Concepts",
+      "pages": [
+        "concepts/accounts",
+        "concepts/teams",
+        "concepts/dashboards",
+        "concepts/data-sources",
+        "concepts/sessions",
+        "concepts/embed-users",
+        "concepts/questions",
+        "concepts/widgets",
+        "concepts/automations"
+      ]
+    },
+    {
+      "group": "Libraries",
+      "pages": [
+        "libraries/nodejs",
+        "libraries/react",
+        "libraries/ruby",
+        "libraries/rust"
+      ]
+    },
+
+    {
+      "group": "Integrations",
+      "pages": [
+        "integrations/overview",
+        "integrations/sql",
+        "integrations/postgresql",
+        "integrations/mongodb",
+        "integrations/firestore",
+        "integrations/google-sheet",
+        "integrations/airtable",
+        "integrations/redshift",
+        "integrations/snowflake",
+        "integrations/big-query",
+        "integrations/zoho-books",
+        "integrations/quickbooks",
+        "integrations/xero",
+        "integrations/tally",
+        "integrations/sage",
+        "integrations/ms-dynamics",
+        "integrations/myob-business",
+        "integrations/wave",
+        "integrations/wafeq",
+        "integrations/salesforce",
+        "integrations/hubspot",
+        "integrations/google-analytics",
+        "integrations/mixpanel",
+        "integrations/segment",
+        "integrations/shopify",
+        "integrations/zoho-people"
+      ]
+    },
+    {
+      "group": "Accounts",
+      "pages": [
+        "apis/accounts/get-all-accounts",
+        "apis/accounts/get-account-by-id"
+      ]
+    },
+    {
+      "group": "Teams",
+      "pages": [
+        "apis/teams/get-all-teams",
+        "apis/teams/get-team-by-id",
+        "apis/teams/update-team-by-id"
+      ]
+    },
+    {
+      "group": "Dashboards",
+      "pages": [
+        "apis/dashboards/get-all-dashboards",
+        "apis/dashboards/create-dashboard",
+        "apis/dashboards/get-dashboard-by-id",
+        "apis/dashboards/delete-dashboard-by-id",
+        "apis/dashboards/update-dashboard-by-id",
+        {
+          "group": "Widgets",
+          "pages": [
+            "apis/dashboards/get-all-widgets-under-dashboard",
+            "apis/dashboards/get-widget-by-id",
+            "apis/dashboards/update-widget-by-id",
+            "apis/dashboards/create-widget",
+            "apis/dashboards/delete-widget-by-id"
+          ]
+        },
+        {
+          "group": "Questions",
+          "pages": [
+            "apis/dashboards/get-questions-by-dashboard-id",
+            "apis/dashboards/ask-question-to-dashboard-by-id"
+          ]
+        },
+        {
+          "group": "Sessions",
+          "pages": [
+            "apis/dashboards/upsert-dashboard-session",
+            "apis/dashboards/get-all-dashboard-sessions",
+            "apis/dashboards/revoke-dashboard-sessions"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Embed Users",
+      "pages": [
+        "apis/embed-users/get-all-embed-users",
+        "apis/embed-users/upsert-embed-user",
+        "apis/embed-users/get-token",
+        "apis/embed-users/get-embed-user-by-id",
+        "apis/embed-users/delete-embed-user-by-id"
+      ]
+    },
+    {
+      "group": "Datasources",
+      "pages": [
+        "apis/datasources/get-data-source-by-id",
+        "apis/datasources/get-data-source-data-by-id",
+        "apis/datasources/populate-data-source-columns-by-id",
+        "apis/datasources/delete-data-source-by-id",
+        "apis/datasources/create-data-source",
+        "apis/datasources/update-data-source-by-id",
+        "apis/datasources/get-all-data-sources"
+      ]
+    },
+    {
+      "group": "Automations",
+      "pages": [
+        "apis/automations/get-all-automations",
+        "apis/automations/create-automation",
+        "apis/automations/get-automation-by-id",
+        "apis/automations/update-automation-by-id",
+        "apis/automations/delete-automation-by-id"
+      ]
+    }
+  ],
+  "openapi": ["openapi.yaml"],
+  "footerSocials": {
+    "twitter": "https://twitter.com/OnvoAI",
+    "github": "https://github.com/onvo-ai",
+    "linkedin": "https://www.linkedin.com/company/onvo",
+    "facebook": "https://www.facebook.com/onvoai",
+    "instagram": "https://www.instagram.com/onvoai"
+  }
+}

@@ -1,0 +1,81 @@
+---
+title: "SQL"
+description: "SQL is an open-source relational database management system. It is popular for being very beginner friendly and has become one of the most popular database options out there"
+---
+
+![title](/assets/integrations/sql.png)
+
+### How do I activate this integration?
+
+<Steps>
+  <Step title="First Step">
+    Login to your Onvo account, go to the Integrations page click on `Connect`
+    next to the SQL Database card.
+  </Step>
+  <Step title="Second Step">
+    You will then be shown a configuration modal where you can enter the SQL
+    credentials and click on `Connect SQL DB`.
+  </Step>
+  <Step title="Third Step">
+    You can now head over to the Data sources page and click on `New data
+    source`.
+  </Step>
+  <Step title="Fourth Step">
+    Fill in a name for the data source, an optional description and choose SQL
+    as the type. Then click on `Connect`.
+  </Step>
+  <Step title="Fifth Step">
+    In the page that appears, fill in the SQL query and click on `Save changes`.
+    You should now see your data descriptions and sample data appear.
+  </Step>
+</Steps>
+
+![title](/assets/integrations/sql-1.png)
+
+### What can I do with this integration?
+
+You can pull in data from multiple tables/databases as data sources on Onvo to build your dashboards and reports. Any datasource using the MySQL integration will be kept in sync with the underlying data to keep your dashboards live.
+
+You can create beautiful, interactive dashboards using your MySQL data. Just ask for the kind of visualisation you want in natural language to create a widget on the dashboard. You can also ask for data pre-processing before visualisation. We also allow for questions in natural language to your data on MySQL.
+
+![title](/assets/integrations/common-dashboard.png)
+Once you are happy with your dashboard, you can integrate them into your products with the SDK.
+
+### How do I create a dashboard using multiple tables?
+
+On Onvo, you can do this in two ways:
+
+1. You can write an SQL query with a join on a single datasource so that the datasource has all the relevant data to begin with
+2. You can optionally create 2 separate data sources and make sure you mention the field used to correlate the data in the "fields" tab. This will enable the AI to write the necessary code to join the data without having to write complicated join queries.
+
+### Config parameters
+
+<ParamField path="host" type="string">
+  Database server address (e.g., "localhost" or "192.168.1.1").
+</ParamField>
+
+<ParamField path="user" type="string">
+  Database username for authentication (e.g., "myuser").
+</ParamField>
+
+<ParamField path="password" type="string">
+  Password for connecting to the database server.
+</ParamField>
+
+<ParamField path="database" type="string">
+  Name of the target database (e.g., "mydatabase").
+</ParamField>
+
+<ParamField path="query" type="string">
+  SQL query to execute on the database. Example: "SELECT * FROM mytable WHERE
+  column = 'value'".
+</ParamField>
+
+### Security considerations
+
+It is recommended to setup a separate user on your database with just read access to the tables you require for your dashboard. In addition, if possible, restrict the incoming IP addresses to the database.
+
+<Note>
+  If you do restrict access by IP addresses, make sure to whitelist
+  **35.209.78.5** for Onvo AI to access your database.
+</Note>

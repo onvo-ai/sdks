@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.react-grid-item > .react-resizable-handle {
+  background-image: none !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.react-resizable-handle::after {
+  display: none !important;
+}
+.react-grid-placeholder {
+  border-radius: 8px;
+  background-color: #3366cc !important;
+}

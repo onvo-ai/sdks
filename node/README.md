@@ -37,7 +37,7 @@ const { Onvo } = require("@onvo-ai/node");
 const onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
 
 // Identify a user
-await onvo.identifyUser("123456", {
+await onvo.upsertEmbedUser("123456", {
   name: "John Appleseed",
   email: "john@appleseed.com",
   metadata: {
@@ -47,7 +47,7 @@ await onvo.identifyUser("123456", {
 });
 
 // Create a session
-const sessionUrl = await onvo.createSession({
+const sessionUrl = await onvo.upsertDashboardSession({
   dashboardId: "ebc7ab74-3fd2-47e6-90df-addaec3a029e",
   userId: "123456",
   parameters: {
@@ -67,7 +67,7 @@ _This is the main class that initializes the connection to the Onvo platform._
 
 ---
 
-**`await onvo.identifyUser(userId, userData)`**
+**`await onvo.upsertEmbedUser(userId, userData)`**
 _Identify a user on the Onvo platform._
 
 - `userId (string)`: Unique identifier for the user.
@@ -78,7 +78,7 @@ _Identify a user on the Onvo platform._
 
 ---
 
-**`await onvo.createSession(sessionData)`**
+**`await onvo.upsertDashboardSession(sessionData)`**
 _Create a session on the Onvo platform._
 
 - `sessionData (object)`
