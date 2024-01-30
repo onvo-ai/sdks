@@ -3,7 +3,7 @@ import { Metric, Text } from "@tremor/react";
 import React from "react";
 import { useDashboard } from "../Dashboard/Dashboard";
 
-const DashboardHeader: React.FC = ({}) => {
+export const DashboardHeader: React.FC = ({}) => {
   const { dashboard } = useDashboard();
 
   return (
@@ -32,5 +32,3 @@ const DashboardHeader: React.FC = ({}) => {
     </section>
   );
 };
-
-export default DashboardHeader;

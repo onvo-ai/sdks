@@ -1,6 +1,6 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import Wrapper from "./Wrapper";
+import { Wrapper } from "./Wrapper";
 import { Button } from "@tremor/react";
 
 const meta: Meta<typeof Wrapper> = {
