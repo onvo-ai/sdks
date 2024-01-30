@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "../node_modules/react-grid-layout/css/styles.css";
+@import "../node_modules/react-resizable/css/styles.css";
 
 .react-grid-item > .react-resizable-handle {
   background-image: none !important;

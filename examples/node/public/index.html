@@ -12,6 +12,7 @@
 
     <script>
 
+
         window.onload = () => {
 
             fetch("/api/dashboards").then(a => a.json()).then(arr => {
@@ -24,21 +25,20 @@
                     li.style.cursor = "pointer";
                     document.getElementById("dashboard-list").appendChild(li);
                 });
+                loadDashboard(arr[0].id);
             })
 
             function loadDashboard(id) {
-                document.getElementById("iframe").style.display = "none";
                 document.getElementById("loader").style.display = "flex";
                 fetch("/api/dashboards/" + id).then(a => a.json()).then(obj => {
                     console.log(obj);
                     document.getElementById("iframe").setAttribute("src", obj.url);
-                    document.getElementById("iframe").style.display = "block";
-                })
+                    document.getElementById("iframe").onload = () => {
+                        document.getElementById("loader").style.display = "none";
+                    };
+                });
             }
 
-            function setLoaded() {
-                document.getElementById("loader").style.display = "none";
-            }
         }
     </script>
 </head>
@@ -93,8 +93,7 @@
             Loading dashboard...
         </div>
 
-        <iframe frameborder="0" onload="setLoaded();"
-            style="height: 100vh; width: calc(100vw - 300px);  background-color: var(--bs-body-bg); display: none;"
+        <iframe frameborder="0" style="height: 100vh; width: calc(100vw - 300px);  background-color: var(--bs-body-bg);"
             id="iframe" />
     </div>
 </body>

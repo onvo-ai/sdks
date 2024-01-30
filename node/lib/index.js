@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import axios from "axios";
 export default class Onvo {
     apiKey;
     endpoint;
@@ -7,20 +7,28 @@ export default class Onvo {
         this.endpoint = endpoint;
     }
     async fetchBase(url, method, body) {
-        let response = await fetch(this.endpoint + url, {
-            method: method || "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "x-api-key": this.apiKey,
-            },
-            body: body ? JSON.stringify(body) : undefined,
-        });
-        let json = await response.json();
-        if (response.ok) {
-            return json;
+        try {
+            const response = await axios({
+                method: method || "GET",
+                url: this.endpoint + url,
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-api-key": this.apiKey,
+                },
+                data: body,
+            });
+            return response.data;
         }
-        else {
-            throw new Error(json.message);
+        catch (error) {
+            if (error.response) {
+                throw new Error(error.response.data.message);
+            }
+            else if (error.request) {
+                throw new Error("No response received from the server");
+            }
+            else {
+                throw new Error("Error in making the request: " + error.message);
+            }
         }
     }
     // Account endpoints

@@ -1,8 +1,8 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import DashboardHeader from "./DashboardHeader";
-import Wrapper from "../Wrapper/Wrapper";
-import Dashboard from "../Dashboard/Dashboard";
+import { DashboardHeader } from "./DashboardHeader";
+import { Wrapper } from "../Wrapper/Wrapper";
+import { Dashboard } from "../Dashboard/Dashboard";
 
 const meta: Meta<typeof DashboardHeader> = {
   component: DashboardHeader,

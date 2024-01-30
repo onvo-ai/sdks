@@ -19,7 +19,7 @@ const Context = createContext<DashboardContext>({
   widgets: [],
 });
 
-const Dashboard: React.FC<{ id: string; children: any }> = ({
+export const Dashboard: React.FC<{ id: string; children: any }> = ({
   id,
   children,
 }) => {
@@ -40,5 +40,4 @@ const Dashboard: React.FC<{ id: string; children: any }> = ({
     </Context.Provider>
   );
 };
-export default Dashboard;
 export const useDashboard = () => useContext(Context);

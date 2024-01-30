@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@onvo-ai/node@^0.11.6":
+  version "0.11.6"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/node/-/node-0.11.6.tgz#08f6ece1eeba4b18100c0769539ea460205e8904"
+  integrity sha512-1PY5ePbZ576crOquP4PPW1Brj/AKbC/E36d/RbGW0dh7Umcl2zzFVei1dFV+5OTFv3WwFXuyF36n0Olen1i5KA==
+  dependencies:
+    node-fetch "2.6.1"
+
 accepts@~1.3.8:
   version "1.3.8"
   resolved "https://registry.npmjs.org/accepts/-/accepts-1.3.8.tgz"
@@ -276,6 +283,11 @@ negotiator@0.6.3:
   version "0.6.3"
   resolved "https://registry.npmjs.org/negotiator/-/negotiator-0.6.3.tgz"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
+
+node-fetch@2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
+  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
 object-inspect@^1.9.0:
   version "1.12.3"
