@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'httparty'
+require 'json'
 
 class Onvo
   include HTTParty
@@ -17,34 +18,25 @@ class Onvo
     }
   end
 
-  def handle_response_error(response_code)
-    case response_code
-    when 404
-      p 'Not Found'
-    when 500...600
-      p "#{response_code} Error"
-    end
-  end
-
   def base_request
     response = yield
-    handle_response_error(response.code) if response.code >= 400
-    response.body
-  rescue StandardError => e
-    e.full_message(highlight: true, order: :top)
+    body = JSON.parse(response.body)
+    raise "#{response.code} Error : #{body["message"]}" if response.code >= 400 #TODO: Replace Runtime w/ custom errors
+
+    body
   end
 
   def base_get(subdirectory)
     base_request { self.class.get(subdirectory, options) }
   end
 
-  def base_post(subdirectory)
-    base_request { self.class.post(subdirectory, options) }
-  end
+  # def base_post(subdirectory, body)
+  #   base_request { self.class.post(subdirectory, options, body) }
+  # end
 
-  def base_delete(subdirectory)
-    base_request { self.class.delete(subdirectory, options) }
-  end
+  # def base_delete(subdirectory)
+  #   base_request { self.class.delete(subdirectory, options) }
+  # end
 
   # ------ EOI ------
 
@@ -80,7 +72,7 @@ class Onvo
     base_get(`/embed-users/#{id}`)
   end
 
-  def delete_embed_user_by_id(id)
-    base_delete(`embed-users/#{id}`)
-  end
+  # def delete_embed_user_by_id(id)
+  #   base_delete(`embed-users/#{id}`)
+  # end
 end
