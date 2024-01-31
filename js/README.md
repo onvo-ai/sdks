@@ -1,37 +1,37 @@
-# @onvo-ai/node
+# @onvo-ai/js
 
-The @onvo-ai/node package provides utilities to seamlessly communicate with the Onvo platform, allowing developers to integrate AI-powered dashboards into their products. This README provides an overview of the package's features, installation, and usage instructions.
+The @onvo-ai/js package provides utilities to seamlessly communicate with the Onvo platform, allowing developers to integrate AI-powered dashboards into their products. This README provides an overview of the package's features, installation, and usage instructions.
 
 ## Installation
 
 You can install the package using npm:
 
 ```bash
-npm install @onvo-ai/node
+npm install @onvo-ai/js
 ```
 
 OR
 
 ```bash
-yarn add @onvo-ai/node
+yarn add @onvo-ai/js
 ```
 
 OR
 
 ```bash
-bun install @onvo-ai/node
+bun install @onvo-ai/js
 ```
 
 ## Getting Started
 
-To begin using the `@onvo-ai/node` package, you'll need to have an API key from the Onvo platform. Ensure that your API key is stored as an environment variable named `API_KEY`.
+To begin using the `@onvo-ai/js` package, you'll need to have an API key from the Onvo platform. Ensure that your API key is stored as an environment variable named `API_KEY`.
 
 ## Usage
 
 Here's an example of how to use the package to interact with the Onvo platform:
 
 ```javascript
-const { Onvo } = require("@onvo-ai/node");
+const { Onvo } = require("@onvo-ai/js");
 
 // Initialize the Onvo class with your API key
 const onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
@@ -94,4 +94,4 @@ For any issues, questions, or feedback, please contact our support team at info@
 
 This package is distributed under the MIT License.
 
-Thank you for choosing the @onvo-ai/node package to integrate AI-powered dashboards from the Onvo platform into your product! We hope this package enhances your development experience and empowers your applications with advanced analytics capabilities.
+Thank you for choosing the @onvo-ai/js package to integrate AI-powered dashboards from the Onvo platform into your product! We hope this package enhances your development experience and empowers your applications with advanced analytics capabilities.
