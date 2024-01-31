@@ -3,7 +3,12 @@ import { Text, Title, Divider, Card } from "@tremor/react";
 import React, { useEffect, useState } from "react";
 import { useToken } from "../Wrapper";
 
-import { LinkIcon, TableCellsIcon } from "@heroicons/react/24/outline";
+import {
+  ClockIcon,
+  LinkIcon,
+  PencilIcon,
+  TableCellsIcon,
+} from "@heroicons/react/24/outline";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -13,7 +18,7 @@ const DashboardCard: React.FC<{
   dashboard: any;
   onClick?: (dashboard: any) => void;
   variant?: "list" | "grid";
-}> = ({ dashboard, onClick, variant = "list" }) => {
+}> = ({ dashboard, onClick, variant = "grid" }) => {
   return (
     <Card
       onClick={() => onClick && onClick(dashboard)}
@@ -60,21 +65,14 @@ const DashboardCard: React.FC<{
           </Text>
         </div>
         <div className="w-48 flex-shrink-0 flex flex-col gap-1">
-          <Text>Updated {dayjs(dashboard.last_updated_at).fromNow()}</Text>
-          {dashboard.last_updated_by && (
-            <div className="flex flex-row gap-2 items-center">
-              <img
-                alt={dashboard.last_updated_by.full_name || "Profile picture"}
-                src={
-                  dashboard.last_updated_by.avatar_url || "/default-user.png"
-                }
-                height={20}
-                width={20}
-                className="rounded-full flex-shrink-0 w-5"
-              />
-              <Text>{dashboard.last_updated_by.full_name}</Text>
-            </div>
-          )}
+          <Text className="flex flex-row items-center gap-2">
+            <ClockIcon height={16} width={16} />
+            Created {dayjs(dashboard.created_at).fromNow()}
+          </Text>
+          <Text className="flex flex-row items-center gap-2">
+            <PencilIcon height={16} width={16} />
+            Updated {dayjs(dashboard.last_updated_at).fromNow()}
+          </Text>
         </div>
       </div>
     </Card>
@@ -83,9 +81,9 @@ const DashboardCard: React.FC<{
 
 export const DashboardList: React.FC<{
   columns?: number;
-  onClick?: (dashboard: any) => void;
+  onClickItem?: (dashboard: any) => void;
   variant?: "list" | "grid";
-}> = ({ columns = 3, onClick, variant = "list" }) => {
+}> = ({ columns = 3, onClickItem, variant = "grid" }) => {
   const [dashboards, setDashboards] = useState<any[]>([]);
   const { backend } = useToken();
 
@@ -116,7 +114,7 @@ export const DashboardList: React.FC<{
         <DashboardCard
           key={a.id}
           dashboard={a}
-          onClick={onClick}
+          onClick={onClickItem}
           variant={variant}
         />
       ))}
