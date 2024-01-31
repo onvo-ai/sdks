@@ -1,4 +1,4 @@
-import Onvo from "@onvo-ai/node";
+import Onvo from "@onvo-ai/js";
 import dotenv from "dotenv";
 import DashboardGrid from "./DashboardGrid";
 

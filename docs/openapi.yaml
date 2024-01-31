@@ -6,10 +6,10 @@ info:
     Onvo's servers.
 
 
-    If you use node js, you can use the `@onvo-ai/node` package to consume the
+    If you use node js, you can use the `@onvo-ai/js` package to consume the
     endpoints.  
 
-    [https://www.npmjs.com/package/@onvo-ai/node](https://www.npmjs.com/package/@onvo-ai/node)
+    [https://www.npmjs.com/package/@onvo-ai/js](https://www.npmjs.com/package/@onvo-ai/js)
 
 
     ---

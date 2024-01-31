@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import Onvo from "@onvo-ai/node";
+import Onvo from "@onvo-ai/js";
 
 type OnvoWrapperContext = {
   token: string | undefined;

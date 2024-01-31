@@ -6,7 +6,7 @@ You can find the API documentation at https://onvo.ai/support/docs
 
 ## Server library progress
 
-#### ✅ [Node.js](https://www.npmjs.com/package/@onvo-ai/node) - Available with an example project
+#### ✅ [Node.js](https://www.npmjs.com/package/@onvo-ai/js) - Available with an example project
 
 #### Java - Coming soon
 
@@ -38,4 +38,4 @@ For any issues, questions, or feedback, please contact our support team at info@
 
 This package is distributed under the MIT License.
 
-Thank you for choosing the @onvo-ai/node package to integrate AI-powered dashboards from the Onvo platform into your product! We hope this package enhances your development experience and empowers your applications with advanced analytics capabilities.
+Thank you for choosing the @onvo-ai/js package to integrate AI-powered dashboards from the Onvo platform into your product! We hope this package enhances your development experience and empowers your applications with advanced analytics capabilities.
