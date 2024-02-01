@@ -32,8 +32,8 @@ class OnvoTest < Minitest::Test
   end
 
   def test_get_account_by_id
-    sample__account_id = @onvo.get_accounts[0]["id"]
-    assert_silent { @onvo.get_account_by_id(sample_id) }
+    sample_account_id = @onvo.get_accounts[0]["id"]
+    assert_silent { @onvo.get_account_by_id(sample_account_id) }
   end
 
   # Team endpoints
@@ -43,7 +43,7 @@ class OnvoTest < Minitest::Test
 
   def test_get_team_by_id
     sample_test_id = @onvo.get_teams[0]["id"]
-    assert_silent { @onvo.get_team_by_id(sample_id) }
+    assert_silent { @onvo.get_team_by_id(sample_test_id) }
   end
 
   # Embed user endpoints
@@ -53,10 +53,51 @@ class OnvoTest < Minitest::Test
 
   def test_get_embed_user_by_id
     sample_embed_user_id = @onvo.get_embed_users[0]["id"]
-    assert_silent { @onvo.get_embed_user_by_id }
+    assert_silent { @onvo.get_embed_user_by_id(sample_embed_user_id) }
   end
 
-  # def test_delete_embed_user_by_id(id)
+  # def test_delete_embed_user_by_id
   #   assert_silent { @onvo.delete_embed_user_by_id }
+  # end
+
+  # def test_upsert_embed_user
+  #   assert_silent { @onvo.upsert_embed_user(123, 'test-user', 'test-email@test.com', {}) }
+  # end
+
+  def test_get_embed_user_access_token
+    sample_embed_user_id = @onvo.get_embed_users[0]["id"]
+    assert_silent { @onvo.get_embed_user_access_token(sample_embed_user_id) }
+  end
+
+   # ---- Datasource user endpoints ----
+
+  def test_get_datasources
+    assert_silent { @onvo.get_datasources }
+  end
+
+  def test_get_datasource_by_id
+    sample_datasource_id = @onvo.get_datasources[0]["id"]
+    assert_silent { @onvo.get_datasource_by_id(sample_datasource_id) }
+  end
+
+  # def test_get_datasource_data_by_id
+  #   sample_datasource_id = @onvo.get_datasources[0]["id"] #TODO : Create a new table before getting data
+  #   assert_silent { @onvo.get_datasource_data_by_id(sample_datasource_id) }
+  # end
+
+  # def test_populate_data_source_by_id
+  #   assert_silent { @onvo.populate_data_source_by_id(sample_datasource_id) }
+  # end
+
+  # def test_delete_datasource_by_id
+  #   assert_silent { @onvo.delete_datasource_by_id(sample_datasource_id) }
+  # end
+
+  # def test_update_datasource_by_id
+  #   assert_silent { @onvo.update_datasource_by_id(sample_datasource_id, test_body) }
+  # end
+
+  # def test_create_datasource(body)
+  #   assert_silent { @onvo.create_datasource(test_datasource) }
   # end
 end

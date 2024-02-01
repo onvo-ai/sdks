@@ -30,6 +30,10 @@ class Onvo
     base_request { self.class.get(subdirectory, options) }
   end
 
+  # def base_put(subdirectory, body)
+  #   base_request { self.class.put(subdirectory, options, body) }
+  # end
+
   # def base_post(subdirectory, body)
   #   base_request { self.class.post(subdirectory, options, body) }
   # end
@@ -40,12 +44,12 @@ class Onvo
 
   # ------ EOI ------
 
-  # Dashboard endpoints
+  # ---- Dashboard endpoints ----
   def get_dashboards
     base_get('/dashboards')
   end
 
-  # Account endpoints
+  # ---- Account endpoints ----
   def get_accounts
     base_get('/accounts')
   end
@@ -54,7 +58,7 @@ class Onvo
     base_get("/accounts/#{id}")
   end
 
-  # Team endpoints
+  # ---- Team endpoints ----
   def get_teams
     base_get('/teams')
   end
@@ -63,7 +67,7 @@ class Onvo
     base_get("/teams/#{id}")
   end
 
-  # Embed user endpoints
+  # ---- Embed user endpoints ----
   def get_embed_users
     base_get('/embed-users')
   end
@@ -74,5 +78,48 @@ class Onvo
 
   # def delete_embed_user_by_id(id)
   #   base_delete(`embed-users/#{id}`)
+  # end
+
+  # def upsert_embed_user(id, name, email, metadata)
+  #   base_post('/embed-users', {
+  #     id: id,
+  #     name: name,
+  #     email: email,
+  #     metadata: metadata
+  #   })
+  # end
+
+  def get_embed_user_access_token(id)
+    base_get("/embed-users/#{id}/token")
+  end
+
+  # ---- Datasource user endpoints ----
+
+  def get_datasources
+    base_get('/datasources')
+  end
+
+  def get_datasource_by_id(id)
+    base_get("/datasources/#{id}")
+  end
+
+  def get_datasource_data_by_id(id)
+    base_get("/datasources/#{id}/data")
+  end
+
+  # def populate_data_source_by_id(id)
+  #   base_post("/datasources/#{id}/populate-columns")
+  # end
+
+  # def delete_datasource_by_id(id)
+  #   base_delete("/datasources/#{id}")
+  # end
+
+  # def update_datasource_by_id(id, body)
+  #   base_post("/datasources/#{id}", body)
+  # end
+
+  # def create_datasource(body)
+  #   base_put('/datasources', body)
   # end
 end
