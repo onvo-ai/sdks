@@ -22,7 +22,8 @@ info:
   version: 1.0.0
   contact: {}
 servers:
-  - url: "https://dashboard.onvo.axis"
+  - url: "https://dashboard.onvo.ai"
+    description: Production server (uses live data)
 paths:
   /api/accounts:
     get:
