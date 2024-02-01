@@ -51,7 +51,7 @@ class Onvo
   end
 
   def get_account_by_id(id)
-    base_get(`/accounts/#{id}`)
+    base_get("/accounts/#{id}")
   end
 
   # Team endpoints
@@ -60,7 +60,7 @@ class Onvo
   end
 
   def get_team_by_id(id)
-    base_get(`/teams/#{id}`)
+    base_get("/teams/#{id}")
   end
 
   # Embed user endpoints
@@ -69,7 +69,7 @@ class Onvo
   end
 
   def get_embed_user_by_id(id)
-    base_get(`/embed-users/#{id}`)
+    base_get("/embed-users/#{id}")
   end
 
   # def delete_embed_user_by_id(id)

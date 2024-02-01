@@ -31,27 +31,30 @@ class OnvoTest < Minitest::Test
     assert_silent { @onvo.get_accounts }
   end
 
-  # def test_get_account_by_id
-  #   assert_silent( @onvo.get_account_by_id )
-  # end
+  def test_get_account_by_id
+    sample__account_id = @onvo.get_accounts[0]["id"]
+    assert_silent { @onvo.get_account_by_id(sample_id) }
+  end
 
   # Team endpoints
   def test_get_teams
     assert_silent { @onvo.get_teams }
   end
 
-  # def test_get_team_by_id
-  #   assert_silent { @onvo.get_team_by_id }
-  # end
+  def test_get_team_by_id
+    sample_test_id = @onvo.get_teams[0]["id"]
+    assert_silent { @onvo.get_team_by_id(sample_id) }
+  end
 
   # Embed user endpoints
   def test_get_embed_users
     assert_silent { @onvo.get_embed_users }
   end
 
-  # def test_get_embed_user_by_id
-  #   assert_silent { @onvo.get_embed_user_by_id }
-  # end
+  def test_get_embed_user_by_id
+    sample_embed_user_id = @onvo.get_embed_users[0]["id"]
+    assert_silent { @onvo.get_embed_user_by_id }
+  end
 
   # def test_delete_embed_user_by_id(id)
   #   assert_silent { @onvo.delete_embed_user_by_id }
