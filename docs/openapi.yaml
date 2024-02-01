@@ -22,7 +22,7 @@ info:
   version: 1.0.0
   contact: {}
 servers:
-  - url: "{{baseUrl}}"
+  - url: "https://dashboard.onvo.axis"
 paths:
   /api/accounts:
     get:
