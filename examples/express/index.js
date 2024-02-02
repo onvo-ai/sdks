@@ -1,8 +1,13 @@
-import Onvo from "../lib/index.js";
+import Onvo from "@onvo-ai/js";
 import dotenv from "dotenv";
 import express from "express";
 
 dotenv.config();
+if (!process.env.API_KEY) {
+  console.log("No API key found, exiting...");
+  process.exit();
+}
+
 let onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
 
 const app = express();
@@ -19,7 +24,6 @@ app.get("/api/dashboards", async function (req, res) {
 });
 
 app.get("/api/dashboards/:id", async function (req, res) {
-  let authorization = "";
   try {
     await onvo.upsertEmbedUser("123456", {
       name: "John appleseed",

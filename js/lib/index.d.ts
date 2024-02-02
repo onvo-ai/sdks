@@ -1,8 +1,9 @@
+import { Method } from "axios";
 export default class Onvo {
     apiKey: string;
     endpoint: string;
     constructor(endpoint: string, apiKey: string);
-    fetchBase(url: string, method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE", body?: any): Promise<any>;
+    fetchBase(url: string, method?: Method, body?: any): Promise<any>;
     getAccounts(): Promise<any>;
     getAccountById(id: string): Promise<any>;
     getTeams(): Promise<any>;

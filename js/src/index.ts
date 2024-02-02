@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import axios, { Method } from "axios";
 
 export default class Onvo {
   apiKey: string;
@@ -9,24 +9,27 @@ export default class Onvo {
     this.endpoint = endpoint;
   }
 
-  async fetchBase(
-    url: string,
-    method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE",
-    body?: any
-  ) {
-    let response = await fetch(this.endpoint + url, {
-      method: method || "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": this.apiKey,
-      },
-      body: body ? JSON.stringify(body) : undefined,
-    });
-    let json: any = await response.json();
-    if (response.ok) {
-      return json;
-    } else {
-      throw new Error(json.message);
+  async fetchBase(url: string, method?: Method, body?: any) {
+    try {
+      const response = await axios({
+        method: method || "GET",
+        url: this.endpoint + url,
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": this.apiKey,
+        },
+        data: body,
+      });
+
+      return response.data;
+    } catch (error: any) {
+      if (error.response) {
+        throw new Error(error.response.data.message);
+      } else if (error.request) {
+        throw new Error("No response received from the server");
+      } else {
+        throw new Error("Error in making the request: " + error.message);
+      }
     }
   }
 

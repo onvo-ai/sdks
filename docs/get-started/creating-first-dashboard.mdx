@@ -37,24 +37,24 @@ API_KEY=eyJhbGciOiJIUzI1NiJ9.e...
 
 ### Install the backend package
 
-Next, in your backend environment, install the `@onvo-ai/node` package, this lets you authenticate users, setup sessions and fetch the list of dashboards & reports.
+Next, in your backend environment, install the `@onvo-ai/js` package, this lets you authenticate users, setup sessions and fetch the list of dashboards & reports.
 
 <CodeGroup>
 
 ```bash npm
-npm install @onvo-ai/node
+npm install @onvo-ai/js
 ```
 
 ```bash yarn
-yarn add @onvo-ai/node
+yarn add @onvo-ai/js
 ```
 
 ```bash pnpm
-pnpm install @onvo-ai/node
+pnpm install @onvo-ai/js
 ```
 
 ```bash bun
-bun install @onvo-ai/node
+bun install @onvo-ai/js
 ```
 
 </CodeGroup>
@@ -62,7 +62,7 @@ bun install @onvo-ai/node
 ### Initialise the SDK
 
 ```JavaScript
-import Onvo from "@onvo-ai/node";
+import Onvo from "@onvo-ai/js";
 import dotenv from "dotenv";
 
 dotenv.config();

@@ -1,15 +1,12 @@
-"use client";
-
 import { useMemo } from "react";
 import React from "react";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
-import "/node_modules/react-grid-layout/css/styles.css";
-import "/node_modules/react-resizable/css/styles.css";
+
 import ChartCard from "./ChartCard";
 import { useDashboard } from "../Dashboard/Dashboard";
 
-const DashboardGrid: React.FC<{}> = () => {
+export const DashboardGrid: React.FC<{}> = () => {
   const { dashboard, widgets } = useDashboard();
 
   const ResponsiveGridLayout = useMemo(
@@ -85,5 +82,3 @@ const DashboardGrid: React.FC<{}> = () => {
     </div>
   );
 };
-
-export default DashboardGrid;

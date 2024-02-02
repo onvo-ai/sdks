@@ -1,9 +1,9 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import Dashboard from "./Dashboard";
-import Wrapper from "../Wrapper/Wrapper";
-import DashboardHeader from "../DashboardHeader/DashboardHeader";
-import DashboardGrid from "../DashboardGrid/DashboardGrid";
+import { Dashboard } from "./Dashboard";
+import { Wrapper } from "../Wrapper/Wrapper";
+import { DashboardHeader } from "../DashboardHeader/DashboardHeader";
+import { DashboardGrid } from "../DashboardGrid/DashboardGrid";
 
 const meta: Meta<typeof Dashboard> = {
   component: Dashboard,
