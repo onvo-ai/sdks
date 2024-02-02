@@ -162,7 +162,38 @@ class Onvo
   #   base_post("/dashboards/#{dashboard_id}/widgets/#{widget_id}", body)
   # end
 
-  # def create_dashboard_widget(dashboard_id, body) #TODO: fix node/src/index.ts
+  # TODO: fix in node/src/index.ts
+  # def create_dashboard_widget(dashboard_id, body)
   #   base_put("/dashboards/#{dashboard_id}/widgets", body)
+  # end
+
+  # ---- Dashboard Question Endpoints ----
+  def get_dashboard_questions_by_id(dashboard_id)
+    base_get("/dashboards/#{dashboard_id}/questions")
+  end
+
+  # TODO: rename to create_dashboard_question?
+  # def ask_dashboard_question(dashboard_id, query)
+  #   base_put("/dashboards/#{dashboard_id}/questions?query=#{query}")
+  # end
+
+  # ---- Dashboard Session Endpoints ----
+
+  # TODO: rename to get_dashboard_sessions?
+  def get_dashboard_sessions_by_id(dashboard_id)
+    base_get("/dashboards/#{dashboard_id}/sessions")
+  end
+
+  # TODO: rename to delete_dashboard_sessions?
+  # def delete_dashboard_sessions_by_id(dashboard_id)
+  #   base_delete("/dashboards/#{dashboard_id}/sessions")
+  # end
+
+  # def upsert_dashboard_session(dashboard_id, user_id, parameters)
+  #   session_data = base_post(
+  #     "/dashboards/#{dashboard_id}/sessions",
+  #     { 'user': user_id, 'parameters': parameters }
+  #   )
+  #   session_data.merge({ 'url': "#{endpoint}#{session_data['url']}" })
   # end
 end

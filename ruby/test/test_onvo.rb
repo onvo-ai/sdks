@@ -153,4 +153,33 @@ class OnvoTest < Minitest::Test
   #   sample_dashboard_id = @onvo.get_dashboards[0]["id"]
   #   assert_silent { @onvo.create_dashboard_widget(sample_dashboard_id, sample_body) }
   # end
+
+  # ---- Dashboard Question Endpoints ----
+  def test_get_dashboard_questions_by_id
+    sample_dashboard_id = @onvo.get_dashboards[0]["id"]
+    assert_silent { @onvo.get_dashboard_questions_by_id(sample_dashboard_id) }
+  end
+
+  # def test_ask_dashboard_question
+  #   sample_dashboard_id = @onvo.get_dashboards[0]["id"]
+  #   assert_silent { @onvo.ask_dashboard_question(sample_dashboard_id, sample_query) }
+  # end
+
+  # ---- Dashboard Session Endpoints ----
+
+  def test_get_dashboard_sessions_by_id
+    sample_dashboard_id = @onvo.get_dashboards[0]["id"]
+    assert_silent { @onvo.get_dashboard_sessions_by_id(sample_dashboard_id) }
+  end
+
+  # def test_delete_dashboard_sessions_by_id
+  #   sample_dashboard_id = @onvo.get_dashboards[0]["id"]
+  #   assert_silent { @onvo.delete_dashboard_sessions_by_id(sample_dashboard_id) }
+  # end
+
+  # def test_upsert_dashboard_session
+  #   sample_dashboard_id = @onvo.get_dashboards[0]["id"]
+  #   sample_embed_user_id = @onvo.get_embed_users[0]["id"]
+  #   assert_silent { @onvo.upsert_dashboard_session(sample_dashboard_id, sample_embed_user_id, sample_parameters) }
+  # end
 end
