@@ -36,7 +36,7 @@ class OnvoTest < Minitest::Test
     assert_silent { @onvo.get_account_by_id(sample_account_id) }
   end
 
-  # Team endpoints
+  # ---- Team endpoints ----
   def test_get_teams
     assert_silent { @onvo.get_teams }
   end
@@ -46,7 +46,7 @@ class OnvoTest < Minitest::Test
     assert_silent { @onvo.get_team_by_id(sample_test_id) }
   end
 
-  # Embed user endpoints
+  # ---- Embed user endpoints ----
   def test_get_embed_users
     assert_silent { @onvo.get_embed_users }
   end
@@ -100,4 +100,28 @@ class OnvoTest < Minitest::Test
   # def test_create_datasource(body)
   #   assert_silent { @onvo.create_datasource(test_datasource) }
   # end
+
+  # ---- Automation endpoints ----
+
+  def test_get_automations
+    assert_silent { @onvo.get_automations }
+  end
+
+  # def test_get_automation_by_id
+  #   sample_automation_id = @onvo.get_automations[0]["id"] #TODO : Create a new automation before getting data
+  #   assert_silent { @onvo.get_automation_by_id(sample_automation_id) }
+  # end
+
+  # def test_delete_automation_by_id
+  #   assert_silent { @onvo.delete_automation_by_id(sample_automation_id) }
+  # end
+
+  # def test_update_automation_by_id
+  #   assert_silent { @onvo.update_automation_by_id(sample_automation_id, sample_body) }
+  # end
+
+  # def test_create_automation
+  #   assert_silent { @onvo.create_automation(sample_body) }
+  # end
+
 end
