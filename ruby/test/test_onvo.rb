@@ -124,4 +124,33 @@ class OnvoTest < Minitest::Test
   #   assert_silent { @onvo.create_automation(sample_body) }
   # end
 
+  # ---- Dashboard Widget endpoints ----
+
+  def test_get_dashboard_widgets
+    sample_dashboard_id = @onvo.get_dashboards[0]["id"]
+    assert_silent { @onvo.get_dashboard_widgets(sample_dashboard_id) }
+  end
+
+  def test_get_dashboard_widget_by_id
+    sample_dashboard_id = @onvo.get_dashboards[0]["id"]
+    sample_widget_id = @onvo.get_dashboard_widgets(sample_dashboard_id)[0]["id"]
+    assert_silent { @onvo.get_dashboard_widget_by_id(sample_dashboard_id, sample_widget_id) }
+  end
+
+  # def test_delete_dashboard_widget_by_id
+  #   sample_dashboard_id = @onvo.get_dashboards[0]["id"]
+  #   sample_widget_id = @onvo.get_dashboard_widgets(sample_dashboard_id)[0]["id"]
+  #   assert_silent { @onvo.delete_dashboard_widget_by_id(sample_dashboard_id, sample_widget_id) }
+  # end
+
+  # def test_update_dashboard_widget_by_id
+  #   sample_dashboard_id = @onvo.get_dashboards[0]["id"]
+  #   sample_widget_id = @onvo.get_dashboard_widgets(sample_dashboard_id)[0]["id"]
+  #   assert_silent { @onvo.delete_dashboard_widget_by_id(sample_dashboard_id, sample_widget_id, sample_body) }
+  # end
+
+  # def test_create_dashboard_widget
+  #   sample_dashboard_id = @onvo.get_dashboards[0]["id"]
+  #   assert_silent { @onvo.create_dashboard_widget(sample_dashboard_id, sample_body) }
+  # end
 end

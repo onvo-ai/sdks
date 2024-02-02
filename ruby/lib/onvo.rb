@@ -162,7 +162,7 @@ class Onvo
   #   base_post("/dashboards/#{dashboard_id}/widgets/#{widget_id}", body)
   # end
 
-  # def create_dashboard_widget(dashboard_id, body)
+  # def create_dashboard_widget(dashboard_id, body) #TODO: fix node/src/index.ts
   #   base_put("/dashboards/#{dashboard_id}/widgets", body)
   # end
 end
