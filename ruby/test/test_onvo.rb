@@ -35,7 +35,22 @@ class OnvoTest < Minitest::Test
     yield id
     @onvo.delete_datasource_by_id(id)
   end
-  # ---- EOI ----
+
+  def create_sample_embed_user
+    @onvo.upsert_embed_user(
+      'sample-embed-user-id',
+      'Rails Integration Test User',
+      'test@test.com',
+      { 'hello': 'world' }
+    )
+  end
+
+  def with_sample_embed_user
+    id = create_sample_embed_user['id']
+    yield id
+    @onvo.delete_embed_user_by_id(id)
+  end
+  # ---- Start of Tests ----
 
   def test_invalid_api_key_error
     @onvo.options[:headers][:"x-api-key"] = 'incorrect_api_key'
@@ -71,21 +86,24 @@ class OnvoTest < Minitest::Test
   end
 
   def test_get_embed_user_by_id
-    sample_embed_user_id = @onvo.get_embed_users[0]["id"]
-    assert_silent { @onvo.get_embed_user_by_id(sample_embed_user_id) }
+    with_sample_embed_user do |user_id|
+      assert_silent { @onvo.get_embed_user_by_id(user_id) }
+    end
   end
 
-  # def test_delete_embed_user_by_id
-  #   assert_silent { @onvo.delete_embed_user_by_id }
-  # end
+  def test_delete_embed_user_by_id
+    sample_embed_user_id = create_sample_embed_user["id"]
+    assert_silent { @onvo.delete_embed_user_by_id(sample_embed_user_id) }
+  end
 
-  # def test_upsert_embed_user
-  #   assert_silent { @onvo.upsert_embed_user(123, 'test-user', 'test-email@test.com', {}) }
-  # end
+  def test_upsert_embed_user
+    assert_silent { create_sample_embed_user }
+  end
 
   def test_get_embed_user_access_token
-    sample_embed_user_id = @onvo.get_embed_users[0]['id']
-    assert_silent { @onvo.get_embed_user_access_token(sample_embed_user_id) }
+    with_sample_embed_user do |user_id|
+      assert_silent { @onvo.get_embed_user_access_token(user_id) }
+    end
   end
 
    # ---- Datasource user endpoints ----

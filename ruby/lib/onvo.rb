@@ -77,18 +77,21 @@ class Onvo
     base_get("/embed-users/#{id}")
   end
 
-  # def delete_embed_user_by_id(id)
-  #   base_delete(`embed-users/#{id}`)
-  # end
+  def delete_embed_user_by_id(id)
+    base_delete("/embed-users/#{id}")
+  end
 
-  # def upsert_embed_user(id, name, email, metadata)
-  #   base_post('/embed-users', {
-  #     id: id,
-  #     name: name,
-  #     email: email,
-  #     metadata: metadata
-  #   })
-  # end
+  def upsert_embed_user(id, name, email, metadata = {})
+    base_post(
+      '/embed-users',
+      {
+        'id': id,
+        'name': name,
+        'email': email,
+        'metadata': metadata
+      }
+    )
+  end
 
   def get_embed_user_access_token(id)
     base_get("/embed-users/#{id}/token")
