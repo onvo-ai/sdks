@@ -30,17 +30,18 @@ class Onvo
     base_request { self.class.get(subdirectory, options) }
   end
 
-  # def base_put(subdirectory, body)
-  #   base_request { self.class.put(subdirectory, options, body) }
-  # end
+  def base_put(subdirectory, body)
+    base_request { self.class.put(subdirectory, body: body.to_json, **options) }
+  end
 
-  # def base_post(subdirectory, body)
-  #   base_request { self.class.post(subdirectory, options, body) }
-  # end
+  def base_post(subdirectory, body = nil)
+    params = body ? options.merge({ body: body.to_json }) : options
+    base_request { self.class.post(subdirectory, params) }
+  end
 
-  # def base_delete(subdirectory)
-  #   base_request { self.class.delete(subdirectory, options) }
-  # end
+  def base_delete(subdirectory)
+    base_request { self.class.delete(subdirectory, options) }
+  end
 
   # ------ EOI ------
 
@@ -107,21 +108,21 @@ class Onvo
     base_get("/datasources/#{id}/data")
   end
 
-  # def populate_data_source_by_id(id)
-  #   base_post("/datasources/#{id}/populate-columns")
-  # end
+  def populate_data_source_by_id(id)
+    base_post("/datasources/#{id}/populate-columns")
+  end
 
-  # def delete_datasource_by_id(id)
-  #   base_delete("/datasources/#{id}")
-  # end
+  def delete_datasource_by_id(id)
+    base_delete("/datasources/#{id}")
+  end
 
-  # def update_datasource_by_id(id, body)
-  #   base_post("/datasources/#{id}", body)
-  # end
+  def update_datasource_by_id(id, body)
+    base_post("/datasources/#{id}", body)
+  end
 
-  # def create_datasource(body)
-  #   base_put('/datasources', body)
-  # end
+  def create_datasource(body)
+    base_put('/datasources', body)
+  end
 
   # ---- Automation endpoints ----
 
