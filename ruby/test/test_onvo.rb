@@ -20,24 +20,25 @@ class OnvoTest < Minitest::Test
 
   # TODO: Integrate FactoryBot and move this over
   def create_sample_datasource
-    sample_datasource = @onvo.create_datasource(
+    @onvo.create_datasource(
       {
         'description': 'Ruby Integration Test Data Source',
         'title': 'Ruby Integration Test Data Source',
-        "source": "file",
-        'config': "{\"url\":\"https://eiexmihxmtknazmbqnsa.supabase.co/storage/v1/object/sign/data-sources/357c281c-4347-4778-a575-6aabe4c831bc/datasource:dc66cd9b-7fe8-47e2-8370-2d19f8f3200f/zillow.csv?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJkYXRhLXNvdXJjZXMvMzU3YzI4MWMtNDM0Ny00Nzc4LWE1NzUtNmFhYmU0YzgzMWJjL2RhdGFzb3VyY2U6ZGM2NmNkOWItN2ZlOC00N2UyLTgzNzAtMmQxOWY4ZjMyMDBmL3ppbGxvdy5jc3YiLCJpYXQiOjE3MDY5NjQ0ODksImV4cCI6MTczODUwMDQ4OX0.XJHdWIn4ezrOyHZrcMoPldpt98Lu3f8D-W5VW2kllSk\",\"filename\":\"zillow.csv\",\"type\":\"csv\"}"
+        "source": 'file',
+        'config': '{"url":"https://eiexmihxmtknazmbqnsa.supabase.co/storage/v1/object/sign/data-sources/357c281c-4347-4778-a575-6aabe4c831bc/datasource:dc66cd9b-7fe8-47e2-8370-2d19f8f3200f/zillow.csv?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJkYXRhLXNvdXJjZXMvMzU3YzI4MWMtNDM0Ny00Nzc4LWE1NzUtNmFhYmU0YzgzMWJjL2RhdGFzb3VyY2U6ZGM2NmNkOWItN2ZlOC00N2UyLTgzNzAtMmQxOWY4ZjMyMDBmL3ppbGxvdy5jc3YiLCJpYXQiOjE3MDY5NjQ0ODksImV4cCI6MTczODUwMDQ4OX0.XJHdWIn4ezrOyHZrcMoPldpt98Lu3f8D-W5VW2kllSk","filename":"zillow.csv","type":"csv"}'
       }
     )
-    return sample_datasource['id']
   end
 
-  def delete_datasource(id)
+  def with_sample_datasource
+    id = create_sample_datasource['id']
+    yield id
     @onvo.delete_datasource_by_id(id)
   end
   # ---- EOI ----
 
   def test_invalid_api_key_error
-    @onvo.options[:headers][:"x-api-key"]="incorrect_api_key"
+    @onvo.options[:headers][:"x-api-key"] = 'incorrect_api_key'
     assert_raises(RuntimeError) { @onvo.get_dashboards }
   end
 
@@ -50,7 +51,7 @@ class OnvoTest < Minitest::Test
   end
 
   def test_get_account_by_id
-    sample_account_id = @onvo.get_accounts[0]["id"]
+    sample_account_id = @onvo.get_accounts[0]['id']
     assert_silent { @onvo.get_account_by_id(sample_account_id) }
   end
 
@@ -60,7 +61,7 @@ class OnvoTest < Minitest::Test
   end
 
   def test_get_team_by_id
-    sample_test_id = @onvo.get_teams[0]["id"]
+    sample_test_id = @onvo.get_teams[0]['id']
     assert_silent { @onvo.get_team_by_id(sample_test_id) }
   end
 
@@ -83,7 +84,7 @@ class OnvoTest < Minitest::Test
   # end
 
   def test_get_embed_user_access_token
-    sample_embed_user_id = @onvo.get_embed_users[0]["id"]
+    sample_embed_user_id = @onvo.get_embed_users[0]['id']
     assert_silent { @onvo.get_embed_user_access_token(sample_embed_user_id) }
   end
 
@@ -93,38 +94,39 @@ class OnvoTest < Minitest::Test
     assert_silent { @onvo.get_datasources }
   end
 
-  def test_get_datasource_by_id
-    sample_datasource_id = create_sample_datasource
-    assert_silent { @onvo.get_datasource_by_id(sample_datasource_id) }
-    delete_datasource(sample_datasource_id)
-  end
-
-  def test_get_datasource_data_by_id
-    sample_datasource_id = create_sample_datasource
-    assert_silent { @onvo.get_datasource_data_by_id(sample_datasource_id) }
-    delete_datasource(sample_datasource_id)
-  end
-
-  def test_populate_datasource_by_id
-    sample_datasource_id = create_sample_datasource
-    assert_silent { @onvo.populate_data_source_by_id(sample_datasource_id) }
-    delete_datasource(sample_datasource_id)
+  def test_create_datasource
+    assert_silent { create_sample_datasource }
   end
 
   def test_delete_datasource_by_id
-    sample_datasource_id = create_sample_datasource
-    assert_silent { @onvo.delete_datasource_by_id(sample_datasource_id) }
-    delete_datasource(sample_datasource_id)
+    datasource_id = create_sample_datasource['id']
+    assert_silent { @onvo.delete_datasource_by_id(datasource_id) }
+  end
+
+  def test_get_datasource_by_id
+    with_sample_datasource do |datasource_id|
+      assert_silent { @onvo.get_datasource_by_id(datasource_id) }
+    end
+  end
+
+  def test_populate_datasource_by_id
+    with_sample_datasource do |datasource_id|
+      assert_silent { @onvo.populate_data_source_by_id(datasource_id) }
+    end
+  end
+
+  def test_get_datasource_data_by_id
+    with_sample_datasource do |datasource_id|
+      assert_silent { @onvo.get_datasource_data_by_id(datasource_id) }
+    end
   end
 
   def test_update_datasource_by_id
-    sample_datasource_id = create_sample_datasource
-    assert_silent { @onvo.update_datasource_by_id(sample_datasource_id, { title: 'Renaming Test' }) }
-    delete_datasource(sample_datasource_id)
-  end
-
-  def test_create_datasource
-    assert_silent { create_sample_datasource }
+    with_sample_datasource do |datasource_id|
+      assert_silent {
+        @onvo.update_datasource_by_id(datasource_id, { title: 'Renaming Test' })
+      }
+    end
   end
 
   # ---- Automation endpoints ----
