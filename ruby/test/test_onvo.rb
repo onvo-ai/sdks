@@ -18,7 +18,7 @@ class OnvoTest < Minitest::Test
     assert_equal options, @onvo.options
   end
 
-  # TODO: Integrate FactoryBot and move this over
+  # TODO: Integrate FactoryBot and all of these over
   def create_sample_datasource
     @onvo.create_datasource(
       {
@@ -49,6 +49,29 @@ class OnvoTest < Minitest::Test
     id = create_sample_embed_user['id']
     yield id
     @onvo.delete_embed_user_by_id(id)
+  end
+
+  def create_sample_automation
+    @onvo.create_automation(
+      {
+        created_by: '197302e5-88e2-49f4-bbe7-92b5a4dc4264',
+        dashboard: '9ce5c740-413e-43f6-9d91-38ae7c75d1c8',
+        description: 'A sample description',
+        email_format: 'This is an automation from Onvo',
+        email_subject: 'This is an automation from Onvo',
+        enabled: false,
+        output_format: 'link',
+        recipient_type: 'internal',
+        schedule: '',
+        title: 'API datasource test'
+      }
+    )
+  end
+
+  def with_sample_automation
+    id = create_sample_automation['id']
+    yield id
+    @onvo.delete_automation_by_id(id)
   end
   # ---- Start of Tests ----
 
@@ -153,22 +176,26 @@ class OnvoTest < Minitest::Test
     assert_silent { @onvo.get_automations }
   end
 
-  # def test_get_automation_by_id
-  #   sample_automation_id = @onvo.get_automations[0]["id"] #TODO : Create a new automation before getting data
-  #   assert_silent { @onvo.get_automation_by_id(sample_automation_id) }
-  # end
+  def test_create_automation
+    assert_silent { create_sample_automation }
+  end
 
-  # def test_delete_automation_by_id
-  #   assert_silent { @onvo.delete_automation_by_id(sample_automation_id) }
-  # end
+  def test_delete_automation_by_id
+    id = create_sample_automation['id']
+    assert_silent { @onvo.delete_automation_by_id(id) }
+  end
 
-  # def test_update_automation_by_id
-  #   assert_silent { @onvo.update_automation_by_id(sample_automation_id, sample_body) }
-  # end
+  def test_get_automation_by_id
+    with_sample_automation do |automation_id|
+      assert_silent { @onvo.get_automation_by_id(automation_id) }
+    end
+  end
 
-  # def test_create_automation
-  #   assert_silent { @onvo.create_automation(sample_body) }
-  # end
+  def test_update_automation_by_id
+    with_sample_automation do |automation_id|
+      assert_silent { @onvo.update_automation_by_id(automation_id, {description: 'test new description'}) }
+    end
+  end
 
   # ---- Dashboard Widget endpoints ----
 

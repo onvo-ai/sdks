@@ -137,17 +137,17 @@ class Onvo
     base_get("/automations/#{id}")
   end
 
-  # def delete_automation_by_id(id)
-  #   base_delete("/automations/#{id}")
-  # end
+  def delete_automation_by_id(id)
+    base_delete("/automations/#{id}")
+  end
 
-  # def update_automation_by_id(id, body)
-  #   base_post("/automations/#{id}", body)
-  # end
+  def update_automation_by_id(id, body)
+    base_post("/automations/#{id}", body)
+  end
 
-  # def create_automation(body)
-  #   base_put('/automations', body)
-  # end
+  def create_automation(body)
+    base_put('/automations', body)
+  end
 
   # ---- Dashboard Widget endpoints ----
   def get_dashboard_widgets(dashboard_id)
