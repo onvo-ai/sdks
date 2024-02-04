@@ -51,6 +51,21 @@ class OnvoTest < Minitest::Test
     @onvo.delete_embed_user_by_id(id)
   end
 
+  def create_sample_dashboard
+    @onvo.create_dashboard(
+      {
+        'description': 'Test Description.',
+        'title': 'Ruby Integration Test Dashboard'
+      }
+    )
+  end
+
+  def with_sample_dashboard
+    id = create_sample_dashboard['id']
+    yield id
+    @onvo.delete_dashboard_by_id(id)
+  end
+
   def create_sample_automation
     @onvo.create_automation(
       {
@@ -73,15 +88,12 @@ class OnvoTest < Minitest::Test
     yield id
     @onvo.delete_automation_by_id(id)
   end
-  # ---- Start of Tests ----
+
+  # ---- Accounts Endpoints ----
 
   def test_invalid_api_key_error
     @onvo.options[:headers][:"x-api-key"] = 'incorrect_api_key'
     assert_raises(RuntimeError) { @onvo.get_dashboards }
-  end
-
-  def test_get_dashboards
-    assert_silent { @onvo.get_dashboards }
   end
 
   def test_get_accounts
@@ -168,6 +180,34 @@ class OnvoTest < Minitest::Test
         @onvo.update_datasource_by_id(datasource_id, { title: 'Renaming Test' })
       }
     end
+  end
+
+  # ---- Dashboard Endpoints ----
+  def test_get_dashboards
+    assert_silent { @onvo.get_dashboards }
+  end
+
+  def test_get_dashboard_by_id
+    with_sample_dashboard do |id|
+      assert_silent { @onvo.get_dashboard_by_id(id) }
+    end
+  end
+
+  def test_delete_dashboard_by_id
+    sample_dashboard_id = create_sample_dashboard['id']
+    assert_silent { @onvo.delete_dashboard_by_id(sample_dashboard_id) }
+  end
+
+  def test_update_dashboard_by_id
+    with_sample_dashboard do |id|
+      assert_silent {
+        @onvo.update_dashboard_by_id(id, { 'description': 'A New Test Description.' })
+      }
+    end
+  end
+
+  def test_create_dashboard
+    assert_silent { create_sample_dashboard }
   end
 
   # ---- Automation endpoints ----

@@ -43,13 +43,6 @@ class Onvo
     base_request { self.class.delete(subdirectory, options) }
   end
 
-  # ------ EOI ------
-
-  # ---- Dashboard endpoints ----
-  def get_dashboards
-    base_get('/dashboards')
-  end
-
   # ---- Account endpoints ----
   def get_accounts
     base_get('/accounts')
@@ -125,6 +118,28 @@ class Onvo
 
   def create_datasource(body)
     base_put('/datasources', body)
+  end
+
+  # ---- Dashboard endpoints ----
+
+  def get_dashboards
+    base_get('/dashboards')
+  end
+
+  def get_dashboard_by_id(id)
+    base_get("/dashboards/#{id}")
+  end
+
+  def delete_dashboard_by_id(id)
+    base_delete("/dashboards/#{id}")
+  end
+
+  def update_dashboard_by_id(id, body)
+    base_post("/dashboards/#{id}", body)
+  end
+
+  def create_dashboard(body)
+    base_put('/dashboards', body)
   end
 
   # ---- Automation endpoints ----
