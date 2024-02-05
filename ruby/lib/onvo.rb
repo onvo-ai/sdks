@@ -2,6 +2,7 @@
 
 require 'httparty'
 require 'json'
+require 'uri'
 
 class Onvo
   include HTTParty
@@ -30,8 +31,9 @@ class Onvo
     base_request { self.class.get(subdirectory, options) }
   end
 
-  def base_put(subdirectory, body)
-    base_request { self.class.put(subdirectory, body: body.to_json, **options) }
+  def base_put(subdirectory, body = nil)
+    params = body ? options.merge({ body: body.to_json }) : options
+    base_request { self.class.put(subdirectory, params) }
   end
 
   def base_post(subdirectory, body = nil)
@@ -182,8 +184,9 @@ class Onvo
   # end
 
   # TODO: fix in node/src/index.ts
-  # def create_dashboard_widget(dashboard_id, body)
-  #   base_put("/dashboards/#{dashboard_id}/widgets", body)
+  # def create_dashboard_widget(dashboard_id, query)
+  #   processed_query = URI.encode_www_form_component(query)
+  #   base_put("/dashboards/#{dashboard_id}/widgets?query=#{processed_query}")
   # end
 
   # ---- Dashboard Question Endpoints ----
@@ -191,28 +194,26 @@ class Onvo
     base_get("/dashboards/#{dashboard_id}/questions")
   end
 
-  # TODO: rename to create_dashboard_question?
-  # def ask_dashboard_question(dashboard_id, query)
-  #   base_put("/dashboards/#{dashboard_id}/questions?query=#{query}")
-  # end
+  def ask_dashboard_question(dashboard_id, query)
+    processed_query = URI.encode_www_form_component(query)
+    base_put("/dashboards/#{dashboard_id}/questions?query=#{processed_query}")
+  end
 
   # ---- Dashboard Session Endpoints ----
 
-  # TODO: rename to get_dashboard_sessions?
   def get_dashboard_sessions_by_id(dashboard_id)
     base_get("/dashboards/#{dashboard_id}/sessions")
   end
 
-  # TODO: rename to delete_dashboard_sessions?
-  # def delete_dashboard_sessions_by_id(dashboard_id)
-  #   base_delete("/dashboards/#{dashboard_id}/sessions")
-  # end
+  def delete_dashboard_sessions_by_id(dashboard_id)
+    base_delete("/dashboards/#{dashboard_id}/sessions")
+  end
 
-  # def upsert_dashboard_session(dashboard_id, user_id, parameters)
-  #   session_data = base_post(
-  #     "/dashboards/#{dashboard_id}/sessions",
-  #     { 'user': user_id, 'parameters': parameters }
-  #   )
-  #   session_data.merge({ 'url': "#{endpoint}#{session_data['url']}" })
-  # end
+  def upsert_dashboard_session(dashboard_id, user_id, parameters = {})
+    session_data = base_post(
+      "/dashboards/#{dashboard_id}/sessions",
+      { 'user': user_id, 'parameters': parameters }
+    )
+    session_data.merge({ 'url': "#{endpoint}#{session_data['url']}" })
+  end
 end

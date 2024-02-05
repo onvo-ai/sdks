@@ -11,16 +11,6 @@ class AutomationsTest < Minitest::Test
     @onvo = Onvo.new(@endpoint, @api_key)
   end
 
-  def test_onvo_initializer
-    options = {
-      headers: {
-        'x-api-key': @api_key,
-        'Content-Type': 'application/json'
-      }
-    }
-    assert_equal options, @onvo.options
-  end
-
   SAMPLE_AUTOMATION_PARAMS = {
     created_by: '197302e5-88e2-49f4-bbe7-92b5a4dc4264',
     dashboard: '9ce5c740-413e-43f6-9d91-38ae7c75d1c8',

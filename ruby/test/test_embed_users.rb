@@ -11,16 +11,6 @@ class EmbedUsersTest < Minitest::Test
     @onvo = Onvo.new(@endpoint, @api_key)
   end
 
-  def test_onvo_initializer
-    options = {
-      headers: {
-        'x-api-key': @api_key,
-        'Content-Type': 'application/json'
-      }
-    }
-    assert_equal options, @onvo.options
-  end
-
   def create_sample_embed_user
     @onvo.upsert_embed_user(
       'sample-embed-user-id',

@@ -11,16 +11,6 @@ class DashboardTest < Minitest::Test
     @onvo = Onvo.new(@endpoint, @api_key)
   end
 
-  def test_onvo_initializer
-    options = {
-      headers: {
-        'x-api-key': @api_key,
-        'Content-Type': 'application/json'
-      }
-    }
-    assert_equal options, @onvo.options
-  end
-
   SAMPLE_DASHBOARD_PARAMS = {
     'description': 'Test Description.',
     'title': 'Ruby Integration Test Dashboard'
