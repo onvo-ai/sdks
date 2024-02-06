@@ -23,8 +23,7 @@ class DashboardWidgetTest < Minitest::Test
   }.freeze
 
   def test_get_dashboard_widgets
-    sample_dashboard_id = @sample_dashboard['id']
-    assert_silent { @onvo.get_dashboard_widgets(sample_dashboard_id) }
+    assert_silent { @onvo.get_dashboard_widgets(@sample_dashboard_id) }
   end
 
   # def test_get_dashboard_widget_by_id
@@ -50,7 +49,7 @@ class DashboardWidgetTest < Minitest::Test
   #   assert_silent { @onvo.create_dashboard_widget(sample_dashboard_id, sample_body) }
   # end
 
-  Minitest.after_run do
-    @onvo.delete_dashboard_by_id(@sample_dashboard['id'])
+  def after_all
+    @onvo.delete_dashboard_by_id(@sample_dashboard_id)
   end
 end

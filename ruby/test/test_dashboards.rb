@@ -16,6 +16,23 @@ class DashboardTest < Minitest::Test
     'title': 'Ruby Integration Test Dashboard'
   }.freeze
 
+  #TODO: Move to appropriate file
+  def test_onvo_initializer
+    options = {
+      headers: {
+        'x-api-key': @api_key,
+        'Content-Type': 'application/json'
+      }
+    }
+    assert_equal options, @onvo.options
+  end
+
+  #TODO: Move to appropriate file
+  def test_invalid_api_key_error
+    @onvo.options[:headers][:"x-api-key"] = 'incorrect_api_key'
+    assert_raises(RuntimeError) { @onvo.get_dashboards }
+  end
+
   def create_sample_dashboard
     @onvo.create_dashboard(SAMPLE_DASHBOARD_PARAMS)
   end
