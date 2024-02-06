@@ -12,7 +12,7 @@ class EmbedUsersTest < Minitest::Test
   end
 
   def create_sample_embed_user
-    @onvo.upsert_embed_user(
+    @onvo.embed_users.upsert(
       'sample-embed-user-id',
       'Rails Integration Test User',
       'test@test.com',
@@ -23,29 +23,29 @@ class EmbedUsersTest < Minitest::Test
   def with_sample_embed_user
     id = create_sample_embed_user['id']
     yield id
-    @onvo.delete_embed_user_by_id(id)
+    @onvo.embed_users.delete(id)
   end
 
-  def test_get_embed_users
-    assert_silent { @onvo.get_embed_users }
+  def test_list_embed_users
+    assert_silent { @onvo.embed_users.list }
   end
 
-  def test_get_embed_user_by_id
+  def test_get_embed_user
     with_sample_embed_user do |user_id|
-      assert_silent { @onvo.get_embed_user_by_id(user_id) }
+      assert_silent { @onvo.embed_users.get(user_id) }
     end
   end
 
   def test_create_and_delete_embed_user
     assert_silent do
       sample_embed_user_id = create_sample_embed_user["id"]
-      @onvo.delete_embed_user_by_id(sample_embed_user_id)
+      @onvo.embed_users.delete(sample_embed_user_id)
     end
   end
 
   def test_get_embed_user_access_token
     with_sample_embed_user do |user_id|
-      assert_silent { @onvo.get_embed_user_access_token(user_id) }
+      assert_silent { @onvo.embed_users.get_access_token(user_id) }
     end
   end
 end

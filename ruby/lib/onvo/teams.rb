@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
+require_relative '../resource_template'
+
 # Team endpoints
-module Teams
-  def get_teams
+class Teams < ResourceTemplate
+  def list
     base_get('/teams')
   end
 
-  def get_team_by_id(id)
+  def get(id)
     base_get("/teams/#{id}")
   end
 end

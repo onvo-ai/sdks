@@ -11,12 +11,12 @@ class TeamsTest < Minitest::Test
     @onvo = Onvo.new(@endpoint, @api_key)
   end
 
-  def test_get_teams
-    assert_silent { @onvo.get_teams }
+  def test_team_list
+    assert_silent { @onvo.teams.list }
   end
 
-  def test_get_team_by_id
-    sample_test_id = @onvo.get_teams[0]['id']
-    assert_silent { @onvo.get_team_by_id(sample_test_id) }
+  def test_team_get
+    sample_test_id = @onvo.teams.list[0]['id']
+    assert_silent { @onvo.teams.get(sample_test_id) }
   end
 end
