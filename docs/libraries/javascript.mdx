@@ -52,13 +52,13 @@ let onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
 You can now fetch the list of dashboards and reports you have with the following API calls:
 
 ```JavaScript
-let dashboards = await onvo.getDashboards();
+let dashboards = await onvo.dashboards.list();
 ```
 
 To allow a user to view a dashboard, you need to associate a user with the dashboard using a session. To get started, create the user using the following function:
 
 ```JavaScript
-await onvo.upsertEmbedUser("123456", {
+await onvo.embed_users.upsert("123456", {
     name: "John appleseed",
     email: "john@appleseed.com",
     metadata: {
@@ -71,9 +71,12 @@ await onvo.upsertEmbedUser("123456", {
 To create a session linking the user and a dashboard, you can use the following code:
 
 ```JavaScript
-let session = await onvo.upsertDashboardSession({
-    dashboardId: <id of dashboard you have received from the previous getDashboards() function>,
-    userId: "123456"
+let session = await onvo.dashboard("<id of dashboard you have received from the previous getDashboards() function>").sessions.upsert({
+    userId: "123456",
+    parameters: {
+        "hello": "world",
+        "testing": 1234567456
+    }
 });
 ```
 

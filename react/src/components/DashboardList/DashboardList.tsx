@@ -89,9 +89,10 @@ export const DashboardList: React.FC<{
 
   useEffect(() => {
     if (backend) {
-      backend
-        .getDashboards()
+      backend.dashboards
+        .list()
         .then((a) => {
+          // @ts-ignore
           setDashboards(a);
         })
         .catch((e) => console.log("UNABLE TO FETCH LIST: ", e));

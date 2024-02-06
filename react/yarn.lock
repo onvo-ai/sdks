@@ -1610,10 +1610,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@onvo-ai/js@^0.11.19":
-  version "0.11.19"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.11.19.tgz#6ea060de384a633e3f974b955e0207361a0a9f8f"
-  integrity sha512-+OLq4eH0OlIhwb5XeTgdpbj39Xw+zP5/BGxbDk3sA9YUC+lv4HP8sZO+gLTrlRL8QZg9W8nYpw/nzRHAzR4SUg==
+"@onvo-ai/js@^0.12.2":
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.12.2.tgz#04100256fa97a21fedc103297be060b505b242c4"
+  integrity sha512-qq+KmnB/LWKzYrKNDVFU5l3FA+pAwvo6Qs/FQyuXp8kDa2Hxny3Q2o3i6UlZAf7jALS+d/PeQODh3N7ZKN0sBQ==
   dependencies:
     axios "^1.6.7"
 
