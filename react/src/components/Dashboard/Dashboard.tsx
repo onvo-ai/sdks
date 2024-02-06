@@ -29,8 +29,9 @@ export const Dashboard: React.FC<{ id: string; children: any }> = ({
 
   useEffect(() => {
     if (id && backend) {
-      backend.getDashboardById(id).then(setDashboard);
-      backend.getDashboardWidgets(id).then(setWidgets);
+      // @ts-ignore
+      backend.dashboards.get(id).then(setDashboard);
+      backend.dashboard(id).widgets.list().then(setWidgets);
     }
   }, [id, backend]);
 

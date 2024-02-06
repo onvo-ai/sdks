@@ -37,7 +37,7 @@ const { Onvo } = require("@onvo-ai/js");
 const onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
 
 // Identify a user
-await onvo.upsertEmbedUser("123456", {
+await onvo.embed_users.upsert("123456", {
   name: "John Appleseed",
   email: "john@appleseed.com",
   metadata: {
@@ -47,14 +47,15 @@ await onvo.upsertEmbedUser("123456", {
 });
 
 // Create a session
-const sessionUrl = await onvo.upsertDashboardSession({
-  dashboardId: "ebc7ab74-3fd2-47e6-90df-addaec3a029e",
-  userId: "123456",
-  parameters: {
-    year: 2023,
-    sort: "asc",
-  },
-});
+const sessionUrl = await onvo
+  .dashboard("ebc7ab74-3fd2-47e6-90df-addaec3a029e")
+  .sessions.upsert({
+    userId: "123456",
+    parameters: {
+      year: 2023,
+      sort: "asc",
+    },
+  });
 ```
 
 ## API Reference
@@ -64,27 +65,6 @@ _This is the main class that initializes the connection to the Onvo platform._
 
 - `baseUrl (string)`: The base URL to the Onvo platform or your self hosted endpoint.
 - `apiKey (string)`: Your API key for authentication.
-
----
-
-**`await onvo.upsertEmbedUser(userId, userData)`**
-_Identify a user on the Onvo platform._
-
-- `userId (string)`: Unique identifier for the user.
-- `userData (object)`
-  - `name (string)`: Name of the user
-  - `email (string)`: Email id of the user
-  - `metadata: (object)`: _Optional_ Additional data used to fetch the right data source
-
----
-
-**`await onvo.upsertDashboardSession(sessionData)`**
-_Create a session on the Onvo platform._
-
-- `sessionData (object)`
-  - `dashboardId (string)`: The unique identifier of the dashboard
-  - `userId (string)`: The id of user that was identified in the previous step
-  - `parameters (string)`: _Optional_ Additional parameters used to fetch the right data source
 
 ## Support
 
