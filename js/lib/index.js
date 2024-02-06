@@ -130,11 +130,11 @@ export default class Onvo {
     deleteDashboardWidgetById(dashboardId, widgetId) {
         return this.fetchBase("/api/dashboards/" + dashboardId + "/widgets/" + widgetId, "DELETE");
     }
-    updateDashboardWidgetById(id, body) {
-        return this.fetchBase("/api/dashboards/" + id, "POST", body);
+    updateDashboardWidgetById(dashboardId, widgetId, body) {
+        return this.fetchBase("/api/dashboards/" + dashboardId + "/widgets/" + widgetId, "POST", body);
     }
-    createDashboardWidget(body) {
-        return this.fetchBase("/api/dashboards", "PUT", body);
+    createDashboardWidget(dashboardId, body) {
+        return this.fetchBase("/api/dashboards/" + dashboardId + "/widgets", "PUT", body);
     }
     // Dashboard Question endpoints
     getDashboardQuestionsById(dashboardId) {
@@ -156,5 +156,17 @@ export default class Onvo {
             parameters: parameters,
         });
         return { ...data, url: this.endpoint + data.url };
+    }
+    // Dashboard Datasource endpoints
+    getDashboardDatasources(dashboardId) {
+        return this.fetchBase("/api/dashboards/" + dashboardId + "/datasources");
+    }
+    unlinkDashboardDatasourceById(dashboardId, datasourceId) {
+        return this.fetchBase("/api/dashboards/" + dashboardId + "/datasources/" + datasourceId, "DELETE");
+    }
+    linkDashboardDatasource(dashboardId, datasourceId) {
+        return this.fetchBase("/api/dashboards/" + dashboardId + "/datasources", "PUT", {
+            datasourceId: datasourceId,
+        });
     }
 }

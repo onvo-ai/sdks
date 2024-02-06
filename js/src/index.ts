@@ -153,11 +153,19 @@ export default class Onvo {
       "DELETE"
     );
   }
-  updateDashboardWidgetById(id: string, body: any) {
-    return this.fetchBase("/api/dashboards/" + id, "POST", body);
+  updateDashboardWidgetById(dashboardId: string, widgetId: string, body: any) {
+    return this.fetchBase(
+      "/api/dashboards/" + dashboardId + "/widgets/" + widgetId,
+      "POST",
+      body
+    );
   }
-  createDashboardWidget(body: any) {
-    return this.fetchBase("/api/dashboards", "PUT", body);
+  createDashboardWidget(dashboardId: string, body: any) {
+    return this.fetchBase(
+      "/api/dashboards/" + dashboardId + "/widgets",
+      "PUT",
+      body
+    );
   }
 
   // Dashboard Question endpoints
@@ -200,5 +208,26 @@ export default class Onvo {
     );
 
     return { ...data, url: this.endpoint + data.url };
+  }
+
+  // Dashboard Datasource endpoints
+
+  getDashboardDatasources(dashboardId: string) {
+    return this.fetchBase("/api/dashboards/" + dashboardId + "/datasources");
+  }
+  unlinkDashboardDatasourceById(dashboardId: string, datasourceId: string) {
+    return this.fetchBase(
+      "/api/dashboards/" + dashboardId + "/datasources/" + datasourceId,
+      "DELETE"
+    );
+  }
+  linkDashboardDatasource(dashboardId: string, datasourceId: string) {
+    return this.fetchBase(
+      "/api/dashboards/" + dashboardId + "/datasources",
+      "PUT",
+      {
+        datasourceId: datasourceId,
+      }
+    );
   }
 }

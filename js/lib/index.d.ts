@@ -39,8 +39,8 @@ export default class Onvo {
     getDashboardWidgets(dashboardId: string): Promise<any>;
     getDashboardWidgetById(dashboardId: string, widgetId: String): Promise<any>;
     deleteDashboardWidgetById(dashboardId: string, widgetId: string): Promise<any>;
-    updateDashboardWidgetById(id: string, body: any): Promise<any>;
-    createDashboardWidget(body: any): Promise<any>;
+    updateDashboardWidgetById(dashboardId: string, widgetId: string, body: any): Promise<any>;
+    createDashboardWidget(dashboardId: string, body: any): Promise<any>;
     getDashboardQuestionsById(dashboardId: string): Promise<any>;
     askDashboardQuestion(dashboardId: string, query: string): Promise<any>;
     getDashboardSessionsById(dashboardId: string): Promise<any>;
@@ -52,4 +52,7 @@ export default class Onvo {
             [key: string]: any;
         };
     }): Promise<any>;
+    getDashboardDatasources(dashboardId: string): Promise<any>;
+    unlinkDashboardDatasourceById(dashboardId: string, datasourceId: string): Promise<any>;
+    linkDashboardDatasource(dashboardId: string, datasourceId: string): Promise<any>;
 }
