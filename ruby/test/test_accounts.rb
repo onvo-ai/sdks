@@ -11,12 +11,12 @@ class AccountsTest < Minitest::Test
     @onvo = Onvo.new(@endpoint, @api_key)
   end
 
-  def test_get_accounts
-    assert_silent { @onvo.get_accounts }
+  def test_accounts_list
+    assert_silent { @onvo.accounts.list }
   end
 
-  def test_get_account_by_id
-    sample_account_id = @onvo.get_accounts[0]['id']
-    assert_silent { @onvo.get_account_by_id(sample_account_id) }
+  def test_accounts_get
+    sample_account_id = @onvo.accounts.list[0]['id']
+    assert_silent { @onvo.accounts.get(sample_account_id) }
   end
 end

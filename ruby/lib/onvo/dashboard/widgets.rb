@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'uri'
+
 # Dashboard Widget endpoints
 module Widgets
   def get_dashboard_widgets(dashboard_id)
