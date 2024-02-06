@@ -3,7 +3,7 @@ info:
   title: External APIs
   description: >-
     This is a collection of all the endpoints made available to interact with
-    Onvo's servers.
+    Onvo's servers. Generated using https://p2o.defcon007.com/
 
 
     If you use node js, you can use the `@onvo-ai/js` package to consume the
@@ -2812,6 +2812,387 @@ paths:
           schema:
             type: string
             example: c5d37456-a042-4177-ab5f-69563f07937d
+  /api/dashboards/{id}/datasources:
+    get:
+      tags:
+        - Dashboards > Datasources
+      summary: Get all datasources in dashboard
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: c5d37456-a042-4177-ab5f-69563f07937d
+      responses:
+        "200":
+          description: OK
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: boolean
+                example: "true"
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: GET,DELETE,PATCH,POST,PUT,OPTIONS
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: >-
+                  X-CSRF-Token, X-Requested-With, Accept, Accept-Version,
+                  Content-Length, Content-MD5, Content-Type, Date,
+                  X-Api-Version, x-api-key
+            vary:
+              schema:
+                type: string
+                example: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url
+            content-type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Tue, 06 Feb 2024 06:45:47 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - id: bce247c9-079a-414f-af8f-49a24598d8b9
+                  created_at: "2024-01-21T15:54:42.14785+00:00"
+                  last_updated_at: "2024-01-21T15:54:42.14785+00:00"
+                  title: Sample Customers
+                  source: file
+                  config: >-
+                    {"type":"csv","url":"https://eiexmihxmtknazmbqnsa.supabase.co/storage/v1/object/public/assets/Sample%20Customers.csv"}
+                  columns:
+                    - title: Customer ID
+                      description: A unique identifier for the customer across tables
+                    - title: City
+                      description: City of residence
+                    - title: Country
+                      description: Country of residence
+                    - title: Segment
+                      description: Segment of customer according to purchasing habits
+                    - title: State
+                      description: State of residence
+                    - title: Postal Code
+                      description: Postal Code of customer
+                    - title: Region
+                      description: Region of residence
+                  parameters: "[]"
+                  description: >-
+                    A sample datasource containing the details of customers in
+                    an e-commerce setting
+                  team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
+                  created_by: 5899f99d-a449-4bfa-8769-19c097aaf1f6
+                  last_updated_by: 5899f99d-a449-4bfa-8769-19c097aaf1f6
+                  size: 118
+                  sample_data: >-
+                    [{"Customer
+                    ID":"CG-12520","City":"Henderson","Country":"United
+                    States","Segment":"Consumer","State":"Kentucky","Postal
+                    Code":"42420","Region":"South"},{"Customer
+                    ID":"DV-13045","City":"Los Angeles","Country":"United
+                    States","Segment":"Corporate","State":"California","Postal
+                    Code":"90036","Region":"West"},{"Customer
+                    ID":"SO-20335","City":"Fort Lauderdale","Country":"United
+                    States","Segment":"Consumer","State":"Florida","Postal
+                    Code":"33311","Region":"South"},{"Customer
+                    ID":"BH-11710","City":"Los Angeles","Country":"United
+                    States","Segment":"Consumer","State":"California","Postal
+                    Code":"90032","Region":"West"},{"Customer
+                    ID":"AA-10480","City":"Concord","Country":"United
+                    States","Segment":"Consumer","State":"North
+                    Carolina","Postal Code":"28027","Region":"South"},{"Customer
+                    ID":"IM-15070","City":"Seattle","Country":"United
+                    States","Segment":"Consumer","State":"Washington","Postal
+                    Code":"98103","Region":"West"},{"Customer
+                    ID":"HP-14815","City":"Fort Worth","Country":"United
+                    States","Segment":"Home Office","State":"Texas","Postal
+                    Code":"76106","Region":"Central"},{"Customer
+                    ID":"PK-19075","City":"Madison","Country":"United
+                    States","Segment":"Consumer","State":"Wisconsin","Postal
+                    Code":"53711","Region":"Central"},{"Customer
+                    ID":"AG-10270","City":"West Jordan","Country":"United
+                    States","Segment":"Consumer","State":"Utah","Postal
+                    Code":"84084","Region":"West"},{"Customer
+                    ID":"ZD-21925","City":"San Francisco","Country":"United
+                    States","Segment":"Consumer","State":"California","Postal
+                    Code":"94109","Region":"West"}]
+                - id: a0242622-ca73-4353-87b1-4e0af2051b07
+                  created_at: "2024-01-21T15:54:42.161692+00:00"
+                  last_updated_at: "2024-01-21T15:54:42.161692+00:00"
+                  title: Sample Orders
+                  source: file
+                  config: >-
+                    {"type":"csv","url":"https://eiexmihxmtknazmbqnsa.supabase.co/storage/v1/object/public/assets/Sample%20Orders.csv"}
+                  columns:
+                    - title: Row ID
+                      description: A serial number for every row
+                    - title: Order ID
+                      description: A unique ID for every order
+                    - title: Order Date
+                      description: Order Date in YYYY-MM-DD format
+                    - title: Ship Date
+                      description: Ship Date in YYYY-MM-DD format
+                    - title: Ship Mode
+                      description: The type of shipping for the order
+                    - title: Customer ID
+                      description: Customer ID
+                    - title: Product ID
+                      description: Product ID
+                    - title: Category
+                      description: Category of product
+                    - title: Sub-Category
+                      description: Sub-Category of product
+                    - title: Product Name
+                      description: name of the product
+                    - title: Sales
+                      description: Sales price in USD
+                    - title: Quantity
+                      description: Quantity as a whole number
+                    - title: Discount
+                      description: Discount as a percentage from 0-1
+                    - title: Profit
+                      description: Profit in USD (can be negative)
+                  parameters: "[]"
+                  description: >-
+                    A sample datasource containing the details of orders in an
+                    e-commerce setting
+                  team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
+                  created_by: 5899f99d-a449-4bfa-8769-19c097aaf1f6
+                  last_updated_by: 5899f99d-a449-4bfa-8769-19c097aaf1f6
+                  size: 3454
+                  sample_data: >-
+                    [{"Row ID":"1","Order ID":"CA-2017-152156","Order
+                    Date":"2017-11-08","Ship Date":"2017-11-11","Ship
+                    Mode":"Second Class","Customer ID":"CG-12520","Product
+                    ID":"FUR-BO-10001798","Category":"Furniture","Sub-Category":"Bookcases","Product
+                    Name":"Bush Somerset Collection
+                    Bookcase","Sales":"261.96","Quantity":"2","Discount":"0","Profit":"41.9136"},{"Row
+                    ID":"2","Order ID":"CA-2017-152156","Order
+                    Date":"2017-11-08","Ship Date":"2017-11-11","Ship
+                    Mode":"Second Class","Customer ID":"CG-12520","Product
+                    ID":"FUR-CH-10000454","Category":"Furniture","Sub-Category":"Chairs","Product
+                    Name":"Hon Deluxe Fabric Upholstered Stacking Chairs,
+                    Rounded
+                    Back","Sales":"731.94","Quantity":"3","Discount":"0","Profit":"219.582"},{"Row
+                    ID":"3","Order ID":"CA-2017-138688","Order
+                    Date":"2017-06-12","Ship Date":"2017-06-16","Ship
+                    Mode":"Second Class","Customer ID":"DV-13045","Product
+                    ID":"OFF-LA-10000240","Category":"Office
+                    Supplies","Sub-Category":"Labels","Product
+                    Name":"Self-Adhesive Address Labels for Typewriters by
+                    Universal","Sales":"14.62","Quantity":"2","Discount":"0","Profit":"6.8714"},{"Row
+                    ID":"4","Order ID":"US-2016-108966","Order
+                    Date":"2016-10-11","Ship Date":"2016-10-18","Ship
+                    Mode":"Standard Class","Customer ID":"SO-20335","Product
+                    ID":"FUR-TA-10000577","Category":"Furniture","Sub-Category":"Tables","Product
+                    Name":"Bretford CR4500 Series Slim Rectangular
+                    Table","Sales":"957.5775","Quantity":"5","Discount":"0.45","Profit":"-383.031"},{"Row
+                    ID":"5","Order ID":"US-2016-108966","Order
+                    Date":"2016-10-11","Ship Date":"2016-10-18","Ship
+                    Mode":"Standard Class","Customer ID":"SO-20335","Product
+                    ID":"OFF-ST-10000760","Category":"Office
+                    Supplies","Sub-Category":"Storage","Product Name":"Eldon
+                    Fold 'N Roll Cart
+                    System","Sales":"22.368","Quantity":"2","Discount":"0.2","Profit":"2.5164"},{"Row
+                    ID":"6","Order ID":"CA-2015-115812","Order
+                    Date":"2015-06-09","Ship Date":"2015-06-14","Ship
+                    Mode":"Standard Class","Customer ID":"BH-11710","Product
+                    ID":"FUR-FU-10001487","Category":"Furniture","Sub-Category":"Furnishings","Product
+                    Name":"Eldon Expressions Wood and Plastic Desk Accessories,
+                    Cherry
+                    Wood","Sales":"48.86","Quantity":"7","Discount":"0","Profit":"14.1694"},{"Row
+                    ID":"7","Order ID":"CA-2015-115812","Order
+                    Date":"2015-06-09","Ship Date":"2015-06-14","Ship
+                    Mode":"Standard Class","Customer ID":"BH-11710","Product
+                    ID":"OFF-AR-10002833","Category":"Office
+                    Supplies","Sub-Category":"Art","Product Name":"Newell
+                    322","Sales":"7.28","Quantity":"4","Discount":"0","Profit":"1.9656"},{"Row
+                    ID":"8","Order ID":"CA-2015-115812","Order
+                    Date":"2015-06-09","Ship Date":"2015-06-14","Ship
+                    Mode":"Standard Class","Customer ID":"BH-11710","Product
+                    ID":"TEC-PH-10002275","Category":"Technology","Sub-Category":"Phones","Product
+                    Name":"Mitel 5320 IP Phone VoIP
+                    phone","Sales":"907.152","Quantity":"6","Discount":"0.2","Profit":"90.7152"},{"Row
+                    ID":"9","Order ID":"CA-2015-115812","Order
+                    Date":"2015-06-09","Ship Date":"2015-06-14","Ship
+                    Mode":"Standard Class","Customer ID":"BH-11710","Product
+                    ID":"OFF-BI-10003910","Category":"Office
+                    Supplies","Sub-Category":"Binders","Product Name":"DXL
+                    Angle-View Binders with Locking Rings by
+                    Samsill","Sales":"18.504","Quantity":"3","Discount":"0.2","Profit":"5.7825"},{"Row
+                    ID":"10","Order ID":"CA-2015-115812","Order
+                    Date":"2015-06-09","Ship Date":"2015-06-14","Ship
+                    Mode":"Standard Class","Customer ID":"BH-11710","Product
+                    ID":"OFF-AP-10002892","Category":"Office
+                    Supplies","Sub-Category":"Appliances","Product Name":"Belkin
+                    F5C206VTEL 6 Outlet
+                    Surge","Sales":"114.9","Quantity":"5","Discount":"0","Profit":"34.47"}]
+    put:
+      tags:
+        - Dashboards > Datasources
+      summary: Add datasource to dashboard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                datasourceId: 2e335065-0fb5-47c0-97b0-e603a15efdd8
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: c5d37456-a042-4177-ab5f-69563f07937d
+      responses:
+        "201":
+          description: Created
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: boolean
+                example: "true"
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: GET,DELETE,PATCH,POST,PUT,OPTIONS
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: >-
+                  X-CSRF-Token, X-Requested-With, Accept, Accept-Version,
+                  Content-Length, Content-MD5, Content-Type, Date,
+                  X-Api-Version, x-api-key
+            vary:
+              schema:
+                type: string
+                example: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url
+            content-type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Tue, 06 Feb 2024 06:52:24 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                dashboard: c5d37456-a042-4177-ab5f-69563f07937d
+                datasource: 2e335065-0fb5-47c0-97b0-e603a15efdd8
+                team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
+  /api/dashboards/{dashboardId}/datasources/{datasourceId}:
+    delete:
+      tags:
+        - Dashboards > Datasources
+      summary: Delete datasource from dashboard
+      parameters:
+        - name: dashboardId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: c5d37456-a042-4177-ab5f-69563f07937d
+        - name: datasourceId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 2e335065-0fb5-47c0-97b0-e603a15efdd8
+      responses:
+        "200":
+          description: OK
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: boolean
+                example: "true"
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: GET,DELETE,PATCH,POST,PUT,OPTIONS
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: >-
+                  X-CSRF-Token, X-Requested-With, Accept, Accept-Version,
+                  Content-Length, Content-MD5, Content-Type, Date,
+                  X-Api-Version, x-api-key
+            vary:
+              schema:
+                type: string
+                example: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url
+            content-type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Tue, 06 Feb 2024 06:54:12 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
   /api/dashboards:
     get:
       tags:
