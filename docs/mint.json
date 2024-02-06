@@ -173,6 +173,14 @@
             "apis/dashboards/get-all-dashboard-sessions",
             "apis/dashboards/revoke-dashboard-sessions"
           ]
+        },
+        {
+          "group": " Datasources",
+          "pages": [
+            "apis/dashboards/get-all-datasources-in-dashboard",
+            "apis/dashboards/add-datasource-to-dashboard",
+            "apis/dashboards/delete-datasource-from-dashboard"
+          ]
         }
       ]
     },
