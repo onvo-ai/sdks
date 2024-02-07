@@ -1,32 +1,34 @@
 # frozen_string_literal: true
 
+require_relative '../resource_template'
+
 # Datasource endpoints
-module Datasources
-  def get_datasources
+class Datasources < ResourceTemplate
+  def list
     base_get('/datasources')
   end
 
-  def get_datasource_by_id(id)
+  def get(id)
     base_get("/datasources/#{id}")
   end
 
-  def get_datasource_data_by_id(id)
+  def get_data(id)
     base_get("/datasources/#{id}/data")
   end
 
-  def populate_data_source_by_id(id)
+  def fetch_column_descriptions(id)
     base_post("/datasources/#{id}/populate-columns")
   end
 
-  def delete_datasource_by_id(id)
+  def delete(id)
     base_delete("/datasources/#{id}")
   end
 
-  def update_datasource_by_id(id, body)
+  def update(id, body)
     base_post("/datasources/#{id}", body)
   end
 
-  def create_datasource(body)
+  def create(body)
     base_put('/datasources', body)
   end
 end

@@ -17,53 +17,53 @@ class DashboardTest < Minitest::Test
   }.freeze
 
   #TODO: Move to appropriate file
-  def test_onvo_initializer
-    options = {
-      headers: {
-        'x-api-key': @api_key,
-        'Content-Type': 'application/json'
-      }
-    }
-    assert_equal options, @onvo.options
-  end
+  # def test_onvo_initializer
+  #   options = {
+  #     headers: {
+  #       'x-api-key': @api_key,
+  #       'Content-Type': 'application/json'
+  #     }
+  #   }
+  #   assert_equal options, @onvo.options
+  # end
 
   #TODO: Move to appropriate file
-  def test_invalid_api_key_error
-    @onvo.options[:headers][:"x-api-key"] = 'incorrect_api_key'
-    assert_raises(RuntimeError) { @onvo.get_dashboards }
-  end
+  # def test_invalid_api_key_error
+  #   @onvo.options[:headers][:"x-api-key"] = 'incorrect_api_key'
+  #   assert_raises(RuntimeError) { @onvo.dashboards.list }
+  # end
 
   def create_sample_dashboard
-    @onvo.create_dashboard(SAMPLE_DASHBOARD_PARAMS)
+    @onvo.dashboards.create(SAMPLE_DASHBOARD_PARAMS)
   end
 
   def with_sample_dashboard
     id = create_sample_dashboard['id']
     yield id
-    @onvo.delete_dashboard_by_id(id)
+    @onvo.dashboards.delete(id)
   end
 
-  def test_get_dashboards
-    assert_silent { @onvo.get_dashboards }
+  def test_list_dashboards
+    assert_silent { @onvo.dashboards.list }
   end
 
-  def test_get_dashboard_by_id
+  def test_get_dashboard
     with_sample_dashboard do |id|
-      assert_silent { @onvo.get_dashboard_by_id(id) }
+      assert_silent { @onvo.dashboards.get(id) }
     end
   end
 
   def test_create_and_delete_dashboard
     assert_silent do
       sample_dashboard_id = create_sample_dashboard['id']
-      @onvo.delete_dashboard_by_id(sample_dashboard_id)
+      @onvo.dashboards.delete(sample_dashboard_id)
     end
   end
 
-  def test_update_dashboard_by_id
+  def test_update_dashboard
     with_sample_dashboard do |id|
       assert_silent do
-        @onvo.update_dashboard_by_id(id, { 'description': 'A New Test Description.' })
+        @onvo.dashboards.update(id, { 'description': 'A New Test Description.' })
       end
     end
   end

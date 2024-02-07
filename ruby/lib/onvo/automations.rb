@@ -1,24 +1,26 @@
 # frozen_string_literal: true
 
+require_relative '../resource_template'
+
 # Automation endpoints
-module Automations
-  def get_automations
+class Automations < ResourceTemplate
+  def list
     base_get('/automations')
   end
 
-  def get_automation_by_id(id)
+  def get(id)
     base_get("/automations/#{id}")
   end
 
-  def delete_automation_by_id(id)
+  def delete(id)
     base_delete("/automations/#{id}")
   end
 
-  def update_automation_by_id(id, body)
+  def update(id, body)
     base_post("/automations/#{id}", body)
   end
 
-  def create_automation(body)
+  def create(body)
     base_put('/automations', body)
   end
 end
