@@ -5,7 +5,7 @@ require 'json'
 require 'uri'
 
 # The default template for an Onvo Resource
-class ResourceTemplate
+class Resource
   include HTTParty
 
   attr_accessor :options

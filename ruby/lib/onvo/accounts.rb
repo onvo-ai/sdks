@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../resource_template'
+require_relative '../resource'
 
 # Account endpoints
-class Accounts < ResourceTemplate
+class Accounts < Resource
   def list
     base_get('/accounts')
   end

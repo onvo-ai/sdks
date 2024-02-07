@@ -1,17 +1,9 @@
 # frozen_string_literal: true
 
-require_relative './dashboard/widgets'
-require_relative './dashboard/questions'
-require_relative './dashboard/sessions'
-
-require_relative '../resource_template'
+require_relative '../resource'
 
 # Dashboard endpoints
-class Dashboards < ResourceTemplate
-  # include Widgets
-  # include Questions
-  # include Sessions
-
+class Dashboards < Resource
   def list
     base_get('/dashboards')
   end

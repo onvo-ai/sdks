@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../resource_template'
+require_relative '../resource'
 
 # Team endpoints
-class Teams < ResourceTemplate
+class Teams < Resource
   def list
     base_get('/teams')
   end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../resource_template'
+require_relative '../resource'
 
 # Automation endpoints
-class Automations < ResourceTemplate
+class Automations < Resource
   def list
     base_get('/automations')
   end

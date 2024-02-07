@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../resource_template'
+require_relative '../resource'
 
 # Datasource endpoints
-class Datasources < ResourceTemplate
+class Datasources < Resource
   def list
     base_get('/datasources')
   end

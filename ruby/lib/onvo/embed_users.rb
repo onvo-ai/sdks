@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../resource_template'
+require_relative '../resource'
 
 # Embed user endpoints
-class EmbedUsers < ResourceTemplate
+class EmbedUsers < Resource
   def list
     base_get('/embed-users')
   end
