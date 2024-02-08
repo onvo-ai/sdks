@@ -11,6 +11,8 @@ import { OnvoDatasource } from "./datasource";
 import { OnvoQuestions } from "./questions";
 import { OnvoAutomation } from "./automation";
 import { OnvoWidget } from "./widget";
+import { OnvoSessions } from "./sessions";
+import { OnvoWidgets } from "./widgets";
 export declare class Onvo extends OnvoBase {
     accounts: OnvoAccounts;
     teams: OnvoTeams;
@@ -19,6 +21,8 @@ export declare class Onvo extends OnvoBase {
     automations: OnvoAutomations;
     dashboards: OnvoDashboards;
     questions: OnvoQuestions;
+    widgets: OnvoWidgets;
+    sessions: OnvoSessions;
     automation: (automationId: string) => OnvoAutomation;
     dashboard: (dashboardId: string) => OnvoDashboard;
     embed_user: (embedUserId: string) => OnvoEmbedUser;

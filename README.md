@@ -2,7 +2,7 @@
 
 This repository contains packages to provides utilities to seamlessly communicate with the Onvo platform, allowing developers to integrate AI-powered dashboards into their products.
 
-You can find the API documentation at https://onvo.ai/support/docs
+You can find the API documentation at https://docs.onvo.ai
 
 ## Server library progress
 

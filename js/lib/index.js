@@ -11,6 +11,8 @@ import { OnvoDatasource } from "./datasource";
 import { OnvoQuestions } from "./questions";
 import { OnvoAutomation } from "./automation";
 import { OnvoWidget } from "./widget";
+import { OnvoSessions } from "./sessions";
+import { OnvoWidgets } from "./widgets";
 export class Onvo extends OnvoBase {
     accounts;
     teams;
@@ -19,6 +21,8 @@ export class Onvo extends OnvoBase {
     automations;
     dashboards;
     questions;
+    widgets;
+    sessions;
     automation;
     dashboard;
     embed_user;
@@ -33,6 +37,8 @@ export class Onvo extends OnvoBase {
         this.automations = new OnvoAutomations(apiKey, options);
         this.dashboards = new OnvoDashboards(apiKey, options);
         this.questions = new OnvoQuestions(apiKey, options);
+        this.sessions = new OnvoSessions(apiKey, options);
+        this.widgets = new OnvoWidgets(apiKey, options);
         this.dashboard = (dashboardId) => {
             return new OnvoDashboard(dashboardId, apiKey, options);
         };
