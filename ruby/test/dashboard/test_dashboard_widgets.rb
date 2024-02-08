@@ -1,55 +1,31 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
-require_relative '../lib/onvo'
+require_relative './dashboard_test_base'
 require 'minitest/hooks'
 
-# All tests related to Onvo's dashboard widget endpoints
-class DashboardWidgetTest < Minitest::Test
-  include Minitest::Hooks
-
+# All tests related to Onvo's dashboard widget endpoints (Skipping create and delete. Every test has it)
+class DashboardWidgetTest < DashboardTestBase
   def before_all
-    @endpoint = ENV['ONVO_API_ENDPOINT']
-    @api_key = ENV['ONVO_API_KEY']
-    @onvo = Onvo.new(@endpoint, @api_key)
-
-    @sample_dashboard_id = @onvo.create_dashboard(SAMPLE_DASHBOARD_PARAMS)['id']
-    # @sample_widget = @onvo.create_dashboard_widget('')
+    super
+    @dashboard.datasources.link(@sample_datasource_id)
+    @dashboard.widgets.create('Display the number of rows the data has.')
+    @sample_widget_id = @dashboard.widgets.list[0]['id']
   end
 
-  SAMPLE_DASHBOARD_PARAMS = {
-    'description': 'Sample dashboard for widget testing',
-    'title': 'Widget Testing Dashboard'
-  }.freeze
-
-  def test_get_dashboard_widgets
-    assert_silent { @onvo.get_dashboard_widgets(@sample_dashboard_id) }
+  def test_list_widgets
+    assert_silent { @dashboard.widgets.list }
   end
 
-  # def test_get_dashboard_widget_by_id
-  #   sample_dashboard_id = @onvo.get_dashboards[0]["id"]
-  #   sample_widget_id = @onvo.get_dashboard_widgets(sample_dashboard_id)[0]["id"]
-  #   assert_silent { @onvo.get_dashboard_widget_by_id(sample_dashboard_id, sample_widget_id) }
-  # end
+  def test_get_widget
+    assert_silent { @dashboard.widgets.get(@sample_widget_id) }
+  end
 
-  # def test_delete_dashboard_widget_by_id
-  #   sample_dashboard_id = @onvo.get_dashboards[0]["id"]
-  #   sample_widget_id = @onvo.get_dashboard_widgets(sample_dashboard_id)[0]["id"]
-  #   assert_silent { @onvo.delete_dashboard_widget_by_id(sample_dashboard_id, sample_widget_id) }
-  # end
-
-  # def test_update_dashboard_widget_by_id
-  #   sample_dashboard_id = @onvo.get_dashboards[0]["id"]
-  #   sample_widget_id = @onvo.get_dashboard_widgets(sample_dashboard_id)[0]["id"]
-  #   assert_silent { @onvo.delete_dashboard_widget_by_id(sample_dashboard_id, sample_widget_id, sample_body) }
-  # end
-
-  # def test_create_dashboard_widget
-  #   sample_dashboard_id = @onvo.get_dashboards[0]["id"]
-  #   assert_silent { @onvo.create_dashboard_widget(sample_dashboard_id, sample_body) }
-  # end
+  def test_update_widget
+    assert_silent { @dashboard.widgets.update(@sample_widget_id, { title: 'A different title' }) }
+  end
 
   def after_all
-    @onvo.delete_dashboard_by_id(@sample_dashboard_id)
+    super
+    @dashboard.widgets.delete(@sample_widget_id)
   end
 end

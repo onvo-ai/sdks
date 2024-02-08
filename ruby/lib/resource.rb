@@ -27,6 +27,8 @@ class Resource
     raise "#{response.code} Error : #{body['message']}" if response.code >= 400
 
     body
+  rescue JSON::ParserError, TypeError
+    response.body
   end
 
   def base_get(subdirectory)

@@ -12,9 +12,9 @@ class Dashboard
   def initialize(dashboard_id, endpoint, api_key)
     params = [dashboard_id, endpoint, api_key]
 
-    @datasource = Datasources.new(*params)
-    @widgets = Widgets.new(*params)
-    @questions = Questions.new(*params)
-    @sessions = Sessions.new(*params)
+    @datasources = DashboardDatasources.new(*params)
+    @widgets = DashboardWidgets.new(*params)
+    @questions = DashboardQuestions.new(*params)
+    @sessions = DashboardSessions.new(*params)
   end
 end
