@@ -6,23 +6,27 @@ You can find the API documentation at https://onvo.ai/support/docs
 
 ## Server library progress
 
-#### ✅ [Node.js](https://www.npmjs.com/package/@onvo-ai/js) - Available with an example project
+#### ✅ [Javascript](https://www.npmjs.com/package/@onvo-ai/js) Available on NPM
+
+#### [Ruby](https://rubygems.org/gems/onvo) Available on RubyGems
+
+#### Python - Coming soon
 
 #### Java - Coming soon
-
-#### Ruby - Coming soon
 
 #### Go - Coming soon
 
 #### PHP - Coming soon
 
+#### Rust - Coming soon
+
 ## Client library progress
 
-#### ✅ HTML iframe - Available with example project
+#### ✅ HTML iframe
+
+#### ✅ React
 
 #### HTML web component - Coming soon
-
-#### React - Coming soon
 
 #### Angular - Coming soon
 
