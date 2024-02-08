@@ -1,6 +1,8 @@
 import OnvoBase from "../base";
 export declare class OnvoEmbedUser extends OnvoBase {
-    id: string;
-    constructor(endpoint: string, apiKey: string, id: string);
+    #private;
+    constructor(id: string, apiKey: string, options?: {
+        endpoint: string;
+    });
     getAccessToken(): Promise<any>;
 }

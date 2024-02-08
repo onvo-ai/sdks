@@ -1,21 +1,26 @@
-import { OnvoDashboardWidgets } from "./dashboard_widgets";
-import { OnvoDashboardQuestions } from "./dashboard_questions";
-import { OnvoDashboardSessions } from "./dashboard_sessions";
 import { OnvoDashboardDatasources } from "./dashboard_datasources";
 import OnvoBase from "../base";
 
 export class OnvoDashboard extends OnvoBase {
-  widgets: OnvoDashboardWidgets;
-  questions: OnvoDashboardQuestions;
-  sessions: OnvoDashboardSessions;
   datasources: OnvoDashboardDatasources;
+  #id: string;
 
-  constructor(endpoint: string, apiKey: string, id: string) {
-    super(endpoint, apiKey);
+  constructor(id: string, apiKey: string, options?: { endpoint: string }) {
+    super(apiKey, options);
+    this.#id = id;
+    this.datasources = new OnvoDashboardDatasources(id, apiKey, options);
+  }
 
-    this.widgets = new OnvoDashboardWidgets(endpoint, apiKey, id);
-    this.questions = new OnvoDashboardQuestions(endpoint, apiKey, id);
-    this.sessions = new OnvoDashboardSessions(endpoint, apiKey, id);
-    this.datasources = new OnvoDashboardDatasources(endpoint, apiKey, id);
+  updateWidgetCache() {
+    return this.fetchBase(
+      "/api/dashboards/" + this.#id + "/update-cache",
+      "POST"
+    );
+  }
+
+  getWidgetSuggestions() {
+    return this.fetchBase(
+      "/api/dashboards/" + this.#id + "/widget-suggestions"
+    );
   }
 }
