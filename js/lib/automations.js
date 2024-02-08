@@ -1,13 +1,6 @@
-export class OnvoAutomations {
-    apiKey;
-    endpoint;
-    fetchBase;
-    constructor(endpoint, apiKey, fetchBase) {
-        this.apiKey = apiKey;
-        this.endpoint = endpoint;
-        this.fetchBase = fetchBase;
-    }
-    // Automation endpoints
+import OnvoBase from "./base";
+// Automation endpoints
+export class OnvoAutomations extends OnvoBase {
     list() {
         return this.fetchBase("/api/automations");
     }

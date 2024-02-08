@@ -6,11 +6,11 @@ import { OnvoDatasources } from "./datasources";
 import { OnvoAutomations } from "./automations";
 import { OnvoDashboards } from "./dashboards";
 import { OnvoDashboard } from "./dashboard";
+import OnvoBase from "./base";
+import { OnvoEmbedUser } from "./embed_user";
+import { OnvoDatasource } from "./datasource";
 
-export default class Onvo {
-  apiKey: string;
-  endpoint: string;
-
+export class Onvo extends OnvoBase {
   accounts: OnvoAccounts;
   teams: OnvoTeams;
   embed_users: OnvoEmbedUsers;
@@ -19,6 +19,8 @@ export default class Onvo {
   dashboards: OnvoDashboards;
 
   dashboard: (dashboardId: string) => OnvoDashboard;
+  embed_user: (embedUserId: string) => OnvoEmbedUser;
+  datasource: (datasourceId: string) => OnvoDatasource;
 
   // Base fetch method
   async fetchBase(url: string, method?: Method, body?: any) {
@@ -46,18 +48,26 @@ export default class Onvo {
   }
 
   constructor(endpoint: string, apiKey: string) {
-    this.apiKey = apiKey;
-    this.endpoint = endpoint;
+    super(endpoint, apiKey);
 
-    this.accounts = new OnvoAccounts(endpoint, apiKey, this.fetchBase);
-    this.teams = new OnvoTeams(endpoint, apiKey, this.fetchBase);
-    this.embed_users = new OnvoEmbedUsers(endpoint, apiKey, this.fetchBase);
-    this.datasources = new OnvoDatasources(endpoint, apiKey, this.fetchBase);
-    this.automations = new OnvoAutomations(endpoint, apiKey, this.fetchBase);
-    this.dashboards = new OnvoDashboards(endpoint, apiKey, this.fetchBase);
+    this.accounts = new OnvoAccounts(endpoint, apiKey);
+    this.teams = new OnvoTeams(endpoint, apiKey);
+    this.embed_users = new OnvoEmbedUsers(endpoint, apiKey);
+    this.datasources = new OnvoDatasources(endpoint, apiKey);
+    this.automations = new OnvoAutomations(endpoint, apiKey);
+    this.dashboards = new OnvoDashboards(endpoint, apiKey);
 
     this.dashboard = (dashboardId: string) => {
-      return new OnvoDashboard(endpoint, apiKey, this.fetchBase, dashboardId);
+      return new OnvoDashboard(endpoint, apiKey, dashboardId);
+    };
+
+    this.embed_user = (embedUserId: string) => {
+      return new OnvoEmbedUser(endpoint, apiKey, embedUserId);
+    };
+    this.datasource = (datasourceId: string) => {
+      return new OnvoDatasource(endpoint, apiKey, datasourceId);
     };
   }
 }
+
+export default Onvo;

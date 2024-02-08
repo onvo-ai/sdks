@@ -126,6 +126,7 @@
         "integrations/zoho-people"
       ]
     },
+
     {
       "group": "Accounts",
       "pages": [
@@ -146,42 +147,35 @@
       "pages": [
         "apis/dashboards/get-all-dashboards",
         "apis/dashboards/create-dashboard",
-        "apis/dashboards/get-dashboard-by-id",
-        "apis/dashboards/delete-dashboard-by-id",
+        "apis/dashboards/get-dashboard-widget-suggestions",
         "apis/dashboards/update-dashboard-by-id",
+        "apis/dashboards/delete-dashboard-by-id",
+        "apis/dashboards/update-dashboard-widget-cache",
+
         {
-          "group": "Widgets",
+          "group": "Datasources",
           "pages": [
-            "apis/dashboards/get-all-widgets-under-dashboard",
-            "apis/dashboards/get-widget-by-id",
-            "apis/dashboards/update-widget-by-id",
-            "apis/dashboards/create-widget",
-            "apis/dashboards/delete-widget-by-id"
-          ]
-        },
-        {
-          "group": "Questions",
-          "pages": [
-            "apis/dashboards/get-questions-by-dashboard-id",
-            "apis/dashboards/ask-question-to-dashboard-by-id"
-          ]
-        },
-        {
-          "group": "Sessions",
-          "pages": [
-            "apis/dashboards/upsert-dashboard-session",
-            "apis/dashboards/get-all-dashboard-sessions",
-            "apis/dashboards/revoke-dashboard-sessions"
-          ]
-        },
-        {
-          "group": " Datasources",
-          "pages": [
-            "apis/dashboards/get-all-datasources-in-dashboard",
-            "apis/dashboards/add-datasource-to-dashboard",
-            "apis/dashboards/delete-datasource-from-dashboard"
+            "apis/dashboards->-datasources/get-all-datasources-in-dashboard",
+            "apis/dashboards->-datasources/add-datasource-to-dashboard",
+            "apis/dashboards->-datasources/delete-datasource-from-dashboard"
           ]
         }
+      ]
+    },
+    {
+      "group": "Sessions",
+      "pages": [
+        "apis/sessions/get-all-dashboard-sessions",
+        "apis/sessions/upsert-dashboard-session",
+        "apis/sessions/revoke-dashboard-sessions"
+      ]
+    },
+    {
+      "group": "Questions",
+      "pages": [
+        "apis/questions/get-questions-by-dashboard",
+        "apis/questions/ask-question-to-dashboard",
+        "apis/questions/delete-question"
       ]
     },
     {
@@ -189,7 +183,7 @@
       "pages": [
         "apis/embed-users/get-all-embed-users",
         "apis/embed-users/upsert-embed-user",
-        "apis/embed-users/get-token",
+        "apis/embed-users/get-token-for-embed-user-by-id",
         "apis/embed-users/get-embed-user-by-id",
         "apis/embed-users/delete-embed-user-by-id"
       ]
@@ -198,11 +192,11 @@
       "group": "Datasources",
       "pages": [
         "apis/datasources/get-data-source-by-id",
+        "apis/datasources/update-data-source-by-id",
+        "apis/datasources/delete-data-source-by-id",
         "apis/datasources/get-data-source-data-by-id",
         "apis/datasources/populate-data-source-columns-by-id",
-        "apis/datasources/delete-data-source-by-id",
         "apis/datasources/create-data-source",
-        "apis/datasources/update-data-source-by-id",
         "apis/datasources/get-all-data-sources"
       ]
     },
@@ -211,9 +205,21 @@
       "pages": [
         "apis/automations/get-all-automations",
         "apis/automations/create-automation",
+        "apis/automations/get-automation-runs",
         "apis/automations/get-automation-by-id",
         "apis/automations/update-automation-by-id",
         "apis/automations/delete-automation-by-id"
+      ]
+    },
+    {
+      "group": "Widgets",
+      "pages": [
+        "apis/widgets/get-all-widgets-under-dashboard",
+        "apis/widgets/create-widget",
+        "apis/widgets/get-widget-image-by-id",
+        "apis/widgets/get-widget-by-id",
+        "apis/widgets/update-widget-by-id",
+        "apis/widgets/delete-widget-by-id"
       ]
     }
   ],

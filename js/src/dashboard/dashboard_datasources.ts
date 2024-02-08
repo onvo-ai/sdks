@@ -1,21 +1,10 @@
-import { Method } from "axios";
+import OnvoBase from "../base";
 
-export class OnvoDashboardDatasources {
-  apiKey: string;
-  endpoint: string;
+export class OnvoDashboardDatasources extends OnvoBase {
   dashboardId: string;
 
-  fetchBase: (url: string, method?: Method, body?: any) => Promise<any>;
-
-  constructor(
-    endpoint: string,
-    apiKey: string,
-    fetchBase: (url: string, method?: Method, body?: any) => Promise<any>,
-    dashboardId: string
-  ) {
-    this.apiKey = apiKey;
-    this.endpoint = endpoint;
-    this.fetchBase = fetchBase;
+  constructor(endpoint: string, apiKey: string, dashboardId: string) {
+    super(endpoint, apiKey);
     this.dashboardId = dashboardId;
   }
 

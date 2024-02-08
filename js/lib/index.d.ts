@@ -6,9 +6,10 @@ import { OnvoDatasources } from "./datasources";
 import { OnvoAutomations } from "./automations";
 import { OnvoDashboards } from "./dashboards";
 import { OnvoDashboard } from "./dashboard";
-export default class Onvo {
-    apiKey: string;
-    endpoint: string;
+import OnvoBase from "./base";
+import { OnvoEmbedUser } from "./embed_user";
+import { OnvoDatasource } from "./datasource";
+export declare class Onvo extends OnvoBase {
     accounts: OnvoAccounts;
     teams: OnvoTeams;
     embed_users: OnvoEmbedUsers;
@@ -16,6 +17,9 @@ export default class Onvo {
     automations: OnvoAutomations;
     dashboards: OnvoDashboards;
     dashboard: (dashboardId: string) => OnvoDashboard;
+    embed_user: (embedUserId: string) => OnvoEmbedUser;
+    datasource: (datasourceId: string) => OnvoDatasource;
     fetchBase(url: string, method?: Method, body?: any): Promise<any>;
     constructor(endpoint: string, apiKey: string);
 }
+export default Onvo;
