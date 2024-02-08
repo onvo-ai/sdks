@@ -8,7 +8,7 @@ You can find the API documentation at https://onvo.ai/support/docs
 
 #### ✅ [Javascript](https://www.npmjs.com/package/@onvo-ai/js) Available on NPM
 
-#### [Ruby](https://rubygems.org/gems/onvo) Available on RubyGems
+#### ✅ [Ruby](https://rubygems.org/gems/onvo) Available on RubyGems
 
 #### Python - Coming soon
 
