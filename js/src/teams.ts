@@ -1,26 +1,14 @@
-import { Method } from "axios";
+import OnvoBase from "./base";
 
-export class OnvoTeams {
-  apiKey: string;
-  endpoint: string;
-
-  fetchBase: (url: string, method?: Method, body?: any) => Promise<any>;
-
-  constructor(
-    endpoint: string,
-    apiKey: string,
-    fetchBase: (url: string, method?: Method, body?: any) => Promise<any>
-  ) {
-    this.apiKey = apiKey;
-    this.endpoint = endpoint;
-    this.fetchBase = fetchBase;
-  }
-
-  // Team endpoints
+// Team endpoints
+export class OnvoTeams extends OnvoBase {
   list() {
     return this.fetchBase("/api/teams");
   }
   get(id: string) {
     return this.fetchBase("/api/teams/" + id);
+  }
+  update(id: string, body: any) {
+    return this.fetchBase("/api/teams/" + id, "POST", body);
   }
 }

@@ -31,7 +31,7 @@ export const Dashboard: React.FC<{ id: string; children: any }> = ({
     if (id && backend) {
       // @ts-ignore
       backend.dashboards.get(id).then(setDashboard);
-      backend.dashboard(id).widgets.list().then(setWidgets);
+      backend.widgets.list({ dashboard: id }).then(setWidgets);
     }
   }, [id, backend]);
 

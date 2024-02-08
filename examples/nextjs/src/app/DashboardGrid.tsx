@@ -6,7 +6,7 @@ const DashboardGrid: React.FC<{ token: string }> = ({ token }) => {
   const router = useRouter();
   localStorage.setItem("token", token);
   return (
-    <Wrapper baseUrl="https://dashboard.onvo.ai" token={token}>
+    <Wrapper token={token}>
       <DashboardList onClickItem={(e) => router.push(e.id)} />
     </Wrapper>
   );

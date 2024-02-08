@@ -2,15 +2,19 @@
 
 This repository contains packages to provides utilities to seamlessly communicate with the Onvo platform, allowing developers to integrate AI-powered dashboards into their products.
 
-You can find the API documentation at https://onvo.ai/support/docs
+You can find the API documentation at https://docs.onvo.ai
 
 ## Server library progress
 
-#### ✅ [Node.js](https://www.npmjs.com/package/@onvo-ai/js) - Available with an example project
+#### ✅ [Javascript](https://www.npmjs.com/package/@onvo-ai/js) : Available on NPM
+
+#### ✅ [Ruby](https://rubygems.org/gems/onvo) : Available on RubyGems
+
+#### 🚧 Python - Work ongoing
+
+#### 🚧 Rust - Work ongoing
 
 #### Java - Coming soon
-
-#### Ruby - Coming soon
 
 #### Go - Coming soon
 
@@ -18,11 +22,11 @@ You can find the API documentation at https://onvo.ai/support/docs
 
 ## Client library progress
 
-#### ✅ HTML iframe - Available with example project
+#### ✅ HTML iframe
+
+#### ✅ React
 
 #### HTML web component - Coming soon
-
-#### React - Coming soon
 
 #### Angular - Coming soon
 

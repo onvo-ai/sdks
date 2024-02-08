@@ -1,22 +1,7 @@
-import { Method } from "axios";
+import OnvoBase from "./base";
 
-export class OnvoAccounts {
-  apiKey: string;
-  endpoint: string;
-
-  fetchBase: (url: string, method?: Method, body?: any) => Promise<any>;
-
-  constructor(
-    endpoint: string,
-    apiKey: string,
-    fetchBase: (url: string, method?: Method, body?: any) => Promise<any>
-  ) {
-    this.apiKey = apiKey;
-    this.endpoint = endpoint;
-    this.fetchBase = fetchBase;
-  }
-
-  // Account endpoints
+// Account endpoints
+export class OnvoAccounts extends OnvoBase {
   list() {
     return this.fetchBase("/api/accounts");
   }

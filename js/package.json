@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/js",
-  "version": "0.12.2",
+  "version": "0.12.11",
   "description": "The nodejs SDK for Onvo AI dashboard builder",
   "main": "lib/index.js",
   "scripts": {
@@ -17,6 +17,20 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "axios": "^1.6.7"
-  }
+    "axios": "0.21.1"
+  },
+  "keywords": [
+    "onvo",
+    "sdk",
+    "dashboard",
+    "builder",
+    "reports",
+    "analytics",
+    "ai",
+    "visualization"
+  ],
+  "bugs": {
+    "url": "https://github.com/onvo-ai/sdks/issues"
+  },
+  "homepage": "https://github.com/onvo-ai/sdks/tree/main/js"
 }
