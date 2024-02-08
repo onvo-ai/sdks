@@ -1,13 +1,6 @@
-export class OnvoDashboards {
-    apiKey;
-    endpoint;
-    async fetchBase(url, method, body) { }
-    constructor(endpoint, apiKey, fetchBase) {
-        this.apiKey = apiKey;
-        this.endpoint = endpoint;
-        this.fetchBase = fetchBase;
-    }
-    // Dashboard endpoints
+import OnvoBase from "./base";
+// Dashboard endpoints
+export class OnvoDashboards extends OnvoBase {
     list() {
         return this.fetchBase("/api/dashboards");
     }

@@ -1,13 +1,6 @@
-export class OnvoEmbedUsers {
-    apiKey;
-    endpoint;
-    fetchBase;
-    constructor(endpoint, apiKey, fetchBase) {
-        this.apiKey = apiKey;
-        this.endpoint = endpoint;
-        this.fetchBase = fetchBase;
-    }
-    // Embed user endpoints
+import OnvoBase from "./base";
+// Embed user endpoints
+export class OnvoEmbedUsers extends OnvoBase {
     list() {
         return this.fetchBase("/api/embed-users");
     }
@@ -24,8 +17,5 @@ export class OnvoEmbedUsers {
             email: userData.email,
             metadata: userData.metadata,
         });
-    }
-    getAccessToken(id) {
-        return this.fetchBase("/api/embed-users/" + id + "/token");
     }
 }

@@ -1,12 +1,8 @@
-export class OnvoDashboardDatasources {
-    apiKey;
-    endpoint;
+import OnvoBase from "../base";
+export class OnvoDashboardDatasources extends OnvoBase {
     dashboardId;
-    fetchBase;
-    constructor(endpoint, apiKey, fetchBase, dashboardId) {
-        this.apiKey = apiKey;
-        this.endpoint = endpoint;
-        this.fetchBase = fetchBase;
+    constructor(endpoint, apiKey, dashboardId) {
+        super(endpoint, apiKey);
         this.dashboardId = dashboardId;
     }
     // Dashboard Datasource endpoints

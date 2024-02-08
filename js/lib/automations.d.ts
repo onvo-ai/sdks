@@ -1,9 +1,5 @@
-import { Method } from "axios";
-export declare class OnvoAutomations {
-    apiKey: string;
-    endpoint: string;
-    fetchBase: (url: string, method?: Method, body?: any) => Promise<any>;
-    constructor(endpoint: string, apiKey: string, fetchBase: (url: string, method?: Method, body?: any) => Promise<any>);
+import OnvoBase from "./base";
+export declare class OnvoAutomations extends OnvoBase {
     list(): Promise<any>;
     get(id: string): Promise<any>;
     delete(id: string): Promise<any>;

@@ -1,9 +1,5 @@
-import { Method } from "axios";
-export declare class OnvoEmbedUsers {
-    apiKey: string;
-    endpoint: string;
-    fetchBase: (url: string, method?: Method, body?: any) => Promise<any>;
-    constructor(endpoint: string, apiKey: string, fetchBase: (url: string, method?: Method, body?: any) => Promise<any>);
+import OnvoBase from "./base";
+export declare class OnvoEmbedUsers extends OnvoBase {
     list(): Promise<any>;
     get(id: string): Promise<any>;
     delete(id: string): Promise<any>;
@@ -14,5 +10,4 @@ export declare class OnvoEmbedUsers {
             [key: string]: any;
         };
     }): Promise<any>;
-    getAccessToken(id: string): Promise<any>;
 }

@@ -1,22 +1,7 @@
-import { Method } from "axios";
+import OnvoBase from "./base";
 
-export class OnvoAutomations {
-  apiKey: string;
-  endpoint: string;
-
-  fetchBase: (url: string, method?: Method, body?: any) => Promise<any>;
-
-  constructor(
-    endpoint: string,
-    apiKey: string,
-    fetchBase: (url: string, method?: Method, body?: any) => Promise<any>
-  ) {
-    this.apiKey = apiKey;
-    this.endpoint = endpoint;
-    this.fetchBase = fetchBase;
-  }
-
-  // Automation endpoints
+// Automation endpoints
+export class OnvoAutomations extends OnvoBase {
   list() {
     return this.fetchBase("/api/automations");
   }
