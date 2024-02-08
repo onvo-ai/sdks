@@ -1,0 +1,23 @@
+PATH
+  remote: .
+  specs:
+    onvo (0.0.1)
+      httparty (~> 0.13.7)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    json (1.8.6)
+    multi_xml (0.6.0)
+
+PLATFORMS
+  x86_64-darwin-21
+
+DEPENDENCIES
+  onvo!
+
+BUNDLED WITH
+   2.3.25
