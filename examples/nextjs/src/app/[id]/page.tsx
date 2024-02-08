@@ -12,7 +12,7 @@ const DashboardInnerPage: React.FC<{
   let token = localStorage.getItem("token") || "";
   return (
     <main className="w-full min-h-[100vh]">
-      <Wrapper baseUrl="https://dashboard.onvo.ai" token={token}>
+      <Wrapper token={token}>
         <Dashboard id={params.id}>
           <DashboardHeader />
           <DashboardGrid />

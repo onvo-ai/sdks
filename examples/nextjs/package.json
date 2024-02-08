@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@onvo-ai/js": "^0.11.19",
-    "@onvo-ai/react": "^0.2.4",
+    "@onvo-ai/js": "^0.12.11",
+    "@onvo-ai/react": "^0.2.7",
     "dotenv": "^16.4.1",
     "next": "14.1.0",
     "react": "^18",

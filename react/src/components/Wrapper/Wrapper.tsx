@@ -15,10 +15,12 @@ const Context = createContext<OnvoWrapperContext>({
 
 export const Wrapper: React.FC<{
   token: string;
-  baseUrl: string;
+  baseUrl?: string;
   children: any;
 }> = ({ token, children, baseUrl = "https://dashboard.onvo.ai" }) => {
-  let backend = new Onvo(baseUrl, token);
+  let backend = new Onvo(token, {
+    endpoint: baseUrl,
+  });
 
   return (
     <Context.Provider value={{ token, baseUrl, backend }}>

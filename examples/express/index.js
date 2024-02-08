@@ -8,7 +8,7 @@ if (!process.env.API_KEY) {
   process.exit();
 }
 
-let onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
+let onvo = new Onvo(process.env.API_KEY);
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.use(express.static("public"));
 
 app.get("/api/dashboards", async function (req, res) {
   try {
-    let data = await onvo.getDashboards();
+    let data = await onvo.dashboards.list();
     res.send(JSON.stringify(data));
   } catch (e) {
     console.log(e);
@@ -25,7 +25,7 @@ app.get("/api/dashboards", async function (req, res) {
 
 app.get("/api/dashboards/:id", async function (req, res) {
   try {
-    await onvo.upsertEmbedUser("123456", {
+    await onvo.embed_users.upsert("123456", {
       name: "John appleseed",
       email: "john@appleseed.com",
       metadata: {
@@ -34,7 +34,7 @@ app.get("/api/dashboards/:id", async function (req, res) {
       },
     });
 
-    let data = await onvo.upsertDashboardSession({
+    let data = await onvo.sessions.upsert({
       dashboardId: req.params.id,
       userId: "123456",
     });
