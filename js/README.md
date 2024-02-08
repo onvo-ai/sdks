@@ -26,15 +26,19 @@ bun install @onvo-ai/js
 
 To begin using the `@onvo-ai/js` package, you'll need to have an API key from the Onvo platform. Ensure that your API key is stored as an environment variable named `API_KEY`.
 
+```bash
+API_KEY=your_api_key
+```
+
 ## Usage
 
 Here's an example of how to use the package to interact with the Onvo platform:
 
 ```javascript
-const { Onvo } = require("@onvo-ai/js");
+const Onvo = require("@onvo-ai/js");
 
 // Initialize the Onvo class with your API key
-const onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
+const onvo = new Onvo(process.env.API_KEY);
 
 // Identify a user
 await onvo.embed_users.upsert("123456", {
@@ -47,24 +51,121 @@ await onvo.embed_users.upsert("123456", {
 });
 
 // Create a session
-const sessionUrl = await onvo
-  .dashboard("ebc7ab74-3fd2-47e6-90df-addaec3a029e")
-  .sessions.upsert({
-    userId: "123456",
-    parameters: {
-      year: 2023,
-      sort: "asc",
-    },
-  });
+const sessionUrl = await onvo.sessions.upsert({
+  userId: "123456",
+  dashboard: "ebc7ab74-3fd2-47e6-90df-addaec3a029e",
+  parameters: {
+    year: 2023,
+    sort: "asc",
+  },
+});
 ```
 
 ## API Reference
 
-**`new Onvo(baseUrl, apiKey)`**
+**`new Onvo(apiKey, options)`**
 _This is the main class that initializes the connection to the Onvo platform._
 
-- `baseUrl (string)`: The base URL to the Onvo platform or your self hosted endpoint.
 - `apiKey (string)`: Your API key for authentication.
+- `options`:
+  - `baseUrl (string)`: The base URL to the Onvo platform or your self hosted endpoint.
+
+### Accounts
+
+```typescript
+onvo.accounts.list()
+onvo.accounts.get(id:string)
+```
+
+### Automations
+
+```typescript
+onvo.automations.list()
+onvo.automations.create(body:object)
+onvo.automations.get(id:string)
+onvo.automations.update(id:string, body:object)
+onvo.automations.delete(id:string)
+
+onvo.automation(id:string).getRuns()
+```
+
+### Dashboards
+
+```typescript
+onvo.dashboards.list()
+onvo.dashboards.create(body:object)
+onvo.dashboards.get(id:string)
+onvo.dashboards.update(id:string, body:object)
+onvo.dashboards.delete(id:string)
+
+onvo.dashboard(id:string).updateWidgetCache()
+onvo.dashboard(id:string).getWidgetSuggestions()
+
+onvo.dashboard(dashboardId:string).datasources.list()
+onvo.dashboard(dashboardId:string).datasources.link(datasourceId:string)
+onvo.dashboard(dashboardId:string).datasources.unlink(datasourceId:string)
+```
+
+### Datasources
+
+```typescript
+onvo.datasources.list()
+onvo.datasources.create(body:object)
+onvo.datasources.get(id:string)
+onvo.datasources.update(id:string, body:object)
+onvo.datasources.delete(id:string)
+
+onvo.datasource(id:string).getData()
+onvo.datasource(id:string).fetchColumnDescriptions()
+```
+
+### Embed Users
+
+```typescript
+onvo.embed_users.list()
+onvo.embed_users.get(id:string)
+onvo.embed_users.upsert(id:string, body:object)
+onvo.embed_users.delete(id:string)
+
+onvo.embed_user(id:string).getAccessToken()
+```
+
+### Questions
+
+```typescript
+onvo.widgets.list(filters: object)
+onvo.widgets.create(body:object)
+onvo.widgets.delete(id:string)
+```
+
+### Sessions
+
+```typescript
+onvo.sessions.list(filters: object)
+onvo.sessions.delete(id:string)
+onvo.sessions.revokeAll(body:object)
+onvo.sessions.upsert(body:object)
+```
+
+### Teams
+
+```typescript
+onvo.teams.list(filters: object)
+onvo.teams.get(id:string)
+onvo.teams.update(id:string, body:object)
+```
+
+### Widgets
+
+```typescript
+onvo.widgets.list(filters: object)
+onvo.widgets.create(body:object)
+onvo.widgets.get(id:string)
+onvo.widgets.update(id:string, body:object)
+onvo.widgets.delete(id:string)
+
+onvo.widget(id:string).getImage()
+```
 
 ## Support
 

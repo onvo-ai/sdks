@@ -1,11 +1,11 @@
 import OnvoBase from "../base";
-export class OnvoEmbedUser extends OnvoBase {
+export class OnvoWidget extends OnvoBase {
     #id;
     constructor(id, apiKey, options) {
         super(apiKey, options);
         this.#id = id;
     }
-    getAccessToken() {
-        return this.fetchBase("/api/embed-users/" + this.#id + "/token");
+    getImage() {
+        return this.fetchBase("/api/widgets/" + this.#id + "/image");
     }
 }

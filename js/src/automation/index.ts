@@ -1,6 +1,6 @@
 import OnvoBase from "../base";
 
-export class OnvoEmbedUser extends OnvoBase {
+export class OnvoAutomation extends OnvoBase {
   #id: string;
 
   constructor(id: string, apiKey: string, options?: { endpoint: string }) {
@@ -8,7 +8,7 @@ export class OnvoEmbedUser extends OnvoBase {
     this.#id = id;
   }
 
-  getAccessToken() {
-    return this.fetchBase("/api/embed-users/" + this.#id + "/token");
+  getRuns() {
+    return this.fetchBase("/api/automations/" + this.#id + "/runs");
   }
 }

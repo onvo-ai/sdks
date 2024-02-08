@@ -1,4 +1,4 @@
-import { Method } from "axios";
+import OnvoBase from "./base";
 import { OnvoAccounts } from "./accounts";
 import { OnvoTeams } from "./teams";
 import { OnvoEmbedUsers } from "./embed_users";
@@ -6,9 +6,11 @@ import { OnvoDatasources } from "./datasources";
 import { OnvoAutomations } from "./automations";
 import { OnvoDashboards } from "./dashboards";
 import { OnvoDashboard } from "./dashboard";
-import OnvoBase from "./base";
 import { OnvoEmbedUser } from "./embed_user";
 import { OnvoDatasource } from "./datasource";
+import { OnvoQuestions } from "./questions";
+import { OnvoAutomation } from "./automation";
+import { OnvoWidget } from "./widget";
 export declare class Onvo extends OnvoBase {
     accounts: OnvoAccounts;
     teams: OnvoTeams;
@@ -16,10 +18,14 @@ export declare class Onvo extends OnvoBase {
     datasources: OnvoDatasources;
     automations: OnvoAutomations;
     dashboards: OnvoDashboards;
+    questions: OnvoQuestions;
+    automation: (automationId: string) => OnvoAutomation;
     dashboard: (dashboardId: string) => OnvoDashboard;
     embed_user: (embedUserId: string) => OnvoEmbedUser;
     datasource: (datasourceId: string) => OnvoDatasource;
-    fetchBase(url: string, method?: Method, body?: any): Promise<any>;
-    constructor(endpoint: string, apiKey: string);
+    widget: (widgetId: string) => OnvoWidget;
+    constructor(apiKey: string, options?: {
+        endpoint: string;
+    });
 }
 export default Onvo;

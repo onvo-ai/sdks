@@ -7,4 +7,7 @@ export class OnvoTeams extends OnvoBase {
     get(id) {
         return this.fetchBase("/api/teams/" + id);
     }
+    update(id, body) {
+        return this.fetchBase("/api/teams/" + id, "POST", body);
+    }
 }

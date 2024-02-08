@@ -1,6 +1,6 @@
 import axios, { Method } from "axios";
 export default class OnvoBase {
-  apiKey: string;
+  #apiKey: string;
   endpoint: string;
 
   // Base fetch method
@@ -11,7 +11,7 @@ export default class OnvoBase {
         url: this.endpoint + url,
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": this.apiKey,
+          "x-api-key": this.#apiKey,
         },
         data: body,
       });
@@ -28,8 +28,8 @@ export default class OnvoBase {
     }
   }
 
-  constructor(endpoint: string, apiKey: string) {
-    this.apiKey = apiKey;
-    this.endpoint = endpoint;
+  constructor(apiKey: string, options?: { endpoint: string }) {
+    this.#apiKey = apiKey;
+    this.endpoint = options?.endpoint || "https:/dashboard.onvo.ai";
   }
 }
