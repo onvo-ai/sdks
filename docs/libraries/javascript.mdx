@@ -46,7 +46,9 @@ import Onvo from "@onvo-ai/js";
 import dotenv from "dotenv";
 
 dotenv.config();
-let onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
+
+// Initialize the Onvo class with your API key
+const onvo = new Onvo(process.env.API_KEY);
 ```
 
 You can now fetch the list of dashboards and reports you have with the following API calls:
@@ -71,12 +73,15 @@ await onvo.embed_users.upsert("123456", {
 To create a session linking the user and a dashboard, you can use the following code:
 
 ```JavaScript
-let session = await onvo.dashboard("<id of dashboard you have received from the previous getDashboards() function>").sessions.upsert({
-    userId: "123456",
-    parameters: {
-        "hello": "world",
-        "testing": 1234567456
-    }
+
+// Create a session
+const sessionUrl = await onvo.sessions.upsert({
+  userId: "123456",
+  dashboard: "<id of dashboard you have received from the previous getDashboards() function>",
+  parameters: {
+    year: 2023,
+    sort: "asc",
+  },
 });
 ```
 
@@ -94,6 +99,112 @@ The session object looks like the following:
     "user": "123456",
     "url": "https://dashboard.onvo.ai/embed/dashboard/e0a6ce20-ca31-421e-8764-74cde46e9463?token=eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFwcF9tZXRhZGF0YSI6eyJkYXNoYm9hcmQiOiJlMGE2Y2UyMC1jYTMxLTQyMWUtODc2NC03NGNkZTQ2ZTk0NjMiLCJzZXNzaW9uIjoiMWFkODkzZDktODY1NC00Nzk3LTg2MDMtZDAxMTg2NTc1MzQ5In0sInN1YiI6IjMxYTA1Y2ZkLTEyNzUtNGM3Ni04MzkwLTIwYjMyOGEzYzRiZi1zdWNjZXNzZnVsbCIsImF1ZCI6ImF1dGhlbnRpY2F0ZWQiLCJpYXQiOjE2OTQxNTU3Mjd9.P_eZloNdX7FN2sVWsANfIrHy5SikE1Zl8NPmAteDIwU"
 }
+```
+
+### Library Reference
+
+**`new Onvo(apiKey, options)`**
+_This is the main class that initializes the connection to the Onvo platform._
+
+- `apiKey (string)`: Your API key for authentication.
+- `options`:
+  - `baseUrl (string)`: The base URL to the Onvo platform or your self hosted endpoint.
+
+#### Accounts
+
+```typescript
+onvo.accounts.list()
+onvo.accounts.get(id:string)
+```
+
+##### Automations
+
+```typescript
+onvo.automations.list()
+onvo.automations.create(body:object)
+onvo.automations.get(id:string)
+onvo.automations.update(id:string, body:object)
+onvo.automations.delete(id:string)
+
+onvo.automation(id:string).getRuns()
+```
+
+#### Dashboards
+
+```typescript
+onvo.dashboards.list()
+onvo.dashboards.create(body:object)
+onvo.dashboards.get(id:string)
+onvo.dashboards.update(id:string, body:object)
+onvo.dashboards.delete(id:string)
+
+onvo.dashboard(id:string).updateWidgetCache()
+onvo.dashboard(id:string).getWidgetSuggestions()
+
+onvo.dashboard(dashboardId:string).datasources.list()
+onvo.dashboard(dashboardId:string).datasources.link(datasourceId:string)
+onvo.dashboard(dashboardId:string).datasources.unlink(datasourceId:string)
+```
+
+#### Datasources
+
+```typescript
+onvo.datasources.list()
+onvo.datasources.create(body:object)
+onvo.datasources.get(id:string)
+onvo.datasources.update(id:string, body:object)
+onvo.datasources.delete(id:string)
+
+onvo.datasource(id:string).getData()
+onvo.datasource(id:string).fetchColumnDescriptions()
+```
+
+#### Embed Users
+
+```typescript
+onvo.embed_users.list()
+onvo.embed_users.get(id:string)
+onvo.embed_users.upsert(id:string, body:object)
+onvo.embed_users.delete(id:string)
+
+onvo.embed_user(id:string).getAccessToken()
+```
+
+#### Questions
+
+```typescript
+onvo.widgets.list(filters: object)
+onvo.widgets.create(body:object)
+onvo.widgets.delete(id:string)
+```
+
+#### Sessions
+
+```typescript
+onvo.sessions.list(filters: object)
+onvo.sessions.delete(id:string)
+onvo.sessions.revokeAll(body:object)
+onvo.sessions.upsert(body:object)
+```
+
+#### Teams
+
+```typescript
+onvo.teams.list(filters: object)
+onvo.teams.get(id:string)
+onvo.teams.update(id:string, body:object)
+```
+
+#### Widgets
+
+```typescript
+onvo.widgets.list(filters: object)
+onvo.widgets.create(body:object)
+onvo.widgets.get(id:string)
+onvo.widgets.update(id:string, body:object)
+onvo.widgets.delete(id:string)
+
+onvo.widget(id:string).getImage()
 ```
 
 ### Links

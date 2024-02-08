@@ -61,7 +61,7 @@ const sessionUrl = await onvo.sessions.upsert({
 });
 ```
 
-## API Reference
+## Library Reference
 
 **`new Onvo(apiKey, options)`**
 _This is the main class that initializes the connection to the Onvo platform._

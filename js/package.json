@@ -18,5 +18,19 @@
   },
   "dependencies": {
     "axios": "0.21.1"
-  }
+  },
+  "keywords": [
+    "onvo",
+    "sdk",
+    "dashboard",
+    "builder",
+    "reports",
+    "analytics",
+    "ai",
+    "visualization"
+  ],
+  "bugs": {
+    "url": "https://github.com/onvo-ai/sdks/issues"
+  },
+  "homepage": "https://github.com/onvo-ai/sdks/tree/main/js"
 }
