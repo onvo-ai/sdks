@@ -1,4 +1,5 @@
 import OnvoBase from "../base";
+import { AutomationRun } from "../types";
 
 export class OnvoAutomation extends OnvoBase {
   #id: string;
@@ -9,6 +10,8 @@ export class OnvoAutomation extends OnvoBase {
   }
 
   getRuns() {
-    return this.fetchBase("/api/automations/" + this.#id + "/runs");
+    return this.fetchBase("/api/automations/" + this.#id + "/runs") as Promise<
+      AutomationRun[]
+    >;
   }
 }

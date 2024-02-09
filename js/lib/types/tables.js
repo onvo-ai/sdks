@@ -1,0 +1,28 @@
+export var Table;
+(function (Table) {
+    Table["Countries"] = "countries";
+    Table["Invites"] = "invites";
+    Table["ItineraryInvites"] = "itinerary_invites";
+    Table["Itineraries"] = "itineraries";
+    Table["Members"] = "members";
+    Table["Teams"] = "teams";
+    Table["Travelers"] = "travelers";
+    Table["Accounts"] = "accounts";
+    Table["DataSources"] = "datasources";
+    Table["EmbedUsers"] = "embed_users";
+    Table["APIKeys"] = "api_keys";
+    Table["Widgets"] = "widgets";
+    Table["Dashboards"] = "dashboards";
+    Table["DashboardDatasources"] = "dashboard_datasources";
+    Table["Sessions"] = "sessions";
+    Table["Questions"] = "questions";
+    Table["Integrations"] = "integrations";
+    Table["DecryptedIntegrations"] = "decrypted_integrations";
+    Table["DecryptedSessions"] = "decrypted_sessions";
+    Table["DecryptedWidgets"] = "decrypted_widgets";
+    Table["DecryptedDatasources"] = "decrypted_datasources";
+    Table["Subscriptions"] = "subscriptions";
+    Table["SubscriptionPlans"] = "subscription_plans";
+    Table["Automations"] = "automations";
+    Table["AutomationRuns"] = "automation_runs";
+})(Table || (Table = {}));
