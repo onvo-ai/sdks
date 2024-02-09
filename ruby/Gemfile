@@ -3,3 +3,7 @@
 source 'http://rubygems.org'
 
 gemspec
+
+gem 'httparty', '~> 0.13.7'
+gem 'minitest-hooks', '~> 1.5.1'
+gem 'uri', '~> 0.13.0'
