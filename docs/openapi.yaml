@@ -21,7 +21,7 @@ info:
     [https://github.com/onvo-ai/sdks](https://github.com/onvo-ai/sdks)
   version: 1.0.0
 servers:
-  - url: http://{{baseurl}}
+  - url: https://dashboard.onvo.ai
 components:
   securitySchemes:
     apikeyAuth:
