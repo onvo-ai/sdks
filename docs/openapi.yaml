@@ -25,8 +25,9 @@ servers:
 components:
   securitySchemes:
     apikeyAuth:
-      type: http
-      scheme: apikey
+      type: apiKey
+      in: header
+      name: x-api-key
 security:
   - apikeyAuth: []
 tags:
