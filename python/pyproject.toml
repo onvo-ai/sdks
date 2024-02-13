@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "onvo"
+version = "0.0.3"
+authors = [{ name = "Bryan Davis", email = "bryandavis999.dev@gmail.com" }]
+description = "A gem to seamlessly communicate with the Onvo platform"
+requires-python = ">=3.8"
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+]
+keywords = ["python", "onvo"]
+
+[project.urls]
+Homepage = "https://github.com/onvo-ai/sdks"
+Issues = "https://github.com/onvo-ai/sdks/issues"

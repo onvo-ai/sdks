@@ -1,15 +1,15 @@
 Metadata-Version: 2.1
 Name: onvo
-Version: 0.0.1
-Summary: Communicate with the Onvo platform.
-Author: Bryan Davis
-Author-email: bryandavis999.dev@gmail.com
+Version: 0.0.3
+Summary: A gem to seamlessly communicate with the Onvo platform
+Author-email: Bryan Davis <bryandavis999.dev@gmail.com>
+Project-URL: Homepage, https://github.com/onvo-ai/sdks
+Project-URL: Issues, https://github.com/onvo-ai/sdks/issues
 Keywords: python,onvo
 Classifier: Development Status :: 1 - Planning
 Classifier: Intended Audience :: Developers
-Classifier: Programming Language :: Python :: 2
+Classifier: Operating System :: OS Independent
 Classifier: Programming Language :: Python :: 3
-Classifier: Operating System :: MacOS :: MacOS X
-Classifier: Operating System :: Microsoft :: Windows
-
-A gem to provide utilities to seamlessly communicate with the Onvo platform, allowing developers to integrate AI-powered dashboards into their products.
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.8
+License-File: LICENSE
