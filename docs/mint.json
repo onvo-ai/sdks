@@ -70,6 +70,10 @@
         "get-started/customising-look-and-feel"
       ]
     },
+    {
+      "group": "Advanced",
+      "pages": ["advanced/self-hosting"]
+    },
 
     {
       "group": "Concepts",

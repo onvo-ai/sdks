@@ -22,6 +22,9 @@ info:
   version: 1.0.0
 servers:
   - url: https://dashboard.onvo.ai
+    description: Production server (uses live data)
+  - url: https://staging.onvo.ai
+    description: Sandbox server (uses test data)
 components:
   securitySchemes:
     apikeyAuth:
