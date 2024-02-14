@@ -21,12 +21,16 @@ info:
     [https://github.com/onvo-ai/sdks](https://github.com/onvo-ai/sdks)
   version: 1.0.0
 servers:
-  - url: http://{{baseurl}}
+  - url: https://dashboard.onvo.ai
+    description: Production server (uses live data)
+  - url: https://staging.onvo.ai
+    description: Sandbox server (uses test data)
 components:
   securitySchemes:
     apikeyAuth:
-      type: http
-      scheme: apikey
+      type: apiKey
+      in: header
+      name: x-api-key
 security:
   - apikeyAuth: []
 tags:

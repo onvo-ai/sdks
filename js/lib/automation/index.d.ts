@@ -4,5 +4,12 @@ export declare class OnvoAutomation extends OnvoBase {
     constructor(id: string, apiKey: string, options?: {
         endpoint: string;
     });
-    getRuns(): Promise<any>;
+    getRuns(): Promise<{
+        automation: string;
+        id: string;
+        recipient_emails: string[] | null;
+        run_at: string;
+        status: string;
+        team: string;
+    }[]>;
 }

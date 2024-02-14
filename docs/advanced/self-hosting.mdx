@@ -1,0 +1,99 @@
+---
+title: "Self hosting"
+description: "This section will walk you through self hosting the Onvo platform on your own system or a cloud provider of your choosing"
+---
+
+<Info>
+  Self hosting is only available on our enterprise plan. To learn more about our
+  enterprise plan, [talk to us](https://www.onvo.ai/book-demo).
+</Info>
+
+### Supported cloud platforms
+
+<CardGroup cols={2}>
+  <Card title="Google Cloud" icon="google">
+    You can use the Compute engine, GKE or even on a raw VM on GCP
+  </Card>
+  <Card title="Amazon AWS" icon="aws">
+    You can use AWS Fargate, EKS or even on a raw VM on Amazon ECS
+  </Card>
+  <Card title="Microsoft Azure" icon="microsoft">
+    You can run the platform on Azure Kubernetes Service or even on a raw VM on
+    Azure
+  </Card>
+  <Card title="Docker" icon="docker">
+    We can run the platform on any system that allow docker images
+  </Card>
+</CardGroup>
+
+### Requirements
+
+A system with a minimum of 64GB of RAM, 4 CPUs and above 12GB of VRAM is
+required to run the platform.
+
+### Components
+
+<CardGroup cols={2}>
+  <Card title="Database" icon="square-1">
+    The database is a customised version of postgresql available as a docker
+    image
+  </Card>
+  <Card title="Platform" icon="square-2">
+    The platform works on Next.js as a docker image
+  </Card>
+  <Card title="Data service" icon="square-3">
+    The data service is written in python and Node.js and is available as a
+    docker image
+  </Card>
+  <Card title="LLM (optional)" icon="square-4">
+    We have an LLM available to run on premise using Ollama as a docker image on
+    supported systems with Nvidia GPUs
+  </Card>
+</CardGroup>
+
+### Installation
+
+1. Run the setup script provided by the Onvo team on your system.
+
+```bash
+cd Onvo
+./setup
+```
+
+2. This will create a `.env.example` file displaying the keys you will have to fill in. Create a `.env` file with the same keys and fill in values with your own providers.
+
+```bash
+DASHBOARD_URL="https://dashboard.onvo.ai"
+DATA_SERVICE_URI="https://data-service.onvo.ai"
+
+OPENAI_API_KEY="<openai-api-key>"
+
+SMTP_HOST="smtp.google.com"
+SMTP_PORT="465"
+SMTP_PASSWORD="<smtp-password>"
+SMTP_USER="<smtp-username>"
+
+NEXT_PUBLIC_SUPABASE_URL="https://api.supabase.com"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="<supabase-anon-key>"
+SUPABASE_JWT_SECRET="<super-secret-jwt-token-with-at-least-32-characters-long>"
+SUPABASE_SERVICE_KEY="<supabase-service-key>"
+
+### IF YOU NEED GOOGLE SHEETS, UNCOMMENT OUT THE FOLLOWING
+# GOOGLE_CLIENT_ID="<google-client-id>"
+# GOOGLE_CLIENT_SECRET="<google-client-secret>"
+
+### IF YOU NEED ZOHO, UNCOMMENT OUT THE FOLLOWING
+# ZOHO_CLIENT_ID="<zoho-client-id>"
+# ZOHO_CLIENT_SECRET="<zoho-client-secret>"
+
+### IF YOU NEED AIRTABLE, UNCOMMENT OUT THE FOLLOWING
+# AIRTABLE_CLIENT_ID="<airtable-client-id>"
+# AIRTABLE_CLIENT_SECRET="<airtable-client-secret>"
+
+```
+
+3. Now you can run the platform by running
+
+```bash
+docker compose -f "docker-compose.yml" up --build
+```
