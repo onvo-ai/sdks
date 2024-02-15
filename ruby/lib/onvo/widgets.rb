@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'uri'
 require_relative '../resource'
 
 # Dashboard Widget endpoints
@@ -25,7 +24,7 @@ class Widgets < Resource
     base_post("/widgets/#{widget_id}", body: body)
   end
 
-  def create(query, dashboard_id)
+  def create(dashboard_id, query)
     base_put('/widgets', query: { query: query }, body: { dashboard: dashboard_id })
   end
 end
