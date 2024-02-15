@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name                  = 'onvo'
-  s.version               = '0.1.3'
+  s.version               = '0.1.4'
   s.summary               = 'Communicate with the Onvo platform.'
   s.description           = 'A gem to provide utilities to seamlessly communicate with the Onvo platform, allowing developers to integrate AI-powered dashboards into their products.'
   s.authors               = ['Bryan Davis', 'Ronnel Davis']
