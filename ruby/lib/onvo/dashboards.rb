@@ -17,10 +17,10 @@ class Dashboards < Resource
   end
 
   def update(id, body)
-    base_post("/dashboards/#{id}", body)
+    base_post("/dashboards/#{id}", body: body)
   end
 
   def create(body)
-    base_put('/dashboards', body)
+    base_put('/dashboards', body: body)
   end
 end
