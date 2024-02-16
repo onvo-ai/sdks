@@ -25,10 +25,10 @@ class Datasources < Resource
   end
 
   def update(id, body)
-    base_post("/datasources/#{id}", body)
+    base_post("/datasources/#{id}", body: body)
   end
 
   def create(body)
-    base_put('/datasources', body)
+    base_put('/datasources', body: body)
   end
 end
