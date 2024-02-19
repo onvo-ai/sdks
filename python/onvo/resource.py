@@ -13,10 +13,21 @@ class Resource:
         except ValueError:
             return response.text()
 
-    def get_url(self, subdirectory):
-        return f"{self.endpoint}{subdirectory}"
-
-    def base_get(self, subdirectory):
-        url = self.get_url(subdirectory)
-        response = requests.get(url, headers=self.headers)
+    # TODO : Add documentation marking 'params' as the query
+    def base_request(self, handler, subdirectory, additional_options):
+        url = f"{self.endpoint}{subdirectory}"
+        options = {"headers": self.headers, **additional_options}
+        response = handler(url, **options)
         return self.handle_response(response)
+
+    def base_get(self, subdirectory, **options):
+        return self.base_request(requests.get, subdirectory, options)
+
+    def base_put(self, subdirectory, **options):
+        return self.base_request(requests.put, subdirectory, options)
+
+    def base_post(self, subdirectory, **options):
+        return self.base_request(requests.post, subdirectory, options)
+
+    def base_delete(self, subdirectory, **options):
+        return self.base_request(requests.delete, subdirectory, options)

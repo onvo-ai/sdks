@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "onvo"
-version = "0.0.3"
+version = "0.0.4"
 authors = [{ name = "Bryan Davis", email = "bryandavis999.dev@gmail.com" }]
-description = "A gem to seamlessly communicate with the Onvo platform"
+description = "Communicate with the Onvo platform."
 requires-python = ">=3.8"
 classifiers = [
   "Development Status :: 1 - Planning",
