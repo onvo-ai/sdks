@@ -13,10 +13,12 @@ class EmbedUsersTest < Minitest::Test
 
   def create_sample_embed_user
     @onvo.embed_users.upsert(
-      'sample-embed-user-id',
-      'Rails Integration Test User',
-      'test@test.com',
-      { 'hello': 'world' }
+      {
+        id: 'sample-embed-user-id',
+        name: 'Rails Integration Test User',
+        email: 'test@test.com',
+        metadata: { 'hello': 'world' }
+      }
     )
   end
 
@@ -38,7 +40,7 @@ class EmbedUsersTest < Minitest::Test
 
   def test_create_and_delete_embed_user
     assert_silent do
-      sample_embed_user_id = create_sample_embed_user["id"]
+      sample_embed_user_id = create_sample_embed_user['id']
       @onvo.embed_users.delete(sample_embed_user_id)
     end
   end

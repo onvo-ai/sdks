@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+require 'rake/testtask'
+
+Rake::TestTask.new(:quick_test) do |t|
+  t.libs << 'test'
+  file_list = FileList['test/test_*.rb', 'test/dashboard/test_*.rb']
+  file_list.exclude('test/test_questions', 'test/test_widgets')
+  t.test_files = file_list
+end
+
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'test'
+  file_list = FileList['test/test_*.rb', 'test/dashboard/test_*.rb']
+  t.test_files = file_list
+end
+
+task default: 'quick_test'

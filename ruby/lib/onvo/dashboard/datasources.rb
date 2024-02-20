@@ -10,7 +10,7 @@ class DashboardDatasources < DashboardResource
   end
 
   def link(datasource_id)
-    base_put("/dashboards/#{@dashboard_id}/datasources", datasourceId: datasource_id) #TODO: check if not "datasourceId"
+    base_put("/dashboards/#{@dashboard_id}/datasources", body: { datasourceId: datasource_id })
   end
 
   def unlink(datasource_id)

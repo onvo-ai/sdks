@@ -17,10 +17,10 @@ class Automations < Resource
   end
 
   def update(id, body)
-    base_post("/automations/#{id}", body)
+    base_post("/automations/#{id}", body: body)
   end
 
   def create(body)
-    base_put('/automations', body)
+    base_put('/automations', body: body)
   end
 end

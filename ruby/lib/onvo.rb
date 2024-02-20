@@ -6,12 +6,15 @@ require_relative './onvo/embed_users'
 require_relative './onvo/datasources'
 require_relative './onvo/automations'
 require_relative './onvo/dashboards'
+require_relative './onvo/questions'
+require_relative './onvo/sessions'
+require_relative './onvo/widgets'
 
 require_relative './onvo/dashboard'
 
 # The Onvo Ruby SDK
 class Onvo
-  attr_reader :accounts, :teams, :embed_users, :datasources, :automations, :dashboards
+  attr_reader :accounts, :teams, :embed_users, :datasources, :automations, :dashboards, :questions, :sessions, :widgets
   attr_accessor :endpoint, :api_key
 
   def initialize(endpoint = ENV['ONVO_API_ENDPOINT'], api_key = ENV['ONVO_API_KEY'])
@@ -23,8 +26,11 @@ class Onvo
     @teams = Teams.new(*params)
     @embed_users = EmbedUsers.new(*params)
     @datasources = Datasources.new(*params)
-    @automations = Automations.new(*params)
     @dashboards = Dashboards.new(*params)
+    @automations = Automations.new(*params)
+    @questions = Questions.new(*params)
+    @sessions = Sessions.new(*params)
+    @widgets = Widgets.new(*params)
   end
 
   def dashboard(dashboard_id)

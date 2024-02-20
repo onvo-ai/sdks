@@ -16,16 +16,8 @@ class EmbedUsers < Resource
     base_delete("/embed-users/#{id}")
   end
 
-  def upsert(id, name, email, metadata = {})
-    base_post(
-      '/embed-users',
-      {
-        'id': id,
-        'name': name,
-        'email': email,
-        'metadata': metadata
-      }
-    )
+  def upsert(body)
+    base_post('/embed-users', body: body)
   end
 
   def get_access_token(id)
