@@ -1,20 +1,7 @@
-import unittest
-from onvo import Onvo
+from .base_test import BaseTest
 
 
-class TestAccounts(unittest.TestCase):
-
-    def assertShouldRaise(self, expected_exception, callable):
-        if expected_exception is None:
-            try:
-                callable()
-            except Exception as error:
-                self.fail(f"{error}")
-        else:
-            self.assertRaises(expected_exception, callable)
-
-    def setUp(self):
-        self.onvoSDK = Onvo()
+class TestAccounts(BaseTest):
 
     def test_list(self):
         self.assertShouldRaise(None, self.onvoSDK.accounts.list)
