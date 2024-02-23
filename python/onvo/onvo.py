@@ -1,7 +1,10 @@
 import os
 from onvo.accounts import Accounts
-
-# from onvo.automations import Automations
+from onvo.automations import Automations
+from onvo.dashboards import Dashboards
+from onvo.datasources import Datasources
+from onvo.embed_users import EmbedUsers
+from onvo.teams import Teams
 
 try:
     default_endpoint = os.environ["ONVO_API_ENDPOINT"]
@@ -20,11 +23,11 @@ class Onvo:
         params = [endpoint, api_key]
 
         self.accounts = Accounts(*params)
-        # self.automations = Automations.new(*params)
-        # self.teams = Teams.new(*params)
-        # self.embed_users = EmbedUsers.new(*params)
-        # self.datasources = Datasources.new(*params)
-        # self.dashboards = Dashboards.new(*params)
+        self.automations = Automations.new(*params)
+        self.datasources = Datasources.new(*params)
+        self.dashboards = Dashboards.new(*params)
+        self.embed_users = EmbedUsers.new(*params)
+        self.teams = Teams.new(*params)
 
     def check_init_params(self):
         if self.endpoint is None:
