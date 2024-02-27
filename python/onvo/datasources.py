@@ -14,11 +14,11 @@ class Datasources(Resource):
     def populate_columns(self, id):
         return self.base_post(f"/datasources/{id}/populate-columns")
 
-    def create(self, body):
-        return self.base_put(f"/datasources", body=body)
+    def create(self, data):
+        return self.base_put(f"/datasources", data=data)
 
-    def update(self, id, body):
-        return self.base_post(f"/datasources/{id}", body=body)
+    def update(self, id, data):
+        return self.base_post(f"/datasources/{id}", data=data)
 
     def delete(self, id):
         return self.base_delete(f"/datasources/{id}")

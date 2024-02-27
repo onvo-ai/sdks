@@ -1,4 +1,5 @@
 import requests
+import json
 
 
 class Resource:
@@ -24,6 +25,8 @@ class Resource:
         return self.base_request(requests.get, subdirectory, options)
 
     def base_put(self, subdirectory, **options):
+        if "data" in options:
+            options["data"] = json.dumps(options["data"])
         return self.base_request(requests.put, subdirectory, options)
 
     def base_post(self, subdirectory, **options):

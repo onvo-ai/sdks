@@ -23,11 +23,11 @@ class Onvo:
         params = [endpoint, api_key]
 
         self.accounts = Accounts(*params)
-        self.automations = Automations.new(*params)
-        self.datasources = Datasources.new(*params)
-        self.dashboards = Dashboards.new(*params)
-        self.embed_users = EmbedUsers.new(*params)
-        self.teams = Teams.new(*params)
+        self.automations = Automations(*params)
+        self.datasources = Datasources(*params)
+        self.dashboards = Dashboards(*params)
+        self.embed_users = EmbedUsers(*params)
+        self.teams = Teams(*params)
 
     def check_init_params(self):
         if self.endpoint is None:
