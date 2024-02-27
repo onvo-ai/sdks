@@ -1,8 +1,8 @@
 from .base_test import BaseTest
 
 SAMPLE_DATASOURCE_PARAMS = {
-    "description": "Ruby Integration Test Data Source",
-    "title": "Ruby Integration Test Data Source",
+    "description": "Python Integration Test Data Source",
+    "title": "Python Integration Test Data Source",
     "source": "api",
     "config": '{"type":"json","method":"GET","transform":"products","url":"https://dummyjson.com/products","headers":"{}"}',
 }
@@ -31,11 +31,19 @@ class TestDatasources(BaseTest):
             None, lambda: self.onvoSDK.datasources.get_data(self.sampleDatasourceId)
         )
 
-    def test_populate_datasource(self):
-        pass
+    def test_update(self):
+        self.assertShouldRaise(
+            None,
+            lambda: self.onvoSDK.datasources.update(
+                self.sampleDatasourceId, {"title": "Renaming Test"}
+            ),
+        )
 
-    def test_update_datasource(self):
-        pass
+    def test_populate_columns(self):
+        self.assertShouldRaise(
+            None,
+            lambda: self.onvoSDK.datasources.populate_columns(self.sampleDatasourceId),
+        )
 
     def tearDown(self) -> None:
         self.onvoSDK.datasources.delete(self.sampleDatasourceId)  # Skipping test delete

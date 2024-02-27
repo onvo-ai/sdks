@@ -30,6 +30,8 @@ class Resource:
         return self.base_request(requests.put, subdirectory, options)
 
     def base_post(self, subdirectory, **options):
+        if "data" in options:
+            options["data"] = json.dumps(options["data"])
         return self.base_request(requests.post, subdirectory, options)
 
     def base_delete(self, subdirectory, **options):
