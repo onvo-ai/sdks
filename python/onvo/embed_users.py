@@ -12,7 +12,7 @@ class EmbedUsers(Resource):
         return self.base_delete(f"/embed-users/{id}")
 
     def upsert(self, data):
-        return self.base_post("/embed-users", data)
+        return self.base_post("/embed-users", data=data)
 
     def get_access_token(self, id):
         return self.base_get(f"/embed-users/#{id}/token")
