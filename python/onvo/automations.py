@@ -8,11 +8,11 @@ class Automations(Resource):
     def get(self, id):
         return self.base_get(f"/automations/{id}")
 
-    def create(self, body):
-        return self.base_put(f"/automations", body=body)
+    def create(self, data):
+        return self.base_put(f"/automations", data=data)
 
-    def update(self, id, body):
-        return self.base_post(f"/automations/{id}", body=body)
+    def update(self, id, data):
+        return self.base_post(f"/automations/{id}", data=data)
 
     def delete(self, id):
         return self.base_delete(f"/automations/{id}")
