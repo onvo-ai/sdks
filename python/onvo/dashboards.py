@@ -8,11 +8,11 @@ class Dashboards(Resource):
     def get(self, id):
         return self.base_get(f"/dashboards/{id}")
 
-    def create(self, body):
-        return self.base_put(f"/dashboards", body=body)
+    def create(self, data):
+        return self.base_put(f"/dashboards", data=data)
 
-    def update(self, id, body):
-        return self.base_post(f"/dashboards/{id}", body=body)
+    def update(self, id, data):
+        return self.base_post(f"/dashboards/{id}", data=data)
 
     def delete(self, id):
         return self.base_delete(f"/dashboards/{id}")

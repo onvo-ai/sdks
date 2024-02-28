@@ -1,7 +1,7 @@
 from .base_test import BaseTest
 
 SAMPLE_DATASOURCE_PARAMS = {
-    "description": "Python Integration Test Data Source",
+    "description": "Python Integration Test Data Source. Delete if seen.",
     "title": "Python Integration Test Data Source",
     "source": "api",
     "config": '{"type":"json","method":"GET","transform":"products","url":"https://dummyjson.com/products","headers":"{}"}',
