@@ -1,7 +1,7 @@
-from onvo.resource import Resource
+from onvo.base_resource import BaseResource
 
 
-class Datasources(Resource):
+class Datasources(BaseResource):
     def list(self):
         return self.base_get("/datasources")
 

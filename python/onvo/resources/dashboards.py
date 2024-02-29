@@ -1,7 +1,7 @@
-from onvo.resource import Resource
+from onvo.base_resource import BaseResource
 
 
-class Dashboards(Resource):
+class Dashboards(BaseResource):
     def list(self):
         return self.base_get("/dashboards")
 

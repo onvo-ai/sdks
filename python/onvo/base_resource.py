@@ -2,7 +2,7 @@ import requests
 import json
 
 
-class Resource:
+class BaseResource:
     def __init__(self, endpoint, api_key):
         self.endpoint = endpoint
         self.headers = {"x-api-key": api_key, "Content-Type": "application/json"}

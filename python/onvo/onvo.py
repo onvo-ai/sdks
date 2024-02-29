@@ -1,10 +1,10 @@
 import os
-from onvo.accounts import Accounts
-from onvo.automations import Automations
-from onvo.dashboards import Dashboards
-from onvo.datasources import Datasources
-from onvo.embed_users import EmbedUsers
-from onvo.teams import Teams
+from onvo.resources.accounts import Accounts
+from onvo.resources.automations import Automations
+from onvo.resources.dashboards import Dashboards
+from onvo.resources.datasources import Datasources
+from onvo.resources.embed_users import EmbedUsers
+from onvo.resources.teams import Teams
 
 try:
     default_endpoint = os.environ["ONVO_API_ENDPOINT"]
