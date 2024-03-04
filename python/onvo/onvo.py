@@ -5,6 +5,7 @@ from onvo.resources.dashboards import Dashboards
 from onvo.resources.datasources import Datasources
 from onvo.resources.embed_users import EmbedUsers
 from onvo.resources.teams import Teams
+from onvo.resources.sessions import Sessions
 
 from onvo.resources.dashboard import Dashboard
 
@@ -30,6 +31,7 @@ class Onvo:
         self.dashboards = Dashboards(*params)
         self.embed_users = EmbedUsers(*params)
         self.teams = Teams(*params)
+        self.sessions = Sessions(*params)
 
     def dashboard(self, dashboard_id):
         return Dashboard(dashboard_id, self.endpoint, self.api_key)
