@@ -1,4 +1,5 @@
 import requests
+from requests.utils import quote
 import json
 
 
@@ -20,6 +21,11 @@ class BaseResource:
         options = {"headers": self.headers, **additional_options}
         if "data" in options:
             options["data"] = json.dumps(options["data"])
+        # Standardizing params to use '%20' instead of '+' to replace spaces for all SDK requests
+        if "params" in options:
+            options["params"] = "&".join(
+                [f"{key}={quote(value)}" for key, value in options["params"].items()]
+            )
 
         response = handler(url, **options)
         return self.handle_response(response)
