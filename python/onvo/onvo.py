@@ -7,6 +7,7 @@ from onvo.resources.embed_users import EmbedUsers
 from onvo.resources.teams import Teams
 from onvo.resources.sessions import Sessions
 from onvo.resources.questions import Questions
+from onvo.resources.widgets import Widgets
 
 from onvo.resources.dashboard import Dashboard
 
@@ -34,6 +35,7 @@ class Onvo:
         self.teams = Teams(*params)
         self.sessions = Sessions(*params)
         self.questions = Questions(*params)
+        self.widgets = Widgets(*params)
 
     def dashboard(self, dashboard_id):
         return Dashboard(dashboard_id, self.endpoint, self.api_key)
