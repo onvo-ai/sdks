@@ -11,13 +11,14 @@ class Widgets(BaseResource):
     def get_image(self, id):
         return self.base_get(f"/widgets/{id}/image")
 
-    def create(self, dashboard_id, query):
-        return self.base_put(
-            "/widgets", params={"query": query}, data={"dashboard": dashboard_id}
-        )
+    # TODO: Fix breakage in create widgets
+    # def create(self, dashboard_id, query):
+    #     return self.base_put(
+    #         "/widgets", params={"query": query}, data={"dashboard": dashboard_id}
+    #     )
 
-    def update(self, id, data):
-        return self.base_post(f"/widgets/{id}", data=data)
+    # def update(self, id, data):
+    #     return self.base_post(f"/widgets/{id}", data=data)
 
-    def delete(self, id):
-        return self.base_delete(f"/widgets/{id}")
+    # def delete(self, id):
+    #     return self.base_delete(f"/widgets/{id}")
