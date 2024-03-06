@@ -15,10 +15,7 @@ class BaseResource:
         except ValueError:
             return response.text()
 
-    # TODO : Add documentation marking 'params' as the query & 'data' as the body
-    def base_request(self, handler, subdirectory, additional_options):
-        url = f"{self.endpoint}{subdirectory}"
-        options = {"headers": self.headers, **additional_options}
+    def process_options(self, options):
         if "data" in options:
             options["data"] = json.dumps(options["data"])
         # Standardizing params to use '%20' instead of '+' to replace spaces for all SDK requests
@@ -26,6 +23,12 @@ class BaseResource:
             options["params"] = "&".join(
                 [f"{key}={quote(value)}" for key, value in options["params"].items()]
             )
+
+    # TODO : Add documentation marking 'params' as the query & 'data' as the body
+    def base_request(self, handler, subdirectory, additional_options):
+        url = f"{self.endpoint}{subdirectory}"
+        options = {"headers": self.headers, **additional_options}
+        self.process_options(options)
 
         response = handler(url, **options)
         return self.handle_response(response)
