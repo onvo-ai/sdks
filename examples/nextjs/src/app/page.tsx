@@ -8,13 +8,16 @@ if (!process.env.API_KEY) {
   process.exit();
 }
 
-let onvo = new Onvo("https://dashboard.onvo.ai", process.env.API_KEY);
+let onvo = new Onvo(process.env.API_KEY, {
+  endpoint: process.env.NEXT_PUBLIC_BASE_URL || "https://dashboard.onvo.ai",
+});
 
 export default async function Home() {
   let token = "";
 
   try {
-    await onvo.upsertEmbedUser("123456", {
+    // UPSERT AN EMBED USER
+    await onvo.embed_users.upsert("123456", {
       name: "John appleseed",
       email: "john@appleseed.com",
       metadata: {
@@ -23,16 +26,31 @@ export default async function Home() {
       },
     });
 
-    let data = await onvo.getEmbedUserAccessToken("123456");
+    // UPSERT A SESSION FOR EACH DASHBOARD
+    let dashboards = await onvo.dashboards.list();
+    await Promise.all(
+      dashboards.map(async (dash: any) => {
+        return onvo.sessions.upsert({
+          user: "123456",
+          dashboard: dash.id,
+          parameters: {},
+        });
+      })
+    );
+
+    // GET ACCESS TOKEN
+    let data = await onvo.embed_user("123456").getAccessToken();
     token = data.token;
-    console.log(data);
+    console.log("TOKEN: ", data);
   } catch (e) {
     console.log(e);
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <DashboardGrid token={token} />
+    <main className="flex min-h-screen flex-row">
+      <div className="p-24">
+        <DashboardGrid token={token} />
+      </div>
     </main>
   );
 }
