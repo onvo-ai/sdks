@@ -2,17 +2,23 @@ import OnvoBase from "../base";
 
 export class OnvoSessions extends OnvoBase {
   // Dashboard Session endpoints
-  list(filters: { dashboard: string }) {
+  list(filters: { parent_dashboard: string }) {
+    return this.fetchBase(
+      "/api/sessions?parent_dashboard=" + filters.parent_dashboard
+    );
+  }
+
+  get(filters: { dashboard: string }) {
     return this.fetchBase("/api/sessions?dashboard=" + filters.dashboard);
   }
 
   delete(id: string) {
-    return this.fetchBase("/api/sessions/" + id, "DELETE");
+    return this.fetchBase("/api/sessions?dashboard=" + id, "DELETE");
   }
 
   revokeAll(filters: { dashboard: string }) {
     return this.fetchBase(
-      "/api/sessions?dashboard=" + filters.dashboard,
+      "/api/sessions?parent_dashboard=" + filters.dashboard,
       "DELETE"
     );
   }
