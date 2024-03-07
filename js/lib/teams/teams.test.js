@@ -1,4 +1,4 @@
-import { OnvoTeams } from "./index";
+import { OnvoTeams } from "./index.js";
 describe("Teams", () => {
     let onvoTeams;
     beforeEach(() => {

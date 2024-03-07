@@ -1,4 +1,4 @@
-import OnvoBase from "../base";
+import OnvoBase from "../base.js";
 export declare class OnvoEmbedUsers extends OnvoBase {
     list(): Promise<any>;
     get(id: string): Promise<any>;

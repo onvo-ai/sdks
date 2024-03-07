@@ -1,4 +1,4 @@
-import OnvoBase from "../base";
+import OnvoBase from "../base.js";
 export declare class OnvoAccounts extends OnvoBase {
     list(): Promise<{
         avatar_url: string | null;

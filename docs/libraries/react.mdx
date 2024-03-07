@@ -53,7 +53,11 @@ const ListPage = () => {
 
   return (
     <Wrapper baseUrl={baseUrl} token={accessToken}>
-      <DashboardList />
+      <DashboardList
+        columns={3}
+        variant="grid"
+        onClickItem={(dashboard) => console.log(dashboard)}
+      />
     </Wrapper>
   );
 };

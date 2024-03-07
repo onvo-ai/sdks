@@ -15,6 +15,7 @@ export const DashboardGrid: React.FC<{}> = () => {
   );
 
   let children = useMemo(() => {
+    if (!dashboard) return [];
     return widgets.map((i: any) => (
       <div
         className="hover:z-20"
@@ -34,7 +35,7 @@ export const DashboardGrid: React.FC<{}> = () => {
         />
       </div>
     ));
-  }, [widgets]);
+  }, [widgets, dashboard]);
 
   if (!dashboard) return <></>;
 

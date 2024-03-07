@@ -138,3 +138,6 @@ dist
 __pycache__
 python/build/
 *.egg-info/
+
+lib/
+

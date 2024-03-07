@@ -1,5 +1,5 @@
-import OnvoBase from "../base";
-import { Automation } from "../types";
+import OnvoBase from "../base.js";
+import { Automation } from "../types/index.js";
 export declare class OnvoAutomations extends OnvoBase {
     list(): Promise<{
         created_at: string;
