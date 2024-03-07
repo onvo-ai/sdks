@@ -1,4 +1,4 @@
-import { OnvoAutomations } from "./index";
+import { OnvoAutomations } from "./index.js";
 describe("Automations", () => {
     let onvoAutomations;
     let automation;

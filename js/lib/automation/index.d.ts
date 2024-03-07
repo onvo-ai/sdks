@@ -1,4 +1,4 @@
-import OnvoBase from "../base";
+import OnvoBase from "../base.js";
 export declare class OnvoAutomation extends OnvoBase {
     #private;
     constructor(id: string, apiKey: string, options?: {

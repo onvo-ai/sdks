@@ -1,4 +1,4 @@
-import OnvoBase from "../base";
+import OnvoBase from "../base.js";
 // Account endpoints
 export class OnvoAccounts extends OnvoBase {
     list() {

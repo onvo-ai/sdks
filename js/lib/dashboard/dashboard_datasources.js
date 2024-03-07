@@ -1,4 +1,4 @@
-import OnvoBase from "../base";
+import OnvoBase from "../base.js";
 export class OnvoDashboardDatasources extends OnvoBase {
     #dashboardId;
     constructor(dashboardId, apiKey, options) {

@@ -1,4 +1,4 @@
-import OnvoBase from "../base";
+import OnvoBase from "../base.js";
 // Embed user endpoints
 export class OnvoEmbedUsers extends OnvoBase {
     list() {

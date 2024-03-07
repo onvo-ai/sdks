@@ -1,9 +1,9 @@
-import { Database } from "./database.types";
-import { Modify } from "./utils";
-export * from "./database.types";
-export * from "./tables";
-export * from "./datasources";
-export * from "./utils";
+import { Database } from "./database.types.js";
+import { Modify } from "./utils.js";
+export * from "./database.types.js";
+export * from "./tables.js";
+export * from "./datasources.js";
+export * from "./utils.js";
 export type Settings = {
     theme: "dark" | "light" | "auto";
     dark_background: string;
