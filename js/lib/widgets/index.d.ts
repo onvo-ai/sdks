@@ -1,4 +1,4 @@
-import OnvoBase from "../base";
+import OnvoBase from "../base.js";
 export declare class OnvoWidgets extends OnvoBase {
     list(filters: {
         dashboard: string;

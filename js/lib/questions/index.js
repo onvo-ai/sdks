@@ -1,4 +1,4 @@
-import OnvoBase from "../base";
+import OnvoBase from "../base.js";
 // Question endpoints
 export class OnvoQuestions extends OnvoBase {
     list(filters) {

@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useToken } from "../Wrapper";
 
 type DashboardContext = {
@@ -29,7 +23,6 @@ export const Dashboard: React.FC<{ id: string; children: any }> = ({
 
   useEffect(() => {
     if (id && backend) {
-      // @ts-ignore
       backend.dashboards.get(id).then(setDashboard);
       backend.widgets.list({ dashboard: id }).then(setWidgets);
     }

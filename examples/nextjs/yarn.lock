@@ -258,10 +258,10 @@
   dependencies:
     axios "0.21.1"
 
-"@onvo-ai/react@^0.2.8":
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.2.8.tgz#e70d3a1c6ac33ee16a524a7e704a8af746b57755"
-  integrity sha512-i6bSEUTCXKGTuMHGWf+xjbfe04K5GHuf/r+BrdiXY4lYXq3AfjHCoft1IXJUrMI3sNIjOyreavB6aEEUl0Jr2Q==
+"@onvo-ai/react@^0.2.11":
+  version "0.2.11"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.2.11.tgz#6f2238b7e2e090a1c062b14adba0a8672e0552ed"
+  integrity sha512-jvbYLSIb9AQN390b6TjGT4HIHGAQNCvEVrPU0Vj8KDTquXuKadWbbOu+TjP820UVF5+7thv3pcOZTJyvrkvnTQ==
   dependencies:
     "@heroicons/react" "^2.1.1"
     "@onvo-ai/js" "^0.12.10"

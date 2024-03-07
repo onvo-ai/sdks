@@ -1,5 +1,5 @@
-import OnvoBase from "../base";
-import { Team } from "../types";
+import OnvoBase from "../base.js";
+import { Team } from "../types/index.js";
 export declare class OnvoTeams extends OnvoBase {
     list(): Promise<{
         created_at: string | null;

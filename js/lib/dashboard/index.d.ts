@@ -1,5 +1,5 @@
-import { OnvoDashboardDatasources } from "./dashboard_datasources";
-import OnvoBase from "../base";
+import { OnvoDashboardDatasources } from "./dashboard_datasources.js";
+import OnvoBase from "../base.js";
 export declare class OnvoDashboard extends OnvoBase {
     #private;
     datasources: OnvoDashboardDatasources;

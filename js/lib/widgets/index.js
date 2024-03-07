@@ -1,4 +1,4 @@
-import OnvoBase from "../base";
+import OnvoBase from "../base.js";
 export class OnvoWidgets extends OnvoBase {
     // Dashboard Widget endpoints
     list(filters) {

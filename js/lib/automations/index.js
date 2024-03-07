@@ -1,4 +1,4 @@
-import OnvoBase from "../base";
+import OnvoBase from "../base.js";
 // Automation endpoints
 export class OnvoAutomations extends OnvoBase {
     list() {
