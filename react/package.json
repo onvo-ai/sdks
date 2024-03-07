@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/react",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "The react SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "main": "dist/cjs/index.js",
@@ -28,7 +28,7 @@
   "license": "MIT",
   "dependencies": {
     "@heroicons/react": "^2.1.1",
-    "@onvo-ai/js": "^0.12.10",
+    "@onvo-ai/js": "^0.12.13",
     "@tremor/react": "^3.8.2",
     "chart.js": "^4.4.1",
     "chartjs-plugin-datalabels": "^2.2.0",
@@ -78,6 +78,7 @@
     "storybook": "7.4.5",
     "storybook-react-context": "^0.6.0",
     "tailwindcss": "^3.3.3",
+    "tsc-alias": "^1.8.8",
     "typescript": "^5.0.4"
   },
   "resolutions": {
