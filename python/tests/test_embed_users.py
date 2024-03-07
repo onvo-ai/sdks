@@ -10,9 +10,10 @@ SAMPLE_EMBED_USER_PARAMS = {
 
 class TestEmbedUsers(BaseTest):
 
-    def setUp(self):
-        super().setUp()
-        self.sampleEmbedUserId = self.onvoSDK.embed_users.upsert(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.sampleEmbedUserId = cls.onvoSDK.embed_users.upsert(
             SAMPLE_EMBED_USER_PARAMS
         )[
             "id"
@@ -40,5 +41,7 @@ class TestEmbedUsers(BaseTest):
             ),
         )
 
-    def tearDown(self) -> None:
-        self.onvoSDK.embed_users.delete(self.sampleEmbedUserId)  # Skipping test delete
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.onvoSDK.embed_users.delete(cls.sampleEmbedUserId)  # Skipping test delete
+        super().tearDownClass()

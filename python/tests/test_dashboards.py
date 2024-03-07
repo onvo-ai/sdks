@@ -8,11 +8,10 @@ SAMPLE_DASHBOARD_PARAMS = {
 
 class TestDashboards(BaseTest):
 
-    def setUp(self):
-        super().setUp()
-        self.sampleDashboardId = self.onvoSDK.dashboards.create(
-            SAMPLE_DASHBOARD_PARAMS
-        )[
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.sampleDashboardId = cls.onvoSDK.dashboards.create(SAMPLE_DASHBOARD_PARAMS)[
             "id"
         ]  # Skipping test create
 
@@ -33,5 +32,7 @@ class TestDashboards(BaseTest):
             ),
         )
 
-    def tearDown(self) -> None:
-        self.onvoSDK.dashboards.delete(self.sampleDashboardId)  # Skipping test delete
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.onvoSDK.dashboards.delete(cls.sampleDashboardId)  # Skipping test delete
+        super().tearDownClass()

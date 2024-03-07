@@ -10,9 +10,10 @@ SAMPLE_DATASOURCE_PARAMS = {
 
 class TestDatasources(BaseTest):
 
-    def setUp(self):
-        super().setUp()
-        self.sampleDatasourceId = self.onvoSDK.datasources.create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.sampleDatasourceId = cls.onvoSDK.datasources.create(
             SAMPLE_DATASOURCE_PARAMS
         )[
             "id"
@@ -45,5 +46,7 @@ class TestDatasources(BaseTest):
             lambda: self.onvoSDK.datasources.populate_columns(self.sampleDatasourceId),
         )
 
-    def tearDown(self) -> None:
-        self.onvoSDK.datasources.delete(self.sampleDatasourceId)  # Skipping test delete
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.onvoSDK.datasources.delete(cls.sampleDatasourceId)  # Skipping test delete
+        super().tearDownClass()

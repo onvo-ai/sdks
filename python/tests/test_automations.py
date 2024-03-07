@@ -20,14 +20,15 @@ SAMPLE_AUTOMATION_PARAMS = {
 
 class TestAutomations(BaseTest):
 
-    def setUp(self):
-        super().setUp()
-        self.sampleDashboardId = self.onvoSDK.dashboards.create(
-            SAMPLE_DASHBOARD_PARAMS
-        )["id"]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.sampleDashboardId = cls.onvoSDK.dashboards.create(SAMPLE_DASHBOARD_PARAMS)[
+            "id"
+        ]
         # Skipping test create
-        self.sampleAutomationId = self.onvoSDK.automations.create(
-            {**SAMPLE_AUTOMATION_PARAMS, "dashboard": self.sampleDashboardId}
+        cls.sampleAutomationId = cls.onvoSDK.automations.create(
+            {**SAMPLE_AUTOMATION_PARAMS, "dashboard": cls.sampleDashboardId}
         )["id"]
 
     def test_list(self):
@@ -47,6 +48,8 @@ class TestAutomations(BaseTest):
             ),
         )
 
-    def tearDown(self) -> None:
-        self.onvoSDK.dashboards.delete(self.sampleDashboardId)
-        self.onvoSDK.automations.delete(self.sampleAutomationId)  # Skipping test delete
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.onvoSDK.dashboards.delete(cls.sampleDashboardId)
+        cls.onvoSDK.automations.delete(cls.sampleAutomationId)  # Skipping test delete
+        super().tearDownClass()
