@@ -13,7 +13,7 @@ class BaseResource:
         try:
             return response.json()
         except ValueError:
-            return response.text()
+            return response.text
 
     def process_options(self, options):
         if "data" in options:

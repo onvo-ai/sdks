@@ -13,5 +13,6 @@ class BaseTest(unittest.TestCase):
         else:
             self.assertRaises(expected_exception, callable)
 
-    def setUp(self):
-        self.onvoSDK = Onvo()
+    @classmethod
+    def setUpClass(cls):
+        cls.onvoSDK = Onvo()
