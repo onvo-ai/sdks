@@ -12,6 +12,8 @@ export default class OnvoBase {
         headers: {
           "Content-Type": "application/json",
           "x-api-key": this.#apiKey,
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         },
         data: body,
       });

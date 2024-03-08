@@ -4,5 +4,8 @@ export declare class OnvoEmbedUser extends OnvoBase {
     constructor(id: string, apiKey: string, options?: {
         endpoint: string;
     });
-    getAccessToken(): Promise<any>;
+    getAccessToken(): Promise<{
+        user: string;
+        token: string;
+    }>;
 }
