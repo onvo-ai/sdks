@@ -1,11 +1,11 @@
 {
   "name": "@onvo-ai/js",
-  "version": "0.12.20",
+  "version": "0.12.21",
   "description": "The nodejs SDK for Onvo AI dashboard builder",
   "main": "lib/index.js",
   "scripts": {
     "build": "rm -rf lib && tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
-    "test": "jest -t 'should fetch token'"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "axios": "0.21.1"
+    "cross-fetch": "^4.0.0"
   },
   "keywords": [
     "onvo",
