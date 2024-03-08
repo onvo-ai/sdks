@@ -25,4 +25,5 @@ export var Table;
     Table["SubscriptionPlans"] = "subscription_plans";
     Table["Automations"] = "automations";
     Table["AutomationRuns"] = "automation_runs";
+    Table["Logs"] = "logs";
 })(Table || (Table = {}));

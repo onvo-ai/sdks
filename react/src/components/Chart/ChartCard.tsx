@@ -23,11 +23,8 @@ const ChartCard: React.FC<{
       className="z-0 foreground-color relative flex h-full w-full flex-col"
       ref={ref}
     >
-      <div className="flex w-full flex-row items-center">
-        <Title className="flex-grow">{widget.title}</Title>
-      </div>
       <div className="relative z-0 h-[calc(100%-30px)] w-full overflow-y-auto">
-        <ChartBase json={output} key={widget.id} />
+        <ChartBase json={output} title={widget.title} id={widget.id} />
       </div>
     </Card>
   );

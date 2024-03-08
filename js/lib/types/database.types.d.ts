@@ -584,40 +584,31 @@ export interface Database {
             questions: {
                 Row: {
                     account: string | null;
-                    assumptions: string[];
-                    cache: string | null;
-                    code: string;
                     created_at: string;
                     dashboard: string;
                     embed_user: string | null;
                     id: string;
-                    output: string;
+                    messages: Json;
                     query: string;
                     team: string | null;
                 };
                 Insert: {
                     account?: string | null;
-                    assumptions: string[];
-                    cache?: string | null;
-                    code: string;
                     created_at?: string;
                     dashboard: string;
                     embed_user?: string | null;
                     id?: string;
-                    output: string;
+                    messages?: Json;
                     query: string;
                     team?: string | null;
                 };
                 Update: {
                     account?: string | null;
-                    assumptions?: string[];
-                    cache?: string | null;
-                    code?: string;
                     created_at?: string;
                     dashboard?: string;
                     embed_user?: string | null;
                     id?: string;
-                    output?: string;
+                    messages?: Json;
                     query?: string;
                     team?: string | null;
                 };
@@ -657,7 +648,6 @@ export interface Database {
                     created_at: string;
                     dashboard: string;
                     embed_user: string;
-                    id: string;
                     parameters: string;
                     team: string;
                 };
@@ -665,7 +655,6 @@ export interface Database {
                     created_at?: string;
                     dashboard: string;
                     embed_user: string;
-                    id?: string;
                     parameters?: string;
                     team: string;
                 };
@@ -673,7 +662,6 @@ export interface Database {
                     created_at?: string;
                     dashboard?: string;
                     embed_user?: string;
-                    id?: string;
                     parameters?: string;
                     team?: string;
                 };
@@ -817,10 +805,12 @@ export interface Database {
                     assumptions: string[];
                     cache: string | null;
                     code: string;
+                    created_at: string;
                     dashboard: string;
                     h: number | null;
                     id: string;
-                    query: string;
+                    messages: Json;
+                    settings: Json;
                     team: string;
                     title: string;
                     w: number | null;
@@ -831,10 +821,12 @@ export interface Database {
                     assumptions: string[];
                     cache?: string | null;
                     code: string;
+                    created_at?: string;
                     dashboard: string;
                     h?: number | null;
                     id?: string;
-                    query: string;
+                    messages?: Json;
+                    settings?: Json;
                     team: string;
                     title: string;
                     w?: number | null;
@@ -845,10 +837,12 @@ export interface Database {
                     assumptions?: string[];
                     cache?: string | null;
                     code?: string;
+                    created_at?: string;
                     dashboard?: string;
                     h?: number | null;
                     id?: string;
-                    query?: string;
+                    messages?: Json;
+                    settings?: Json;
                     team?: string;
                     title?: string;
                     w?: number | null;
@@ -981,7 +975,6 @@ export interface Database {
                     created_at: string | null;
                     dashboard: string | null;
                     embed_user: string | null;
-                    id: string | null;
                     parameters: string | null;
                     team: string | null;
                 };
@@ -989,7 +982,6 @@ export interface Database {
                     created_at?: string | null;
                     dashboard?: string | null;
                     embed_user?: string | null;
-                    id?: string | null;
                     parameters?: never;
                     team?: string | null;
                 };
@@ -997,7 +989,6 @@ export interface Database {
                     created_at?: string | null;
                     dashboard?: string | null;
                     embed_user?: string | null;
-                    id?: string | null;
                     parameters?: never;
                     team?: string | null;
                 };
@@ -1030,10 +1021,12 @@ export interface Database {
                     assumptions: string[] | null;
                     cache: string | null;
                     code: string | null;
+                    created_at: string | null;
                     dashboard: string | null;
                     h: number | null;
                     id: string | null;
-                    query: string | null;
+                    messages: Json | null;
+                    settings: Json | null;
                     team: string | null;
                     title: string | null;
                     w: number | null;
@@ -1044,10 +1037,12 @@ export interface Database {
                     assumptions?: string[] | null;
                     cache?: never;
                     code?: string | null;
+                    created_at?: string | null;
                     dashboard?: string | null;
                     h?: number | null;
                     id?: string | null;
-                    query?: string | null;
+                    messages?: Json | null;
+                    settings?: Json | null;
                     team?: string | null;
                     title?: string | null;
                     w?: number | null;
@@ -1058,10 +1053,12 @@ export interface Database {
                     assumptions?: string[] | null;
                     cache?: never;
                     code?: string | null;
+                    created_at?: string | null;
                     dashboard?: string | null;
                     h?: number | null;
                     id?: string | null;
-                    query?: string | null;
+                    messages?: Json | null;
+                    settings?: Json | null;
                     team?: string | null;
                     title?: string | null;
                     w?: number | null;

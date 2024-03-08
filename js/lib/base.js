@@ -28,6 +28,37 @@ export default class OnvoBase {
             }
         }
     }
+    async streamingFetch(url, method, body, callbacks) {
+        try {
+            const response = await axios({
+                url: this.endpoint + url,
+                method: method || "GET",
+                data: body,
+                headers: {
+                    "x-api-key": this.#apiKey,
+                },
+                responseType: "stream",
+            });
+            let output = "";
+            const decoder = new TextDecoder();
+            response.data.on("data", (chunk) => {
+                const chunkValue = decoder.decode(chunk);
+                output += chunkValue;
+                callbacks.onStream(chunkValue);
+            });
+            response.data.on("end", () => {
+                callbacks.onComplete(output);
+            });
+            response.data.on("error", (err) => {
+                console.log(err);
+                callbacks.onError(err);
+            });
+        }
+        catch (e) {
+            console.log(e);
+            callbacks.onError(new Error(e.message));
+        }
+    }
     constructor(apiKey, options) {
         this.#apiKey = apiKey;
         this.endpoint = options?.endpoint || "https:/dashboard.onvo.ai";

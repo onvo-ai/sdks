@@ -14,6 +14,7 @@ import { OnvoAutomation } from "./automation";
 import { OnvoWidget } from "./widget";
 import { OnvoSessions } from "./sessions";
 import { OnvoWidgets } from "./widgets";
+export * from "./types";
 
 export class Onvo extends OnvoBase {
   accounts: OnvoAccounts;

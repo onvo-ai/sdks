@@ -55,3 +55,5 @@ export type ComprehensiveDashboard = Dashboard & {
   datasources: DataSource[];
   widgets: Widget[];
 };
+
+export type Log = Database["public"]["Tables"]["logs"]["Row"];

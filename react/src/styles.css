@@ -3,6 +3,7 @@
 @tailwind utilities;
 @import "../node_modules/react-grid-layout/css/styles.css";
 @import "../node_modules/react-resizable/css/styles.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 .react-grid-item > .react-resizable-handle {
   background-image: none !important;

@@ -99,7 +99,7 @@ app.use(express.static("public"));
 
 app.get("/api/get-token/:id", async function (req, res) {
   try {
-    let data = await onvo.getEmbedUserToken(req.params.id);
+    let data = await onvo.embed_user(req.params.id).getAccessToken();
     res.send(JSON.stringify(data));
   } catch (e) {
     console.log(e);

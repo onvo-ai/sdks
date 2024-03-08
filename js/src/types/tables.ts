@@ -26,4 +26,6 @@ export enum Table {
 
   Automations = "automations",
   AutomationRuns = "automation_runs",
+
+  Logs = "logs",
 }
