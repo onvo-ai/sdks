@@ -7,7 +7,7 @@ name = "onvo"
 version = "0.1.0"
 authors = [{ name = "Bryan Davis", email = "bryandavis999.dev@gmail.com" }]
 description = "Communicate with the Onvo platform."
-readme = "README.txt"
+readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
   "Development Status :: 1 - Planning",

@@ -20,7 +20,15 @@ except:
 
 
 class Onvo:
+    """The Onvo class, needs to be instantiated to be used"""
+
     def __init__(self, endpoint=default_endpoint, api_key=default_api_key):
+        """Initialize the Onvo object
+
+        Args:
+            endpoint (str, optional): takes an endpoint such as "https://dashboard.onvo.ai/api". Defaults to ONVO_API_ENDPOINT in your local environment.
+            api_key (str, optional): takes an API endpoint. Defaults to ONVO_API_KEY in your local environment.
+        """
         self.endpoint = endpoint
         self.api_key = api_key
         self.check_init_params()
@@ -40,9 +48,22 @@ class Onvo:
         )  # TODO: remove self.dashboards once back-end is fixed
 
     def dashboard(self, dashboard_id):
+        """Creates a dashboard object that can be used to modify properties of Dashboard such as the datasources it's connected to.
+
+        Args:
+            dashboard_id (str): The id of the dashboard you want to connect.
+
+        Returns:
+            Dashboard: A dashboard object that contains sub-resources to manipulate.
+        """
         return Dashboard(dashboard_id, self.endpoint, self.api_key)
 
     def check_init_params(self):
+        """Checks if the instance of Onvo was initialized with both endpoint and api key
+
+        Raises:
+            Exception: raises errors if either the endpoint or the api key is missing
+        """
         if self.endpoint is None:
             raise Exception(
                 "Onvo object has no endpoint! Initalize with the endpoint parameter or use ONVO_API_ENDPOINT"
