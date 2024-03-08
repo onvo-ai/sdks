@@ -27,7 +27,7 @@ describe("Automations", () => {
         title: "Testing Automation",
         description: "",
 
-        dashboard: "a3cc7494-2763-4620-9b0f-b4230b99dce4",
+        dashboard: "42058ac8-a83b-4e26-8b3c-b86a773d052a",
         output_format: "link",
 
         schedule: "",

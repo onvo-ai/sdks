@@ -9,6 +9,8 @@ export class OnvoEmbedUser extends OnvoBase {
   }
 
   getAccessToken() {
-    return this.fetchBase("/api/embed-users/" + this.#id + "/token");
+    return this.fetchBase(
+      "/api/embed-users/" + this.#id + "/token"
+    ) as Promise<{ user: string; token: string }>;
   }
 }
