@@ -13,6 +13,7 @@ import { OnvoAutomation } from "./automation/index.js";
 import { OnvoWidget } from "./widget/index.js";
 import { OnvoSessions } from "./sessions/index.js";
 import { OnvoWidgets } from "./widgets/index.js";
+export * from "./types/index.js";
 export declare class Onvo extends OnvoBase {
     accounts: OnvoAccounts;
     teams: OnvoTeams;

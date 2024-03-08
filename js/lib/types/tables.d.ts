@@ -23,5 +23,6 @@ export declare enum Table {
     Subscriptions = "subscriptions",
     SubscriptionPlans = "subscription_plans",
     Automations = "automations",
-    AutomationRuns = "automation_runs"
+    AutomationRuns = "automation_runs",
+    Logs = "logs"
 }

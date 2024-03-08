@@ -9,11 +9,24 @@ import numeral from "numeral";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import React from "react";
 
-const ChartBase: React.FC<{ json: any; key: string }> = ({ json, key }) => {
-  let output = { ...json };
-  if (output.options.plugins) {
-    delete output.options.plugins.title?.text;
-  }
+const ChartBase: React.FC<{ json: any; id: string; title: string }> = ({
+  json,
+  id,
+  title,
+}) => {
+  let output = Object.assign({}, json, {});
+  output.options.plugins.title = {
+    display: true,
+    text: title || output.options.plugins.title?.text || "",
+    align: "start",
+    fullSize: true,
+    font: {
+      size: 18,
+      weight: 500,
+      family: "Inter",
+    },
+  };
+
   return (
     <ErrorBoundary
       fallbackRender={({ error }) => (
@@ -41,7 +54,7 @@ const ChartBase: React.FC<{ json: any; key: string }> = ({ json, key }) => {
           <TableWidget data={output} />
         ) : (
           <Chart
-            id={key}
+            id={id}
             className="h-full w-full"
             plugins={output.type === "funnel" ? [ChartDataLabels] : []}
             {...output}

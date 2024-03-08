@@ -13,9 +13,7 @@ export class OnvoWidgets extends OnvoBase {
     update(id, body) {
         return this.fetchBase("/api/widgets/" + id, "POST", body);
     }
-    create({ query, dashboard }) {
-        return this.fetchBase("/api/widgets?query=" + query, "PUT", {
-            dashboard: dashboard,
-        });
+    create(body) {
+        return this.fetchBase("/api/widgets", "PUT", body);
     }
 }

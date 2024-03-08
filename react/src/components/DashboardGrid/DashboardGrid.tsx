@@ -3,7 +3,7 @@ import React from "react";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 
-import ChartCard from "./ChartCard";
+import ChartCard from "../Chart/ChartCard";
 import { useDashboard } from "../Dashboard/Dashboard";
 
 export const DashboardGrid: React.FC<{}> = () => {

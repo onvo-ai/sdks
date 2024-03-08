@@ -1,15 +1,18 @@
 import OnvoBase from "../base";
+import { EmbedUser } from "../types";
 
 // Embed user endpoints
 export class OnvoEmbedUsers extends OnvoBase {
   list() {
-    return this.fetchBase("/api/embed-users");
+    return this.fetchBase("/api/embed-users") as Promise<EmbedUser[]>;
   }
   get(id: string) {
-    return this.fetchBase("/api/embed-users/" + id);
+    return this.fetchBase("/api/embed-users/" + id) as Promise<EmbedUser>;
   }
   delete(id: string) {
-    return this.fetchBase("/api/embed-users/" + id, "DELETE");
+    return this.fetchBase("/api/embed-users/" + id, "DELETE") as Promise<{
+      success: true;
+    }>;
   }
   upsert(
     userId: string,
@@ -24,6 +27,6 @@ export class OnvoEmbedUsers extends OnvoBase {
       name: userData.name,
       email: userData.email,
       metadata: userData.metadata,
-    });
+    }) as Promise<EmbedUser>;
   }
 }
