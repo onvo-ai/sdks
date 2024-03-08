@@ -1,64 +1,76 @@
-import axios from "axios";
+import fetch from "cross-fetch";
 export default class OnvoBase {
     #apiKey;
     endpoint;
     // Base fetch method
     async fetchBase(url, method, body) {
         try {
-            const response = await axios({
+            const requestOptions = {
                 method: method || "GET",
-                url: this.endpoint + url,
                 headers: {
                     "Content-Type": "application/json",
                     "x-api-key": this.#apiKey,
                     "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
                 },
-                data: body,
-            });
-            return response.data;
+            };
+            if (body) {
+                requestOptions.body = JSON.stringify(body);
+            }
+            const response = await fetch(this.endpoint + url, requestOptions);
+            if (!response.ok) {
+                throw new Error(`HTTP error ${response.status}`);
+            }
+            const data = await response.json();
+            return data;
         }
         catch (error) {
-            if (error.response) {
-                throw new Error(error.response.data.message);
-            }
-            else if (error.request) {
-                throw new Error("No response received from the server");
-            }
-            else {
-                throw new Error("Error in making the request: " + error.message);
-            }
+            console.log(error);
+            throw new Error("Error in making the request: " + error.message);
         }
     }
     async streamingFetch(url, method, body, callbacks) {
         try {
-            const response = await axios({
-                url: this.endpoint + url,
+            const requestOptions = {
                 method: method || "GET",
-                data: body,
                 headers: {
                     "x-api-key": this.#apiKey,
                 },
-                responseType: "stream",
-            });
-            let output = "";
+            };
+            if (body) {
+                requestOptions.body = JSON.stringify(body);
+            }
+            const response = await fetch(this.endpoint + url, requestOptions);
+            if (!response.ok) {
+                throw new Error(`HTTP error ${response.status}`);
+            }
+            const reader = response.body?.getReader();
+            if (!reader) {
+                throw new Error("Response body is missing");
+            }
             const decoder = new TextDecoder();
-            response.data.on("data", (chunk) => {
-                const chunkValue = decoder.decode(chunk);
+            let output = "";
+            const readChunk = async ({ done, value, }) => {
+                if (done) {
+                    callbacks.onComplete(output);
+                    return;
+                }
+                const chunkValue = decoder.decode(value, { stream: true });
                 output += chunkValue;
                 callbacks.onStream(chunkValue);
-            });
-            response.data.on("end", () => {
-                callbacks.onComplete(output);
-            });
-            response.data.on("error", (err) => {
-                console.log(err);
-                callbacks.onError(err);
-            });
+                const { done: streamDone, value: nextValue } = await reader.read();
+                if (!nextValue) {
+                    callbacks.onComplete(output);
+                    return;
+                }
+                readChunk({ done: streamDone, value: nextValue });
+            };
+            // @ts-ignore
+            readChunk(await reader.read());
         }
-        catch (e) {
-            console.log(e);
-            callbacks.onError(new Error(e.message));
+        catch (err) {
+            console.log(err);
+            callbacks.onError(err);
         }
     }
     constructor(apiKey, options) {
