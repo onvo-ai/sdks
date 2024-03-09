@@ -4,7 +4,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 import { toast } from "sonner";
-import { DotLottiePlayer } from "@dotlottie/react-player";
 import Empty from "./Empty";
 import React from "react";
 import { useToken } from "../Wrapper";
@@ -71,14 +70,12 @@ const QuestionSidebar: React.FC<{
     <div className="background-color w-[320px] flex-shrink-0 overflow-y-auto border-r border-gray-200 p-2 dark:border-gray-800">
       {loading && questions.length === 0 && (
         <div className="flex h-full w-full flex-col items-center justify-center">
-          <div className="relative -mt-8 h-auto w-72 opacity-75">
-            <DotLottiePlayer
-              src="./assets/logo.lottie"
-              autoplay
-              loop
-            ></DotLottiePlayer>
+          <div className="relative inline-flex h-12">
+            <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
+            <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
+            <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
           </div>
-          <Text className="-mt-6">Loading questions...</Text>
+          <Text>Loading questions...</Text>
         </div>
       )}
       {onSelect && !loading && (

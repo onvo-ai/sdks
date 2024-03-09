@@ -400,22 +400,23 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@onvo-ai/js@^0.12.31":
-  version "0.12.31"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.12.31.tgz#0eee7086dca0b2360985a437b2d9c07efe6593b6"
-  integrity sha512-6H8GeKpBYt+E5hmxKsKrtMFWGuGf7d3IM3kOQ4C1jc4HGZPzL9r5XitWf9d1kXdzjz6JKYxMSyWuRA7BKYGJVQ==
+"@onvo-ai/js@^0.12.34":
+  version "0.12.34"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.12.34.tgz#c86906f3f6f47a21e7f24f4aef9001ec2919d235"
+  integrity sha512-att3VZ9cwo4LxMreNJ1Wn1cniRW8vdqZC0m87PF2C55COt4kuGUMd27eOyV29oG48iko/Kxc3LGV0ZDuDOYwDw==
 
-"@onvo-ai/react@^0.2.13":
-  version "0.2.13"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.2.13.tgz#2c39985c7014186a9a39010863e408fd86b2c92d"
-  integrity sha512-qRRlDFfjnYFSbRcVniBXk8FK9DESPbXaVP0UNaK4/T4uNOGIQ5p7Ur59mzAhjFjWe3jXMcgTCxLI26mX7vCkiw==
+"@onvo-ai/react@^0.2.18":
+  version "0.2.18"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.2.18.tgz#1fc3ac929a7e6075abb390b55c0b2d67f2569821"
+  integrity sha512-auuO1Wl9BsCZ5Yl7P+VVHFxReHqvD2PBClH6NSL5X4bv7V1kHl0eAzWOBYguPte+zppphovekpgnfyS2wR8jUw==
   dependencies:
     "@dotlottie/react-player" "^1.6.18"
     "@heroicons/react" "^2.1.1"
-    "@onvo-ai/js" "^0.12.31"
+    "@onvo-ai/js" "^0.12.34"
     "@tremor/react" "^3.14.1"
     "@uidotdev/usehooks" "^2.4.1"
-    chart.js "^4.4.1"
+    chart.js "^4.4.0"
+    chartjs-chart-funnel "^4.1.8"
     chartjs-plugin-datalabels "^2.2.0"
     dayjs "^1.11.10"
     numeral "^2.0.6"
@@ -428,6 +429,7 @@
     remark-gfm "^4.0.0"
     rollup-plugin-import-css "^3.5.0"
     sonner "^1.4.3"
+    use-prefers-color-scheme "^1.1.3"
     zustand "^4.5.2"
 
 "@pkgjs/parseargs@^0.11.0":
@@ -514,6 +516,11 @@
     react-transition-state "^2.1.1"
     recharts "^2.10.3"
     tailwind-merge "^1.14.0"
+
+"@types/chroma-js@^2.4.3":
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/@types/chroma-js/-/chroma-js-2.4.4.tgz#254dddff54568ff8e5d0dcdb071871a458fdfd31"
+  integrity sha512-/DTccpHTaKomqussrn+ciEvfW4k6NAHzNzs/sts1TCqg333qNxOhy8TNIoQCmbGG3Tl8KdEhkGAssb1n3mTXiQ==
 
 "@types/d3-array@^3.0.3":
   version "3.2.1"
@@ -1027,12 +1034,20 @@ character-reference-invalid@^2.0.0:
   resolved "https://registry.yarnpkg.com/character-reference-invalid/-/character-reference-invalid-2.0.1.tgz#85c66b041e43b47210faf401278abf808ac45cb9"
   integrity sha512-iBZ4F4wRbyORVsu0jPV7gXkOsGYjGHPmAyv+HiHG8gi5PtC9KI2j1+v8/tlibRvjoWX027ypmG/n0HtO5t7unw==
 
-chart.js@^4.4.1:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-4.4.1.tgz#ac5dc0e69a7758909158a96fe80ce43b3bb96a9f"
-  integrity sha512-C74QN1bxwV1v2PEujhmKjOZ7iUM4w6BWs23Md/6aOZZSlwMzeCIDGuZay++rBgChYru7/+QFeoQW0fQoP534Dg==
+chart.js@^4.4.0:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-4.4.2.tgz#95962fa6430828ed325a480cc2d5f2b4e385ac31"
+  integrity sha512-6GD7iKwFpP5kbSD4MeRRRlTnQvxfQREy36uEtm1hzHzcOqwWx0YEHuspuoNlslu+nciLIB7fjjsHkUv/FzFcOg==
   dependencies:
     "@kurkle/color" "^0.3.0"
+
+chartjs-chart-funnel@^4.1.8:
+  version "4.1.8"
+  resolved "https://registry.yarnpkg.com/chartjs-chart-funnel/-/chartjs-chart-funnel-4.1.8.tgz#488ea7fd61e476e9809fafec188dc22d40e989e6"
+  integrity sha512-LycAlqSUixS3YM9n5V2TUDZPSfvel7pzKJ/zNId7kEG1mirL2xVoTbU+Dlfn9MZcGJYPnoBF3893JNvH+xDCBg==
+  dependencies:
+    "@types/chroma-js" "^2.4.3"
+    chroma-js "^2.4.2"
 
 chartjs-plugin-datalabels@^2.2.0:
   version "2.2.0"
@@ -1053,6 +1068,11 @@ chokidar@^3.5.3:
     readdirp "~3.6.0"
   optionalDependencies:
     fsevents "~2.3.2"
+
+chroma-js@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-2.4.2.tgz#dffc214ed0c11fa8eefca2c36651d8e57cbfb2b0"
+  integrity sha512-U9eDw6+wt7V8z5NncY2jJfZa+hUH8XEj8FQHgFJTrUFnJfXYf4Ml4adI2vXZOjqRDpFWtYVWypDfZwnJ+HIR4A==
 
 client-only@0.0.1, client-only@^0.0.1:
   version "0.0.1"
@@ -4135,6 +4155,11 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+use-prefers-color-scheme@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/use-prefers-color-scheme/-/use-prefers-color-scheme-1.1.3.tgz#18945cecbe33566f961fac1b90c079d1ce2d10b5"
+  integrity sha512-ZRgDfb5BFLum/Sud4SpZ+d1YcV+lRbsupw0qQ/rGy5kGrpE3KMUQgEQOKiQQSa4Wslex46n5fKFO+9FGMTosUQ==
 
 use-sync-external-store@1.2.0:
   version "1.2.0"

@@ -1,44 +1,37 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
-import json from "@rollup/plugin-json";
 import tailwindcss from "tailwindcss";
-import image from "@rollup/plugin-image";
+import terser from "@rollup/plugin-terser";
 
 const tailwindConfig = require("./tailwind.config.js");
-const packageJson = require("./package.json");
-
 export default [
   {
-    input: "src/index.ts",
+    input: "lib/index.js",
     output: [
       {
-        file: packageJson.main,
+        dir: "dist/cjs",
         format: "cjs",
         sourcemap: true,
-        inlineDynamicImports: true,
       },
+
       {
-        file: packageJson.module,
+        dir: "dist/esm",
         format: "esm",
         sourcemap: true,
-        inlineDynamicImports: true,
       },
     ],
     plugins: [
       peerDepsExternal(),
       resolve({ browser: true }),
       commonjs(),
-      json(),
-      image(),
       postcss({
         extensions: [".css"],
         plugins: [tailwindcss(tailwindConfig)],
       }),
-      typescript({ tsconfig: "./tsconfig.json" }),
+      terser(),
     ],
     external: ["react", "react-dom"],
   },

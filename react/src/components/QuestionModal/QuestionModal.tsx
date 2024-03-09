@@ -21,8 +21,7 @@ import { useMeasure } from "@uidotdev/usehooks";
 import SuggestionsBar from "./SuggestionsBar";
 import { useToken } from "../Wrapper";
 import { useDashboard } from "../Dashboard";
-// @ts-ignore
-import logoImage from "./assets/logo-square.svg";
+import Logo from "./Logo";
 
 dayjs.extend(relativeTime);
 export const useQuestionModal = create<{
@@ -262,14 +261,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                       <>
                         <div className="flex h-full w-full flex-col items-center justify-center">
                           <Icon
-                            icon={() => (
-                              <img
-                                alt="logo"
-                                src={logoImage}
-                                height={72}
-                                width={72}
-                              />
-                            )}
+                            icon={() => <Logo height={72} width={72} />}
                             variant="shadow"
                             size="xl"
                           />
