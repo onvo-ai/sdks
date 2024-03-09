@@ -6,6 +6,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
 import json from "@rollup/plugin-json";
 import tailwindcss from "tailwindcss";
+import image from "@rollup/plugin-image";
 
 const tailwindConfig = require("./tailwind.config.js");
 const packageJson = require("./package.json");
@@ -18,11 +19,13 @@ export default [
         file: packageJson.main,
         format: "cjs",
         sourcemap: true,
+        inlineDynamicImports: true,
       },
       {
         file: packageJson.module,
         format: "esm",
         sourcemap: true,
+        inlineDynamicImports: true,
       },
     ],
     plugins: [
@@ -30,13 +33,14 @@ export default [
       resolve({ browser: true }),
       commonjs(),
       json(),
+      image(),
       postcss({
         extensions: [".css"],
         plugins: [tailwindcss(tailwindConfig)],
       }),
       typescript({ tsconfig: "./tsconfig.json" }),
     ],
-    external: ["react", "react-dom", "styled-components"],
+    external: ["react", "react-dom"],
   },
   {
     input: "src/index.ts",

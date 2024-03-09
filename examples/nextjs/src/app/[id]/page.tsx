@@ -4,6 +4,7 @@ import {
   Dashboard,
   DashboardHeader,
   DashboardGrid,
+  QuestionModal,
 } from "@onvo-ai/react";
 import { useState, useEffect } from "react";
 
@@ -28,6 +29,7 @@ const DashboardInnerPage: React.FC<{
         <Dashboard id={params.id}>
           <DashboardHeader />
           <DashboardGrid />
+          <QuestionModal />
         </Dashboard>
       </Wrapper>
     </main>

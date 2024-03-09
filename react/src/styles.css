@@ -18,3 +18,45 @@
   border-radius: 8px;
   background-color: #3366cc !important;
 }
+
+/* STYLING */
+:root {
+  font-family: "Inter", "Helvetica Neue", sans-serif;
+  --background-color: #f9fafb;
+  --foreground-color: #ffffff;
+  --font-override: inherit;
+}
+.foreground-color {
+  background-color: var(--foreground-color) !important;
+}
+.background-color {
+  background-color: var(--background-color) !important;
+}
+.font-override {
+  font-family: var(--font-override) !important;
+}
+.rdg-sort-arrow {
+  margin-top: 12px;
+}
+.rdg-cell[role="columnheader"] {
+  overflow-y: visible;
+  width: 100%;
+  position: relative;
+}
+.rdg a {
+  text-decoration: underline;
+  color: #3366cc;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #030712;
+    --foreground-color: #111827;
+    --font-override: inherit;
+  }
+  .rdg {
+    --rdg-background-color: #111827 !important;
+    --rdg-header-background-color: #1f2937 !important;
+    --rdg-row-hover-background-color: #1f2937 !important;
+  }
+}

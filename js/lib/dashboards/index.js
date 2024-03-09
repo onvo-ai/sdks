@@ -1,6 +1,12 @@
-import OnvoBase from "../base.js";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OnvoDashboards = void 0;
+const base_1 = __importDefault(require("../base.js"));
 // Dashboard endpoints
-export class OnvoDashboards extends OnvoBase {
+class OnvoDashboards extends base_1.default {
     list() {
         return this.fetchBase("/api/dashboards");
     }
@@ -17,3 +23,4 @@ export class OnvoDashboards extends OnvoBase {
         return this.fetchBase("/api/dashboards", "PUT", body);
     }
 }
+exports.OnvoDashboards = OnvoDashboards;

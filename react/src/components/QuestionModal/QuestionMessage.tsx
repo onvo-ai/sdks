@@ -13,6 +13,10 @@ import { Disclosure } from "@headlessui/react";
 import Loader from "./Loader";
 import ChartBase from "../Chart/ChartBase";
 import { useDashboard } from "../Dashboard";
+// @ts-ignore
+import defaultUserImage from "./assets/default-user.png";
+// @ts-ignore
+import logoImage from "./assets/logo-square.svg";
 dayjs.extend(relativeTime);
 
 const QuestionMessage: React.FC<{
@@ -134,7 +138,7 @@ const QuestionMessage: React.FC<{
         <img
           className="z-10 rounded-md"
           alt="profile"
-          src="/default-user.png"
+          src={defaultUserImage}
           height={32}
           width={32}
         />
@@ -202,7 +206,7 @@ const QuestionMessage: React.FC<{
     <div className="relative mb-3 flex flex-row items-start justify-start gap-3">
       <img
         alt="profile"
-        src="/logo-square.svg"
+        src={logoImage}
         className="rounded-md bg-gray-200 p-1 dark:bg-gray-800"
         height={32}
         width={32}

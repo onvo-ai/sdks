@@ -1,14 +1,17 @@
 import { ErrorBoundary } from "react-error-boundary";
-import { Text, Title, Metric, Flex } from "@tremor/react";
+import { Text, Title } from "@tremor/react";
+
+import TableWidget from "./TableWidget";
+import React from "react";
 
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
-
-import TableWidget from "./TableWidget";
-import numeral from "numeral";
+import { Chart as ChartJS } from "chart.js";
+import { FunnelController, TrapezoidElement } from "chartjs-chart-funnel";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import React from "react";
+import Metric from "./MetricChart";
 
+ChartJS.register([FunnelController, TrapezoidElement, ChartDataLabels, Metric]);
 const ChartBase: React.FC<{ json: any; id: string; title: string }> = ({
   json,
   id,
@@ -37,28 +40,10 @@ const ChartBase: React.FC<{ json: any; id: string; title: string }> = ({
       )}
     >
       {output ? (
-        output.type === "metric" ? (
-          <Flex
-            justifyContent="start"
-            alignItems="baseline"
-            className="space-x-3 truncate"
-          >
-            <Metric>
-              {numeral(output.data.datasets[0].data[0]).value()
-                ? numeral(output.data.datasets[0].data[0]).format("0,0.00")
-                : output.data.datasets[0].data[0]}
-            </Metric>
-            <Text>{output.data.datasets[0].label}</Text>
-          </Flex>
-        ) : output.type === "table" ? (
+        output.type === "table" ? (
           <TableWidget data={output} />
         ) : (
-          <Chart
-            id={id}
-            className="h-full w-full"
-            plugins={output.type === "funnel" ? [ChartDataLabels] : []}
-            {...output}
-          />
+          <Chart id={id} className="h-full w-full" {...output} />
         )
       ) : (
         <></>

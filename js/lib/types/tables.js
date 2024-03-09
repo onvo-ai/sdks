@@ -1,4 +1,7 @@
-export var Table;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Table = void 0;
+var Table;
 (function (Table) {
     Table["Countries"] = "countries";
     Table["Invites"] = "invites";
@@ -26,4 +29,4 @@ export var Table;
     Table["Automations"] = "automations";
     Table["AutomationRuns"] = "automation_runs";
     Table["Logs"] = "logs";
-})(Table || (Table = {}));
+})(Table || (exports.Table = Table = {}));

@@ -1,20 +1,31 @@
 import OnvoBase from "../base";
+import { DataSource } from "../types";
 
 // Datasource user endpoints
 export class OnvoDatasources extends OnvoBase {
   list() {
-    return this.fetchBase("/api/datasources");
+    return this.fetchBase("/api/datasources") as Promise<DataSource[]>;
   }
   get(id: string) {
-    return this.fetchBase("/api/datasources/" + id);
+    return this.fetchBase("/api/datasources/" + id) as Promise<DataSource>;
   }
   delete(id: string) {
-    return this.fetchBase("/api/datasources/" + id, "DELETE");
+    return this.fetchBase("/api/datasources/" + id, "DELETE") as Promise<{
+      success: true;
+    }>;
   }
-  update(id: string, body: any) {
-    return this.fetchBase("/api/datasources/" + id, "POST", body);
+  update(id: string, body: Partial<DataSource>) {
+    return this.fetchBase(
+      "/api/datasources/" + id,
+      "POST",
+      body
+    ) as Promise<DataSource>;
   }
-  create(body: any) {
-    return this.fetchBase("/api/datasources", "PUT", body);
+  create(body: Omit<DataSource, "id">) {
+    return this.fetchBase(
+      "/api/datasources",
+      "PUT",
+      body
+    ) as Promise<DataSource>;
   }
 }

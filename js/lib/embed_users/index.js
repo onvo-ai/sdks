@@ -1,6 +1,12 @@
-import OnvoBase from "../base.js";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OnvoEmbedUsers = void 0;
+const base_1 = __importDefault(require("../base.js"));
 // Embed user endpoints
-export class OnvoEmbedUsers extends OnvoBase {
+class OnvoEmbedUsers extends base_1.default {
     list() {
         return this.fetchBase("/api/embed-users");
     }
@@ -19,3 +25,4 @@ export class OnvoEmbedUsers extends OnvoBase {
         });
     }
 }
+exports.OnvoEmbedUsers = OnvoEmbedUsers;

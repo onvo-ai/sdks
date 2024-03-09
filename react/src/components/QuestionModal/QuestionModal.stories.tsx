@@ -1,30 +1,22 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { Dashboard } from "./Dashboard";
+import { QuestionModal } from "./QuestionModal";
 import { Wrapper } from "../Wrapper/Wrapper";
-import { DashboardHeader } from "../DashboardHeader/DashboardHeader";
-import { DashboardGrid } from "../DashboardGrid/DashboardGrid";
-import { QuestionModal } from "../QuestionModal/QuestionModal";
+import { Dashboard } from "../Dashboard/Dashboard";
 
-const meta: Meta<typeof Dashboard> = {
-  component: Dashboard,
-  title: "Onvo/Dashboard",
+const meta: Meta<typeof QuestionModal> = {
+  component: QuestionModal,
+  title: "Onvo/QuestionModal",
   argTypes: {},
 };
 export default meta;
 
-type Story = StoryObj<{
-  token: string;
-  baseUrl: string;
-  id: string;
-}>;
+type Story = StoryObj<{ token: string; baseUrl: string; id: string }>;
 
 export const Primary: Story = (args) => {
   return (
     <Wrapper {...args}>
       <Dashboard id={args.id}>
-        <DashboardHeader />
-        <DashboardGrid />
         <QuestionModal />
       </Dashboard>
     </Wrapper>
@@ -37,5 +29,3 @@ Primary.args = {
   baseUrl: "https://staging.onvo.ai",
   id: "1ca1e66c-0f5b-43fc-91aa-954c3377deba",
 };
-
-Primary.parameters = { layout: "fullscreen" };

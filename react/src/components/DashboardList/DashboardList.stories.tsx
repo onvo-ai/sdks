@@ -10,7 +10,12 @@ const meta: Meta<typeof DashboardList> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof DashboardList & typeof Wrapper>;
+type Story = StoryObj<{
+  token: string;
+  baseUrl: string;
+  columns: number;
+  variant: string;
+}>;
 
 export const Primary: Story = (args) => {
   return (

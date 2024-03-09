@@ -1,6 +1,12 @@
-import OnvoBase from "../base.js";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OnvoTeams = void 0;
+const base_1 = __importDefault(require("../base.js"));
 // Team endpoints
-export class OnvoTeams extends OnvoBase {
+class OnvoTeams extends base_1.default {
     list() {
         return this.fetchBase("/api/teams");
     }
@@ -11,3 +17,4 @@ export class OnvoTeams extends OnvoBase {
         return this.fetchBase("/api/teams/" + id, "POST", body);
     }
 }
+exports.OnvoTeams = OnvoTeams;
