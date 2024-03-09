@@ -4,7 +4,15 @@ export declare class OnvoDashboardDatasources extends OnvoBase {
     constructor(dashboardId: string, apiKey: string, options?: {
         endpoint: string;
     });
-    list(): Promise<any>;
-    unlink(datasourceId: string): Promise<any>;
-    link(datasourceId: string): Promise<any>;
+    list(): Promise<{
+        dashboard: string;
+        datasource: string;
+        team: string;
+    }[]>;
+    unlink(datasourceId: string): Promise<{
+        success: true;
+    }>;
+    link(datasourceId: string): Promise<{
+        success: true;
+    }>;
 }

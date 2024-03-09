@@ -1,4 +1,4 @@
-import { Card, Title } from "@tremor/react";
+import { Card } from "@tremor/react";
 import React, { useMemo, useRef } from "react";
 import ChartBase from "./ChartBase";
 
@@ -20,12 +20,11 @@ const ChartCard: React.FC<{
 
   return (
     <Card
-      className="z-0 foreground-color relative flex h-full w-full flex-col"
+      key={widget.id}
+      className="group foreground-color relative flex h-full w-full flex-col -z-[1] py-3"
       ref={ref}
     >
-      <div className="relative z-0 h-[calc(100%-30px)] w-full overflow-y-auto">
-        <ChartBase json={output} title={widget.title} id={widget.id} />
-      </div>
+      <ChartBase json={output} title={widget.title} id={widget.id} />
     </Card>
   );
 };

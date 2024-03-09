@@ -1,4 +1,5 @@
 import OnvoBase from "../base";
+import { DashboardDatasource } from "../types";
 
 export class OnvoDashboardDatasources extends OnvoBase {
   #dashboardId: string;
@@ -16,13 +17,13 @@ export class OnvoDashboardDatasources extends OnvoBase {
   list() {
     return this.fetchBase(
       "/api/dashboards/" + this.#dashboardId + "/datasources"
-    );
+    ) as Promise<DashboardDatasource[]>;
   }
   unlink(datasourceId: string) {
     return this.fetchBase(
       "/api/dashboards/" + this.#dashboardId + "/datasources/" + datasourceId,
       "DELETE"
-    );
+    ) as Promise<{ success: true }>;
   }
   link(datasourceId: string) {
     return this.fetchBase(
@@ -31,6 +32,6 @@ export class OnvoDashboardDatasources extends OnvoBase {
       {
         datasourceId: datasourceId,
       }
-    );
+    ) as Promise<{ success: true }>;
   }
 }

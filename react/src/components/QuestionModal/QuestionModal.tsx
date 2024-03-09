@@ -1,4 +1,3 @@
-"use client";
 import {
   TextInput,
   Text,
@@ -21,6 +20,9 @@ import React from "react";
 import { useMeasure } from "@uidotdev/usehooks";
 import SuggestionsBar from "./SuggestionsBar";
 import { useToken } from "../Wrapper";
+import { useDashboard } from "../Dashboard";
+// @ts-ignore
+import logoImage from "./assets/logo-square.svg";
 
 dayjs.extend(relativeTime);
 export const useQuestionModal = create<{
@@ -31,13 +33,11 @@ export const useQuestionModal = create<{
   setOpen: (o: boolean) => set({ open: o }),
 }));
 
-const QuestionModal: React.FC<{ id: string; title: string; team: string }> = ({
-  id,
-  title,
-  team,
-}) => {
+export const QuestionModal: React.FC<{}> = ({}) => {
   const { backend } = useToken();
   const [containerRef, { width }] = useMeasure();
+  const { dashboard } = useDashboard();
+
   const input = useRef<HTMLTextAreaElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useQuestionModal((state) => [
@@ -59,7 +59,7 @@ const QuestionModal: React.FC<{ id: string; title: string; team: string }> = ({
   const getQuestions = async () => {
     setLoading(true);
     if (!backend) return;
-    let qs: any[] = await backend.questions.list({ dashboard: id });
+    let qs: any[] = await backend.questions.list({ dashboard: dashboard.id });
     setLoading(false);
     let sorted = qs.sort((a, b) => {
       return (
@@ -77,10 +77,10 @@ const QuestionModal: React.FC<{ id: string; title: string; team: string }> = ({
   };
 
   useEffect(() => {
-    if (id) {
+    if (dashboard && dashboard.id) {
       getQuestions();
     }
-  }, [id]);
+  }, [dashboard]);
 
   const scrollToBottom = () => {
     if (scroller.current) {
@@ -89,9 +89,9 @@ const QuestionModal: React.FC<{ id: string; title: string; team: string }> = ({
   };
 
   useEffect(() => {
-    if (open) {
+    if (open && dashboard && dashboard.id) {
       backend
-        ?.dashboard(id)
+        ?.dashboard(dashboard.id)
         .getWidgetSuggestions()
         .then((newSuggestions: string[]) => {
           if (newSuggestions.length > 0) {
@@ -105,7 +105,7 @@ const QuestionModal: React.FC<{ id: string; title: string; team: string }> = ({
     } else {
       setSuggestions([]);
     }
-  }, [open]);
+  }, [open, dashboard]);
 
   useEffect(() => {
     if (selectedQuestion) {
@@ -136,9 +136,9 @@ const QuestionModal: React.FC<{ id: string; title: string; team: string }> = ({
     let str = "";
     backend?.questions.create(
       {
-        dashboardId: id,
+        dashboardId: dashboard?.id,
         questionId: selectedQuestion?.id || undefined,
-        messages: newMessages,
+        messages: msg,
       },
       {
         onStream: (s) => {
@@ -166,6 +166,7 @@ const QuestionModal: React.FC<{ id: string; title: string; team: string }> = ({
         ref={containerRef}
         className={"absolute left-0 right-0 w-full"}
       ></div>
+      <div className={"h-[55px] w-full"}></div>
       <div
         className={
           "foreground-color fixed bottom-0 right-0 z-10 border-t border-gray-200 p-2 dark:border-gray-800"
@@ -217,8 +218,12 @@ const QuestionModal: React.FC<{ id: string; title: string; team: string }> = ({
               Back to dashboard
             </Button>
             <div className="flex flex-row w-full flex-grow justify-center items-center">
-              <Title>
-                <a href={"/dashboards/" + id}>{title}</a> / Questions
+              <Title
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                {dashboard?.title} / Questions
               </Title>
             </div>
             <div className="w-[170px] h-4" />
@@ -260,7 +265,7 @@ const QuestionModal: React.FC<{ id: string; title: string; team: string }> = ({
                             icon={() => (
                               <img
                                 alt="logo"
-                                src="/logo-square.svg"
+                                src={logoImage}
                                 height={72}
                                 width={72}
                               />
@@ -307,8 +312,10 @@ const QuestionModal: React.FC<{ id: string; title: string; team: string }> = ({
                     )}
                     {messages.map((a, index) => (
                       <QuestionMessage
-                        dashboardId={id}
-                        teamId={team || selectedQuestion?.team || undefined}
+                        dashboardId={dashboard.id}
+                        teamId={
+                          dashboard.team || selectedQuestion?.team || undefined
+                        }
                         questionId={selectedQuestion?.id || "null"}
                         onDelete={() => {
                           let newMessages = messages.filter(
@@ -407,5 +414,3 @@ const QuestionModal: React.FC<{ id: string; title: string; team: string }> = ({
     </>
   );
 };
-
-export default QuestionModal;

@@ -1,5 +1,6 @@
 import { OnvoDashboardDatasources } from "./dashboard_datasources";
 import OnvoBase from "../base";
+import { Widget } from "../types";
 
 export class OnvoDashboard extends OnvoBase {
   datasources: OnvoDashboardDatasources;
@@ -15,12 +16,12 @@ export class OnvoDashboard extends OnvoBase {
     return this.fetchBase(
       "/api/dashboards/" + this.#id + "/update-cache",
       "POST"
-    );
+    ) as Promise<Widget[]>;
   }
 
   getWidgetSuggestions() {
     return this.fetchBase(
       "/api/dashboards/" + this.#id + "/widget-suggestions"
-    );
+    ) as Promise<string[]>;
   }
 }

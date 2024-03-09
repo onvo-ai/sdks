@@ -1,4 +1,5 @@
 import OnvoBase from "../base";
+import { DataSource } from "../types";
 
 export class OnvoDatasource extends OnvoBase {
   #id: string;
@@ -9,12 +10,14 @@ export class OnvoDatasource extends OnvoBase {
   }
 
   getData() {
-    return this.fetchBase("/api/datasources/" + this.#id + "/data");
+    return this.fetchBase(
+      "/api/datasources/" + this.#id + "/data"
+    ) as Promise<any>;
   }
   fetchColumnDescriptions() {
     return this.fetchBase(
       "/api/datasources/" + this.#id + "/populate-columns",
       "POST"
-    );
+    ) as Promise<DataSource>;
   }
 }

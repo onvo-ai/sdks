@@ -1,24 +1,57 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import React from "react";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 
 import ChartCard from "../Chart/ChartCard";
 import { useDashboard } from "../Dashboard/Dashboard";
+import { useToken } from "../Wrapper";
+import { defaults } from "chart.js";
 
 export const DashboardGrid: React.FC<{}> = () => {
-  const { dashboard, widgets } = useDashboard();
+  const { dashboard, widgets, theme, refresh } = useDashboard();
+  const { backend } = useToken();
 
   const ResponsiveGridLayout = useMemo(
     () => WidthProvider(Responsive) as any,
     []
   );
 
+  useEffect(() => {
+    const r = document.querySelector(":root") as any;
+    if (r && dashboard && dashboard.settings) {
+      const settings = dashboard.settings;
+      r.style.setProperty(
+        "--background-color",
+        theme === "dark" ? settings.dark_background : settings.light_background
+      );
+      r.style.setProperty(
+        "--foreground-color",
+        theme === "dark" ? settings.dark_foreground : settings.light_foreground
+      );
+
+      if (dashboard.settings.font !== "inter") {
+        r.style.setProperty("--font-override", settings.font);
+        defaults.font.family = settings.font;
+      } else {
+        defaults.font.family = "Inter";
+      }
+    }
+
+    return () => {
+      r.style.setProperty("--background-color", "");
+      r.style.setProperty("--foreground-color", "");
+      r.style.setProperty("--font-override", "");
+
+      defaults.font.family = "Inter";
+    };
+  }, [dashboard, theme]);
+
   let children = useMemo(() => {
     if (!dashboard) return [];
     return widgets.map((i: any) => (
       <div
-        className="hover:z-20"
+        className="hover:z-10"
         key={i.id}
         data-grid={{ x: i.x, y: i.y, w: i.w, h: i.h }}
       >
@@ -26,7 +59,7 @@ export const DashboardGrid: React.FC<{}> = () => {
           editable={dashboard.settings && dashboard.settings?.editable}
           widget={i}
           onUpdate={() => {
-            //router.refresh()
+            refresh();
           }}
           onRequestEdit={() => {
             // setSelectedWidget(i);
@@ -41,7 +74,7 @@ export const DashboardGrid: React.FC<{}> = () => {
 
   return (
     <div
-      className="font-override background-color relative w-full pb-safe mt-2"
+      className="font-override background-color relative w-full pb-safe"
       id="screenshot-content"
     >
       <ResponsiveGridLayout
@@ -51,7 +84,7 @@ export const DashboardGrid: React.FC<{}> = () => {
         className="layout"
         rowHeight={120}
         breakpoints={{ lg: 1280, md: 1024, sm: 768, xs: 640, xxs: 480 }}
-        cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+        cols={{ lg: 12, md: 12, sm: 12, xs: 12, xxs: 12 }}
         isDraggable={dashboard.settings && dashboard.settings?.editable}
         isResizable={dashboard.settings && dashboard.settings?.editable}
         onLayoutChange={(layout: any) => {
@@ -67,14 +100,14 @@ export const DashboardGrid: React.FC<{}> = () => {
             };
           });
           if (dashboard && dashboard.settings && dashboard.settings.editable) {
-            // updatedWidgets.forEach((i) => {
-            //   updateWidgetById(i.dashboard, i.id, {
-            //     x: i.x,
-            //     y: i.y,
-            //     w: i.w,
-            //     h: i.h,
-            //   });
-            // });
+            updatedWidgets.forEach((i) => {
+              backend?.widgets.update(i.id, {
+                x: i.x,
+                y: i.y,
+                w: i.w,
+                h: i.h,
+              });
+            });
           }
         }}
       >

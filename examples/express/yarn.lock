@@ -2,12 +2,10 @@
 # yarn lockfile v1
 
 
-"@onvo-ai/js@^0.12.11":
-  version "0.12.11"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.12.11.tgz#ff2a16362bc441ea059bd8c84d46abf1997a39c0"
-  integrity sha512-HGwg1vgPShBS4qSeC2thLP2eHaQ1k/8RCOF9BJShecV9lqTq4i/XPQBiw5KcC+dcYNwOhLU/3PcglQBozLocDw==
-  dependencies:
-    axios "0.21.1"
+"@onvo-ai/js@^0.12.31":
+  version "0.12.31"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.12.31.tgz#0eee7086dca0b2360985a437b2d9c07efe6593b6"
+  integrity sha512-6H8GeKpBYt+E5hmxKsKrtMFWGuGf7d3IM3kOQ4C1jc4HGZPzL9r5XitWf9d1kXdzjz6JKYxMSyWuRA7BKYGJVQ==
 
 accepts@~1.3.8:
   version "1.3.8"
@@ -21,13 +19,6 @@ array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/array-flatten/-/array-flatten-1.1.1.tgz"
   integrity sha512-PCVAQswWemu6UdxsDFFX/+gVeYqKAod3D3UVm91jHwynguOwAvYPhx8nNlM++NqRcK6CxxpUafjmhIdKiHibqg==
-
-axios@0.21.1:
-  version "0.21.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
-  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
-  dependencies:
-    follow-redirects "^1.10.0"
 
 body-parser@1.20.1:
   version "1.20.1"
@@ -173,11 +164,6 @@ finalhandler@1.2.0:
     parseurl "~1.3.3"
     statuses "2.0.1"
     unpipe "~1.0.0"
-
-follow-redirects@^1.10.0:
-  version "1.15.5"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.5.tgz#54d4d6d062c0fa7d9d17feb008461550e3ba8020"
-  integrity sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==
 
 forwarded@0.2.0:
   version "0.2.0"

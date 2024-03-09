@@ -1,4 +1,3 @@
-"use client";
 import { Text, Icon, Bold, Button } from "@tremor/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -74,7 +73,7 @@ const QuestionSidebar: React.FC<{
         <div className="flex h-full w-full flex-col items-center justify-center">
           <div className="relative -mt-8 h-auto w-72 opacity-75">
             <DotLottiePlayer
-              src={"/lottie/logo.lottie"}
+              src="./assets/logo.lottie"
               autoplay
               loop
             ></DotLottiePlayer>
