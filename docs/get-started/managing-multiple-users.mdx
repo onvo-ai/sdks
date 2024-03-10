@@ -13,7 +13,7 @@ Using both of these values, you can control what the user sees. Here is a code s
 
 ```JavaScript
 // setting user parameters
-await onvo.upsertEmbedUser("123456", {
+await onvo.embed_users.upsert("123456", {
     name: "John appleseed",
     email: "john@appleseed.com",
     metadata: {
@@ -23,7 +23,7 @@ await onvo.upsertEmbedUser("123456", {
 });
 
 // setting session parameters
-let session = await onvo.upsertDashboardSession({
+let session = await onvo.sessions.upsert({
     dashboardId: "yutc67taci87tads8",
     userId: "123456",
     parameters: {

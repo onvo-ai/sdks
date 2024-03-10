@@ -6,17 +6,16 @@
     "jsx": "react",
     "module": "ESNext",
     "declaration": true,
-    "declarationDir": "types",
     "target": "ES6",
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "lib",
     "moduleResolution": "node",
-    "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
   },
   "exclude": [
     "dist",
+    "lib",
     "node_modules",
     "src/**/*.test.tsx",
     "src/**/*.stories.tsx"

@@ -13,10 +13,8 @@ import { Disclosure } from "@headlessui/react";
 import Loader from "./Loader";
 import ChartBase from "../Chart/ChartBase";
 import { useDashboard } from "../Dashboard";
-// @ts-ignore
-import defaultUserImage from "./assets/default-user.png";
-// @ts-ignore
-import logoImage from "./assets/logo-square.svg";
+import Logo from "./Logo";
+import { UserIcon } from "@heroicons/react/24/solid";
 dayjs.extend(relativeTime);
 
 const QuestionMessage: React.FC<{
@@ -135,14 +133,7 @@ const QuestionMessage: React.FC<{
   if (role === "user") {
     return (
       <div className="group relative mb-3 flex flex-row items-start justify-start gap-3">
-        <img
-          className="z-10 rounded-md"
-          alt="profile"
-          src={defaultUserImage}
-          height={32}
-          width={32}
-        />
-
+        <Icon variant="shadow" icon={UserIcon} size="sm" />
         <div className="w-full">
           {editing ? (
             <Textarea
@@ -204,12 +195,10 @@ const QuestionMessage: React.FC<{
 
   return (
     <div className="relative mb-3 flex flex-row items-start justify-start gap-3">
-      <img
-        alt="profile"
-        src={logoImage}
-        className="rounded-md bg-gray-200 p-1 dark:bg-gray-800"
-        height={32}
-        width={32}
+      <Icon
+        variant="shadow"
+        icon={() => <Logo height={20} width={20} />}
+        size="sm"
       />
 
       <article className="prose prose-sm dark:prose-invert w-full">
