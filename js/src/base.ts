@@ -19,9 +19,9 @@ export default class OnvoBase {
         },
         body: body ? JSON.stringify(body) : undefined,
       });
-      let data = response.json();
+      let data = await response.json();
       if (!response.ok) {
-        throw new Error("Error in making the request: " + data);
+        throw new Error(JSON.stringify(data));
       }
       return data;
     } catch (error: any) {

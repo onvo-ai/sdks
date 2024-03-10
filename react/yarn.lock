@@ -1619,10 +1619,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@onvo-ai/js@^0.12.34":
-  version "0.12.34"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.12.34.tgz#c86906f3f6f47a21e7f24f4aef9001ec2919d235"
-  integrity sha512-att3VZ9cwo4LxMreNJ1Wn1cniRW8vdqZC0m87PF2C55COt4kuGUMd27eOyV29oG48iko/Kxc3LGV0ZDuDOYwDw==
+"@onvo-ai/js@^0.12.40":
+  version "0.12.40"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.12.40.tgz#a10b7ffee9b76825a171ae7dc1e83e55d39b43d3"
+  integrity sha512-1J8embzC47GTRuJatMCrMWZQMG0ucEzwhz8JLxkcxNeFw31QITkDI6abIXRnykfoC2Ua/CTlRwEBoD8x43R/fw==
 
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
