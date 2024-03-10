@@ -1,8 +1,11 @@
 {
   "name": "@onvo-ai/js",
-  "version": "0.12.35",
+  "version": "0.12.36",
   "description": "The nodejs SDK for Onvo AI dashboard builder",
   "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "rm -rf lib && tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "test": "jest"
