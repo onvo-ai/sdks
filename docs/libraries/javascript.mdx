@@ -76,7 +76,7 @@ To create a session linking the user and a dashboard, you can use the following 
 
 // Create a session
 const sessionUrl = await onvo.sessions.upsert({
-  userId: "123456",
+  user: "123456",
   dashboard: "<id of dashboard you have received from the previous dashboards.list() function>",
   parameters: {
     year: 2023,
