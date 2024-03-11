@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ESNext",
+    // "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    /* Modules */
+    "module": "CommonJS" /* Specify what module code is generated. */,
+    // "baseUrl": "." /* Specify the base directory to resolve non-relative module names. */,
+    "moduleResolution": "Node" /* Specify how TypeScript looks up a file from a given module specifier. */,
+    "composite": true,
+    /* JavaScript Support */
+    "allowJs": true /* Only output d.ts files and not JavaScript files. */,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "noEmit": true,
+    /* Type Checking */
+    "strict": true /* Enable all strict type-checking options. */,
+    "noImplicitAny": true /* Enable error reporting for expressions and declarations with an implied 'any' type. */,
+    "strictNullChecks": true /* When type checking, take into account 'null' and 'undefined'. */,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": true,
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+  },
+  "exclude": [".babelrc"]
+}

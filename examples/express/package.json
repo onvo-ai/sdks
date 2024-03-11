@@ -5,14 +5,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "tsx watch index.ts"
   },
-  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@onvo-ai/js": "^0.12.40",
+    "@onvo-ai/js": "^0.12.41",
     "dotenv": "^16.3.1",
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.25",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.2"
   }
 }

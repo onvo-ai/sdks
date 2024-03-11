@@ -331,6 +331,20 @@ var OnvoWidget = class extends OnvoBase {
       "/api/widgets/" + this.#id + "/image"
     );
   }
+  updatePrompts(messages) {
+    return this.fetchBase("/api/widgets/" + this.#id, "PATCH", {
+      messages
+    });
+  }
+  executeCode(code) {
+    return this.fetchBase(
+      "/api/widgets/" + this.#id + "/execute-code",
+      "POST",
+      {
+        code
+      }
+    );
+  }
 };
 
 // src/sessions/index.ts

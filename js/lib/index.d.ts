@@ -1669,6 +1669,26 @@ declare class OnvoWidget extends OnvoBase {
         endpoint: string;
     });
     getImage(): Promise<any>;
+    updatePrompts(messages: {
+        role: "user" | "assistant";
+        content: String;
+    }[]): Promise<{
+        assumptions: string[];
+        cache: string | null;
+        code: string;
+        created_at: string;
+        dashboard: string;
+        h: number | null;
+        id: string;
+        messages: Json;
+        settings: Json;
+        team: string;
+        title: string;
+        w: number | null;
+        x: number | null;
+        y: number | null;
+    }>;
+    executeCode(code: string): Promise<any>;
 }
 
 declare class OnvoSessions extends OnvoBase {

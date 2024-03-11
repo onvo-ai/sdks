@@ -35,8 +35,8 @@ app.get("/api/dashboards/:id", async function (req, res) {
     });
 
     let data = await onvo.sessions.upsert({
-      dashboardId: req.params.id,
-      userId: "123456",
+      dashboard: req.params.id,
+      user: "123456",
     });
     console.log(data);
     res.send(JSON.stringify({ url: data.url }));
