@@ -1,7 +1,7 @@
 {
   "name": "@onvo-ai/js",
   "version": "0.12.41",
-  "description": "The nodejs SDK for Onvo AI dashboard builder",
+  "description": "The javascript SDK for Onvo AI dashboard builder",
   "main": "./lib/index.js",
   "module": "./lib/index.mjs",
   "types": "./lib/index.d.ts",
@@ -10,7 +10,8 @@
   ],
   "scripts": {
     "build": "rm -rf lib && tsup",
-    "test": "jest"
+    "test": "jest",
+    "deploy": "yarn build && yarn test && yarn publish"
   },
   "repository": {
     "type": "git",
