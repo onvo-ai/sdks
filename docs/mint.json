@@ -151,9 +151,10 @@
       "pages": [
         "apis/dashboards/get-all-dashboards",
         "apis/dashboards/create-dashboard",
-        "apis/dashboards/get-dashboard-widget-suggestions",
+        "apis/dashboards/get-dashboard-by-id",
         "apis/dashboards/update-dashboard-by-id",
         "apis/dashboards/delete-dashboard-by-id",
+        "apis/dashboards/get-dashboard-widget-suggestions",
         "apis/dashboards/update-dashboard-widget-cache",
 
         {
@@ -171,7 +172,8 @@
       "pages": [
         "apis/sessions/get-all-dashboard-sessions",
         "apis/sessions/upsert-dashboard-session",
-        "apis/sessions/revoke-dashboard-sessions"
+        "apis/sessions/revoke-dashboard-sessions",
+        "apis/sessions/delete-dashboard-sessions"
       ]
     },
     {
@@ -179,6 +181,7 @@
       "pages": [
         "apis/questions/get-questions-by-dashboard",
         "apis/questions/ask-question-to-dashboard",
+        "apis/questions/update-question-by-id",
         "apis/questions/delete-question"
       ]
     },
@@ -219,11 +222,13 @@
       "group": "Widgets",
       "pages": [
         "apis/widgets/get-all-widgets-under-dashboard",
-        "apis/widgets/create-widget",
         "apis/widgets/get-widget-image-by-id",
         "apis/widgets/get-widget-by-id",
         "apis/widgets/update-widget-by-id",
-        "apis/widgets/delete-widget-by-id"
+        "apis/widgets/delete-widget-by-id",
+        "apis/widgets/request-edit-widget-by-id",
+        "apis/widgets/create-widget",
+        "apis/widgets/execute-widget-code"
       ]
     }
   ],
