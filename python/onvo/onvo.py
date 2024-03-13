@@ -26,8 +26,8 @@ class Onvo:
         """Initialize the Onvo object
 
         Args:
-            endpoint (str, optional): takes an endpoint such as "https://dashboard.onvo.ai/api". Defaults to ONVO_API_ENDPOINT in your local environment.
-            api_key (str, optional): takes an API endpoint. Defaults to ONVO_API_KEY in your local environment.
+            endpoint (str, optional): Takes an endpoint such as "https://dashboard.onvo.ai/api". Defaults to ONVO_API_ENDPOINT in your local environment.
+            api_key (str, optional): Takes an API key. Defaults to ONVO_API_KEY in your local environment.
         """
         self.endpoint = endpoint
         self.api_key = api_key
