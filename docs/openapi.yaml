@@ -21,14 +21,15 @@ info:
     [https://github.com/onvo-ai/sdks](https://github.com/onvo-ai/sdks)
   version: 1.0.0
 servers:
-  - url: http://{{baseurl}}
+  - url: https://dashboard.onvo.ai
 components:
   securitySchemes:
-    apikeyAuth:
-      type: http
-      scheme: apikey
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
 security:
-  - apikeyAuth: []
+  - ApiKeyAuth: []
 tags:
   - name: Automations
   - name: Accounts
@@ -63,17 +64,17 @@ paths:
         - Automations
       summary: Get all automations
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -115,39 +116,39 @@ paths:
                 type: object
               example:
                 - id: a8a95eeb-a54c-42eb-8d41-276217368105
-                  created_at: '2024-01-22T13:09:16.847+00:00'
-                  last_updated_at: '2024-01-22T13:09:16.847+00:00'
+                  created_at: "2024-01-22T13:09:16.847+00:00"
+                  last_updated_at: "2024-01-22T13:09:16.847+00:00"
                   created_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   last_run_at: null
                   next_run_at: null
                   title: First automation
-                  description: ''
+                  description: ""
                   dashboard:
                     id: c5d37456-a042-4177-ab5f-69563f07937d
                     title: Sample E-commerce dashboard
                   output_format: link
-                  schedule: ''
+                  schedule: ""
                   recipient_type: internal
-                  email_format: ''
-                  email_subject: ''
+                  email_format: ""
+                  email_subject: ""
                   recipients: []
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                   enabled: false
                   last_updated_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   timezone: Asia/Calcutta
     put:
       tags:
@@ -167,22 +168,22 @@ paths:
                 output_format: link
                 email_format: This is an automation from Onvo
                 email_subject: This is an automation from Onvo
-                schedule: ''
+                schedule: ""
                 recipient_type: internal
                 recipients: []
                 timezone: Asia/Calcutta
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -224,8 +225,8 @@ paths:
                 type: object
               example:
                 id: fc07e473-e83e-4f8c-ab80-ae14d83a41ba
-                created_at: '2024-01-24T16:02:28.215923+00:00'
-                last_updated_at: '2024-01-24T16:02:28.215923+00:00'
+                created_at: "2024-01-24T16:02:28.215923+00:00"
+                last_updated_at: "2024-01-24T16:02:28.215923+00:00"
                 created_by: 5899f99d-a449-4bfa-8769-19c097aaf1f5
                 last_run_at: null
                 next_run_at: null
@@ -233,7 +234,7 @@ paths:
                 description: A sample description
                 dashboard: c5d37456-a042-4177-ab5f-69563f07937d
                 output_format: link
-                schedule: ''
+                schedule: ""
                 recipient_type: internal
                 email_format: This is an automation from Onvo
                 email_subject: This is an automation from Onvo
@@ -255,17 +256,17 @@ paths:
           required: true
           example: 3d668658-8dc8-4298-ac90-3eb025f7b273
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -319,17 +320,17 @@ paths:
           required: true
           example: a8a95eeb-a54c-42eb-8d41-276217368105
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -371,19 +372,19 @@ paths:
                 type: object
               example:
                 id: a8a95eeb-a54c-42eb-8d41-276217368105
-                created_at: '2024-01-22T13:09:16.847+00:00'
-                last_updated_at: '2024-01-22T13:09:16.847+00:00'
+                created_at: "2024-01-22T13:09:16.847+00:00"
+                last_updated_at: "2024-01-22T13:09:16.847+00:00"
                 created_by: 5899f99d-a449-4bfa-8769-19c097aaf1f6
                 last_run_at: null
                 next_run_at: null
                 title: First automation by API
-                description: ''
+                description: ""
                 dashboard: c5d37456-a042-4177-ab5f-69563f07937d
                 output_format: link
-                schedule: ''
+                schedule: ""
                 recipient_type: internal
-                email_format: ''
-                email_subject: ''
+                email_format: ""
+                email_subject: ""
                 recipients: []
                 team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                 enabled: false
@@ -401,17 +402,17 @@ paths:
           required: true
           example: fc07e473-e83e-4f8c-ab80-ae14d83a41ba
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -471,17 +472,17 @@ paths:
             type: string
           required: true
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -523,19 +524,19 @@ paths:
                 type: object
               example:
                 id: a8a95eeb-a54c-42eb-8d41-276217368105
-                created_at: '2024-01-22T13:09:16.847+00:00'
-                last_updated_at: '2024-01-22T13:09:16.847+00:00'
+                created_at: "2024-01-22T13:09:16.847+00:00"
+                last_updated_at: "2024-01-22T13:09:16.847+00:00"
                 created_by: 5899f99d-a449-4bfa-8769-19c097aaf1f6
                 last_run_at: null
                 next_run_at: null
                 title: First automation by API
-                description: ''
+                description: ""
                 dashboard: c5d37456-a042-4177-ab5f-69563f07937d
                 output_format: link
-                schedule: ''
+                schedule: ""
                 recipient_type: internal
-                email_format: ''
-                email_subject: ''
+                email_format: ""
+                email_subject: ""
                 recipients: []
                 team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                 enabled: false
@@ -547,17 +548,17 @@ paths:
         - Accounts
       summary: Get all accounts
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -599,33 +600,33 @@ paths:
                 type: object
               example:
                 - id: 5899f99d-a449-4bfa-8769-19c097aaf1f5
-                  updated_at: '2024-01-17T10:14:12.62603+00:00'
+                  updated_at: "2024-01-17T10:14:12.62603+00:00"
                   full_name: Demo user
                   avatar_url: >-
                     https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                   email: info@onvo.ai
-                  phone_number: '8075065108'
+                  phone_number: "8075065108"
                 - id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                  updated_at: '2024-01-17T10:14:12.62603+00:00'
+                  updated_at: "2024-01-17T10:14:12.62603+00:00"
                   full_name: Ronnel Davis
                   avatar_url: >-
                     https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                   email: ronneldavis1996@gmail.com
-                  phone_number: '8075065108'
+                  phone_number: "8075065108"
                 - id: 5899f99d-a449-4bfa-8769-19c097aaf1f7
-                  updated_at: '2024-01-17T10:14:12.62603+00:00'
+                  updated_at: "2024-01-17T10:14:12.62603+00:00"
                   full_name: Ashiq Muhammed
                   avatar_url: >-
                     https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                   email: mbgashiq@gmail.com
-                  phone_number: '8075065108'
+                  phone_number: "8075065108"
                 - id: 5899f99d-a449-4bfa-8769-19c097aaf1f8
-                  updated_at: '2024-01-17T10:14:12.62603+00:00'
+                  updated_at: "2024-01-17T10:14:12.62603+00:00"
                   full_name: Vrushabh Jambhulkar
                   avatar_url: >-
                     https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                   email: vrushabh2312@gmail.com
-                  phone_number: '8075065108'
+                  phone_number: "8075065108"
   /api/accounts/{id}:
     get:
       tags:
@@ -639,17 +640,17 @@ paths:
           required: true
           example: 5899f99d-a449-4bfa-8769-19c097aaf1f5
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -691,12 +692,12 @@ paths:
                 type: object
               example:
                 id: 5899f99d-a449-4bfa-8769-19c097aaf1f5
-                updated_at: '2024-01-17T10:14:12.62603+00:00'
+                updated_at: "2024-01-17T10:14:12.62603+00:00"
                 full_name: Demo user
                 avatar_url: >-
                   https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                 email: info@onvo.ai
-                phone_number: '8075065108'
+                phone_number: "8075065108"
   /api/teams:
     get:
       tags:
@@ -707,7 +708,7 @@ paths:
         calling with an API key, the endpoint fails as a key is scoped to a
         singular organisation
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             vary:
@@ -739,7 +740,7 @@ paths:
               schema:
                 type: object
               example:
-                - created_at: '2023-09-26T13:39:00.642448+00:00'
+                - created_at: "2023-09-26T13:39:00.642448+00:00"
                   name: Onvo Test
                   id: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                   phone_number: null
@@ -763,17 +764,17 @@ paths:
           required: true
           example: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -814,7 +815,7 @@ paths:
               schema:
                 type: object
               example:
-                created_at: '2024-01-17T10:14:12.62603+00:00'
+                created_at: "2024-01-17T10:14:12.62603+00:00"
                 name: Onvo AI
                 id: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                 phone_number: +91 807 506 5108
@@ -845,17 +846,17 @@ paths:
           required: true
           example: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -896,7 +897,7 @@ paths:
               schema:
                 type: object
               example:
-                created_at: '2024-01-17T10:14:12.62603+00:00'
+                created_at: "2024-01-17T10:14:12.62603+00:00"
                 name: Onvo AI
                 id: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                 phone_number: +91 807 506 5108
@@ -916,17 +917,17 @@ paths:
           required: true
           example: c5d37456-a042-4177-ab5f-69563f07937d
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -968,8 +969,8 @@ paths:
                 type: object
               example:
                 - id: bce247c9-079a-414f-af8f-49a24598d8b9
-                  created_at: '2024-01-21T15:54:42.14785+00:00'
-                  last_updated_at: '2024-01-21T15:54:42.14785+00:00'
+                  created_at: "2024-01-21T15:54:42.14785+00:00"
+                  last_updated_at: "2024-01-21T15:54:42.14785+00:00"
                   title: Sample Customers
                   source: file
                   config: >-
@@ -989,7 +990,7 @@ paths:
                       description: Postal Code of customer
                     - title: Region
                       description: Region of residence
-                  parameters: '[]'
+                  parameters: "[]"
                   description: >-
                     A sample datasource containing the details of customers in
                     an e-commerce setting
@@ -1030,8 +1031,8 @@ paths:
                     States","Segment":"Consumer","State":"California","Postal
                     Code":"94109","Region":"West"}]
                 - id: a0242622-ca73-4353-87b1-4e0af2051b07
-                  created_at: '2024-01-21T15:54:42.161692+00:00'
-                  last_updated_at: '2024-01-21T15:54:42.161692+00:00'
+                  created_at: "2024-01-21T15:54:42.161692+00:00"
+                  last_updated_at: "2024-01-21T15:54:42.161692+00:00"
                   title: Sample Orders
                   source: file
                   config: >-
@@ -1065,7 +1066,7 @@ paths:
                       description: Discount as a percentage from 0-1
                     - title: Profit
                       description: Profit in USD (can be negative)
-                  parameters: '[]'
+                  parameters: "[]"
                   description: >-
                     A sample datasource containing the details of orders in an
                     e-commerce setting
@@ -1159,17 +1160,17 @@ paths:
           required: true
           example: c5d37456-a042-4177-ab5f-69563f07937d
       responses:
-        '201':
+        "201":
           description: Created
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -1232,17 +1233,17 @@ paths:
           required: true
           example: 2e335065-0fb5-47c0-97b0-e603a15efdd8
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -1291,7 +1292,7 @@ paths:
       summary: Get all dashboards
       description: This endpoint fetches all teh dashboards under an organisation
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             content-type:
@@ -1330,8 +1331,8 @@ paths:
                 type: object
               example:
                 - id: 47b6e961-a51c-4bf3-a9d4-01f30215cc42
-                  created_at: '2023-09-01T11:14:50.430891+00:00'
-                  last_updated_at: '2023-09-07T14:51:42.626+00:00'
+                  created_at: "2023-09-01T11:14:50.430891+00:00"
+                  last_updated_at: "2023-09-07T14:51:42.626+00:00"
                   title: Sample Dashboard
                   description: Some description about the dashboard
                   thumbnail: >-
@@ -1345,7 +1346,7 @@ paths:
                         Show me a metric showing the total amount of sales in US
                         dollars. Round the final value to 2 decimal points
                       x: 4
-                      'y': 0
+                      "y": 0
                       w: 4
                       h: 1
                       assumptions:
@@ -1402,7 +1403,7 @@ paths:
                       title: Total customers
                       query: Create a metric showing the total customer to date
                       x: 0
-                      'y': 0
+                      "y": 0
                       w: 4
                       h: 1
                       assumptions:
@@ -1449,7 +1450,7 @@ paths:
                         Show me the sales per month as a line chart. Each line
                         should show the sales for a year.
                       x: 6
-                      'y': 1
+                      "y": 1
                       w: 6
                       h: 3
                       assumptions: []
@@ -1514,7 +1515,7 @@ paths:
                       title: Total orders
                       query: Show me a metric for how many orders I have to date
                       x: 8
-                      'y': 0
+                      "y": 0
                       w: 4
                       h: 1
                       assumptions:
@@ -1592,7 +1593,7 @@ paths:
                       title: Top 5 states by sales volume
                       query: Create a chart showing the top 5 states by sales volume
                       x: 0
-                      'y': 1
+                      "y": 1
                       w: 6
                       h: 3
                       assumptions: []
@@ -1672,8 +1673,8 @@ paths:
                       dashboard: 47b6e961-a51c-4bf3-a9d4-01f30215cc42
                   datasources:
                     - id: 44a3aa21-0181-46d9-a54b-af915aaec92e
-                      created_at: '2023-09-01T11:39:30.716235+00:00'
-                      last_updated_at: '2023-09-01T11:40:13.644+00:00'
+                      created_at: "2023-09-01T11:39:30.716235+00:00"
+                      last_updated_at: "2023-09-01T11:40:13.644+00:00"
                       title: Customer data
                       source: file
                       config:
@@ -1698,8 +1699,8 @@ paths:
                       organisation: 31a05cfd-1275-4c76-8390-20b328a3c4bf
                       parameters: []
                     - id: 74813926-d1ec-4b38-82e1-08d1820cb029
-                      created_at: '2023-09-01T10:26:18.017866+00:00'
-                      last_updated_at: '2023-09-06T15:17:27.333+00:00'
+                      created_at: "2023-09-01T10:26:18.017866+00:00"
+                      last_updated_at: "2023-09-06T15:17:27.333+00:00"
                       title: Order data
                       source: file
                       config:
@@ -1755,7 +1756,7 @@ paths:
                 thumbnail: >-
                   https://images.klipfolio.com/website/public/5a275fee-d42b-4f31-91f6-8148d4d729af/executive%20dashboard.png
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             content-type:
@@ -1794,8 +1795,8 @@ paths:
                 type: object
               example:
                 id: d1f04fea-9ef7-4a68-a30e-a0e1d3462006
-                created_at: '2023-09-08T06:27:01.524552+00:00'
-                last_updated_at: '2023-09-08T06:27:01.524552+00:00'
+                created_at: "2023-09-08T06:27:01.524552+00:00"
+                last_updated_at: "2023-09-08T06:27:01.524552+00:00"
                 title: Untitled Dashboard
                 description: Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
                 thumbnail: >-
@@ -1815,7 +1816,7 @@ paths:
           required: true
           example: c5d37456-a042-4177-ab5f-69563f07937d
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             content-type:
@@ -1854,8 +1855,8 @@ paths:
                 type: object
               example:
                 id: 47b6e961-a51c-4bf3-a9d4-01f30215cc42
-                created_at: '2023-09-01T11:14:50.430891+00:00'
-                last_updated_at: '2023-09-07T14:51:42.626+00:00'
+                created_at: "2023-09-01T11:14:50.430891+00:00"
+                last_updated_at: "2023-09-07T14:51:42.626+00:00"
                 title: Sample Dashboard
                 description: Some description about the dashboard
                 thumbnail: >-
@@ -1869,7 +1870,7 @@ paths:
                       Show me a metric showing the total amount of sales in US
                       dollars. Round the final value to 2 decimal points
                     x: 4
-                    'y': 0
+                    "y": 0
                     w: 4
                     h: 1
                     assumptions:
@@ -1925,7 +1926,7 @@ paths:
                     title: Total customers
                     query: Create a metric showing the total customer to date
                     x: 0
-                    'y': 0
+                    "y": 0
                     w: 4
                     h: 1
                     assumptions:
@@ -1972,7 +1973,7 @@ paths:
                       Show me the sales per month as a line chart. Each line
                       should show the sales for a year.
                     x: 6
-                    'y': 1
+                    "y": 1
                     w: 6
                     h: 3
                     assumptions: []
@@ -2037,7 +2038,7 @@ paths:
                     title: Total orders
                     query: Show me a metric for how many orders I have to date
                     x: 8
-                    'y': 0
+                    "y": 0
                     w: 4
                     h: 1
                     assumptions:
@@ -2113,7 +2114,7 @@ paths:
                     title: Top 5 states by sales volume
                     query: Create a chart showing the top 5 states by sales volume
                     x: 0
-                    'y': 1
+                    "y": 1
                     w: 6
                     h: 3
                     assumptions: []
@@ -2193,8 +2194,8 @@ paths:
                     dashboard: 47b6e961-a51c-4bf3-a9d4-01f30215cc42
                 datasources:
                   - id: 44a3aa21-0181-46d9-a54b-af915aaec92e
-                    created_at: '2023-09-01T11:39:30.716235+00:00'
-                    last_updated_at: '2023-09-01T11:40:13.644+00:00'
+                    created_at: "2023-09-01T11:39:30.716235+00:00"
+                    last_updated_at: "2023-09-01T11:40:13.644+00:00"
                     title: Customer data
                     source: file
                     config:
@@ -2219,8 +2220,8 @@ paths:
                     organisation: 31a05cfd-1275-4c76-8390-20b328a3c4bf
                     parameters: []
                   - id: 74813926-d1ec-4b38-82e1-08d1820cb029
-                    created_at: '2023-09-01T10:26:18.017866+00:00'
-                    last_updated_at: '2023-09-06T15:17:27.333+00:00'
+                    created_at: "2023-09-01T10:26:18.017866+00:00"
+                    last_updated_at: "2023-09-06T15:17:27.333+00:00"
                     title: Order data
                     source: file
                     config:
@@ -2270,7 +2271,7 @@ paths:
           required: true
           example: 22d7c977-b9fb-426b-82a2-83d68f65afc8
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             content-type:
@@ -2328,7 +2329,7 @@ paths:
           required: true
           example: d1f04fea-9ef7-4a68-a30e-a0e1d3462006
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             content-type:
@@ -2367,8 +2368,8 @@ paths:
                 type: object
               example:
                 id: d1f04fea-9ef7-4a68-a30e-a0e1d3462006
-                created_at: '2023-09-08T06:27:01.524552+00:00'
-                last_updated_at: '2023-09-08T10:37:58.032+00:00'
+                created_at: "2023-09-08T06:27:01.524552+00:00"
+                last_updated_at: "2023-09-08T10:37:58.032+00:00"
                 title: TESTING API
                 description: Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
                 thumbnail: >-
@@ -2388,17 +2389,17 @@ paths:
           required: true
           example: fc5624ac-abd8-453c-b56d-898b990a94f0
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -2461,17 +2462,17 @@ paths:
           required: true
           example: fd0b9d77-791d-4898-afa6-99800301d861
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -2518,7 +2519,7 @@ paths:
                     Create a bar chart showing the orders per month. The x axis
                     should show the month and year in MM-YYYY format
                   x: 6
-                  'y': 3
+                  "y": 3
                   w: 6
                   h: 3
                   assumptions:
@@ -2604,7 +2605,7 @@ paths:
                     month. The x-axis should show the month in MM-YYYY format.
                     Do not use moment.js
                   x: 0
-                  'y': 5
+                  "y": 5
                   w: 6
                   h: 3
                   assumptions:
@@ -2681,7 +2682,7 @@ paths:
                   title: Orders per year
                   query: Create a bar chart showing the sales in USD per year
                   x: 4
-                  'y': 1
+                  "y": 1
                   w: 4
                   h: 2
                   assumptions:
@@ -2765,7 +2766,7 @@ paths:
                   title: Top 5 states by sales
                   query: Create a bar chart showing the top 5 states by sales volume
                   x: 0
-                  'y': 3
+                  "y": 3
                   w: 4
                   h: 2
                   assumptions:
@@ -2863,7 +2864,7 @@ paths:
                     customers. It can be calculated by dividing the total sales
                     in USD divided by the number of customers
                   x: 8
-                  'y': 0
+                  "y": 0
                   w: 4
                   h: 1
                   assumptions:
@@ -2942,11 +2943,11 @@ paths:
                     Create a pie chart showing the sales in 2018 vs the sales in
                     2019
                   x: 0
-                  'y': 0
+                  "y": 0
                   w: 4
                   h: 2
                   assumptions:
-                    - ''
+                    - ""
                     - >-
                       1. Load the 'Sample Orders' dataset using pandas with only
                       the necessary columns 'Order Date' and 'Sales' to minimize
@@ -2975,8 +2976,8 @@ paths:
                     - >-
                       9. Set the plugins.datalabels.display to false as the user
                       has not asked to show the values in the chart.
-                    - ''
-                    - ''
+                    - ""
+                    - ""
                   code: |-
                     import pandas as pd
 
@@ -3031,7 +3032,7 @@ paths:
                     Create a pie chart showing the sales volumes of New York and
                     California
                   x: 8
-                  'y': 1
+                  "y": 1
                   w: 4
                   h: 2
                   assumptions:
@@ -3120,7 +3121,7 @@ paths:
                   title: Total orders overall
                   query: Create a metric showing total orders
                   x: 4
-                  'y': 0
+                  "y": 0
                   w: 4
                   h: 1
                   assumptions:
@@ -3186,7 +3187,7 @@ paths:
                   title: Total customers
                   query: Create a metric showing all my customers to date
                   x: 0
-                  'y': 2
+                  "y": 2
                   w: 4
                   h: 1
                   assumptions:
@@ -3269,20 +3270,20 @@ paths:
             schema:
               type: object
               example:
-                user: '123456'
+                user: "123456"
                 dashboard: fd0b9d77-791d-4898-afa6-99800301d861
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -3324,10 +3325,10 @@ paths:
                 type: object
               example:
                 id: 0abd65a9-2646-4633-9488-f13f1cafbee9
-                created_at: '2024-02-08T12:38:33.134741+00:00'
+                created_at: "2024-02-08T12:38:33.134741+00:00"
                 dashboard: bd5a09a7-2d8c-4339-a20d-db9f425bf47e
                 team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
-                user: '123456'
+                user: "123456"
                 url: >-
                   /embed/dashboard/bd5a09a7-2d8c-4339-a20d-db9f425bf47e?token=eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFwcF9tZXRhZGF0YSI6eyJkYXNoYm9hcmRzIjpbImJkNWEwOWE3LTJkOGMtNDMzOS1hMjBkLWRiOWY0MjViZjQ3ZSJdLCJzZXNzaW9uIjoiMGFiZDY1YTktMjY0Ni00NjMzLTk0ODgtZjEzZjFjYWZiZWU5IiwicGFyZW50X3RlYW0iOiJlZTViMDhjNi01MTY3LTQ0MjUtYmJjMy1hNzQ2ZmU0YTdlYWQifSwic3ViIjoiZWU1YjA4YzYtNTE2Ny00NDI1LWJiYzMtYTc0NmZlNGE3ZWFkLTEyMzQ1NiIsImF1ZCI6ImF1dGhlbnRpY2F0ZWQiLCJpYXQiOjE3MDczOTU5MTN9.C2hKE6jqIZxcJwW9ncN6zA4T1j_3lOZHBginJeyUz18
                 token: >-
@@ -3343,17 +3344,17 @@ paths:
             type: string
           example: fd0b9d77-791d-4898-afa6-99800301d861
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -3406,17 +3407,17 @@ paths:
             type: string
           example: fd0b9d77-791d-4898-afa6-99800301d861
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -3460,13 +3461,13 @@ paths:
                 - id: 270d2743-3ad0-47e7-b760-7d30583383dd
                   embed_user: ee5b08c6-5167-4425-bbc3-a746fe4a7ead-123456
                   parameters: AMzLETYlazN6mEtbScR+EBWTzDDGtijTB7ivDcx38d4NVw==
-                  created_at: '2024-02-08T10:06:39.959868+00:00'
+                  created_at: "2024-02-08T10:06:39.959868+00:00"
                   dashboard: bd5a09a7-2d8c-4339-a20d-db9f425bf47e
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                 - id: 0abd65a9-2646-4633-9488-f13f1cafbee9
                   embed_user: ee5b08c6-5167-4425-bbc3-a746fe4a7ead-123456
                   parameters: AMzLETYlazN6mEtbScR+EBWTzDDGtijTB7ivDcx38d4NVw==
-                  created_at: '2024-02-08T12:38:33.134741+00:00'
+                  created_at: "2024-02-08T12:38:33.134741+00:00"
                   dashboard: bd5a09a7-2d8c-4339-a20d-db9f425bf47e
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
   /api/sessions/{id}:
@@ -3482,17 +3483,17 @@ paths:
           required: true
           example: e9334aee-9a6a-4558-866a-0ca6bad13b91
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -3604,17 +3605,17 @@ paths:
                   - role: user
                     content: Can you split it by year?
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -3653,7 +3654,7 @@ paths:
                 type: object
               example:
                 id: e380c78a-89b0-4f89-84a4-54018e59993e
-                created_at: '2024-03-13T08:35:11.1161+00:00'
+                created_at: "2024-03-13T08:35:11.1161+00:00"
                 dashboard: fc5624ac-abd8-453c-b56d-898b990a94f0
                 query: |-
                   How many orders do I have in total?
@@ -3833,17 +3834,17 @@ paths:
             type: string
           example: fd0b9d77-791d-4898-afa6-99800301d861
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -3885,11 +3886,11 @@ paths:
                 type: object
               example:
                 - id: 665b4c0a-4d50-48d6-9045-5e3ce2b4a503
-                  created_at: '2024-02-08T07:10:24.99291+00:00'
+                  created_at: "2024-02-08T07:10:24.99291+00:00"
                   dashboard: fd0b9d77-791d-4898-afa6-99800301d861
                   query: Which state gives me the highest orders?
                   assumptions:
-                    - ''
+                    - ""
                     - >-
                       1. Load the necessary columns from the 'Sample Orders'
                       dataset to count the number of orders per state. We will
@@ -3922,8 +3923,8 @@ paths:
                     - >-
                       10. Set the plugins.datalabels.display option to false as
                       the user did not ask to show the values in the chart.
-                    - ''
-                    - ''
+                    - ""
+                    - ""
                   code: |-
                     import pandas as pd
 
@@ -3997,11 +3998,11 @@ paths:
                     of Orders per
                     State"},"datalabels":{"display":false}},"scales":{"y":{"beginAtZero":true}}}}
                 - id: 7135ce6b-372e-4879-9b99-b818a73155d4
-                  created_at: '2024-02-08T07:10:24.992797+00:00'
+                  created_at: "2024-02-08T07:10:24.992797+00:00"
                   dashboard: fd0b9d77-791d-4898-afa6-99800301d861
                   query: How many orders do I have year over year?
                   assumptions:
-                    - ''
+                    - ""
                     - >-
                       1. Load the 'Order Date' column from the 'Sample Orders'
                       dataset using pandas, as it contains the necessary
@@ -4028,8 +4029,8 @@ paths:
                       8. Set the plugins.datalabels.display option to false as
                       the user has not asked to show the values in the chart.
                     - 9. Return the chart configuration as a dictionary.
-                    - ''
-                    - ''
+                    - ""
+                    - ""
                   code: |-
                     import pandas as pd
 
@@ -4102,11 +4103,11 @@ paths:
                     of Orders Year Over
                     Year"},"datalabels":{"display":false}},"scales":{"y":{"beginAtZero":true}}}}
                 - id: d860060c-68e1-4c9d-bdbc-d84ca0337c5f
-                  created_at: '2024-02-08T07:11:36.573628+00:00'
+                  created_at: "2024-02-08T07:11:36.573628+00:00"
                   dashboard: fd0b9d77-791d-4898-afa6-99800301d861
                   query: What is my LTV in CAD?
                   assumptions:
-                    - ''
+                    - ""
                     - >-
                       1. Load the 'Sample Orders' dataset as it contains the
                       'Sales' and 'Profit' columns which are necessary to
@@ -4139,8 +4140,8 @@ paths:
                     - >-
                       9. Set plugins.datalabels.display to false as per the
                       instructions.
-                    - ''
-                    - ''
+                    - ""
+                    - ""
                   code: |-
                     import pandas as pd
 
@@ -4203,17 +4204,17 @@ paths:
           required: true
           example: 665b4c0a-4d50-48d6-9045-5e3ce2b4a503
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -4269,17 +4270,17 @@ paths:
           required: true
           example: 665b4c0a-4d50-48d6-9045-5e3ce2b4a503
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -4321,11 +4322,11 @@ paths:
                 type: object
               example:
                 - id: 665b4c0a-4d50-48d6-9045-5e3ce2b4a503
-                  created_at: '2024-02-08T07:10:24.99291+00:00'
+                  created_at: "2024-02-08T07:10:24.99291+00:00"
                   dashboard: fd0b9d77-791d-4898-afa6-99800301d861
                   query: Which state gives me the highest orders?
                   assumptions:
-                    - ''
+                    - ""
                     - >-
                       1. Load the necessary columns from the 'Sample Orders'
                       dataset to count the number of orders per state. We will
@@ -4358,8 +4359,8 @@ paths:
                     - >-
                       10. Set the plugins.datalabels.display option to false as
                       the user did not ask to show the values in the chart.
-                    - ''
-                    - ''
+                    - ""
+                    - ""
                   code: |-
                     import pandas as pd
 
@@ -4433,11 +4434,11 @@ paths:
                     of Orders per
                     State"},"datalabels":{"display":false}},"scales":{"y":{"beginAtZero":true}}}}
                 - id: 7135ce6b-372e-4879-9b99-b818a73155d4
-                  created_at: '2024-02-08T07:10:24.992797+00:00'
+                  created_at: "2024-02-08T07:10:24.992797+00:00"
                   dashboard: fd0b9d77-791d-4898-afa6-99800301d861
                   query: How many orders do I have year over year?
                   assumptions:
-                    - ''
+                    - ""
                     - >-
                       1. Load the 'Order Date' column from the 'Sample Orders'
                       dataset using pandas, as it contains the necessary
@@ -4464,8 +4465,8 @@ paths:
                       8. Set the plugins.datalabels.display option to false as
                       the user has not asked to show the values in the chart.
                     - 9. Return the chart configuration as a dictionary.
-                    - ''
-                    - ''
+                    - ""
+                    - ""
                   code: |-
                     import pandas as pd
 
@@ -4538,11 +4539,11 @@ paths:
                     of Orders Year Over
                     Year"},"datalabels":{"display":false}},"scales":{"y":{"beginAtZero":true}}}}
                 - id: d860060c-68e1-4c9d-bdbc-d84ca0337c5f
-                  created_at: '2024-02-08T07:11:36.573628+00:00'
+                  created_at: "2024-02-08T07:11:36.573628+00:00"
                   dashboard: fd0b9d77-791d-4898-afa6-99800301d861
                   query: What is my LTV in CAD?
                   assumptions:
-                    - ''
+                    - ""
                     - >-
                       1. Load the 'Sample Orders' dataset as it contains the
                       'Sales' and 'Profit' columns which are necessary to
@@ -4575,8 +4576,8 @@ paths:
                     - >-
                       9. Set plugins.datalabels.display to false as per the
                       instructions.
-                    - ''
-                    - ''
+                    - ""
+                    - ""
                   code: |-
                     import pandas as pd
 
@@ -4639,21 +4640,21 @@ paths:
               example:
                 name: TESTSTTS
                 email: helleeo@eyworld.com
-                id: '123456'
+                id: "123456"
                 metadata:
                   hello: world
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -4694,9 +4695,9 @@ paths:
               schema:
                 type: object
               example:
-                id: '123456'
-                created_at: '2024-01-20T09:48:58.064312+00:00'
-                last_updated_at: '2024-01-20T09:48:58.064312+00:00'
+                id: "123456"
+                created_at: "2024-01-20T09:48:58.064312+00:00"
+                last_updated_at: "2024-01-20T09:48:58.064312+00:00"
                 name: TESTSTTS
                 email: helleeo@eyworld.com
                 metadata:
@@ -4707,17 +4708,17 @@ paths:
         - Embed Users
       summary: Get all embed users
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -4759,23 +4760,23 @@ paths:
                 type: object
               example:
                 - id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                  created_at: '2024-01-23T13:32:33.333579+00:00'
-                  last_updated_at: '2024-01-23T13:32:33.333579+00:00'
+                  created_at: "2024-01-23T13:32:33.333579+00:00"
+                  last_updated_at: "2024-01-23T13:32:33.333579+00:00"
                   name: Ronnel Davis
                   email: ronneldavis1996@gmail.com
                   metadata: {}
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                 - id: successfull
-                  created_at: '2024-01-24T14:36:04.032105+00:00'
-                  last_updated_at: '2024-01-24T14:36:04.032105+00:00'
+                  created_at: "2024-01-24T14:36:04.032105+00:00"
+                  last_updated_at: "2024-01-24T14:36:04.032105+00:00"
                   name: TESTSTTS
                   email: helleeo@eyworld.com
                   metadata:
                     hello: world
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
-                - id: '123456'
-                  created_at: '2024-01-20T09:48:58.064312+00:00'
-                  last_updated_at: '2024-01-20T09:48:58.064312+00:00'
+                - id: "123456"
+                  created_at: "2024-01-20T09:48:58.064312+00:00"
+                  last_updated_at: "2024-01-20T09:48:58.064312+00:00"
                   name: TESTSTTS
                   email: helleeo@eyworld.com
                   metadata:
@@ -4792,19 +4793,19 @@ paths:
           schema:
             type: integer
           required: true
-          example: '123456'
+          example: "123456"
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -4845,7 +4846,7 @@ paths:
               schema:
                 type: object
               example:
-                user: '123456'
+                user: "123456"
                 token: >-
                   eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFwcF9tZXRhZGF0YSI6eyJkYXNoYm9hcmRzIjpbImY3MmU1MjhhLTc3MjItNGY2Ny05NDk5LTgwNmQ3NDcwMTk5MiJdfSwic3ViIjoiZWU1YjA4YzYtNTE2Ny00NDI1LWJiYzMtYTc0NmZlNGE3ZWFkLTEyMzQ1NiIsImF1ZCI6ImF1dGhlbnRpY2F0ZWQiLCJpYXQiOjE3MDYxMDcyNzl9.ENx5LFmxJ-2x5WsPTS3dWj4hAASsk9tDC5oN4lPYHoU
   /api/embed-users/{id}:
@@ -4859,19 +4860,19 @@ paths:
           schema:
             type: integer
           required: true
-          example: '123456'
+          example: "123456"
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -4912,9 +4913,9 @@ paths:
               schema:
                 type: object
               example:
-                id: '123456'
-                created_at: '2024-01-20T09:48:58.064312+00:00'
-                last_updated_at: '2024-01-20T09:48:58.064312+00:00'
+                id: "123456"
+                created_at: "2024-01-20T09:48:58.064312+00:00"
+                last_updated_at: "2024-01-20T09:48:58.064312+00:00"
                 name: TESTSTTS
                 email: helleeo@eyworld.com
                 metadata:
@@ -4930,19 +4931,19 @@ paths:
           schema:
             type: integer
           required: true
-          example: '123456'
+          example: "123456"
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -4997,17 +4998,17 @@ paths:
           required: true
           example: 30f1b94c-a03d-41aa-bb2a-bc94890f1926
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -5049,8 +5050,8 @@ paths:
                 type: object
               example:
                 id: 30f1b94c-a03d-41aa-bb2a-bc94890f1926
-                created_at: '2024-01-17T16:31:06.014144+00:00'
-                last_updated_at: '2024-01-17T16:31:28.528+00:00'
+                created_at: "2024-01-17T16:31:06.014144+00:00"
+                last_updated_at: "2024-01-17T16:31:28.528+00:00"
                 title: File test
                 source: file
                 config: >-
@@ -5072,8 +5073,8 @@ paths:
                     description: >-
                       The amount received by the bank in currency format (e.g.,
                       '3,680.00')
-                parameters: '[]'
-                description: ''
+                parameters: "[]"
+                description: ""
                 team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                 created_by: 5899f99d-a449-4bfa-8769-19c097aaf1f6
                 last_updated_by: 5899f99d-a449-4bfa-8769-19c097aaf1f6
@@ -5121,17 +5122,17 @@ paths:
           required: true
           example: 1e299626-d48f-4686-9102-7ee26499ec52
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -5192,17 +5193,17 @@ paths:
           required: true
           example: 2e335065-0fb5-47c0-97b0-e603a15efdd8
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -5244,8 +5245,8 @@ paths:
                 type: object
               example:
                 id: 2e335065-0fb5-47c0-97b0-e603a15efdd8
-                created_at: '2024-01-17T11:55:26.929359+00:00'
-                last_updated_at: '2024-01-24T15:26:11.8+00:00'
+                created_at: "2024-01-17T11:55:26.929359+00:00"
+                last_updated_at: "2024-01-24T15:26:11.8+00:00"
                 title: Airtable customers dataset
                 source: airtable
                 config: >-
@@ -5270,7 +5271,7 @@ paths:
                   - title: Region
                     description: The region where the customer is located.
                 parameters: GCHHaN/37sD/x8jhbI0Drf6jUqRumCZilJjAmPp6c+JRkg==
-                description: ''
+                description: ""
                 team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                 created_by: 5899f99d-a449-4bfa-8769-19c097aaf1f6
                 last_updated_by: null
@@ -5344,17 +5345,17 @@ paths:
           required: true
           example: ff9936cb-9e9b-4399-bd78-510dd608ce69
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -5401,73 +5402,73 @@ paths:
                 sample_data:
                   - Date: 1-Jul
                     Guest: Siddharth Manmdhan
-                    Phone number: ''
-                    Total nights: '1'
+                    Phone number: ""
+                    Total nights: "1"
                     Confirmed Amt: " \t3,880.00"
-                    GST: '200'
+                    GST: "200"
                     Received by Bank: " \t3,680.00"
                   - Date: 6-Jul
                     Guest: John Umman
-                    Phone number: ''
-                    Total nights: '1'
+                    Phone number: ""
+                    Total nights: "1"
                     Confirmed Amt: " \t3,880.00"
-                    GST: '200'
+                    GST: "200"
                     Received by Bank: " \t3,680.00"
                   - Date: 8-Jul
                     Guest: Irshad PP
-                    Phone number: ''
-                    Total nights: '1'
+                    Phone number: ""
+                    Total nights: "1"
                     Confirmed Amt: " \t3,880.00"
-                    GST: '200'
+                    GST: "200"
                     Received by Bank: " \t3,680.00"
                   - Date: 9-Jul
                     Guest: Avith M Lal
-                    Phone number: ''
-                    Total nights: '1'
+                    Phone number: ""
+                    Total nights: "1"
                     Confirmed Amt: " \t3,317.40"
-                    GST: '171'
+                    GST: "171"
                     Received by Bank: " \t3,146.40"
                   - Date: 11-Jul
                     Guest: Shams Nazar
-                    Phone number: ''
-                    Total nights: '2'
+                    Phone number: ""
+                    Total nights: "2"
                     Confirmed Amt: " \t7,760.00"
-                    GST: '400'
+                    GST: "400"
                     Received by Bank: " \t7,360.00"
                   - Date: 14-Jul
                     Guest: Kevin Thomas
-                    Phone number: ''
-                    Total nights: '1'
+                    Phone number: ""
+                    Total nights: "1"
                     Confirmed Amt: " \t3,317.40"
-                    GST: '171'
+                    GST: "171"
                     Received by Bank: " \t3,146.40"
                   - Date: 15-Jul
                     Guest: Kevin Thomas
-                    Phone number: ''
-                    Total nights: '1'
+                    Phone number: ""
+                    Total nights: "1"
                     Confirmed Amt: " \t3,880.00"
-                    GST: '200'
+                    GST: "200"
                     Received by Bank: " \t3,680.00"
                   - Date: 16-Jul
                     Guest: Anna Binu
-                    Phone number: ''
-                    Total nights: '1'
+                    Phone number: ""
+                    Total nights: "1"
                     Confirmed Amt: " \t3,298.00"
-                    GST: '170'
+                    GST: "170"
                     Received by Bank: " \t3,128.00"
                   - Date: 18-Jul
                     Guest: Faiza M
-                    Phone number: ''
-                    Total nights: '2'
+                    Phone number: ""
+                    Total nights: "2"
                     Confirmed Amt: " \t7,760.00"
-                    GST: '400'
+                    GST: "400"
                     Received by Bank: " \t7,360.00"
                   - Date: 22-Jul
                     Guest: Prabhath CA
-                    Phone number: ''
-                    Total nights: '1'
+                    Phone number: ""
+                    Total nights: "1"
                     Confirmed Amt: " \t3,880.00"
-                    GST: '200'
+                    GST: "200"
                     Received by Bank: " \t3,680.00"
                 columns:
                   - title: Date
@@ -5497,19 +5498,19 @@ paths:
               example:
                 title: Airtable customers API test
                 source: airtable
-                description: ''
+                description: ""
       responses:
-        '201':
+        "201":
           description: Created
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -5551,14 +5552,14 @@ paths:
                 type: object
               example:
                 id: 1e299626-d48f-4686-9102-7ee26499ec52
-                created_at: '2024-01-24T15:29:12.794291+00:00'
-                last_updated_at: '2024-01-24T15:29:12.794291+00:00'
+                created_at: "2024-01-24T15:29:12.794291+00:00"
+                last_updated_at: "2024-01-24T15:29:12.794291+00:00"
                 title: Airtable customers API test
                 source: airtable
                 config: eiRRfAWSFeimsE6hNekFrIBJHIjt7JiwdHjWKCz+DNmMUw==
                 columns: []
                 parameters: GCHHaN/37sD/x8jhbI0Drf6jUqRumCZilJjAmPp6c+JRkg==
-                description: ''
+                description: ""
                 team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                 created_by: null
                 last_updated_by: null
@@ -5586,17 +5587,17 @@ paths:
           required: true
           example: 5c13d03b-76e1-4fe5-b2e7-b19e80835b2d
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -5639,8 +5640,8 @@ paths:
                 type: object
               example:
                 id: 5c13d03b-76e1-4fe5-b2e7-b19e80835b2d
-                created_at: '2024-03-05T05:21:28.286161+00:00'
-                last_updated_at: '2024-03-14T06:51:48.451+00:00'
+                created_at: "2024-03-05T05:21:28.286161+00:00"
+                last_updated_at: "2024-03-14T06:51:48.451+00:00"
                 title: Spanish Test
                 source: file
                 config: >-
@@ -5739,7 +5740,7 @@ paths:
                   - title: Forma_de_Pagto
                     description: Payment method (String)
                 parameters: K8Ohb718qbSDiaTcM2/QJg7x8Vob+Oif79PiQhG/AH+FSw==
-                description: ''
+                description: ""
                 team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                 created_by: 5899f99d-a449-4bfa-8769-19c097aaf1f6
                 last_updated_by: null
@@ -6096,17 +6097,17 @@ paths:
         - Datasources
       summary: Get all data sources
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -6148,8 +6149,8 @@ paths:
                 type: object
               example:
                 - id: 2e335065-0fb5-47c0-97b0-e603a15efdd8
-                  created_at: '2024-01-17T11:55:26.929359+00:00'
-                  last_updated_at: '2024-01-17T12:00:03.629+00:00'
+                  created_at: "2024-01-17T11:55:26.929359+00:00"
+                  last_updated_at: "2024-01-17T12:00:03.629+00:00"
                   title: Airtable test
                   source: airtable
                   config: >-
@@ -6171,25 +6172,25 @@ paths:
                       description: The postal code of the customer's location.
                     - title: Region
                       description: The region where the customer is located.
-                  parameters: '[]'
-                  description: ''
+                  parameters: "[]"
+                  description: ""
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                   created_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   last_updated_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   size: 15
                   sample_data: >-
                     [{"State":"Michigan","Customer
@@ -6225,8 +6226,8 @@ paths:
                     City","Segment":"Corporate","Country":"United
                     States","Postal Code":"10024","Region":"East"}]
                 - id: 30f1b94c-a03d-41aa-bb2a-bc94890f1926
-                  created_at: '2024-01-17T16:31:06.014144+00:00'
-                  last_updated_at: '2024-01-17T16:31:28.528+00:00'
+                  created_at: "2024-01-17T16:31:06.014144+00:00"
+                  last_updated_at: "2024-01-17T16:31:28.528+00:00"
                   title: File test
                   source: file
                   config: >-
@@ -6250,25 +6251,25 @@ paths:
                       description: >-
                         The amount received by the bank in currency format
                         (e.g., '3,680.00')
-                  parameters: '[]'
-                  description: ''
+                  parameters: "[]"
+                  description: ""
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                   created_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   last_updated_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   size: 4
                   sample_data: >-
                     [{"Date":"1-Jul","Guest":"Siddharth Manmdhan","Phone
@@ -6303,8 +6304,8 @@ paths:
                     \t3,880.00","GST":"200.00","Received by Bank":"
                     \t3,680.00"}]
                 - id: 9fa19a4d-8852-4228-b0f5-f10ade43f576
-                  created_at: '2024-01-17T16:31:47.377513+00:00'
-                  last_updated_at: '2024-01-17T16:38:54.071+00:00'
+                  created_at: "2024-01-17T16:31:47.377513+00:00"
+                  last_updated_at: "2024-01-17T16:38:54.071+00:00"
                   title: Google sheet test
                   source: google-sheet
                   config: >-
@@ -6320,25 +6321,25 @@ paths:
                         Year' (string)
                     - title: Status
                       description: The status of the subscription (string)
-                  parameters: '[]'
-                  description: ''
+                  parameters: "[]"
+                  description: ""
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                   created_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   last_updated_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   size: 1
                   sample_data: >-
                     [{"Subscription":"Netflix","Amount per month":"650","Next
@@ -6363,37 +6364,37 @@ paths:
                     prime","Amount per month":"320","Next renewal":"October 18,
                     2022","Status":"Cancelled"}]
                 - id: 937b32c1-412c-4397-af87-5644ab41bbf7
-                  created_at: '2024-01-19T16:39:50.039927+00:00'
-                  last_updated_at: '2024-01-19T16:48:14.855+00:00'
+                  created_at: "2024-01-19T16:39:50.039927+00:00"
+                  last_updated_at: "2024-01-19T16:48:14.855+00:00"
                   title: MongoDB
                   source: mongodb
                   config: >-
                     {"url":"mongodb+srv://onvo:onvo@cluster0.qllzhbg.mongodb.net/?retryWrites=true&w=majority","database":"admin","collection":"sample_airbnb"}
                   columns: []
-                  parameters: '[]'
-                  description: ''
+                  parameters: "[]"
+                  description: ""
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                   created_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   last_updated_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   size: 0
-                  sample_data: '[]'
+                  sample_data: "[]"
                 - id: fb252707-58e5-4958-bbe4-e1bab726a7ee
-                  created_at: '2024-01-18T09:58:05.210116+00:00'
-                  last_updated_at: '2024-01-18T09:58:05.210116+00:00'
+                  created_at: "2024-01-18T09:58:05.210116+00:00"
+                  last_updated_at: "2024-01-18T09:58:05.210116+00:00"
                   title: Sample Customers
                   source: file
                   config: >-
@@ -6413,27 +6414,27 @@ paths:
                       description: Postal Code of customer
                     - title: Region
                       description: Region of residence
-                  parameters: '[]'
+                  parameters: "[]"
                   description: >-
                     A sample datasource containing the details of customers in
                     an e-commerce setting
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                   created_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   last_updated_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   size: 118
                   sample_data: >-
                     [{"Customer
@@ -6468,8 +6469,8 @@ paths:
                     States","Segment":"Consumer","State":"California","Postal
                     Code":"94109","Region":"West"}]
                 - id: fbef48dd-177e-4512-a906-bf5791e1bf05
-                  created_at: '2024-01-18T09:58:05.300625+00:00'
-                  last_updated_at: '2024-01-18T09:58:05.300625+00:00'
+                  created_at: "2024-01-18T09:58:05.300625+00:00"
+                  last_updated_at: "2024-01-18T09:58:05.300625+00:00"
                   title: Sample Orders
                   source: file
                   config: >-
@@ -6503,27 +6504,27 @@ paths:
                       description: Discount as a percentage from 0-1
                     - title: Profit
                       description: Profit in USD (can be negative)
-                  parameters: '[]'
+                  parameters: "[]"
                   description: >-
                     A sample datasource containing the details of orders in an
                     e-commerce setting
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                   created_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   last_updated_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   size: 3454
                   sample_data: >-
                     [{"Row ID":"1","Order ID":"CA-2017-152156","Order
@@ -6593,8 +6594,8 @@ paths:
                     F5C206VTEL 6 Outlet
                     Surge","Sales":"114.9","Quantity":"5","Discount":"0","Profit":"34.47"}]
                 - id: bce247c9-079a-414f-af8f-49a24598d8b9
-                  created_at: '2024-01-21T15:54:42.14785+00:00'
-                  last_updated_at: '2024-01-21T15:54:42.14785+00:00'
+                  created_at: "2024-01-21T15:54:42.14785+00:00"
+                  last_updated_at: "2024-01-21T15:54:42.14785+00:00"
                   title: Sample Customers
                   source: file
                   config: >-
@@ -6614,27 +6615,27 @@ paths:
                       description: Postal Code of customer
                     - title: Region
                       description: Region of residence
-                  parameters: '[]'
+                  parameters: "[]"
                   description: >-
                     A sample datasource containing the details of customers in
                     an e-commerce setting
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                   created_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   last_updated_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   size: 118
                   sample_data: >-
                     [{"Customer
@@ -6669,8 +6670,8 @@ paths:
                     States","Segment":"Consumer","State":"California","Postal
                     Code":"94109","Region":"West"}]
                 - id: a0242622-ca73-4353-87b1-4e0af2051b07
-                  created_at: '2024-01-21T15:54:42.161692+00:00'
-                  last_updated_at: '2024-01-21T15:54:42.161692+00:00'
+                  created_at: "2024-01-21T15:54:42.161692+00:00"
+                  last_updated_at: "2024-01-21T15:54:42.161692+00:00"
                   title: Sample Orders
                   source: file
                   config: >-
@@ -6704,27 +6705,27 @@ paths:
                       description: Discount as a percentage from 0-1
                     - title: Profit
                       description: Profit in USD (can be negative)
-                  parameters: '[]'
+                  parameters: "[]"
                   description: >-
                     A sample datasource containing the details of orders in an
                     e-commerce setting
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                   created_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   last_updated_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   size: 3454
                   sample_data: >-
                     [{"Row ID":"1","Order ID":"CA-2017-152156","Order
@@ -6794,33 +6795,33 @@ paths:
                     F5C206VTEL 6 Outlet
                     Surge","Sales":"114.9","Quantity":"5","Discount":"0","Profit":"34.47"}]
                 - id: dc7c03cb-89ed-4036-a597-6086760be083
-                  created_at: '2024-01-23T10:53:16.403091+00:00'
-                  last_updated_at: '2024-01-23T11:25:27.737+00:00'
+                  created_at: "2024-01-23T10:53:16.403091+00:00"
+                  last_updated_at: "2024-01-23T11:25:27.737+00:00"
                   title: Quickbooks test
                   source: quickbooks
                   config: '{"company_id":3018,"resource":"bank_accounts"}'
                   columns: []
-                  parameters: '[]'
-                  description: ''
+                  parameters: "[]"
+                  description: ""
                   team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                   created_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   last_updated_by:
                     id: 5899f99d-a449-4bfa-8769-19c097aaf1f6
-                    updated_at: '2024-01-17T10:14:12.62603+00:00'
+                    updated_at: "2024-01-17T10:14:12.62603+00:00"
                     full_name: Ronnel Davis
                     avatar_url: >-
                       https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png
                     email: ronneldavis1996@gmail.com
-                    phone_number: '8075065108'
+                    phone_number: "8075065108"
                   size: 0
-                  sample_data: '[]'
+                  sample_data: "[]"
   /api/widgets:
     get:
       tags:
@@ -6833,17 +6834,17 @@ paths:
             type: string
           example: fc5624ac-abd8-453c-b56d-898b990a94f0
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -6890,7 +6891,7 @@ paths:
                     Create a bar chart showing the orders per month. The x axis
                     should show the month and year in MM-YYYY format
                   x: 6
-                  'y': 3
+                  "y": 3
                   w: 6
                   h: 3
                   assumptions:
@@ -7007,7 +7008,7 @@ paths:
                     month. The x-axis should show the month in MM-YYYY format.
                     Do not use moment.js
                   x: 0
-                  'y': 5
+                  "y": 5
                   w: 6
                   h: 3
                   assumptions:
@@ -7126,7 +7127,7 @@ paths:
                   title: Top 5 states by sales
                   query: Create a bar chart showing the top 5 states by sales volume
                   x: 0
-                  'y': 1
+                  "y": 1
                   w: 4
                   h: 2
                   assumptions:
@@ -7238,7 +7239,7 @@ paths:
                     customers. It can be calculated by dividing the total sales
                     in USD divided by the number of customers
                   x: 8
-                  'y': 0
+                  "y": 0
                   w: 4
                   h: 1
                   assumptions:
@@ -7325,7 +7326,7 @@ paths:
                     month. The x-axis should show the month in MM-YYYY format.
                     Do not use moment.js
                   x: 0
-                  'y': 3
+                  "y": 3
                   w: 6
                   h: 3
                   assumptions:
@@ -7444,7 +7445,7 @@ paths:
                   title: Orders per year
                   query: Create a bar chart showing the sales in USD per year
                   x: 4
-                  'y': 1
+                  "y": 1
                   w: 4
                   h: 2
                   assumptions:
@@ -7537,7 +7538,7 @@ paths:
                   title: Top 5 states by sales
                   query: Create a bar chart showing the top 5 states by sales volume
                   x: 0
-                  'y': 3
+                  "y": 3
                   w: 4
                   h: 2
                   assumptions:
@@ -7648,7 +7649,7 @@ paths:
                     Create a bar chart showing the orders per month. The x axis
                     should show the month and year in MM-YYYY format
                   x: 6
-                  'y': 3
+                  "y": 3
                   w: 6
                   h: 3
                   assumptions:
@@ -7762,7 +7763,7 @@ paths:
                   title: Total customers
                   query: Create a metric showing all my customers to date
                   x: 0
-                  'y': 0
+                  "y": 0
                   w: 4
                   h: 1
                   assumptions:
@@ -7838,7 +7839,7 @@ paths:
                   title: Total orders
                   query: Create a metric showing total orders
                   x: 4
-                  'y': 0
+                  "y": 0
                   w: 4
                   h: 1
                   assumptions:
@@ -7910,7 +7911,7 @@ paths:
                   title: Orders per year
                   query: Create a bar chart showing the sales in USD per year
                   x: 4
-                  'y': 1
+                  "y": 1
                   w: 4
                   h: 2
                   assumptions:
@@ -8005,7 +8006,7 @@ paths:
                     Create a pie chart showing the sales volumes of New York and
                     California
                   x: 8
-                  'y': 1
+                  "y": 1
                   w: 4
                   h: 2
                   assumptions:
@@ -8108,7 +8109,7 @@ paths:
                     customers. It can be calculated by dividing the total sales
                     in USD divided by the number of customers
                   x: 8
-                  'y': 0
+                  "y": 0
                   w: 4
                   h: 1
                   assumptions:
@@ -8192,7 +8193,7 @@ paths:
                   title: Total customers
                   query: Create a metric showing all my customers to date
                   x: 0
-                  'y': 2
+                  "y": 2
                   w: 4
                   h: 1
                   assumptions:
@@ -8270,11 +8271,11 @@ paths:
                     Create a pie chart showing the sales in 2018 vs the sales in
                     2019
                   x: 0
-                  'y': 0
+                  "y": 0
                   w: 4
                   h: 2
                   assumptions:
-                    - ''
+                    - ""
                     - >-
                       1. Load the 'Sample Orders' dataset using pandas with only
                       the necessary columns 'Order Date' and 'Sales' to minimize
@@ -8303,8 +8304,8 @@ paths:
                     - >-
                       9. Set the plugins.datalabels.display to false as the user
                       has not asked to show the values in the chart.
-                    - ''
-                    - ''
+                    - ""
+                    - ""
                   code: |-
                     import pandas as pd
 
@@ -8366,7 +8367,7 @@ paths:
                   title: Total orders overall
                   query: Create a metric showing total orders
                   x: 4
-                  'y': 0
+                  "y": 0
                   w: 4
                   h: 1
                   assumptions:
@@ -8440,7 +8441,7 @@ paths:
                     Create a pie chart showing the sales volumes of New York and
                     California
                   x: 8
-                  'y': 1
+                  "y": 1
                   w: 4
                   h: 2
                   assumptions:
@@ -8548,17 +8549,17 @@ paths:
               example:
                 title: Testing title change
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -8605,11 +8606,11 @@ paths:
                   Create a pie chart showing the sales in 2018 vs the sales in
                   2019
                 x: 0
-                'y': 0
+                "y": 0
                 w: 4
                 h: 2
                 assumptions:
-                  - ''
+                  - ""
                   - >-
                     1. Load the 'Order Date' and 'Sales' columns from the
                     'Sample Orders' dataset using pandas, as these are the only
@@ -8639,8 +8640,8 @@ paths:
                     9. Since the user did not specify a chart type and did not
                     ask to show values in the chart, the default type will be
                     'pie' and datalabels will be set to false.
-                  - ''
-                  - ''
+                  - ""
+                  - ""
                 code: |-
                   import pandas as pd
 
@@ -8714,17 +8715,17 @@ paths:
           required: true
           example: 60065550-847e-4e85-a734-9bad7a77bac4
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -8780,17 +8781,17 @@ paths:
           required: true
           example: 5a85328f-ed69-4c44-9cfb-cdea08324397
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -8837,7 +8838,7 @@ paths:
                   Create a bar chart showing the orders per month. The x axis
                   should show the month and year in MM-YYYY format
                 x: 6
-                'y': 3
+                "y": 3
                 w: 6
                 h: 3
                 assumptions:
@@ -8934,17 +8935,17 @@ paths:
           required: true
           example: a47b0ece-ef1b-43c6-a267-9debe10f7d27
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -8991,11 +8992,11 @@ paths:
                   Create a pie chart showing the sales in 2018 vs the sales in
                   2019
                 x: 0
-                'y': 0
+                "y": 0
                 w: 4
                 h: 2
                 assumptions:
-                  - ''
+                  - ""
                   - >-
                     1. Load the 'Order Date' and 'Sales' columns from the
                     'Sample Orders' dataset using pandas, as these are the only
@@ -9025,8 +9026,8 @@ paths:
                     9. Since the user did not specify a chart type and did not
                     ask to show values in the chart, the default type will be
                     'pie' and datalabels will be set to false.
-                  - ''
-                  - ''
+                  - ""
+                  - ""
                 code: |-
                   import pandas as pd
 
@@ -9113,17 +9114,17 @@ paths:
           required: true
           example: 0a09493d-360a-474d-a297-b39e7d767832
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -9168,7 +9169,7 @@ paths:
                 id: 0a09493d-360a-474d-a297-b39e7d767832
                 title: Sales volume M-o-M
                 x: 0
-                'y': 3
+                "y": 3
                 w: 6
                 h: 3
                 assumptions: []
@@ -9219,7 +9220,7 @@ paths:
                   Volume Month Over Month"}}}}
                 team: ee5b08c6-5167-4425-bbc3-a746fe4a7ead
                 settings: {}
-                created_at: '2024-03-05T12:09:10.192+00:00'
+                created_at: "2024-03-05T12:09:10.192+00:00"
                 messages:
                   - role: user
                     content: >-
@@ -9240,17 +9241,17 @@ paths:
           required: true
           example: a47b0ece-ef1b-43c6-a267-9debe10f7d27
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string
@@ -9314,17 +9315,17 @@ paths:
           required: true
           example: 4fcfa893-69f9-4728-84ff-d533aadd02dc
       responses:
-        '200':
+        "200":
           description: OK
           headers:
             Access-Control-Allow-Credentials:
               schema:
                 type: boolean
-                example: 'true'
+                example: "true"
             Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '*'
+                example: "*"
             Access-Control-Allow-Methods:
               schema:
                 type: string

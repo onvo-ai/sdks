@@ -26,7 +26,6 @@ const ChartBase: React.FC<{ json: any; id: string; title: string }> = ({
     font: {
       size: 18,
       weight: 500,
-      family: "Inter",
     },
   };
 
