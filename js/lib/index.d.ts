@@ -2,11 +2,6 @@ declare class OnvoBase {
     #private;
     endpoint: string;
     fetchBase(url: string, method?: "GET" | "PUT" | "POST" | "DELETE" | "PATCH", body?: any): Promise<unknown>;
-    streamingFetch(url: string, method: "GET" | "PUT" | "POST" | "PATCH", body: any, callbacks: {
-        onStream: (str: string) => void;
-        onComplete: (str: string) => void;
-        onError: (err: Error) => void;
-    }): Promise<void>;
     constructor(apiKey: string, options?: {
         endpoint: string;
     });
@@ -1604,8 +1599,8 @@ declare class OnvoDatasource extends OnvoBase {
     constructor(id: string, apiKey: string, options?: {
         endpoint: string;
     });
-    getData(): Promise<any>;
-    fetchColumnDescriptions(): Promise<DataSource>;
+    initialize(): Promise<DataSource>;
+    uploadFile(file: File): Promise<DataSource>;
 }
 
 declare class OnvoQuestions extends OnvoBase {
@@ -1628,11 +1623,16 @@ declare class OnvoQuestions extends OnvoBase {
         }[];
         dashboardId: string;
         questionId?: string;
-    }, callbacks: {
-        onStream: (str: string) => void;
-        onComplete: (str: string) => void;
-        onError: (err: Error) => void;
-    }): Promise<void>;
+    }): Promise<{
+        account: string | null;
+        created_at: string;
+        dashboard: string;
+        embed_user: string | null;
+        id: string;
+        messages: Json;
+        query: string;
+        team: string | null;
+    }>;
     delete(id: string): Promise<{
         success: true;
     }>;

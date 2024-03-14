@@ -78,10 +78,11 @@ const QuestionSidebar: React.FC<{
           <Text>Loading questions...</Text>
         </div>
       )}
-      {onSelect && !loading && (
+      {onSelect && (
         <Button
           variant="secondary"
           className="mb-2 w-full"
+          disabled={loading}
           onClick={() => onSelect(undefined)}
         >
           New Question / Chart

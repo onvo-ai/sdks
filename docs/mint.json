@@ -201,9 +201,9 @@
         "apis/datasources/get-data-source-by-id",
         "apis/datasources/update-data-source-by-id",
         "apis/datasources/delete-data-source-by-id",
-        "apis/datasources/get-data-source-data-by-id",
-        "apis/datasources/populate-data-source-columns-by-id",
+        "apis/datasources/initialize-data-source-data-by-id",
         "apis/datasources/create-data-source",
+        "apis/datasources/upload-data-source-file",
         "apis/datasources/get-all-data-sources"
       ]
     },
@@ -222,12 +222,12 @@
       "group": "Widgets",
       "pages": [
         "apis/widgets/get-all-widgets-under-dashboard",
+        "apis/widgets/create-widget",
         "apis/widgets/get-widget-image-by-id",
         "apis/widgets/get-widget-by-id",
         "apis/widgets/update-widget-by-id",
         "apis/widgets/delete-widget-by-id",
         "apis/widgets/request-edit-widget-by-id",
-        "apis/widgets/create-widget",
         "apis/widgets/execute-widget-code"
       ]
     }

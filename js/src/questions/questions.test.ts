@@ -13,29 +13,12 @@ describe("Questions", () => {
   });
 
   it("should create question", async () => {
-    let acc = "";
-    let promise = new Promise<any>((resolve, reject) => {
-      onvo.questions.create(
-        {
-          messages: [{ role: "user", content: "How many orders do I have?" }],
-          dashboardId: "1ca1e66c-0f5b-43fc-91aa-954c3377deba",
-        },
-        {
-          onComplete: (str) => {
-            resolve(str);
-          },
-          onStream: (str) => {
-            acc += str;
-          },
-          onError: (err) => {
-            reject(err);
-          },
-        }
-      );
+    let response = await onvo.questions.create({
+      messages: [{ role: "user", content: "How many orders do I have?" }],
+      dashboardId: "1ca1e66c-0f5b-43fc-91aa-954c3377deba",
     });
-    const response = await promise;
 
     expect(response).toBeDefined();
-    expect(response).toEqual(acc);
+    expect(response.id).toBeDefined();
   }, 60000);
 });

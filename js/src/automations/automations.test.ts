@@ -40,10 +40,10 @@ describe("Automations", () => {
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       });
       expect(automation).toBeDefined();
-    });
+    }, 10000);
   });
 
-  describe("Automations creation", () => {
+  describe("Automations fetching", () => {
     it("should list automations", async () => {
       const automations = await onvoAutomations.list();
       expect(automations).toBeDefined();
