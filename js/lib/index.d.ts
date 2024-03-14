@@ -1599,8 +1599,8 @@ declare class OnvoDatasource extends OnvoBase {
     constructor(id: string, apiKey: string, options?: {
         endpoint: string;
     });
-    getData(): Promise<any>;
-    fetchColumnDescriptions(): Promise<DataSource>;
+    initialize(): Promise<DataSource>;
+    uploadFile(file: File): Promise<DataSource>;
 }
 
 declare class OnvoQuestions extends OnvoBase {

@@ -229,15 +229,18 @@ var OnvoDatasource = class extends OnvoBase {
     super(apiKey, options);
     this.#id = id;
   }
-  getData() {
+  initialize() {
     return this.fetchBase(
-      "/api/datasources/" + this.#id + "/data"
+      "/api/datasources/" + this.#id + "/initialize"
     );
   }
-  fetchColumnDescriptions() {
+  uploadFile(file) {
+    const formData = new FormData();
+    formData.append("file", file);
     return this.fetchBase(
-      "/api/datasources/" + this.#id + "/populate-columns",
-      "POST"
+      "/api/datasources/" + this.#id + "/upload-file",
+      "POST",
+      formData
     );
   }
 };

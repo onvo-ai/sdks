@@ -9,15 +9,18 @@ export class OnvoDatasource extends OnvoBase {
     this.#id = id;
   }
 
-  getData() {
+  initialize() {
     return this.fetchBase(
-      "/api/datasources/" + this.#id + "/data"
-    ) as Promise<any>;
+      "/api/datasources/" + this.#id + "/initialize"
+    ) as Promise<DataSource>;
   }
-  fetchColumnDescriptions() {
+  uploadFile(file: File) {
+    const formData = new FormData();
+    formData.append("file", file);
     return this.fetchBase(
-      "/api/datasources/" + this.#id + "/populate-columns",
-      "POST"
+      "/api/datasources/" + this.#id + "/upload-file",
+      "POST",
+      formData
     ) as Promise<DataSource>;
   }
 }
