@@ -34,6 +34,7 @@ export const DashboardGrid: React.FC<{}> = () => {
         r.style.setProperty("--font-override", settings.font);
         defaults.font.family = settings.font;
       } else {
+        r.style.setProperty("--font-override", "Inter");
         defaults.font.family = "Inter";
       }
     }

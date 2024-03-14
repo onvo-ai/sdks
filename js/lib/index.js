@@ -5,14 +5,17 @@ var OnvoBase = class {
   // Base fetch method
   async fetchBase(url, method, body) {
     try {
+      let headers = {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+      };
+      if (this.#apiKey && this.#apiKey.trim() !== "") {
+        headers["x-api-key"] = this.#apiKey;
+      }
       const response = await fetch(this.endpoint + url, {
         method: method || "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": this.#apiKey,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-        },
+        headers,
         body: body ? JSON.stringify(body) : void 0
       });
       let data = await response.json();
@@ -24,48 +27,11 @@ var OnvoBase = class {
       throw new Error("Error in making the request: " + error.message);
     }
   }
-  async streamingFetch(url, method, body, callbacks) {
-    try {
-      const controller = new AbortController();
-      const signal = controller.signal;
-      const response = await fetch(this.endpoint + url, {
-        method: method || "GET",
-        body: body ? JSON.stringify(body) : void 0,
-        headers: {
-          "x-api-key": this.#apiKey
-        },
-        signal
-      });
-      if (!response.ok) {
-        console.log("Error streaming data: ", response);
-        throw new Error(response.message);
-      }
-      let output = "";
-      let data = response.body;
-      if (!data) {
-        throw new Error("No data in response");
-      }
-      const reader = data.getReader();
-      const decoder = new TextDecoder();
-      let done = false;
-      while (!done) {
-        const { value, done: doneReading } = await reader.read();
-        done = doneReading;
-        const chunkValue = decoder.decode(value);
-        output += chunkValue;
-        callbacks.onStream(chunkValue);
-      }
-      callbacks.onComplete(output);
-    } catch (e) {
-      console.log(e);
-      callbacks.onError(new Error(e.message));
-    }
-  }
   constructor(apiKey, options) {
     if (!apiKey)
       throw new Error("API key is required");
     this.#apiKey = apiKey;
-    this.endpoint = options?.endpoint || "https:/dashboard.onvo.ai";
+    this.endpoint = options?.endpoint || "https://dashboard.onvo.ai";
   }
 };
 
@@ -283,17 +249,12 @@ var OnvoQuestions = class extends OnvoBase {
       "/api/questions?dashboard=" + filters.dashboard
     );
   }
-  create(payload, callbacks) {
-    return this.streamingFetch(
-      "/api/questions",
-      "POST",
-      {
-        dashboard: payload.dashboardId,
-        existingQuestion: payload.questionId || void 0,
-        messages: payload.messages
-      },
-      callbacks
-    );
+  create(payload) {
+    return this.fetchBase("/api/questions", "POST", {
+      dashboard: payload.dashboardId,
+      id: payload.questionId || void 0,
+      messages: payload.messages
+    });
   }
   delete(id) {
     return this.fetchBase("/api/questions/" + id, "DELETE");

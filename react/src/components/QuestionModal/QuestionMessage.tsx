@@ -63,10 +63,6 @@ const QuestionMessage: React.FC<{
 
     e.preventDefault();
     e.stopPropagation();
-    let query = messages
-      .filter((a) => a.role === "user")
-      .map((a) => a.content)
-      .join("\n");
     let newObj: any = {
       title: title,
       x: 0,
@@ -103,26 +99,29 @@ const QuestionMessage: React.FC<{
 
   useEffect(() => {
     if (role === "assistant") {
-      if (content.split("#### Plan:")[1]) {
-        let ass = content.split("#### Plan:\n")[1].split("\n#### Code:")[0];
-        setAssumptions(ass);
-      }
-
       if (content.split("```python")[1]) {
         let code = content.split("```python")[1].split("```")[0].trim();
         setCode(code);
       }
 
+      // TODO: REMOVE THIS AFTER MIGRATION
       if (content.split("#### Chart config:")[1]) {
         let out = content
           .split("#### Chart config:")[1]
           .split("#### Final answer:")[0]
           .trim();
         setOutput(JSON.parse(out));
+
+        if (content.split("#### Final answer:\n")[1]) {
+          let ans = content.split("#### Final answer:\n")[1];
+          setAnswer(ans || "");
+        }
       }
 
-      if (content.split("#### Final answer:\n")[1]) {
-        let ans = content.split("#### Final answer:\n")[1];
+      if (content.split("```json")[1]) {
+        let out = content.split("```json")[1].split("```")[0].trim();
+        setOutput(JSON.parse(out));
+        let ans = content.split("```json")[1].split("```")[1];
         setAnswer(ans || "");
       }
     } else {

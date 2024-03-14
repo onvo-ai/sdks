@@ -251,18 +251,18 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@onvo-ai/js@^0.12.40":
-  version "0.12.40"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.12.40.tgz#a10b7ffee9b76825a171ae7dc1e83e55d39b43d3"
-  integrity sha512-1J8embzC47GTRuJatMCrMWZQMG0ucEzwhz8JLxkcxNeFw31QITkDI6abIXRnykfoC2Ua/CTlRwEBoD8x43R/fw==
+"@onvo-ai/js@^0.12.44", "@onvo-ai/js@^0.12.45":
+  version "0.12.45"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.12.45.tgz#aac4035aef042490d872d12391b4936962388bbe"
+  integrity sha512-GZHD8IFNeP/stWzZ+w0qoqQCT6da9xDYuWfzsvmq5Rcfohk3HLg50DYAEXkMxsGG489nDWna7I+7dbSXjNpHNQ==
 
-"@onvo-ai/react@^0.2.24":
-  version "0.2.24"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.2.24.tgz#ac889ef7f2790fe10bcc34ff16339da0f8fb0624"
-  integrity sha512-9vJLN6zbeuTbCTOgy2K0jehlCS2tw6P3O626tGh7StsHdAxdfa2S9UdH0EZ5yYulYYciWbzSMYzTSQc6F3Svag==
+"@onvo-ai/react@^0.2.25":
+  version "0.2.25"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.2.25.tgz#56fb2d52568ad683799a976d04c347e8a2e0426a"
+  integrity sha512-gEKhhxVvHWkFUMe/j15EcLNzbA8K4ayOEcU24udJeOmmMlTlY8a33ICCIqjur/FP/Dk4Y8p9+iwe5rpXIxjfIw==
   dependencies:
     "@heroicons/react" "^2.1.1"
-    "@onvo-ai/js" "^0.12.40"
+    "@onvo-ai/js" "^0.12.44"
     "@tremor/react" "^3.14.1"
     "@uidotdev/usehooks" "^2.4.1"
     chart.js "^4.4.0"

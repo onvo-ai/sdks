@@ -9,14 +9,17 @@ export default class OnvoBase {
     body?: any
   ) {
     try {
+      let headers: any = {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      };
+      if (this.#apiKey && this.#apiKey.trim() !== "") {
+        headers["x-api-key"] = this.#apiKey;
+      }
       const response = await fetch(this.endpoint + url, {
         method: method || "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": this.#apiKey,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        },
+        headers: headers,
         body: body ? JSON.stringify(body) : undefined,
       });
       let data = await response.json();
@@ -29,60 +32,9 @@ export default class OnvoBase {
     }
   }
 
-  async streamingFetch(
-    url: string,
-    method: "GET" | "PUT" | "POST" | "PATCH",
-    body: any,
-    callbacks: {
-      onStream: (str: string) => void;
-      onComplete: (str: string) => void;
-      onError: (err: Error) => void;
-    }
-  ) {
-    try {
-      const controller = new AbortController();
-      const signal = controller.signal;
-      const response = await fetch(this.endpoint + url, {
-        method: method || "GET",
-        body: body ? JSON.stringify(body) : undefined,
-        headers: {
-          "x-api-key": this.#apiKey,
-        },
-        signal,
-      });
-
-      if (!response.ok) {
-        console.log("Error streaming data: ", response);
-        // @ts-ignore
-        throw new Error(response.message);
-      }
-
-      let output = "";
-      let data = response.body;
-      if (!data) {
-        throw new Error("No data in response");
-      }
-      const reader = data.getReader();
-      const decoder = new TextDecoder();
-      let done = false;
-
-      while (!done) {
-        const { value, done: doneReading } = await reader.read();
-        done = doneReading;
-        const chunkValue = decoder.decode(value);
-        output += chunkValue;
-        callbacks.onStream(chunkValue);
-      }
-      callbacks.onComplete(output);
-    } catch (e: any) {
-      console.log(e);
-      callbacks.onError(new Error(e.message));
-    }
-  }
-
   constructor(apiKey: string, options?: { endpoint: string }) {
     if (!apiKey) throw new Error("API key is required");
     this.#apiKey = apiKey;
-    this.endpoint = options?.endpoint || "https:/dashboard.onvo.ai";
+    this.endpoint = options?.endpoint || "https://dashboard.onvo.ai";
   }
 }

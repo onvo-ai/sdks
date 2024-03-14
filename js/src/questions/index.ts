@@ -8,28 +8,16 @@ export class OnvoQuestions extends OnvoBase {
       "/api/questions?dashboard=" + filters.dashboard
     ) as Promise<Question[]>;
   }
-  create(
-    payload: {
-      messages: { role: "user" | "assistant"; content: string }[];
-      dashboardId: string;
-      questionId?: string;
-    },
-    callbacks: {
-      onStream: (str: string) => void;
-      onComplete: (str: string) => void;
-      onError: (err: Error) => void;
-    }
-  ) {
-    return this.streamingFetch(
-      "/api/questions",
-      "POST",
-      {
-        dashboard: payload.dashboardId,
-        existingQuestion: payload.questionId || undefined,
-        messages: payload.messages,
-      },
-      callbacks
-    );
+  create(payload: {
+    messages: { role: "user" | "assistant"; content: string }[];
+    dashboardId: string;
+    questionId?: string;
+  }) {
+    return this.fetchBase("/api/questions", "POST", {
+      dashboard: payload.dashboardId,
+      id: payload.questionId || undefined,
+      messages: payload.messages,
+    }) as Promise<Question>;
   }
   delete(id: string) {
     return this.fetchBase("/api/questions/" + id, "DELETE") as Promise<{

@@ -22,8 +22,10 @@ import SuggestionsBar from "./SuggestionsBar";
 import { useToken } from "../Wrapper";
 import { useDashboard } from "../Dashboard";
 import Logo from "./Logo";
+import QuestionLoader from "./QuestionLoader";
 
 dayjs.extend(relativeTime);
+
 export const useQuestionModal = create<{
   open: boolean;
   setOpen: (o: boolean) => void;
@@ -119,44 +121,21 @@ export const QuestionModal: React.FC<{}> = ({}) => {
   const askQuestion = async (
     msg: { role: "user" | "assistant"; content: string }[]
   ) => {
-    let q = msg
-      .filter((m) => m.role === "user")
-      .map((m) => m.content)
-      .join("\n");
-
+    setMessages(msg);
     setQuestionLoading(true);
     window.setTimeout(scrollToBottom, 300);
-    const newMessages = [
-      ...msg,
-      { role: "assistant" as const, content: "Loading..." },
-    ];
-
-    setMessages(newMessages);
-    let str = "";
-    backend?.questions.create(
-      {
+    try {
+      let response = await backend?.questions.create({
         dashboardId: dashboard?.id,
         questionId: selectedQuestion?.id || undefined,
         messages: msg,
-      },
-      {
-        onStream: (s) => {
-          str += s;
-          setMessages((msg) => [
-            ...msg.slice(0, -1),
-            { role: "assistant", content: str },
-          ]);
-        },
-        onComplete: (s) => {
-          getQuestions();
-        },
-        onError: (e) => {
-          console.log(e);
-          toast.error(e.message);
-          setQuestionLoading(false);
-        },
-      }
-    );
+      });
+      setSelectedQuestion(response);
+    } catch (e: any) {
+      toast.error("Failed to ask question: ", e.message);
+    }
+
+    setQuestionLoading(false);
   };
 
   return (
@@ -257,7 +236,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                   ref={scroller}
                 >
                   <div className="mx-auto w-full max-w-2xl">
-                    {messages.length === 0 && (
+                    {messages.length === 0 && !questionLoading && (
                       <>
                         <div className="flex h-full w-full flex-col items-center justify-center">
                           <Icon
@@ -354,6 +333,8 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                         content={a.content}
                       />
                     ))}
+
+                    {questionLoading && <QuestionLoader />}
                   </div>
                 </div>
 

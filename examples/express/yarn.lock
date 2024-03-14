@@ -142,10 +142,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@onvo-ai/js@^0.12.41":
-  version "0.12.41"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.12.41.tgz#03ebb9ba44891917a4f54787af2e5dce97186515"
-  integrity sha512-hFahfP5V3ppAHD9GZyGdFUbxkxQfw3yT+xqJwqFq7EQOfRnzUA7KV9DnXOhx1MUW0WoKZKg8/hknEch0ywtgYQ==
+"@onvo-ai/js@^0.12.45":
+  version "0.12.45"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.12.45.tgz#aac4035aef042490d872d12391b4936962388bbe"
+  integrity sha512-GZHD8IFNeP/stWzZ+w0qoqQCT6da9xDYuWfzsvmq5Rcfohk3HLg50DYAEXkMxsGG489nDWna7I+7dbSXjNpHNQ==
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.9"
