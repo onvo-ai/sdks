@@ -8,6 +8,14 @@ import { useDashboard } from "../Dashboard/Dashboard";
 import { useToken } from "../Wrapper";
 import { defaults } from "chart.js";
 
+const r = document.querySelector(":root") as any;
+r.style.setProperty(
+  "--font-override",
+  "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+);
+defaults.font.family =
+  "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
+
 export const DashboardGrid: React.FC<{}> = () => {
   const { dashboard, widgets, theme, refresh } = useDashboard();
   const { backend } = useToken();
@@ -19,6 +27,14 @@ export const DashboardGrid: React.FC<{}> = () => {
 
   useEffect(() => {
     const r = document.querySelector(":root") as any;
+
+    r.style.setProperty(
+      "--font-override",
+      "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+    );
+    defaults.font.family =
+      "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
+
     if (r && dashboard && dashboard.settings) {
       const settings = dashboard.settings;
       r.style.setProperty(
@@ -33,9 +49,6 @@ export const DashboardGrid: React.FC<{}> = () => {
       if (dashboard.settings.font !== "inter") {
         r.style.setProperty("--font-override", settings.font);
         defaults.font.family = settings.font;
-      } else {
-        r.style.setProperty("--font-override", "Inter");
-        defaults.font.family = "Inter";
       }
     }
 
@@ -44,7 +57,8 @@ export const DashboardGrid: React.FC<{}> = () => {
       r.style.setProperty("--foreground-color", "");
       r.style.setProperty("--font-override", "");
 
-      defaults.font.family = "Inter";
+      defaults.font.family =
+        "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
     };
   }, [dashboard, theme]);
 
