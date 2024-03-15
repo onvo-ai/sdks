@@ -56,11 +56,26 @@ icon: "database"
 }
 ```
 
-```typescript file
+```typescript csv
 {
   url: string;
   filename: string;
-  type: "json" | "csv" | "xml" | "excel";
+}
+```
+
+```typescript excel
+{
+  url: string;
+  filename: string;
+  sheetName: string;
+}
+```
+
+```typescript json
+{
+  url: string;
+  filename: string;
+  transform: string;
 }
 ```
 
