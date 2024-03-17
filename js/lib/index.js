@@ -3,7 +3,33 @@ var OnvoBase = class {
   #apiKey;
   endpoint;
   // Base fetch method
-  async fetchBase(url, method, body) {
+  async fetchBase(url, method, body, isForm) {
+    try {
+      let headers = {
+        "Content-Type": isForm ? void 0 : "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+      };
+      if (this.#apiKey && this.#apiKey.trim() !== "") {
+        headers["x-api-key"] = this.#apiKey;
+      }
+      const response = await fetch(this.endpoint + url, {
+        method: method || "GET",
+        headers,
+        body: isForm ? body : body ? JSON.stringify(body) : void 0
+      });
+      if (!response.ok) {
+        let data2 = await response.text();
+        throw new Error(data2);
+      }
+      let data = await response.json();
+      return data;
+    } catch (error) {
+      throw new Error("Error in making the request: " + error.message);
+    }
+  }
+  // Base fetch method
+  async fetchImage(url, method, body) {
     try {
       let headers = {
         "Content-Type": "application/json",
@@ -14,15 +40,12 @@ var OnvoBase = class {
         headers["x-api-key"] = this.#apiKey;
       }
       const response = await fetch(this.endpoint + url, {
+        mode: "no-cors",
         method: method || "GET",
         headers,
         body: body ? JSON.stringify(body) : void 0
-      });
-      let data = await response.json();
-      if (!response.ok) {
-        throw new Error(JSON.stringify(data));
-      }
-      return data;
+      }).then((response2) => response2.blob());
+      return response;
     } catch (error) {
       throw new Error("Error in making the request: " + error.message);
     }
@@ -156,7 +179,7 @@ var OnvoDashboards = class extends OnvoBase {
   }
 };
 
-// src/dashboard/dashboard_datasources.ts
+// src/dashboard_datasources/index.ts
 var OnvoDashboardDatasources = class extends OnvoBase {
   #dashboardId;
   constructor(dashboardId, apiKey, options) {
@@ -236,11 +259,12 @@ var OnvoDatasource = class extends OnvoBase {
   }
   uploadFile(file) {
     const formData = new FormData();
-    formData.append("file", file);
+    formData.set("file", file, file.name);
     return this.fetchBase(
       "/api/datasources/" + this.#id + "/upload-file",
       "POST",
-      formData
+      formData,
+      true
     );
   }
 };
@@ -291,7 +315,7 @@ var OnvoWidget = class extends OnvoBase {
     this.#id = id;
   }
   getImage() {
-    return this.fetchBase(
+    return this.fetchImage(
       "/api/widgets/" + this.#id + "/image"
     );
   }
@@ -324,29 +348,29 @@ var OnvoSessions = class extends OnvoBase {
       "/api/sessions?dashboard=" + filters.dashboard
     );
   }
-  delete(id) {
+  revoke(filters) {
     return this.fetchBase(
-      "/api/sessions?dashboard=" + id,
+      "/api/sessions?dashboard=" + filters.dashboard,
       "DELETE"
     );
   }
   revokeAll(filters) {
     return this.fetchBase(
-      "/api/sessions?parent_dashboard=" + filters.dashboard,
+      "/api/sessions?parent_dashboard=" + filters.parent_dashboard,
       "DELETE"
     );
   }
   async upsert({
-    user,
-    dashboard,
+    embed_user,
+    parent_dashboard,
     parameters
   }) {
     let data = await this.fetchBase("/api/sessions", "POST", {
-      user,
+      user: embed_user,
       parameters,
-      dashboard
+      dashboard: parent_dashboard
     });
-    return { ...data, url: this.endpoint + data.url };
+    return data;
   }
 };
 

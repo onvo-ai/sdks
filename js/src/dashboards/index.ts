@@ -21,7 +21,18 @@ export class OnvoDashboards extends OnvoBase {
       body
     ) as Promise<Dashboard>;
   }
-  create(body: Omit<Dashboard, "id">) {
+  create(
+    body: Omit<
+      Dashboard,
+      | "id"
+      | "created_at"
+      | "created_by"
+      | "last_updated_at"
+      | "last_updated_by"
+      | "thumbnail"
+      | "team"
+    >
+  ) {
     return this.fetchBase("/api/dashboards", "PUT", body) as Promise<Dashboard>;
   }
 }

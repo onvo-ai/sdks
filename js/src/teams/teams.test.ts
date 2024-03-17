@@ -1,10 +1,10 @@
-import { OnvoTeams } from "./index";
+import { Onvo } from "../index";
 
 describe("Teams", () => {
-  let onvoTeams: OnvoTeams;
+  let onvo: Onvo;
 
   beforeEach(() => {
-    onvoTeams = new OnvoTeams(
+    onvo = new Onvo(
       "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFwcF9tZXRhZGF0YSI6eyJ0ZWFtIjoiM2QwNWI5OTAtYzg1NS00OTQ1LWJkZDEtYjNhODMwNWZmYzU5In0sInN1YiI6IjNkMDViOTkwLWM4NTUtNDk0NS1iZGQxLWIzYTgzMDVmZmM1OSIsImF1ZCI6ImF1dGhlbnRpY2F0ZWQiLCJpYXQiOjE3MDc0ODU5MTZ9.VxHmDH_CgaJTbIFL1ysxc_PFXN6cMgS1ampyJLs4A7k",
       {
         endpoint: "https://staging.onvo.ai",
@@ -13,13 +13,13 @@ describe("Teams", () => {
   });
 
   afterAll(() => {
-    return onvoTeams.update("3d05b990-c855-4945-bdd1-b3a8305ffc59", {
+    return onvo.teams.update("3d05b990-c855-4945-bdd1-b3a8305ffc59", {
       name: "Testing team",
     });
   });
 
   it("should list teams", async () => {
-    const accounts = await onvoTeams.list();
+    const accounts = await onvo.teams.list();
     expect(accounts).toBeDefined();
     expect(accounts.length).toBeGreaterThan(0);
     expect(accounts[0].id).toBeDefined();
@@ -30,7 +30,9 @@ describe("Teams", () => {
   });
 
   it("should get a team", async () => {
-    const account = await onvoTeams.get("3d05b990-c855-4945-bdd1-b3a8305ffc59");
+    const account = await onvo.teams.get(
+      "3d05b990-c855-4945-bdd1-b3a8305ffc59"
+    );
     expect(account.id).toBeDefined();
     expect(account.name).toBeDefined();
     expect(account.logo).toBeDefined();
@@ -39,7 +41,7 @@ describe("Teams", () => {
   });
 
   it("should update a team", async () => {
-    const account = await onvoTeams.update(
+    const account = await onvo.teams.update(
       "3d05b990-c855-4945-bdd1-b3a8305ffc59",
       {
         name: "In test",

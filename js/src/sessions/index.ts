@@ -15,37 +15,35 @@ export class OnvoSessions extends OnvoBase {
     ) as Promise<Session>;
   }
 
-  delete(id: string) {
+  revoke(filters: { dashboard: string }) {
     return this.fetchBase(
-      "/api/sessions?dashboard=" + id,
+      "/api/sessions?dashboard=" + filters.dashboard,
       "DELETE"
     ) as Promise<{ success: true }>;
   }
 
-  revokeAll(filters: { dashboard: string }) {
+  revokeAll(filters: { parent_dashboard: string }) {
     return this.fetchBase(
-      "/api/sessions?parent_dashboard=" + filters.dashboard,
+      "/api/sessions?parent_dashboard=" + filters.parent_dashboard,
       "DELETE"
     ) as Promise<{ success: true }>;
   }
 
   async upsert({
-    user,
-    dashboard,
+    embed_user,
+    parent_dashboard,
     parameters,
   }: {
-    user: string;
-    dashboard: string;
+    embed_user: string;
+    parent_dashboard: string;
     parameters?: { [key: string]: any };
   }) {
     let data: any = await this.fetchBase("/api/sessions", "POST", {
-      user: user,
+      user: embed_user,
       parameters: parameters,
-      dashboard: dashboard,
+      dashboard: parent_dashboard,
     });
 
-    return { ...data, url: this.endpoint + data.url } as Promise<
-      Session & { url: string }
-    >;
+    return data as Promise<Session & { url: string; token: string }>;
   }
 }

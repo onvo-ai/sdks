@@ -1,4 +1,4 @@
-import { OnvoDashboardDatasources } from "./dashboard_datasources";
+import { OnvoDashboardDatasources } from "../dashboard_datasources";
 import OnvoBase from "../base";
 import { Widget } from "../types";
 

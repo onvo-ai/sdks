@@ -1,7 +1,10 @@
+import * as buffer from 'buffer';
+
 declare class OnvoBase {
     #private;
     endpoint: string;
-    fetchBase(url: string, method?: "GET" | "PUT" | "POST" | "DELETE" | "PATCH", body?: any): Promise<unknown>;
+    fetchBase(url: string, method?: "GET" | "PUT" | "POST" | "DELETE" | "PATCH", body?: any, isForm?: boolean): Promise<unknown>;
+    fetchImage(url: string, method?: "GET" | "PUT" | "POST" | "DELETE" | "PATCH", body?: any): Promise<buffer.Blob>;
     constructor(apiKey: string, options?: {
         endpoint: string;
     });
@@ -830,7 +833,6 @@ interface Database {
             };
             widgets: {
                 Row: {
-                    assumptions: string[];
                     cache: string | null;
                     code: string;
                     created_at: string;
@@ -846,7 +848,6 @@ interface Database {
                     y: number | null;
                 };
                 Insert: {
-                    assumptions: string[];
                     cache?: string | null;
                     code: string;
                     created_at?: string;
@@ -862,7 +863,6 @@ interface Database {
                     y?: number | null;
                 };
                 Update: {
-                    assumptions?: string[];
                     cache?: string | null;
                     code?: string;
                     created_at?: string;
@@ -1046,7 +1046,6 @@ interface Database {
             };
             decrypted_widgets: {
                 Row: {
-                    assumptions: string[] | null;
                     cache: string | null;
                     code: string | null;
                     created_at: string | null;
@@ -1062,7 +1061,6 @@ interface Database {
                     y: number | null;
                 };
                 Insert: {
-                    assumptions?: string[] | null;
                     cache?: never;
                     code?: string | null;
                     created_at?: string | null;
@@ -1078,7 +1076,6 @@ interface Database {
                     y?: number | null;
                 };
                 Update: {
-                    assumptions?: string[] | null;
                     cache?: never;
                     code?: string | null;
                     created_at?: string | null;
@@ -1112,6 +1109,12 @@ interface Database {
             };
         };
         Functions: {
+            can_create_widget: {
+                Args: {
+                    p_auth: Json;
+                };
+                Returns: boolean;
+            };
             check_id_in_dashboards: {
                 Args: {
                     id: string;
@@ -1139,12 +1142,6 @@ interface Database {
                 Returns: boolean;
             };
             stripe_can_create_invite: {
-                Args: {
-                    organisation: string;
-                };
-                Returns: boolean;
-            };
-            stripe_can_create_widget: {
                 Args: {
                     organisation: string;
                 };
@@ -1437,7 +1434,7 @@ declare class OnvoDatasources extends OnvoBase {
         success: true;
     }>;
     update(id: string, body: Partial<DataSource>): Promise<DataSource>;
-    create(body: Omit<DataSource, "id">): Promise<DataSource>;
+    create(body: Omit<DataSource, "id" | "created_at" | "created_by" | "last_updated_at" | "last_updated_by" | "sample_data" | "size" | "team">): Promise<DataSource>;
 }
 
 declare class OnvoAutomations extends OnvoBase {
@@ -1537,7 +1534,7 @@ declare class OnvoDashboards extends OnvoBase {
         success: true;
     }>;
     update(id: string, body: Partial<Dashboard>): Promise<Dashboard>;
-    create(body: Omit<Dashboard, "id">): Promise<Dashboard>;
+    create(body: Omit<Dashboard, "id" | "created_at" | "created_by" | "last_updated_at" | "last_updated_by" | "thumbnail" | "team">): Promise<Dashboard>;
 }
 
 declare class OnvoDashboardDatasources extends OnvoBase {
@@ -1554,7 +1551,9 @@ declare class OnvoDashboardDatasources extends OnvoBase {
         success: true;
     }>;
     link(datasourceId: string): Promise<{
-        success: true;
+        dashboard: string;
+        datasource: string;
+        team: string;
     }>;
 }
 
@@ -1565,7 +1564,6 @@ declare class OnvoDashboard extends OnvoBase {
         endpoint: string;
     });
     updateWidgetCache(): Promise<{
-        assumptions: string[];
         cache: string | null;
         code: string;
         created_at: string;
@@ -1673,7 +1671,6 @@ declare class OnvoWidget extends OnvoBase {
         role: "user" | "assistant";
         content: String;
     }[]): Promise<{
-        assumptions: string[];
         cache: string | null;
         code: string;
         created_at: string;
@@ -1710,17 +1707,19 @@ declare class OnvoSessions extends OnvoBase {
         parameters: string;
         team: string;
     }>;
-    delete(id: string): Promise<{
-        success: true;
-    }>;
-    revokeAll(filters: {
+    revoke(filters: {
         dashboard: string;
     }): Promise<{
         success: true;
     }>;
-    upsert({ user, dashboard, parameters, }: {
-        user: string;
-        dashboard: string;
+    revokeAll(filters: {
+        parent_dashboard: string;
+    }): Promise<{
+        success: true;
+    }>;
+    upsert({ embed_user, parent_dashboard, parameters, }: {
+        embed_user: string;
+        parent_dashboard: string;
         parameters?: {
             [key: string]: any;
         };
@@ -1732,6 +1731,7 @@ declare class OnvoSessions extends OnvoBase {
         team: string;
     } & {
         url: string;
+        token: string;
     }>;
 }
 
@@ -1739,7 +1739,6 @@ declare class OnvoWidgets extends OnvoBase {
     list(filters: {
         dashboard: string;
     }): Promise<{
-        assumptions: string[];
         cache: string | null;
         code: string;
         created_at: string;
@@ -1755,7 +1754,6 @@ declare class OnvoWidgets extends OnvoBase {
         y: number | null;
     }[]>;
     get(id: string): Promise<{
-        assumptions: string[];
         cache: string | null;
         code: string;
         created_at: string;
@@ -1774,7 +1772,6 @@ declare class OnvoWidgets extends OnvoBase {
         success: true;
     }>;
     update(id: string, body: Partial<Widget>): Promise<{
-        assumptions: string[];
         cache: string | null;
         code: string;
         created_at: string;
@@ -1789,8 +1786,7 @@ declare class OnvoWidgets extends OnvoBase {
         x: number | null;
         y: number | null;
     }>;
-    create(body: Omit<Widget, "id">): Promise<{
-        assumptions: string[];
+    create(body: Omit<Widget, "id" | "created_at">): Promise<{
         cache: string | null;
         code: string;
         created_at: string;

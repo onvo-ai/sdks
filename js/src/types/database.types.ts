@@ -807,7 +807,6 @@ export interface Database {
       };
       widgets: {
         Row: {
-          assumptions: string[];
           cache: string | null;
           code: string;
           created_at: string;
@@ -823,7 +822,6 @@ export interface Database {
           y: number | null;
         };
         Insert: {
-          assumptions: string[];
           cache?: string | null;
           code: string;
           created_at?: string;
@@ -839,7 +837,6 @@ export interface Database {
           y?: number | null;
         };
         Update: {
-          assumptions?: string[];
           cache?: string | null;
           code?: string;
           created_at?: string;
@@ -1023,7 +1020,6 @@ export interface Database {
       };
       decrypted_widgets: {
         Row: {
-          assumptions: string[] | null;
           cache: string | null;
           code: string | null;
           created_at: string | null;
@@ -1039,7 +1035,6 @@ export interface Database {
           y: number | null;
         };
         Insert: {
-          assumptions?: string[] | null;
           cache?: never;
           code?: string | null;
           created_at?: string | null;
@@ -1055,7 +1050,6 @@ export interface Database {
           y?: number | null;
         };
         Update: {
-          assumptions?: string[] | null;
           cache?: never;
           code?: string | null;
           created_at?: string | null;
@@ -1089,6 +1083,12 @@ export interface Database {
       };
     };
     Functions: {
+      can_create_widget: {
+        Args: {
+          p_auth: Json;
+        };
+        Returns: boolean;
+      };
       check_id_in_dashboards: {
         Args: {
           id: string;
@@ -1116,12 +1116,6 @@ export interface Database {
         Returns: boolean;
       };
       stripe_can_create_invite: {
-        Args: {
-          organisation: string;
-        };
-        Returns: boolean;
-      };
-      stripe_can_create_widget: {
         Args: {
           organisation: string;
         };

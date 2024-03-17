@@ -32,6 +32,6 @@ export class OnvoDashboardDatasources extends OnvoBase {
       {
         datasourceId: datasourceId,
       }
-    ) as Promise<{ success: true }>;
+    ) as Promise<DashboardDatasource>;
   }
 }

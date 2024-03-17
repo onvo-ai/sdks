@@ -16,11 +16,12 @@ export class OnvoDatasource extends OnvoBase {
   }
   uploadFile(file: File) {
     const formData = new FormData();
-    formData.append("file", file);
+    formData.set("file", file, file.name);
     return this.fetchBase(
       "/api/datasources/" + this.#id + "/upload-file",
       "POST",
-      formData
+      formData,
+      true
     ) as Promise<DataSource>;
   }
 }
