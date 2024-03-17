@@ -10,7 +10,7 @@ export class OnvoWidget extends OnvoBase {
   }
 
   getImage() {
-    return this.fetchBase(
+    return this.fetchImage(
       "/api/widgets/" + this.#id + "/image"
     ) as Promise<any>;
   }

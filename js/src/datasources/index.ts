@@ -21,7 +21,19 @@ export class OnvoDatasources extends OnvoBase {
       body
     ) as Promise<DataSource>;
   }
-  create(body: Omit<DataSource, "id">) {
+  create(
+    body: Omit<
+      DataSource,
+      | "id"
+      | "created_at"
+      | "created_by"
+      | "last_updated_at"
+      | "last_updated_by"
+      | "sample_data"
+      | "size"
+      | "team"
+    >
+  ) {
     return this.fetchBase(
       "/api/datasources",
       "PUT",
