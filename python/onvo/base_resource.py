@@ -64,46 +64,46 @@ class BaseResource:
         response = handler(url, **options)
         return self.handle_response(response)
 
-    def base_get(self, subdirectory: str, **options) -> requests.Response:
+    def base_get(self, subdirectory: str, **options) -> list | dict | str:
         """The base request for the RESTful index and show actions
 
         Args:
             subdirectory (str): The path to the resource(s)
 
         Returns:
-            Response: The response object returned
+            list | dict | str: The response object from all possible get requests
         """
         return self.base_request(requests.get, subdirectory, options)
 
-    def base_put(self, subdirectory: str, **options) -> requests.Response:
+    def base_put(self, subdirectory: str, **options) -> dict:
         """The base request for the RESTful create action
 
         Args:
             subdirectory (str): The path to the resource
 
         Returns:
-            Response: The response object returned
+            dict: The body of the newly created object or a success/failure message
         """
         return self.base_request(requests.put, subdirectory, options)
 
-    def base_post(self, subdirectory: str, **options) -> requests.Response:
+    def base_post(self, subdirectory: str, **options) -> dict:
         """The base request for the RESTful update action
 
         Args:
             subdirectory (str): The path to the resource
 
         Returns:
-            Response: The response object returned
+            dict: The body of the newly updated object or a success/failure message
         """
         return self.base_request(requests.post, subdirectory, options)
 
-    def base_delete(self, subdirectory: str, **options) -> requests.Response:
+    def base_delete(self, subdirectory: str, **options) -> dict:
         """The base request for the RESTful delete action
 
         Args:
             subdirectory (str): The path to the resource
 
         Returns:
-            Response: The response object returned
+            dict: A success/failure message on deletion
         """
         return self.base_request(requests.delete, subdirectory, options)
