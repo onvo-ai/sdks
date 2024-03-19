@@ -24,8 +24,8 @@ await onvo.embed_users.upsert("123456", {
 
 // setting session parameters
 let session = await onvo.sessions.upsert({
-    dashboardId: "yutc67taci87tads8",
-    userId: "123456",
+    parent_dashboard: "yutc67taci87tads8",
+    embed_user: "123456",
     parameters: {
         year: 2023,
         sorting: "asc"
