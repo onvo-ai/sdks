@@ -52,8 +52,8 @@ await onvo.embed_users.upsert("123456", {
 
 // Create a session
 const sessionUrl = await onvo.sessions.upsert({
-  userId: "123456",
-  dashboard: "ebc7ab74-3fd2-47e6-90df-addaec3a029e",
+  embed_user: "123456",
+  parent_dashboard: "ebc7ab74-3fd2-47e6-90df-addaec3a029e",
   parameters: {
     year: 2023,
     sort: "asc",

@@ -31,8 +31,8 @@ export default async function Home() {
     await Promise.all(
       dashboards.map(async (dash: any) => {
         return onvo.sessions.upsert({
-          user: "123456",
-          dashboard: dash.id,
+          embed_user: "123456",
+          parent_dashboard: dash.id,
           parameters: {},
         });
       })
