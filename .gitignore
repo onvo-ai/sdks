@@ -133,4 +133,11 @@ dist
 
 # MacOS
 **/.DS_Store
+
+# Python
+__pycache__
+python/build/
+*.egg-info/
+
 lib/
+
