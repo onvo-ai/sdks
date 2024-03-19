@@ -1,7 +1,7 @@
 import { Button, Text, Card, Bold, Icon, Textarea } from "@tremor/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import React from "react";
-import { useToken } from "../Wrapper";
+import { useBackend } from "../Wrapper";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import dayjs from "dayjs";
@@ -38,7 +38,7 @@ const QuestionMessage: React.FC<{
   onDelete,
   onEdit,
 }) => {
-  const { backend } = useToken();
+  const backend = useBackend();
   const { refresh } = useDashboard();
 
   const [output, setOutput] = useState<any>();

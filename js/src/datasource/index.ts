@@ -16,7 +16,7 @@ export class OnvoDatasource extends OnvoBase {
   }
   uploadFile(file: File) {
     const formData = new FormData();
-    formData.set("file", file, file.name);
+    formData.set("file", file);
     return this.fetchBase(
       "/api/datasources/" + this.#id + "/upload-file",
       "POST",

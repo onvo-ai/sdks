@@ -19,7 +19,7 @@ import QuestionSidebar from "./QuestionSidebar";
 import React from "react";
 import { useMeasure } from "@uidotdev/usehooks";
 import SuggestionsBar from "./SuggestionsBar";
-import { useToken } from "../Wrapper";
+import { useBackend } from "../Wrapper";
 import { useDashboard } from "../Dashboard";
 import Logo from "./Logo";
 import QuestionLoader from "./QuestionLoader";
@@ -35,7 +35,7 @@ export const useQuestionModal = create<{
 }));
 
 export const QuestionModal: React.FC<{}> = ({}) => {
-  const { backend } = useToken();
+  const backend = useBackend();
   const [containerRef, { width }] = useMeasure();
   const { dashboard } = useDashboard();
 

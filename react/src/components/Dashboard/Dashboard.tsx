@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useToken } from "../Wrapper";
+import { useBackend } from "../Wrapper";
 import { Dashboard as DashboardType, Widget } from "@onvo-ai/js";
 import usePrefersColorScheme from "use-prefers-color-scheme";
 
@@ -9,6 +9,8 @@ type DashboardContext = {
   widgets: any[];
   refresh: () => void;
   theme: "light" | "dark";
+  selectedWidget: Widget | undefined;
+  setSelectedWidget: (widget: Widget | undefined) => void;
 };
 
 const Context = createContext<DashboardContext>({
@@ -17,6 +19,8 @@ const Context = createContext<DashboardContext>({
   widgets: [],
   refresh: () => {},
   theme: "light",
+  selectedWidget: undefined,
+  setSelectedWidget: () => {},
 });
 
 export const Dashboard: React.FC<{
@@ -25,9 +29,10 @@ export const Dashboard: React.FC<{
 }> = ({ id, children }) => {
   const [dashboard, setDashboard] = useState<DashboardType>();
   const [widgets, setWidgets] = useState<Widget[]>([]);
-  const { backend } = useToken();
+  const backend = useBackend();
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const prefersColorScheme = usePrefersColorScheme();
+  const [selectedWidget, setSelectedWidget] = useState<Widget>();
 
   const refresh = () => {
     if (!backend) return;
@@ -53,7 +58,17 @@ export const Dashboard: React.FC<{
   }, [dashboard, prefersColorScheme]);
 
   return (
-    <Context.Provider value={{ id, dashboard, widgets, refresh, theme }}>
+    <Context.Provider
+      value={{
+        id,
+        dashboard,
+        widgets,
+        refresh,
+        theme,
+        selectedWidget,
+        setSelectedWidget,
+      }}
+    >
       <div className={theme}>{children}</div>
     </Context.Provider>
   );

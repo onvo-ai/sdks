@@ -5,8 +5,10 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 
 import ChartCard from "../Chart/ChartCard";
 import { useDashboard } from "../Dashboard/Dashboard";
-import { useToken } from "../Wrapper";
+import { useBackend } from "../Wrapper";
 import { defaults } from "chart.js";
+import { Widget } from "@onvo-ai/js";
+import UpdateChartModal from "./EditWidgetModal";
 
 const r = document.querySelector(":root") as any;
 r.style.setProperty(
@@ -16,9 +18,11 @@ r.style.setProperty(
 defaults.font.family =
   "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 
-export const DashboardGrid: React.FC<{}> = () => {
+export const DashboardGrid: React.FC<{ spacing?: number }> = ({
+  spacing = 10,
+}) => {
   const { dashboard, widgets, theme, refresh } = useDashboard();
-  const { backend } = useToken();
+  const backend = useBackend();
 
   const ResponsiveGridLayout = useMemo(
     () => WidthProvider(Responsive) as any,
@@ -64,23 +68,13 @@ export const DashboardGrid: React.FC<{}> = () => {
 
   let children = useMemo(() => {
     if (!dashboard) return [];
-    return widgets.map((i: any) => (
+    return widgets.map((i: Widget) => (
       <div
         className="hover:z-10"
         key={i.id}
         data-grid={{ x: i.x, y: i.y, w: i.w, h: i.h }}
       >
-        <ChartCard
-          editable={dashboard.settings && dashboard.settings?.editable}
-          widget={i}
-          onUpdate={() => {
-            refresh();
-          }}
-          onRequestEdit={() => {
-            // setSelectedWidget(i);
-            // setOpen(true);
-          }}
-        />
+        <ChartCard widget={i} />
       </div>
     ));
   }, [widgets, dashboard]);
@@ -92,12 +86,14 @@ export const DashboardGrid: React.FC<{}> = () => {
       className="font-override background-color relative w-full pb-safe"
       id="screenshot-content"
     >
+      <UpdateChartModal />
       <ResponsiveGridLayout
         resizeHandle={
           <div className="react-resizable-handle absolute bottom-2 right-2 cursor-pointer rounded-br-lg border-b-[3px] border-r-[3px] border-gray-300 dark:border-gray-700" />
         }
         className="layout"
         rowHeight={120}
+        margin={[spacing, spacing]}
         breakpoints={{ lg: 1280, md: 1024, sm: 768, xs: 640, xxs: 480 }}
         cols={{ lg: 12, md: 12, sm: 12, xs: 12, xxs: 12 }}
         isDraggable={dashboard.settings && dashboard.settings?.editable}

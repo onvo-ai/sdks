@@ -6,12 +6,14 @@ var OnvoBase = class {
   async fetchBase(url, method, body, isForm) {
     try {
       let headers = {
-        "Content-Type": isForm ? void 0 : "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
       };
       if (this.#apiKey && this.#apiKey.trim() !== "") {
         headers["x-api-key"] = this.#apiKey;
+      }
+      if (!isForm) {
+        headers["Content-Type"] = "application/json";
       }
       const response = await fetch(this.endpoint + url, {
         method: method || "GET",
@@ -259,7 +261,7 @@ var OnvoDatasource = class extends OnvoBase {
   }
   uploadFile(file) {
     const formData = new FormData();
-    formData.set("file", file, file.name);
+    formData.set("file", file);
     return this.fetchBase(
       "/api/datasources/" + this.#id + "/upload-file",
       "POST",

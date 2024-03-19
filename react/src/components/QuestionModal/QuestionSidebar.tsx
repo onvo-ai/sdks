@@ -6,7 +6,7 @@ import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 import { toast } from "sonner";
 import Empty from "./Empty";
 import React from "react";
-import { useToken } from "../Wrapper";
+import { useBackend } from "../Wrapper";
 dayjs.extend(relativeTime);
 
 const QuestionSidebarCard: React.FC<{
@@ -48,7 +48,7 @@ const QuestionSidebar: React.FC<{
   loading: boolean;
   questions: any[];
 }> = ({ onSelect, onDelete, selectedQuestionId, loading, questions }) => {
-  const { backend } = useToken();
+  const backend = useBackend();
 
   const deleteQuestion = (questionId: string) => {
     if (!backend) return;
