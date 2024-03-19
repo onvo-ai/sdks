@@ -1,0 +1,794 @@
+Customer ID,City,Country,Segment,State,Postal Code,Region
+CG-12520,Henderson,United States,Consumer,Kentucky,42420,South
+DV-13045,Los Angeles,United States,Corporate,California,90036,West
+SO-20335,Fort Lauderdale,United States,Consumer,Florida,33311,South
+BH-11710,Los Angeles,United States,Consumer,California,90032,West
+AA-10480,Concord,United States,Consumer,North Carolina,28027,South
+IM-15070,Seattle,United States,Consumer,Washington,98103,West
+HP-14815,Fort Worth,United States,Home Office,Texas,76106,Central
+PK-19075,Madison,United States,Consumer,Wisconsin,53711,Central
+AG-10270,West Jordan,United States,Consumer,Utah,84084,West
+ZD-21925,San Francisco,United States,Consumer,California,94109,West
+KB-16585,Fremont,United States,Corporate,Nebraska,68025,Central
+SF-20065,Philadelphia,United States,Consumer,Pennsylvania,19140,East
+EB-13870,Orem,United States,Consumer,Utah,84057,West
+EH-13945,Los Angeles,United States,Consumer,California,90049,West
+TB-21520,Philadelphia,United States,Consumer,Pennsylvania,19140,East
+MA-17560,Houston,United States,Home Office,Texas,77095,Central
+GH-14485,Richardson,United States,Corporate,Texas,75080,Central
+SN-20710,Houston,United States,Home Office,Texas,77041,Central
+LC-16930,Naperville,United States,Corporate,Illinois,60540,Central
+RA-19885,Los Angeles,United States,Corporate,California,90049,West
+ES-14080,Melbourne,United States,Corporate,Florida,32935,South
+ON-18715,Eagan,United States,Corporate,Minnesota,55122,Central
+PO-18865,Westland,United States,Consumer,Michigan,48185,Central
+LH-16900,Dover,United States,Consumer,Delaware,19901,East
+DP-13000,New Albany,United States,Consumer,Indiana,47150,Central
+JM-15265,New York City,United States,Corporate,New York,10024,East
+TB-21055,Troy,United States,Consumer,New York,12180,East
+KM-16720,Los Angeles,United States,Consumer,California,90004,West
+PS-18970,Chicago,United States,Home Office,Illinois,60610,Central
+BS-11590,Gilbert,United States,Corporate,Arizona,85234,West
+KD-16270,Springfield,United States,Consumer,Virginia,22153,South
+HM-14980,New York City,United States,Consumer,New York,10009,East
+JE-15745,Memphis,United States,Consumer,Tennessee,38109,South
+KB-16600,Houston,United States,Corporate,Texas,77041,Central
+SC-20770,Decatur,United States,Corporate,Alabama,35601,South
+DN-13690,San Francisco,United States,Consumer,California,94122,West
+JC-16105,Durham,United States,Corporate,North Carolina,27707,South
+CS-12400,Chicago,United States,Home Office,Illinois,60623,Central
+PG-18895,Rochester,United States,Consumer,Minnesota,55901,Central
+GM-14455,Houston,United States,Home Office,Texas,77095,Central
+JS-15685,Los Angeles,United States,Corporate,California,90036,West
+KB-16315,Minneapolis,United States,Consumer,Minnesota,55407,Central
+RB-19705,Portland,United States,Home Office,Oregon,97206,West
+PN-18775,New York City,United States,Home Office,New York,10009,East
+KD-16345,San Francisco,United States,Consumer,California,94122,West
+ER-13855,Saint Paul,United States,Corporate,Minnesota,55106,Central
+RB-19465,Chicago,United States,Home Office,Illinois,60610,Central
+GZ-14470,Rochester,United States,Consumer,Minnesota,55901,Central
+LC-16870,Aurora,United States,Consumer,Colorado,80013,West
+JM-15250,Charlotte,United States,Consumer,North Carolina,28205,South
+PA-19060,Orland Park,United States,Home Office,Illinois,60462,Central
+CV-12805,New York City,United States,Corporate,New York,10035,East
+CL-12565,Urbandale,United States,Consumer,Iowa,50322,Central
+RC-19960,Columbus,United States,Consumer,Ohio,43229,East
+DK-13090,Seattle,United States,Consumer,Washington,98103,West
+GG-14650,Bristol,United States,Corporate,Tennessee,37620,South
+SC-20725,Wilmington,United States,Consumer,Delaware,19805,East
+AD-10180,Houston,United States,Home Office,Texas,77041,Central
+PF-19165,Bloomington,United States,Consumer,Illinois,61701,Central
+TS-21610,Phoenix,United States,Consumer,Arizona,85023,West
+LS-16975,Los Angeles,United States,Home Office,California,90004,West
+DW-13585,Columbus,United States,Corporate,Ohio,43229,East
+LC-16885,Roseville,United States,Consumer,California,95661,West
+JD-15895,Philadelphia,United States,Corporate,Pennsylvania,19140,East
+SH-19975,San Francisco,United States,Corporate,California,94122,West
+SG-20080,Independence,United States,Consumer,Missouri,64055,Central
+HA-14920,Pasadena,United States,Consumer,California,91104,West
+MG-17680,Newark,United States,Home Office,Ohio,43055,East
+JE-16165,Franklin,United States,Corporate,Wisconsin,53132,Central
+TW-21025,Scottsdale,United States,Home Office,Arizona,85254,West
+SP-20650,San Jose,United States,Corporate,California,95123,West
+NK-18490,Seattle,United States,Home Office,Washington,98105,West
+DB-13060,Seattle,United States,Consumer,Washington,98115,West
+NP-18670,Edmond,United States,Consumer,Oklahoma,73034,Central
+TT-21070,Los Angeles,United States,Consumer,California,90045,West
+EM-13960,Philadelphia,United States,Consumer,Pennsylvania,19134,East
+RD-19900,Carlsbad,United States,Consumer,New Mexico,88220,West
+MJ-17740,Seattle,United States,Consumer,Washington,98115,West
+BM-11140,San Antonio,United States,Consumer,Texas,78207,Central
+CS-12130,Los Angeles,United States,Consumer,California,90004,West
+JB-15400,Chicago,United States,Corporate,Illinois,60623,Central
+SJ-20500,Houston,United States,Consumer,Texas,77036,Central
+JK-15640,New York City,United States,Home Office,New York,10009,East
+DK-13150,Decatur,United States,Corporate,Illinois,62521,Central
+RM-19675,Monroe,United States,Home Office,Louisiana,71203,South
+SK-19990,Fairfield,United States,Consumer,Connecticut,6824,East
+FM-14290,Los Angeles,United States,Home Office,California,90032,West
+AM-10360,Grand Prairie,United States,Corporate,Texas,75051,Central
+MP-17470,New York City,United States,Home Office,New York,10035,East
+MZ-17515,Redlands,United States,Corporate,California,92374,West
+CB-12025,Hamilton,United States,Consumer,Ohio,45011,East
+VM-21685,Westfield,United States,Home Office,New Jersey,7090,East
+FH-14365,Philadelphia,United States,Corporate,Pennsylvania,19120,East
+MB-17305,Akron,United States,Consumer,Ohio,44312,East
+BS-11755,Denver,United States,Consumer,Colorado,80219,West
+LC-17140,Dallas,United States,Consumer,Texas,75220,Central
+HK-14890,Franklin,United States,Corporate,Tennessee,37064,South
+LE-16810,Whittier,United States,Consumer,California,90604,West
+JH-15985,Saginaw,United States,Consumer,Michigan,48601,Central
+MS-17980,Dallas,United States,Corporate,Texas,75220,Central
+VW-21775,Medina,United States,Corporate,Ohio,44256,East
+JH-15910,Los Angeles,United States,Consumer,California,90032,West
+JB-15925,Dublin,United States,Consumer,Ohio,43017,East
+DS-13180,Detroit,United States,Corporate,Michigan,48227,Central
+VD-21670,Columbia,United States,Consumer,Tennessee,38401,South
+EA-14035,Charlotte,United States,Corporate,North Carolina,28205,South
+DB-13120,Santa Clara,United States,Corporate,California,95051,West
+KL-16645,Chicago,United States,Consumer,Illinois,60610,Central
+DW-13480,Lakeville,United States,Home Office,Minnesota,55044,Central
+LH-17155,San Francisco,United States,Consumer,California,94109,West
+KC-16540,San Diego,United States,Consumer,California,92037,West
+DL-13315,New York City,United States,Consumer,New York,10024,East
+DR-12880,Chicago,United States,Corporate,Illinois,60623,Central
+CC-12670,New York City,United States,Consumer,New York,10009,East
+Dl-13600,Pasadena,United States,Corporate,Texas,77506,Central
+SB-20290,Houston,United States,Corporate,Texas,77036,Central
+RC-19825,Chicago,United States,Consumer,Illinois,60610,Central
+AH-10210,Brentwood,United States,Consumer,California,94513,West
+CB-12535,Chapel Hill,United States,Corporate,North Carolina,27514,South
+CA-12310,Cincinnati,United States,Corporate,Ohio,45231,East
+KH-16690,San Francisco,United States,Corporate,California,94110,West
+BB-10990,Inglewood,United States,Corporate,California,90301,West
+AG-10495,Philadelphia,United States,Corporate,Pennsylvania,19140,East
+JO-15280,Los Angeles,United States,Consumer,California,90004,West
+AH-10195,Tamarac,United States,Corporate,Florida,33319,South
+NZ-18565,Columbus,United States,Home Office,Ohio,43229,East
+KL-16555,Colorado Springs,United States,Corporate,Colorado,80906,West
+AS-10225,New York City,United States,Corporate,New York,10024,East
+CR-12625,Lakewood,United States,Home Office,New Jersey,8701,East
+SH-20395,Arlington,United States,Consumer,Virginia,22204,South
+BP-11185,Arvada,United States,Corporate,Colorado,80004,West
+TS-21205,Hackensack,United States,Corporate,New Jersey,7601,East
+AG-10525,Saint Petersburg,United States,Corporate,Florida,33710,South
+SP-20860,Philadelphia,United States,Corporate,Pennsylvania,19143,East
+NM-18445,New York City,United States,Home Office,New York,10024,East
+FA-14230,Long Beach,United States,Corporate,California,90805,West
+GK-14620,Hesperia,United States,Corporate,California,92345,West
+DJ-13510,Murfreesboro,United States,Corporate,Tennessee,37130,South
+PO-18850,Philadelphia,United States,Consumer,Pennsylvania,19143,East
+JL-15850,Philadelphia,United States,Consumer,Pennsylvania,19134,East
+DB-13615,Los Angeles,United States,Consumer,California,90045,West
+AC-10420,San Francisco,United States,Corporate,California,94122,West
+CC-12550,San Francisco,United States,Consumer,California,94122,West
+TD-20995,Lowell,United States,Consumer,Massachusetts,1852,East
+AB-10060,New York City,United States,Home Office,New York,10009,East
+JL-15505,New York City,United States,Consumer,New York,10035,East
+VB-21745,Columbus,United States,Corporate,Georgia,31907,South
+KW-16435,New York City,United States,Consumer,New York,10009,East
+JD-16060,San Francisco,United States,Consumer,California,94109,West
+MK-17905,Manchester,United States,Corporate,Connecticut,6040,East
+GT-14755,Harlingen,United States,Consumer,Texas,78550,Central
+AG-10900,Tucson,United States,Consumer,Arizona,85705,West
+MM-18280,Quincy,United States,Corporate,Illinois,62301,Central
+AR-10405,Franklin,United States,Corporate,Massachusetts,2038,East
+RA-19915,Houston,United States,Consumer,Texas,77095,Central
+AS-10285,San Francisco,United States,Corporate,California,94109,West
+LA-16780,Taylor,United States,Corporate,Michigan,48180,Central
+DO-13435,Pembroke Pines,United States,Consumer,Florida,33024,South
+DK-13225,Philadelphia,United States,Corporate,Pennsylvania,19140,East
+NG-18430,Cincinnati,United States,Consumer,Ohio,45231,East
+MV-18190,New York City,United States,Consumer,New York,10009,East
+JG-15115,Des Moines,United States,Consumer,Washington,98198,West
+BP-11095,Peoria,United States,Corporate,Illinois,61604,Central
+VP-21730,Las Vegas,United States,Home Office,Nevada,89115,West
+SS-20140,Warwick,United States,Corporate,Rhode Island,2886,East
+AG-10675,Houston,United States,Consumer,Texas,77036,Central
+LF-17185,Miami,United States,Consumer,Florida,33180,South
+RF-19840,New York City,United States,Consumer,New York,10024,East
+KH-16510,San Francisco,United States,Consumer,California,94110,West
+KC-16675,Seattle,United States,Corporate,Washington,98105,West
+CJ-12010,Huntington Beach,United States,Consumer,California,92646,West
+PB-19150,Los Angeles,United States,Consumer,California,90004,West
+MP-17965,Lawrence,United States,Corporate,Massachusetts,1841,East
+NF-18385,Jackson,United States,Consumer,Mississippi,39212,South
+SD-20485,New Rochelle,United States,Home Office,New York,10801,East
+KH-16630,San Antonio,United States,Corporate,Texas,78207,Central
+RB-19795,Gastonia,United States,Home Office,North Carolina,28052,South
+MK-18160,Jacksonville,United States,Consumer,Florida,32216,South
+PO-19180,Chicago,United States,Home Office,Illinois,60623,Central
+BB-11545,Houston,United States,Corporate,Texas,77070,Central
+TB-21595,Columbus,United States,Consumer,Indiana,47201,Central
+RB-19360,Auburn,United States,Consumer,New York,13021,East
+EB-13705,Akron,United States,Corporate,Ohio,44312,East
+SC-20095,Concord,United States,Consumer,California,94521,West
+TN-21040,Phoenix,United States,Home Office,Arizona,85023,West
+JS-15940,Park Ridge,United States,Home Office,Illinois,60068,Central
+MH-17785,Lindenhurst,United States,Corporate,New York,11757,East
+JP-15520,San Francisco,United States,Consumer,California,94110,West
+JE-15475,Troy,United States,Consumer,New York,12180,East
+JG-15805,New York City,United States,Corporate,New York,10024,East
+XP-21865,San Diego,United States,Consumer,California,92024,West
+EM-14065,New York City,United States,Consumer,New York,10024,East
+MT-18070,Los Angeles,United States,Home Office,California,90045,West
+SA-20830,Chicago,United States,Consumer,Illinois,60610,Central
+CW-11905,Huntsville,United States,Home Office,Texas,77340,Central
+AJ-10960,Rochester,United States,Consumer,New York,14609,East
+SS-20590,Seattle,United States,Consumer,Washington,98115,West
+RO-19780,Memphis,United States,Consumer,Tennessee,38109,South
+MD-17350,Fayetteville,United States,Consumer,Arkansas,72701,South
+MY-17380,Parker,United States,Corporate,Colorado,80134,West
+CM-12385,Atlanta,United States,Consumer,Georgia,30318,South
+LS-17245,Gladstone,United States,Consumer,Missouri,64118,Central
+BN-11515,Los Angeles,United States,Consumer,California,90049,West
+DB-13210,Houston,United States,Consumer,Texas,77041,Central
+MC-17605,Detroit,United States,Corporate,Michigan,48234,Central
+BD-11605,Lawrence,United States,Consumer,Massachusetts,1841,East
+PH-18790,Lakeland,United States,Home Office,Florida,33801,South
+MG-18145,Philadelphia,United States,Consumer,Pennsylvania,19134,East
+KB-16240,Los Angeles,United States,Corporate,California,90036,West
+JC-15340,Los Angeles,United States,Consumer,California,90032,West
+RL-19615,Montgomery,United States,Consumer,Alabama,36116,South
+AA-10375,Mesa,United States,Consumer,Arizona,85204,West
+EP-13915,Chicago,United States,Consumer,Illinois,60653,Central
+DK-12985,Henderson,United States,Consumer,Kentucky,42420,South
+BD-11500,Green Bay,United States,Consumer,Wisconsin,54302,Central
+LM-17065,Springfield,United States,Consumer,Ohio,45503,East
+AS-10135,New York City,United States,Home Office,New York,10035,East
+BD-11320,San Francisco,United States,Consumer,California,94110,West
+GT-14710,Houston,United States,Consumer,Texas,77070,Central
+AJ-10945,Wilmington,United States,Consumer,North Carolina,28403,South
+OT-18730,Los Angeles,United States,Consumer,California,90045,West
+LP-17080,San Francisco,United States,Consumer,California,94110,West
+CA-12775,Tampa,United States,Consumer,Florida,33614,South
+JF-15490,Seattle,United States,Consumer,Washington,98105,West
+FP-14320,Los Angeles,United States,Consumer,California,90008,West
+EB-13840,Seattle,United States,Corporate,Washington,98105,West
+JF-15415,New York City,United States,Consumer,New York,10024,East
+SF-20200,Marysville,United States,Consumer,Washington,98270,West
+TG-21640,Long Beach,United States,Consumer,California,90805,West
+CS-11950,Chicago,United States,Consumer,Illinois,60610,Central
+CC-12145,Los Angeles,United States,Consumer,California,90004,West
+DV-13465,Denver,United States,Consumer,Colorado,80219,West
+BD-11725,Richmond,United States,Consumer,Kentucky,40475,South
+ZC-21910,Salem,United States,Consumer,Oregon,97301,West
+MS-17830,Laredo,United States,Consumer,Texas,78041,Central
+LR-16915,San Diego,United States,Consumer,California,92024,West
+TP-21130,Philadelphia,United States,Consumer,Pennsylvania,19134,East
+CK-12205,Philadelphia,United States,Consumer,Pennsylvania,19120,East
+AS-10240,Tampa,United States,Consumer,Florida,33614,South
+AR-10510,Philadelphia,United States,Consumer,Pennsylvania,19134,East
+NB-18655,Dallas,United States,Corporate,Texas,75217,Central
+GD-14590,Philadelphia,United States,Corporate,Pennsylvania,19143,East
+CK-12595,Grove City,United States,Consumer,Ohio,43123,East
+NG-18355,New York City,United States,Corporate,New York,10011,East
+CA-12265,Chicago,United States,Consumer,Illinois,60610,Central
+SF-20965,Dearborn,United States,Corporate,Michigan,48126,Central
+MO-17800,New York City,United States,Home Office,New York,10009,East
+AT-10735,Seattle,United States,Consumer,Washington,98115,West
+FM-14380,Aurora,United States,Consumer,Colorado,80013,West
+DJ-13420,Warner Robins,United States,Corporate,Georgia,31088,South
+ME-17725,Aurora,United States,Consumer,Colorado,80013,West
+JD-16150,Minneapolis,United States,Corporate,Minnesota,55407,Central
+JL-15835,Mission Viejo,United States,Consumer,California,92691,West
+SC-20305,Rochester Hills,United States,Consumer,Michigan,48307,Central
+CC-12430,Columbus,United States,Home Office,Indiana,47201,Central
+AR-10825,Vancouver,United States,Corporate,Washington,98661,West
+SR-20740,New York City,United States,Home Office,New York,10024,East
+CR-12730,Columbus,United States,Consumer,Ohio,43229,East
+EH-14125,Aurora,United States,Home Office,Illinois,60505,Central
+SP-20545,New York City,United States,Corporate,New York,10011,East
+TH-21235,Dallas,United States,Corporate,Texas,75081,Central
+RP-19390,Cleveland,United States,Consumer,Ohio,44105,East
+RB-19570,Columbus,United States,Consumer,Indiana,47201,Central
+CD-11980,Tyler,United States,Consumer,Texas,75701,Central
+DJ-13630,New York City,United States,Consumer,New York,10024,East
+GT-14635,Burlington,United States,Corporate,North Carolina,27217,South
+MC-17845,Jackson,United States,Consumer,Mississippi,39212,South
+RA-19285,New York City,United States,Consumer,New York,10035,East
+NP-18325,Waynesboro,United States,Consumer,Virginia,22980,South
+AB-10165,Los Angeles,United States,Consumer,California,90036,West
+JO-15550,Chester,United States,Home Office,Pennsylvania,19013,East
+JK-15370,Long Beach,United States,Consumer,California,90805,West
+BN-11470,Cary,United States,Corporate,North Carolina,27511,South
+DP-13165,New York City,United States,Consumer,New York,10035,East
+TH-21550,New York City,United States,Home Office,New York,10035,East
+AP-10915,Palm Coast,United States,Consumer,Florida,32137,South
+RS-19765,Mount Vernon,United States,Corporate,New York,10550,East
+SV-20365,Dover,United States,Consumer,Delaware,19901,East
+CK-12325,Orem,United States,Home Office,Utah,84057,West
+RD-19810,Los Angeles,United States,Home Office,California,90045,West
+MR-17545,Philadelphia,United States,Home Office,Pennsylvania,19140,East
+SC-20695,Hialeah,United States,Corporate,Florida,33012,South
+JF-15355,Austin,United States,Consumer,Texas,78745,Central
+EG-13900,Oceanside,United States,Consumer,New York,11572,East
+DS-13030,Seattle,United States,Home Office,Washington,98115,West
+PO-19195,Naperville,United States,Home Office,Illinois,60540,Central
+SS-20875,Dallas,United States,Consumer,Texas,75220,Central
+PB-19105,Evanston,United States,Consumer,Illinois,60201,Central
+RF-19735,Trenton,United States,Consumer,Michigan,48183,Central
+YC-21895,San Francisco,United States,Corporate,California,94110,West
+DC-13285,Cottage Grove,United States,Consumer,Minnesota,55016,Central
+CP-12340,New York City,United States,Corporate,New York,10009,East
+BF-11020,Green Bay,United States,Corporate,Wisconsin,54302,Central
+LH-17020,Columbus,United States,Consumer,Ohio,43229,East
+CS-12250,Bossier City,United States,Corporate,Louisiana,71111,South
+AJ-10795,Saint Petersburg,United States,Corporate,Florida,33710,South
+BV-11245,Des Moines,United States,Corporate,Iowa,50315,Central
+DL-12865,Cincinnati,United States,Consumer,Ohio,45231,East
+BM-11785,Columbus,United States,Consumer,Ohio,43229,East
+LT-17110,Lancaster,United States,Consumer,California,93534,West
+JK-15730,Asheville,United States,Consumer,North Carolina,28806,South
+ES-14020,San Francisco,United States,Consumer,California,94110,West
+RH-19495,Rochester,United States,Consumer,Minnesota,55901,Central
+CD-11920,Lake Elsinore,United States,Consumer,California,92530,West
+HW-14935,San Diego,United States,Corporate,California,92105,West
+MC-18130,Monroe,United States,Corporate,Louisiana,71203,South
+GM-14440,San Francisco,United States,Consumer,California,94122,West
+PJ-19015,Santa Ana,United States,Consumer,California,92704,West
+BW-11110,Milwaukee,United States,Corporate,Wisconsin,53209,Central
+TR-21325,Belleville,United States,Consumer,New Jersey,7109,East
+PG-18820,San Francisco,United States,Consumer,California,94110,West
+JL-15175,Columbia,United States,Home Office,Tennessee,38401,South
+BM-11650,New York City,United States,Corporate,New York,10035,East
+EM-14095,Los Angeles,United States,Corporate,California,90036,West
+AF-10885,Louisville,United States,Consumer,Kentucky,40214,South
+GA-14725,Lorain,United States,Consumer,Ohio,44052,East
+CK-12760,Linden,United States,Corporate,New Jersey,7036,East
+DP-13105,Salinas,United States,Corporate,California,93905,West
+BK-11260,New York City,United States,Consumer,New York,10035,East
+SJ-20125,New Brunswick,United States,Home Office,New Jersey,8901,East
+CM-12445,San Francisco,United States,Consumer,California,94122,West
+AJ-10780,Springfield,United States,Corporate,Virginia,22153,South
+LS-16945,Philadelphia,United States,Corporate,Pennsylvania,19140,East
+GP-14740,Lancaster,United States,Corporate,Pennsylvania,17602,East
+PK-18910,Philadelphia,United States,Home Office,Pennsylvania,19143,East
+SM-20005,New York City,United States,Consumer,New York,10009,East
+AG-10765,Philadelphia,United States,Home Office,Pennsylvania,19120,East
+PM-19135,Detroit,United States,Home Office,Michigan,48227,Central
+LL-16840,Rochester,United States,Consumer,New York,14609,East
+JS-15595,Los Angeles,United States,Corporate,California,90045,West
+EL-13735,Columbia,United States,Home Office,Maryland,21044,East
+PC-18745,San Francisco,United States,Corporate,California,94122,West
+HL-15040,Houston,United States,Consumer,Texas,77095,Central
+MS-17365,Detroit,United States,Consumer,Michigan,48227,Central
+GB-14530,Auburn,United States,Corporate,New York,13021,East
+JR-16210,Springfield,United States,Corporate,Ohio,45503,East
+BE-11335,Jackson,United States,Home Office,Michigan,49201,Central
+SC-20050,Norwich,United States,Home Office,Connecticut,6360,East
+RW-19630,Dallas,United States,Corporate,Texas,75220,Central
+SE-20110,New York City,United States,Consumer,New York,10009,East
+AH-10075,New York City,United States,Corporate,New York,10011,East
+JM-15535,Philadelphia,United States,Consumer,Pennsylvania,19143,East
+JJ-15760,Springfield,United States,Home Office,Virginia,22153,South
+RK-19300,Philadelphia,United States,Consumer,Pennsylvania,19140,East
+CG-12040,Philadelphia,United States,Home Office,Pennsylvania,19120,East
+RP-19270,Riverside,United States,Corporate,California,92503,West
+KC-16255,San Francisco,United States,Corporate,California,94110,West
+KH-16360,Philadelphia,United States,Consumer,Pennsylvania,19143,East
+GH-14665,Round Rock,United States,Consumer,Texas,78664,Central
+SW-20275,Jackson,United States,Consumer,Mississippi,39212,South
+JA-15970,Phoenix,United States,Consumer,Arizona,85023,West
+DL-12925,Oceanside,United States,Consumer,California,92054,West
+LW-16990,San Francisco,United States,Corporate,California,94110,West
+TB-21190,Fayetteville,United States,Home Office,Arkansas,72701,South
+BS-11800,New York City,United States,Home Office,New York,10011,East
+RW-19690,Wilmington,United States,Consumer,North Carolina,28403,South
+TZ-21580,Louisville,United States,Consumer,Colorado,80027,West
+AS-10630,Pasadena,United States,Home Office,Texas,77506,Central
+TS-21340,Houston,United States,Consumer,Texas,77041,Central
+SL-20155,Jacksonville,United States,Home Office,Florida,32216,South
+MW-18235,Virginia Beach,United States,Corporate,Virginia,23464,South
+RD-19585,Henderson,United States,Consumer,Kentucky,42420,South
+RA-19945,Murrieta,United States,Consumer,California,92563,West
+MT-17815,Scottsdale,United States,Consumer,Arizona,85254,West
+VG-21790,San Diego,United States,Consumer,California,92037,West
+JS-15880,Seattle,United States,Consumer,Washington,98103,West
+KM-16225,New York City,United States,Corporate,New York,10011,East
+HR-14770,Los Angeles,United States,Home Office,California,90045,West
+DE-13255,Springfield,United States,Home Office,Ohio,45503,East
+AG-10390,Cincinnati,United States,Consumer,Ohio,45231,East
+JJ-15445,Los Angeles,United States,Consumer,California,90004,West
+JH-15430,Burlington,United States,Consumer,North Carolina,27217,South
+RD-19660,Saint Peters,United States,Home Office,Missouri,63376,Central
+MO-17500,New York City,United States,Consumer,New York,10035,East
+NS-18640,Chicago,United States,Corporate,Illinois,60610,Central
+DG-13300,Philadelphia,United States,Corporate,Pennsylvania,19134,East
+NF-18595,New York City,United States,Home Office,New York,10009,East
+MG-17650,Philadelphia,United States,Home Office,Pennsylvania,19143,East
+TS-21160,Toledo,United States,Corporate,Ohio,43615,East
+BD-11620,San Francisco,United States,Consumer,California,94122,West
+CM-12160,Brownsville,United States,Consumer,Texas,78521,Central
+SN-20560,Los Angeles,United States,Home Office,California,90008,West
+EH-14005,Denver,United States,Home Office,Colorado,80219,West
+FO-14305,New York City,United States,Consumer,New York,10035,East
+MS-17710,Mesa,United States,Consumer,Arizona,85204,West
+CC-12100,Columbus,United States,Home Office,Indiana,47201,Central
+DW-13540,Seattle,United States,Consumer,Washington,98105,West
+BT-11395,Detroit,United States,Corporate,Michigan,48227,Central
+CY-12745,Oakland,United States,Corporate,California,94601,West
+BT-11485,Clinton,United States,Home Office,Maryland,20735,East
+PS-19045,Charlotte,United States,Home Office,North Carolina,28205,South
+PV-18985,San Francisco,United States,Home Office,California,94122,West
+NM-18520,Riverside,United States,Consumer,California,92503,West
+DL-13495,San Francisco,United States,Corporate,California,94110,West
+CS-12355,Roswell,United States,Consumer,Georgia,30076,South
+FH-14275,La Porte,United States,Corporate,Indiana,46350,Central
+NC-18340,Lansing,United States,Consumer,Michigan,48911,Central
+AA-10315,Minneapolis,United States,Consumer,Minnesota,55407,Central
+LT-16765,Escondido,United States,Consumer,California,92025,West
+AP-10720,New York City,United States,Home Office,New York,10035,East
+PM-18940,Jackson,United States,Consumer,Michigan,49201,Central
+AT-10435,Los Angeles,United States,Home Office,California,90004,West
+CA-12055,Houston,United States,Home Office,Texas,77070,Central
+HR-14830,Seattle,United States,Corporate,Washington,98103,West
+BT-11530,Los Angeles,United States,Home Office,California,90036,West
+LH-16750,Charlotte,United States,Consumer,North Carolina,28205,South
+SW-20755,New York City,United States,Corporate,New York,10009,East
+SP-20620,Philadelphia,United States,Corporate,Pennsylvania,19134,East
+BF-11170,Los Angeles,United States,Home Office,California,90036,West
+KT-16480,Buffalo,United States,Consumer,New York,14215,East
+BG-11695,Cincinnati,United States,Corporate,Ohio,45231,East
+GM-14680,Seattle,United States,Consumer,Washington,98105,West
+EJ-14155,Gulfport,United States,Consumer,Mississippi,39503,South
+NP-18700,Fresno,United States,Consumer,California,93727,West
+MH-18115,Chester,United States,Home Office,Pennsylvania,19013,East
+JR-15700,Jacksonville,United States,Consumer,Florida,32216,South
+SM-20950,Greenville,United States,Corporate,North Carolina,27834,South
+CC-12220,La Porte,United States,Consumer,Indiana,46350,Central
+PF-19225,San Francisco,United States,Consumer,California,94122,West
+DC-12850,Florence,United States,Consumer,Alabama,35630,South
+BD-11770,Houston,United States,Consumer,Texas,77070,Central
+GM-14500,Providence,United States,Consumer,Rhode Island,2908,East
+TB-21355,New York City,United States,Corporate,New York,10009,East
+JH-16180,Pueblo,United States,Consumer,Colorado,81001,West
+EB-13975,Fairfield,United States,Corporate,California,94533,West
+QJ-19255,Saint Paul,United States,Corporate,Minnesota,55106,Central
+TC-21535,Arlington,United States,Home Office,Virginia,22204,South
+CS-12460,Columbus,United States,Consumer,Georgia,31907,South
+HG-14965,Los Angeles,United States,Corporate,California,90032,West
+LW-16825,Deltona,United States,Corporate,Florida,32725,South
+MC-17575,Cincinnati,United States,Consumer,Ohio,45231,East
+LP-17095,Murray,United States,Consumer,Kentucky,42071,South
+EB-14170,Wilmington,United States,Consumer,North Carolina,28403,South
+GZ-14545,Lawrence,United States,Corporate,Massachusetts,1841,East
+CP-12085,Norwich,United States,Corporate,Connecticut,6360,East
+FG-14260,San Francisco,United States,Home Office,California,94110,West
+LD-17005,San Francisco,United States,Consumer,California,94109,West
+AB-10255,Lorain,United States,Home Office,Ohio,44052,East
+MN-17935,Dallas,United States,Consumer,Texas,75220,Central
+JR-15670,Middletown,United States,Consumer,Connecticut,6457,East
+JF-15190,Los Angeles,United States,Consumer,California,90008,West
+CM-12115,New York City,United States,Consumer,New York,10011,East
+AS-10045,Jacksonville,United States,Corporate,North Carolina,28540,South
+BP-11290,Evanston,United States,Consumer,Illinois,60201,Central
+ND-18370,Louisville,United States,Consumer,Kentucky,40214,South
+LB-16735,Fort Worth,United States,Consumer,Texas,76106,Central
+KT-16465,Los Angeles,United States,Consumer,California,90049,West
+HM-14860,Philadelphia,United States,Corporate,Pennsylvania,19120,East
+AB-10600,Tucson,United States,Corporate,Arizona,85705,West
+SZ-20035,Pico Rivera,United States,Home Office,California,90660,West
+MG-17890,Clinton,United States,Home Office,Maryland,20735,East
+JK-16120,Aurora,United States,Home Office,Illinois,60505,Central
+PP-18955,Smyrna,United States,Home Office,Georgia,30080,South
+YS-21880,Burlington,United States,Corporate,North Carolina,27217,South
+KM-16375,Salem,United States,Home Office,Virginia,24153,South
+AB-10105,Phoenix,United States,Consumer,Arizona,85023,West
+HA-14905,New York City,United States,Consumer,New York,10024,East
+BT-11305,Costa Mesa,United States,Home Office,California,92627,West
+SV-20815,Houston,United States,Corporate,Texas,77041,Central
+RW-19540,Mesa,United States,Corporate,Arizona,85204,West
+DK-12835,Salinas,United States,Corporate,California,93905,West
+ST-20530,Parma,United States,Consumer,Ohio,44134,East
+MM-17920,San Francisco,United States,Consumer,California,94110,West
+PW-19030,Richmond,United States,Corporate,Kentucky,40475,South
+SC-20440,Aurora,United States,Corporate,Colorado,80013,West
+TS-21085,Phoenix,United States,Consumer,Arizona,85023,West
+MC-17425,Mobile,United States,Corporate,Alabama,36608,South
+ME-17320,Columbus,United States,Home Office,Georgia,31907,South
+NH-18610,Irving,United States,Corporate,Texas,75061,Central
+MB-18085,Vineland,United States,Consumer,New Jersey,8360,East
+KD-16495,New York City,United States,Corporate,New York,10009,East
+KN-16390,Los Angeles,United States,Corporate,California,90004,West
+NP-18685,Niagara Falls,United States,Home Office,New York,14304,East
+CS-12505,Thomasville,United States,Consumer,North Carolina,27360,South
+MS-17770,New York City,United States,Consumer,New York,10035,East
+CM-12655,Los Angeles,United States,Home Office,California,90008,West
+Co-12640,Philadelphia,United States,Consumer,Pennsylvania,19143,East
+TS-21370,New York City,United States,Corporate,New York,10035,East
+JW-15220,Vancouver,United States,Corporate,Washington,98661,West
+JD-15790,Coppell,United States,Consumer,Texas,75019,Central
+PC-19000,Los Angeles,United States,Home Office,California,90004,West
+AR-10540,New York City,United States,Consumer,New York,10024,East
+AI-10855,Philadelphia,United States,Consumer,Pennsylvania,19120,East
+TB-21400,Seattle,United States,Consumer,Washington,98105,West
+PL-18925,Chicago,United States,Home Office,Illinois,60610,Central
+GH-14425,Tucson,United States,Consumer,Arizona,85705,West
+MP-18175,Laguna Niguel,United States,Home Office,California,92677,West
+JM-15655,Bridgeton,United States,Corporate,New Jersey,8302,East
+CL-11890,Everett,United States,Consumer,Massachusetts,2149,East
+DB-13270,San Diego,United States,Home Office,California,92024,West
+IG-15085,San Diego,United States,Consumer,California,92024,West
+BO-11425,Richmond,United States,Consumer,Kentucky,40475,South
+AB-10150,Long Beach,United States,Consumer,New York,11561,East
+JW-16075,Philadelphia,United States,Consumer,Pennsylvania,19140,East
+EB-13750,Seattle,United States,Corporate,Washington,98103,West
+SG-20470,New York City,United States,Consumer,New York,10011,East
+CM-12190,Philadelphia,United States,Consumer,Pennsylvania,19134,East
+AW-10840,Allen,United States,Consumer,Texas,75002,Central
+MC-18100,El Paso,United States,Consumer,Texas,79907,Central
+TT-21460,Aurora,United States,Home Office,Illinois,60505,Central
+VG-21805,Virginia Beach,United States,Corporate,Virginia,23464,South
+MY-18295,Grapevine,United States,Corporate,Texas,76051,Central
+RD-19480,Olympia,United States,Consumer,Washington,98502,West
+DP-13390,Peoria,United States,Home Office,Illinois,61604,Central
+ML-17395,Los Angeles,United States,Corporate,California,90008,West
+JC-15385,Kent,United States,Consumer,Washington,98031,West
+JG-15160,Los Angeles,United States,Consumer,California,90049,West
+MC-17275,Lafayette,United States,Consumer,Louisiana,70506,South
+NW-18400,Tigard,United States,Consumer,Oregon,97224,West
+TB-21280,Washington,United States,Consumer,District of Columbia,20016,East
+BS-11380,Skokie,United States,Corporate,Illinois,60076,Central
+HH-15010,San Francisco,United States,Corporate,California,94110,West
+CD-12280,Seattle,United States,Consumer,Washington,98105,West
+TH-21100,Los Angeles,United States,Consumer,California,90045,West
+MM-18055,Seattle,United States,Consumer,Washington,98115,West
+NS-18505,Dallas,United States,Consumer,Texas,75217,Central
+RB-19645,North Las Vegas,United States,Corporate,Nevada,89031,West
+SW-20455,Suffolk,United States,Consumer,Virginia,23434,South
+EB-13930,San Francisco,United States,Consumer,California,94110,West
+PS-18760,Los Angeles,United States,Consumer,California,90008,West
+HF-14995,Indianapolis,United States,Consumer,Indiana,46203,Central
+HZ-14950,Columbus,United States,Consumer,Ohio,43229,East
+CD-12790,San Diego,United States,Home Office,California,92037,West
+JK-15205,San Francisco,United States,Consumer,California,94122,West
+FM-14215,Dublin,United States,Corporate,Ohio,43017,East
+ED-13885,San Diego,United States,Home Office,California,92037,West
+DA-13450,Houston,United States,Home Office,Texas,77095,Central
+JW-15955,Oakland,United States,Consumer,California,94601,West
+RM-19375,Houston,United States,Consumer,Texas,77095,Central
+ML-17755,Suffolk,United States,Home Office,Virginia,23434,South
+CC-12685,Greensboro,United States,Consumer,North Carolina,27405,South
+JE-15610,Milwaukee,United States,Corporate,Wisconsin,53209,Central
+RP-19855,Kenosha,United States,Corporate,Wisconsin,53142,Central
+TB-21175,Houston,United States,Corporate,Texas,77041,Central
+BE-11455,Olathe,United States,Home Office,Kansas,66062,Central
+JF-15565,Dallas,United States,Consumer,Texas,75081,Central
+PB-19210,Tulsa,United States,Corporate,Oklahoma,74133,Central
+BT-11680,Newark,United States,Consumer,Ohio,43055,East
+JL-15235,Chicago,United States,Consumer,Illinois,60623,Central
+CH-12070,Raleigh,United States,Home Office,North Carolina,27604,South
+ND-18460,Macon,United States,Corporate,Georgia,31204,South
+BF-10975,Charlotte,United States,Corporate,North Carolina,28205,South
+KH-16330,Bowling Green,United States,Corporate,Kentucky,42104,South
+GW-14605,Seattle,United States,Consumer,Washington,98115,West
+NC-18625,Aurora,United States,Corporate,Colorado,80013,West
+ME-18010,San Francisco,United States,Corporate,California,94122,West
+BP-11230,Spokane,United States,Consumer,Washington,99207,West
+JC-15775,San Antonio,United States,Consumer,Texas,78207,Central
+AS-10090,Charlottesville,United States,Consumer,Virginia,22901,South
+AC-10450,Minneapolis,United States,Consumer,Minnesota,55407,Central
+MD-17860,Indianapolis,United States,Corporate,Indiana,46203,Central
+DB-13660,Oceanside,United States,Consumer,New York,11572,East
+EH-13990,Roswell,United States,Consumer,Georgia,30076,South
+EH-13765,Watertown,United States,Corporate,New York,13601,East
+SC-20230,Arlington,United States,Corporate,Texas,76017,Central
+JE-15715,Broomfield,United States,Consumer,Colorado,80020,West
+AC-10615,New York City,United States,Corporate,New York,10009,East
+JD-16015,Chicago,United States,Consumer,Illinois,60610,Central
+CB-12415,Columbus,United States,Consumer,Ohio,43229,East
+JS-16030,Houston,United States,Consumer,Texas,77036,Central
+LW-17215,Pasadena,United States,Consumer,California,91104,West
+SC-20800,Houston,United States,Consumer,Texas,77041,Central
+AM-10705,Auburn,United States,Consumer,Alabama,36830,South
+RH-19510,Providence,United States,Home Office,Rhode Island,2908,East
+CT-11995,Rochester,United States,Consumer,Minnesota,55901,Central
+MC-17590,Perth Amboy,United States,Corporate,New Jersey,8861,East
+CC-12610,Philadelphia,United States,Corporate,Pennsylvania,19134,East
+KA-16525,Ontario,United States,Consumer,California,91761,West
+TC-20980,Seattle,United States,Corporate,Washington,98105,West
+BF-11080,Baltimore,United States,Consumer,Maryland,21215,East
+MM-17260,Wilmington,United States,Consumer,Delaware,19805,East
+AH-10120,Tucson,United States,Home Office,Arizona,85705,West
+BW-11200,Boynton Beach,United States,Consumer,Florida,33437,South
+SW-20245,Stockton,United States,Consumer,California,95207,West
+BS-11665,Philadelphia,United States,Consumer,Pennsylvania,19143,East
+RF-19345,Dover,United States,Corporate,New Hampshire,3820,East
+WB-21850,Philadelphia,United States,Consumer,Pennsylvania,19134,East
+TB-21625,Grand Prairie,United States,Consumer,Texas,75051,Central
+AF-10870,College Station,United States,Consumer,Texas,77840,Central
+RB-19435,Saint Louis,United States,Consumer,Missouri,63116,Central
+KF-16285,Manteca,United States,Home Office,California,95336,West
+JH-15820,Kent,United States,Consumer,Ohio,44240,East
+IL-15100,San Francisco,United States,Consumer,California,94122,West
+PB-18805,Salt Lake City,United States,Home Office,Utah,84106,West
+RH-19600,Huntsville,United States,Consumer,Alabama,35810,South
+AW-10930,Aurora,United States,Home Office,Illinois,60505,Central
+ML-17410,Fairfield,United States,Consumer,Connecticut,6824,East
+DB-13555,Jacksonville,United States,Corporate,Florida,32216,South
+MH-17620,San Francisco,United States,Corporate,California,94110,West
+DK-13375,Marion,United States,Consumer,Ohio,43302,East
+BT-11440,Littleton,United States,Consumer,Colorado,80122,West
+DB-13405,La Porte,United States,Consumer,Indiana,46350,Central
+TG-21310,Los Angeles,United States,Consumer,California,90049,West
+BF-11005,Pasadena,United States,Home Office,California,91104,West
+JM-16195,Los Angeles,United States,Consumer,California,90004,West
+MZ-17335,San Diego,United States,Home Office,California,92024,West
+MW-18220,New York City,United States,Consumer,New York,10035,East
+MV-17485,Arlington,United States,Consumer,Virginia,22204,South
+SM-20320,Monroe,United States,Home Office,North Carolina,28110,South
+TP-21415,Seattle,United States,Consumer,Washington,98115,West
+JK-15625,Seattle,United States,Consumer,Washington,98115,West
+PJ-18835,Murfreesboro,United States,Corporate,Tennessee,37130,South
+RS-19420,Seattle,United States,Corporate,Washington,98115,West
+SV-20935,New York City,United States,Consumer,New York,10009,East
+BC-11125,Peoria,United States,Home Office,Arizona,85345,West
+EM-13825,Sioux Falls,United States,Corporate,South Dakota,57103,Central
+BM-11575,New York City,United States,Corporate,New York,10035,East
+KN-16705,Fort Collins,United States,Home Office,Colorado,80525,West
+KW-16570,Clarksville,United States,Consumer,Tennessee,37042,South
+SC-20260,San Francisco,United States,Corporate,California,94122,West
+CV-12295,Fresno,United States,Consumer,California,93727,West
+SG-20605,New York City,United States,Consumer,New York,10009,East
+TM-21010,San Francisco,United States,Consumer,California,94122,West
+EM-13810,Los Angeles,United States,Corporate,California,90036,West
+ML-18040,Albuquerque,United States,Corporate,New Mexico,87105,West
+CR-12580,Elmhurst,United States,Home Office,Illinois,60126,Central
+AZ-10750,New York City,United States,Consumer,New York,10009,East
+PW-19240,Louisville,United States,Consumer,Colorado,80027,West
+SC-20380,Seattle,United States,Consumer,Washington,98115,West
+CM-11935,Fayetteville,United States,Consumer,North Carolina,28314,South
+GM-14695,Los Angeles,United States,Corporate,California,90036,West
+TB-21250,New York City,United States,Consumer,New York,10024,East
+JM-15865,Jamestown,United States,Consumer,New York,14701,East
+SC-20575,Mishawaka,United States,Consumer,Indiana,46544,Central
+LS-17200,Skokie,United States,Corporate,Illinois,60076,Central
+RR-19315,San Francisco,United States,Consumer,California,94110,West
+DB-12910,Tampa,United States,Home Office,Florida,33614,South
+TT-21220,Houston,United States,Consumer,Texas,77041,Central
+LO-17170,La Quinta,United States,Corporate,California,92253,West
+KD-16615,Scottsdale,United States,Corporate,Arizona,85254,West
+NB-18580,Philadelphia,United States,Corporate,Pennsylvania,19134,East
+BD-11635,Bowling Green,United States,Consumer,Kentucky,42104,South
+CM-12235,Carrollton,United States,Consumer,Texas,75007,Central
+EN-13780,New York City,United States,Consumer,New York,10035,East
+KN-16450,Jacksonville,United States,Corporate,Florida,32216,South
+BO-11350,Los Angeles,United States,Corporate,California,90045,West
+AG-10300,Los Angeles,United States,Corporate,California,90049,West
+MC-17635,Saint Louis,United States,Corporate,Missouri,63116,Central
+TA-21385,New York City,United States,Home Office,New York,10024,East
+JF-15295,Seattle,United States,Consumer,Washington,98103,West
+TT-21265,Los Angeles,United States,Corporate,California,90045,West
+SB-20170,New York City,United States,Consumer,New York,10035,East
+CL-12700,Springfield,United States,Home Office,Missouri,65807,Central
+HG-15025,Amarillo,United States,Consumer,Texas,79109,Central
+NL-18310,Los Angeles,United States,Home Office,California,90045,West
+RR-19525,Lowell,United States,Corporate,Massachusetts,1852,East
+TC-21295,San Diego,United States,Consumer,California,92024,West
+SV-20785,Pueblo,United States,Consumer,Colorado,81001,West
+BE-11410,Lancaster,United States,Consumer,Ohio,43130,East
+SC-20680,Columbus,United States,Home Office,Georgia,31907,South
+DF-13135,Vallejo,United States,Consumer,California,94591,West
+FH-14350,Seattle,United States,Consumer,Washington,98105,West
+MS-17530,San Diego,United States,Consumer,California,92037,West
+RH-19555,Tallahassee,United States,Consumer,Florida,32303,South
+GA-14515,San Francisco,United States,Consumer,California,94122,West
+JP-16135,Columbus,United States,Home Office,Georgia,31907,South
+Dp-13240,Murray,United States,Home Office,Utah,84107,West
+MO-17950,Dallas,United States,Consumer,Texas,75220,Central
+DL-13330,Las Cruces,United States,Consumer,New Mexico,88001,West
+MH-18025,Seattle,United States,Consumer,Washington,98115,West
+DR-12940,Franklin,United States,Home Office,Massachusetts,2038,East
+DM-13015,Encinitas,United States,Consumer,California,92024,West
+CA-11965,Hoover,United States,Corporate,Alabama,35244,South
+AC-10660,Huntsville,United States,Consumer,Texas,77340,Central
+DM-13345,Roswell,United States,Corporate,Georgia,30076,South
+VF-21715,Columbus,United States,Home Office,Indiana,47201,Central
+CC-12370,Fayetteville,United States,Consumer,North Carolina,28314,South
+BF-11275,Tucson,United States,Corporate,Arizona,85705,West
+HG-14845,Lake Charles,United States,Consumer,Louisiana,70601,South
+BP-11155,Columbus,United States,Consumer,Georgia,31907,South
+EM-14140,Glendale,United States,Home Office,Arizona,85301,West
+MA-17995,Watertown,United States,Home Office,New York,13601,East
+AY-10555,Oceanside,United States,Corporate,California,92054,West
+GB-14575,Philadelphia,United States,Consumer,Pennsylvania,19134,East
+JB-16045,Columbus,United States,Home Office,Georgia,31907,South
+MG-17875,New York City,United States,Home Office,New York,10011,East
+SR-20425,Louisville,United States,Home Office,Colorado,80027,West
+JB-16000,Brownsville,United States,Consumer,Texas,78521,Central
+DM-12955,Lincoln Park,United States,Corporate,Michigan,48146,Central
+TC-21475,Columbus,United States,Home Office,Georgia,31907,South
+SW-20350,Detroit,United States,Home Office,Michigan,48227,Central
+RE-19450,Dallas,United States,Consumer,Texas,75081,Central
+BF-11215,Albuquerque,United States,Home Office,New Mexico,87105,West
+KB-16405,Apple Valley,United States,Home Office,California,92307,West
+JG-15310,Providence,United States,Corporate,Rhode Island,2908,East
+EC-14050,New York City,United States,Consumer,New York,10024,East
+EB-14110,Philadelphia,United States,Consumer,Pennsylvania,19134,East
+JP-15460,Oceanside,United States,Corporate,New York,11572,East
+CS-11845,Seattle,United States,Corporate,Washington,98105,West
+GH-14410,Glendale,United States,Home Office,Arizona,85301,West
+PT-19090,Houston,United States,Consumer,Texas,77070,Central
+JL-15130,Houston,United States,Consumer,Texas,77036,Central
+AH-10030,Philadelphia,United States,Corporate,Pennsylvania,19134,East
+CC-12475,New York City,United States,Consumer,New York,10024,East
+DW-13195,Houston,United States,Corporate,Texas,77095,Central
+SJ-20215,Grand Prairie,United States,Consumer,Texas,75051,Central
+BG-11740,Philadelphia,United States,Consumer,Pennsylvania,19120,East
+LB-16795,Highland Park,United States,Home Office,Illinois,60035,Central
+CM-11815,Pasadena,United States,Corporate,Texas,77506,Central
+EH-14185,Decatur,United States,Consumer,Alabama,35601,South
+TS-21505,Columbia,United States,Consumer,Tennessee,38401,South
+PR-18880,Oakland,United States,Consumer,California,94601,West
+LC-17050,Mission Viejo,United States,Consumer,California,92691,West
+CS-12490,Conroe,United States,Corporate,Texas,77301,Central
+DH-13075,Richmond,United States,Corporate,Kentucky,40475,South
+JO-15145,Philadelphia,United States,Corporate,Pennsylvania,19140,East
+AH-10690,New York City,United States,Corporate,New York,10024,East
+HJ-14875,Jacksonville,United States,Home Office,Florida,32216,South
+MH-17455,Jacksonville,United States,Consumer,North Carolina,28540,South
+RD-19930,Austin,United States,Consumer,Texas,78745,Central
+SC-20020,Plano,United States,Consumer,Texas,75023,Central
+SU-20665,Jackson,United States,Home Office,Mississippi,39212,South
+FC-14335,Mesquite,United States,Corporate,Texas,75150,Central
+RB-19330,Philadelphia,United States,Consumer,Pennsylvania,19143,East
+NC-18535,Dallas,United States,Corporate,Texas,75217,Central
+DB-12970,Los Angeles,United States,Corporate,California,90004,West
+MF-17665,Toledo,United States,Corporate,Ohio,43615,East
+RM-19750,New York City,United States,Consumer,New York,10011,East
+VM-21835,Newark,United States,Consumer,Delaware,19711,East
+EJ-13720,San Diego,United States,Consumer,California,92037,West
+NC-18415,Jacksonville,United States,Consumer,North Carolina,28540,South
+LS-17230,Dover,United States,Consumer,Delaware,19901,East
+KE-16420,Bristol,United States,Corporate,Tennessee,37620,South
+DH-13675,Quincy,United States,Home Office,Massachusetts,2169,East
+PF-19120,Gilbert,United States,Consumer,Arizona,85234,West
+VT-21700,Philadelphia,United States,Home Office,Pennsylvania,19143,East
+MG-17695,Buffalo,United States,Consumer,New York,14215,East
+SP-20920,Los Angeles,United States,Consumer,California,90036,West
+CS-12175,Columbia,United States,Corporate,Tennessee,38401,South
+DK-12895,Kenosha,United States,Consumer,Wisconsin,53142,Central
+KM-16660,Roswell,United States,Consumer,Georgia,30076,South
+AA-10645,Chester,United States,Consumer,Pennsylvania,19013,East
+DD-13570,Houston,United States,Consumer,Texas,77041,Central
+AH-10465,New York City,United States,Consumer,New York,10035,East
+TP-21565,Aurora,United States,Corporate,Colorado,80013,West
+EK-13795,Santa Ana,United States,Home Office,California,92704,West
+CR-12820,New York City,United States,Home Office,New York,10035,East
+SG-20890,Mcallen,United States,Corporate,Texas,78501,Central
+AH-10585,Chicago,United States,Consumer,Illinois,60623,Central
+NF-18475,Rockford,United States,Home Office,Illinois,61107,Central
+BS-11365,New York City,United States,Corporate,New York,10011,East
+SH-20635,Jackson,United States,Corporate,Tennessee,38301,South
+RD-19720,Daytona Beach,United States,Consumer,Florida,32114,South
+AG-10330,Stockton,United States,Consumer,California,95207,West
+GR-14560,San Francisco,United States,Corporate,California,94110,West
+VS-21820,Los Angeles,United States,Consumer,California,90036,West
+TM-21490,Oklahoma City,United States,Consumer,Oklahoma,73120,Central
+TS-21430,Los Angeles,United States,Corporate,California,90045,West
+DB-13360,New York City,United States,Home Office,New York,10009,East
+NR-18550,Aurora,United States,Consumer,Illinois,60505,Central
+CS-11860,Jacksonville,United States,Consumer,North Carolina,28540,South
+MF-18250,Los Angeles,United States,Corporate,California,90036,West
+LW-17125,Norwich,United States,Consumer,Connecticut,6360,East
+AR-10345,Lawrence,United States,Corporate,Massachusetts,1841,East
+KS-16300,Lehi,United States,Corporate,Utah,84043,West
+AB-10015,Seattle,United States,Consumer,Washington,98103,West
+LR-17035,Philadelphia,United States,Corporate,Pennsylvania,19134,East
+SS-20410,Los Angeles,United States,Consumer,California,90008,West
+JM-15580,Monroe,United States,Consumer,North Carolina,28110,South
+JK-15325,Dallas,United States,Corporate,Texas,75220,Central
+DM-13525,Houston,United States,Corporate,Texas,77070,Central
+ML-18265,Seattle,United States,Consumer,Washington,98103,West
+MH-17290,Los Angeles,United States,Home Office,California,90036,West
+FC-14245,Lakewood,United States,Home Office,Ohio,44107,East
+TH-21115,Philadelphia,United States,Corporate,Pennsylvania,19140,East
+JK-16090,Omaha,United States,Consumer,Nebraska,68104,Central
+SB-20185,Concord,United States,Consumer,New Hampshire,3301,East
+BG-11035,Monroe,United States,Consumer,Louisiana,71203,South
+BW-11065,Raleigh,United States,Consumer,North Carolina,27604,South
+MG-18205,Jacksonville,United States,Corporate,Florida,32216,South
+DO-13645,Los Angeles,United States,Consumer,California,90036,West
+BP-11050,Cranston,United States,Corporate,Rhode Island,2920,East
+TS-21655,Milwaukee,United States,Consumer,Wisconsin,53209,Central
+EM-14200,Virginia Beach,United States,Home Office,Virginia,23464,South
+AO-10810,Los Angeles,United States,Corporate,California,90045,West
+MH-17440,New York City,United States,Corporate,New York,10035,East
+SS-20515,Louisville,United States,Home Office,Kentucky,40214,South
+LD-16855,Chicago,United States,Corporate,Illinois,60653,Central
+VP-21760,San Francisco,United States,Corporate,California,94109,West
+TC-21145,Lakewood,United States,Corporate,New Jersey,8701,East
+IM-15055,Roseville,United States,Consumer,California,95661,West
+AR-10570,Columbus,United States,Consumer,Georgia,31907,South
+CM-12715,Huntsville,United States,Corporate,Texas,77340,Central
+FW-14395,Huntsville,United States,Corporate,Alabama,35810,South
+LC-16960,Arlington,United States,Home Office,Virginia,22204,South
+HE-14800,Chicago,United States,Corporate,Illinois,60623,Central
+BD-11560,Fresno,United States,Home Office,California,93727,West
+HD-14785,Philadelphia,United States,Home Office,Pennsylvania,19143,East
+CJ-11875,Philadelphia,United States,Corporate,Pennsylvania,19140,East
+RS-19870,Burlington,United States,Home Office,Iowa,52601,Central
+SC-20845,Arlington Heights,United States,Consumer,Illinois,60004,Central
+RE-19405,Kent,United States,Consumer,Ohio,44240,East
+SM-20905,Newark,United States,Consumer,Ohio,43055,East

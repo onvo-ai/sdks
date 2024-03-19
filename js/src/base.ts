@@ -11,12 +11,14 @@ export default class OnvoBase {
   ) {
     try {
       let headers: any = {
-        "Content-Type": isForm ? undefined : "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       };
       if (this.#apiKey && this.#apiKey.trim() !== "") {
         headers["x-api-key"] = this.#apiKey;
+      }
+      if (!isForm) {
+        headers["Content-Type"] = "application/json";
       }
       const response = await fetch(this.endpoint + url, {
         method: method || "GET",

@@ -1,7 +1,7 @@
 import { Text, Title, Divider, Card } from "@tremor/react";
 
 import React, { useEffect, useState } from "react";
-import { useToken } from "../Wrapper";
+import { useBackend } from "../Wrapper";
 
 import {
   ClockIcon,
@@ -85,7 +85,7 @@ export const DashboardList: React.FC<{
   variant?: "list" | "grid";
 }> = ({ columns = 3, onClickItem, variant = "grid" }) => {
   const [dashboards, setDashboards] = useState<any[]>([]);
-  const { backend } = useToken();
+  const backend = useBackend();
 
   useEffect(() => {
     if (backend) {
