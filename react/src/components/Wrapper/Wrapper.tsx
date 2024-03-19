@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from "react";
 import Onvo from "@onvo-ai/js";
+import { Toaster } from "sonner";
 
 type OnvoWrapperContext = {
   backend: Onvo | undefined;
@@ -19,6 +20,11 @@ export const Wrapper: React.FC<{
     endpoint: baseUrl,
   });
 
-  return <Context.Provider value={{ backend }}>{children}</Context.Provider>;
+  return (
+    <Context.Provider value={{ backend }}>
+      <Toaster position="bottom-right" richColors />
+      {children}
+    </Context.Provider>
+  );
 };
 export const useBackend = () => useContext(Context).backend;

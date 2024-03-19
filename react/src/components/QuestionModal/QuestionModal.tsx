@@ -23,6 +23,7 @@ import { useBackend } from "../Wrapper";
 import { useDashboard } from "../Dashboard";
 import Logo from "./Logo";
 import QuestionLoader from "./QuestionLoader";
+import { Question } from "@onvo-ai/js";
 
 dayjs.extend(relativeTime);
 
@@ -49,13 +50,13 @@ export const QuestionModal: React.FC<{}> = ({}) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [questionLoading, setQuestionLoading] = useState(false);
   const [query, setQuery] = useState("");
-  const [selectedQuestion, setSelectedQuestion] = useState<any>();
+  const [selectedQuestion, setSelectedQuestion] = useState<Question>();
   const [messages, setMessages] = useState<
     { role: "user" | "assistant"; content: string }[]
   >([]);
 
   const [loading, setLoading] = useState(false);
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
 
   const getQuestions = async () => {
     setLoading(true);

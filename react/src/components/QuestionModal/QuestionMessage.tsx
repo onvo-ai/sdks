@@ -42,7 +42,6 @@ const QuestionMessage: React.FC<{
   const { refresh } = useDashboard();
 
   const [output, setOutput] = useState<any>();
-  const [assumptions, setAssumptions] = useState("");
   const [code, setCode] = useState("");
   const [answer, setAnswer] = useState("");
 
@@ -71,7 +70,6 @@ const QuestionMessage: React.FC<{
       h: output.type === "metric" ? 1 : 2,
       messages: messages,
       dashboard: dashboardId,
-      assumptions: assumptions.split("\n"),
       team: teamId || "",
       code: code,
       cache: JSON.stringify(output),
@@ -233,13 +231,6 @@ const QuestionMessage: React.FC<{
               </>
             )}
           </Disclosure>
-        )}
-        {assumptions && assumptions.trim() !== "" && (
-          <ErrorBoundary
-            fallbackRender={({ error }) => <Text>{assumptions}</Text>}
-          >
-            <ReactMarkdown>{"#### Plan:\n" + assumptions}</ReactMarkdown>
-          </ErrorBoundary>
         )}
         {output && (
           <Card
