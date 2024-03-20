@@ -37,7 +37,7 @@ export default class OnvoBase {
   }
 
   // Base fetch method
-  async fetchImage(
+  async fetchBlob(
     url: string,
     method?: "GET" | "PUT" | "POST" | "DELETE" | "PATCH",
     body?: any

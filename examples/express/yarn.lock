@@ -142,10 +142,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@onvo-ai/js@^0.13.1":
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.1.tgz#a9c78cb66c3099317b8ed0af82332e60b99ab16f"
-  integrity sha512-pcxQHAwI17nJq82jT6Buln1dwJcpCC0PFbCMtoGs0lNm4lVDDnOjwucUccU9Vb7YdiFUYmqU94bRYrlplM7N0w==
+"@onvo-ai/js@^0.13.3":
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.3.tgz#9561f8f7827a038f0bf7aebb550e26befbcce875"
+  integrity sha512-96oSPTmLgwI+QGnEUU2qoVtTDwFPcdeFn1KNF9LxqwWrLhAVeVhkUqTAIf8Mc2NM0UpIPiA25jJY4QmtyBgj/Q==
   dependencies:
     web-file-polyfill "^1.0.4"
 

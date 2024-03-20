@@ -9,9 +9,9 @@ export class OnvoWidget extends OnvoBase {
     this.#id = id;
   }
 
-  getImage() {
-    return this.fetchImage(
-      "/api/widgets/" + this.#id + "/image"
+  export(format: "svg" | "csv" | "xlsx" | "png") {
+    return this.fetchBlob(
+      "/api/widgets/" + this.#id + "/export?format=" + format
     ) as Promise<any>;
   }
   updatePrompts(messages: { role: "user" | "assistant"; content: String }[]) {

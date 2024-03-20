@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@onvo-ai/js": "^0.13.1",
+    "@onvo-ai/js": "^0.13.3",
     "dotenv": "^16.3.1",
     "express": "^4.18.2"
   },
