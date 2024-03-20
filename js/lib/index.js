@@ -31,7 +31,7 @@ var OnvoBase = class {
     }
   }
   // Base fetch method
-  async fetchImage(url, method, body) {
+  async fetchBlob(url, method, body) {
     try {
       let headers = {
         "Content-Type": "application/json",
@@ -231,6 +231,11 @@ var OnvoDashboard = class extends OnvoBase {
       "/api/dashboards/" + this.#id + "/widget-suggestions"
     );
   }
+  export(format) {
+    return this.fetchBlob(
+      "/api/dashboards/" + this.#id + "/export?format=" + format
+    );
+  }
 };
 
 // src/embed_user/index.ts
@@ -316,9 +321,9 @@ var OnvoWidget = class extends OnvoBase {
     super(apiKey, options);
     this.#id = id;
   }
-  getImage() {
-    return this.fetchImage(
-      "/api/widgets/" + this.#id + "/image"
+  export(format) {
+    return this.fetchBlob(
+      "/api/widgets/" + this.#id + "/export?format=" + format
     );
   }
   updatePrompts(messages) {

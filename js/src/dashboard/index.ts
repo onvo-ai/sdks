@@ -24,4 +24,10 @@ export class OnvoDashboard extends OnvoBase {
       "/api/dashboards/" + this.#id + "/widget-suggestions"
     ) as Promise<string[]>;
   }
+
+  export(format: "csv" | "xlsx" | "pdf" | "png") {
+    return this.fetchBlob(
+      "/api/dashboards/" + this.#id + "/export?format=" + format
+    ) as Promise<any>;
+  }
 }
