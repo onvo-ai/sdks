@@ -134,6 +134,16 @@ export const QuestionModal: React.FC<{}> = ({}) => {
       setSelectedQuestion(response);
     } catch (e: any) {
       toast.error("Failed to ask question: ", e.message);
+      setMessages((m) => {
+        return [
+          ...m,
+          {
+            role: "assistant",
+            content:
+              "I could not answer your question. Could you try adding some more descriptions about the question?",
+          },
+        ];
+      });
     }
 
     setQuestionLoading(false);
