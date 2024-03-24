@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/react",
-  "version": "0.2.33",
+  "version": "0.2.34",
   "description": "The react SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "module": "dist/esm/index.js",
@@ -39,7 +39,7 @@
     "numeral": "^2.0.6",
     "prop-types": "^15.8.1",
     "react-chartjs-2": "^5.2.0",
-    "react-data-grid": "^7.0.0-beta.42",
+    "react-data-grid": "^7.0.0-beta.41",
     "react-error-boundary": "^4.0.12",
     "react-grid-layout": "^1.4.4",
     "react-markdown": "^9.0.1",
