@@ -56,8 +56,8 @@ const DashboardCard: React.FC<{
       <div className="grid grid-cols-2">
         <div className="w-36 flex-shrink-0 flex flex-col gap-1">
           <Text className="flex flex-row items-center gap-2">
-            <TableCellsIcon height={16} width={16} /> {dashboard.widgets.length}{" "}
-            widgets
+            <TableCellsIcon height={16} width={16} />{" "}
+            {dashboard.widgets?.length} widgets
           </Text>
           <Text className="flex flex-row items-center gap-2">
             <LinkIcon height={16} width={16} /> {dashboard.datasources.length}{" "}

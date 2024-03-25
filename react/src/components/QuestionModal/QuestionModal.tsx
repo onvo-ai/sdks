@@ -8,7 +8,7 @@ import {
   Button,
 } from "@tremor/react";
 import { Transition } from "@headlessui/react";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { toast } from "sonner";
@@ -60,7 +60,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
 
   const getQuestions = async () => {
     setLoading(true);
-    if (!backend) return;
+    if (!backend || !dashboard) return;
     let qs: any[] = await backend.questions.list({ dashboard: dashboard.id });
     setLoading(false);
     let sorted = qs.sort((a, b) => {
@@ -125,6 +125,10 @@ export const QuestionModal: React.FC<{}> = ({}) => {
     setMessages(msg);
     setQuestionLoading(true);
     window.setTimeout(scrollToBottom, 300);
+    if (!dashboard) {
+      toast.error("Failed to find associated dashboard.");
+      return;
+    }
     try {
       let response = await backend?.questions.create({
         dashboardId: dashboard?.id,
@@ -138,6 +142,56 @@ export const QuestionModal: React.FC<{}> = ({}) => {
 
     setQuestionLoading(false);
   };
+
+  const questionMessageList = useMemo(() => {
+    if (!dashboard) {
+      return null;
+    }
+
+    return messages.map((a, index) => (
+      <QuestionMessage
+        dashboardId={dashboard?.id}
+        teamId={dashboard?.team || selectedQuestion?.team || undefined}
+        questionId={selectedQuestion?.id || "null"}
+        onDelete={() => {
+          let newMessages = messages.filter((m, i) => i < index);
+          backend?.questions.update(selectedQuestion?.id || "null", {
+            messages: newMessages,
+          });
+          setMessages(newMessages);
+        }}
+        onEdit={(msg) => {
+          let newMessages = messages
+            .map((m, i) => {
+              if (i === index) {
+                return {
+                  ...m,
+                  content: msg,
+                };
+              }
+              return m;
+            })
+            .filter((m, i) => i <= index);
+          askQuestion(newMessages);
+        }}
+        key={
+          (selectedQuestion?.id || "null") +
+          "-" +
+          messages.length +
+          "-" +
+          a.content.substring(0, 10)
+        }
+        onClose={() => {
+          setSelectedQuestion(undefined);
+          setMessages([]);
+          setOpen(false);
+        }}
+        messages={messages.filter((a, i) => a.role === "user" && i < index)}
+        role={a.role}
+        content={a.content}
+      />
+    ));
+  }, [messages, dashboard, selectedQuestion]);
 
   return (
     <>
@@ -282,58 +336,8 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                         </div>
                       </>
                     )}
-                    {messages.map((a, index) => (
-                      <QuestionMessage
-                        dashboardId={dashboard.id}
-                        teamId={
-                          dashboard.team || selectedQuestion?.team || undefined
-                        }
-                        questionId={selectedQuestion?.id || "null"}
-                        onDelete={() => {
-                          let newMessages = messages.filter(
-                            (m, i) => i < index
-                          );
-                          backend?.questions.update(
-                            selectedQuestion?.id || "null",
-                            {
-                              messages: newMessages,
-                            }
-                          );
-                          setMessages(newMessages);
-                        }}
-                        onEdit={(msg) => {
-                          let newMessages = messages
-                            .map((m, i) => {
-                              if (i === index) {
-                                return {
-                                  ...m,
-                                  content: msg,
-                                };
-                              }
-                              return m;
-                            })
-                            .filter((m, i) => i <= index);
-                          askQuestion(newMessages);
-                        }}
-                        key={
-                          (selectedQuestion?.id || "null") +
-                          "-" +
-                          messages.length +
-                          "-" +
-                          a.content.substring(0, 10)
-                        }
-                        onClose={() => {
-                          setSelectedQuestion(undefined);
-                          setMessages([]);
-                          setOpen(false);
-                        }}
-                        messages={messages.filter(
-                          (a, i) => a.role === "user" && i < index
-                        )}
-                        role={a.role}
-                        content={a.content}
-                      />
-                    ))}
+
+                    {questionMessageList}
 
                     {questionLoading && <QuestionLoader />}
                   </div>

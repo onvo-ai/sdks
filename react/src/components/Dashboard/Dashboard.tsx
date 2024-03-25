@@ -5,8 +5,8 @@ import usePrefersColorScheme from "use-prefers-color-scheme";
 
 type DashboardContext = {
   id: string | undefined;
-  dashboard: any;
-  widgets: any[];
+  dashboard?: DashboardType;
+  widgets: Widget[];
   refresh: () => void;
   theme: "light" | "dark";
   selectedWidget: Widget | undefined;
