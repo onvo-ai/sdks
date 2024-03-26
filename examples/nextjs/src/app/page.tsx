@@ -20,10 +20,7 @@ export default async function Home() {
     await onvo.embed_users.upsert("123456", {
       name: "John appleseed",
       email: "john@appleseed.com",
-      metadata: {
-        study_id: 585,
-        group_id: 1234,
-      },
+      metadata: {},
     });
 
     // UPSERT A SESSION FOR EACH DASHBOARD
