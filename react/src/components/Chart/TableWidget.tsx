@@ -84,71 +84,78 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
       key: a,
       name: a,
       renderCell: cellRenderer,
-      renderHeaderCell: (p: any) => (
-        <div
-          className="flex h-full flex-col justify-center gap-2"
-          style={{ lineHeight: "12px" }}
-        >
-          <div className="flex flex-row items-center justify-between">
-            {p.column.name}
-            <div className="flex flex-row">
-              {sorting.length > 0 && sorting[0].columnKey === p.column.name && (
+      renderHeaderCell: (p: any) => {
+        const isMatchingFilterColumn =
+          sorting.length > 0 && sorting[0].columnKey === p.column.name;
+        const filterTypeClass = isMatchingFilterColumn
+          ? "onvo-table-widget-filter-active"
+          : "onvo-table-widget-filter-inactive";
+        return (
+          <div
+            className="onvo-table-widget-header flex h-full flex-col justify-center gap-2"
+            style={{ lineHeight: "12px" }}
+          >
+            <div className="onvo-table-widget-header-title flex flex-row items-center justify-between">
+              {p.column.name}
+              <div className={`${filterTypeClass} flex flex-row`}>
+                {isMatchingFilterColumn && (
+                  <Icon
+                    icon={
+                      sorting[0].direction === "ASC"
+                        ? BarsArrowUpIcon
+                        : BarsArrowDownIcon
+                    }
+                    size="sm"
+                  />
+                )}
                 <Icon
-                  icon={
-                    sorting[0].direction === "ASC"
-                      ? BarsArrowUpIcon
-                      : BarsArrowDownIcon
-                  }
+                  onClick={(e) => {
+                    setFilterEnabled((a) => !a);
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                  icon={filterEnabled ? FunnelIconSolid : FunnelIconOutline}
                   size="sm"
+                  tooltip="Toggle filters"
                 />
-              )}
-              <Icon
-                onClick={(e) => {
-                  setFilterEnabled((a) => !a);
-                  e.preventDefault();
-                  e.stopPropagation();
-                }}
-                icon={filterEnabled ? FunnelIconSolid : FunnelIconOutline}
-                size="sm"
-                tooltip="Toggle filters"
-              />
+              </div>
             </div>
+            {filterEnabled && (
+              <MultiSelect
+                placeholder="Filter"
+                className="-mt-2"
+                onValueChange={(val) => {
+                  console.log(val);
+                  setFilters({
+                    ...filters,
+                    [p.column.key]: val,
+                  });
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                }}
+              >
+                {options[a].map((b) => (
+                  <MultiSelectItem key={a + "-" + b} value={b + ""}>
+                    {b + ""}
+                  </MultiSelectItem>
+                ))}
+              </MultiSelect>
+            )}
           </div>
-          {filterEnabled && (
-            <MultiSelect
-              placeholder="Filter"
-              className="-mt-2"
-              onValueChange={(val) => {
-                console.log(val);
-                setFilters({
-                  ...filters,
-                  [p.column.key]: val,
-                });
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-            >
-              {options[a].map((b) => (
-                <MultiSelectItem key={a + "-" + b} value={b + ""}>
-                  {b + ""}
-                </MultiSelectItem>
-              ))}
-            </MultiSelect>
-          )}
-        </div>
-      ),
+        );
+      },
     }));
   }, [options, filterEnabled, sorting]);
 
   return (
-    <div className="h-full flex flex-col relative">
-      <Title className="text-md text-gray-600 dark:text-gray-500 my-0">
+    <div className="onvo-table-widget h-full flex flex-col relative">
+      <Title className="onvo-table-widget-title text-md text-gray-600 dark:text-gray-500 my-0">
         {data.options.plugins.title.text}
       </Title>
       <DataGrid
-        className="fill-grid mt-3 h-full rounded-md border border-gray-200 dark:border-gray-800"
+        className="onvo-table-widget-data-grid fill-grid mt-3 h-full rounded-md border border-gray-200 dark:border-gray-800"
         defaultColumnOptions={{
           sortable: true,
           resizable: true,

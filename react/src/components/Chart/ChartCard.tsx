@@ -99,7 +99,7 @@ const ChartCard: React.FC<{
       ref={ref}
     >
       <div
-        className="z-20 absolute top-4 right-4  hidden group-hover:block"
+        className="onvo-chart-card-dropdown-wrapper z-20 absolute top-4 right-4  hidden group-hover:block"
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
