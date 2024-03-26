@@ -16,7 +16,7 @@ const Dropdown: React.FC<{
 }> = ({ options }) => {
   return (
     <div
-      className="relative z-20 dropdown-container"
+      className="onvo-dropdown-container relative z-20 dropdown-container"
       onClick={(e) => {
         e.stopPropagation();
         e.preventDefault();
@@ -24,7 +24,7 @@ const Dropdown: React.FC<{
     >
       <Menu as="div" className="z-20 inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex w-full justify-center">
+          <Menu.Button className="onvo-dropdown-button inline-flex w-full justify-center">
             <Icon variant="shadow" icon={EllipsisVerticalIcon} size="md" />
           </Menu.Button>
         </div>
@@ -37,7 +37,7 @@ const Dropdown: React.FC<{
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="z-20 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:divide-gray-800 dark:bg-gray-700">
+          <Menu.Items className="onvo-dropdown-menu-items z-20 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:divide-gray-800 dark:bg-gray-700">
             {options.map((a, i) => (
               <div key={i + ""} className="px-1 py-1">
                 {a.map((b) => (
@@ -52,7 +52,7 @@ const Dropdown: React.FC<{
                             ? "text-white " +
                               (b.color ? b.color : "bg-blue-500")
                             : "text-gray-900 dark:text-gray-200"
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                        }  onvo-dropdown-menu-item-${i} group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
                         {b.icon && (
                           <b.icon
