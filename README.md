@@ -10,7 +10,7 @@ You can find the API documentation at https://docs.onvo.ai
 
 #### ✅ [Ruby](https://rubygems.org/gems/onvo) : Available on RubyGems
 
-#### 🚧 Python - Work ongoing
+#### ✅ [Python](https://pypi.org/project/onvo/) : Available on pip
 
 #### 🚧 Rust - Work ongoing
 
@@ -24,9 +24,9 @@ You can find the API documentation at https://docs.onvo.ai
 
 #### ✅ HTML iframe
 
-#### ✅ React
+#### ✅ React component library
 
-#### HTML web component - Coming soon
+#### 🚧 HTML web component - Work ongoing
 
 #### Angular - Coming soon
 
