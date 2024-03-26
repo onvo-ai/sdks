@@ -11,8 +11,8 @@ class Datasources(BaseResource):
     def get_data(self, id):
         return self.base_get(f"/datasources/{id}/data")
 
-    def populate_columns(self, id):
-        return self.base_post(f"/datasources/{id}/populate-columns")
+    # def populate_columns(self, id):
+    #     return self.base_post(f"/datasources/{id}/populate-columns")
 
     def create(self, data):
         return self.base_put(f"/datasources", data=data)
