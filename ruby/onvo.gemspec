@@ -9,7 +9,8 @@ Gem::Specification.new do |s|
   s.email                 = ['bryandavis999.dev@gmail.com']
   s.files                 = Dir['lib/**/*']
   s.required_ruby_version = '>= 2.6.0'
-
+  s.extra_rdoc_files      = Dir["README.md", "LICENSE"]
+  
   s.add_dependency          'httparty', '~> 0.13.7'
   s.add_dependency          'minitest-hooks', '~> 1.5.1'
   s.add_dependency          'uri', '~> 0.13.0'
