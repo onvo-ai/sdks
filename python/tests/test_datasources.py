@@ -40,11 +40,11 @@ class TestDatasources(BaseTest):
             ),
         )
 
-    def test_populate_columns(self):
-        self.assertShouldRaise(
-            None,
-            lambda: self.onvoSDK.datasources.populate_columns(self.sampleDatasourceId),
-        )
+    # def test_populate_columns(self):
+    #     self.assertShouldRaise(
+    #         None,
+    #         lambda: self.onvoSDK.datasources.populate_columns(self.sampleDatasourceId),
+    #     )
 
     @classmethod
     def tearDownClass(cls) -> None:

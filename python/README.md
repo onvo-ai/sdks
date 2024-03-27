@@ -73,11 +73,12 @@ Feel free to use the `help()` method on any of the functions to dig deeper.
 - `.accounts.get(id:str)`
 
 ### Automations
-- `.automations.list()`
+<!-- - `.automations.list()`
 - `.automations.get(id:str)`
 - `.automations.create(data:dict)`
 - `.automations.update(id:str, data:dict)`
-- `.automations.delete(id:str)`
+- `.automations.delete(id:str)` -->
+<!-- TODO: fix automations -->
 
 ### Dashboards
 - `.dashboards.list()`
@@ -97,7 +98,8 @@ Feel free to use the `help()` method on any of the functions to dig deeper.
 - `.datasources.update(id:str, data:dict)`
 - `.datasources.delete(id:str)`
 
-- `.datasources.populate_columns(id:str)`
+<!-- - `.datasources.populate_columns(id:str)` -->
+<!-- TODO: fix populate columns -->
 - `.datasources.get_data(id:str)`
 
 ### Embed Users
@@ -109,27 +111,30 @@ Feel free to use the `help()` method on any of the functions to dig deeper.
 - `.embed_users.get_access_token(id:str)`
 
 ### Sessions
-- `.sessions.list(dashboard_id:str)`
+<!-- - `.sessions.list(dashboard_id:str)`
 - `.sessions.upsert(dashboard_id:str, user_id:dict)`
-- `.sessions.delete(dashboard_id:str)`
+- `.sessions.delete(dashboard_id:str)` -->
+<!-- TODO: fix sessions -->
 
 ### Teams
 - `.teams.list()`
 - `.teams.get(id:str)`
 
 ### Questions
-- `.questions.list(dashboard_id:str)`
+<!-- - `.questions.list(dashboard_id:str)`
 - `.questions.create(dashboard_id:str, query:str)`
-- `.questions.delete(question_id:str)`
+- `.questions.delete(question_id:str)` -->
+<!-- TODO: fix questions -->
 
 ### Widgets
-- `.widgets.list(dashboard_id:str)`
+<!-- - `.widgets.list(dashboard_id:str)`
 - `.widgets.get(id:str)`
 - `.widgets.create(dashboard_id:str, query:str)`
 - `.widgets.update(id:str, data:dict)`
 - `.widgetss.delete(id:str)`
 
-- `.widgets.get_image(id:str)`
+- `.widgets.get_image(id:str)` -->
+<!-- TODO: fix widgets -->
 
 ## Support
 
