@@ -1,4 +1,5 @@
 from .base_test import BaseTest
+import os
 
 SAMPLE_DATASOURCE_PARAMS = {
     "description": "Python Integration Test Data Source. Delete if seen.",
@@ -27,9 +28,9 @@ class TestDatasources(BaseTest):
             None, lambda: self.onvoSDK.datasources.get(self.sampleDatasourceId)
         )
 
-    def test_get_data(self):
+    def test_initialize(self):
         self.assertShouldRaise(
-            None, lambda: self.onvoSDK.datasources.get_data(self.sampleDatasourceId)
+            None, lambda: self.onvoSDK.datasources.initialize(self.sampleDatasourceId)
         )
 
     def test_update(self):
@@ -40,11 +41,18 @@ class TestDatasources(BaseTest):
             ),
         )
 
-    # def test_populate_columns(self):
+    # TODO: diagnose and fix 500: Internal server error
+    # def test_upload_file(self):
+    #     test_file_path = os.path.join(os.path.dirname(__file__), "python_onvo_test.csv")
+    #     with open(test_file_path, "ab") as f:
+    #         f.write(b"a,b,c\n1,2,3\n4,5,6\n")
     #     self.assertShouldRaise(
     #         None,
-    #         lambda: self.onvoSDK.datasources.populate_columns(self.sampleDatasourceId),
+    #         lambda: self.onvoSDK.datasources.upload_file(
+    #             self.sampleDatasourceId, test_file_path
+    #         ),
     #     )
+    #     os.remove(test_file_path)
 
     @classmethod
     def tearDownClass(cls) -> None:

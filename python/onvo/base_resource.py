@@ -39,6 +39,8 @@ class BaseResource:
         """
         if "data" in options:
             options["data"] = json.dumps(options["data"])
+        elif "files" in options:
+            del options["headers"]["Content-Type"]
         # Standardizing params to use '%20' instead of '+' to replace spaces for all SDK requests
         if "params" in options:
             options["params"] = "&".join(
