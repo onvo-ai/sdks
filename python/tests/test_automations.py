@@ -6,14 +6,16 @@ SAMPLE_DASHBOARD_PARAMS = {
 }
 
 SAMPLE_AUTOMATION_PARAMS = {
-    "created_by": "197302e5-88e2-49f4-bbe7-92b5a4dc4264",
+    "created_by": "96460c6b-87e9-464c-a0fe-5e47b5dae3d9",  # TODO: export to a global variable acessible by all tests
     "description": "A sample description",
     "email_format": "This is an automation from Onvo",
     "email_subject": "This is an automation from Onvo",
     "enabled": "false",
     "output_format": "link",
     "recipient_type": "internal",
+    "recipients": [],
     "schedule": "",
+    "timezone": "Asia/Calcutta",
     "title": "API datasource test",
 }
 
@@ -37,6 +39,11 @@ class TestAutomations(BaseTest):
     def test_get(self):
         self.assertShouldRaise(
             None, lambda: self.onvoSDK.automations.get(self.sampleAutomationId)
+        )
+
+    def test_get_runs(self):
+        self.assertShouldRaise(
+            None, lambda: self.onvoSDK.automations.get_runs(self.sampleAutomationId)
         )
 
     def test_update(self):
