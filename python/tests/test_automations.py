@@ -6,7 +6,6 @@ SAMPLE_DASHBOARD_PARAMS = {
 }
 
 SAMPLE_AUTOMATION_PARAMS = {
-    "created_by": "96460c6b-87e9-464c-a0fe-5e47b5dae3d9",  # TODO: export to a global variable acessible by all tests
     "description": "A sample description",
     "email_format": "This is an automation from Onvo",
     "email_subject": "This is an automation from Onvo",
@@ -25,12 +24,16 @@ class TestAutomations(BaseTest):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.sampleDashboardId = cls.onvoSDK.dashboards.create(SAMPLE_DASHBOARD_PARAMS)[
-            "id"
-        ]
+        cls.sample_dashboard_id = cls.onvoSDK.dashboards.create(
+            SAMPLE_DASHBOARD_PARAMS
+        )["id"]
         # Skipping test create
-        cls.sampleAutomationId = cls.onvoSDK.automations.create(
-            {**SAMPLE_AUTOMATION_PARAMS, "dashboard": cls.sampleDashboardId}
+        cls.sample_automation_id = cls.onvoSDK.automations.create(
+            {
+                **SAMPLE_AUTOMATION_PARAMS,
+                "dashboard": cls.sample_dashboard_id,
+                "created_by": cls.sample_user_id,
+            }
         )["id"]
 
     def test_list(self):
@@ -38,25 +41,25 @@ class TestAutomations(BaseTest):
 
     def test_get(self):
         self.assertShouldRaise(
-            None, lambda: self.onvoSDK.automations.get(self.sampleAutomationId)
+            None, lambda: self.onvoSDK.automations.get(self.sample_automation_id)
         )
 
     def test_get_runs(self):
         self.assertShouldRaise(
-            None, lambda: self.onvoSDK.automations.get_runs(self.sampleAutomationId)
+            None, lambda: self.onvoSDK.automations.get_runs(self.sample_automation_id)
         )
 
     def test_update(self):
         self.assertShouldRaise(
             None,
             lambda: self.onvoSDK.automations.update(
-                self.sampleAutomationId,
+                self.sample_automation_id,
                 {"description": "A New Test Description. Delete if seen."},
             ),
         )
 
     @classmethod
     def tearDownClass(cls) -> None:
-        cls.onvoSDK.dashboards.delete(cls.sampleDashboardId)
-        cls.onvoSDK.automations.delete(cls.sampleAutomationId)  # Skipping test delete
+        cls.onvoSDK.dashboards.delete(cls.sample_dashboard_id)
+        cls.onvoSDK.automations.delete(cls.sample_automation_id)  # Skipping test delete
         super().tearDownClass()
