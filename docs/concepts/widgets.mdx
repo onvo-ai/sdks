@@ -64,6 +64,23 @@ icon: "grid-2-plus"
   The identifier or name of the team to which the widget belongs.
 </ParamField>
 
+<ParamField path="messages" type="array" required>
+  The output or result of the question.
+  <Expandable title="properties">
+    <ParamField path="role" type="string">
+      Can be either 'user' or 'assistant'.
+    </ParamField>
+    <ParamField path="content" type="string">
+      The message content in markdown format. Contains the code to run in
+      \`\`\`python \`\`\` tags and the code output in \`\`\`json \`\`\` tags
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField path="settings" type="object">
+  All the settings for the current widget
+</ParamField>
+
 <ParamField path="title" type="string" required>
   The title or name of the widget.
 </ParamField>

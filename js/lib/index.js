@@ -403,7 +403,7 @@ var OnvoWidgets = class extends OnvoBase {
     );
   }
   create(body) {
-    return this.fetchBase("/api/widgets", "POST", body);
+    return this.fetchBase("/api/widgets", "PUT", body);
   }
 };
 
