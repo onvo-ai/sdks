@@ -32,7 +32,7 @@ export const LastUpdatedBadge: React.FC<{ date: string }> = ({ date }) => {
   }, []);
 
   return (
-    <Badge key={key} size="xs" className="ml-2">
+    <Badge key={key} size="xs" className="onvo-last-updated-badge ml-2">
       Last updated {dayjs(date).fromNow()}
     </Badge>
   );
@@ -73,7 +73,7 @@ export const DashboardHeader: React.FC = ({}) => {
   );
 
   return (
-    <section className="onv-dashboard-header foreground-color sticky z-10 border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 top-0">
+    <section className="onvo-dashboard-header foreground-color sticky z-10 border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 top-0">
       <main className="mx-auto px-6 pt-4 lg:px-8">
         <div className="mb-3 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
           <Icon
@@ -86,10 +86,10 @@ export const DashboardHeader: React.FC = ({}) => {
           <div className="w-full">
             {dashboard ? (
               <>
-                <Metric className="font-override text-xl">
+                <Metric className="onvo-dashboard-header-title font-override text-xl">
                   {dashboard?.title || " "}
                 </Metric>
-                <span className=" text-tremor-default text-tremor-content dark:text-dark-tremor-content font-override mt-1">
+                <span className="onvo-dashboard-header-description text-tremor-default text-tremor-content dark:text-dark-tremor-content font-override mt-1">
                   {dashboard?.description || " "}
                   <LastUpdatedBadge date={dashboard.last_updated_at} />
                 </span>
@@ -102,8 +102,14 @@ export const DashboardHeader: React.FC = ({}) => {
             )}
           </div>
           <div className="flex flex-row gap-2">
-            <Menu as="div" className="relative inline-block text-left">
-              <Menu.Button as="div">
+            <Menu
+              as="div"
+              className="onvo-dashboard-header-download relative inline-block text-left"
+            >
+              <Menu.Button
+                as="div"
+                className="onvo-dashboard-header-download-button"
+              >
                 <Button
                   icon={ChevronDownIcon}
                   iconPosition="right"
@@ -123,7 +129,7 @@ export const DashboardHeader: React.FC = ({}) => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="onvo-download-menu-items absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div className="px-1 py-1 ">
                     <Menu.Item>
                       {({ active }) => (
@@ -131,7 +137,7 @@ export const DashboardHeader: React.FC = ({}) => {
                           onClick={() => exportDashboard("xlsx")}
                           className={`${
                             active ? "bg-blue-500 text-white" : "text-gray-900"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          } onvo-download-menu-item-xlsx  group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                         >
                           <DocumentChartBarIcon
                             className="mr-2 h-5 w-5"
@@ -147,7 +153,7 @@ export const DashboardHeader: React.FC = ({}) => {
                           onClick={() => exportDashboard("csv")}
                           className={`${
                             active ? "bg-blue-500 text-white" : "text-gray-900"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          } onvo-download-menu-item-csv group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                         >
                           <TableCellsIcon
                             className="mr-2 h-5 w-5"
@@ -163,7 +169,7 @@ export const DashboardHeader: React.FC = ({}) => {
                           onClick={() => exportDashboard("png")}
                           className={`${
                             active ? "bg-blue-500 text-white" : "text-gray-900"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          } onvo-download-menu-item-png group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                         >
                           <PhotoIcon
                             className="mr-2 h-5 w-5"
@@ -179,7 +185,7 @@ export const DashboardHeader: React.FC = ({}) => {
                           onClick={() => exportDashboard("pdf")}
                           className={`${
                             active ? "bg-blue-500 text-white" : "text-gray-900"
-                          } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          } onvo-download-menu-item-pdf group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                         >
                           <DocumentIcon
                             className="mr-2 h-5 w-5"
