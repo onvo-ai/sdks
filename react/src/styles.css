@@ -38,11 +38,6 @@
 .rdg-sort-arrow {
   margin-top: 12px;
 }
-.rdg-cell[role="columnheader"] {
-  overflow-y: visible;
-  width: 100%;
-  position: relative;
-}
 .rdg a {
   text-decoration: underline;
   color: #3366cc;

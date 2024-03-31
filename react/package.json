@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/react",
-  "version": "0.2.32",
+  "version": "0.2.35",
   "description": "The react SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "module": "dist/esm/index.js",
@@ -29,7 +29,7 @@
   "dependencies": {
     "@heroicons/react": "^2.1.1",
     "@monaco-editor/react": "^4.6.0",
-    "@onvo-ai/js": "^0.13.3",
+    "@onvo-ai/js": "^0.13.4",
     "@tremor/react": "^3.14.1",
     "@uidotdev/usehooks": "^2.4.1",
     "chart.js": "^4.4.0",
@@ -39,7 +39,7 @@
     "numeral": "^2.0.6",
     "prop-types": "^15.8.1",
     "react-chartjs-2": "^5.2.0",
-    "react-data-grid": "^7.0.0-beta.42",
+    "react-data-grid": "^7.0.0-beta.41",
     "react-error-boundary": "^4.0.12",
     "react-grid-layout": "^1.4.4",
     "react-markdown": "^9.0.1",
@@ -80,6 +80,7 @@
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "postcss": "^8.4.33",
+    "postcss-import": "^16.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^4.12.1",

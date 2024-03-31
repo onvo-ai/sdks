@@ -24,6 +24,6 @@ export class OnvoWidgets extends OnvoBase {
     ) as Promise<Widget>;
   }
   create(body: Omit<Widget, "id" | "created_at">) {
-    return this.fetchBase("/api/widgets", "POST", body) as Promise<Widget>;
+    return this.fetchBase("/api/widgets", "PUT", body) as Promise<Widget>;
   }
 }

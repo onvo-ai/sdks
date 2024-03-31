@@ -588,30 +588,24 @@ export interface Database {
       };
       questions: {
         Row: {
-          account: string | null;
           created_at: string;
           dashboard: string;
-          embed_user: string | null;
           id: string;
           messages: Json;
           query: string;
           team: string | null;
         };
         Insert: {
-          account?: string | null;
           created_at?: string;
           dashboard: string;
-          embed_user?: string | null;
           id?: string;
           messages?: Json;
           query: string;
           team?: string | null;
         };
         Update: {
-          account?: string | null;
           created_at?: string;
           dashboard?: string;
-          embed_user?: string | null;
           id?: string;
           messages?: Json;
           query?: string;
@@ -626,24 +620,10 @@ export interface Database {
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "questions_organisation_user_fkey";
-            columns: ["embed_user"];
-            isOneToOne: false;
-            referencedRelation: "embed_users";
-            referencedColumns: ["id"];
-          },
-          {
             foreignKeyName: "questions_team_fkey";
             columns: ["team"];
             isOneToOne: false;
             referencedRelation: "teams";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "questions_user_fkey";
-            columns: ["account"];
-            isOneToOne: false;
-            referencedRelation: "accounts";
             referencedColumns: ["id"];
           }
         ];
@@ -680,17 +660,10 @@ export interface Database {
           },
           {
             foreignKeyName: "sessions_embed_user_fkey";
-            columns: ["embed_user"];
+            columns: ["embed_user", "team"];
             isOneToOne: false;
             referencedRelation: "embed_users";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "sessions_team_fkey";
-            columns: ["team"];
-            isOneToOne: false;
-            referencedRelation: "teams";
-            referencedColumns: ["id"];
+            referencedColumns: ["id", "team"];
           }
         ];
       };
@@ -723,39 +696,39 @@ export interface Database {
           amount: number;
           created_at: string;
           currency: string;
-          id: string;
           interval: string;
           period_end: string;
           period_start: string;
           product_name: string;
           stripe_customer_id: string;
           stripe_product_id: string;
+          stripe_subscription_id: string;
           team: string;
         };
         Insert: {
           amount: number;
           created_at?: string;
           currency: string;
-          id: string;
           interval: string;
           period_end: string;
           period_start?: string;
           product_name: string;
           stripe_customer_id: string;
           stripe_product_id: string;
+          stripe_subscription_id: string;
           team: string;
         };
         Update: {
           amount?: number;
           created_at?: string;
           currency?: string;
-          id?: string;
           interval?: string;
           period_end?: string;
           period_start?: string;
           product_name?: string;
           stripe_customer_id?: string;
           stripe_product_id?: string;
+          stripe_subscription_id?: string;
           team?: string;
         };
         Relationships: [
@@ -769,7 +742,7 @@ export interface Database {
           {
             foreignKeyName: "subscriptions_team_fkey";
             columns: ["team"];
-            isOneToOne: false;
+            isOneToOne: true;
             referencedRelation: "teams";
             referencedColumns: ["id"];
           }
@@ -802,6 +775,18 @@ export interface Database {
           name?: string | null;
           phone_number?: string | null;
           stripe_id?: string | null;
+        };
+        Relationships: [];
+      };
+      widget_limit: {
+        Row: {
+          widgets: number | null;
+        };
+        Insert: {
+          widgets?: number | null;
+        };
+        Update: {
+          widgets?: number | null;
         };
         Relationships: [];
       };
@@ -1004,17 +989,10 @@ export interface Database {
           },
           {
             foreignKeyName: "sessions_embed_user_fkey";
-            columns: ["embed_user"];
+            columns: ["embed_user", "team"];
             isOneToOne: false;
             referencedRelation: "embed_users";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "sessions_team_fkey";
-            columns: ["team"];
-            isOneToOne: false;
-            referencedRelation: "teams";
-            referencedColumns: ["id"];
+            referencedColumns: ["id", "team"];
           }
         ];
       };
