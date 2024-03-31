@@ -83,15 +83,15 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
 
   return (
     <div
-      className="font-override background-color relative w-full pb-safe"
+      className="onvo-dashboard-grid-wrapper font-override background-color relative w-full pb-safe"
       id="screenshot-content"
     >
       <UpdateChartModal />
       <ResponsiveGridLayout
         resizeHandle={
-          <div className="react-resizable-handle absolute bottom-2 right-2 cursor-pointer rounded-br-lg border-b-[3px] border-r-[3px] border-gray-300 dark:border-gray-700" />
+          <div className="onvo-dashboard-grid-handle react-resizable-handle absolute bottom-2 right-2 cursor-pointer rounded-br-lg border-b-[3px] border-r-[3px] border-gray-300 dark:border-gray-700" />
         }
-        className="layout"
+        className="onvo-dashboard-grid-layout layout"
         rowHeight={120}
         margin={[spacing, spacing]}
         breakpoints={{ lg: 1280, md: 1024, sm: 768, xs: 640, xxs: 480 }}
