@@ -25,6 +25,8 @@ class BaseResource:
         Returns:
             list/dict/str: Processes the response body as json or raw text if the JSON processing fails.
         """
+        if response.status_code >= 400:
+            print(response.text)
         response.raise_for_status()
         try:
             return response.json()
@@ -98,6 +100,17 @@ class BaseResource:
             dict: The body of the newly updated object or a success/failure message
         """
         return self.base_request(requests.post, subdirectory, options)
+
+    def base_patch(self, subdirectory: str, **options) -> dict:
+        """The base request for the RESTful update action through the patch channel
+
+        Args:
+            subdirectory (str): The path to the resource
+
+        Returns:
+            dict: The body of the newly updated object or a success/failure message
+        """
+        return self.base_request(requests.patch, subdirectory, options)
 
     def base_delete(self, subdirectory: str, **options) -> dict:
         """The base request for the RESTful delete action
