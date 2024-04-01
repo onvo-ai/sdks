@@ -83,7 +83,9 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
 
   return (
     <div
-      className="font-override background-color relative w-full pb-safe"
+      className={
+        "font-override background-color relative w-full pb-safe " + theme
+      }
       id="screenshot-content"
     >
       <UpdateChartModal />
