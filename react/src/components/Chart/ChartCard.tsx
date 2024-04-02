@@ -68,7 +68,7 @@ const ChartCard: React.FC<{
         return backend.widget(widget.id).export(format);
       },
       {
-        loading: "Exporting widget...",
+        loading: `Exporting widget as ${format}...`,
         success: (blob) => {
           let blobUrl = window.URL.createObjectURL(blob);
           let a = document.createElement("a");

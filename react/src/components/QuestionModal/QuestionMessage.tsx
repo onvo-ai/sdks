@@ -45,8 +45,6 @@ const QuestionMessage: React.FC<{
   const [code, setCode] = useState("");
   const [answer, setAnswer] = useState("");
 
-  const lastTime = useRef(new Date());
-
   const [editing, setEditing] = useState(false);
   const [newMessage, setNewMessage] = useState("");
 
@@ -97,30 +95,20 @@ const QuestionMessage: React.FC<{
 
   useEffect(() => {
     if (role === "assistant") {
-      if (content.split("```python")[1]) {
-        let code = content.split("```python")[1].split("```")[0].trim();
-        setCode(code);
-      }
+      if (content.search("```") >= 0) {
+        if (content.split("```python")[1]) {
+          let code = content.split("```python")[1].split("```")[0].trim();
+          setCode(code);
+        }
 
-      // TODO: REMOVE THIS AFTER MIGRATION
-      if (content.split("#### Chart config:")[1]) {
-        let out = content
-          .split("#### Chart config:")[1]
-          .split("#### Final answer:")[0]
-          .trim();
-        setOutput(JSON.parse(out));
-
-        if (content.split("#### Final answer:\n")[1]) {
-          let ans = content.split("#### Final answer:\n")[1];
+        if (content.split("```json")[1]) {
+          let out = content.split("```json")[1].split("```")[0].trim();
+          setOutput(JSON.parse(out));
+          let ans = content.split("```json")[1].split("```")[1];
           setAnswer(ans || "");
         }
-      }
-
-      if (content.split("```json")[1]) {
-        let out = content.split("```json")[1].split("```")[0].trim();
-        setOutput(JSON.parse(out));
-        let ans = content.split("```json")[1].split("```")[1];
-        setAnswer(ans || "");
+      } else {
+        setAnswer(content);
       }
     } else {
       setAnswer(content);
@@ -211,7 +199,6 @@ const QuestionMessage: React.FC<{
                 >
                   <span>Show working</span>
                   <div className="flex flex-row items-center gap-2">
-                    {!output && <Loader time={lastTime.current} />}
                     <ChevronUpIcon
                       className={`${
                         open ? "rotate-180 transform" : ""
