@@ -2,6 +2,8 @@ from onvo.base_resource import BaseResource
 
 
 class Questions(BaseResource):
+    """Endpoints to manage Onvo questions"""
+
     def list(self, dashboard_id: str):
         """List all questions linked to a dashboard
 

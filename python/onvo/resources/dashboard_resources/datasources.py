@@ -2,6 +2,8 @@ from onvo.resources.dashboard_resources.base_resource import DashboardBaseResour
 
 
 class DashboardDatasources(DashboardBaseResource):
+    """Endpoints to manage Onvo datasources linked to a dashboard"""
+
     def list(self):
         """List all datasources linked to a dashboard
 

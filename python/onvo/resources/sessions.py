@@ -2,11 +2,7 @@ from onvo.base_resource import BaseResource
 
 
 class Sessions(BaseResource):
-    """Endpoints to get and update sessions. A session creates a link between a user under your organisation and a dashboard.
-
-    Args:
-        BaseResource (_type_): _description_
-    """
+    """Endpoints to get and update sessions. A session creates a link between a user under your organisation and a dashboard."""
 
     def list(self, dashboard_id: str):
         """List all sessions for a dashboard

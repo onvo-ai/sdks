@@ -49,7 +49,6 @@ class BaseResource:
                 [f"{key}={quote(value)}" for key, value in options["params"].items()]
             )
 
-    # TODO : Add documentation marking 'params' as the query & 'data' as the body
     def base_request(self, handler, subdirectory: str, additional_options):
         """The commmon flow for all requests made through Onvo
 

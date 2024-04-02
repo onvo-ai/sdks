@@ -2,6 +2,8 @@ from onvo.base_resource import BaseResource
 
 
 class Datasources(BaseResource):
+    """Endpoints to manage Onvo datasources"""
+
     def list(self):
         """List all datasources in an organization
 

@@ -4,6 +4,8 @@ import json
 
 
 class Widgets(BaseResource):
+    """Endpoints to manage Onvo widgets"""
+
     def __init__(self, endpoint, api_key, questions):
         super().__init__(endpoint, api_key)
         self.questions = questions
@@ -43,7 +45,7 @@ class Widgets(BaseResource):
         return self.base_get(f"/widgets/{id}/export?format={format}")
 
     def create(self, dashboard_id: str, query: str):
-        """Create a new widget
+        """Create a new widget. The endpoint first asks a question via the questions endpoint and uses the response to create a new widget
 
         Args:
             dashboard_id (str): The dashboard id to create the widget for

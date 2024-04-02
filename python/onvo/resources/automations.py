@@ -2,6 +2,8 @@ from onvo.base_resource import BaseResource
 
 
 class Automations(BaseResource):
+    """Endpoints to manage Onvo automations"""
+
     def list(self):
         """List all automations linked to an organization
 

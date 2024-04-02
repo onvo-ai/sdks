@@ -2,6 +2,8 @@ from onvo.base_resource import BaseResource
 
 
 class EmbedUsers(BaseResource):
+    """Endpoints to manage Onvo embed users"""
+
     def list(self):
         """List all embed users
 

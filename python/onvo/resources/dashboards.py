@@ -2,6 +2,8 @@ from onvo.base_resource import BaseResource
 
 
 class Dashboards(BaseResource):
+    """Endpoints to manage Onvo dashboards"""
+
     def list(self):
         """Get a list of all dashboards under an organization
 
