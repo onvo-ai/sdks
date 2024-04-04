@@ -117,7 +117,7 @@ const QuestionMessage: React.FC<{
 
   if (role === "user") {
     return (
-      <div className="group relative mb-3 flex flex-row items-start justify-start gap-3">
+      <div className="onvo-question-message-user group relative mb-3 flex flex-row items-start justify-start gap-3">
         <Icon variant="shadow" icon={UserIcon} size="sm" />
         <div className="w-full">
           {editing ? (
@@ -179,14 +179,14 @@ const QuestionMessage: React.FC<{
   }
 
   return (
-    <div className="relative mb-3 flex flex-row items-start justify-start gap-3">
+    <div className="onvo-question-message-assistant relative mb-3 flex flex-row items-start justify-start gap-3">
       <Icon
         variant="shadow"
         icon={() => <Logo height={20} width={20} />}
         size="sm"
       />
 
-      <article className="prose prose-sm dark:prose-invert w-full">
+      <article className="onvo-question-assistant-code-wrapper prose prose-sm dark:prose-invert w-full">
         {code.trim() !== "" && (
           <Disclosure>
             {({ open }) => (
@@ -210,7 +210,7 @@ const QuestionMessage: React.FC<{
                   <ErrorBoundary
                     fallbackRender={({ error }) => <Text>{code}</Text>}
                   >
-                    <ReactMarkdown className="-mt-5">
+                    <ReactMarkdown className="onvo-question-assistant-code -mt-5">
                       {"```python\n" + code + "\n```"}
                     </ReactMarkdown>
                   </ErrorBoundary>
@@ -222,7 +222,7 @@ const QuestionMessage: React.FC<{
         {output && (
           <Card
             className={
-              "foreground-color relative my-2 py-3 flex flex-col " +
+              "onvo-question-assistant-chart foreground-color relative my-2 py-3 flex flex-col " +
               (output.type === "metric" ? "h-32" : "h-96")
             }
           >

@@ -207,7 +207,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
     <>
       <div
         ref={containerRef}
-        className={"absolute left-0 right-0 w-full"}
+        className={"onvo-question-modal-wrapper absolute left-0 right-0 w-full"}
       ></div>
       <div className={"h-[55px] w-full"}></div>
       <div
@@ -223,7 +223,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
           }}
         >
           <TextInput
-            className="background-color pr-[52px]"
+            className="onvo-question-modal-textinput background-color pr-[52px]"
             placeholder={`Ask your dashboard for a chart or a question...`}
           />
           <Icon
@@ -237,7 +237,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
 
       <Transition appear show={open} as={Fragment as any}>
         <div
-          className="foreground-color fixed right-0 top-0 z-20 h-screen"
+          className="onvo-question-modal-question-list foreground-color fixed right-0 top-0 z-20 h-screen"
           style={{
             width: width || 0,
           }}
@@ -313,7 +313,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                             Ask me for a widget or a question
                           </Title>
                         </div>
-                        <div className="grid grid-cols-2 gap-2">
+                        <div className="onvo-question-modal-suggestions-list grid grid-cols-2 gap-2">
                           {suggestions.length > 0
                             ? suggestions.map((a) => (
                                 <Card

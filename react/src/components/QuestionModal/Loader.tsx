@@ -12,7 +12,7 @@ const Loader: React.FC<{ time: Date }> = ({ time }) => {
   }, [time]);
 
   return (
-    <div className="flex flex-row gap-2 items-center">
+    <div className="onvo-loader-question-modal flex flex-row gap-2 items-center">
       <Text className="my-0">{elapsed}s</Text>
       <div role="status">
         <svg

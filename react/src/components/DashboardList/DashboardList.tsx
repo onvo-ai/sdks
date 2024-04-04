@@ -23,7 +23,7 @@ const DashboardCard: React.FC<{
     <Card
       onClick={() => onClick && onClick(dashboard)}
       className={
-        "gap-4 flex " +
+        "onvo-dashboard-card gap-4 flex " +
         (variant === "grid" ? "flex-col" : "flex-row items-center")
       }
     >
@@ -42,8 +42,10 @@ const DashboardCard: React.FC<{
 
       <div className="flex flex-grow flex-row items-center gap-2">
         <div className="flex-grow">
-          <Title>{dashboard.title}</Title>
-          <Text>{dashboard.description}</Text>
+          <Title className="onvo-dashboard-card-title">{dashboard.title}</Title>
+          <Text className="onvo-dashboard-card-description">
+            {dashboard.description}
+          </Text>
         </div>
       </div>
 
@@ -55,21 +57,21 @@ const DashboardCard: React.FC<{
 
       <div className="grid grid-cols-2">
         <div className="w-36 flex-shrink-0 flex flex-col gap-1">
-          <Text className="flex flex-row items-center gap-2">
+          <Text className="onvo-dashboard-card-details-text  flex flex-row items-center gap-2">
             <TableCellsIcon height={16} width={16} />{" "}
             {dashboard.widgets?.length} widgets
           </Text>
-          <Text className="flex flex-row items-center gap-2">
+          <Text className="onvo-dashboard-card-details-text flex flex-row items-center gap-2">
             <LinkIcon height={16} width={16} /> {dashboard.datasources.length}{" "}
             datasources
           </Text>
         </div>
         <div className="w-48 flex-shrink-0 flex flex-col gap-1">
-          <Text className="flex flex-row items-center gap-2">
+          <Text className="onvo-dashboard-card-details-text flex flex-row items-center gap-2">
             <ClockIcon height={16} width={16} />
             Created {dayjs(dashboard.created_at).fromNow()}
           </Text>
-          <Text className="flex flex-row items-center gap-2">
+          <Text className="onvo-dashboard-card-details-text flex flex-row items-center gap-2">
             <PencilIcon height={16} width={16} />
             Updated {dayjs(dashboard.last_updated_at).fromNow()}
           </Text>
@@ -110,7 +112,7 @@ export const DashboardList: React.FC<{
     }[columns] || "grid-cols-2";
 
   return (
-    <div className={"w-full grid gap-4 " + cols}>
+    <div className={"onvo-dashboard-list w-full grid gap-4 " + cols}>
       {dashboards.map((a) => (
         <DashboardCard
           key={a.id}
