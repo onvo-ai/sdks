@@ -32,9 +32,9 @@ const ChartBase: React.FC<{ json: any; id: string; title: string }> = ({
   return (
     <ErrorBoundary
       fallbackRender={({ error }) => (
-        <div className="flex h-full w-full flex-col items-center justify-center ">
-          <Title>Error rendering chart</Title>
-          <Text>{error.message}</Text>
+        <div className="onvo-chart-base-error-fallback flex h-full w-full flex-col items-center justify-center">
+          <Title className="error-title">Error rendering chart</Title>
+          <Text className="error-message">{error.message}</Text>
         </div>
       )}
     >

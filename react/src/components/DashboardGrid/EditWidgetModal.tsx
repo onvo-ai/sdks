@@ -37,7 +37,7 @@ const Message: React.FC<{
   const [newMessage, setNewMessage] = useState(message.content);
 
   return (
-    <div className="relative mb-3 flex flex-row items-start justify-start gap-3 group">
+    <div className="onvo-message-wrapper relative mb-3 flex flex-row items-start justify-start gap-3 group">
       {message.role === "assistant" ? (
         <Icon
           variant="shadow"
@@ -47,7 +47,7 @@ const Message: React.FC<{
       ) : (
         <Icon variant="shadow" icon={UserIcon} size="sm" />
       )}
-      <div className="w-full">
+      <div className="onvo-message-text w-full">
         {editing ? (
           <Textarea
             defaultValue={message.content}
@@ -58,7 +58,7 @@ const Message: React.FC<{
         )}
 
         {editing ? (
-          <div className="flex flex-row gap-2 mt-2">
+          <div className="onvo-message-edit-options flex flex-row gap-2 mt-2">
             <Button
               size="sm"
               className="py-1 rounded-md"
@@ -97,7 +97,7 @@ const Message: React.FC<{
           <Icon
             onClick={() => setEditing(true)}
             variant="shadow"
-            className="absolute top-1 right-1 hidden group-hover:block"
+            className="onvo-message-edit-button absolute top-1 right-1 hidden group-hover:block"
             icon={PencilIcon}
             size="sm"
           />
@@ -224,7 +224,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
     <>
       <div
         ref={containerRef}
-        className={"absolute left-0 right-0 w-full"}
+        className={"onvo-edit-chart-header absolute left-0 right-0 w-full"}
       ></div>
       <Transition appear show={open} as={Fragment as any}>
         <div
@@ -280,6 +280,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
             leaveTo="opacity-0 translate-y-12"
           >
             <div className="flex h-full w-full flex-row pt-[55px]">
+              !!
               <div className="relative overflow-y-auto flex w-full flex-grow flex-col border-r border-gray-200 dark:border-gray-800">
                 <div className="flex flex-col absolute bottom-8 overflow-y-auto top-0 pt-4 px-4 w-full">
                   {messages.map((a, index) => (
@@ -310,13 +311,17 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                   ))}
                 </div>
 
-                <div className={"absolute bottom-0 left-0 right-0 z-10 pb-4"}>
+                <div
+                  className={
+                    "onvo-input-text-wrapper absolute bottom-0 left-0 right-0 z-10 pb-4"
+                  }
+                >
                   <SuggestionsBar onSelect={(val) => setNewMessage(val)} />
                   <div className="relative mx-auto flex w-full max-w-2xl flex-row items-center gap-2">
                     <Textarea
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
-                      className="background-color pr-[52px]"
+                      className="onvo-ask-textarea background-color pr-[52px]"
                       placeholder={`Ask for changes to your chart...`}
                       autoFocus
                     />
@@ -347,7 +352,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                 >
                   {loading && (
                     <div className="absolute top-0 left-0 bottom-0 right-0 z-10 backdrop-blur-md bg-white/50 dark:bg-gray-900/50 flex justify-center items-center">
-                      <Card className="flex flex-row gap-6 items-center w-72">
+                      <Card className="onvo-loading-card flex flex-row gap-6 items-center w-72">
                         <div role="status">
                           <svg
                             aria-hidden="true"
@@ -380,6 +385,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                         top: 10,
                       },
                     }}
+                    className="onvo-code-editor"
                     theme="vs-dark"
                     onChange={(val) => setCode(val || "")}
                   />
