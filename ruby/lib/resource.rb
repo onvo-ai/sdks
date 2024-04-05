@@ -27,7 +27,7 @@ class Resource
   # Makes a request, handles errors, parses and returns the body
   #
   # @yieldparam [HTTParty::Response] response
-  # @return [Hash]
+  # @return [Hash, Array]
   def base_request
     response = yield
     body = JSON.parse(response.body)
@@ -42,7 +42,7 @@ class Resource
   # Adds query or body options to the request if they are present
   #
   # @param extra_options [Hash]
-  # @return [Hash]
+  # @return [Hash] the modified options with query and/or body
   def merge_options(extra_options)
     filtered_extras = {}
     filtered_extras[:query] = extra_options[:query] if extra_options.key? :query
@@ -54,7 +54,7 @@ class Resource
   #
   # @param subdirectory [String]
   # @param extra_options [Hash]
-  # @return [Hash]
+  # @return [Hash, Array]
   def base_get(subdirectory, **extra_options)
     base_request { self.class.get(subdirectory, **merge_options(extra_options)) }
   end
