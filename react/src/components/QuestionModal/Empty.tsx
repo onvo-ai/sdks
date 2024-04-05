@@ -1,4 +1,4 @@
-import { Metric, Subtitle, Title } from "@tremor/react";
+import { Subtitle, Title } from "@tremor/react";
 import React from "react";
 
 const Empty: React.FC<{
@@ -12,7 +12,7 @@ const Empty: React.FC<{
   return (
     <div
       className={
-        "flex gap-6 items-center p-6 " +
+        "onvo-empty-question-modal flex gap-6 items-center p-6 " +
         (direction === "row" ? "flex-row" : "flex-col text-center")
       }
     >
@@ -32,8 +32,12 @@ const Empty: React.FC<{
         ></video>
       )}
       <div>
-        <Title className="mb-1 text-lg font-bold">{title}</Title>
-        <Subtitle className="mb-4 max-w-lg">{subtitle}</Subtitle>
+        <Title className="onvo-empty-question-modal-title mb-1 text-lg font-bold">
+          {title}
+        </Title>
+        <Subtitle className="onvo-empty-question-modal-subtitle mb-4 max-w-lg">
+          {subtitle}
+        </Subtitle>
         {button}
       </div>
     </div>

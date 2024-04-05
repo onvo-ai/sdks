@@ -6,7 +6,7 @@ import { Icon, Subtitle } from "@tremor/react";
 
 const Loader: React.FC<{}> = ({}) => {
   return (
-    <div role="status">
+    <div className="onvo-loader-question-modal-content" role="status">
       <svg
         aria-hidden="true"
         className="w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -52,7 +52,7 @@ const QuestionLoader: React.FC<{}> = () => {
   ];
 
   return (
-    <div className="relative flex flex-row items-start justify-start gap-3">
+    <div className="onvo-loader-question-modal relative flex flex-row items-start justify-start gap-3">
       <Icon
         variant="shadow"
         icon={() => <Logo height={20} width={20} />}

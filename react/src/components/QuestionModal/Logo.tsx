@@ -1,6 +1,7 @@
 import * as React from "react";
 const Logo = (props: any) => (
   <svg
+    className="onvo-logo-question-modal"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 360 360"
     fill="none"
