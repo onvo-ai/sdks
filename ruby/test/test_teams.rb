@@ -19,4 +19,9 @@ class TeamsTest < Minitest::Test
     sample_test_id = @onvo.teams.list[0]['id']
     assert_silent { @onvo.teams.get(sample_test_id) }
   end
+
+  def test_update
+    sample_test_id = @onvo.teams.list[0]['id']
+    assert_silent { @onvo.teams.update(sample_test_id, { 'name': 'Onvo AI', 'phone_number': '+91 807 506 5108' }) }
+  end
 end
