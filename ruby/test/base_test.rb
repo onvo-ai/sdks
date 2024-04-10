@@ -4,7 +4,7 @@ require 'minitest/autorun'
 require_relative '../lib/onvo'
 
 # All tests related to Onvo's automation endpoints
-class AutomationsTest < Minitest::Test
+class BaseTest < Minitest::Test
   def setup
     @endpoint = ENV['ONVO_API_ENDPOINT']
     @api_key = ENV['ONVO_API_KEY']
