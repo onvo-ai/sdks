@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
-require_relative '../lib/onvo'
+require_relative './base_template'
 
 # All tests related to Onvo's automation endpoints
-class AutomationsTest < Minitest::Test
+class AutomationsTest < BaseTemplate
   def setup
-    @endpoint = ENV['ONVO_API_ENDPOINT']
-    @api_key = ENV['ONVO_API_KEY']
-    @onvo = Onvo.new(@endpoint, @api_key)
-
+    super
     @sample_dashboard_id = @onvo.dashboards.create(SAMPLE_DASHBOARD_PARAMS)['id']
   end
 
@@ -19,7 +15,6 @@ class AutomationsTest < Minitest::Test
   }.freeze
 
   SAMPLE_AUTOMATION_PARAMS = {
-    created_by: '96460c6b-87e9-464c-a0fe-5e47b5dae3d9',
     description: 'A sample description',
     email_format: 'This is an automation from Onvo',
     email_subject: 'This is an automation from Onvo',
@@ -33,7 +28,9 @@ class AutomationsTest < Minitest::Test
   }.freeze
 
   def create_sample_automation
-    @onvo.automations.create(SAMPLE_AUTOMATION_PARAMS.merge(dashboard: @sample_dashboard_id))
+    @onvo.automations.create(
+      SAMPLE_AUTOMATION_PARAMS.merge(dashboard: @sample_dashboard_id, created_by: @sample_user_id)
+    )
   end
 
   def with_sample_automation
