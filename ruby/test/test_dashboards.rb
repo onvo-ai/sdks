@@ -4,7 +4,6 @@ require_relative './base_template'
 
 # All tests related to Onvo's dashboard endpoints
 class DashboardTest < BaseTemplate
-
   SAMPLE_DASHBOARD_PARAMS = {
     'description': 'Test Description.',
     'title': 'Ruby Integration Test Dashboard'
@@ -42,6 +41,12 @@ class DashboardTest < BaseTemplate
       assert_silent do
         @onvo.dashboards.update(id, { 'description': 'A New Test Description.' })
       end
+    end
+  end
+
+  def test_update_dashboard_cache
+    with_sample_dashboard do |id|
+      assert_silent { @onvo.dashboards.update_cache(id) }
     end
   end
 end
