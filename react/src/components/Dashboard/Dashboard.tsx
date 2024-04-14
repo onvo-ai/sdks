@@ -69,7 +69,9 @@ export const Dashboard: React.FC<{
         setSelectedWidget,
       }}
     >
-      <div className={`onvo-dashboard-context ${theme}`}>{children}</div>
+      <div className={`onvo-dashboard-context flex h-screen flex-col ${theme}`}>
+        {children}
+      </div>
     </Context.Provider>
   );
 };

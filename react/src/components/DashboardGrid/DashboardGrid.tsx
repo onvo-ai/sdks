@@ -83,7 +83,10 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
 
   return (
     <div
-      className={"onvo-dashboard-grid-wrapper font-override background-color relative w-full pb-safe "+ theme}
+      className={
+        "onvo-dashboard-grid-wrapper flex-grow font-override background-color relative w-full pb-safe " +
+        theme
+      }
       id="screenshot-content"
     >
       <UpdateChartModal />
