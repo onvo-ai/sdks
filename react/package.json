@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/react",
-  "version": "0.2.38",
+  "version": "0.2.39",
   "description": "The react SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "module": "dist/esm/index.js",
@@ -33,6 +33,7 @@
     "@tremor/react": "^3.14.1",
     "@uidotdev/usehooks": "^2.4.1",
     "chart.js": "^4.4.0",
+    "chartjs-adapter-dayjs-4": "^1.0.4",
     "chartjs-chart-funnel": "^4.1.8",
     "chartjs-plugin-datalabels": "^2.2.0",
     "dayjs": "^1.11.10",
