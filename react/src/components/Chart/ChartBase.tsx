@@ -5,6 +5,7 @@ import TableWidget from "./TableWidget";
 import React from "react";
 
 import "chart.js/auto";
+import "chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm";
 import { Chart } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js";
 import { FunnelController, TrapezoidElement } from "chartjs-chart-funnel";
