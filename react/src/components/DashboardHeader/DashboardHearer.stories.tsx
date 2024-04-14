@@ -3,6 +3,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { DashboardHeader } from "./DashboardHeader";
 import { Wrapper } from "../Wrapper/Wrapper";
 import { Dashboard } from "../Dashboard/Dashboard";
+import { Button } from "@tremor/react";
 
 const meta: Meta<typeof DashboardHeader> = {
   component: DashboardHeader,
@@ -17,7 +18,9 @@ export const Primary: Story = (args) => {
   return (
     <Wrapper {...args}>
       <Dashboard id={args.id}>
-        <DashboardHeader />
+        <DashboardHeader>
+          <Button size="xs">Share</Button>
+        </DashboardHeader>
       </Dashboard>
     </Wrapper>
   );

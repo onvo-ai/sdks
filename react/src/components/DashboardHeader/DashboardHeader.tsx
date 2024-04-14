@@ -38,7 +38,9 @@ export const LastUpdatedBadge: React.FC<{ date: string }> = ({ date }) => {
   );
 };
 
-export const DashboardHeader: React.FC = ({}) => {
+export const DashboardHeader: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
   const { dashboard } = useDashboard();
   const backend = useBackend();
 
@@ -79,7 +81,7 @@ export const DashboardHeader: React.FC = ({}) => {
           <Icon
             icon={PresentationChartBarIcon}
             variant="shadow"
-            size="xl"
+            size="lg"
             tooltip="Back to dashboards"
           />
 
@@ -199,6 +201,7 @@ export const DashboardHeader: React.FC = ({}) => {
                 </Menu.Items>
               </Transition>
             </Menu>
+            {children}
           </div>
         </div>
       </main>

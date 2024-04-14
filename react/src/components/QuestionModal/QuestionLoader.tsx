@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import React from "react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
-import { Icon, Subtitle } from "@tremor/react";
+import { Icon, Text } from "@tremor/react";
 
 const Loader: React.FC<{}> = ({}) => {
   return (
@@ -66,7 +66,7 @@ const QuestionLoader: React.FC<{}> = () => {
             ) : (
               <CheckCircleIcon className="h-6 w-6 mr-2 text-green-500" />
             )}
-            <Subtitle>{a}</Subtitle>
+            <Text>{a}</Text>
           </div>
         ))}
       </div>

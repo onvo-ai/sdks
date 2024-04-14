@@ -158,49 +158,62 @@ export const QuestionModal: React.FC<{}> = ({}) => {
       return null;
     }
 
-    return messages.map((a, index) => (
-      <QuestionMessage
-        dashboardId={dashboard?.id}
-        teamId={dashboard?.team || selectedQuestion?.team || undefined}
-        questionId={selectedQuestion?.id || "null"}
-        onDelete={() => {
-          let newMessages = messages.filter((m, i) => i < index);
-          backend?.questions.update(selectedQuestion?.id || "null", {
-            messages: newMessages,
-          });
-          setMessages(newMessages);
-        }}
-        onEdit={(msg) => {
-          let newMessages = messages
-            .map((m, i) => {
-              if (i === index) {
-                return {
-                  ...m,
-                  content: msg,
-                };
-              }
-              return m;
-            })
-            .filter((m, i) => i <= index);
-          askQuestion(newMessages);
-        }}
-        key={
-          (selectedQuestion?.id || "null") +
-          "-" +
-          messages.length +
-          "-" +
-          a.content.substring(0, 10)
-        }
-        onClose={() => {
-          setSelectedQuestion(undefined);
-          setMessages([]);
-          setOpen(false);
-        }}
-        messages={messages.filter((a, i) => a.role === "user" && i < index)}
-        role={a.role}
-        content={a.content}
-      />
-    ));
+    return messages
+      .filter((a) => a.content)
+      .map((a, index) => (
+        <QuestionMessage
+          index={index}
+          dashboardId={dashboard?.id}
+          teamId={dashboard?.team || selectedQuestion?.team || undefined}
+          questionId={selectedQuestion?.id || "null"}
+          onDelete={() => {
+            let newMessages = messages.filter((m, i) => i < index);
+            backend?.questions.update(selectedQuestion?.id || "null", {
+              messages: newMessages,
+            });
+            setMessages(newMessages);
+          }}
+          onReply={(msg) => {
+            let newMessages = [
+              ...messages,
+              {
+                role: "user" as const,
+                content: msg,
+              },
+            ];
+            askQuestion(newMessages);
+          }}
+          onEdit={(msg) => {
+            let newMessages = messages
+              .map((m, i) => {
+                if (i === index) {
+                  return {
+                    ...m,
+                    content: msg,
+                  };
+                }
+                return m;
+              })
+              .filter((m, i) => i <= index);
+            askQuestion(newMessages);
+          }}
+          key={
+            (selectedQuestion?.id || "null") +
+            "-" +
+            messages.length +
+            "-" +
+            a.content.substring(0, 10)
+          }
+          onClose={() => {
+            setSelectedQuestion(undefined);
+            setMessages([]);
+            setOpen(false);
+          }}
+          messages={messages}
+          role={a.role}
+          content={a.content}
+        />
+      ));
   }, [messages, dashboard, selectedQuestion]);
 
   return (
@@ -209,7 +222,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
         ref={containerRef}
         className={"onvo-question-modal-wrapper absolute left-0 right-0 w-full"}
       ></div>
-      <div className={"h-[55px] w-full"}></div>
+      <div className={"h-[55px] flex-shrink-0 w-full"}></div>
       <div
         className={
           "foreground-color fixed bottom-0 right-0 z-10 border-t border-gray-200 p-2 dark:border-gray-800"

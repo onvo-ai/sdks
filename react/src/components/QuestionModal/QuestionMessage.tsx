@@ -18,16 +18,19 @@ import { UserIcon } from "@heroicons/react/24/solid";
 dayjs.extend(relativeTime);
 
 const QuestionMessage: React.FC<{
+  index: number;
   dashboardId: string;
   questionId: string;
-  messages: { role: "user" | "assistant"; content: string }[];
-  role: "user" | "assistant";
+  messages: { role: "user" | "assistant" | "tool"; content: string }[];
+  role: "user" | "assistant" | "tool";
   content: string;
   teamId?: string;
   onClose: () => void;
   onDelete: () => void;
   onEdit: (msg: string) => void;
+  onReply: (msg: string) => void;
 }> = ({
+  index,
   role,
   content,
   questionId,
@@ -37,6 +40,7 @@ const QuestionMessage: React.FC<{
   onClose,
   onDelete,
   onEdit,
+  onReply,
 }) => {
   const backend = useBackend();
   const { refresh } = useDashboard();
@@ -47,6 +51,7 @@ const QuestionMessage: React.FC<{
 
   const [editing, setEditing] = useState(false);
   const [newMessage, setNewMessage] = useState("");
+  const [options, setOptions] = useState<string[]>([]);
 
   const title = useMemo(() => {
     if (output?.options?.plugins?.title?.text) {
@@ -94,27 +99,35 @@ const QuestionMessage: React.FC<{
   };
 
   useEffect(() => {
-    if (role === "assistant") {
-      if (content.search("```") >= 0) {
+    if (role === "assistant" || role === "tool") {
+      if ((content || "").search("```") >= 0) {
         if (content.split("```python")[1]) {
           let code = content.split("```python")[1].split("```")[0].trim();
           setCode(code);
         }
-
         if (content.split("```json")[1]) {
           let out = content.split("```json")[1].split("```")[0].trim();
           setOutput(JSON.parse(out));
           let ans = content.split("```json")[1].split("```")[1];
           setAnswer(ans || "");
         }
+        setOptions([]);
+      } else if ((content || "").search("`") >= 0) {
+        let opts = content.match(/(\`.*?\`)/g)?.map((a) => a.replace(/`/g, ""));
+        let ans = content.split("`")[0];
+        setAnswer(ans);
+        setOptions(opts || []);
       } else {
         setAnswer(content);
+        setOptions([]);
       }
     } else {
       setAnswer(content);
     }
   }, [content, role]);
-
+  if (!content || content.trim() === "") {
+    return <></>;
+  }
   if (role === "user") {
     return (
       <div className="onvo-question-message-user group relative mb-3 flex flex-row items-start justify-start gap-3">
@@ -178,6 +191,8 @@ const QuestionMessage: React.FC<{
     );
   }
 
+  let isLast = index === messages.length - 1;
+  let nextMessage = isLast ? "" : messages[index + 1].content || "";
   return (
     <div className="onvo-question-message-assistant relative mb-3 flex flex-row items-start justify-start gap-3">
       <Icon
@@ -243,6 +258,22 @@ const QuestionMessage: React.FC<{
           <ErrorBoundary fallbackRender={({ error }) => <Text>{answer}</Text>}>
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{answer}</ReactMarkdown>
           </ErrorBoundary>
+        )}
+        {options && options.length > 0 && (
+          <div className="flex flex-row gap-2 -mt-2">
+            {options.map((a) => (
+              <Button
+                onClick={() => isLast && onReply(a)}
+                size="sm"
+                disabled={!isLast}
+                key={a}
+                color={a === nextMessage ? "blue" : "gray"}
+                variant="secondary"
+              >
+                {a}
+              </Button>
+            ))}
+          </div>
         )}
       </article>
     </div>
