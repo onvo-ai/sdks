@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
+require 'minitest/hooks'
 require_relative '../lib/onvo'
 
 # Common methods, attributes and setup for all tests
 class BaseTemplate < Minitest::Test
-  def setup
+  include Minitest::Hooks
+
+  def before_all
     @endpoint = ENV['ONVO_API_ENDPOINT']
     @api_key = ENV['ONVO_API_KEY']
     @onvo = Onvo.new(@endpoint, @api_key)
