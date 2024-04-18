@@ -9,6 +9,7 @@ import { useBackend } from "../Wrapper";
 import { defaults } from "chart.js";
 import { Widget } from "@onvo-ai/js";
 import UpdateChartModal from "./EditWidgetModal";
+import CreateSeparatorModal from "../Chart/CreateSeparatorModal";
 
 const r = document.querySelector(":root") as any;
 r.style.setProperty(
@@ -79,8 +80,15 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
     ));
   }, [widgets, dashboard]);
 
-  if (!dashboard) return <></>;
+  const maxHeight = useMemo(() => {
+    let h = 0;
+    widgets.forEach((i: any) => {
+      if (i.y + i.h > h) h = i.y + i.h;
+    });
+    return h;
+  }, [widgets]);
 
+  if (!dashboard) return <></>;
   return (
     <div
       className={
@@ -95,7 +103,7 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
           <div className="onvo-dashboard-grid-handle react-resizable-handle absolute bottom-2 right-2 cursor-pointer rounded-br-lg border-b-[3px] border-r-[3px] border-gray-300 dark:border-gray-700" />
         }
         className="onvo-dashboard-grid-layout layout"
-        rowHeight={120}
+        rowHeight={50}
         margin={[spacing, spacing]}
         breakpoints={{ lg: 1280, md: 1024, sm: 768, xs: 640, xxs: 480 }}
         cols={{ lg: 12, md: 12, sm: 12, xs: 12, xxs: 12 }}
@@ -126,6 +134,21 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
         }}
       >
         {children}
+        {dashboard.settings && dashboard.settings?.editable && (
+          <div
+            key="create-separator"
+            data-grid={{
+              x: 0,
+              y: maxHeight + 1,
+              w: 12,
+              h: 1,
+              isDraggable: false,
+              isResizable: false,
+            }}
+          >
+            <CreateSeparatorModal maxHeight={maxHeight} />
+          </div>
+        )}
       </ResponsiveGridLayout>
     </div>
   );

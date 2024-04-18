@@ -1,5 +1,5 @@
 import { Card } from "@tremor/react";
-import React, { useMemo, useRef } from "react";
+import React, { useMemo } from "react";
 import ChartBase from "./ChartBase";
 import { toast } from "sonner";
 import {
@@ -14,12 +14,13 @@ import { useDashboard } from "../Dashboard";
 import { useBackend } from "../Wrapper";
 import Dropdown from "./Dropdown";
 import { Widget } from "@onvo-ai/js";
+import { useSeparatorModal } from "./CreateSeparatorModal";
 
 const ChartCard: React.FC<{
   widget: Widget;
 }> = ({ widget }) => {
-  const ref = useRef<HTMLDivElement>(null);
   const { refresh, setSelectedWidget } = useDashboard();
+  const { setOpen } = useSeparatorModal();
   const backend = useBackend();
 
   const duplicate = async () => {
@@ -92,14 +93,63 @@ const ChartCard: React.FC<{
     }
   }, [widget]);
 
+  if (output.type === "separator") {
+    return (
+      <div className="group relative h-full w-full py-0 !bg-transparent !border-0 !ring-0 !shadow-none px-0">
+        <div
+          className="z-20 absolute top-1 right-4  hidden group-hover:block"
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+          onMouseDown={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+          onMouseUp={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+        >
+          <Dropdown
+            options={[
+              [
+                {
+                  title: "Edit separator",
+                  icon: PencilSquareIcon,
+                  id: "edit",
+                  onClick: () =>
+                    setOpen(true, {
+                      id: widget.id,
+                      title: widget.title,
+                      subtitle: output.options.plugins.subtitle.text || "",
+                    }),
+                },
+              ],
+              [
+                {
+                  title: "Delete separator",
+                  icon: TrashIcon,
+                  id: "delete",
+                  color: "bg-red-500",
+                  onClick: deleteWidget,
+                },
+              ],
+            ]}
+          />
+        </div>
+        <ChartBase json={output} id={widget.id} title={widget.title} />
+      </div>
+    );
+  }
+
   return (
     <Card
       key={widget.id}
       className="onvo-chart-card group foreground-color relative flex h-full w-full flex-col -z-[1] py-3"
-      ref={ref}
     >
       <div
-        className="onvo-chart-card-dropdown-wrapper z-20 absolute top-4 right-4  hidden group-hover:block"
+        className="onvo-chart-card-dropdown-wrapper z-20 absolute top-1 right-4 hidden group-hover:block"
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();

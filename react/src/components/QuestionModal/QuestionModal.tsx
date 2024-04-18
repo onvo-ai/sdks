@@ -144,7 +144,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
           {
             role: "assistant",
             content:
-              "I could not answer your question. Could you try adding some more descriptions about the question?",
+              "I could not answer your question. Could you try adding some more details about the question?",
           },
         ];
       });
@@ -158,62 +158,60 @@ export const QuestionModal: React.FC<{}> = ({}) => {
       return null;
     }
 
-    return messages
-      .filter((a) => a.content)
-      .map((a, index) => (
-        <QuestionMessage
-          index={index}
-          dashboardId={dashboard?.id}
-          teamId={dashboard?.team || selectedQuestion?.team || undefined}
-          questionId={selectedQuestion?.id || "null"}
-          onDelete={() => {
-            let newMessages = messages.filter((m, i) => i < index);
-            backend?.questions.update(selectedQuestion?.id || "null", {
-              messages: newMessages,
-            });
-            setMessages(newMessages);
-          }}
-          onReply={(msg) => {
-            let newMessages = [
-              ...messages,
-              {
-                role: "user" as const,
-                content: msg,
-              },
-            ];
-            askQuestion(newMessages);
-          }}
-          onEdit={(msg) => {
-            let newMessages = messages
-              .map((m, i) => {
-                if (i === index) {
-                  return {
-                    ...m,
-                    content: msg,
-                  };
-                }
-                return m;
-              })
-              .filter((m, i) => i <= index);
-            askQuestion(newMessages);
-          }}
-          key={
-            (selectedQuestion?.id || "null") +
-            "-" +
-            messages.length +
-            "-" +
-            a.content.substring(0, 10)
-          }
-          onClose={() => {
-            setSelectedQuestion(undefined);
-            setMessages([]);
-            setOpen(false);
-          }}
-          messages={messages}
-          role={a.role}
-          content={a.content}
-        />
-      ));
+    return messages.map((a, index) => (
+      <QuestionMessage
+        index={index}
+        dashboardId={dashboard?.id}
+        teamId={dashboard?.team || selectedQuestion?.team || undefined}
+        questionId={selectedQuestion?.id || "null"}
+        onDelete={() => {
+          let newMessages = messages.filter((m, i) => i < index);
+          backend?.questions.update(selectedQuestion?.id || "null", {
+            messages: newMessages,
+          });
+          setMessages(newMessages);
+        }}
+        onReply={(msg) => {
+          let newMessages = [
+            ...messages,
+            {
+              role: "user" as const,
+              content: msg,
+            },
+          ];
+          askQuestion(newMessages);
+        }}
+        onEdit={(msg) => {
+          let newMessages = messages
+            .map((m, i) => {
+              if (i === index) {
+                return {
+                  ...m,
+                  content: msg,
+                };
+              }
+              return m;
+            })
+            .filter((m, i) => i <= index);
+          askQuestion(newMessages);
+        }}
+        key={
+          (selectedQuestion?.id || "null") +
+          "-" +
+          messages.length +
+          "-" +
+          a.content.substring(0, 10)
+        }
+        onClose={() => {
+          setSelectedQuestion(undefined);
+          setMessages([]);
+          setOpen(false);
+        }}
+        messages={messages}
+        role={a.role}
+        content={a.content}
+      />
+    ));
   }, [messages, dashboard, selectedQuestion]);
 
   return (
@@ -237,7 +235,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
         >
           <TextInput
             className="onvo-question-modal-textinput background-color pr-[52px]"
-            placeholder={`Ask your dashboard for a chart or a question...`}
+            placeholder={`Describe the chart or visualization you want to make...`}
           />
           <Icon
             size="xs"
@@ -323,7 +321,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                             size="xl"
                           />
                           <Title className="mt-2">
-                            Ask me for a widget or a question
+                            Ask me for a widget or visualisation
                           </Title>
                         </div>
                         <div className="onvo-question-modal-suggestions-list grid grid-cols-2 gap-2">
@@ -376,7 +374,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                       ref={input}
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
-                      placeholder={`Ask your dashboard for a chart or a question...`}
+                      placeholder={`Describe the chart or visualization you want to make...`}
                       autoFocus
                     />
                     <Icon
