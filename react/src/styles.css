@@ -27,10 +27,10 @@
   --font-override: inherit;
 }
 .foreground-color {
-  background-color: var(--foreground-color) !important;
+  background-color: var(--foreground-color);
 }
 .background-color {
-  background-color: var(--background-color) !important;
+  background-color: var(--background-color);
 }
 .font-override {
   font-family: var(--font-override) !important;

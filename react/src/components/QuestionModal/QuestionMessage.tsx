@@ -70,7 +70,7 @@ const QuestionMessage: React.FC<{
       x: 0,
       y: 0,
       w: 4,
-      h: output.type === "metric" ? 1 : 2,
+      h: output.type === "metric" ? 2 : 4,
       messages: messages,
       dashboard: dashboardId,
       team: teamId || "",
