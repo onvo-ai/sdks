@@ -28,7 +28,7 @@ class TestSessions(DashboardBaseTest):
             ),
         )
 
-    # TODO: fix 405 method not allowed for delete by id
+    # TODO: remove if not needed
     # def test_delete(self):
     #     sample_session_token = self.onvoSDK.sessions.upsert(
     #         self.sample_dashboard_id, self.sample_embed_user_id
