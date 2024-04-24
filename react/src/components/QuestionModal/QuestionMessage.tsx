@@ -43,7 +43,7 @@ const QuestionMessage: React.FC<{
   onReply,
 }) => {
   const backend = useBackend();
-  const { refresh } = useDashboard();
+  const { refresh, widgets } = useDashboard();
 
   const [output, setOutput] = useState<any>();
   const [code, setCode] = useState("");
@@ -65,12 +65,16 @@ const QuestionMessage: React.FC<{
 
     e.preventDefault();
     e.stopPropagation();
+    let maxHeight = 0;
+    widgets.forEach((i: any) => {
+      if (i.y + i.h > maxHeight) maxHeight = i.y + i.h;
+    });
     let newObj: any = {
       title: title,
       x: 0,
-      y: 0,
+      y: maxHeight,
       w: 4,
-      h: output.type === "metric" ? 2 : 4,
+      h: output.type === "metric" ? 10 : 20,
       messages: messages,
       dashboard: dashboardId,
       team: teamId || "",

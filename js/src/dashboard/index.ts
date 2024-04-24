@@ -28,6 +28,6 @@ export class OnvoDashboard extends OnvoBase {
   export(format: "csv" | "xlsx" | "pdf" | "png") {
     return this.fetchBlob(
       "/api/dashboards/" + this.#id + "/export?format=" + format
-    ) as Promise<any>;
+    ) as Promise<Blob>;
   }
 }

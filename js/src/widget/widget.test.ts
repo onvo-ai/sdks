@@ -16,7 +16,7 @@ describe("Widget", () => {
     let response = await onvo
       .widget("adc6b5b5-1256-4c2e-90b7-acc4abe105dd")
       .export("png");
-
+    expect(response.size).toBeGreaterThan(0);
     expect(response).toBeDefined();
   }, 30000);
   it("should update widget prompt", async () => {

@@ -103,7 +103,7 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
           <div className="onvo-dashboard-grid-handle react-resizable-handle absolute bottom-2 right-2 cursor-pointer rounded-br-lg border-b-[3px] border-r-[3px] border-gray-300 dark:border-gray-700" />
         }
         className="onvo-dashboard-grid-layout layout"
-        rowHeight={50}
+        rowHeight={10}
         margin={[spacing, spacing]}
         breakpoints={{ lg: 1280, md: 1024, sm: 768, xs: 640, xxs: 480 }}
         cols={{ lg: 12, md: 12, sm: 12, xs: 12, xxs: 12 }}
@@ -141,7 +141,7 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
               x: 0,
               y: maxHeight + 1,
               w: 12,
-              h: 1,
+              h: 2,
               isDraggable: false,
               isResizable: false,
             }}

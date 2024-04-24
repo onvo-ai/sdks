@@ -324,6 +324,19 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                       className="onvo-ask-textarea background-color pr-[52px]"
                       placeholder={`Ask for changes to your chart...`}
                       autoFocus
+                      onKeyUp={(evt) => {
+                        if (evt.key === "Enter" && !evt.shiftKey) {
+                          getGraph([
+                            ...messages,
+                            { role: "user", content: newMessage },
+                          ]);
+                          setMessages((m) => [
+                            ...m,
+                            { role: "user", content: newMessage },
+                          ]);
+                          setNewMessage("");
+                        }
+                      }}
                     />
                     <Icon
                       size="xs"

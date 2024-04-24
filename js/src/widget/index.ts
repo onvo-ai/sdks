@@ -12,7 +12,7 @@ export class OnvoWidget extends OnvoBase {
   export(format: "svg" | "csv" | "xlsx" | "png") {
     return this.fetchBlob(
       "/api/widgets/" + this.#id + "/export?format=" + format
-    ) as Promise<any>;
+    ) as Promise<Blob>;
   }
   updatePrompts(messages: { role: "user" | "assistant"; content: String }[]) {
     return this.fetchBase("/api/widgets/" + this.#id, "PATCH", {

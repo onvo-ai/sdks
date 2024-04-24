@@ -41,11 +41,14 @@ const ChartBase: React.FC<{ json: any; id: string; title: string }> = ({
     },
   };
 
-  if (output.options.plugins.subtitle) {
+  if (
+    output.options.plugins.subtitle &&
+    output.options.plugins.subtitle.display !== false
+  ) {
     output.options.plugins.subtitle = {
       display: true,
       text: output.options.plugins.subtitle?.text || "",
-      align: "start",
+      align: output.options.plugins.subtitle.align || "start",
       fullSize: true,
       font: {
         family: "Inter",
@@ -54,7 +57,7 @@ const ChartBase: React.FC<{ json: any; id: string; title: string }> = ({
       },
       padding: {
         top: 0,
-        bottom: 10,
+        bottom: 15,
       },
     };
   }
