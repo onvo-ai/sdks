@@ -4,7 +4,7 @@ declare class OnvoBase {
     #private;
     endpoint: string;
     fetchBase(url: string, method?: "GET" | "PUT" | "POST" | "DELETE" | "PATCH", body?: any, isForm?: boolean): Promise<unknown>;
-    fetchBlob(url: string, method?: "GET" | "PUT" | "POST" | "DELETE" | "PATCH", body?: any): Promise<buffer.Blob>;
+    fetchBlob(url: string): Promise<buffer.Blob>;
     constructor(apiKey: string, options?: {
         endpoint: string;
     });
@@ -1557,7 +1557,7 @@ declare class OnvoDashboard extends OnvoBase {
         y: number | null;
     }[]>;
     getWidgetSuggestions(): Promise<string[]>;
-    export(format: "csv" | "xlsx" | "pdf" | "png"): Promise<any>;
+    export(format: "csv" | "xlsx" | "pdf" | "png"): Promise<Blob>;
 }
 
 declare class OnvoEmbedUser extends OnvoBase {
@@ -1639,7 +1639,7 @@ declare class OnvoWidget extends OnvoBase {
     constructor(id: string, apiKey: string, options?: {
         endpoint: string;
     });
-    export(format: "svg" | "csv" | "xlsx" | "png"): Promise<any>;
+    export(format: "svg" | "csv" | "xlsx" | "png"): Promise<Blob>;
     updatePrompts(messages: {
         role: "user" | "assistant";
         content: String;

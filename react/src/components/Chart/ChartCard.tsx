@@ -19,7 +19,7 @@ import { useSeparatorModal } from "./CreateSeparatorModal";
 const ChartCard: React.FC<{
   widget: Widget;
 }> = ({ widget }) => {
-  const { refresh, setSelectedWidget } = useDashboard();
+  const { dashboard, refresh, setSelectedWidget } = useDashboard();
   const { setOpen } = useSeparatorModal();
   const backend = useBackend();
 
@@ -96,52 +96,110 @@ const ChartCard: React.FC<{
   if (output.type === "separator") {
     return (
       <div className="group relative h-full w-full py-0 !bg-transparent !border-0 !ring-0 !shadow-none px-0">
-        <div
-          className="z-20 absolute top-1 right-4  hidden group-hover:block"
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-          }}
-          onMouseDown={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-          }}
-          onMouseUp={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-          }}
-        >
-          <Dropdown
-            options={[
-              [
-                {
-                  title: "Edit separator",
-                  icon: PencilSquareIcon,
-                  id: "edit",
-                  onClick: () =>
-                    setOpen(true, {
-                      id: widget.id,
-                      title: widget.title,
-                      subtitle: output.options.plugins.subtitle.text || "",
-                    }),
-                },
-              ],
-              [
-                {
-                  title: "Delete separator",
-                  icon: TrashIcon,
-                  id: "delete",
-                  color: "bg-red-500",
-                  onClick: deleteWidget,
-                },
-              ],
-            ]}
-          />
-        </div>
+        {dashboard?.settings?.editable && (
+          <div
+            className="z-20 absolute top-1 right-4  hidden group-hover:block"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+            }}
+            onMouseDown={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+            }}
+            onMouseUp={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+            }}
+          >
+            <Dropdown
+              options={[
+                [
+                  {
+                    title: "Edit separator",
+                    icon: PencilSquareIcon,
+                    id: "edit",
+                    onClick: () =>
+                      setOpen(true, {
+                        id: widget.id,
+                        title: widget.title,
+                        subtitle: output.options.plugins.subtitle.text || "",
+                      }),
+                  },
+                ],
+                [
+                  {
+                    title: "Delete separator",
+                    icon: TrashIcon,
+                    id: "delete",
+                    color: "bg-red-500",
+                    onClick: deleteWidget,
+                  },
+                ],
+              ]}
+            />
+          </div>
+        )}
         <ChartBase json={output} id={widget.id} title={widget.title} />
       </div>
     );
   }
+
+  const editOptions = [
+    {
+      title: "Edit widget",
+      icon: PencilSquareIcon,
+      id: "edit",
+      onClick: onRequestEdit,
+    },
+    {
+      title: "Duplicate widget",
+      icon: DocumentDuplicateIcon,
+      id: "duplicate",
+      onClick: duplicate,
+    },
+  ];
+
+  const exportOptions = [
+    {
+      title: "Download as excel",
+      icon: DocumentChartBarIcon,
+      id: "download-excel",
+      onClick: () => exportWidget("xlsx"),
+    },
+    {
+      title: "Download as csv",
+      icon: TableCellsIcon,
+      id: "download-csv",
+      onClick: () => exportWidget("csv"),
+    },
+
+    ...(JSON.parse(widget.cache || "{}").type === "table"
+      ? []
+      : [
+          {
+            title: "Download as svg",
+            icon: PhotoIcon,
+            id: "download-svg",
+            onClick: () => exportWidget("svg"),
+          },
+          {
+            title: "Download as png",
+            icon: PhotoIcon,
+            id: "download-png",
+            onClick: () => exportWidget("png"),
+          },
+        ]),
+  ];
+  const deleteOptions = [
+    {
+      title: "Delete widget",
+      icon: TrashIcon,
+      id: "delete",
+      color: "bg-red-500",
+      onClick: deleteWidget,
+    },
+  ];
 
   return (
     <Card
@@ -164,62 +222,11 @@ const ChartCard: React.FC<{
         }}
       >
         <Dropdown
-          options={[
-            [
-              {
-                title: "Edit widget",
-                icon: PencilSquareIcon,
-                id: "edit",
-                onClick: onRequestEdit,
-              },
-              {
-                title: "Duplicate widget",
-                icon: DocumentDuplicateIcon,
-                id: "duplicate",
-                onClick: duplicate,
-              },
-            ],
-            [
-              {
-                title: "Download as excel",
-                icon: DocumentChartBarIcon,
-                id: "download-excel",
-                onClick: () => exportWidget("xlsx"),
-              },
-              {
-                title: "Download as csv",
-                icon: TableCellsIcon,
-                id: "download-csv",
-                onClick: () => exportWidget("csv"),
-              },
-
-              ...(JSON.parse(widget.cache || "{}").type === "table"
-                ? []
-                : [
-                    {
-                      title: "Download as svg",
-                      icon: PhotoIcon,
-                      id: "download-svg",
-                      onClick: () => exportWidget("svg"),
-                    },
-                    {
-                      title: "Download as png",
-                      icon: PhotoIcon,
-                      id: "download-png",
-                      onClick: () => exportWidget("png"),
-                    },
-                  ]),
-            ],
-            [
-              {
-                title: "Delete widget",
-                icon: TrashIcon,
-                id: "delete",
-                color: "bg-red-500",
-                onClick: deleteWidget,
-              },
-            ],
-          ]}
+          options={
+            dashboard?.settings?.editable
+              ? [editOptions, exportOptions, deleteOptions]
+              : [exportOptions]
+          }
         />
       </div>
       <ChartBase json={output} title={widget.title} id={widget.id} />

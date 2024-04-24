@@ -376,6 +376,19 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                       onChange={(e) => setQuery(e.target.value)}
                       placeholder={`Describe the chart or visualization you want to make...`}
                       autoFocus
+                      onKeyUp={(evt) => {
+                        if (evt.key === "Enter" && !evt.shiftKey) {
+                          let newMessages = [
+                            ...messages,
+                            {
+                              role: "user" as const,
+                              content: query,
+                            },
+                          ];
+                          askQuestion(newMessages);
+                          setQuery("");
+                        }
+                      }}
                     />
                     <Icon
                       className="absolute right-3 top-3 z-10"

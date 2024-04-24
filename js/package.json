@@ -1,14 +1,14 @@
 {
   "name": "@onvo-ai/js",
-  "version": "0.13.4",
+  "version": "0.13.9",
   "description": "The javascript SDK for Onvo AI dashboard builder",
-  "main": "./lib/index.js",
-  "module": "./lib/index.cjs",
+  "main": "./lib/esm/index.js",
+  "module": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "exports": {
     ".": {
-      "import": "./lib/index.js",
-      "require": "./lib/index.cjs"
+      "import": "./lib/esm/index.js",
+      "require": "./lib/index.js"
     }
   },
   "files": [

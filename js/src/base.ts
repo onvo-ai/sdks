@@ -37,11 +37,7 @@ export default class OnvoBase {
   }
 
   // Base fetch method
-  async fetchBlob(
-    url: string,
-    method?: "GET" | "PUT" | "POST" | "DELETE" | "PATCH",
-    body?: any
-  ) {
+  async fetchBlob(url: string) {
     try {
       let headers: any = {
         "Content-Type": "application/json",
@@ -52,10 +48,8 @@ export default class OnvoBase {
         headers["x-api-key"] = this.#apiKey;
       }
       const response = await fetch(this.endpoint + url, {
-        mode: "no-cors",
-        method: method || "GET",
+        method: "GET",
         headers: headers,
-        body: body ? JSON.stringify(body) : undefined,
       }).then((response) => response.blob());
       return response;
     } catch (error: any) {

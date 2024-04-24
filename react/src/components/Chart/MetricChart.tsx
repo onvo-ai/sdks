@@ -29,13 +29,14 @@ class Metric extends LineController {
 
     // Draw the text
 
+    let offset = this.chart.height - 10;
     ctx.fillStyle = defaults.color as string;
     ctx.font = "600 44px " + defaults.font.family;
-    ctx.fillText(value, 0, 75);
+    ctx.fillText(value, 0, offset);
     let w = ctx.measureText(value).width;
 
     ctx.font = "16px " + defaults.font.family;
-    ctx.fillText(meta.label || "", 10 + w, 75);
+    ctx.fillText(meta.label || "", 10 + w, offset);
 
     ctx.restore();
   }
