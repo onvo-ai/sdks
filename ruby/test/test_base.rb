@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './base_template'
+require_relative '../lib/onvo'
 
 # Tests for the base template class
 class BaseTest < BaseTemplate
@@ -11,11 +12,15 @@ class BaseTest < BaseTemplate
         'Content-Type': 'application/json'
       }
     }
-    assert_equal options, @onvo.options
+
+    assert_equal @onvo.endpoint, ENV['ONVO_API_ENDPOINT']
+    assert_equal @onvo.api_key, ENV['ONVO_API_KEY']
   end
 
   def test_invalid_api_key_error
-    @onvo.options[:headers][:"x-api-key"] = 'incorrect_api_key'
-    assert_raises(RuntimeError) { @onvo.accounts.list }
+    endpoint = ENV['ONVO_API_ENDPOINT']
+    incorrect_api_key = 'incorrect_api_key'
+    alt_onvo = Onvo.new(endpoint, incorrect_api_key)
+    assert_raises(RuntimeError) { alt_onvo.accounts.list }
   end
 end
