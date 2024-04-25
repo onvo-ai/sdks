@@ -53,12 +53,6 @@
     --foreground-color: #111827;
     --font-override: inherit;
   }
-  .rdg {
-    --rdg-background-color: #111827 !important;
-    --rdg-header-background-color: #1f2937 !important;
-    --rdg-row-hover-background-color: #1f2937 !important;
-    --rdg-color: #ccc;
-  }
 }
 
 .dark .rdg {
