@@ -124,6 +124,7 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
             <></>
           )
         }
+        draggableHandle=".chart-drag-handle"
         className="onvo-dashboard-grid-layout layout"
         rowHeight={10}
         margin={[spacing, spacing]}

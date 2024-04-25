@@ -200,7 +200,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
           "-" +
           messages.length +
           "-" +
-          a.content.substring(0, 10)
+          (a.content || "").substring(0, 10)
         }
         onClose={() => {
           setSelectedQuestion(undefined);
