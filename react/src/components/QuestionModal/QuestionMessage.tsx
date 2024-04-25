@@ -43,7 +43,7 @@ const QuestionMessage: React.FC<{
   onReply,
 }) => {
   const backend = useBackend();
-  const { refresh, widgets } = useDashboard();
+  const { refresh, widgets, dashboard } = useDashboard();
 
   const [output, setOutput] = useState<any>();
   const [code, setCode] = useState("");
@@ -245,14 +245,16 @@ const QuestionMessage: React.FC<{
               (output.type === "metric" ? "h-32" : "h-96")
             }
           >
-            <Button
-              variant="primary"
-              size="xs"
-              onClick={addToDashboard}
-              className="absolute top-3 right-3 z-10"
-            >
-              Add to dashboard
-            </Button>
+            {dashboard?.settings?.editable && (
+              <Button
+                variant="primary"
+                size="xs"
+                onClick={addToDashboard}
+                className="absolute top-3 right-3 z-10"
+              >
+                Add to dashboard
+              </Button>
+            )}
 
             <ChartBase json={output} id={questionId} title={title} />
           </Card>

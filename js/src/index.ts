@@ -65,6 +65,4 @@ export class Onvo extends OnvoBase {
     };
   }
 }
-// @ts-ignore
-if (typeof window === "undefined") window.Onvo = Onvo;
 export default Onvo;
