@@ -6,6 +6,7 @@ import { FunnelIcon as FunnelIconOutline } from "@heroicons/react/24/outline";
 import { FunnelIcon as FunnelIconSolid } from "@heroicons/react/24/solid";
 import { BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/20/solid";
 import React from "react";
+import { useDashboard } from "../Dashboard";
 
 function urlify(text: string) {
   var urlRegex = /(https?:\/\/[^\s]+)/g;
@@ -26,6 +27,7 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
   const [filterEnabled, setFilterEnabled] = useState(false);
   const [options, setOptions] = useState<{ [key: string]: string[] }>({});
   const [filters, setFilters] = useState<{ [key: string]: string[] }>({});
+  const { theme } = useDashboard();
 
   let [objects, fields] = useMemo(() => {
     let newRows: any[] = [];
@@ -62,7 +64,9 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
     let filtered = [...objects];
     Object.keys(filters).forEach((key) => {
       if (filters[key].length > 0) {
-        filtered = filtered.filter((a) => filters[key].includes(a[key]));
+        filtered = filtered.filter((a) =>
+          (filters[key] + "").includes(a[key] + "")
+        );
       }
     });
 
@@ -155,7 +159,10 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
         {data.options.plugins.title.text}
       </Title>
       <DataGrid
-        className="onvo-table-widget-data-grid fill-grid mt-3 h-full rounded-md border border-gray-200 dark:border-gray-800"
+        className={
+          "onvo-table-widget-data-grid fill-grid mt-3 h-full rounded-md border border-gray-200 dark:border-gray-800 " +
+          (theme === "dark" ? "rdg-dark" : "rdg-light")
+        }
         defaultColumnOptions={{
           sortable: true,
           resizable: true,
