@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import React from "react";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
@@ -29,6 +29,7 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
     () => WidthProvider(Responsive) as any,
     []
   );
+  const initialized = useRef(false);
 
   useEffect(() => {
     const r = document.querySelector(":root") as any;
@@ -67,6 +68,23 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
     };
   }, [dashboard, theme]);
 
+  useEffect(() => {
+    if (
+      !initialized.current &&
+      dashboard &&
+      new Date(dashboard.last_updated_at).getTime() + 60000 <
+        new Date().getTime()
+    ) {
+      initialized.current = true;
+      backend
+        ?.dashboard(dashboard.id)
+        .updateWidgetCache()
+        .then((data) => {
+          refresh();
+        });
+    }
+  }, [dashboard]);
+
   let children = useMemo(() => {
     if (!dashboard) return [];
     return widgets.map((i: Widget) => (
@@ -100,8 +118,13 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
       <UpdateChartModal />
       <ResponsiveGridLayout
         resizeHandle={
-          <div className="onvo-dashboard-grid-handle react-resizable-handle absolute bottom-2 right-2 cursor-pointer rounded-br-lg border-b-[3px] border-r-[3px] border-gray-300 dark:border-gray-700" />
+          dashboard.settings && dashboard.settings?.editable ? (
+            <div className="onvo-dashboard-grid-handle react-resizable-handle absolute bottom-2 right-2 cursor-pointer rounded-br-lg border-b-[3px] border-r-[3px] border-gray-300 dark:border-gray-700" />
+          ) : (
+            <></>
+          )
         }
+        draggableHandle=".chart-drag-handle"
         className="onvo-dashboard-grid-layout layout"
         rowHeight={10}
         margin={[spacing, spacing]}

@@ -206,6 +206,18 @@ const ChartCard: React.FC<{
       key={widget.id}
       className="onvo-chart-card group foreground-color relative flex h-full w-full flex-col -z-[1] py-3"
     >
+      {dashboard?.settings?.editable && (
+        <div className="group chart-drag-handle hidden group-hover:grid absolute grid-cols-4 py-1 cursor-move px-1 items-center justify-center h-6 w-10 bg-gray-50 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-blue-900 rounded-md z-10 top-2 left-[50%] -ml-5">
+          <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+          <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+          <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+          <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+          <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+          <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+          <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+          <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+        </div>
+      )}
       <div
         className="onvo-chart-card-dropdown-wrapper z-20 absolute top-1 right-4 hidden group-hover:block"
         onClick={(e) => {

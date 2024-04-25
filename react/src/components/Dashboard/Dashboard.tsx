@@ -45,6 +45,7 @@ export const Dashboard: React.FC<{
       refresh();
     }
   }, [id, backend]);
+
   useEffect(() => {
     if (dashboard) {
       if (dashboard.settings?.theme === "dark") {

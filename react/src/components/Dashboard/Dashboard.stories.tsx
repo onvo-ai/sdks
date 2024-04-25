@@ -33,9 +33,9 @@ export const Primary: Story = (args) => {
 
 Primary.args = {
   token:
-    "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFwcF9tZXRhZGF0YSI6eyJ0ZWFtIjoiM2QwNWI5OTAtYzg1NS00OTQ1LWJkZDEtYjNhODMwNWZmYzU5In0sInN1YiI6IjNkMDViOTkwLWM4NTUtNDk0NS1iZGQxLWIzYTgzMDVmZmM1OSIsImF1ZCI6ImF1dGhlbnRpY2F0ZWQiLCJpYXQiOjE3MDc0ODU5MTZ9.VxHmDH_CgaJTbIFL1ysxc_PFXN6cMgS1ampyJLs4A7k",
-  baseUrl: "https://staging.onvo.ai",
-  id: "f90182a2-f485-45a8-a9d6-b72021c03b50",
+    "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFwcF9tZXRhZGF0YSI6eyJkYXNoYm9hcmRzIjpbImUxOTg5ZTE4LTczZDctNDFhMi1hZWIyLTg2MzY3YmIyMTc3ZSJdLCJwYXJlbnRfdGVhbSI6ImVlNWIwOGM2LTUxNjctNDQyNS1iYmMzLWE3NDZmZTRhN2VhZCJ9LCJzdWIiOiJhNDQ5LTRiZmEtODc2OS0xOWMwOTdhYWYxZjYiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiaWF0IjoxNzE0MDI3NzYxfQ.vsoRaiS5K9Hjy6ekdo6L87M3wn9HsuoM4ykABA73N_Q",
+  baseUrl: "http://localhost:3004",
+  id: "e1989e18-73d7-41a2-aeb2-86367bb2177e",
 };
 
 Primary.parameters = { layout: "fullscreen" };
