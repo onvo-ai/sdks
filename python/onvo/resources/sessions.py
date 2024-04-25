@@ -40,13 +40,14 @@ class Sessions(BaseResource):
             "/sessions", data={"dashboard": dashboard_id, "user": user_id}
         )
 
-    def delete(self, id):
-        """Delete an existing session
+    # Remove if not needed
+    # def delete(self, id):
+    #     """Delete an existing session
 
-        Args:
-            id (str): The session id to delete
+    #     Args:
+    #         id (str): The session id to delete
 
-        Returns:
-            dict: A dictionary that shows status of the delete. Returns {"success": true} if successful.
-        """
-        return self.base_delete(f"/sessions/{id}")
+    #     Returns:
+    #         dict: A dictionary that shows status of the delete. Returns {"success": true} if successful.
+    #     """
+    #     return self.base_delete(f"/sessions/{id}")

@@ -54,11 +54,13 @@ class Widgets(BaseResource):
         Returns:
             dict: A dictionary containing the details of the newly created widget
         """
-        conversation = self.questions.create(dashboard_id, query)
-        question_text = conversation["messages"][-1]["content"]
+        conversation = self.questions.create(dashboard_id, query)["messages"]
+        raw_widget_text = list(
+            filter(lambda message: message["role"] == "tool", conversation)
+        )[-1]["content"]
 
         def extract_pattern(pattern):
-            return re.findall(pattern, question_text)[0].strip()
+            return re.findall(pattern, raw_widget_text)[0].strip()
 
         code = extract_pattern(r"```python([\S\n\t\v ]*)```\n```json")
         cache = extract_pattern(r"```json([\S\n\t\v ]*)```")

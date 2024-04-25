@@ -141,3 +141,6 @@ python/build/
 
 lib/
 
+# Ruby
+.yardoc
+doc
