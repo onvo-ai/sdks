@@ -62,7 +62,9 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
     let filtered = [...objects];
     Object.keys(filters).forEach((key) => {
       if (filters[key].length > 0) {
-        filtered = filtered.filter((a) => filters[key].includes(a[key]));
+        filtered = filtered.filter((a) =>
+          (filters[key] + "").includes(a[key] + "")
+        );
       }
     });
 

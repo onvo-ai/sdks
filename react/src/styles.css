@@ -43,6 +43,10 @@
   color: #3366cc;
 }
 
+.rdg-cell[role="columnheader"] {
+  overflow-y: visible;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color: #030712;
