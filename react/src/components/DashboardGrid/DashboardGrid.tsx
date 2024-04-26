@@ -89,7 +89,7 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
     if (!dashboard) return [];
     return widgets.map((i: Widget) => (
       <div
-        className="hover:z-10"
+        className="z-0 hover:z-[1]"
         key={i.id}
         data-grid={{ x: i.x, y: i.y, w: i.w, h: i.h }}
       >
