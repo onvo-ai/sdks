@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo } from "react";
 import React from "react";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
@@ -13,33 +13,13 @@ import CreateSeparatorModal from "../Chart/CreateSeparatorModal";
 export const DashboardGrid: React.FC<{ spacing?: number }> = ({
   spacing = 10,
 }) => {
-  const { dashboard, widgets, refreshDashboard, refreshWidgets, editable } =
-    useDashboard();
+  const { dashboard, widgets, editable } = useDashboard();
   const backend = useBackend();
 
   const ResponsiveGridLayout = useMemo(
     () => WidthProvider(Responsive) as any,
     []
   );
-  const initialized = useRef(false);
-
-  useEffect(() => {
-    if (
-      !initialized.current &&
-      dashboard &&
-      new Date(dashboard.last_updated_at).getTime() + 60000 <
-        new Date().getTime()
-    ) {
-      initialized.current = true;
-      backend
-        ?.dashboard(dashboard.id)
-        .updateWidgetCache()
-        .then((data) => {
-          refreshWidgets();
-          refreshDashboard();
-        });
-    }
-  }, [dashboard]);
 
   let children = useMemo(() => {
     if (!dashboard) return [];

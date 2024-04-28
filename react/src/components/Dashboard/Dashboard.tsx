@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useBackend } from "../Wrapper";
 import { Dashboard as DashboardType, Widget } from "@onvo-ai/js";
 import usePrefersColorScheme from "use-prefers-color-scheme";
@@ -47,6 +53,7 @@ export const Dashboard: React.FC<{
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const prefersColorScheme = usePrefersColorScheme();
   const [selectedWidget, setSelectedWidget] = useState<Widget>();
+  const initialized = useRef(false);
 
   const refreshDashboard = () => {
     if (!backend) return;
@@ -57,6 +64,24 @@ export const Dashboard: React.FC<{
     if (!backend) return;
     backend.widgets.list({ dashboard: id }).then(setWidgets);
   };
+
+  useEffect(() => {
+    if (
+      !initialized.current &&
+      dashboard &&
+      new Date(dashboard.last_updated_at).getTime() + 60000 <
+        new Date().getTime()
+    ) {
+      initialized.current = true;
+      backend
+        ?.dashboard(dashboard.id)
+        .updateWidgetCache()
+        .then((data) => {
+          refreshWidgets();
+          refreshDashboard();
+        });
+    }
+  }, [dashboard]);
 
   useEffect(() => {
     if (id && backend) {

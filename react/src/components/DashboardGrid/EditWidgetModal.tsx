@@ -280,7 +280,6 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
             leaveTo="opacity-0 translate-y-12"
           >
             <div className="flex h-full w-full flex-row pt-[55px]">
-              !!
               <div className="relative overflow-y-auto flex w-full flex-grow flex-col border-r border-gray-200 dark:border-gray-800">
                 <div className="flex flex-col absolute bottom-8 overflow-y-auto top-0 pt-4 px-4 w-full">
                   {messages.map((a, index) => (
