@@ -112,7 +112,7 @@ const Message: React.FC<{
 const UpdateChartModal: React.FC<{}> = ({}) => {
   const [containerRef, { width }] = useMeasure();
   const backend = useBackend();
-  const { refresh, setSelectedWidget, selectedWidget } = useDashboard();
+  const { refreshWidgets, setSelectedWidget, selectedWidget } = useDashboard();
 
   const [newMessage, setNewMessage] = useState("");
   const [widget, setWidget] = useState<Widget>();
@@ -201,7 +201,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
     setWidget(undefined);
     setNewMessage("");
     setSelectedWidget(undefined);
-    refresh();
+    refreshWidgets();
   };
 
   const executeCode = async () => {

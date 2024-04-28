@@ -26,7 +26,7 @@ export const useSeparatorModal = create<{
 const CreateSeparatorModal: React.FC<{
   maxHeight: number;
 }> = ({ maxHeight }) => {
-  const { dashboard, widgets, theme, refresh } = useDashboard();
+  const { dashboard, refreshWidgets } = useDashboard();
   const backend = useBackend();
   const { open, setOpen, widget } = useSeparatorModal();
   const [title, setTitle] = useState("");
@@ -109,7 +109,7 @@ const CreateSeparatorModal: React.FC<{
     setOpen(false);
     setTitle("");
     setSubtitle("");
-    refresh();
+    refreshWidgets();
   };
 
   return (

@@ -41,7 +41,8 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
       });
       newRows.push(row);
     });
-    return [newRows, [label, ...data.data.datasets.map((a: any) => a.label)]];
+    let newFields = [label, ...data.data.datasets.map((a: any) => a.label)];
+    return [newRows, newFields];
   }, [data]);
 
   useEffect(() => {

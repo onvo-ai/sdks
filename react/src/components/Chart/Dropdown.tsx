@@ -13,7 +13,8 @@ interface Option {
 }
 const Dropdown: React.FC<{
   options: Option[][];
-}> = ({ options }) => {
+  children: any;
+}> = ({ options, children }) => {
   return (
     <div
       className="onvo-dropdown-container relative z-20 dropdown-container"
@@ -25,7 +26,7 @@ const Dropdown: React.FC<{
       <Menu as="div" className="z-20 inline-block text-left">
         <div>
           <Menu.Button className="onvo-dropdown-button inline-flex w-full justify-center">
-            <Icon variant="shadow" icon={EllipsisVerticalIcon} size="md" />
+            {children}
           </Menu.Button>
         </div>
         <Transition

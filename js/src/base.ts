@@ -58,7 +58,8 @@ export default class OnvoBase {
   }
 
   constructor(apiKey: string, options?: { endpoint: string }) {
-    if (!apiKey) throw new Error("API key is required");
+    if (apiKey === undefined || apiKey === null)
+      throw new Error("API key is required");
     this.#apiKey = apiKey;
     this.endpoint = options?.endpoint || "https://dashboard.onvo.ai";
   }

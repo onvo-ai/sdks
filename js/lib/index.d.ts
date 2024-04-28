@@ -1557,7 +1557,7 @@ declare class OnvoDashboard extends OnvoBase {
         y: number | null;
     }[]>;
     getWidgetSuggestions(): Promise<string[]>;
-    export(format: "csv" | "xlsx" | "pdf" | "png"): Promise<Blob>;
+    export(format: "csv" | "xlsx" | "pdf" | "png" | "jpeg"): Promise<Blob>;
 }
 
 declare class OnvoEmbedUser extends OnvoBase {
@@ -1639,7 +1639,7 @@ declare class OnvoWidget extends OnvoBase {
     constructor(id: string, apiKey: string, options?: {
         endpoint: string;
     });
-    export(format: "svg" | "csv" | "xlsx" | "png"): Promise<Blob>;
+    export(format: "svg" | "csv" | "xlsx" | "png" | "jpeg"): Promise<Blob>;
     updatePrompts(messages: {
         role: "user" | "assistant";
         content: String;
@@ -1776,6 +1776,14 @@ declare class OnvoWidgets extends OnvoBase {
     }>;
 }
 
+declare class OnvoQuestion extends OnvoBase {
+    #private;
+    constructor(id: string, apiKey: string, options?: {
+        endpoint: string;
+    });
+    export(messageIndex: number, format: "svg" | "csv" | "xlsx" | "png" | "jpeg"): Promise<Blob>;
+}
+
 declare class Onvo extends OnvoBase {
     accounts: OnvoAccounts;
     teams: OnvoTeams;
@@ -1791,6 +1799,7 @@ declare class Onvo extends OnvoBase {
     embed_user: (embedUserId: string) => OnvoEmbedUser;
     datasource: (datasourceId: string) => OnvoDatasource;
     widget: (widgetId: string) => OnvoWidget;
+    question: (questionId: string) => OnvoQuestion;
     constructor(apiKey: string, options?: {
         endpoint: string;
     });

@@ -1,10 +1,12 @@
-import { Card } from "@tremor/react";
+import { Card, Icon } from "@tremor/react";
 import React, { useMemo } from "react";
 import ChartBase from "./ChartBase";
 import { toast } from "sonner";
 import {
+  ArrowDownTrayIcon,
   DocumentChartBarIcon,
   DocumentDuplicateIcon,
+  EllipsisVerticalIcon,
   PencilSquareIcon,
   PhotoIcon,
   TableCellsIcon,
@@ -34,7 +36,8 @@ const DragHandle = () => {
 const ChartCard: React.FC<{
   widget: Widget;
 }> = ({ widget }) => {
-  const { dashboard, refresh, setSelectedWidget } = useDashboard();
+  const { dashboard, refreshWidgets, setSelectedWidget, editable } =
+    useDashboard();
   const { setOpen } = useSeparatorModal();
   const backend = useBackend();
 
@@ -49,7 +52,7 @@ const ChartCard: React.FC<{
       {
         loading: "Duplicating widget...",
         success: () => {
-          refresh();
+          refreshWidgets();
           return "Widget duplicated";
         },
         error: (error) => "Error duplicating widget: " + error.message,
@@ -69,7 +72,7 @@ const ChartCard: React.FC<{
       {
         loading: "Deleting widget...",
         success: () => {
-          refresh();
+          refreshWidgets();
           return "Widget deleted";
         },
         error: (error) => "Error deleting widget: " + error.message,
@@ -77,7 +80,7 @@ const ChartCard: React.FC<{
     );
   };
 
-  const exportWidget = (format: "svg" | "png" | "csv" | "xlsx") => {
+  const exportWidget = (format: "svg" | "png" | "csv" | "xlsx" | "jpeg") => {
     if (!backend) return;
     toast.promise(
       () => {
@@ -111,8 +114,8 @@ const ChartCard: React.FC<{
   if (output.type === "separator") {
     return (
       <div className="group relative h-full w-full py-0 !bg-transparent !border-0 !ring-0 !shadow-none px-0">
-        {dashboard?.settings?.editable && <DragHandle />}
-        {dashboard?.settings?.editable && (
+        {editable && <DragHandle />}
+        {editable && (
           <div
             className="z-20 absolute top-1 right-4  hidden group-hover:block"
             onClick={(e) => {
@@ -139,7 +142,8 @@ const ChartCard: React.FC<{
                       setOpen(true, {
                         id: widget.id,
                         title: widget.title,
-                        subtitle: output.options.plugins.subtitle.text || "",
+                        subtitle:
+                          output.options.plugins.subtitle.text.join("\n") || "",
                       }),
                   },
                 ],
@@ -153,7 +157,9 @@ const ChartCard: React.FC<{
                   },
                 ],
               ]}
-            />
+            >
+              <Icon variant="shadow" icon={PencilSquareIcon} size="sm" />
+            </Dropdown>
           </div>
         )}
         <ChartBase json={output} id={widget.id} title={widget.title} />
@@ -205,8 +211,15 @@ const ChartCard: React.FC<{
             id: "download-png",
             onClick: () => exportWidget("png"),
           },
+          {
+            title: "Download as jpeg",
+            icon: PhotoIcon,
+            id: "download-jpeg",
+            onClick: () => exportWidget("jpeg"),
+          },
         ]),
   ];
+
   const deleteOptions = [
     {
       title: "Delete widget",
@@ -222,9 +235,9 @@ const ChartCard: React.FC<{
       key={widget.id}
       className="onvo-chart-card group foreground-color relative flex h-full w-full flex-col -z-[1] py-3"
     >
-      {dashboard?.settings?.editable && <DragHandle />}
+      {editable && <DragHandle />}
       <div
-        className="onvo-chart-card-dropdown-wrapper z-20 absolute top-1 right-4 hidden group-hover:block"
+        className="onvo-chart-card-dropdown-wrapper z-20 absolute top-1 right-4 hidden group-hover:flex flex-row gap-2"
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
@@ -238,13 +251,14 @@ const ChartCard: React.FC<{
           e.preventDefault();
         }}
       >
-        <Dropdown
-          options={
-            dashboard?.settings?.editable
-              ? [editOptions, exportOptions, deleteOptions]
-              : [exportOptions]
-          }
-        />
+        <Dropdown options={[exportOptions]}>
+          <Icon variant="shadow" icon={ArrowDownTrayIcon} size="sm" />
+        </Dropdown>
+        {editable && (
+          <Dropdown options={[editOptions, deleteOptions]}>
+            <Icon variant="shadow" icon={PencilSquareIcon} size="sm" />
+          </Dropdown>
+        )}
       </div>
       <ChartBase json={output} title={widget.title} id={widget.id} />
     </Card>
