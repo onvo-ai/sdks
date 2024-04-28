@@ -9,7 +9,7 @@ export class OnvoWidget extends OnvoBase {
     this.#id = id;
   }
 
-  export(format: "svg" | "csv" | "xlsx" | "png") {
+  export(format: "svg" | "csv" | "xlsx" | "png" | "jpeg") {
     return this.fetchBlob(
       "/api/widgets/" + this.#id + "/export?format=" + format
     ) as Promise<Blob>;

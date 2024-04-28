@@ -8,13 +8,21 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { ErrorBoundary } from "react-error-boundary";
 import { toast } from "sonner";
-import { ChevronUpIcon, PencilIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowDownTrayIcon,
+  ChevronUpIcon,
+  DocumentChartBarIcon,
+  PencilIcon,
+  PhotoIcon,
+  TableCellsIcon,
+} from "@heroicons/react/24/outline";
 import { Disclosure } from "@headlessui/react";
 import Loader from "./Loader";
 import ChartBase from "../Chart/ChartBase";
 import { useDashboard } from "../Dashboard";
 import Logo from "./Logo";
 import { UserIcon } from "@heroicons/react/24/solid";
+import Dropdown from "../Chart/Dropdown";
 dayjs.extend(relativeTime);
 
 const QuestionMessage: React.FC<{
@@ -43,7 +51,7 @@ const QuestionMessage: React.FC<{
   onReply,
 }) => {
   const backend = useBackend();
-  const { refresh, widgets, dashboard } = useDashboard();
+  const { refreshWidgets, widgets, editable } = useDashboard();
 
   const [output, setOutput] = useState<any>();
   const [code, setCode] = useState("");
@@ -93,7 +101,7 @@ const QuestionMessage: React.FC<{
       {
         loading: "Adding widget to dashboard...",
         success: () => {
-          refresh();
+          refreshWidgets();
           onClose();
           return "Widget added to dashboard";
         },
@@ -129,6 +137,7 @@ const QuestionMessage: React.FC<{
       setAnswer(content);
     }
   }, [content, role]);
+
   if (!content || content.trim() === "") {
     return <></>;
   }
@@ -195,6 +204,67 @@ const QuestionMessage: React.FC<{
     );
   }
 
+  const exportChart = (format: "svg" | "png" | "csv" | "xlsx" | "jpeg") => {
+    if (!backend) return;
+    toast.promise(
+      () => {
+        return backend.question(questionId).export(index, format);
+      },
+      {
+        loading: `Exporting chart as ${format}...`,
+        success: (blob) => {
+          let blobUrl = window.URL.createObjectURL(blob);
+          let a = document.createElement("a");
+          a.download = title + "." + format;
+          a.href = blobUrl;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          return "Chart exported";
+        },
+        error: (error) => "Error exporting chart: " + error.message,
+      }
+    );
+  };
+
+  const exportOptions = [
+    {
+      title: "Download as excel",
+      icon: DocumentChartBarIcon,
+      id: "download-excel",
+      onClick: () => exportChart("xlsx"),
+    },
+    {
+      title: "Download as csv",
+      icon: TableCellsIcon,
+      id: "download-csv",
+      onClick: () => exportChart("csv"),
+    },
+
+    ...(output && output.type === "table"
+      ? []
+      : [
+          {
+            title: "Download as svg",
+            icon: PhotoIcon,
+            id: "download-svg",
+            onClick: () => exportChart("svg"),
+          },
+          {
+            title: "Download as png",
+            icon: PhotoIcon,
+            id: "download-png",
+            onClick: () => exportChart("png"),
+          },
+          {
+            title: "Download as jpeg",
+            icon: PhotoIcon,
+            id: "download-jpeg",
+            onClick: () => exportChart("jpeg"),
+          },
+        ]),
+  ];
+
   let isLast = index === messages.length - 1;
   let nextMessage = isLast ? "" : messages[index + 1].content || "";
   return (
@@ -241,20 +311,34 @@ const QuestionMessage: React.FC<{
         {output && (
           <Card
             className={
-              "onvo-question-assistant-chart foreground-color relative my-2 py-3 flex flex-col " +
+              "group onvo-question-assistant-chart foreground-color relative my-2 py-3 flex flex-col " +
               (output.type === "metric" ? "h-32" : "h-96")
             }
           >
-            {dashboard?.settings?.editable && (
-              <Button
-                variant="primary"
-                size="xs"
-                onClick={addToDashboard}
-                className="absolute top-3 right-3 z-10"
-              >
-                Add to dashboard
-              </Button>
-            )}
+            <div
+              className="onvo-chart-card-dropdown-wrapper z-20 absolute top-2 right-4 flex flex-row gap-2 items-center"
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+              onMouseDown={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+              onMouseUp={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+            >
+              {editable && (
+                <Button variant="primary" size="xs" onClick={addToDashboard}>
+                  Add to dashboard
+                </Button>
+              )}
+              <Dropdown options={[exportOptions]}>
+                <Icon variant="shadow" icon={ArrowDownTrayIcon} size="sm" />
+              </Dropdown>
+            </div>
 
             <ChartBase json={output} id={questionId} title={title} />
           </Card>

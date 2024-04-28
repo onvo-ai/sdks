@@ -62,7 +62,6 @@ const ChartBase: React.FC<{ json: any; id: string; title: string }> = ({
         align: output.options.plugins.subtitle.align || "start",
         fullSize: true,
         font: {
-          family: "Inter",
           size: 14,
           weight: 400,
         },
