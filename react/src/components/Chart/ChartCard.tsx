@@ -235,6 +235,14 @@ const ChartCard: React.FC<{
     },
   ];
 
+  const downloadEnabled = useMemo(() => {
+    if (dashboard?.settings && dashboard.settings.disable_download)
+      return false;
+    if (widget.settings && (widget.settings as any).disable_download)
+      return false;
+    return true;
+  }, [dashboard, widget]);
+
   return (
     <Card
       key={widget.id}
@@ -256,7 +264,7 @@ const ChartCard: React.FC<{
           e.preventDefault();
         }}
       >
-        {(!widget.settings || !(widget.settings as any).disable_download) && (
+        {downloadEnabled && (
           <Dropdown options={[exportOptions]}>
             <Icon variant="shadow" icon={ArrowDownTrayIcon} size="sm" />
           </Dropdown>

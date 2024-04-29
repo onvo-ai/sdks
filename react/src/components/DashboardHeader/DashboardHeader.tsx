@@ -104,119 +104,131 @@ export const DashboardHeader: React.FC<{ children?: React.ReactNode }> = ({
             )}
           </div>
           <div className="flex flex-row gap-2">
-            <Menu
-              as="div"
-              className="onvo-dashboard-header-download relative inline-block text-left"
-            >
-              <Menu.Button
+            {!dashboard?.settings?.disable_download && (
+              <Menu
                 as="div"
-                className="onvo-dashboard-header-download-button"
+                className="onvo-dashboard-header-download relative inline-block text-left"
               >
-                <Button
-                  icon={ChevronDownIcon}
-                  iconPosition="right"
-                  size="xs"
-                  variant="secondary"
-                  disabled={!dashboard}
+                <Menu.Button
+                  as="div"
+                  className="onvo-dashboard-header-download-button"
                 >
-                  Download
-                </Button>
-              </Menu.Button>
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-              >
-                <Menu.Items className="onvo-download-menu-items absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div className="px-1 py-1 ">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          onClick={() => exportDashboard("xlsx")}
-                          className={`${
-                            active ? "bg-blue-500 text-white" : "text-gray-900"
-                          } onvo-download-menu-item-xlsx  group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                        >
-                          <DocumentChartBarIcon
-                            className="mr-2 h-5 w-5"
-                            aria-hidden="true"
-                          />
-                          Download excel
-                        </button>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          onClick={() => exportDashboard("csv")}
-                          className={`${
-                            active ? "bg-blue-500 text-white" : "text-gray-900"
-                          } onvo-download-menu-item-csv group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                        >
-                          <TableCellsIcon
-                            className="mr-2 h-5 w-5"
-                            aria-hidden="true"
-                          />
-                          Download csv
-                        </button>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          onClick={() => exportDashboard("png")}
-                          className={`${
-                            active ? "bg-blue-500 text-white" : "text-gray-900"
-                          } onvo-download-menu-item-png group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                        >
-                          <PhotoIcon
-                            className="mr-2 h-5 w-5"
-                            aria-hidden="true"
-                          />
-                          Download png
-                        </button>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          onClick={() => exportDashboard("jpeg")}
-                          className={`${
-                            active ? "bg-blue-500 text-white" : "text-gray-900"
-                          } onvo-download-menu-item-png group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                        >
-                          <PhotoIcon
-                            className="mr-2 h-5 w-5"
-                            aria-hidden="true"
-                          />
-                          Download jpeg
-                        </button>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          onClick={() => exportDashboard("pdf")}
-                          className={`${
-                            active ? "bg-blue-500 text-white" : "text-gray-900"
-                          } onvo-download-menu-item-pdf group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                        >
-                          <DocumentIcon
-                            className="mr-2 h-5 w-5"
-                            aria-hidden="true"
-                          />
-                          Download pdf
-                        </button>
-                      )}
-                    </Menu.Item>
-                  </div>
-                </Menu.Items>
-              </Transition>
-            </Menu>
+                  <Button
+                    icon={ChevronDownIcon}
+                    iconPosition="right"
+                    size="xs"
+                    variant="secondary"
+                    disabled={!dashboard}
+                  >
+                    Download
+                  </Button>
+                </Menu.Button>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="onvo-download-menu-items absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div className="px-1 py-1 ">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={() => exportDashboard("xlsx")}
+                            className={`${
+                              active
+                                ? "bg-blue-500 text-white"
+                                : "text-gray-900"
+                            } onvo-download-menu-item-xlsx  group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          >
+                            <DocumentChartBarIcon
+                              className="mr-2 h-5 w-5"
+                              aria-hidden="true"
+                            />
+                            Download excel
+                          </button>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={() => exportDashboard("csv")}
+                            className={`${
+                              active
+                                ? "bg-blue-500 text-white"
+                                : "text-gray-900"
+                            } onvo-download-menu-item-csv group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          >
+                            <TableCellsIcon
+                              className="mr-2 h-5 w-5"
+                              aria-hidden="true"
+                            />
+                            Download csv
+                          </button>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={() => exportDashboard("png")}
+                            className={`${
+                              active
+                                ? "bg-blue-500 text-white"
+                                : "text-gray-900"
+                            } onvo-download-menu-item-png group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          >
+                            <PhotoIcon
+                              className="mr-2 h-5 w-5"
+                              aria-hidden="true"
+                            />
+                            Download png
+                          </button>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={() => exportDashboard("jpeg")}
+                            className={`${
+                              active
+                                ? "bg-blue-500 text-white"
+                                : "text-gray-900"
+                            } onvo-download-menu-item-png group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          >
+                            <PhotoIcon
+                              className="mr-2 h-5 w-5"
+                              aria-hidden="true"
+                            />
+                            Download jpeg
+                          </button>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={() => exportDashboard("pdf")}
+                            className={`${
+                              active
+                                ? "bg-blue-500 text-white"
+                                : "text-gray-900"
+                            } onvo-download-menu-item-pdf group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          >
+                            <DocumentIcon
+                              className="mr-2 h-5 w-5"
+                              aria-hidden="true"
+                            />
+                            Download pdf
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            )}
             {children}
           </div>
         </div>

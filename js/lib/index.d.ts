@@ -1305,6 +1305,7 @@ type Settings = {
     editable: boolean;
     can_ask_questions: boolean;
     hide_header: boolean;
+    disable_download: boolean;
 };
 type Invite = Database["public"]["Tables"]["invites"]["Row"];
 type Member = Database["public"]["Tables"]["members"]["Row"];

@@ -17,6 +17,7 @@ export type Settings = {
   editable: boolean;
   can_ask_questions: boolean;
   hide_header: boolean;
+  disable_download: boolean;
 };
 export type Invite = Database["public"]["Tables"]["invites"]["Row"];
 export type Member = Database["public"]["Tables"]["members"]["Row"];
