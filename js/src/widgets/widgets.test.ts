@@ -186,12 +186,14 @@ def main():
 
   it("should update widget", async () => {
     let widget = await onvo.widgets.update(newWidget.id, {
-      title: "Automation test",
+      settings: {
+        title: "Automation test",
+      },
     });
     expect(widget).toBeDefined();
     expect(widget.id).toBeDefined();
-    expect(widget.title).toBeDefined();
-    expect(widget.title).toEqual("Automation test");
+    expect((widget.settings as any).title).toBeDefined();
+    expect((widget.settings as any).title).toEqual("Automation test");
   });
 
   it("should get widget", async () => {

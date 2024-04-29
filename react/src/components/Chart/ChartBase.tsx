@@ -22,11 +22,12 @@ ChartJS.register([
   Separator,
   zoomPlugin,
 ]);
-const ChartBase: React.FC<{ json: any; id: string; title: string }> = ({
-  json,
-  id,
-  title,
-}) => {
+const ChartBase: React.FC<{
+  json: any;
+  id: string;
+  title: string;
+  settings: any;
+}> = ({ json, id, title, settings }) => {
   const chartRef = useRef<any>();
   const [zoomed, setZoomed] = useState(false);
 
@@ -38,7 +39,7 @@ const ChartBase: React.FC<{ json: any; id: string; title: string }> = ({
   let chartConfig = useMemo(() => {
     let output = Object.assign({}, json, {});
     output.options.plugins.title = {
-      display: true,
+      display: settings && settings.title_hidden === true ? false : true,
       text: title || output.options.plugins.title?.text || "",
       align: "start",
       fullSize: true,

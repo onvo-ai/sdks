@@ -6,6 +6,8 @@ import {
   TextInput,
   Title,
   Textarea,
+  Divider,
+  Switch,
 } from "@tremor/react";
 import { useResizable } from "react-resizable-layout";
 import { Transition } from "@headlessui/react";
@@ -14,6 +16,8 @@ import { Widget } from "@onvo-ai/js";
 import {
   ArrowUpIcon,
   BackwardIcon,
+  EyeIcon,
+  EyeSlashIcon,
   PencilIcon,
 } from "@heroicons/react/24/outline";
 import Editor from "@monaco-editor/react";
@@ -123,6 +127,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
   const [messages, setMessages] = useState<
     { role: "user" | "assistant"; content: string }[]
   >([]);
+  const [settings, setSettings] = useState<any>({});
 
   useEffect(() => {
     if (selectedWidget) {
@@ -140,7 +145,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
     setTitle(widget.title || "");
     setCode(widget.code);
     setOutput(out);
-    console.log("MESSAGES: ", widget.messages);
+    setSettings(widget.settings || {});
     // @ts-ignore
     setMessages(widget.messages || []);
   }, [widget]);
@@ -174,6 +179,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
           title: title,
           code: code,
           cache: output,
+          settings: settings,
         }) as Promise<any>;
       },
       {
@@ -244,6 +250,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
             <Button
               variant="light"
               size="sm"
+              className="ml-2"
               icon={BackwardIcon}
               onClick={() => {
                 cleanup();
@@ -251,11 +258,9 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
             >
               Back to dashboard
             </Button>
-            <TextInput
-              onChange={(e) => setTitle(e.target.value)}
-              value={title}
-              className="max-w-lg"
-            />
+            <div className="flex flex-row w-full flex-grow justify-center items-center">
+              <Title>{title}</Title>
+            </div>
             <div className="flex flex-row gap-2">
               <Button
                 size="sm"
@@ -280,7 +285,6 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
             leaveTo="opacity-0 translate-y-12"
           >
             <div className="flex h-full w-full flex-row pt-[55px]">
-              !!
               <div className="relative overflow-y-auto flex w-full flex-grow flex-col border-r border-gray-200 dark:border-gray-800">
                 <div className="flex flex-col absolute bottom-8 overflow-y-auto top-0 pt-4 px-4 w-full">
                   {messages.map((a, index) => (
@@ -417,16 +421,80 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                       }
                     >
                       {output && (
-                        <>
-                          <ChartBase
-                            json={output}
-                            id={selectedWidget?.id || ""}
-                            title={title}
-                          />
-                        </>
+                        <ChartBase
+                          json={output}
+                          id={selectedWidget?.id || ""}
+                          title={title}
+                          settings={settings}
+                          key={title + JSON.stringify(settings)}
+                        />
                       )}
                     </Card>
                   </div>
+                </div>
+              </div>
+
+              <div className="justify-start h-[calc(100vh-56px)] sticky top-14 gap-2 w-72 flex flex-col flex-shrink-0 border-l border-slate-200 bg-slate-100 p-4 dark:border-slate-700 dark:bg-slate-800">
+                <Text className="font-semibold">Settings</Text>
+
+                <div className="flex flex-row items-center justify-between">
+                  <Text className="text-xs">Title</Text>{" "}
+                  <Icon
+                    icon={settings.title_hidden ? EyeSlashIcon : EyeIcon}
+                    size="sm"
+                    onClick={() => {
+                      setSettings((s: any) => ({
+                        ...s,
+                        title_hidden: !s.title_hidden,
+                      }));
+                    }}
+                  />
+                </div>
+                <TextInput
+                  placeholder="Title"
+                  className="text-xs -mt-2"
+                  value={title}
+                  onChange={(val) => setTitle(val.target.value)}
+                  disabled={settings.title_hidden}
+                />
+
+                {false && (
+                  <div className="flex flex-row items-center justify-between">
+                    <Text className="text-xs">Subtitle</Text>{" "}
+                    <Icon
+                      icon={settings.subtitle_hidden ? EyeSlashIcon : EyeIcon}
+                      size="sm"
+                      onClick={() => {
+                        setSettings((s: any) => ({
+                          ...s,
+                          subtitle_hidden: !s.subtitle_hidden,
+                        }));
+                      }}
+                    />
+                  </div>
+                )}
+                {false && (
+                  <TextInput
+                    placeholder="Subtitle"
+                    className="text-xs -mt-2"
+                    disabled={settings.subtitle_hidden}
+                  />
+                )}
+                <div className="my-2 h-[1px] w-full bg-gray-200 dark:bg-slate-600" />
+                <div className="flex flex-row items-center justify-start gap-2">
+                  <input
+                    id="default-checkbox"
+                    type="checkbox"
+                    checked={settings.disable_download}
+                    onChange={(val) => {
+                      setSettings((s: any) => ({
+                        ...s,
+                        disable_download: val.target.checked,
+                      }));
+                    }}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-md focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <Text className="text-xs">Disable downloads</Text>
                 </div>
               </div>
             </div>

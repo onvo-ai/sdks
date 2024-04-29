@@ -340,7 +340,12 @@ const QuestionMessage: React.FC<{
               </Dropdown>
             </div>
 
-            <ChartBase json={output} id={questionId} title={title} />
+            <ChartBase
+              json={output}
+              id={questionId}
+              title={title}
+              settings={{}}
+            />
           </Card>
         )}
 
