@@ -162,7 +162,12 @@ const ChartCard: React.FC<{
             </Dropdown>
           </div>
         )}
-        <ChartBase json={output} id={widget.id} title={widget.title} />
+        <ChartBase
+          json={output}
+          id={widget.id}
+          title={widget.title}
+          settings={{}}
+        />
       </div>
     );
   }
@@ -251,16 +256,23 @@ const ChartCard: React.FC<{
           e.preventDefault();
         }}
       >
-        <Dropdown options={[exportOptions]}>
-          <Icon variant="shadow" icon={ArrowDownTrayIcon} size="sm" />
-        </Dropdown>
+        {(!widget.settings || !(widget.settings as any).disable_download) && (
+          <Dropdown options={[exportOptions]}>
+            <Icon variant="shadow" icon={ArrowDownTrayIcon} size="sm" />
+          </Dropdown>
+        )}
         {editable && (
           <Dropdown options={[editOptions, deleteOptions]}>
             <Icon variant="shadow" icon={PencilSquareIcon} size="sm" />
           </Dropdown>
         )}
       </div>
-      <ChartBase json={output} title={widget.title} id={widget.id} />
+      <ChartBase
+        json={output}
+        title={widget.title}
+        id={widget.id}
+        settings={widget.settings}
+      />
     </Card>
   );
 };
