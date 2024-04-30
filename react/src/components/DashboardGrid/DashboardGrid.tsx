@@ -13,7 +13,7 @@ import CreateSeparatorModal from "../Chart/CreateSeparatorModal";
 export const DashboardGrid: React.FC<{ spacing?: number }> = ({
   spacing = 10,
 }) => {
-  const { dashboard, widgets, editable } = useDashboard();
+  const { dashboard, widgets, adminMode } = useDashboard();
   const backend = useBackend();
 
   const ResponsiveGridLayout = useMemo(
@@ -43,6 +43,8 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
   }, [widgets]);
 
   if (!dashboard) return <></>;
+
+  const editable = adminMode || dashboard?.settings?.can_edit_widget_layout;
   return (
     <div
       className={

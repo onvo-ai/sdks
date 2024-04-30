@@ -1302,10 +1302,14 @@ type Settings = {
     light_foreground: string;
     border_radius: number;
     font: string;
-    editable: boolean;
-    can_ask_questions: boolean;
     hide_header: boolean;
-    disable_download: boolean;
+    can_ask_questions: boolean;
+    can_edit_widgets: boolean;
+    can_edit_widget_layout: boolean;
+    can_create_widgets: boolean;
+    can_delete_widgets: boolean;
+    disable_download_images: boolean;
+    disable_download_reports: boolean;
 };
 type Invite = Database["public"]["Tables"]["invites"]["Row"];
 type Member = Database["public"]["Tables"]["members"]["Row"];

@@ -17,7 +17,7 @@ type DashboardContext = {
   refreshDashboard: () => void;
   refreshWidgets: () => void;
   theme: "light" | "dark";
-  editable?: boolean;
+  adminMode?: boolean;
   selectedWidget: Widget | undefined;
   setSelectedWidget: (widget: Widget | undefined) => void;
 };
@@ -29,7 +29,7 @@ const Context = createContext<DashboardContext>({
   refreshDashboard: () => {},
   refreshWidgets: () => {},
   theme: "light",
-  editable: false,
+  adminMode: false,
   selectedWidget: undefined,
   setSelectedWidget: () => {},
 });
@@ -44,8 +44,9 @@ defaults.font.family =
 
 export const Dashboard: React.FC<{
   id: string;
+  adminMode?: boolean;
   children: any;
-}> = ({ id, children }) => {
+}> = ({ id, children, adminMode }) => {
   const [dashboard, setDashboard] = useState<DashboardType>();
   const [widgets, setWidgets] = useState<Widget[]>([]);
   const [editable, setEditable] = useState(false);
@@ -99,16 +100,6 @@ export const Dashboard: React.FC<{
       } else {
         setTheme(prefersColorScheme === "dark" ? "dark" : "light");
       }
-
-      if (!dashboard.parent_dashboard) {
-        setEditable(true);
-      } else {
-        if (dashboard.settings?.editable) {
-          setEditable(true);
-        } else {
-          setEditable(false);
-        }
-      }
     }
   }, [dashboard, prefersColorScheme]);
 
@@ -160,7 +151,7 @@ export const Dashboard: React.FC<{
         theme,
         selectedWidget,
         setSelectedWidget,
-        editable,
+        adminMode,
       }}
     >
       <div className={`onvo-dashboard-context flex h-screen flex-col ${theme}`}>

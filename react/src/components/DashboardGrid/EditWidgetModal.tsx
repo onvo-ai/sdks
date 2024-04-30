@@ -485,16 +485,31 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                   <input
                     id="default-checkbox"
                     type="checkbox"
-                    checked={settings.disable_download}
+                    checked={settings.disable_download_images}
                     onChange={(val) => {
                       setSettings((s: any) => ({
                         ...s,
-                        disable_download: val.target.checked,
+                        disable_download_images: val.target.checked,
                       }));
                     }}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-md focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
-                  <Text className="text-xs">Disable downloads</Text>
+                  <Text className="text-xs">Disable image downloads</Text>
+                </div>
+                <div className="flex flex-row items-center justify-start gap-2">
+                  <input
+                    id="default-checkbox"
+                    type="checkbox"
+                    checked={settings.disable_download_reports}
+                    onChange={(val) => {
+                      setSettings((s: any) => ({
+                        ...s,
+                        disable_download_reports: val.target.checked,
+                      }));
+                    }}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-md focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <Text className="text-xs">Disable csv / excel downloads</Text>
                 </div>
               </div>
             </div>

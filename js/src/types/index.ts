@@ -14,10 +14,16 @@ export type Settings = {
   light_foreground: string;
   border_radius: number;
   font: string;
-  editable: boolean;
-  can_ask_questions: boolean;
   hide_header: boolean;
-  disable_download: boolean;
+
+  can_ask_questions: boolean;
+  can_edit_widgets: boolean; // used to be editable
+  can_edit_widget_layout: boolean; // used to be editable
+  can_create_widgets: boolean; // used to be editable
+  can_delete_widgets: boolean; // used to be editable
+
+  disable_download_images: boolean;
+  disable_download_reports: boolean;
 };
 export type Invite = Database["public"]["Tables"]["invites"]["Row"];
 export type Member = Database["public"]["Tables"]["members"]["Row"];
