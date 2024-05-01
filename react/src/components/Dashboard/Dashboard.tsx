@@ -49,7 +49,6 @@ export const Dashboard: React.FC<{
 }> = ({ id, children, adminMode }) => {
   const [dashboard, setDashboard] = useState<DashboardType>();
   const [widgets, setWidgets] = useState<Widget[]>([]);
-  const [editable, setEditable] = useState(false);
   const backend = useBackend();
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const prefersColorScheme = usePrefersColorScheme();
@@ -92,18 +91,6 @@ export const Dashboard: React.FC<{
   }, [id, backend]);
 
   useEffect(() => {
-    if (dashboard) {
-      if (dashboard.settings?.theme === "dark") {
-        setTheme("dark");
-      } else if (dashboard.settings?.theme === "light") {
-        setTheme("light");
-      } else {
-        setTheme(prefersColorScheme === "dark" ? "dark" : "light");
-      }
-    }
-  }, [dashboard, prefersColorScheme]);
-
-  useEffect(() => {
     const r = document.querySelector(":root") as any;
 
     r.style.setProperty(
@@ -113,23 +100,45 @@ export const Dashboard: React.FC<{
     defaults.font.family =
       "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 
-    if (r && dashboard && dashboard.settings) {
-      const settings = dashboard.settings;
-      r.style.setProperty(
-        "--background-color",
-        theme === "dark" ? settings.dark_background : settings.light_background
-      );
-      r.style.setProperty(
-        "--foreground-color",
-        theme === "dark" ? settings.dark_foreground : settings.light_foreground
-      );
+    let newTheme: "light" | "dark" =
+      prefersColorScheme === "dark" ? "dark" : "light";
+    if (dashboard) {
+      if (dashboard.settings?.theme === "dark") {
+        newTheme = "dark";
+      } else if (dashboard.settings?.theme === "light") {
+        newTheme = "light";
+      } else {
+        newTheme = prefersColorScheme === "dark" ? "dark" : "light";
+      }
 
-      if (dashboard.settings.font !== "inter") {
-        r.style.setProperty("--font-override", settings.font);
-        defaults.font.family = settings.font;
+      if (r && dashboard.settings) {
+        const settings = dashboard.settings;
+        r.style.setProperty(
+          "--background-color",
+          newTheme === "dark"
+            ? settings.dark_background
+            : settings.light_background
+        );
+        r.style.setProperty(
+          "--foreground-color",
+          newTheme === "dark"
+            ? settings.dark_foreground
+            : settings.light_foreground
+        );
+
+        if (newTheme === "dark") {
+          defaults.color = settings.dark_text || "#666666";
+        } else {
+          defaults.color = settings.light_text || "#666666";
+        }
+
+        if (dashboard.settings.font !== "inter") {
+          r.style.setProperty("--font-override", settings.font);
+          defaults.font.family = settings.font;
+        }
       }
     }
-
+    setTheme(newTheme);
     return () => {
       r.style.setProperty("--background-color", "");
       r.style.setProperty("--foreground-color", "");
@@ -138,7 +147,7 @@ export const Dashboard: React.FC<{
       defaults.font.family =
         "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
     };
-  }, [dashboard, theme]);
+  }, [dashboard, prefersColorScheme]);
 
   return (
     <Context.Provider
@@ -154,7 +163,10 @@ export const Dashboard: React.FC<{
         adminMode,
       }}
     >
-      <div className={`onvo-dashboard-context flex h-screen flex-col ${theme}`}>
+      <div
+        key={theme}
+        className={`onvo-dashboard-context flex h-screen flex-col ${theme}`}
+      >
         {children}
       </div>
     </Context.Provider>

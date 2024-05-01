@@ -10,8 +10,10 @@ export type Settings = {
   theme: "dark" | "light" | "auto";
   dark_background: string;
   dark_foreground: string;
+  dark_text: string;
   light_background: string;
   light_foreground: string;
+  light_text: string;
   border_radius: number;
   font: string;
   hide_header: boolean;

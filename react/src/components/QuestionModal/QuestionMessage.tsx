@@ -83,7 +83,7 @@ const QuestionMessage: React.FC<{
       y: maxHeight,
       w: 4,
       h: output.type === "metric" ? 10 : 20,
-      messages: messages,
+      messages: messages.filter((a) => a.role !== "tool"),
       dashboard: dashboardId,
       team: teamId || "",
       code: code,
