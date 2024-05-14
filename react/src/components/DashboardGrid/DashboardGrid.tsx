@@ -10,10 +10,12 @@ import { Widget } from "@onvo-ai/js";
 import UpdateChartModal from "./EditWidgetModal";
 import CreateSeparatorModal from "../Chart/CreateSeparatorModal";
 
+import FilterBar from "./FilterBar";
+
 export const DashboardGrid: React.FC<{ spacing?: number }> = ({
   spacing = 10,
 }) => {
-  const { dashboard, widgets, editable } = useDashboard();
+  const { dashboard, widgets, adminMode } = useDashboard();
   const backend = useBackend();
 
   const ResponsiveGridLayout = useMemo(
@@ -43,6 +45,8 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
   }, [widgets]);
 
   if (!dashboard) return <></>;
+
+  const editable = adminMode || dashboard?.settings?.can_edit_widget_layout;
   return (
     <div
       className={
@@ -51,6 +55,7 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
       id="screenshot-content"
     >
       <UpdateChartModal />
+      <FilterBar />
       <ResponsiveGridLayout
         resizeHandle={
           editable ? (

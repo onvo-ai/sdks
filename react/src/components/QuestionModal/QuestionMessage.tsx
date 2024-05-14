@@ -51,7 +51,7 @@ const QuestionMessage: React.FC<{
   onReply,
 }) => {
   const backend = useBackend();
-  const { refreshWidgets, widgets, editable } = useDashboard();
+  const { refreshWidgets, widgets, dashboard, adminMode } = useDashboard();
 
   const [output, setOutput] = useState<any>();
   const [code, setCode] = useState("");
@@ -83,7 +83,7 @@ const QuestionMessage: React.FC<{
       y: maxHeight,
       w: 4,
       h: output.type === "metric" ? 10 : 20,
-      messages: messages,
+      messages: messages.filter((a) => a.role !== "tool"),
       dashboard: dashboardId,
       team: teamId || "",
       code: code,
@@ -204,7 +204,7 @@ const QuestionMessage: React.FC<{
     );
   }
 
-  const exportChart = (format: "svg" | "png" | "csv" | "xlsx" | "jpeg") => {
+  const exportWidget = (format: "svg" | "png" | "csv" | "xlsx" | "jpeg") => {
     if (!backend) return;
     toast.promise(
       () => {
@@ -227,44 +227,68 @@ const QuestionMessage: React.FC<{
     );
   };
 
-  const exportOptions = [
-    {
-      title: "Download as excel",
-      icon: DocumentChartBarIcon,
-      id: "download-excel",
-      onClick: () => exportChart("xlsx"),
-    },
-    {
-      title: "Download as csv",
-      icon: TableCellsIcon,
-      id: "download-csv",
-      onClick: () => exportChart("csv"),
-    },
+  const ImageDownloadEnabled = useMemo(() => {
+    if (adminMode) return true;
+    if (dashboard?.settings && dashboard.settings.disable_download_images)
+      return false;
+    return true;
+  }, [dashboard, adminMode]);
 
-    ...(output && output.type === "table"
+  const ReportDownloadEnabled = useMemo(() => {
+    if (adminMode) return true;
+    if (dashboard?.settings && dashboard.settings.disable_download_reports)
+      return false;
+    return true;
+  }, [dashboard, adminMode]);
+
+  const AddToDashboardEnabled = useMemo(() => {
+    if (adminMode) return true;
+    if (dashboard?.settings && dashboard.settings.can_create_widgets)
+      return true;
+    return false;
+  }, [dashboard, adminMode]);
+
+  const exportOptions = [
+    ...(ReportDownloadEnabled
+      ? [
+          {
+            title: "Download as excel",
+            icon: DocumentChartBarIcon,
+            id: "download-excel",
+            onClick: () => exportWidget("xlsx"),
+          },
+          {
+            title: "Download as csv",
+            icon: TableCellsIcon,
+            id: "download-csv",
+            onClick: () => exportWidget("csv"),
+          },
+        ]
+      : []),
+
+    ...((output && output.type === "table") || !ImageDownloadEnabled
       ? []
       : [
           {
             title: "Download as svg",
             icon: PhotoIcon,
             id: "download-svg",
-            onClick: () => exportChart("svg"),
+            onClick: () => exportWidget("svg"),
           },
           {
             title: "Download as png",
             icon: PhotoIcon,
             id: "download-png",
-            onClick: () => exportChart("png"),
+            onClick: () => exportWidget("png"),
           },
           {
             title: "Download as jpeg",
             icon: PhotoIcon,
             id: "download-jpeg",
-            onClick: () => exportChart("jpeg"),
+            onClick: () => exportWidget("jpeg"),
           },
         ]),
   ];
-
   let isLast = index === messages.length - 1;
   let nextMessage = isLast ? "" : messages[index + 1].content || "";
   return (
@@ -330,7 +354,7 @@ const QuestionMessage: React.FC<{
                 e.preventDefault();
               }}
             >
-              {editable && (
+              {AddToDashboardEnabled && (
                 <Button variant="primary" size="xs" onClick={addToDashboard}>
                   Add to dashboard
                 </Button>

@@ -6,13 +6,14 @@ import React, { useMemo, useRef, useState } from "react";
 
 import "chart.js/auto";
 import "chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm";
-import { Chart, getElementAtEvent } from "react-chartjs-2";
+import { Chart } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js";
 import { FunnelController, TrapezoidElement } from "chartjs-chart-funnel";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import zoomPlugin from "chartjs-plugin-zoom";
+
 import Metric from "./MetricChart";
 import Separator from "./SeparatorChart";
-import zoomPlugin from "chartjs-plugin-zoom";
 
 ChartJS.register([
   FunnelController,

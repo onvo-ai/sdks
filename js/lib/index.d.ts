@@ -303,6 +303,7 @@ interface Database {
                     created_at: string;
                     created_by: string | null;
                     description: string | null;
+                    filters: Json;
                     id: string;
                     last_updated_at: string;
                     last_updated_by: string | null;
@@ -316,6 +317,7 @@ interface Database {
                     created_at?: string;
                     created_by?: string | null;
                     description?: string | null;
+                    filters?: Json;
                     id?: string;
                     last_updated_at?: string;
                     last_updated_by?: string | null;
@@ -329,6 +331,7 @@ interface Database {
                     created_at?: string;
                     created_by?: string | null;
                     description?: string | null;
+                    filters?: Json;
                     id?: string;
                     last_updated_at?: string;
                     last_updated_by?: string | null;
@@ -376,6 +379,7 @@ interface Database {
                     created_at: string;
                     created_by: string | null;
                     description: string;
+                    filters: Json;
                     id: string;
                     last_updated_at: string;
                     last_updated_by: string | null;
@@ -392,6 +396,7 @@ interface Database {
                     created_at?: string;
                     created_by?: string | null;
                     description?: string;
+                    filters?: Json;
                     id?: string;
                     last_updated_at?: string;
                     last_updated_by?: string | null;
@@ -408,6 +413,7 @@ interface Database {
                     created_at?: string;
                     created_by?: string | null;
                     description?: string;
+                    filters?: Json;
                     id?: string;
                     last_updated_at?: string;
                     last_updated_by?: string | null;
@@ -804,18 +810,6 @@ interface Database {
                 };
                 Relationships: [];
             };
-            widget_limit: {
-                Row: {
-                    widgets: number | null;
-                };
-                Insert: {
-                    widgets?: number | null;
-                };
-                Update: {
-                    widgets?: number | null;
-                };
-                Relationships: [];
-            };
             widgets: {
                 Row: {
                     cache: string | null;
@@ -888,6 +882,7 @@ interface Database {
                     created_at: string | null;
                     created_by: string | null;
                     description: string | null;
+                    filters: Json | null;
                     id: string | null;
                     last_updated_at: string | null;
                     last_updated_by: string | null;
@@ -904,6 +899,7 @@ interface Database {
                     created_at?: string | null;
                     created_by?: string | null;
                     description?: string | null;
+                    filters?: Json | null;
                     id?: string | null;
                     last_updated_at?: string | null;
                     last_updated_by?: string | null;
@@ -920,6 +916,7 @@ interface Database {
                     created_at?: string | null;
                     created_by?: string | null;
                     description?: string | null;
+                    filters?: Json | null;
                     id?: string | null;
                     last_updated_at?: string | null;
                     last_updated_by?: string | null;
@@ -1298,14 +1295,21 @@ type Settings = {
     theme: "dark" | "light" | "auto";
     dark_background: string;
     dark_foreground: string;
+    dark_text: string;
     light_background: string;
     light_foreground: string;
+    light_text: string;
     border_radius: number;
     font: string;
-    editable: boolean;
-    can_ask_questions: boolean;
     hide_header: boolean;
-    disable_download: boolean;
+    filters: boolean;
+    can_ask_questions: boolean;
+    can_edit_widgets: boolean;
+    can_edit_widget_layout: boolean;
+    can_create_widgets: boolean;
+    can_delete_widgets: boolean;
+    disable_download_images: boolean;
+    disable_download_reports: boolean;
 };
 type Invite = Database["public"]["Tables"]["invites"]["Row"];
 type Member = Database["public"]["Tables"]["members"]["Row"];
