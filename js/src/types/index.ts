@@ -17,6 +17,7 @@ export type Settings = {
   border_radius: number;
   font: string;
   hide_header: boolean;
+  filters: boolean;
 
   can_ask_questions: boolean;
   can_edit_widgets: boolean; // used to be editable

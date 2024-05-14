@@ -10,6 +10,8 @@ import { Widget } from "@onvo-ai/js";
 import UpdateChartModal from "./EditWidgetModal";
 import CreateSeparatorModal from "../Chart/CreateSeparatorModal";
 
+import FilterBar from "./FilterBar";
+
 export const DashboardGrid: React.FC<{ spacing?: number }> = ({
   spacing = 10,
 }) => {
@@ -53,6 +55,7 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
       id="screenshot-content"
     >
       <UpdateChartModal />
+      <FilterBar />
       <ResponsiveGridLayout
         resizeHandle={
           editable ? (

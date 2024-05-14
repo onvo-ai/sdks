@@ -252,7 +252,9 @@ const ChartCard: React.FC<{
         ]
       : []),
 
-    ...(JSON.parse(widget.cache || "{}").type === "table" ||
+    ...((widget &&
+      widget.cache &&
+      JSON.parse(widget.cache || "{}").type === "table") ||
     !ImageDownloadEnabled
       ? []
       : [

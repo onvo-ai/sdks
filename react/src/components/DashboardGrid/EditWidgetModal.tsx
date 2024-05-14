@@ -140,7 +140,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
   useEffect(() => {
     if (!widget) return;
 
-    let out = JSON.parse(widget.cache || "{}");
+    let out = JSON.parse(widget && widget.cache ? widget.cache : "{}");
 
     setTitle(widget.title || "");
     setCode(widget.code);

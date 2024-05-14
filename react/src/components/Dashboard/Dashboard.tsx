@@ -14,8 +14,8 @@ type DashboardContext = {
   id: string | undefined;
   dashboard?: DashboardType;
   widgets: Widget[];
-  refreshDashboard: () => void;
-  refreshWidgets: () => void;
+  refreshDashboard: () => Promise<void>;
+  refreshWidgets: () => Promise<void>;
   theme: "light" | "dark";
   adminMode?: boolean;
   selectedWidget: Widget | undefined;
@@ -26,8 +26,8 @@ const Context = createContext<DashboardContext>({
   id: undefined,
   dashboard: undefined,
   widgets: [],
-  refreshDashboard: () => {},
-  refreshWidgets: () => {},
+  refreshDashboard: async () => {},
+  refreshWidgets: async () => {},
   theme: "light",
   adminMode: false,
   selectedWidget: undefined,
@@ -55,14 +55,14 @@ export const Dashboard: React.FC<{
   const [selectedWidget, setSelectedWidget] = useState<Widget>();
   const initialized = useRef(false);
 
-  const refreshDashboard = () => {
+  const refreshDashboard = async () => {
     if (!backend) return;
-    backend.dashboards.get(id).then(setDashboard);
+    await backend.dashboards.get(id).then(setDashboard);
   };
 
-  const refreshWidgets = () => {
+  const refreshWidgets = async () => {
     if (!backend) return;
-    backend.widgets.list({ dashboard: id }).then(setWidgets);
+    await backend.widgets.list({ dashboard: id }).then(setWidgets);
   };
 
   useEffect(() => {

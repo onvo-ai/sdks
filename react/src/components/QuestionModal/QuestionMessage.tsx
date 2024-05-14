@@ -266,8 +266,7 @@ const QuestionMessage: React.FC<{
         ]
       : []),
 
-    ...(JSON.parse(output.cache || "{}").type === "table" ||
-    !ImageDownloadEnabled
+    ...((output && output.type === "table") || !ImageDownloadEnabled
       ? []
       : [
           {

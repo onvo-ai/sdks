@@ -277,6 +277,7 @@ export interface Database {
           created_at: string;
           created_by: string | null;
           description: string | null;
+          filters: Json;
           id: string;
           last_updated_at: string;
           last_updated_by: string | null;
@@ -290,6 +291,7 @@ export interface Database {
           created_at?: string;
           created_by?: string | null;
           description?: string | null;
+          filters?: Json;
           id?: string;
           last_updated_at?: string;
           last_updated_by?: string | null;
@@ -303,6 +305,7 @@ export interface Database {
           created_at?: string;
           created_by?: string | null;
           description?: string | null;
+          filters?: Json;
           id?: string;
           last_updated_at?: string;
           last_updated_by?: string | null;
@@ -350,6 +353,7 @@ export interface Database {
           created_at: string;
           created_by: string | null;
           description: string;
+          filters: Json;
           id: string;
           last_updated_at: string;
           last_updated_by: string | null;
@@ -366,6 +370,7 @@ export interface Database {
           created_at?: string;
           created_by?: string | null;
           description?: string;
+          filters?: Json;
           id?: string;
           last_updated_at?: string;
           last_updated_by?: string | null;
@@ -382,6 +387,7 @@ export interface Database {
           created_at?: string;
           created_by?: string | null;
           description?: string;
+          filters?: Json;
           id?: string;
           last_updated_at?: string;
           last_updated_by?: string | null;
@@ -778,18 +784,6 @@ export interface Database {
         };
         Relationships: [];
       };
-      widget_limit: {
-        Row: {
-          widgets: number | null;
-        };
-        Insert: {
-          widgets?: number | null;
-        };
-        Update: {
-          widgets?: number | null;
-        };
-        Relationships: [];
-      };
       widgets: {
         Row: {
           cache: string | null;
@@ -862,6 +856,7 @@ export interface Database {
           created_at: string | null;
           created_by: string | null;
           description: string | null;
+          filters: Json | null;
           id: string | null;
           last_updated_at: string | null;
           last_updated_by: string | null;
@@ -878,6 +873,7 @@ export interface Database {
           created_at?: string | null;
           created_by?: string | null;
           description?: string | null;
+          filters?: Json | null;
           id?: string | null;
           last_updated_at?: string | null;
           last_updated_by?: string | null;
@@ -894,6 +890,7 @@ export interface Database {
           created_at?: string | null;
           created_by?: string | null;
           description?: string | null;
+          filters?: Json | null;
           id?: string | null;
           last_updated_at?: string | null;
           last_updated_by?: string | null;
