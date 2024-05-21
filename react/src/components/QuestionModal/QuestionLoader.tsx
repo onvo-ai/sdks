@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import React from "react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
-import { Icon, Text } from "@tremor/react";
+import { Card, Icon, Text } from "@tremor/react";
 
 const Loader: React.FC<{}> = ({}) => {
   return (
@@ -52,24 +52,43 @@ const QuestionLoader: React.FC<{}> = () => {
   ];
 
   return (
-    <div className="onvo-loader-question-modal relative flex flex-row items-start justify-start gap-3">
-      <Icon
-        variant="shadow"
-        icon={() => <Logo height={20} width={20} />}
-        size="sm"
-      />
-      <div className="flex-grow flex flex-col gap-2 pt-1">
-        {states.slice(0, state + 1).map((a, i) => (
-          <div className="flex flex-row items-center" key={"state-" + i}>
-            {state === i ? (
-              <Loader />
-            ) : (
-              <CheckCircleIcon className="h-6 w-6 mr-2 text-green-500" />
-            )}
-            <Text>{a}</Text>
-          </div>
-        ))}
+    <div className="onvo-loader-question-modal relative flex flex-col items-start justify-start gap-3">
+      <div className="flex flex-row gap-3 items-start justify-start">
+        <Icon
+          variant="shadow"
+          icon={() => <Logo height={20} width={20} />}
+          size="sm"
+        />
+        <div className="flex-grow flex flex-col gap-2 pt-1">
+          {states.slice(0, state + 1).map((a, i) => (
+            <div className="flex flex-row items-center" key={"state-" + i}>
+              {state === i ? (
+                <Loader />
+              ) : (
+                <CheckCircleIcon className="h-6 w-6 mr-2 text-green-500" />
+              )}
+              <Text>{a}</Text>
+            </div>
+          ))}
+        </div>
       </div>
+      <Card className="animate-pulse">
+        <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2.5"></div>
+        <div className="w-48 h-2 mb-10 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+        <div className="flex items-baseline mt-4">
+          <div className="w-full bg-gray-200 rounded-t-lg h-72 dark:bg-gray-700"></div>
+          <div className="w-full h-56 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+          <div className="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
+          <div className="w-full h-64 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+          <div className="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
+          <div className="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
+          <div className="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
+          <div className="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
+          <div className="w-full h-56 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+          <div className="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
+        </div>
+        <span className="sr-only">Loading...</span>
+      </Card>
     </div>
   );
 };
