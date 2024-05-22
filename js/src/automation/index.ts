@@ -8,8 +8,11 @@ export class OnvoAutomation extends OnvoBase {
     super(apiKey, options);
     this.#id = id;
   }
-
-  getRuns() {
+  /**
+   * Fetches all the runs of the automation
+   * @returns {Promise<AutomationRun[]>} A promise that resolves to an array of AutomationRun objects
+   */
+  getRuns(): Promise<AutomationRun[]> {
     return this.fetchBase("/api/automations/" + this.#id + "/runs") as Promise<
       AutomationRun[]
     >;

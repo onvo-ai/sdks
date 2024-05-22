@@ -9,6 +9,7 @@ import { useBackend } from "../Wrapper";
 import { Dashboard as DashboardType, Widget } from "@onvo-ai/js";
 import usePrefersColorScheme from "use-prefers-color-scheme";
 import { defaults } from "chart.js";
+import { toast } from "sonner";
 
 type DashboardContext = {
   id: string | undefined;
@@ -79,6 +80,9 @@ export const Dashboard: React.FC<{
         .then((data) => {
           refreshWidgets();
           refreshDashboard();
+          toast.success(
+            "Your dashboard has been automatically updated in the background"
+          );
         });
     }
   }, [dashboard]);

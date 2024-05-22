@@ -14,18 +14,37 @@ export class OnvoDashboardDatasources extends OnvoBase {
   }
 
   // Dashboard Datasource endpoints
-  list() {
+  /**
+   * Lists all the datasources linked to a dashboard.
+   *
+   * @return {Promise<DashboardDatasource[]>} A promise that resolves to an array of dashboard datasources.
+   */
+  list(): Promise<DashboardDatasource[]> {
     return this.fetchBase(
       "/api/dashboards/" + this.#dashboardId + "/datasources"
     ) as Promise<DashboardDatasource[]>;
   }
-  unlink(datasourceId: string) {
+
+  /**
+   * Unlinks a datasource from a dashboard.
+   *
+   * @param {string} datasourceId - The ID of the datasource to unlink.
+   * @return {Promise<{ success: boolean }>} A promise that resolves to an object indicating the success of the unlink operation.
+   */
+  unlink(datasourceId: string): Promise<{ success: boolean }> {
     return this.fetchBase(
       "/api/dashboards/" + this.#dashboardId + "/datasources/" + datasourceId,
       "DELETE"
-    ) as Promise<{ success: true }>;
+    ) as Promise<{ success: boolean }>;
   }
-  link(datasourceId: string) {
+
+  /**
+   * Links a datasource to a dashboard.
+   *
+   * @param {string} datasourceId - The ID of the datasource to link.
+   * @return {Promise<DashboardDatasource>} A promise that resolves to the linked dashboard datasource.
+   */
+  link(datasourceId: string): Promise<DashboardDatasource> {
     return this.fetchBase(
       "/api/dashboards/" + this.#dashboardId + "/datasources",
       "PUT",
