@@ -1,7 +1,9 @@
 import OnvoBase from "../base";
 import { Account } from "../types";
 
-// Account endpoints
+/**
+ * Endpoints for managing accounts.
+ */
 export class OnvoAccounts extends OnvoBase {
   /**
    * Fetches a list of accounts.

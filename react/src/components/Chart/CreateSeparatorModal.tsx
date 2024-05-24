@@ -54,7 +54,7 @@ const CreateSeparatorModal: React.FC<{
         plugins: {
           title: { display: true, text: title },
           subtitle: {
-            display: true,
+            display: false,
             text: lines,
           },
         },
@@ -80,7 +80,7 @@ const CreateSeparatorModal: React.FC<{
                         "text": title_text
                     },
                     if subtitle_lines:
-                        .set("plugins", {"subtitle": {"display": True, "text": subtitle_lines}})
+                        .set("plugins", {"subtitle": {"display": False, "text": subtitle_lines}})
                 },
             },
         }
