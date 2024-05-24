@@ -78,12 +78,6 @@ export const QuestionModal: React.FC<{}> = ({}) => {
     }
   };
 
-  useEffect(() => {
-    if (dashboard && dashboard.id) {
-      getQuestions();
-    }
-  }, [dashboard]);
-
   const scrollToBottom = () => {
     if (scroller.current) {
       scroller.current.scrollTop = scroller.current.scrollHeight;
@@ -92,6 +86,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
 
   useEffect(() => {
     if (open && dashboard && dashboard.id) {
+      getQuestions();
       backend
         ?.dashboard(dashboard.id)
         .getWidgetSuggestions()
@@ -100,20 +95,24 @@ export const QuestionModal: React.FC<{}> = ({}) => {
             setSuggestions(newSuggestions);
           }
         });
-
-      scrollToBottom();
-      setMessages([]);
-      setSelectedQuestion(undefined);
     } else {
       setSuggestions([]);
     }
   }, [open, dashboard]);
 
   useEffect(() => {
+    if (!open) {
+      setMessages([]);
+      setSelectedQuestion(undefined);
+    }
+  }, [open]);
+
+  useEffect(() => {
     if (selectedQuestion) {
       // @ts-ignore
       let questionMessages = selectedQuestion.messages as any[];
       setMessages(questionMessages);
+      setTimeout(scrollToBottom, 100);
     } else {
       setMessages([]);
     }
@@ -199,6 +198,8 @@ export const QuestionModal: React.FC<{}> = ({}) => {
           (selectedQuestion?.id || "null") +
           "-" +
           messages.length +
+          "-" +
+          index +
           "-" +
           (a.content || "").substring(0, 10)
         }

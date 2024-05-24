@@ -9,12 +9,22 @@ export class OnvoDatasource extends OnvoBase {
     this.#id = id;
   }
 
-  initialize() {
+  /**
+   * Initializes the data source.
+   * @returns {Promise<DataSource>} A promise that resolves to the data source object.
+   */
+  initialize(): Promise<DataSource> {
     return this.fetchBase(
       "/api/datasources/" + this.#id + "/initialize"
     ) as Promise<DataSource>;
   }
-  uploadFile(file: File) {
+
+  /**
+   * Uploads a file to the data source.
+   * @param {File} file - The file to upload.
+   * @returns {Promise<DataSource>} A promise that resolves to the data source object.
+   */
+  uploadFile(file: File): Promise<DataSource> {
     const formData = new FormData();
     formData.set("file", file);
     return this.fetchBase(

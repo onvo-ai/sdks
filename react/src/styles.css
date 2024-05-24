@@ -19,6 +19,11 @@
   background-color: #3366cc !important;
 }
 
+.onvo-separator a {
+  text-decoration: underline;
+  color: #3366cc;
+}
+
 /* STYLING */
 :root {
   font-family: "Inter", "Helvetica Neue", sans-serif;

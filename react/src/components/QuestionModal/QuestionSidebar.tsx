@@ -85,7 +85,7 @@ const QuestionSidebar: React.FC<{
           disabled={loading}
           onClick={() => onSelect(undefined)}
         >
-          New Question / Chart
+          Build a new visualization
         </Button>
       )}
       {!loading && questions.length === 0 && (

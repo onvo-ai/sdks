@@ -3,12 +3,21 @@ export default class OnvoBase {
   endpoint: string;
 
   // Base fetch method
+  /**
+   * Fetches data from the API.
+   * @param url - The URL to fetch data from.
+   * @param method - The HTTP method to use. Defaults to "GET".
+   * @param body - The data to send with the request.
+   * @param isForm - Indicates if the request is a form request.
+   * @returns The response from the API.
+   * @throws {Error} If there is an error making the request.
+   */
   async fetchBase(
     url: string,
     method?: "GET" | "PUT" | "POST" | "DELETE" | "PATCH",
     body?: any,
     isForm?: boolean
-  ) {
+  ): Promise<any> {
     try {
       let headers: any = {
         "Access-Control-Allow-Origin": "*",
@@ -36,8 +45,13 @@ export default class OnvoBase {
     }
   }
 
-  // Base fetch method
-  async fetchBlob(url: string) {
+  /**
+   * Fetches a Blob from the API.
+   * @param url - The URL to fetch data from.
+   * @returns The response from the API as a Blob.
+   * @throws {Error} If there is an error making the request.
+   */
+  async fetchBlob(url: string): Promise<Blob> {
     try {
       let headers: any = {
         "Content-Type": "application/json",

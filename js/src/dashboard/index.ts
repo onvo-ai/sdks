@@ -12,22 +12,38 @@ export class OnvoDashboard extends OnvoBase {
     this.datasources = new OnvoDashboardDatasources(id, apiKey, options);
   }
 
-  updateWidgetCache() {
+  /**
+   * Updates the widget cache for the dashboard.
+   *
+   * @return {Promise<Widget[]>} A promise that resolves to an array of widgets.
+   */
+  updateWidgetCache(): Promise<Widget[]> {
     return this.fetchBase(
       "/api/dashboards/" + this.#id + "/update-cache",
       "POST"
     ) as Promise<Widget[]>;
   }
 
-  getWidgetSuggestions() {
+  /**
+   * Retrieves widget suggestions for the dashboard.
+   *
+   * @return {Promise<string[]>} A promise that resolves to an array of widget suggestions.
+   */
+  getWidgetSuggestions(): Promise<string[]> {
     return this.fetchBase(
       "/api/dashboards/" + this.#id + "/widget-suggestions"
     ) as Promise<string[]>;
   }
 
-  export(format: "csv" | "xlsx" | "pdf" | "png" | "jpeg") {
+  /**
+   * Exports the dashboard in the specified format.
+   *
+   * @param {("csv" | "xlsx" | "pdf" | "png" | "jpeg")} format - The format to export the dashboard in.
+   * @return {Promise<Blob>} A promise that resolves to a Blob representing the exported dashboard.
+   */
+  export(format: "csv" | "xlsx" | "pdf" | "png" | "jpeg"): Promise<Blob> {
     return this.fetchBlob(
       "/api/dashboards/" + this.#id + "/export?format=" + format
-    ) as Promise<Blob>;
+    );
   }
 }

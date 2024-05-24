@@ -8,10 +8,17 @@ export class OnvoQuestion extends OnvoBase {
     this.#id = id;
   }
 
+  /**
+   * Exports the question in the specified format.
+   *
+   * @param {number} messageIndex - The index of the message to export.
+   * @param {("svg" | "csv" | "xlsx" | "png" | "jpeg")} format - The format to export the question in.
+   * @return {Promise<Blob>} A promise that resolves to a Blob representing the exported question.
+   */
   export(
     messageIndex: number,
     format: "svg" | "csv" | "xlsx" | "png" | "jpeg"
-  ) {
+  ): Promise<Blob> {
     return this.fetchBlob(
       `/api/questions/${
         this.#id
