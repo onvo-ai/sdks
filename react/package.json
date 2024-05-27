@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/react",
-  "version": "0.2.77",
+  "version": "0.2.78",
   "description": "The react SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "module": "dist/esm/index.js",
@@ -97,7 +97,7 @@
     "rollup-plugin-tailwindcss": "^1.0.0",
     "storybook": "^8.0.9",
     "storybook-react-context": "^0.6.0",
-    "tailwindcss": "^3.3.3",
+    "tailwindcss": "^3.4.1",
     "tsc-alias": "^1.8.8",
     "typescript": "^5.0.4"
   },
