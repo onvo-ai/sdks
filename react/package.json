@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/react",
-  "version": "0.2.76",
+  "version": "0.2.77",
   "description": "The react SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "module": "dist/esm/index.js",
@@ -27,6 +27,7 @@
   "author": "Ronnel Davis",
   "license": "MIT",
   "dependencies": {
+    "@headlessui/react": "^2.0.4",
     "@heroicons/react": "^2.1.1",
     "@monaco-editor/react": "^4.6.0",
     "@onvo-ai/js": "^0.13.19",
