@@ -45,9 +45,10 @@ export const LastUpdatedBadge: React.FC<{ date: string }> = ({ date }) => {
   );
 };
 
-export const DashboardHeader: React.FC<{ children?: React.ReactNode }> = ({
-  children,
-}) => {
+export const DashboardHeader: React.FC<{
+  children?: React.ReactNode;
+  className?: string;
+}> = ({ children, className }) => {
   const { dashboard } = useDashboard();
   const backend = useBackend();
 
@@ -136,7 +137,9 @@ export const DashboardHeader: React.FC<{ children?: React.ReactNode }> = ({
   ];
 
   return (
-    <section className="onvo-dashboard-header backdrop-blur-lg sticky z-10 border-b border-gray-200 dark:border-gray-800 top-0">
+    <section
+      className={`onvo-dashboard-header backdrop-blur-lg sticky z-10 border-b border-gray-200 dark:border-gray-800 top-0 ${className ? className : ""}`}
+    >
       <div className="absolute top-0 left-0 w-full h-full z-0 foreground-color opacity-30 dark:opacity-50" />
       <main className="mx-auto px-6 pt-4 lg:px-8 z-10 relative">
         <div className="mb-3 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
@@ -154,8 +157,8 @@ export const DashboardHeader: React.FC<{ children?: React.ReactNode }> = ({
                 <Metric className="onvo-dashboard-header-title font-override text-xl">
                   {dashboard?.title || " "}
                 </Metric>
-                <span className="onvo-dashboard-header-description text-tremor-default text-tremor-content dark:text-dark-tremor-content flex flex-col md:flex-row gap-2 font-override mt-1">
-                  {dashboard?.description || " "}
+                <span className="onvo-dashboard-header-description text-tremor-default text-tremor-content dark:text-dark-tremor-content font-override mt-1">
+                  {dashboard?.description || " "}{" "}
                   <LastUpdatedBadge date={dashboard.last_updated_at} />
                 </span>
               </>

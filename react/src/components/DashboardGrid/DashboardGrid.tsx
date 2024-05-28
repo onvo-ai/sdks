@@ -74,7 +74,7 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
         isResizable={editable}
         onLayoutChange={(layout: any, allLayouts: any) => {
           let keys = Object.keys(allLayouts);
-          if (keys.length > 1 || keys[0] !== "lg") return;
+          if (keys.indexOf("sm") >= 0) return;
           if (!dashboard || !editable) return;
           let newWidgets = widgets.map((i: any) => {
             let item = layout.find((j: any) => j.i === i.id);
