@@ -1,9 +1,6 @@
-import type { Preview } from "@storybook/react";
-import { withThemeFromJSXProvider } from "@storybook/addon-styling";
+import type { Preview, ReactRenderer } from "@storybook/react";
+import { withThemeByClassName } from "@storybook/addon-themes";
 import "../src/styles.css";
-
-/* TODO: update import for your custom theme configurations */
-// import { lightTheme, darkTheme } from '../path/to/themes';
 
 const preview: Preview = {
   parameters: {
@@ -16,15 +13,12 @@ const preview: Preview = {
   },
 
   decorators: [
-    // Adds global styles and theme switching support.
-    withThemeFromJSXProvider({
-      /* Uncomment for theme switching support */
-      // themes: {
-      //   light: lightTheme,
-      //   dark: darkTheme,
-      // }
-      // defaultTheme: 'light',
-      // Provider: ThemeProvider,
+    withThemeByClassName<ReactRenderer>({
+      themes: {
+        light: "",
+        dark: "dark",
+      },
+      defaultTheme: "light",
     }),
   ],
 };

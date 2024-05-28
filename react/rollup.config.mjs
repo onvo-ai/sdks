@@ -7,6 +7,17 @@ import tailwindcss from "tailwindcss";
 import terser from "@rollup/plugin-terser";
 
 const tailwindConfig = require("./tailwind.config.js");
+
+const warningHandler = (warning, warn) => {
+  if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
+    return;
+  }
+  if (warning.code === "THIS_IS_UNDEFINED") {
+    return;
+  }
+  warn(warning);
+};
+
 export default [
   {
     input: "lib/index.js",
@@ -34,11 +45,13 @@ export default [
       terser(),
     ],
     external: ["react", "react-dom"],
+    onwarn: warningHandler,
   },
   {
     input: "src/index.ts",
     output: [{ file: "dist/types.d.ts", format: "es" }],
     plugins: [dts.default()],
     external: [/\.css$/],
+    onwarn: warningHandler,
   },
 ];

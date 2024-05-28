@@ -15,6 +15,7 @@ type DashboardContext = {
   id: string | undefined;
   dashboard?: DashboardType;
   widgets: Widget[];
+  setWidgets: (widgets: Widget[]) => void;
   refreshDashboard: () => Promise<void>;
   refreshWidgets: () => Promise<void>;
   theme: "light" | "dark";
@@ -27,6 +28,7 @@ const Context = createContext<DashboardContext>({
   id: undefined,
   dashboard: undefined,
   widgets: [],
+  setWidgets: () => {},
   refreshDashboard: async () => {},
   refreshWidgets: async () => {},
   theme: "light",
@@ -47,7 +49,8 @@ export const Dashboard: React.FC<{
   id: string;
   adminMode?: boolean;
   children: any;
-}> = ({ id, children, adminMode }) => {
+  className?: string;
+}> = ({ id, children, adminMode, className }) => {
   const [dashboard, setDashboard] = useState<DashboardType>();
   const [widgets, setWidgets] = useState<Widget[]>([]);
   const backend = useBackend();
@@ -156,6 +159,7 @@ export const Dashboard: React.FC<{
   return (
     <Context.Provider
       value={{
+        setWidgets,
         id,
         dashboard,
         widgets,
@@ -169,7 +173,7 @@ export const Dashboard: React.FC<{
     >
       <div
         key={theme}
-        className={`onvo-dashboard-context flex h-screen flex-col ${theme}`}
+        className={`onvo-dashboard-context relative background-color flex min-h-screen flex-col ${theme} ${className}`}
       >
         {children}
       </div>

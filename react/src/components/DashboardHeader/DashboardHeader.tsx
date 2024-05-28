@@ -21,6 +21,7 @@ import {
 import { Menu, Transition } from "@headlessui/react";
 import { toast } from "sonner";
 import { useBackend } from "../Wrapper";
+import Dropdown from "../Chart/Dropdown";
 
 dayjs.extend(relativeTime);
 
@@ -38,15 +39,16 @@ export const LastUpdatedBadge: React.FC<{ date: string }> = ({ date }) => {
   }, []);
 
   return (
-    <Badge key={key} size="xs" className="onvo-last-updated-badge ml-2">
+    <Badge key={key} size="xs" className="onvo-last-updated-badge">
       Last updated {dayjs(date).fromNow()}
     </Badge>
   );
 };
 
-export const DashboardHeader: React.FC<{ children?: React.ReactNode }> = ({
-  children,
-}) => {
+export const DashboardHeader: React.FC<{
+  children?: React.ReactNode;
+  className?: string;
+}> = ({ children, className }) => {
   const { dashboard } = useDashboard();
   const backend = useBackend();
 
@@ -92,14 +94,60 @@ export const DashboardHeader: React.FC<{ children?: React.ReactNode }> = ({
     return true;
   }, [dashboard]);
 
+  const options = [
+    ...(ReportDownloadEnabled
+      ? [
+          {
+            title: "Download as excel",
+            icon: DocumentChartBarIcon,
+            id: "download-excel",
+            onClick: () => exportDashboard("xlsx"),
+          },
+          {
+            title: "Download as csv",
+            icon: TableCellsIcon,
+            id: "download-csv",
+            onClick: () => exportDashboard("csv"),
+          },
+        ]
+      : []),
+
+    ...(!ImageDownloadEnabled
+      ? []
+      : [
+          {
+            title: "Download as PDF",
+            icon: PhotoIcon,
+            id: "download-pdf",
+            onClick: () => exportDashboard("pdf"),
+          },
+          {
+            title: "Download as png",
+            icon: PhotoIcon,
+            id: "download-png",
+            onClick: () => exportDashboard("png"),
+          },
+          {
+            title: "Download as jpeg",
+            icon: PhotoIcon,
+            id: "download-jpeg",
+            onClick: () => exportDashboard("jpeg"),
+          },
+        ]),
+  ];
+
   return (
-    <section className="onvo-dashboard-header foreground-color sticky z-10 border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 top-0">
-      <main className="mx-auto px-6 pt-4 lg:px-8">
+    <section
+      className={`onvo-dashboard-header backdrop-blur-lg sticky z-10 border-b border-gray-200 dark:border-gray-800 top-0 ${className ? className : ""}`}
+    >
+      <div className="absolute top-0 left-0 w-full h-full z-0 foreground-color opacity-30 dark:opacity-50" />
+      <main className="mx-auto px-6 pt-4 lg:px-8 z-10 relative">
         <div className="mb-3 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
           <Icon
             icon={PresentationChartBarIcon}
             variant="shadow"
             size="lg"
+            className="hidden md:block"
             tooltip="Back to dashboards"
           />
 
@@ -110,7 +158,7 @@ export const DashboardHeader: React.FC<{ children?: React.ReactNode }> = ({
                   {dashboard?.title || " "}
                 </Metric>
                 <span className="onvo-dashboard-header-description text-tremor-default text-tremor-content dark:text-dark-tremor-content font-override mt-1">
-                  {dashboard?.description || " "}
+                  {dashboard?.description || " "}{" "}
                   <LastUpdatedBadge date={dashboard.last_updated_at} />
                 </span>
               </>
@@ -123,142 +171,17 @@ export const DashboardHeader: React.FC<{ children?: React.ReactNode }> = ({
           </div>
           <div className="flex flex-row gap-2">
             {(ImageDownloadEnabled || ReportDownloadEnabled) && (
-              <Menu
-                as="div"
-                className="onvo-dashboard-header-download relative inline-block text-left"
-              >
-                <Menu.Button
-                  as="div"
-                  className="onvo-dashboard-header-download-button"
+              <Dropdown options={[options]}>
+                <Button
+                  icon={ChevronDownIcon}
+                  iconPosition="right"
+                  size="xs"
+                  variant="secondary"
+                  disabled={!dashboard}
                 >
-                  <Button
-                    icon={ChevronDownIcon}
-                    iconPosition="right"
-                    size="xs"
-                    variant="secondary"
-                    disabled={!dashboard}
-                  >
-                    Download
-                  </Button>
-                </Menu.Button>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items className="onvo-download-menu-items absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div className="px-1 py-1 ">
-                      {ReportDownloadEnabled && (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
-                              onClick={() => exportDashboard("xlsx")}
-                              className={`${
-                                active
-                                  ? "bg-blue-500 text-white"
-                                  : "text-gray-900"
-                              } onvo-download-menu-item-xlsx  group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                            >
-                              <DocumentChartBarIcon
-                                className="mr-2 h-5 w-5"
-                                aria-hidden="true"
-                              />
-                              Download excel
-                            </button>
-                          )}
-                        </Menu.Item>
-                      )}
-
-                      {ReportDownloadEnabled && (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
-                              onClick={() => exportDashboard("csv")}
-                              className={`${
-                                active
-                                  ? "bg-blue-500 text-white"
-                                  : "text-gray-900"
-                              } onvo-download-menu-item-csv group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                            >
-                              <TableCellsIcon
-                                className="mr-2 h-5 w-5"
-                                aria-hidden="true"
-                              />
-                              Download csv
-                            </button>
-                          )}
-                        </Menu.Item>
-                      )}
-
-                      {ImageDownloadEnabled && (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
-                              onClick={() => exportDashboard("png")}
-                              className={`${
-                                active
-                                  ? "bg-blue-500 text-white"
-                                  : "text-gray-900"
-                              } onvo-download-menu-item-png group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                            >
-                              <PhotoIcon
-                                className="mr-2 h-5 w-5"
-                                aria-hidden="true"
-                              />
-                              Download png
-                            </button>
-                          )}
-                        </Menu.Item>
-                      )}
-
-                      {ImageDownloadEnabled && (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
-                              onClick={() => exportDashboard("jpeg")}
-                              className={`${
-                                active
-                                  ? "bg-blue-500 text-white"
-                                  : "text-gray-900"
-                              } onvo-download-menu-item-png group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                            >
-                              <PhotoIcon
-                                className="mr-2 h-5 w-5"
-                                aria-hidden="true"
-                              />
-                              Download jpeg
-                            </button>
-                          )}
-                        </Menu.Item>
-                      )}
-                      {ImageDownloadEnabled && (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
-                              onClick={() => exportDashboard("pdf")}
-                              className={`${
-                                active
-                                  ? "bg-blue-500 text-white"
-                                  : "text-gray-900"
-                              } onvo-download-menu-item-pdf group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                            >
-                              <DocumentIcon
-                                className="mr-2 h-5 w-5"
-                                aria-hidden="true"
-                              />
-                              Download pdf
-                            </button>
-                          )}
-                        </Menu.Item>
-                      )}
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
+                  Download
+                </Button>
+              </Dropdown>
             )}
             {children}
           </div>

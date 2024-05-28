@@ -24,6 +24,7 @@ import { useDashboard } from "../Dashboard";
 import Logo from "./Logo";
 import QuestionLoader from "./QuestionLoader";
 import { Question } from "@onvo-ai/js";
+import { SparklesIcon } from "@heroicons/react/24/solid";
 
 dayjs.extend(relativeTime);
 
@@ -106,6 +107,12 @@ export const QuestionModal: React.FC<{}> = ({}) => {
       setSelectedQuestion(undefined);
     }
   }, [open]);
+
+  useEffect(() => {
+    return () => {
+      setOpen(false);
+    };
+  }, []);
 
   useEffect(() => {
     if (selectedQuestion) {
@@ -221,33 +228,39 @@ export const QuestionModal: React.FC<{}> = ({}) => {
         ref={containerRef}
         className={"onvo-question-modal-wrapper absolute left-0 right-0 w-full"}
       ></div>
-      <div className={"h-[55px] flex-shrink-0 w-full"}></div>
+      <div className={"h-[57px] flex-shrink-0 w-full background-color"}></div>
       <div
         className={
-          "foreground-color fixed bottom-0 right-0 z-10 border-t border-gray-200 p-2 dark:border-gray-800"
+          "fixed bottom-0 right-0 z-10 p-3 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800"
         }
-        style={{ width: width || 0 }}
+        style={{ width: width ? width : 0 }}
       >
+        <div className="absolute top-0 left-0 w-full h-full foreground-color opacity-30 dark:opacity-50" />
         <div
-          className="relative mx-auto flex w-full max-w-2xl flex-row items-center gap-2"
+          className="rounded-lg cursor-text shadow-lg h-9 z-10 px-2 relative mx-auto flex w-full flex-grow flex-shrink-0 max-w-2xl flex-row items-center gap-2"
           onClick={() => {
             setOpen(true);
           }}
         >
-          <TextInput
-            className="onvo-question-modal-textinput background-color pr-[52px]"
-            placeholder={`Describe the chart or visualization you want to make...`}
-          />
-          <Icon
-            size="xs"
-            className="absolute right-2 top-1 z-10"
-            icon={ArrowUpIcon}
-            variant="solid"
-          />
+          <div className="gradient-border foreground-color" />
+          <SparklesIcon className="h-5 w-5 text-blue-500 z-10" />
+          <Text className="z-10 flex-grow">
+            Describe the chart or visualization you want to make...
+          </Text>
+          <Icon size="xs" className="z-10" icon={ArrowUpIcon} variant="solid" />
         </div>
       </div>
 
-      <Transition appear show={open} as={Fragment as any}>
+      <Transition
+        enter="transition-all ease-out duration-300"
+        enterFrom="opacity-0 translate-y-[100vh]"
+        enterTo="opacity-100 translate-y-0"
+        leave="transition-all ease-in duration-300"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 translate-y-[100vh]"
+        show={open}
+        as={Fragment as any}
+      >
         <div
           className="onvo-question-modal-question-list foreground-color fixed right-0 top-0 z-20 h-screen"
           style={{
