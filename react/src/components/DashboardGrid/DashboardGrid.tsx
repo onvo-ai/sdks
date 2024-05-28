@@ -15,7 +15,7 @@ import FilterBar from "./FilterBar";
 export const DashboardGrid: React.FC<{ spacing?: number }> = ({
   spacing = 10,
 }) => {
-  const { dashboard, widgets, adminMode } = useDashboard();
+  const { dashboard, widgets, setWidgets, adminMode } = useDashboard();
   const backend = useBackend();
 
   const ResponsiveGridLayout = useMemo(
@@ -68,12 +68,15 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
         className="onvo-dashboard-grid-layout layout"
         rowHeight={10}
         margin={[spacing, spacing]}
-        breakpoints={{ lg: 1280, md: 1024, sm: 768, xs: 640, xxs: 480 }}
-        cols={{ lg: 12, md: 12, sm: 12, xs: 12, xxs: 12 }}
+        breakpoints={{ lg: 1280, md: 768, sm: 480 }}
+        cols={{ lg: 12, md: 12, sm: 3 }}
         isDraggable={editable}
         isResizable={editable}
-        onLayoutChange={(layout: any) => {
-          let updatedWidgets = widgets.map((i: any) => {
+        onLayoutChange={(layout: any, allLayouts: any) => {
+          let keys = Object.keys(allLayouts);
+          if (keys.length > 1 || keys[0] !== "lg") return;
+          if (!dashboard || !editable) return;
+          let newWidgets = widgets.map((i: any) => {
             let item = layout.find((j: any) => j.i === i.id);
             if (!item) return i;
             return {
@@ -84,7 +87,21 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
               h: item.h,
             };
           });
-          if (dashboard && editable) {
+
+          // UPDATE ONLY THE WIDGETS THAT CHANGED
+          let updatedWidgets = newWidgets.filter((widget) => {
+            let oldWidget = widgets.find((i: any) => i.id === widget.id);
+            if (!oldWidget) return true;
+            return (
+              oldWidget.x !== widget.x ||
+              oldWidget.y !== widget.y ||
+              oldWidget.w !== widget.w ||
+              oldWidget.h !== widget.h
+            );
+          });
+
+          if (dashboard && editable && updatedWidgets.length > 0) {
+            setWidgets(newWidgets);
             updatedWidgets.forEach((i) => {
               backend?.widgets.update(i.id, {
                 x: i.x,

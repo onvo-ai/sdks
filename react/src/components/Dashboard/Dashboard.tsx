@@ -15,6 +15,7 @@ type DashboardContext = {
   id: string | undefined;
   dashboard?: DashboardType;
   widgets: Widget[];
+  setWidgets: (widgets: Widget[]) => void;
   refreshDashboard: () => Promise<void>;
   refreshWidgets: () => Promise<void>;
   theme: "light" | "dark";
@@ -27,6 +28,7 @@ const Context = createContext<DashboardContext>({
   id: undefined,
   dashboard: undefined,
   widgets: [],
+  setWidgets: () => {},
   refreshDashboard: async () => {},
   refreshWidgets: async () => {},
   theme: "light",
@@ -156,6 +158,7 @@ export const Dashboard: React.FC<{
   return (
     <Context.Provider
       value={{
+        setWidgets,
         id,
         dashboard,
         widgets,
@@ -169,7 +172,7 @@ export const Dashboard: React.FC<{
     >
       <div
         key={theme}
-        className={`onvo-dashboard-context flex h-screen flex-col ${theme}`}
+        className={`onvo-dashboard-context relative background-color flex h-screen flex-col ${theme}`}
       >
         {children}
       </div>
