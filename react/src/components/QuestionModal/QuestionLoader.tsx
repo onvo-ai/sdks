@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import React from "react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
-import { Card, Icon, Text } from "@tremor/react";
+import { Card } from "../../tremor/Card";
+import { Icon } from "../../tremor/Icon";
+import { Text } from "../../tremor/Text";
 
 const Loader: React.FC<{}> = ({}) => {
   return (

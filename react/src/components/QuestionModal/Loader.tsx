@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Text } from "@tremor/react";
+import { Text } from "../../tremor/Text";
 import React from "react";
 
 const Loader: React.FC<{ time: Date }> = ({ time }) => {

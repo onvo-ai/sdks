@@ -1,6 +1,5 @@
 import { Menu, Transition } from "@headlessui/react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { Icon } from "@tremor/react";
+
 import React from "react";
 import { Fragment } from "react";
 

@@ -1,5 +1,6 @@
 import { ErrorBoundary } from "react-error-boundary";
-import { Badge, Button, Text, Title } from "@tremor/react";
+import { Text, Title } from "../../tremor/Text";
+import { Button } from "../../tremor/Button";
 
 import TableWidget from "./TableWidget";
 import React, { useMemo, useRef, useState } from "react";
@@ -135,7 +136,6 @@ const ChartBase: React.FC<{
           and drag to pan
         </Text>
         <Button
-          size="xs"
           className="px-2 py-0.5 rounded-[4px] dark:rounded-[4px] text-gray-600 dark:text-gray-300"
           onClick={resetZoom}
           color="gray"

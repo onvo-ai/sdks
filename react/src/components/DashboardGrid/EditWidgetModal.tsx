@@ -1,14 +1,9 @@
-import {
-  Button,
-  Card,
-  Text,
-  Icon,
-  TextInput,
-  Title,
-  Textarea,
-  Divider,
-  Switch,
-} from "@tremor/react";
+import { Textarea } from "../../tremor/Textarea";
+import { Input } from "../../tremor/Input";
+import { Label, Text, Title } from "../../tremor/Text";
+import { Button } from "../../tremor/Button";
+import { Card } from "../../tremor/Card";
+import { Icon } from "../../tremor/Icon";
 import { useResizable } from "react-resizable-layout";
 import { Transition } from "@headlessui/react";
 import { Fragment, useEffect, useMemo, useState } from "react";
@@ -23,13 +18,13 @@ import {
 import Editor from "@monaco-editor/react";
 import { toast } from "sonner";
 import ChartBase from "../Chart/ChartBase";
-import { useMeasure } from "@uidotdev/usehooks";
 import SuggestionsBar from "./SuggestionsBar";
 import React from "react";
 import Logo from "../QuestionModal/Logo";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { useBackend } from "../Wrapper";
 import { useDashboard } from "../Dashboard/Dashboard";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 const Message: React.FC<{
   message: { role: "user" | "assistant"; content: string };
@@ -43,13 +38,9 @@ const Message: React.FC<{
   return (
     <div className="onvo-message-wrapper relative mb-3 flex flex-row items-start justify-start gap-3 group">
       {message.role === "assistant" ? (
-        <Icon
-          variant="shadow"
-          icon={() => <Logo height={20} width={20} />}
-          size="sm"
-        />
+        <Icon variant="shadow" icon={() => <Logo height={20} width={20} />} />
       ) : (
-        <Icon variant="shadow" icon={UserIcon} size="sm" />
+        <Icon variant="shadow" icon={UserIcon} />
       )}
       <div className="onvo-message-text w-full">
         {editing ? (
@@ -64,8 +55,7 @@ const Message: React.FC<{
         {editing ? (
           <div className="onvo-message-edit-options flex flex-row gap-2 mt-2">
             <Button
-              size="sm"
-              className="py-1 rounded-md"
+              className="py-1"
               onClick={() => {
                 onEdit(newMessage);
                 setEditing(false);
@@ -74,9 +64,8 @@ const Message: React.FC<{
               Regenerate chart
             </Button>
             <Button
-              size="sm"
-              className="py-1 rounded-md"
-              color="red"
+              className="py-1"
+              variant="destructive"
               onClick={() => {
                 onDelete();
                 setEditing(false);
@@ -86,10 +75,8 @@ const Message: React.FC<{
             </Button>
             <div className="flex-grow h-1" />
             <Button
-              size="sm"
-              className="py-1 rounded-md"
+              className="py-1"
               variant="secondary"
-              color="gray"
               onClick={() => {
                 setEditing(false);
               }}
@@ -114,9 +101,9 @@ const Message: React.FC<{
 };
 
 const UpdateChartModal: React.FC<{}> = ({}) => {
-  const [containerRef, { width }] = useMeasure();
   const backend = useBackend();
-  const { refreshWidgets, setSelectedWidget, selectedWidget } = useDashboard();
+  const { refreshWidgets, setSelectedWidget, selectedWidget, dashboard } =
+    useDashboard();
 
   const [newMessage, setNewMessage] = useState("");
   const [widget, setWidget] = useState<Widget>();
@@ -213,13 +200,23 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
   const executeCode = async () => {
     setLoading(true);
     if (!selectedWidget) return;
-    try {
-      let data = await backend?.widget(selectedWidget.id).executeCode(code);
-      setOutput(data);
-    } catch (e: any) {
-      toast.error("Failed to execute code: " + e.message);
-    }
-    setLoading(false);
+    toast.promise(
+      async () => {
+        let data = await backend?.widget(selectedWidget.id).executeCode(code);
+        setOutput(data);
+      },
+      {
+        loading: "Executing code...",
+        success: () => {
+          setLoading(false);
+          return "Successfully executed code";
+        },
+        error: (e: any) => {
+          setLoading(false);
+          return "Failed to execute code: " + e.message;
+        },
+      }
+    );
   };
 
   const open = useMemo(() => {
@@ -228,49 +225,40 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
 
   return (
     <>
-      <div
-        ref={containerRef}
-        className={"onvo-edit-chart-header absolute left-0 right-0 w-full"}
-      ></div>
       <Transition appear show={open} as={Fragment as any}>
-        <div
-          className="foreground-color fixed right-0 top-0 z-20 h-screen"
-          style={{
-            width: width || 0,
-          }}
-        >
+        <div className="onvo-update-chart-modal foreground-color absolute flex flex-col left-0 top-0 z-20 h-full w-full">
           <div
             className={
-              "foreground-color fixed right-0 top-0 z-10 flex flex-row justify-between items-center gap-4 border-b border-gray-200  p-2 dark:border-gray-800"
+              "foreground-color w-full left-0 top-0 z-10 flex flex-row justify-start items-center gap-4 border-b border-gray-200  p-2 dark:border-gray-800"
             }
-            style={{
-              width: width || 0,
-            }}
           >
-            <Button
-              variant="light"
-              size="sm"
+            <Icon
+              icon={ChevronLeftIcon}
+              variant="shadow"
               className="ml-2"
-              icon={BackwardIcon}
               onClick={() => {
                 cleanup();
               }}
-            >
-              Back to dashboard
-            </Button>
-            <div className="flex flex-row w-full flex-grow justify-center items-center">
-              <Title>{title}</Title>
+            />
+
+            <div className="flex flex-row w-full gap-1 flex-grow justify-start items-center">
+              <Text>{dashboard?.title}</Text>
+              <ChevronRightIcon className="h-4 w-4" />
+              <Label>Edit {title}</Label>
             </div>
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row gap-2 flex-shrink-0">
               <Button
-                size="sm"
                 variant="secondary"
+                className="flex-shrink-0"
                 onClick={executeCode}
-                loading={loading}
               >
                 Execute code
               </Button>
-              <Button size="sm" onClick={saveChanges} disabled={loading}>
+              <Button
+                onClick={saveChanges}
+                className="flex-shrink-0"
+                isLoading={loading}
+              >
                 Save changes
               </Button>
             </div>
@@ -284,7 +272,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-12"
           >
-            <div className="flex h-full w-full flex-row pt-[55px]">
+            <div className="flex flex-grow h-[calc(100%-55px)] w-full flex-row">
               <div className="relative overflow-y-auto flex w-full flex-grow flex-col border-r border-gray-200 dark:border-gray-800">
                 <div className="flex flex-col absolute bottom-8 overflow-y-auto top-0 pt-4 px-4 w-full">
                   {messages.map((a, index) => (
@@ -343,10 +331,8 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                       }}
                     />
                     <Icon
-                      size="xs"
                       className="absolute right-2 top-1 z-10"
                       icon={ArrowUpIcon}
-                      variant="solid"
                       onClick={() => {
                         getGraph([
                           ...messages,
@@ -365,7 +351,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
               <div className="background-color w-full flex-grow overflow-y-auto relative">
                 <div
                   id="wrapper"
-                  className="relative w-full h-[calc(100vh-53px)] flex flex-col"
+                  className="relative w-full h-full flex flex-col"
                 >
                   {loading && (
                     <div className="absolute top-0 left-0 bottom-0 right-0 z-10 backdrop-blur-md bg-white/50 dark:bg-gray-900/50 flex justify-center items-center">
@@ -434,14 +420,13 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                 </div>
               </div>
 
-              <div className="justify-start h-[calc(100vh-56px)] sticky top-14 gap-2 w-72 flex flex-col flex-shrink-0 border-l border-slate-200 bg-slate-100 p-4 dark:border-slate-700 dark:bg-slate-800">
+              <div className="justify-start h-full sticky top-14 gap-2 w-72 flex flex-col flex-shrink-0 border-l border-slate-200 bg-slate-100 p-4 dark:border-slate-700 dark:bg-slate-800">
                 <Text className="font-semibold">Settings</Text>
 
                 <div className="flex flex-row items-center justify-between">
                   <Text className="text-xs">Title</Text>{" "}
                   <Icon
                     icon={settings.title_hidden ? EyeSlashIcon : EyeIcon}
-                    size="sm"
                     onClick={() => {
                       setSettings((s: any) => ({
                         ...s,
@@ -450,7 +435,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                     }}
                   />
                 </div>
-                <TextInput
+                <Input
                   placeholder="Title"
                   className="text-xs -mt-2"
                   value={title}
@@ -459,22 +444,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                 />
 
                 {false && (
-                  <div className="flex flex-row items-center justify-between">
-                    <Text className="text-xs">Subtitle</Text>{" "}
-                    <Icon
-                      icon={settings.subtitle_hidden ? EyeSlashIcon : EyeIcon}
-                      size="sm"
-                      onClick={() => {
-                        setSettings((s: any) => ({
-                          ...s,
-                          subtitle_hidden: !s.subtitle_hidden,
-                        }));
-                      }}
-                    />
-                  </div>
-                )}
-                {false && (
-                  <TextInput
+                  <Input
                     placeholder="Subtitle"
                     className="text-xs -mt-2"
                     disabled={settings.subtitle_hidden}

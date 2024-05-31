@@ -1,4 +1,6 @@
-import { Text, Icon, Bold, Button } from "@tremor/react";
+import { Text } from "../../tremor/Text";
+import { Button } from "../../tremor/Button";
+import { Icon } from "../../tremor/Icon";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { TrashIcon } from "@heroicons/react/24/outline";
@@ -23,18 +25,15 @@ const QuestionSidebarCard: React.FC<{
       }
     >
       <div className="flex-grow cursor-pointer" onClick={onClick}>
-        <Text>
-          <Bold>{question.query}</Bold>
-        </Text>
+        <Text className="font-semibold text-sm">{question.query}</Text>
       </div>
       {onDelete && (
         <Icon
           variant="shadow"
-          className="absolute right-2 top-2 cursor-pointer opacity-0 group-hover:opacity-100"
+          size="xs"
+          className="absolute text-red-500 right-2 top-2 cursor-pointer opacity-0 group-hover:opacity-100"
           icon={TrashIcon}
           onClick={onDelete}
-          color="red"
-          size="xs"
         />
       )}
     </div>

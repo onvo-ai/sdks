@@ -1,5 +1,6 @@
-import { Text, Title, Divider, Card } from "@tremor/react";
-
+import { Divider } from "../../tremor/Divider";
+import { Text, Title } from "../../tremor/Text";
+import { Card } from "../../tremor/Card";
 import React, { useEffect, useState } from "react";
 import { useBackend } from "../Wrapper";
 

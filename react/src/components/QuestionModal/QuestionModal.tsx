@@ -1,12 +1,8 @@
-import {
-  TextInput,
-  Text,
-  Icon,
-  Textarea,
-  Title,
-  Card,
-  Button,
-} from "@tremor/react";
+import { Textarea } from "../../tremor/Textarea";
+import { Label, Metric, Text, Title } from "../../tremor/Text";
+import { Icon } from "../../tremor/Icon";
+import { Card } from "../../tremor/Card";
+import { Button } from "../../tremor/Button";
 import { Transition } from "@headlessui/react";
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import dayjs from "dayjs";
@@ -25,6 +21,7 @@ import Logo from "./Logo";
 import QuestionLoader from "./QuestionLoader";
 import { Question } from "@onvo-ai/js";
 import { SparklesIcon } from "@heroicons/react/24/solid";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 dayjs.extend(relativeTime);
 
@@ -226,14 +223,9 @@ export const QuestionModal: React.FC<{}> = ({}) => {
     <>
       <div
         ref={containerRef}
-        className={"onvo-question-modal-wrapper absolute left-0 right-0 w-full"}
-      ></div>
-      <div className={"h-[57px] flex-shrink-0 w-full background-color"}></div>
-      <div
         className={
-          "fixed bottom-0 right-0 z-10 p-3 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800"
+          "relative right-0 z-10 w-full p-3 border-t border-gray-200 dark:border-gray-800"
         }
-        style={{ width: width ? width : 0 }}
       >
         <div className="absolute top-0 left-0 w-full h-full foreground-color opacity-30 dark:opacity-50" />
         <div
@@ -245,9 +237,9 @@ export const QuestionModal: React.FC<{}> = ({}) => {
           <div className="gradient-border foreground-color" />
           <SparklesIcon className="h-5 w-5 text-blue-500 z-10" />
           <Text className="z-10 flex-grow">
-            Describe the chart or visualization you want to make...
+            Describe the chart you want to make...
           </Text>
-          <Icon size="xs" className="z-10" icon={ArrowUpIcon} variant="solid" />
+          <Icon className="z-10" icon={ArrowUpIcon} size="xs" variant="solid" />
         </div>
       </div>
 
@@ -261,38 +253,23 @@ export const QuestionModal: React.FC<{}> = ({}) => {
         show={open}
         as={Fragment as any}
       >
-        <div
-          className="onvo-question-modal-question-list foreground-color fixed right-0 top-0 z-20 h-screen"
-          style={{
-            width: width || 0,
-          }}
-        >
+        <div className="onvo-question-modal-question-list flex flex-col foreground-color absolute w-full right-0 top-0 z-20 h-full">
           <div
             className={
-              "foreground-color fixed right-0 top-0 z-10 flex flex-row items-center gap-4 border-b border-gray-200 p-3 dark:border-gray-800"
+              "foreground-color top-0 w-full z-10 flex flex-row items-center gap-4 border-b border-gray-200 px-3 py-2 dark:border-gray-800"
             }
-            style={{
-              width: width || 0,
-            }}
           >
-            <Button
-              variant="light"
-              size="sm"
-              icon={BackwardIcon}
+            <Icon
+              icon={ChevronLeftIcon}
+              variant="shadow"
               onClick={() => {
                 setOpen(false);
               }}
-            >
-              Back to dashboard
-            </Button>
-            <div className="flex flex-row w-full flex-grow justify-center items-center">
-              <Title
-                onClick={() => {
-                  setOpen(false);
-                }}
-              >
-                {dashboard?.title} / Questions
-              </Title>
+            />
+            <div className="flex flex-row w-full gap-1 flex-grow justify-start items-center">
+              <Text>{dashboard?.title}</Text>
+              <ChevronRightIcon className="h-4 w-4" />
+              <Label>Create a chart</Label>
             </div>
             <div className="w-[170px] h-4" />
           </div>
@@ -305,7 +282,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-12"
           >
-            <div className="flex h-full w-full flex-row pt-[50px]">
+            <div className="flex flex-grow w-full h-[calc(100%-52px)] flex-row">
               <QuestionSidebar
                 loading={loading}
                 questions={questions}
@@ -328,15 +305,15 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                   <div className="mx-auto w-full max-w-2xl">
                     {messages.length === 0 && !questionLoading && (
                       <>
-                        <div className="flex h-full w-full flex-col items-center justify-center">
+                        <div className="flex w-full pt-8 pb-12 flex-col items-center justify-center">
                           <Icon
-                            icon={() => <Logo height={72} width={72} />}
-                            variant="shadow"
                             size="xl"
+                            variant="shadow"
+                            icon={() => <Logo height={72} width={72} />}
                           />
-                          <Title className="mt-2">
+                          <Metric className="mt-2">
                             Ask me for a widget or visualisation
-                          </Title>
+                          </Metric>
                         </div>
                         <div className="onvo-question-modal-suggestions-list grid grid-cols-2 gap-2">
                           {suggestions.length > 0
@@ -406,9 +383,9 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                     />
                     <Icon
                       className="absolute right-3 top-3 z-10"
-                      icon={ArrowUpIcon}
                       variant="solid"
-                      onClick={(e) => {
+                      icon={ArrowUpIcon}
+                      onClick={() => {
                         let newMessages = [
                           ...messages,
                           {

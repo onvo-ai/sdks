@@ -1,7 +1,9 @@
 import "react-data-grid/lib/styles.css";
 import DataGrid, { SortDirection } from "react-data-grid";
 import { useEffect, useMemo, useState } from "react";
-import { Icon, MultiSelect, MultiSelectItem, Title } from "@tremor/react";
+import { MultiSelect, MultiSelectItem } from "@tremor/react";
+import { Icon } from "../../tremor/Icon";
+import { Title } from "../../tremor/Text";
 import { FunnelIcon as FunnelIconOutline } from "@heroicons/react/24/outline";
 import { FunnelIcon as FunnelIconSolid } from "@heroicons/react/24/solid";
 import { BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/20/solid";
@@ -121,7 +123,6 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
                   }}
                   icon={filterEnabled ? FunnelIconSolid : FunnelIconOutline}
                   size="sm"
-                  tooltip="Toggle filters"
                 />
               </div>
             </div>

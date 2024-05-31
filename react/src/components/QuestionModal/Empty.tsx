@@ -1,4 +1,4 @@
-import { Subtitle, Title } from "@tremor/react";
+import { Text, Title } from "../../tremor/Text";
 import React from "react";
 
 const Empty: React.FC<{
@@ -35,9 +35,9 @@ const Empty: React.FC<{
         <Title className="onvo-empty-question-modal-title mb-1 text-lg font-bold">
           {title}
         </Title>
-        <Subtitle className="onvo-empty-question-modal-subtitle mb-4 max-w-lg">
+        <Text className="onvo-empty-question-modal-subtitle mb-4 max-w-lg">
           {subtitle}
-        </Subtitle>
+        </Text>
         {button}
       </div>
     </div>

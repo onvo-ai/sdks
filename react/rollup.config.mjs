@@ -26,12 +26,14 @@ export default [
         dir: "dist/cjs",
         format: "cjs",
         sourcemap: true,
+        plugins: [terser()],
       },
 
       {
         dir: "dist/esm",
         format: "esm",
         sourcemap: true,
+        plugins: [terser()],
       },
     ],
     plugins: [
@@ -39,6 +41,13 @@ export default [
       resolve({ browser: true }),
       commonjs(),
       postcss({
+        inject: {
+          insertAt: "top",
+        },
+        config: {
+          path: "./postcss.config.js",
+        },
+        minimize: true,
         extensions: [".css"],
         plugins: [tailwindcss(tailwindConfig)],
       }),

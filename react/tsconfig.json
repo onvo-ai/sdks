@@ -11,7 +11,10 @@
     "outDir": "lib",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "react": ["./node_modules/@types/react"]
+    }
   },
   "exclude": [
     "dist",

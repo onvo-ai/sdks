@@ -3,15 +3,14 @@ import { useDashboard } from "../Dashboard/Dashboard";
 import { useBackend } from "../Wrapper";
 import React from "react";
 import {
-  Button,
-  Card,
   MultiSelect,
   MultiSelectItem,
   SearchSelect,
   SearchSelectItem,
-  Text,
 } from "@tremor/react";
-
+import { Button } from "../../tremor/Button";
+import { Card } from "../../tremor/Card";
+import { Text } from "../../tremor/Text";
 const FilterBar = () => {
   const { dashboard, refreshWidgets } = useDashboard();
   const backend = useBackend();
@@ -86,10 +85,10 @@ const FilterBar = () => {
       )}
 
       {filtersEnabled && (
-        <div className="mx-[10px] mt-[10px]">
-          <Card className=" py-2 flex flex-row justify-between items-center">
+        <div className="@container mx-[10px] mt-[10px]">
+          <Card className="py-2 flex flex-col @lg:flex-row gap-2 justify-between items-start @lg:items-center">
             <Text className="font-semibold text-lg">Filters</Text>
-            <div className="flex flex-row gap-2 items-center">
+            <div className="flex flex-col @lg:flex-row @lg:overflow-x-auto gap-2 items-start @lg:items-center">
               {filters.map((a) => {
                 let options = (a.options || "")
                   .split(",")
@@ -98,7 +97,7 @@ const FilterBar = () => {
                 return (
                   <div
                     key={a.title}
-                    className="flex flex-row items-center gap-2"
+                    className="flex flex-col @lg:flex-row items-start @lg:items-center gap-2"
                   >
                     <Text>{a.title}</Text>
                     {a.type === "picker" && (
@@ -138,9 +137,7 @@ const FilterBar = () => {
                   </div>
                 );
               })}
-              <Button size="xs" onClick={updateDashboard}>
-                Apply filters
-              </Button>
+              <Button onClick={updateDashboard}>Apply filters</Button>
             </div>
           </Card>
         </div>

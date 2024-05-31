@@ -1,24 +1,16 @@
-import { Badge, Button, Icon, Metric, Text } from "@tremor/react";
-
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { Badge } from "../../tremor/Badge";
+import { Metric } from "../../tremor/Text";
+import { Button } from "../../tremor/Button";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDashboard } from "../Dashboard/Dashboard";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {
   ChevronDownIcon,
-  DocumentIcon,
   DocumentChartBarIcon,
   PhotoIcon,
-  PresentationChartBarIcon,
   TableCellsIcon,
 } from "@heroicons/react/24/outline";
-import { Menu, Transition } from "@headlessui/react";
 import { toast } from "sonner";
 import { useBackend } from "../Wrapper";
 import Dropdown from "../Chart/Dropdown";
@@ -138,19 +130,12 @@ export const DashboardHeader: React.FC<{
 
   return (
     <section
-      className={`onvo-dashboard-header backdrop-blur-lg sticky z-10 border-b border-gray-200 dark:border-gray-800 top-0 ${className ? className : ""}`}
+      className={`onvo-dashboard-header backdrop-blur-lg sticky z-10 border-b border-gray-200 dark:border-gray-800 top-0 ${
+        className ? className : ""
+      }`}
     >
-      <div className="absolute top-0 left-0 w-full h-full z-0 foreground-color opacity-30 dark:opacity-50" />
-      <main className="mx-auto px-6 pt-4 lg:px-8 z-10 relative">
-        <div className="mb-3 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-          <Icon
-            icon={PresentationChartBarIcon}
-            variant="shadow"
-            size="lg"
-            className="hidden md:block"
-            tooltip="Back to dashboards"
-          />
-
+      <main className="mx-auto px-6 py-3 lg:px-8 z-10 relative">
+        <div className="relative z-10 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
           <div className="w-full">
             {dashboard ? (
               <>
@@ -186,6 +171,7 @@ export const DashboardHeader: React.FC<{
             {children}
           </div>
         </div>
+        <div className="absolute top-0 left-0 w-full bottom-0 z-0 foreground-color opacity-30 dark:opacity-50" />
       </main>
     </section>
   );
