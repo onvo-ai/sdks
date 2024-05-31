@@ -1,5 +1,5 @@
 import { Badge } from "../../tremor/Badge";
-import { Metric } from "../../tremor/Text";
+import { Label, Metric } from "../../tremor/Text";
 import { Button } from "../../tremor/Button";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDashboard } from "../Dashboard/Dashboard";
@@ -31,7 +31,7 @@ export const LastUpdatedBadge: React.FC<{ date: string }> = ({ date }) => {
   }, []);
 
   return (
-    <Badge key={key} size="xs" className="onvo-last-updated-badge">
+    <Badge key={key} className="onvo-last-updated-badge">
       Last updated {dayjs(date).fromNow()}
     </Badge>
   );
@@ -130,48 +130,39 @@ export const DashboardHeader: React.FC<{
 
   return (
     <section
-      className={`onvo-dashboard-header backdrop-blur-lg sticky z-10 border-b border-gray-200 dark:border-gray-800 top-0 ${
+      className={`onvo-dashboard-header sticky z-10 border-b foreground-color border-gray-200 dark:border-gray-800 top-0 ${
         className ? className : ""
       }`}
     >
-      <main className="mx-auto px-6 py-3 lg:px-8 z-10 relative">
-        <div className="relative z-10 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-          <div className="w-full">
-            {dashboard ? (
-              <>
-                <Metric className="onvo-dashboard-header-title font-override text-xl">
-                  {dashboard?.title || " "}
-                </Metric>
-                <span className="onvo-dashboard-header-description text-tremor-default text-tremor-content dark:text-dark-tremor-content font-override mt-1">
-                  {dashboard?.description || " "}{" "}
-                  <LastUpdatedBadge date={dashboard.last_updated_at} />
-                </span>
-              </>
-            ) : (
-              <div className="w-3/5 animate-pulse">
-                <div className="mb-2 h-6 w-4/5 rounded-md bg-gray-100 dark:bg-gray-700" />
-                <div className="h-4 w-2/5 rounded-md bg-gray-100 dark:bg-gray-700" />
-              </div>
-            )}
-          </div>
-          <div className="flex flex-row gap-2">
-            {(ImageDownloadEnabled || ReportDownloadEnabled) && (
-              <Dropdown options={[options]}>
-                <Button
-                  icon={ChevronDownIcon}
-                  iconPosition="right"
-                  size="xs"
-                  variant="secondary"
-                  disabled={!dashboard}
-                >
-                  Download
-                </Button>
-              </Dropdown>
-            )}
-            {children}
-          </div>
+      <main className="mx-auto px-6 py-3 lg:px-8 z-10 relative flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+        <div className="flex-grow">
+          {dashboard ? (
+            <>
+              <Metric className="onvo-dashboard-header-title font-override text-xl -mb-1">
+                {dashboard?.title || " "}
+              </Metric>
+              <Label className="onvo-dashboard-header-description font-override">
+                {dashboard?.description || " "}{" "}
+                <LastUpdatedBadge date={dashboard.last_updated_at} />
+              </Label>
+            </>
+          ) : (
+            <div className="w-3/5 animate-pulse">
+              <div className="mb-2 h-6 w-4/5 rounded-md bg-gray-100 dark:bg-gray-700" />
+              <div className="h-4 w-2/5 rounded-md bg-gray-100 dark:bg-gray-700" />
+            </div>
+          )}
         </div>
-        <div className="absolute top-0 left-0 w-full bottom-0 z-0 foreground-color opacity-30 dark:opacity-50" />
+        <div className="flex flex-row gap-2">
+          {(ImageDownloadEnabled || ReportDownloadEnabled) && (
+            <Dropdown options={[options]}>
+              <Button variant="secondary" disabled={!dashboard}>
+                Download <ChevronDownIcon className="h-4 w-4 ml-1" />
+              </Button>
+            </Dropdown>
+          )}
+          {children}
+        </div>
       </main>
     </section>
   );

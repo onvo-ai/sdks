@@ -1,7 +1,6 @@
 import "react-data-grid/lib/styles.css";
 import DataGrid, { SortDirection } from "react-data-grid";
 import { useEffect, useMemo, useState } from "react";
-import { MultiSelect, MultiSelectItem } from "@tremor/react";
 import { Icon } from "../../tremor/Icon";
 import { Title } from "../../tremor/Text";
 import { FunnelIcon as FunnelIconOutline } from "@heroicons/react/24/outline";
@@ -9,6 +8,7 @@ import { FunnelIcon as FunnelIconSolid } from "@heroicons/react/24/solid";
 import { BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/20/solid";
 import React from "react";
 import { useDashboard } from "../Dashboard";
+import { MultiSelect } from "../../tremor/MultiSelect";
 
 function urlify(text: string) {
   var urlRegex = /(https?:\/\/[^\s]+)/g;
@@ -131,23 +131,17 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
                 placeholder="Filter"
                 className="-mt-2"
                 onValueChange={(val) => {
-                  console.log(val);
+                  console.log("FILTER CHANGED: ", val);
                   setFilters({
                     ...filters,
                     [p.column.key]: val,
                   });
                 }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                }}
-              >
-                {options[a].map((b) => (
-                  <MultiSelectItem key={a + "-" + b} value={b + ""}>
-                    {b + ""}
-                  </MultiSelectItem>
-                ))}
-              </MultiSelect>
+                items={options[a].map((c) => ({
+                  label: c,
+                  value: c,
+                }))}
+              />
             )}
           </div>
         );

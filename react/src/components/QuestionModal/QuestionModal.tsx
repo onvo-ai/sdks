@@ -8,12 +8,11 @@ import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { toast } from "sonner";
-import { ArrowUpIcon, BackwardIcon } from "@heroicons/react/24/outline";
+import { ArrowUpIcon } from "@heroicons/react/24/outline";
 import { create } from "zustand";
 import QuestionMessage from "./QuestionMessage";
 import QuestionSidebar from "./QuestionSidebar";
 import React from "react";
-import { useMeasure } from "@uidotdev/usehooks";
 import SuggestionsBar from "./SuggestionsBar";
 import { useBackend } from "../Wrapper";
 import { useDashboard } from "../Dashboard";
@@ -35,7 +34,6 @@ export const useQuestionModal = create<{
 
 export const QuestionModal: React.FC<{}> = ({}) => {
   const backend = useBackend();
-  const [containerRef, { width }] = useMeasure();
   const { dashboard } = useDashboard();
 
   const input = useRef<HTMLTextAreaElement>(null);
@@ -222,7 +220,6 @@ export const QuestionModal: React.FC<{}> = ({}) => {
   return (
     <>
       <div
-        ref={containerRef}
         className={
           "relative right-0 z-10 w-full p-3 border-t border-gray-200 dark:border-gray-800"
         }

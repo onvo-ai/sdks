@@ -1,12 +1,26 @@
 /** @type {import('tailwindcss').Config} */
-import defaultTheme from "tailwindcss/defaultTheme";
+const {
+  scrollbarGutter,
+  scrollbarWidth,
+  scrollbarColor,
+} = require("tailwind-scrollbar-utilities");
+
 /* eslint-disable max-len */
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./lib/**/*.{js,jsx,ts,tsx}"],
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: ["Inter", ...defaultTheme.fontFamily.sans],
+      sans: [
+        "Inter",
+        "ui-sans-serif",
+        "system-ui",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+        '"Noto Color Emoji"',
+      ],
     },
     extend: {
       keyframes: {
@@ -78,5 +92,8 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/container-queries"),
     require("@tailwindcss/forms"),
+    scrollbarGutter(), // no options to configure
+    scrollbarWidth(), // no options to configure
+    scrollbarColor(), // no options to configure
   ],
 };
