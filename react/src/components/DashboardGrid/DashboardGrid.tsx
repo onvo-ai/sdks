@@ -44,15 +44,21 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
     return h;
   }, [widgets]);
 
-  if (!dashboard) return <></>;
+  if (!dashboard)
+    return (
+      <div
+        className={
+          "onvo-dashboard-grid-wrapper overflow-y-auto flex-grow font-override background-color relative w-full"
+        }
+      ></div>
+    );
 
   const editable = adminMode || dashboard?.settings?.can_edit_widget_layout;
   return (
     <div
       className={
-        "onvo-dashboard-grid-wrapper flex-grow font-override background-color relative w-full pb-safe"
+        "onvo-dashboard-grid-wrapper overflow-y-auto flex-grow font-override background-color w-full"
       }
-      id="screenshot-content"
     >
       <UpdateChartModal />
       <FilterBar />

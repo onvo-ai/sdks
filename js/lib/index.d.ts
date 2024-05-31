@@ -1,32 +1,26 @@
-import * as buffer from 'buffer';
-
 declare class OnvoBase {
     #private;
     endpoint: string;
-    fetchBase(url: string, method?: "GET" | "PUT" | "POST" | "DELETE" | "PATCH", body?: any, isForm?: boolean): Promise<unknown>;
-    fetchBlob(url: string): Promise<buffer.Blob>;
+    /**
+     * Fetches data from the API.
+     * @param url - The URL to fetch data from.
+     * @param method - The HTTP method to use. Defaults to "GET".
+     * @param body - The data to send with the request.
+     * @param isForm - Indicates if the request is a form request.
+     * @returns The response from the API.
+     * @throws {Error} If there is an error making the request.
+     */
+    fetchBase(url: string, method?: "GET" | "PUT" | "POST" | "DELETE" | "PATCH", body?: any, isForm?: boolean): Promise<any>;
+    /**
+     * Fetches a Blob from the API.
+     * @param url - The URL to fetch data from.
+     * @returns The response from the API as a Blob.
+     * @throws {Error} If there is an error making the request.
+     */
+    fetchBlob(url: string): Promise<Blob>;
     constructor(apiKey: string, options?: {
         endpoint: string;
     });
-}
-
-declare class OnvoAccounts extends OnvoBase {
-    list(): Promise<{
-        avatar_url: string | null;
-        email: string | null;
-        full_name: string | null;
-        id: string;
-        phone_number: string | null;
-        updated_at: string | null;
-    }[]>;
-    get(id: string): Promise<{
-        avatar_url: string | null;
-        email: string | null;
-        full_name: string | null;
-        id: string;
-        phone_number: string | null;
-        updated_at: string | null;
-    }>;
 }
 
 type Json = string | number | boolean | null | {
@@ -1341,182 +1335,191 @@ type ComprehensiveDashboard = Dashboard & {
 };
 type Log = Database["public"]["Tables"]["logs"]["Row"];
 
+/**
+ * Endpoints for managing accounts.
+ */
+declare class OnvoAccounts extends OnvoBase {
+    /**
+     * Fetches a list of accounts.
+     *
+     * @return {Promise<Account[]>} A promise that resolves to an array of Account objects.
+     */
+    list(): Promise<Account[]>;
+    /**
+     * Fetches a specific account by ID.
+     *
+     * @param {string} id - The ID of the account to fetch.
+     * @return {Promise<Account>} A promise that resolves to an Account object.
+     */
+    get(id: string): Promise<Account>;
+}
+
 declare class OnvoTeams extends OnvoBase {
-    list(): Promise<{
-        created_at: string | null;
-        email: string | null;
-        id: string;
-        logo: string | null;
-        name: string | null;
-        phone_number: string | null;
-        stripe_id: string | null;
-    }[]>;
-    get(id: string): Promise<{
-        created_at: string | null;
-        email: string | null;
-        id: string;
-        logo: string | null;
-        name: string | null;
-        phone_number: string | null;
-        stripe_id: string | null;
-    }>;
-    update(id: string, body: Partial<Team>): Promise<{
-        created_at: string | null;
-        email: string | null;
-        id: string;
-        logo: string | null;
-        name: string | null;
-        phone_number: string | null;
-        stripe_id: string | null;
-    }>;
+    /**
+     * Retrieves a list of all teams.
+     * @returns {Promise<Team[]>} A promise that resolves to an array of Team objects.
+     */
+    list(): Promise<Team[]>;
+    /**
+     * Retrieves a specific team by ID.
+     * @param {string} id - The ID of the team to retrieve.
+     * @returns {Promise<Team>} A promise that resolves to the Team object.
+     */
+    get(id: string): Promise<Team>;
+    /**
+     * Updates a specific team.
+     * @param {string} id - The ID of the team to update.
+     * @param {Partial<Team>} body - The updated team data.
+     * @returns {Promise<Team>} A promise that resolves to the updated Team object.
+     */
+    update(id: string, body: Partial<Team>): Promise<Team>;
 }
 
 declare class OnvoEmbedUsers extends OnvoBase {
-    list(): Promise<{
-        created_at: string;
-        email: string | null;
-        id: string;
-        last_updated_at: string;
-        metadata: Json;
-        name: string;
-        team: string;
-    }[]>;
-    get(id: string): Promise<{
-        created_at: string;
-        email: string | null;
-        id: string;
-        last_updated_at: string;
-        metadata: Json;
-        name: string;
-        team: string;
-    }>;
+    /**
+     * Retrieves a list of embed users.
+     * @returns {Promise<EmbedUser[]>} A promise that resolves to an array of embed users.
+     */
+    list(): Promise<EmbedUser[]>;
+    /**
+     * Retrieves an embed user by ID.
+     * @param {string} id - The ID of the embed user.
+     * @returns {Promise<EmbedUser>} A promise that resolves to the embed user.
+     */
+    get(id: string): Promise<EmbedUser>;
+    /**
+     * Deletes an embed user by ID.
+     * @param {string} id - The ID of the embed user.
+     * @returns {Promise<{ success: boolean }>} A promise that resolves to an object indicating success.
+     */
     delete(id: string): Promise<{
-        success: true;
+        success: boolean;
     }>;
+    /**
+     * Creates or updates an embed user.
+     * @param {string} userId - The ID of the embed user.
+     * @param {Object} userData - The data for the embed user.
+     * @param {string} userData.name - The name of the embed user.
+     * @param {string} userData.email - The email of the embed user.
+     * @param {Object} [userData.metadata] - Additional metadata for the embed user.
+     * @returns {Promise<EmbedUser>} A promise that resolves to the created or updated embed user.
+     */
     upsert(userId: string, userData: {
         name: string;
         email: string;
-        metadata: {
+        metadata?: {
             [key: string]: any;
         };
-    }): Promise<{
-        created_at: string;
-        email: string | null;
-        id: string;
-        last_updated_at: string;
-        metadata: Json;
-        name: string;
-        team: string;
-    }>;
+    }): Promise<EmbedUser>;
 }
 
 declare class OnvoDatasources extends OnvoBase {
+    /**
+     * Lists all the datasources.
+     * @returns {Promise<DataSource[]>} A promise that resolves to an array of datasources.
+     */
     list(): Promise<DataSource[]>;
+    /**
+     * Gets a datasource by ID.
+     * @param {string} id - The ID of the datasource.
+     * @returns {Promise<DataSource>} A promise that resolves to the datasource.
+     */
     get(id: string): Promise<DataSource>;
+    /**
+     * Deletes a datasource by ID.
+     * @param {string} id - The ID of the datasource.
+     * @returns {Promise<{ success: boolean }>} A promise that resolves to an object indicating the success of the deletion.
+     */
     delete(id: string): Promise<{
-        success: true;
+        success: boolean;
     }>;
+    /**
+     * Updates a datasource by ID.
+     * @param {string} id - The ID of the datasource.
+     * @param {Partial<DataSource>} body - The updated datasource object.
+     * @returns {Promise<DataSource>} A promise that resolves to the updated datasource.
+     */
     update(id: string, body: Partial<DataSource>): Promise<DataSource>;
+    /**
+     * Creates a new datasource.
+     * @param {Omit<DataSource, "id" | "created_at" | "created_by" | "last_updated_at" | "last_updated_by" | "sample_data" | "size" | "team">} body - The new datasource object.
+     * @returns {Promise<DataSource>} A promise that resolves to the created datasource.
+     */
     create(body: Omit<DataSource, "id" | "created_at" | "created_by" | "last_updated_at" | "last_updated_by" | "sample_data" | "size" | "team">): Promise<DataSource>;
 }
 
 declare class OnvoAutomations extends OnvoBase {
-    list(): Promise<{
-        created_at: string;
-        created_by: string;
-        dashboard: string;
-        description: string | null;
-        email_format: string;
-        email_subject: string;
-        enabled: boolean;
-        id: string;
-        last_run_at: string | null;
-        last_updated_at: string;
-        last_updated_by: string | null;
-        next_run_at: string | null;
-        output_format: string;
-        recipient_type: string;
-        recipients: string[] | null;
-        schedule: string;
-        team: string;
-        timezone: string;
-        title: string;
-    }[]>;
-    get(id: string): Promise<{
-        created_at: string;
-        created_by: string;
-        dashboard: string;
-        description: string | null;
-        email_format: string;
-        email_subject: string;
-        enabled: boolean;
-        id: string;
-        last_run_at: string | null;
-        last_updated_at: string;
-        last_updated_by: string | null;
-        next_run_at: string | null;
-        output_format: string;
-        recipient_type: string;
-        recipients: string[] | null;
-        schedule: string;
-        team: string;
-        timezone: string;
-        title: string;
-    }>;
+    /**
+     * Fetches all the automations
+     * @returns {Promise<Automation[]>} A promise that resolves to an array of Automation objects
+     */
+    list(): Promise<Automation[]>;
+    /**
+     * Fetches an automation by its ID
+     * @param {string} id - The ID of the automation
+     * @returns {Promise<Automation>} A promise that resolves to an Automation object
+     */
+    get(id: string): Promise<Automation>;
+    /**
+     * Deletes an automation by its ID
+     * @param {string} id - The ID of the automation
+     * @returns {Promise<{ success: boolean }>} A promise that resolves to an object with a success field
+     */
     delete(id: string): Promise<{
-        success: true;
+        success: boolean;
     }>;
-    update(id: string, body: Partial<Automation>): Promise<{
-        created_at: string;
-        created_by: string;
-        dashboard: string;
-        description: string | null;
-        email_format: string;
-        email_subject: string;
-        enabled: boolean;
-        id: string;
-        last_run_at: string | null;
-        last_updated_at: string;
-        last_updated_by: string | null;
-        next_run_at: string | null;
-        output_format: string;
-        recipient_type: string;
-        recipients: string[] | null;
-        schedule: string;
-        team: string;
-        timezone: string;
-        title: string;
-    }>;
-    create(body: Partial<Automation>): Promise<{
-        created_at: string;
-        created_by: string;
-        dashboard: string;
-        description: string | null;
-        email_format: string;
-        email_subject: string;
-        enabled: boolean;
-        id: string;
-        last_run_at: string | null;
-        last_updated_at: string;
-        last_updated_by: string | null;
-        next_run_at: string | null;
-        output_format: string;
-        recipient_type: string;
-        recipients: string[] | null;
-        schedule: string;
-        team: string;
-        timezone: string;
-        title: string;
-    }>;
+    /**
+     * Updates an automation by its ID
+     * @param {string} id - The ID of the automation
+     * @param {Partial<Automation>} body - The updated automation data
+     * @returns {Promise<Automation>} A promise that resolves to an Automation object
+     */
+    update(id: string, body: Partial<Automation>): Promise<Automation>;
+    /**
+     * Creates a new automation
+     * @param {Partial<Automation>} body - The automation data
+     * @returns {Promise<Automation>} A promise that resolves to an Automation object
+     */
+    create(body: Partial<Automation>): Promise<Automation>;
 }
 
 declare class OnvoDashboards extends OnvoBase {
+    /**
+     * Lists all the dashboards.
+     *
+     * @return {Promise<Dashboard[]>} A promise that resolves to an array of dashboards.
+     */
     list(): Promise<Dashboard[]>;
+    /**
+     * Gets a dashboard by ID.
+     *
+     * @param {string} id - The ID of the dashboard.
+     * @return {Promise<Dashboard>} A promise that resolves to the dashboard.
+     */
     get(id: string): Promise<Dashboard>;
+    /**
+     * Deletes a dashboard by ID.
+     *
+     * @param {string} id - The ID of the dashboard.
+     * @return {Promise<{ success: true }>} A promise that resolves to an object indicating the success of the deletion.
+     */
     delete(id: string): Promise<{
         success: true;
     }>;
+    /**
+     * Updates a dashboard by ID.
+     *
+     * @param {string} id - The ID of the dashboard.
+     * @param {Partial<Dashboard>} body - The updated dashboard data.
+     * @return {Promise<Dashboard>} A promise that resolves to the updated dashboard.
+     */
     update(id: string, body: Partial<Dashboard>): Promise<Dashboard>;
+    /**
+     * Creates a new dashboard.
+     *
+     * @param {Omit<Dashboard, "id" | "created_at" | "created_by" | "last_updated_at" | "last_updated_by" | "thumbnail" | "team">} body - The dashboard data.
+     * @return {Promise<Dashboard>} A promise that resolves to the created dashboard.
+     */
     create(body: Omit<Dashboard, "id" | "created_at" | "created_by" | "last_updated_at" | "last_updated_by" | "thumbnail" | "team">): Promise<Dashboard>;
 }
 
@@ -1525,19 +1528,28 @@ declare class OnvoDashboardDatasources extends OnvoBase {
     constructor(dashboardId: string, apiKey: string, options?: {
         endpoint: string;
     });
-    list(): Promise<{
-        dashboard: string;
-        datasource: string;
-        team: string;
-    }[]>;
+    /**
+     * Lists all the datasources linked to a dashboard.
+     *
+     * @return {Promise<DashboardDatasource[]>} A promise that resolves to an array of dashboard datasources.
+     */
+    list(): Promise<DashboardDatasource[]>;
+    /**
+     * Unlinks a datasource from a dashboard.
+     *
+     * @param {string} datasourceId - The ID of the datasource to unlink.
+     * @return {Promise<{ success: boolean }>} A promise that resolves to an object indicating the success of the unlink operation.
+     */
     unlink(datasourceId: string): Promise<{
-        success: true;
+        success: boolean;
     }>;
-    link(datasourceId: string): Promise<{
-        dashboard: string;
-        datasource: string;
-        team: string;
-    }>;
+    /**
+     * Links a datasource to a dashboard.
+     *
+     * @param {string} datasourceId - The ID of the datasource to link.
+     * @return {Promise<DashboardDatasource>} A promise that resolves to the linked dashboard datasource.
+     */
+    link(datasourceId: string): Promise<DashboardDatasource>;
 }
 
 declare class OnvoDashboard extends OnvoBase {
@@ -1546,22 +1558,24 @@ declare class OnvoDashboard extends OnvoBase {
     constructor(id: string, apiKey: string, options?: {
         endpoint: string;
     });
-    updateWidgetCache(): Promise<{
-        cache: string | null;
-        code: string;
-        created_at: string;
-        dashboard: string;
-        h: number | null;
-        id: string;
-        messages: Json;
-        settings: Json;
-        team: string;
-        title: string;
-        w: number | null;
-        x: number | null;
-        y: number | null;
-    }[]>;
+    /**
+     * Updates the widget cache for the dashboard.
+     *
+     * @return {Promise<Widget[]>} A promise that resolves to an array of widgets.
+     */
+    updateWidgetCache(): Promise<Widget[]>;
+    /**
+     * Retrieves widget suggestions for the dashboard.
+     *
+     * @return {Promise<string[]>} A promise that resolves to an array of widget suggestions.
+     */
     getWidgetSuggestions(): Promise<string[]>;
+    /**
+     * Exports the dashboard in the specified format.
+     *
+     * @param {("csv" | "xlsx" | "pdf" | "png" | "jpeg")} format - The format to export the dashboard in.
+     * @return {Promise<Blob>} A promise that resolves to a Blob representing the exported dashboard.
+     */
     export(format: "csv" | "xlsx" | "pdf" | "png" | "jpeg"): Promise<Blob>;
 }
 
@@ -1570,6 +1584,11 @@ declare class OnvoEmbedUser extends OnvoBase {
     constructor(id: string, apiKey: string, options?: {
         endpoint: string;
     });
+    /**
+     * Retrieves an access token for the embed user.
+     *
+     * @return {Promise<{ user: string; token: string }>} A promise that resolves to an object containing the user ID and the access token.
+     */
     getAccessToken(): Promise<{
         user: string;
         token: string;
@@ -1581,21 +1600,39 @@ declare class OnvoDatasource extends OnvoBase {
     constructor(id: string, apiKey: string, options?: {
         endpoint: string;
     });
+    /**
+     * Initializes the data source.
+     * @returns {Promise<DataSource>} A promise that resolves to the data source object.
+     */
     initialize(): Promise<DataSource>;
+    /**
+     * Uploads a file to the data source.
+     * @param {File} file - The file to upload.
+     * @returns {Promise<DataSource>} A promise that resolves to the data source object.
+     */
     uploadFile(file: File): Promise<DataSource>;
 }
 
 declare class OnvoQuestions extends OnvoBase {
+    /**
+     * Lists all questions for a given dashboard.
+     *
+     * @param {Object} filters - The filters to apply to the question list.
+     * @param {string} filters.dashboard - The ID of the dashboard to list questions for.
+     * @returns {Promise<Question[]>} A promise that resolves to an array of questions.
+     */
     list(filters: {
         dashboard: string;
-    }): Promise<{
-        created_at: string;
-        dashboard: string;
-        id: string;
-        messages: Json;
-        query: string;
-        team: string | null;
-    }[]>;
+    }): Promise<Question[]>;
+    /**
+     * Creates a new question.
+     *
+     * @param {Object} payload - The payload for the question creation.
+     * @param {Array<Object>} payload.messages - The messages to include in the question.
+     * @param {string} payload.dashboardId - The ID of the dashboard to create the question in.
+     * @param {string} [payload.questionId] - The ID of the question to update (optional).
+     * @returns {Promise<Question>} A promise that resolves to the created question.
+     */
     create(payload: {
         messages: {
             role: "user" | "assistant";
@@ -1603,25 +1640,24 @@ declare class OnvoQuestions extends OnvoBase {
         }[];
         dashboardId: string;
         questionId?: string;
-    }): Promise<{
-        created_at: string;
-        dashboard: string;
-        id: string;
-        messages: Json;
-        query: string;
-        team: string | null;
-    }>;
+    }): Promise<Question>;
+    /**
+     * Deletes a question.
+     *
+     * @param {string} id - The ID of the question to delete.
+     * @returns {Promise<{ success: boolean }>} A promise that resolves to an object indicating success.
+     */
     delete(id: string): Promise<{
-        success: true;
+        success: boolean;
     }>;
-    update(id: string, body: Partial<Question>): Promise<{
-        created_at: string;
-        dashboard: string;
-        id: string;
-        messages: Json;
-        query: string;
-        team: string | null;
-    }>;
+    /**
+     * Updates a question.
+     *
+     * @param {string} id - The ID of the question to update.
+     * @param {Partial<Question>} body - The updated question data.
+     * @returns {Promise<Question>} A promise that resolves to the updated question.
+     */
+    update(id: string, body: Partial<Question>): Promise<Question>;
 }
 
 declare class OnvoAutomation extends OnvoBase {
@@ -1629,14 +1665,11 @@ declare class OnvoAutomation extends OnvoBase {
     constructor(id: string, apiKey: string, options?: {
         endpoint: string;
     });
-    getRuns(): Promise<{
-        automation: string;
-        id: string;
-        recipient_emails: string[] | null;
-        run_at: string;
-        status: string;
-        team: string;
-    }[]>;
+    /**
+     * Fetches all the runs of the automation
+     * @returns {Promise<AutomationRun[]>} A promise that resolves to an array of AutomationRun objects
+     */
+    getRuns(): Promise<AutomationRun[]>;
 }
 
 declare class OnvoWidget extends OnvoBase {
@@ -1644,141 +1677,128 @@ declare class OnvoWidget extends OnvoBase {
     constructor(id: string, apiKey: string, options?: {
         endpoint: string;
     });
+    /**
+     * Exports the widget in the specified format.
+     *
+     * @param {("svg" | "csv" | "xlsx" | "png" | "jpeg")} format - The format to export the widget in.
+     * @return {Promise<Blob>} A promise that resolves to a Blob representing the exported widget.
+     */
     export(format: "svg" | "csv" | "xlsx" | "png" | "jpeg"): Promise<Blob>;
+    /**
+     * Updates the prompts for the widget.
+     *
+     * @param {Array<{ role: "user" | "assistant"; content: String }>} messages - The new prompts for the widget.
+     * @return {Promise<Widget>} A promise that resolves to the updated widget.
+     */
     updatePrompts(messages: {
         role: "user" | "assistant";
         content: String;
-    }[]): Promise<{
-        cache: string | null;
-        code: string;
-        created_at: string;
-        dashboard: string;
-        h: number | null;
-        id: string;
-        messages: Json;
-        settings: Json;
-        team: string;
-        title: string;
-        w: number | null;
-        x: number | null;
-        y: number | null;
-    }>;
+    }[]): Promise<Widget>;
+    /**
+     * Executes the given code in the widget.
+     *
+     * @param {string} code - The code to execute in the widget.
+     * @return {Promise<any>} A promise that resolves to the result of executing the code.
+     */
     executeCode(code: string): Promise<any>;
 }
 
 declare class OnvoSessions extends OnvoBase {
+    /**
+     * Lists all sessions for a given dashboard
+     * @param filters - Object containing the parent_dashboard field
+     * @returns Promise of an array of Session objects
+     */
     list(filters: {
         parent_dashboard: string;
-    }): Promise<{
-        created_at: string;
-        dashboard: string;
-        embed_user: string;
-        parameters: string;
-        team: string;
-    }[]>;
+    }): Promise<Session[]>;
+    /**
+     * Gets a specific session by its dashboard id
+     * @param filters - Object containing the dashboard field
+     * @returns Promise of a Session object
+     */
     get(filters: {
         dashboard: string;
-    }): Promise<{
-        created_at: string;
-        dashboard: string;
-        embed_user: string;
-        parameters: string;
-        team: string;
-    }>;
+    }): Promise<Session>;
+    /**
+     * Revokes a session by its dashboard id
+     * @param filters - Object containing the dashboard field
+     * @returns Promise of an object with a success field
+     */
     revoke(filters: {
         dashboard: string;
     }): Promise<{
         success: true;
     }>;
+    /**
+     * Revokes all sessions for a given dashboard
+     * @param filters - Object containing the parent_dashboard field
+     * @returns Promise of an object with a success field
+     */
     revokeAll(filters: {
         parent_dashboard: string;
     }): Promise<{
         success: true;
     }>;
+    /**
+     * Creates or updates a session for a given embed_user
+     * @param filters - Object containing the embed_user, parent_dashboard and parameters fields
+     * @returns Promise of a Session object with additional url and token fields
+     */
     upsert({ embed_user, parent_dashboard, parameters, }: {
         embed_user: string;
         parent_dashboard: string;
         parameters?: {
             [key: string]: any;
         };
-    }): Promise<{
-        created_at: string;
-        dashboard: string;
-        embed_user: string;
-        parameters: string;
-        team: string;
-    } & {
+    }): Promise<Session & {
         url: string;
         token: string;
     }>;
 }
 
 declare class OnvoWidgets extends OnvoBase {
+    /**
+     * Retrieves a list of widgets for a given dashboard.
+     *
+     * @param {Object} filters - Filters for the widgets.
+     * @param {string} filters.dashboard - The ID of the dashboard to retrieve widgets for.
+     * @return {Promise<Widget[]>} A promise that resolves to an array of widgets.
+     */
     list(filters: {
         dashboard: string;
-    }): Promise<{
-        cache: string | null;
-        code: string;
-        created_at: string;
-        dashboard: string;
-        h: number | null;
-        id: string;
-        messages: Json;
-        settings: Json;
-        team: string;
-        title: string;
-        w: number | null;
-        x: number | null;
-        y: number | null;
-    }[]>;
-    get(id: string): Promise<{
-        cache: string | null;
-        code: string;
-        created_at: string;
-        dashboard: string;
-        h: number | null;
-        id: string;
-        messages: Json;
-        settings: Json;
-        team: string;
-        title: string;
-        w: number | null;
-        x: number | null;
-        y: number | null;
-    }>;
+    }): Promise<Widget[]>;
+    /**
+     * Retrieves a specific widget by its ID.
+     *
+     * @param {string} id - The ID of the widget to retrieve.
+     * @return {Promise<Widget>} A promise that resolves to the widget.
+     */
+    get(id: string): Promise<Widget>;
+    /**
+     * Deletes a widget by its ID.
+     *
+     * @param {string} id - The ID of the widget to delete.
+     * @return {Promise<{success: boolean}>} A promise that resolves to an object indicating success.
+     */
     delete(id: string): Promise<{
-        success: true;
+        success: boolean;
     }>;
-    update(id: string, body: Partial<Widget>): Promise<{
-        cache: string | null;
-        code: string;
-        created_at: string;
-        dashboard: string;
-        h: number | null;
-        id: string;
-        messages: Json;
-        settings: Json;
-        team: string;
-        title: string;
-        w: number | null;
-        x: number | null;
-        y: number | null;
-    }>;
-    create(body: Omit<Widget, "id" | "created_at">): Promise<{
-        cache: string | null;
-        code: string;
-        created_at: string;
-        dashboard: string;
-        h: number | null;
-        id: string;
-        messages: Json;
-        settings: Json;
-        team: string;
-        title: string;
-        w: number | null;
-        x: number | null;
-        y: number | null;
-    }>;
+    /**
+     * Updates a widget by its ID.
+     *
+     * @param {string} id - The ID of the widget to update.
+     * @param {Partial<Widget>} body - The updated widget data.
+     * @return {Promise<Widget>} A promise that resolves to the updated widget.
+     */
+    update(id: string, body: Partial<Widget>): Promise<Widget>;
+    /**
+     * Creates a new widget.
+     *
+     * @param {Omit<Widget, "id" | "created_at">} body - The widget data to create.
+     * @return {Promise<Widget>} A promise that resolves to the created widget.
+     */
+    create(body: Omit<Widget, "id" | "created_at">): Promise<Widget>;
 }
 
 declare class OnvoQuestion extends OnvoBase {
@@ -1786,6 +1806,13 @@ declare class OnvoQuestion extends OnvoBase {
     constructor(id: string, apiKey: string, options?: {
         endpoint: string;
     });
+    /**
+     * Exports the question in the specified format.
+     *
+     * @param {number} messageIndex - The index of the message to export.
+     * @param {("svg" | "csv" | "xlsx" | "png" | "jpeg")} format - The format to export the question in.
+     * @return {Promise<Blob>} A promise that resolves to a Blob representing the exported question.
+     */
     export(messageIndex: number, format: "svg" | "csv" | "xlsx" | "png" | "jpeg"): Promise<Blob>;
 }
 

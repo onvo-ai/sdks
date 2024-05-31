@@ -1,4 +1,5 @@
-import { Card, Icon } from "@tremor/react";
+import { Card } from "../../tremor/Card";
+import { Icon } from "../../tremor/Icon";
 import React, { useMemo } from "react";
 import ChartBase from "./ChartBase";
 import { toast } from "sonner";
@@ -165,7 +166,7 @@ const ChartCard: React.FC<{
             }}
           >
             <Dropdown options={options}>
-              <Icon variant="shadow" icon={PencilSquareIcon} size="sm" />
+              <Icon icon={PencilSquareIcon} variant="shadow" />
             </Dropdown>
           </div>
         )}
@@ -302,12 +303,12 @@ const ChartCard: React.FC<{
       >
         {(ReportDownloadEnabled || ImageDownloadEnabled) && (
           <Dropdown options={[exportOptions]}>
-            <Icon variant="shadow" icon={ArrowDownTrayIcon} size="sm" />
+            <Icon icon={ArrowDownTrayIcon} variant="shadow" />
           </Dropdown>
         )}
         {(addable || deletable || widget_editable) && (
           <Dropdown options={options}>
-            <Icon variant="shadow" icon={PencilSquareIcon} size="sm" />
+            <Icon icon={PencilSquareIcon} variant="shadow" />
           </Dropdown>
         )}
       </div>

@@ -1,12 +1,15 @@
 import React from "react";
-import { Button, Text, Textarea, TextInput } from "@tremor/react";
+import { Textarea } from "../../tremor/Textarea";
+import { Input } from "../../tremor/Input";
+import { Button } from "../../tremor/Button";
 import { useEffect, useState } from "react";
 import { create } from "zustand";
 import { useDashboard } from "../Dashboard";
 import { useBackend } from "../Wrapper";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Icon, Title } from "@tremor/react";
+import { Icon } from "../../tremor/Icon";
+import { Title, Text } from "../../tremor/Text";
 import { Fragment } from "react";
 
 export const useSeparatorModal = create<{
@@ -127,7 +130,7 @@ const CreateSeparatorModal: React.FC<{
         }
       >
         <Text>Title</Text>
-        <TextInput
+        <Input
           placeholder="Type in a title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}

@@ -6,6 +6,39 @@
 @tailwind components;
 @tailwind utilities;
 
+/* DEFAULT STYLING */
+.onvo-dashboard-context {
+  font-family: "Inter", "Helvetica Neue", sans-serif;
+  --background-color: #f9fafb;
+  --foreground-color: #ffffff;
+  --font-override: inherit;
+}
+
+@media (prefers-color-scheme: dark) {
+  .onvo-dashboard-context {
+    --background-color: #030712;
+    --foreground-color: #111827;
+    --font-override: inherit;
+  }
+}
+
+.foreground-color {
+  background-color: var(--foreground-color) !important;
+}
+.background-color {
+  background-color: var(--background-color) !important;
+}
+.font-override {
+  font-family: var(--font-override) !important;
+}
+
+/* SEPARATOR LINKS STYLING */
+.onvo-separator a {
+  text-decoration: underline;
+  color: #3366cc;
+}
+
+/* REACT GRID STYLING */
 .react-grid-item > .react-resizable-handle {
   background-image: none !important;
   width: 12px !important;
@@ -20,27 +53,7 @@
   background-color: #3366cc33 !important;
 }
 
-.onvo-separator a {
-  text-decoration: underline;
-  color: #3366cc;
-}
-
-/* STYLING */
-:root {
-  font-family: "Inter", "Helvetica Neue", sans-serif;
-  --background-color: #f9fafb;
-  --foreground-color: #ffffff;
-  --font-override: inherit;
-}
-.foreground-color {
-  background-color: var(--foreground-color);
-}
-.background-color {
-  background-color: var(--background-color);
-}
-.font-override {
-  font-family: var(--font-override) !important;
-}
+/* REACT DATA GRID STYLING */
 .rdg-sort-arrow {
   margin-top: 12px;
 }
@@ -48,19 +61,17 @@
   text-decoration: underline;
   color: #3366cc;
 }
-
 .rdg-cell[role="columnheader"] {
   overflow-y: visible;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #030712;
-    --foreground-color: #111827;
-    --font-override: inherit;
-  }
+.dark .rdg {
+  --rdg-background-color: #111827 !important;
+  --rdg-header-background-color: #1f2937 !important;
+  --rdg-row-hover-background-color: #1f2937 !important;
+  --rdg-color: #ccc;
 }
 
+/* ANIMATED GRADIENT BORDER STYLES */
 .gradient-border {
   --borderWidth: 3px;
   position: absolute;
@@ -96,13 +107,7 @@
   }
 }
 
-.dark .rdg {
-  --rdg-background-color: #111827 !important;
-  --rdg-header-background-color: #1f2937 !important;
-  --rdg-row-hover-background-color: #1f2937 !important;
-  --rdg-color: #ccc;
-}
-
+/* LOADER DOTS STYLES */
 .loader-dots div {
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }

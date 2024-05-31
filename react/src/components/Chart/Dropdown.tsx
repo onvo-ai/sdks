@@ -1,6 +1,5 @@
 import { Menu, Transition } from "@headlessui/react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { Icon } from "@tremor/react";
+
 import React from "react";
 import { Fragment } from "react";
 
@@ -38,7 +37,7 @@ const Dropdown: React.FC<{
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="onvo-dropdown-menu-items z-20 absolute backdrop-blur-lg right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white/50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:divide-gray-700 dark:bg-gray-800/50 border dark:border-gray-700">
+          <Menu.Items className="onvo-dropdown-menu-items z-20 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:divide-gray-700 dark:bg-gray-800 border dark:border-gray-700">
             {options.map((a, i) => (
               <div key={i + ""} className="relative px-1 py-1 z-10">
                 {a.map((b) => (

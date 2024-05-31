@@ -8,7 +8,6 @@ const config: StorybookConfig = {
     "@storybook/addon-interactions",
     "@storybook/addon-themes",
     "@storybook/addon-webpack5-compiler-swc",
-    "@chromatic-com/storybook",
     {
       name: '@storybook/addon-postcss',
       options: {

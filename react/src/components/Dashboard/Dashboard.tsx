@@ -58,6 +58,7 @@ export const Dashboard: React.FC<{
   const prefersColorScheme = usePrefersColorScheme();
   const [selectedWidget, setSelectedWidget] = useState<Widget>();
   const initialized = useRef(false);
+  const elementRef = useRef<HTMLDivElement>();
 
   const refreshDashboard = async () => {
     if (!backend) return;
@@ -98,7 +99,8 @@ export const Dashboard: React.FC<{
   }, [id, backend]);
 
   useEffect(() => {
-    const r = document.querySelector(":root") as any;
+    if (!elementRef || !elementRef.current) return;
+    const r = elementRef.current;
 
     r.style.setProperty(
       "--font-override",
@@ -154,7 +156,7 @@ export const Dashboard: React.FC<{
       defaults.font.family =
         "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
     };
-  }, [dashboard, prefersColorScheme]);
+  }, [elementRef, dashboard, prefersColorScheme]);
 
   return (
     <Context.Provider
@@ -173,7 +175,8 @@ export const Dashboard: React.FC<{
     >
       <div
         key={theme}
-        className={`onvo-dashboard-context relative background-color flex min-h-screen flex-col ${theme} ${className}`}
+        ref={elementRef as any}
+        className={`onvo-dashboard-context translate-x-0 h-full relative background-color flex flex-col ${theme} ${className}`}
       >
         {children}
       </div>

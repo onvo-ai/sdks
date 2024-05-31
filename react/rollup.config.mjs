@@ -3,10 +3,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import dts from "rollup-plugin-dts";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
-import tailwindcss from "tailwindcss";
 import terser from "@rollup/plugin-terser";
-
-const tailwindConfig = require("./tailwind.config.js");
 
 const warningHandler = (warning, warn) => {
   if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
@@ -26,12 +23,14 @@ export default [
         dir: "dist/cjs",
         format: "cjs",
         sourcemap: true,
+        plugins: [],
       },
 
       {
         dir: "dist/esm",
         format: "esm",
         sourcemap: true,
+        plugins: [],
       },
     ],
     plugins: [
@@ -39,8 +38,14 @@ export default [
       resolve({ browser: true }),
       commonjs(),
       postcss({
+        inject: {
+          insertAt: "top",
+        },
+        config: {
+          path: "./postcss.config.js",
+        },
+        minimize: true,
         extensions: [".css"],
-        plugins: [tailwindcss(tailwindConfig)],
       }),
       terser(),
     ],

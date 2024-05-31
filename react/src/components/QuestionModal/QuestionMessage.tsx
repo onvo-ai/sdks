@@ -1,5 +1,9 @@
-import { Button, Text, Card, Bold, Icon, Textarea } from "@tremor/react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Textarea } from "../../tremor/Textarea";
+import { Button } from "../../tremor/Button";
+import { Text } from "../../tremor/Text";
+import { Card } from "../../tremor/Card";
+import { Icon } from "../../tremor/Icon";
+import { useEffect, useMemo, useState } from "react";
 import React from "react";
 import { useBackend } from "../Wrapper";
 import remarkGfm from "remark-gfm";
@@ -144,7 +148,7 @@ const QuestionMessage: React.FC<{
   if (role === "user") {
     return (
       <div className="onvo-question-message-user group relative mb-3 flex flex-row items-start justify-start gap-3">
-        <Icon variant="shadow" icon={UserIcon} size="sm" />
+        <Icon variant="shadow" icon={UserIcon} />
         <div className="w-full">
           {editing ? (
             <Textarea
@@ -158,7 +162,6 @@ const QuestionMessage: React.FC<{
           {editing ? (
             <div className="flex flex-row gap-2 mt-2">
               <Button
-                size="sm"
                 className="py-1 rounded-md"
                 onClick={() => {
                   onEdit(newMessage);
@@ -168,7 +171,6 @@ const QuestionMessage: React.FC<{
                 Regenerate chart
               </Button>
               <Button
-                size="sm"
                 className="py-1 rounded-md"
                 color="red"
                 onClick={() => {
@@ -179,7 +181,6 @@ const QuestionMessage: React.FC<{
               </Button>
               <div className="flex-grow h-1" />
               <Button
-                size="sm"
                 className="py-1 rounded-md"
                 variant="secondary"
                 color="gray"
@@ -193,10 +194,10 @@ const QuestionMessage: React.FC<{
           ) : (
             <Icon
               onClick={() => setEditing(true)}
-              variant="shadow"
               className="absolute top-2 right-2 hidden group-hover:block"
               icon={PencilIcon}
-              size="sm"
+              variant="shadow"
+              size="xs"
             />
           )}
         </div>
@@ -293,11 +294,7 @@ const QuestionMessage: React.FC<{
   let nextMessage = isLast ? "" : messages[index + 1].content || "";
   return (
     <div className="onvo-question-message-assistant relative mb-3 flex flex-row items-start justify-start gap-3">
-      <Icon
-        variant="shadow"
-        icon={() => <Logo height={20} width={20} />}
-        size="sm"
-      />
+      <Icon variant="shadow" icon={() => <Logo height={20} width={20} />} />
 
       <article className="onvo-question-assistant-code-wrapper prose prose-sm dark:prose-invert w-full">
         {code.trim() !== "" && (
@@ -355,12 +352,12 @@ const QuestionMessage: React.FC<{
               }}
             >
               {AddToDashboardEnabled && (
-                <Button variant="primary" size="xs" onClick={addToDashboard}>
+                <Button variant="primary" onClick={addToDashboard}>
                   Add to dashboard
                 </Button>
               )}
               <Dropdown options={[exportOptions]}>
-                <Icon variant="shadow" icon={ArrowDownTrayIcon} size="sm" />
+                <Icon variant="shadow" icon={ArrowDownTrayIcon} />
               </Dropdown>
             </div>
 
@@ -383,7 +380,6 @@ const QuestionMessage: React.FC<{
             {options.map((a) => (
               <Button
                 onClick={() => isLast && onReply(a)}
-                size="sm"
                 disabled={!isLast}
                 key={a}
                 color={a === nextMessage ? "blue" : "gray"}

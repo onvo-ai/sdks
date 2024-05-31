@@ -1,5 +1,5 @@
 import { SparklesIcon } from "@heroicons/react/24/solid";
-import { Text } from "@tremor/react";
+import { Text } from "../../tremor/Text";
 import React from "react";
 
 const SuggestionsBar: React.FC<{ onSelect: (str: string) => void }> = ({
