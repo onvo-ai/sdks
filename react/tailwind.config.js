@@ -4,7 +4,7 @@
 /* eslint-disable max-len */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./lib/**/*.{js,jsx,ts,tsx}"],
-  darkMode: "class",
+  darkMode: "selector",
   theme: {
     fontFamily: {
       sans: [

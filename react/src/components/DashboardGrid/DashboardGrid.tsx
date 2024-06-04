@@ -145,6 +145,7 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
           });
 
           if (dashboard && editable && updatedWidgets.length > 0) {
+            console.log("UPDATING ", updatedWidgets.length, " WIDGETS")
             setWidgets(newWidgets);
             updatedWidgets.forEach((i) => {
               backend?.widgets.update(i.id, {
@@ -155,8 +156,8 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
         }}
       >
         {children}
-        <CreateSeparatorModal maxHeight={maxHeight} />
       </ResponsiveGridLayout>
+        <CreateSeparatorModal maxHeight={maxHeight} />
     </div>
   );
 };

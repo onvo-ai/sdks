@@ -35,7 +35,7 @@ export const useSeparatorModal = create<{
 const CreateSeparatorModal: React.FC<{
   maxHeight: number;
 }> = ({ maxHeight }) => {
-  const { dashboard, refreshWidgets, container } = useDashboard();
+  const { dashboard, refreshWidgets, container, adminMode } = useDashboard();
   const backend = useBackend();
   const { open, setOpen, widget } = useSeparatorModal();
   const [title, setTitle] = useState("");
@@ -108,7 +108,7 @@ const CreateSeparatorModal: React.FC<{
             x: 0,
             y: maxHeight,
             w: 24,
-            h: 1,
+            h: 5,
           },
         },
         cache: cache,
@@ -125,11 +125,16 @@ const CreateSeparatorModal: React.FC<{
     refreshWidgets();
   };
 
+  if (!dashboard?.settings?.can_create_widgets && !adminMode) return <></>;
+
   return (
     <>
-      <Dialog>
+      <Dialog open={open}>
         <DialogTrigger asChild>
-          <div className="flex h-full justify-center items-center transition-opacity duration-300 opacity-30 hover:opacity-100 cursor-pointer border-dashed border-gray-200 dark:border-gray-700 border-2 rounded-lg">
+          <div
+            onClick={() => setOpen(true)}
+            className="mx-[10px] mb-[10px] flex h-10 justify-center items-center transition-opacity duration-300 opacity-30 hover:opacity-100 cursor-pointer border-dashed border-gray-200 dark:border-gray-700 border-2 rounded-lg"
+          >
             <Text>+ Add separator</Text>
           </div>
         </DialogTrigger>
@@ -156,10 +161,11 @@ const CreateSeparatorModal: React.FC<{
           <DialogFooter className="mt-6">
             <DialogClose asChild>
               <Button
+                onClick={() => setOpen(false)}
                 className="mt-2 w-full sm:mt-0 sm:w-fit"
                 variant="secondary"
               >
-                Go back
+                Cancel
               </Button>
             </DialogClose>
             <DialogClose asChild>
