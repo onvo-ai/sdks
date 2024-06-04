@@ -14,19 +14,31 @@ import { ErrorBoundary } from "react-error-boundary";
 import { toast } from "sonner";
 import {
   ArrowDownTrayIcon,
-  ChevronUpIcon,
   DocumentChartBarIcon,
   PencilIcon,
   PhotoIcon,
-  TableCellsIcon,
 } from "@heroicons/react/24/outline";
-import { Disclosure } from "@headlessui/react";
-import Loader from "./Loader";
 import ChartBase from "../Chart/ChartBase";
 import { useDashboard } from "../Dashboard";
 import Logo from "./Logo";
 import { UserIcon } from "@heroicons/react/24/solid";
-import Dropdown from "../Chart/Dropdown";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuIconWrapper,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../../tremor/DropdownMenu";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../../tremor/Accordion";
+
 dayjs.extend(relativeTime);
 
 const QuestionMessage: React.FC<{
@@ -83,10 +95,12 @@ const QuestionMessage: React.FC<{
     });
     let newObj: any = {
       title: title,
-      x: 0,
-      y: maxHeight,
-      w: 4,
-      h: output.type === "metric" ? 10 : 20,
+      layouts: {
+        x: 0,
+        y: maxHeight,
+        w: 4,
+        h: output.type === "metric" ? 10 : 20,
+      },
       messages: messages.filter((a) => a.role !== "tool"),
       dashboard: dashboardId,
       team: teamId || "",
@@ -229,11 +243,12 @@ const QuestionMessage: React.FC<{
   };
 
   const ImageDownloadEnabled = useMemo(() => {
+    if (output && output.type === "table") return false;
     if (adminMode) return true;
     if (dashboard?.settings && dashboard.settings.disable_download_images)
       return false;
     return true;
-  }, [dashboard, adminMode]);
+  }, [dashboard, adminMode, output]);
 
   const ReportDownloadEnabled = useMemo(() => {
     if (adminMode) return true;
@@ -249,85 +264,31 @@ const QuestionMessage: React.FC<{
     return false;
   }, [dashboard, adminMode]);
 
-  const exportOptions = [
-    ...(ReportDownloadEnabled
-      ? [
-          {
-            title: "Download as excel",
-            icon: DocumentChartBarIcon,
-            id: "download-excel",
-            onClick: () => exportWidget("xlsx"),
-          },
-          {
-            title: "Download as csv",
-            icon: TableCellsIcon,
-            id: "download-csv",
-            onClick: () => exportWidget("csv"),
-          },
-        ]
-      : []),
-
-    ...((output && output.type === "table") || !ImageDownloadEnabled
-      ? []
-      : [
-          {
-            title: "Download as svg",
-            icon: PhotoIcon,
-            id: "download-svg",
-            onClick: () => exportWidget("svg"),
-          },
-          {
-            title: "Download as png",
-            icon: PhotoIcon,
-            id: "download-png",
-            onClick: () => exportWidget("png"),
-          },
-          {
-            title: "Download as jpeg",
-            icon: PhotoIcon,
-            id: "download-jpeg",
-            onClick: () => exportWidget("jpeg"),
-          },
-        ]),
-  ];
   let isLast = index === messages.length - 1;
   let nextMessage = isLast ? "" : messages[index + 1].content || "";
   return (
     <div className="onvo-question-message-assistant relative mb-3 flex flex-row items-start justify-start gap-3">
       <Icon variant="shadow" icon={() => <Logo height={20} width={20} />} />
-
-      <article className="onvo-question-assistant-code-wrapper prose prose-sm dark:prose-invert w-full">
+      <div className="w-full">
         {code.trim() !== "" && (
-          <Disclosure>
-            {({ open }) => (
-              <>
-                <Disclosure.Button
-                  className={
-                    "flex w-full items-center justify-between bg-gray-100 px-4 py-2 text-left text-sm font-medium text-gray-800 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 " +
-                    (open ? "rounded-t-lg" : "rounded-lg")
-                  }
+          <Accordion type="single" className="leading-none" collapsible>
+            <AccordionItem value="item-1" className="border-b-0">
+              <AccordionTrigger className="border-b-0 py-2 px-2 rounded-md bg-slate-100 dark:bg-slate-700">
+                <span>Show working</span>
+              </AccordionTrigger>
+              <AccordionContent className="pt-2">
+                <ErrorBoundary
+                  fallbackRender={({ error }) => <Text>{code}</Text>}
                 >
-                  <span>Show working</span>
-                  <div className="flex flex-row items-center gap-2">
-                    <ChevronUpIcon
-                      className={`${
-                        open ? "rotate-180 transform" : ""
-                      } h-5 w-5 text-gray-500`}
-                    />
-                  </div>
-                </Disclosure.Button>
-                <Disclosure.Panel>
-                  <ErrorBoundary
-                    fallbackRender={({ error }) => <Text>{code}</Text>}
-                  >
-                    <ReactMarkdown className="onvo-question-assistant-code -mt-5">
+                  <article className="onvo-question-assistant-code-wrapper prose prose-sm dark:prose-invert inline w-full">
+                    <ReactMarkdown className="onvo-question-assistant-code -mt-5 ">
                       {"```python\n" + code + "\n```"}
                     </ReactMarkdown>
-                  </ErrorBoundary>
-                </Disclosure.Panel>
-              </>
-            )}
-          </Disclosure>
+                  </article>
+                </ErrorBoundary>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         )}
         {output && (
           <Card
@@ -356,9 +317,72 @@ const QuestionMessage: React.FC<{
                   Add to dashboard
                 </Button>
               )}
-              <Dropdown options={[exportOptions]}>
-                <Icon variant="shadow" icon={ArrowDownTrayIcon} />
-              </Dropdown>
+              {(ImageDownloadEnabled || ReportDownloadEnabled) && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Icon variant="shadow" icon={ArrowDownTrayIcon} />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="min-w-56">
+                    {ReportDownloadEnabled && (
+                      <>
+                        <DropdownMenuLabel>Reports</DropdownMenuLabel>
+                        <DropdownMenuGroup>
+                          <DropdownMenuItem
+                            onClick={() => exportWidget("xlsx")}
+                          >
+                            <span className="flex items-center gap-x-2">
+                              <DocumentChartBarIcon className="size-4" />
+                              <span>Download as excel</span>
+                            </span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => exportWidget("csv")}>
+                            <span className="flex items-center gap-x-2">
+                              <DropdownMenuIconWrapper>
+                                <DocumentChartBarIcon className="size-4 text-inherit" />
+                              </DropdownMenuIconWrapper>
+                              <span>Download as CSV</span>
+                            </span>
+                          </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                      </>
+                    )}
+                    {ImageDownloadEnabled && ReportDownloadEnabled && (
+                      <DropdownMenuSeparator />
+                    )}
+                    {ImageDownloadEnabled && (
+                      <>
+                        <DropdownMenuLabel>Images</DropdownMenuLabel>
+                        <DropdownMenuGroup>
+                          <DropdownMenuItem onClick={() => exportWidget("svg")}>
+                            <span className="flex items-center gap-x-2">
+                              <PhotoIcon className="size-4" />
+                              <span>Download as SVG</span>
+                            </span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => exportWidget("png")}>
+                            <span className="flex items-center gap-x-2">
+                              <DropdownMenuIconWrapper>
+                                <PhotoIcon className="size-4 text-inherit" />
+                              </DropdownMenuIconWrapper>
+                              <span>Download as PNG</span>
+                            </span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => exportWidget("jpeg")}
+                          >
+                            <span className="flex items-center gap-x-2">
+                              <DropdownMenuIconWrapper>
+                                <PhotoIcon className="size-4 text-inherit" />
+                              </DropdownMenuIconWrapper>
+                              <span>Download as JPEG</span>
+                            </span>
+                          </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                      </>
+                    )}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
             </div>
 
             <ChartBase
@@ -370,27 +394,33 @@ const QuestionMessage: React.FC<{
           </Card>
         )}
 
-        {answer && answer.trim() !== "" && (
-          <ErrorBoundary fallbackRender={({ error }) => <Text>{answer}</Text>}>
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{answer}</ReactMarkdown>
-          </ErrorBoundary>
-        )}
-        {options && options.length > 0 && (
-          <div className="flex flex-row gap-2 -mt-2">
-            {options.map((a) => (
-              <Button
-                onClick={() => isLast && onReply(a)}
-                disabled={!isLast}
-                key={a}
-                color={a === nextMessage ? "blue" : "gray"}
-                variant="secondary"
-              >
-                {a}
-              </Button>
-            ))}
-          </div>
-        )}
-      </article>
+        <article className="onvo-question-assistant-code-wrapper prose prose-sm dark:prose-invert w-full">
+          {answer && answer.trim() !== "" && (
+            <ErrorBoundary
+              fallbackRender={({ error }) => <Text>{answer}</Text>}
+            >
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {answer}
+              </ReactMarkdown>
+            </ErrorBoundary>
+          )}
+          {options && options.length > 0 && (
+            <div className="flex flex-row gap-2 -mt-2">
+              {options.map((a) => (
+                <Button
+                  onClick={() => isLast && onReply(a)}
+                  disabled={!isLast}
+                  key={a}
+                  color={a === nextMessage ? "blue" : "gray"}
+                  variant="secondary"
+                >
+                  {a}
+                </Button>
+              ))}
+            </div>
+          )}
+        </article>
+      </div>
     </div>
   );
 };

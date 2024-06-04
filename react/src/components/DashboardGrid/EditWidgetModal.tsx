@@ -4,13 +4,13 @@ import { Label, Text, Title } from "../../tremor/Text";
 import { Button } from "../../tremor/Button";
 import { Card } from "../../tremor/Card";
 import { Icon } from "../../tremor/Icon";
-import { useResizable } from "react-resizable-layout";
-import { Transition } from "@headlessui/react";
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Dialog, DialogContent } from "../../tremor/Dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../tremor/Tabs"
+
+import { useEffect, useMemo, useState } from "react";
 import { Widget } from "@onvo-ai/js";
 import {
   ArrowUpIcon,
-  BackwardIcon,
   EyeIcon,
   EyeSlashIcon,
   PencilIcon,
@@ -100,10 +100,15 @@ const Message: React.FC<{
   );
 };
 
-const UpdateChartModal: React.FC<{}> = ({}) => {
+const EditChartModal: React.FC<{}> = ({}) => {
   const backend = useBackend();
-  const { refreshWidgets, setSelectedWidget, selectedWidget, dashboard } =
-    useDashboard();
+  const {
+    refreshWidgets,
+    setSelectedWidget,
+    selectedWidget,
+    dashboard,
+    container
+  } = useDashboard();
 
   const [newMessage, setNewMessage] = useState("");
   const [widget, setWidget] = useState<Widget>();
@@ -115,6 +120,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
     { role: "user" | "assistant"; content: string }[]
   >([]);
   const [settings, setSettings] = useState<any>({});
+  const [tab, setTab] = useState<"chat"|"editor">("chat");
 
   useEffect(() => {
     if (selectedWidget) {
@@ -180,10 +186,6 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
     );
   };
 
-  const { position, separatorProps } = useResizable({
-    axis: "y",
-    min: 100,
-  });
 
   const cleanup = () => {
     setOutput(null);
@@ -225,134 +227,163 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
 
   return (
     <>
-      <Transition appear show={open} as={Fragment as any}>
-        <div className="onvo-update-chart-modal foreground-color absolute flex flex-col left-0 top-0 z-20 h-full w-full">
-          <div
-            className={
-              "foreground-color w-full left-0 top-0 z-10 flex flex-row justify-start items-center gap-4 border-b border-gray-200  p-2 dark:border-gray-800"
-            }
-          >
-            <Icon
-              icon={ChevronLeftIcon}
-              variant="shadow"
-              className="ml-2"
-              onClick={() => {
-                cleanup();
-              }}
-            />
+      <Dialog open={open}>
+        <DialogContent
+          container={container}
+          className="max-w-none w-full h-full rounded-none p-0 border-0"
+        >
+          <div className="onvo-update-chart-modal foreground-color absolute flex flex-col left-0 top-0 z-20 h-full w-full">
+            <div
+              className={
+                "foreground-color w-full left-0 top-0 z-10 flex flex-row justify-start items-center gap-4 border-b border-gray-200  p-2 dark:border-gray-800"
+              }
+            >
+              <Icon
+                icon={ChevronLeftIcon}
+                variant="shadow"
+                className="ml-2"
+                onClick={() => {
+                  cleanup();
+                }}
+              />
 
-            <div className="flex flex-row w-full gap-1 flex-grow justify-start items-center">
-              <Text>{dashboard?.title}</Text>
-              <ChevronRightIcon className="h-4 w-4" />
-              <Label>Edit {title}</Label>
-            </div>
-            <div className="flex flex-row gap-2 flex-shrink-0">
-              <Button
-                variant="secondary"
-                className="flex-shrink-0"
-                onClick={executeCode}
-              >
-                Execute code
-              </Button>
-              <Button
-                onClick={saveChanges}
-                className="flex-shrink-0"
-                isLoading={loading}
-              >
-                Save changes
-              </Button>
-            </div>
-          </div>
-          <Transition.Child
-            as={Fragment as any}
-            enter="ease-out delay-200 duration-300"
-            enterFrom="opacity-0 translate-y-12"
-            enterTo="opacity-100 translate-y-0"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 translate-y-0"
-            leaveTo="opacity-0 translate-y-12"
-          >
-            <div className="flex flex-grow h-[calc(100%-55px)] w-full flex-row">
-              <div className="relative overflow-y-auto flex w-full flex-grow flex-col border-r border-gray-200 dark:border-gray-800">
-                <div className="flex flex-col absolute bottom-8 overflow-y-auto top-0 pt-4 px-4 w-full">
-                  {messages.map((a, index) => (
-                    <Message
-                      key={"message-" + index}
-                      message={a}
-                      onDelete={() => {
-                        let newMessages = messages.filter(
-                          (m, i) => i !== index
-                        );
-                        getGraph(newMessages);
-                        setMessages(newMessages);
-                      }}
-                      onEdit={(msg) => {
-                        let newMessages = messages.map((m, i) => {
-                          if (i === index) {
-                            return {
-                              ...m,
-                              content: msg,
-                            };
-                          }
-                          return m;
-                        });
-                        getGraph(newMessages);
-                        setMessages(newMessages);
-                      }}
-                    />
-                  ))}
-                </div>
-
-                <div
-                  className={
-                    "onvo-input-text-wrapper absolute bottom-0 left-0 right-0 z-10 pb-4"
-                  }
-                >
-                  <SuggestionsBar onSelect={(val) => setNewMessage(val)} />
-                  <div className="relative mx-auto flex w-full max-w-2xl flex-row items-center gap-2">
-                    <Textarea
-                      value={newMessage}
-                      onChange={(e) => setNewMessage(e.target.value)}
-                      className="onvo-ask-textarea background-color pr-[52px]"
-                      placeholder={`Ask for changes to your chart...`}
-                      autoFocus
-                      onKeyUp={(evt) => {
-                        if (evt.key === "Enter" && !evt.shiftKey) {
-                          getGraph([
-                            ...messages,
-                            { role: "user", content: newMessage },
-                          ]);
-                          setMessages((m) => [
-                            ...m,
-                            { role: "user", content: newMessage },
-                          ]);
-                          setNewMessage("");
-                        }
-                      }}
-                    />
-                    <Icon
-                      className="absolute right-2 top-1 z-10"
-                      icon={ArrowUpIcon}
-                      onClick={() => {
-                        getGraph([
-                          ...messages,
-                          { role: "user", content: newMessage },
-                        ]);
-                        setMessages((m) => [
-                          ...m,
-                          { role: "user", content: newMessage },
-                        ]);
-                        setNewMessage("");
-                      }}
-                    />
-                  </div>
-                </div>
+              <div className="flex flex-row w-full gap-1 flex-grow justify-start items-center">
+                <Text>{dashboard?.title}</Text>
+                <ChevronRightIcon className="h-4 w-4" />
+                <Label>Edit {title}</Label>
               </div>
-              <div className="background-color w-full flex-grow overflow-y-auto relative">
-                <div
-                  id="wrapper"
-                  className="relative w-full h-full flex flex-col"
+              <div className="flex flex-row gap-2 flex-shrink-0">
+                <Button
+                  onClick={saveChanges}
+                  className="flex-shrink-0"
+                  isLoading={loading}
                 >
+                  Save changes
+                </Button>
+              </div>
+            </div>
+            <div className="relative flex flex-grow h-[calc(100%-55px)] w-full flex-row">
+              <div className="relative flex-grow h-full w-full pt-3 border-r border-gray-200 dark:border-gray-800">
+                {tab === "editor" && (
+              <Button
+                  variant="secondary"
+                  className="absolute top-1.5 right-1 z-10"
+                  onClick={executeCode}
+                >
+                  Execute code
+                </Button>)}
+              <Tabs defaultValue="chat" onValueChange={val => {
+                setTab(val as "chat" | "editor")
+              }} className="h-full flex flex-col">
+    <TabsList>
+      <TabsTrigger value="chat">Chat</TabsTrigger>
+      <TabsTrigger value="editor">Code editor</TabsTrigger>
+    </TabsList>
+    <div className="flex-grow h-full w-full">
+      <TabsContent
+        value="chat"
+        className="h-full"
+      >
+<div className="h-full relative flex-grow flex-col ">
+<div className="flex flex-col absolute bottom-8 overflow-y-auto top-0 pt-4 px-4 w-full">
+  {messages.map((a, index) => (
+    <Message
+      key={"message-" + index}
+      message={a}
+      onDelete={() => {
+        let newMessages = messages.filter(
+          (m, i) => i !== index
+        );
+        getGraph(newMessages);
+        setMessages(newMessages);
+      }}
+      onEdit={(msg) => {
+        let newMessages = messages.map((m, i) => {
+          if (i === index) {
+            return {
+              ...m,
+              content: msg,
+            };
+          }
+          return m;
+        });
+        getGraph(newMessages);
+        setMessages(newMessages);
+      }}
+    />
+  ))}
+</div>
+
+<div
+  className={
+    "onvo-input-text-wrapper absolute bottom-0 left-0 right-0 z-10 pb-4"
+  }
+>
+  <SuggestionsBar onSelect={(val) => setNewMessage(val)} />
+  <div className="relative mx-auto flex w-full max-w-2xl flex-row items-center gap-2">
+    <Textarea
+      value={newMessage}
+      onChange={(e) => setNewMessage(e.target.value)}
+      className="onvo-ask-textarea background-color pr-[52px]"
+      placeholder={`Ask for changes to your chart...`}
+      autoFocus
+      onKeyUp={(evt) => {
+        if (evt.key === "Enter" && !evt.shiftKey) {
+          getGraph([
+            ...messages,
+            { role: "user", content: newMessage },
+          ]);
+          setMessages((m) => [
+            ...m,
+            { role: "user", content: newMessage },
+          ]);
+          setNewMessage("");
+        }
+      }}
+    />
+    <Icon
+      className="absolute right-2 top-1 z-10"
+      icon={ArrowUpIcon}
+      onClick={() => {
+        getGraph([
+          ...messages,
+          { role: "user", content: newMessage },
+        ]);
+        setMessages((m) => [
+          ...m,
+          { role: "user", content: newMessage },
+        ]);
+        setNewMessage("");
+      }}
+    />
+  </div>
+</div>
+</div>
+      </TabsContent>
+      <TabsContent
+        value="editor" 
+        className="h-full w-full"
+      >
+       
+  <Editor
+    defaultLanguage="python"
+    value={code} height="100%"
+    options={{
+      padding: {
+        top: 10,
+      },
+    }}
+    className="onvo-code-editor w-full"
+    theme="vs-dark"
+    onChange={(val) => setCode(val || "")}
+  />
+      </TabsContent>
+    </div>
+  </Tabs>
+
+              </div>
+              <div className="background-color w-full flex-grow relative p-4 overflow-y-auto  bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px]">
+
                   {loading && (
                     <div className="absolute top-0 left-0 bottom-0 right-0 z-10 backdrop-blur-md bg-white/50 dark:bg-gray-900/50 flex justify-center items-center">
                       <Card className="onvo-loading-card flex flex-row gap-6 items-center w-72">
@@ -379,27 +410,7 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                     </div>
                   )}
 
-                  <Editor
-                    height={position}
-                    defaultLanguage="python"
-                    value={code}
-                    options={{
-                      padding: {
-                        top: 10,
-                      },
-                    }}
-                    className="onvo-code-editor"
-                    theme="vs-dark"
-                    onChange={(val) => setCode(val || "")}
-                  />
-                  <div
-                    className="bg-black flex justify-center items-center hover:bg-blue-500 active:bg-blue-800 h-3 w-full"
-                    {...separatorProps}
-                  >
-                    <div className="h-[4px] w-20 bg-gray-400 rounded-full"></div>
-                  </div>
 
-                  <div className="relative p-4 overflow-y-auto">
                     <Card
                       className={
                         "foreground-color relative mt-2 flex w-full flex-col py-3 " +
@@ -416,8 +427,6 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                         />
                       )}
                     </Card>
-                  </div>
-                </div>
               </div>
 
               <div className="justify-start h-full sticky top-14 gap-2 w-72 flex flex-col flex-shrink-0 border-l border-slate-200 bg-slate-100 p-4 dark:border-slate-700 dark:bg-slate-800">
@@ -483,11 +492,12 @@ const UpdateChartModal: React.FC<{}> = ({}) => {
                 </div>
               </div>
             </div>
-          </Transition.Child>
-        </div>
-      </Transition>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
 
-export default UpdateChartModal;
+export default EditChartModal;
+

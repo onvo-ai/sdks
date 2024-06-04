@@ -26,7 +26,7 @@ declare class OnvoBase {
 type Json = string | number | boolean | null | {
     [key: string]: Json | undefined;
 } | Json[];
-interface Database {
+type Database = {
     public: {
         Tables: {
             accounts: {
@@ -810,45 +810,36 @@ interface Database {
                     code: string;
                     created_at: string;
                     dashboard: string;
-                    h: number | null;
                     id: string;
+                    layouts: Json;
                     messages: Json;
                     settings: Json;
                     team: string;
                     title: string;
-                    w: number | null;
-                    x: number | null;
-                    y: number | null;
                 };
                 Insert: {
                     cache?: string | null;
                     code: string;
                     created_at?: string;
                     dashboard: string;
-                    h?: number | null;
                     id?: string;
+                    layouts?: Json;
                     messages?: Json;
                     settings?: Json;
                     team: string;
                     title: string;
-                    w?: number | null;
-                    x?: number | null;
-                    y?: number | null;
                 };
                 Update: {
                     cache?: string | null;
                     code?: string;
                     created_at?: string;
                     dashboard?: string;
-                    h?: number | null;
                     id?: string;
+                    layouts?: Json;
                     messages?: Json;
                     settings?: Json;
                     team?: string;
                     title?: string;
-                    w?: number | null;
-                    x?: number | null;
-                    y?: number | null;
                 };
                 Relationships: [
                     {
@@ -1019,45 +1010,36 @@ interface Database {
                     code: string | null;
                     created_at: string | null;
                     dashboard: string | null;
-                    h: number | null;
                     id: string | null;
+                    layouts: Json | null;
                     messages: Json | null;
                     settings: Json | null;
                     team: string | null;
                     title: string | null;
-                    w: number | null;
-                    x: number | null;
-                    y: number | null;
                 };
                 Insert: {
                     cache?: never;
                     code?: string | null;
                     created_at?: string | null;
                     dashboard?: string | null;
-                    h?: number | null;
                     id?: string | null;
+                    layouts?: Json | null;
                     messages?: Json | null;
                     settings?: Json | null;
                     team?: string | null;
                     title?: string | null;
-                    w?: number | null;
-                    x?: number | null;
-                    y?: number | null;
                 };
                 Update: {
                     cache?: never;
                     code?: string | null;
                     created_at?: string | null;
                     dashboard?: string | null;
-                    h?: number | null;
                     id?: string | null;
+                    layouts?: Json | null;
                     messages?: Json | null;
                     settings?: Json | null;
                     team?: string | null;
                     title?: string | null;
-                    w?: number | null;
-                    x?: number | null;
-                    y?: number | null;
                 };
                 Relationships: [
                     {
@@ -1095,7 +1077,7 @@ interface Database {
                 Args: {
                     input_string: string;
                 };
-                Returns: unknown;
+                Returns: string[];
             };
             stripe_can_create_automation: {
                 Args: {
@@ -1124,8 +1106,9 @@ interface Database {
             [_ in never]: never;
         };
     };
-}
-type Tables<PublicTableNameOrOptions extends keyof (Database["public"]["Tables"] & Database["public"]["Views"]) | {
+};
+type PublicSchema = Database[Extract<keyof Database, "public">];
+type Tables<PublicTableNameOrOptions extends keyof (PublicSchema["Tables"] & PublicSchema["Views"]) | {
     schema: keyof Database;
 }, TableName extends PublicTableNameOrOptions extends {
     schema: keyof Database;
@@ -1133,10 +1116,10 @@ type Tables<PublicTableNameOrOptions extends keyof (Database["public"]["Tables"]
     schema: keyof Database;
 } ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] & Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
     Row: infer R;
-} ? R : never : PublicTableNameOrOptions extends keyof (Database["public"]["Tables"] & Database["public"]["Views"]) ? (Database["public"]["Tables"] & Database["public"]["Views"])[PublicTableNameOrOptions] extends {
+} ? R : never : PublicTableNameOrOptions extends keyof (PublicSchema["Tables"] & PublicSchema["Views"]) ? (PublicSchema["Tables"] & PublicSchema["Views"])[PublicTableNameOrOptions] extends {
     Row: infer R;
 } ? R : never : never;
-type TablesInsert<PublicTableNameOrOptions extends keyof Database["public"]["Tables"] | {
+type TablesInsert<PublicTableNameOrOptions extends keyof PublicSchema["Tables"] | {
     schema: keyof Database;
 }, TableName extends PublicTableNameOrOptions extends {
     schema: keyof Database;
@@ -1144,10 +1127,10 @@ type TablesInsert<PublicTableNameOrOptions extends keyof Database["public"]["Tab
     schema: keyof Database;
 } ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
     Insert: infer I;
-} ? I : never : PublicTableNameOrOptions extends keyof Database["public"]["Tables"] ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
+} ? I : never : PublicTableNameOrOptions extends keyof PublicSchema["Tables"] ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
     Insert: infer I;
 } ? I : never : never;
-type TablesUpdate<PublicTableNameOrOptions extends keyof Database["public"]["Tables"] | {
+type TablesUpdate<PublicTableNameOrOptions extends keyof PublicSchema["Tables"] | {
     schema: keyof Database;
 }, TableName extends PublicTableNameOrOptions extends {
     schema: keyof Database;
@@ -1155,16 +1138,16 @@ type TablesUpdate<PublicTableNameOrOptions extends keyof Database["public"]["Tab
     schema: keyof Database;
 } ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
     Update: infer U;
-} ? U : never : PublicTableNameOrOptions extends keyof Database["public"]["Tables"] ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
+} ? U : never : PublicTableNameOrOptions extends keyof PublicSchema["Tables"] ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
     Update: infer U;
 } ? U : never : never;
-type Enums<PublicEnumNameOrOptions extends keyof Database["public"]["Enums"] | {
+type Enums<PublicEnumNameOrOptions extends keyof PublicSchema["Enums"] | {
     schema: keyof Database;
 }, EnumName extends PublicEnumNameOrOptions extends {
     schema: keyof Database;
 } ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"] : never = never> = PublicEnumNameOrOptions extends {
     schema: keyof Database;
-} ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName] : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"] ? Database["public"]["Enums"][PublicEnumNameOrOptions] : never;
+} ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName] : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"] ? PublicSchema["Enums"][PublicEnumNameOrOptions] : never;
 
 type Modify<A, B extends DeepPartialAny<A>> = {
     [K in keyof A | keyof B]: K extends keyof A ? K extends keyof B ? A[K] extends AnyObject ? B[K] extends AnyObject ? Modify<A[K], B[K]> : B[K] : B[K] : A[K] : B[K];

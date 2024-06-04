@@ -1,10 +1,8 @@
 import { Textarea } from "../../tremor/Textarea";
-import { Label, Metric, Text, Title } from "../../tremor/Text";
+import { Label, Metric, Text } from "../../tremor/Text";
 import { Icon } from "../../tremor/Icon";
 import { Card } from "../../tremor/Card";
-import { Button } from "../../tremor/Button";
-import { Transition } from "@headlessui/react";
-import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { toast } from "sonner";
@@ -21,6 +19,12 @@ import QuestionLoader from "./QuestionLoader";
 import { Question } from "@onvo-ai/js";
 import { SparklesIcon } from "@heroicons/react/24/solid";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+} from "../../tremor/Dialog";
 
 dayjs.extend(relativeTime);
 
@@ -34,7 +38,7 @@ export const useQuestionModal = create<{
 
 export const QuestionModal: React.FC<{}> = ({}) => {
   const backend = useBackend();
-  const { dashboard } = useDashboard();
+  const { dashboard, container, adminMode } = useDashboard();
 
   const input = useRef<HTMLTextAreaElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
@@ -217,6 +221,8 @@ export const QuestionModal: React.FC<{}> = ({}) => {
     ));
   }, [messages, dashboard, selectedQuestion]);
 
+  if (!dashboard?.settings?.can_ask_questions && !adminMode) return <></>;
+
   return (
     <>
       <div
@@ -225,147 +231,146 @@ export const QuestionModal: React.FC<{}> = ({}) => {
         }
       >
         <div className="absolute top-0 left-0 w-full h-full foreground-color opacity-30 dark:opacity-50" />
-        <div
-          className="rounded-lg cursor-text shadow-lg h-9 z-10 px-2 relative mx-auto flex w-full flex-grow flex-shrink-0 max-w-2xl flex-row items-center gap-2"
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          <div className="gradient-border foreground-color" />
-          <SparklesIcon className="h-5 w-5 text-blue-500 z-10" />
-          <Text className="z-10 flex-grow">
-            Describe the chart you want to make...
-          </Text>
-          <Icon className="z-10" icon={ArrowUpIcon} size="xs" variant="solid" />
-        </div>
-      </div>
-
-      <Transition
-        enter="transition-all ease-out duration-300"
-        enterFrom="opacity-0 translate-y-[100vh]"
-        enterTo="opacity-100 translate-y-0"
-        leave="transition-all ease-in duration-300"
-        leaveFrom="opacity-100 translate-y-0"
-        leaveTo="opacity-0 translate-y-[100vh]"
-        show={open}
-        as={Fragment as any}
-      >
-        <div className="onvo-question-modal-question-list flex flex-col foreground-color absolute w-full right-0 top-0 z-20 h-full">
-          <div
-            className={
-              "foreground-color top-0 w-full z-10 flex flex-row items-center gap-4 border-b border-gray-200 px-3 py-2 dark:border-gray-800"
-            }
-          >
-            <Icon
-              icon={ChevronLeftIcon}
-              variant="shadow"
-              onClick={() => {
-                setOpen(false);
-              }}
-            />
-            <div className="flex flex-row w-full gap-1 flex-grow justify-start items-center">
-              <Text>{dashboard?.title}</Text>
-              <ChevronRightIcon className="h-4 w-4" />
-              <Label>Create a chart</Label>
-            </div>
-            <div className="w-[170px] h-4" />
-          </div>
-          <Transition.Child
-            as={Fragment as any}
-            enter="ease-out delay-200 duration-300"
-            enterFrom="opacity-0 translate-y-12"
-            enterTo="opacity-100 translate-y-0"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 translate-y-0"
-            leaveTo="opacity-0 translate-y-12"
-          >
-            <div className="flex flex-grow w-full h-[calc(100%-52px)] flex-row">
-              <QuestionSidebar
-                loading={loading}
-                questions={questions}
-                selectedQuestionId={selectedQuestion?.id || undefined}
-                onSelect={(q) => {
-                  setSelectedQuestion(q);
-                  setMessages([]);
-                  setQuery("");
-                }}
-                onDelete={() => {
-                  setSelectedQuestion(undefined);
-                  getQuestions();
-                }}
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <div className="rounded-lg cursor-text shadow-lg h-9 z-10 px-2 relative mx-auto flex w-full flex-grow flex-shrink-0 max-w-2xl flex-row items-center gap-2">
+              <div className="gradient-border foreground-color" />
+              <SparklesIcon className="h-5 w-5 text-blue-500 z-10" />
+              <Text className="z-10 flex-grow">
+                Describe the chart you want to make...
+              </Text>
+              <Icon
+                className="z-10"
+                icon={ArrowUpIcon}
+                size="xs"
+                variant="solid"
               />
-              <div className="flex h-full w-full flex-col justify-between">
-                <div
-                  className="flex w-full flex-grow flex-col gap-4 overflow-y-auto px-2 py-4"
-                  ref={scroller}
-                >
-                  <div className="mx-auto w-full max-w-2xl">
-                    {messages.length === 0 && !questionLoading && (
-                      <>
-                        <div className="flex w-full pt-8 pb-12 flex-col items-center justify-center">
-                          <Icon
-                            size="xl"
-                            variant="shadow"
-                            icon={() => <Logo height={72} width={72} />}
-                          />
-                          <Metric className="mt-2">
-                            Ask me for a widget or visualisation
-                          </Metric>
-                        </div>
-                        <div className="onvo-question-modal-suggestions-list grid grid-cols-2 gap-2">
-                          {suggestions.length > 0
-                            ? suggestions.map((a) => (
-                                <Card
-                                  key={a}
-                                  className="foreground-color cursor-pointer p-3"
-                                  onClick={() => {
-                                    let newMessages = [
-                                      ...messages,
-                                      {
-                                        role: "user" as const,
-                                        content: a,
-                                      },
-                                    ];
-
-                                    askQuestion(newMessages);
-                                  }}
-                                >
-                                  <Text>{a}</Text>
-                                </Card>
-                              ))
-                            : [1, 2, 3, 4].map((a) => (
-                                <Card
-                                  className="foreground-color animate-pulse"
-                                  key={"skeleton-" + a}
-                                >
-                                  <div className="mb-2 h-2 w-10/12 rounded-full bg-gray-200 dark:bg-gray-700"></div>
-                                  <div className="h-2 w-7/12 rounded-full bg-gray-200 dark:bg-gray-700"></div>
-                                </Card>
-                              ))}
-                        </div>
-                      </>
-                    )}
-
-                    {questionMessageList}
-
-                    {questionLoading && <QuestionLoader />}
-                  </div>
+            </div>
+          </DialogTrigger>
+          <DialogContent
+            container={container}
+            className="max-w-none w-full h-full rounded-none p-0 border-0"
+          >
+            <div className="onvo-question-modal-question-list flex flex-col foreground-color absolute w-full right-0 top-0 z-20 h-full">
+              <div
+                className={
+                  "foreground-color top-0 w-full z-10 flex flex-row items-center gap-4 border-b border-gray-200 px-3 py-2 dark:border-gray-800"
+                }
+              >
+                <DialogClose asChild>
+                  <Icon icon={ChevronLeftIcon} variant="shadow" />
+                </DialogClose>
+                <div className="flex flex-row w-full gap-1 flex-grow justify-start items-center">
+                  <Text>{dashboard?.title}</Text>
+                  <ChevronRightIcon className="h-4 w-4" />
+                  <Label>Create a chart</Label>
                 </div>
+                <div className="w-[170px] h-4" />
+              </div>
+              <div className="flex flex-grow w-full h-[calc(100%-52px)] flex-row">
+                <QuestionSidebar
+                  loading={loading}
+                  questions={questions}
+                  selectedQuestionId={selectedQuestion?.id || undefined}
+                  onSelect={(q) => {
+                    setSelectedQuestion(q);
+                    setMessages([]);
+                    setQuery("");
+                  }}
+                  onDelete={() => {
+                    setSelectedQuestion(undefined);
+                    getQuestions();
+                  }}
+                />
+                <div className="flex h-full w-full flex-col justify-between">
+                  <div
+                    className="flex w-full flex-grow flex-col gap-4 overflow-y-auto px-2 py-4"
+                    ref={scroller}
+                  >
+                    <div className="mx-auto w-full max-w-2xl">
+                      {messages.length === 0 && !questionLoading && (
+                        <>
+                          <div className="flex w-full pt-8 pb-12 flex-col items-center justify-center">
+                            <Icon
+                              size="xl"
+                              variant="shadow"
+                              icon={() => <Logo height={72} width={72} />}
+                            />
+                            <Metric className="mt-2">
+                              Ask me for a widget or visualisation
+                            </Metric>
+                          </div>
+                          <div className="onvo-question-modal-suggestions-list grid grid-cols-2 gap-2">
+                            {suggestions.length > 0
+                              ? suggestions.map((a) => (
+                                  <Card
+                                    key={a}
+                                    className="foreground-color cursor-pointer p-3"
+                                    onClick={() => {
+                                      let newMessages = [
+                                        ...messages,
+                                        {
+                                          role: "user" as const,
+                                          content: a,
+                                        },
+                                      ];
 
-                <div className="relative mx-auto mb-2 mt-4 w-full max-w-2xl px-2">
-                  {messages.length > 0 && (
-                    <SuggestionsBar onSelect={(val) => setQuery(val)} />
-                  )}
-                  <div className="relative flex w-full flex-col items-center justify-center gap-2">
-                    <Textarea
-                      className="background-color min-h-[58px] pr-[52px]"
-                      ref={input}
-                      value={query}
-                      onChange={(e) => setQuery(e.target.value)}
-                      placeholder={`Describe the chart or visualization you want to make...`}
-                      autoFocus
-                      onKeyUp={(evt) => {
-                        if (evt.key === "Enter" && !evt.shiftKey) {
+                                      askQuestion(newMessages);
+                                    }}
+                                  >
+                                    <Text>{a}</Text>
+                                  </Card>
+                                ))
+                              : [1, 2, 3, 4].map((a) => (
+                                  <Card
+                                    className="foreground-color animate-pulse"
+                                    key={"skeleton-" + a}
+                                  >
+                                    <div className="mb-2 h-2 w-10/12 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+                                    <div className="h-2 w-7/12 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+                                  </Card>
+                                ))}
+                          </div>
+                        </>
+                      )}
+
+                      {questionMessageList}
+
+                      {questionLoading && <QuestionLoader />}
+                    </div>
+                  </div>
+
+                  <div className="relative mx-auto mb-2 mt-4 w-full max-w-2xl px-2">
+                    {messages.length > 0 && (
+                      <SuggestionsBar onSelect={(val) => setQuery(val)} />
+                    )}
+                    <div className="relative flex w-full flex-col items-center justify-center gap-2">
+                      <Textarea
+                        className="background-color min-h-[58px] pr-[52px]"
+                        ref={input}
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder={`Describe the chart or visualization you want to make...`}
+                        autoFocus
+                        onKeyUp={(evt) => {
+                          if (evt.key === "Enter" && !evt.shiftKey) {
+                            let newMessages = [
+                              ...messages,
+                              {
+                                role: "user" as const,
+                                content: query,
+                              },
+                            ];
+                            askQuestion(newMessages);
+                            setQuery("");
+                          }
+                        }}
+                      />
+                      <Icon
+                        className="absolute right-3 top-3 z-10"
+                        variant="solid"
+                        icon={ArrowUpIcon}
+                        onClick={() => {
                           let newMessages = [
                             ...messages,
                             {
@@ -375,42 +380,26 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                           ];
                           askQuestion(newMessages);
                           setQuery("");
-                        }
-                      }}
-                    />
-                    <Icon
-                      className="absolute right-3 top-3 z-10"
-                      variant="solid"
-                      icon={ArrowUpIcon}
-                      onClick={() => {
-                        let newMessages = [
-                          ...messages,
-                          {
-                            role: "user" as const,
-                            content: query,
-                          },
-                        ];
-                        askQuestion(newMessages);
-                        setQuery("");
-                      }}
-                    />
-                    <Text className="mt-0 text-center text-xs">
-                      Not sure how to write a prompt?{" "}
-                      <a
-                        href="https://onvo.ai/blog/writing-better-ai-prompts-for-dashboard-generation/"
-                        target="_blank"
-                        className="text-blue-500"
-                      >
-                        Check out this article
-                      </a>
-                    </Text>
+                        }}
+                      />
+                      <Text className="mt-0 text-center text-xs">
+                        Not sure how to write a prompt?{" "}
+                        <a
+                          href="https://onvo.ai/blog/writing-better-ai-prompts-for-dashboard-generation/"
+                          target="_blank"
+                          className="text-blue-500"
+                        >
+                          Check out this article
+                        </a>
+                      </Text>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </Transition.Child>
-        </div>
-      </Transition>
+          </DialogContent>
+        </Dialog>
+      </div>
     </>
   );
 };

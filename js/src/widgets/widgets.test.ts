@@ -32,10 +32,14 @@ describe("Widgets", () => {
             "Create a bar chart showing the orders per month. The x axis should show the month and year in MM-YYYY format",
         },
       ],
-      x: 6,
-      y: 3,
-      w: 6,
-      h: 3,
+      layouts: {
+        lg: {
+          x: 6,
+          y: 3,
+          w: 6,
+          h: 3,
+        },
+      },
       settings: {},
       code: `import pandas as pd
 import numpy as np

@@ -15,6 +15,7 @@ type DashboardContext = {
   id: string | undefined;
   dashboard?: DashboardType;
   widgets: Widget[];
+  container: HTMLDivElement | undefined;
   setWidgets: (widgets: Widget[]) => void;
   refreshDashboard: () => Promise<void>;
   refreshWidgets: () => Promise<void>;
@@ -27,6 +28,7 @@ type DashboardContext = {
 const Context = createContext<DashboardContext>({
   id: undefined,
   dashboard: undefined,
+  container: undefined,
   widgets: [],
   setWidgets: () => {},
   refreshDashboard: async () => {},
@@ -171,6 +173,7 @@ export const Dashboard: React.FC<{
         selectedWidget,
         setSelectedWidget,
         adminMode,
+        container: elementRef.current,
       }}
     >
       <div

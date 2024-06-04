@@ -103,7 +103,10 @@ export const MultiSelect: React.FC<{
           ) : (
             <div className="flex-grow flex flex-row gap-2 overflow-x-hidden">
               {texts.map((a) => (
-                <div className="flex-shrink-0 px-2 py-0.5 rounded-md bg-slate-100">
+                <div
+                  key={a.label}
+                  className="flex-shrink-0 px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-700"
+                >
                   <Text className="text-xs">{a.label}</Text>
                 </div>
               ))}
