@@ -19,6 +19,7 @@ describe("Dashboards", () => {
       description: "This is my dashboard",
       parent_dashboard: null,
       settings: undefined,
+      filters: [],
     });
 
     expect(newDashboard).toBeDefined();

@@ -1,9 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const {
-  scrollbarGutter,
-  scrollbarWidth,
-  scrollbarColor,
-} = require("tailwind-scrollbar-utilities");
+
 
 /* eslint-disable max-len */
 module.exports = {
@@ -88,12 +84,8 @@ module.exports = {
   },
 
   plugins: [
-    require("@headlessui/tailwindcss"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/container-queries"),
     require("@tailwindcss/forms"),
-    scrollbarGutter(), // no options to configure
-    scrollbarWidth(), // no options to configure
-    scrollbarColor(), // no options to configure
   ],
 };

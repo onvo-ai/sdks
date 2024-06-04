@@ -1,6 +1,6 @@
 import { Card } from "../../tremor/Card";
 import { Icon } from "../../tremor/Icon";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import ChartBase from "./ChartBase";
 import { toast } from "sonner";
 import {
@@ -15,7 +15,16 @@ import {
 } from "@heroicons/react/24/outline";
 import { useDashboard } from "../Dashboard";
 import { useBackend } from "../Wrapper";
-import Dropdown from "./Dropdown";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuIconWrapper,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../../tremor/DropdownMenu";
 import { Widget } from "@onvo-ai/js";
 import { useSeparatorModal } from "./CreateSeparatorModal";
 
@@ -40,6 +49,8 @@ const ChartCard: React.FC<{
   const { dashboard, refreshWidgets, setSelectedWidget, adminMode } =
     useDashboard();
   const { setOpen } = useSeparatorModal();
+  const [downloadDropdownOpen, setDownloadDropdownOpen] = useState(false);
+  const [editDropdownOpen, setEditDropdownOpen] = useState(false);
   const backend = useBackend();
 
   const duplicate = async () => {
@@ -119,39 +130,15 @@ const ChartCard: React.FC<{
   const deletable = adminMode || dashboard?.settings?.can_delete_widgets;
 
   if (output.type === "separator") {
-    const options = [] as any[];
-    if (widget_editable) {
-      options.push([
-        {
-          title: "Edit separator",
-          icon: PencilSquareIcon,
-          id: "edit",
-          onClick: () =>
-            setOpen(true, {
-              id: widget.id,
-              title: widget.title,
-              subtitle: output.options.plugins.subtitle.text.join("\n") || "",
-            }),
-        },
-      ]);
-    }
-    if (deletable) {
-      options.push([
-        {
-          title: "Delete separator",
-          icon: TrashIcon,
-          id: "delete",
-          color: "bg-red-500",
-          onClick: deleteWidget,
-        },
-      ]);
-    }
     return (
       <div className="group relative h-full w-full py-0 !bg-transparent !border-0 !ring-0 !shadow-none px-0">
         {layout_editable && <DragHandle />}
         {(widget_editable || deletable) && (
           <div
-            className="z-20 absolute top-1 right-4  hidden group-hover:block"
+            className={
+              "z-20 absolute top-1 right-4  hidden group-hover:block " +
+              (editDropdownOpen ? "!block" : "")
+            }
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
@@ -165,9 +152,44 @@ const ChartCard: React.FC<{
               e.preventDefault();
             }}
           >
-            <Dropdown options={options}>
-              <Icon icon={PencilSquareIcon} variant="shadow" />
-            </Dropdown>
+            <DropdownMenu onOpenChange={setEditDropdownOpen}>
+              <DropdownMenuTrigger asChild>
+                <Icon icon={PencilSquareIcon} variant="shadow" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="min-w-56">
+                {widget_editable && (
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        setOpen(true, {
+                          id: widget.id,
+                          title: widget.title,
+                          subtitle:
+                            output.options.plugins.subtitle.text.join("\n") ||
+                            "",
+                        });
+                      }}
+                    >
+                      <span className="flex items-center gap-x-2">
+                        <PencilSquareIcon className="size-4" />
+                        <span>Edit separator</span>
+                      </span>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                )}
+                {widget_editable && deletable && <DropdownMenuSeparator />}
+                {deletable && (
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem onClick={deleteWidget}>
+                      <span className="flex items-center gap-x-2">
+                        <TrashIcon className="size-4 text-red-500" />
+                        <span className="text-red-500">Delete separator</span>
+                      </span>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         )}
         <ChartBase
@@ -198,26 +220,17 @@ const ChartCard: React.FC<{
     });
   }
 
-  const deleteOptions = [
-    {
-      title: "Delete widget",
-      icon: TrashIcon,
-      id: "delete",
-      color: "bg-red-500",
-      onClick: deleteWidget,
-    },
-  ];
-
   const options = [] as any;
 
   if (editOptions.length > 0) {
     options.push(editOptions);
   }
-  if (deletable) {
-    options.push(deleteOptions);
-  }
-
   const ImageDownloadEnabled = useMemo(() => {
+    const isTable =
+      widget &&
+      widget.cache &&
+      JSON.parse(widget.cache || "{}").type === "table";
+    if (isTable) return false;
     if (adminMode) return true;
     if (dashboard?.settings && dashboard.settings.disable_download_images)
       return false;
@@ -235,51 +248,6 @@ const ChartCard: React.FC<{
     return true;
   }, [dashboard, widget, adminMode]);
 
-  const exportOptions = [
-    ...(ReportDownloadEnabled
-      ? [
-          {
-            title: "Download as excel",
-            icon: DocumentChartBarIcon,
-            id: "download-excel",
-            onClick: () => exportWidget("xlsx"),
-          },
-          {
-            title: "Download as csv",
-            icon: TableCellsIcon,
-            id: "download-csv",
-            onClick: () => exportWidget("csv"),
-          },
-        ]
-      : []),
-
-    ...((widget &&
-      widget.cache &&
-      JSON.parse(widget.cache || "{}").type === "table") ||
-    !ImageDownloadEnabled
-      ? []
-      : [
-          {
-            title: "Download as svg",
-            icon: PhotoIcon,
-            id: "download-svg",
-            onClick: () => exportWidget("svg"),
-          },
-          {
-            title: "Download as png",
-            icon: PhotoIcon,
-            id: "download-png",
-            onClick: () => exportWidget("png"),
-          },
-          {
-            title: "Download as jpeg",
-            icon: PhotoIcon,
-            id: "download-jpeg",
-            onClick: () => exportWidget("jpeg"),
-          },
-        ]),
-  ];
-
   return (
     <Card
       key={widget.id}
@@ -287,7 +255,10 @@ const ChartCard: React.FC<{
     >
       {layout_editable && <DragHandle />}
       <div
-        className="onvo-chart-card-dropdown-wrapper z-20 absolute top-1 right-4 hidden group-hover:flex flex-row gap-2"
+        className={
+          "onvo-chart-card-dropdown-wrapper z-20 absolute top-1 right-4 flex-row gap-2 hidden group-hover:flex " +
+          (downloadDropdownOpen || editDropdownOpen ? "!flex" : "")
+        }
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
@@ -302,14 +273,109 @@ const ChartCard: React.FC<{
         }}
       >
         {(ReportDownloadEnabled || ImageDownloadEnabled) && (
-          <Dropdown options={[exportOptions]}>
-            <Icon icon={ArrowDownTrayIcon} variant="shadow" />
-          </Dropdown>
+          <DropdownMenu onOpenChange={setDownloadDropdownOpen}>
+            <DropdownMenuTrigger asChild>
+              <Icon
+                icon={ArrowDownTrayIcon}
+                className="relative"
+                variant="shadow"
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="min-w-56">
+              {ReportDownloadEnabled && (
+                <>
+                  <DropdownMenuLabel>Reports</DropdownMenuLabel>
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem onClick={() => exportWidget("xlsx")}>
+                      <span className="flex items-center gap-x-2">
+                        <DocumentChartBarIcon className="size-4" />
+                        <span>Download as excel</span>
+                      </span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => exportWidget("csv")}>
+                      <span className="flex items-center gap-x-2">
+                        <DropdownMenuIconWrapper>
+                          <DocumentChartBarIcon className="size-4 text-inherit" />
+                        </DropdownMenuIconWrapper>
+                        <span>Download as CSV</span>
+                      </span>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </>
+              )}
+              {ImageDownloadEnabled && ReportDownloadEnabled && (
+                <DropdownMenuSeparator />
+              )}
+              {ImageDownloadEnabled && (
+                <>
+                  <DropdownMenuLabel>Images</DropdownMenuLabel>
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem onClick={() => exportWidget("svg")}>
+                      <span className="flex items-center gap-x-2">
+                        <PhotoIcon className="size-4 " />
+                        <span>Download as SVG</span>
+                      </span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => exportWidget("png")}>
+                      <span className="flex items-center gap-x-2">
+                        <DropdownMenuIconWrapper>
+                          <PhotoIcon className="size-4 text-inherit" />
+                        </DropdownMenuIconWrapper>
+                        <span>Download as PNG</span>
+                      </span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => exportWidget("jpeg")}>
+                      <span className="flex items-center gap-x-2">
+                        <DropdownMenuIconWrapper>
+                          <PhotoIcon className="size-4 text-inherit" />
+                        </DropdownMenuIconWrapper>
+                        <span>Download as JPEG</span>
+                      </span>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
         )}
         {(addable || deletable || widget_editable) && (
-          <Dropdown options={options}>
-            <Icon icon={PencilSquareIcon} variant="shadow" />
-          </Dropdown>
+          <DropdownMenu onOpenChange={setEditDropdownOpen}>
+            <DropdownMenuTrigger asChild>
+              <Icon icon={PencilSquareIcon} variant="shadow" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="min-w-56">
+              <DropdownMenuGroup>
+                <DropdownMenuItem onClick={onRequestEdit}>
+                  <span className="flex items-center gap-x-2">
+                    <PencilSquareIcon className="size-4 " />
+                    <span>Edit widget</span>
+                  </span>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={duplicate}>
+                  <span className="flex items-center gap-x-2">
+                    <DropdownMenuIconWrapper>
+                      <DocumentDuplicateIcon className="size-4 text-inherit" />
+                    </DropdownMenuIconWrapper>
+                    <span>Duplicate widget</span>
+                  </span>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+
+              {(addable || widget_editable) && deletable && (
+                <DropdownMenuSeparator />
+              )}
+              {deletable && (
+                <DropdownMenuGroup>
+                  <DropdownMenuItem onClick={deleteWidget}>
+                    <span className="flex items-center gap-x-2">
+                      <TrashIcon className="size-4 text-red-500" />
+                      <span className="text-red-500">Delete widget</span>
+                    </span>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
         )}
       </div>
       <ChartBase

@@ -9,11 +9,19 @@ import {
   ChevronDownIcon,
   DocumentChartBarIcon,
   PhotoIcon,
-  TableCellsIcon,
 } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
 import { useBackend } from "../Wrapper";
-import Dropdown from "../Chart/Dropdown";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuIconWrapper,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../../tremor/DropdownMenu";
 
 dayjs.extend(relativeTime);
 
@@ -41,7 +49,7 @@ export const DashboardHeader: React.FC<{
   children?: React.ReactNode;
   className?: string;
 }> = ({ children, className }) => {
-  const { dashboard } = useDashboard();
+  const { dashboard, adminMode } = useDashboard();
   const backend = useBackend();
 
   const exportDashboard = useCallback(
@@ -86,47 +94,7 @@ export const DashboardHeader: React.FC<{
     return true;
   }, [dashboard]);
 
-  const options = [
-    ...(ReportDownloadEnabled
-      ? [
-          {
-            title: "Download as excel",
-            icon: DocumentChartBarIcon,
-            id: "download-excel",
-            onClick: () => exportDashboard("xlsx"),
-          },
-          {
-            title: "Download as csv",
-            icon: TableCellsIcon,
-            id: "download-csv",
-            onClick: () => exportDashboard("csv"),
-          },
-        ]
-      : []),
-
-    ...(!ImageDownloadEnabled
-      ? []
-      : [
-          {
-            title: "Download as PDF",
-            icon: PhotoIcon,
-            id: "download-pdf",
-            onClick: () => exportDashboard("pdf"),
-          },
-          {
-            title: "Download as png",
-            icon: PhotoIcon,
-            id: "download-png",
-            onClick: () => exportDashboard("png"),
-          },
-          {
-            title: "Download as jpeg",
-            icon: PhotoIcon,
-            id: "download-jpeg",
-            onClick: () => exportDashboard("jpeg"),
-          },
-        ]),
-  ];
+  if (dashboard?.settings?.hide_header && !adminMode) return <></>;
 
   return (
     <section
@@ -155,11 +123,68 @@ export const DashboardHeader: React.FC<{
         </div>
         <div className="flex flex-row gap-2">
           {(ImageDownloadEnabled || ReportDownloadEnabled) && (
-            <Dropdown options={[options]}>
-              <Button variant="secondary" disabled={!dashboard}>
-                Download <ChevronDownIcon className="h-4 w-4 ml-1" />
-              </Button>
-            </Dropdown>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" disabled={!dashboard}>
+                  Download <ChevronDownIcon className="h-4 w-4 ml-1" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="min-w-56">
+                {ReportDownloadEnabled && (
+                  <>
+                    <DropdownMenuLabel>Reports</DropdownMenuLabel>
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem onClick={() => exportDashboard("xlsx")}>
+                        <span className="flex items-center gap-x-2">
+                          <DocumentChartBarIcon className="size-4" />
+                          <span>Download as excel</span>
+                        </span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => exportDashboard("csv")}>
+                        <span className="flex items-center gap-x-2">
+                          <DropdownMenuIconWrapper>
+                            <DocumentChartBarIcon className="size-4 text-inherit" />
+                          </DropdownMenuIconWrapper>
+                          <span>Download as CSV</span>
+                        </span>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </>
+                )}
+                {ImageDownloadEnabled && ReportDownloadEnabled && (
+                  <DropdownMenuSeparator />
+                )}
+                {ImageDownloadEnabled && (
+                  <>
+                    <DropdownMenuLabel>Images</DropdownMenuLabel>
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem onClick={() => exportDashboard("pdf")}>
+                        <span className="flex items-center gap-x-2">
+                          <PhotoIcon className="size-4" />
+                          <span>Download as PDF</span>
+                        </span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => exportDashboard("png")}>
+                        <span className="flex items-center gap-x-2">
+                          <DropdownMenuIconWrapper>
+                            <PhotoIcon className="size-4 text-inherit" />
+                          </DropdownMenuIconWrapper>
+                          <span>Download as PNG</span>
+                        </span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => exportDashboard("jpeg")}>
+                        <span className="flex items-center gap-x-2">
+                          <DropdownMenuIconWrapper>
+                            <PhotoIcon className="size-4 text-inherit" />
+                          </DropdownMenuIconWrapper>
+                          <span>Download as JPEG</span>
+                        </span>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
           )}
           {children}
         </div>

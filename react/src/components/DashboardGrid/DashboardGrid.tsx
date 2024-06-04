@@ -7,10 +7,10 @@ import ChartCard from "../Chart/ChartCard";
 import { useDashboard } from "../Dashboard/Dashboard";
 import { useBackend } from "../Wrapper";
 import { Widget } from "@onvo-ai/js";
-import UpdateChartModal from "./EditWidgetModal";
 import CreateSeparatorModal from "../Chart/CreateSeparatorModal";
 
 import FilterBar from "./FilterBar";
+import EditChartModal from "./EditWidgetModal";
 
 export const DashboardGrid: React.FC<{ spacing?: number }> = ({
   spacing = 10,
@@ -24,27 +24,48 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
   );
 
   let children = useMemo(() => {
-    if (!dashboard) return [];
-    return widgets.map((i: Widget) => (
-      <div
-        className="z-0 hover:z-[1]"
-        key={i.id}
-        data-grid={{ x: i.x, y: i.y, w: i.w, h: i.h }}
-      >
+    return (widgets || []).map((i: Widget) => (
+      <div className="z-0 hover:z-[1]" key={i.id}>
         <ChartCard widget={i} />
       </div>
     ));
   }, [widgets, dashboard]);
 
+  let layouts = useMemo(() => {
+    if (widgets.length === 0) return { lg: [] };
+    return {
+      lg: widgets.map((i: Widget) => {
+        let layouts = i.layouts as any;
+        return {
+          i: i.id,
+          x: layouts.lg?.x,
+          y: layouts.lg?.y,
+          w: layouts.lg?.w,
+          h: layouts.lg?.h,
+        };
+      }),
+      sm: widgets.map((i: Widget) => {
+        let layouts = i.layouts as any;
+        return {
+          i: i.id,
+          x: layouts.sm?.x || layouts.lg?.x,
+          y: layouts.sm?.y || layouts.lg?.y,
+          w: layouts.sm?.w || layouts.lg?.w,
+          h: layouts.sm?.h || layouts.lg?.h,
+        };
+      }),
+    };
+  }, [widgets, dashboard]);
+
   const maxHeight = useMemo(() => {
     let h = 0;
-    widgets.forEach((i: any) => {
+    layouts.lg.forEach((i: any) => {
       if (i.y + i.h > h) h = i.y + i.h;
     });
     return h;
-  }, [widgets]);
+  }, [layouts]);
 
-  if (!dashboard)
+  if (!dashboard || layouts.lg.length === 0)
     return (
       <div
         className={
@@ -54,14 +75,16 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
     );
 
   const editable = adminMode || dashboard?.settings?.can_edit_widget_layout;
+
   return (
     <div
       className={
         "onvo-dashboard-grid-wrapper overflow-y-auto flex-grow font-override background-color w-full"
       }
     >
-      <UpdateChartModal />
+      <EditChartModal />
       <FilterBar />
+
       <ResponsiveGridLayout
         resizeHandle={
           editable ? (
@@ -74,23 +97,40 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
         className="onvo-dashboard-grid-layout layout"
         rowHeight={10}
         margin={[spacing, spacing]}
-        breakpoints={{ lg: 1280, md: 768, sm: 480 }}
-        cols={{ lg: 12, md: 12, sm: 3 }}
+        breakpoints={{ lg: 768, sm: 480 }}
+        cols={{ lg: 12, sm: 3 }}
         isDraggable={editable}
         isResizable={editable}
+        layouts={layouts}
         onLayoutChange={(layout: any, allLayouts: any) => {
-          let keys = Object.keys(allLayouts);
-          if (keys.indexOf("sm") >= 0) return;
           if (!dashboard || !editable) return;
+
           let newWidgets = widgets.map((i: any) => {
-            let item = layout.find((j: any) => j.i === i.id);
-            if (!item) return i;
+            let lgLayout = { ...allLayouts.lg.find((j: any) => j.i === i.id) };
+            let smLayout = { ...allLayouts.sm.find((j: any) => j.i === i.id) };
+
             return {
               ...i,
-              x: item.x,
-              y: item.y,
-              w: item.w,
-              h: item.h,
+              layouts: {
+                lg: {
+                  ...i.layouts.lg,
+                  ...{
+                    h: lgLayout.h,
+                    w: lgLayout.w,
+                    x: lgLayout.x,
+                    y: lgLayout.y,
+                  },
+                },
+                sm: {
+                  ...i.layouts.sm,
+                  ...{
+                    h: smLayout.h,
+                    w: smLayout.w,
+                    x: smLayout.x,
+                    y: smLayout.y,
+                  },
+                },
+              },
             };
           });
 
@@ -99,10 +139,8 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
             let oldWidget = widgets.find((i: any) => i.id === widget.id);
             if (!oldWidget) return true;
             return (
-              oldWidget.x !== widget.x ||
-              oldWidget.y !== widget.y ||
-              oldWidget.w !== widget.w ||
-              oldWidget.h !== widget.h
+              JSON.stringify(oldWidget.layouts) !==
+              JSON.stringify(widget.layouts)
             );
           });
 
@@ -110,31 +148,14 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
             setWidgets(newWidgets);
             updatedWidgets.forEach((i) => {
               backend?.widgets.update(i.id, {
-                x: i.x,
-                y: i.y,
-                w: i.w,
-                h: i.h,
+                layouts: i.layouts,
               });
             });
           }
         }}
       >
         {children}
-        {editable && (
-          <div
-            key="create-separator"
-            data-grid={{
-              x: 0,
-              y: maxHeight + 1,
-              w: 12,
-              h: 2,
-              isDraggable: false,
-              isResizable: false,
-            }}
-          >
-            <CreateSeparatorModal maxHeight={maxHeight} />
-          </div>
-        )}
+        <CreateSeparatorModal maxHeight={maxHeight} />
       </ResponsiveGridLayout>
     </div>
   );

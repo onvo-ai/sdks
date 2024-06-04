@@ -18,6 +18,7 @@ describe("Datasources", () => {
       title: "Automation test",
       description: "",
       source: "csv",
+      filters: [],
       config: JSON.stringify({
         url: "1234567890",
         filename: "Test file",
