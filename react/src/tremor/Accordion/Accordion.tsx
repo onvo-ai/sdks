@@ -13,17 +13,17 @@ const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitives.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitives.Trigger>
 >(({ className, children, ...props }, forwardedRef) => (
-  <AccordionPrimitives.Header className="flex">
+  <AccordionPrimitives.Header className="onvo-flex">
     <AccordionPrimitives.Trigger
       className={cx(
         // base
-        "group flex flex-1 cursor-pointer items-center justify-between py-3 text-left text-sm font-medium leading-none",
+        "group onvo-flex onvo-flex-1 onvo-cursor-pointer onvo-items-center onvo-justify-between onvo-py-3 onvo-text-left onvo-text-sm onvo-font-medium onvo-leading-none",
         // text color
-        "text-gray-900 dark:text-gray-50",
+        "onvo-text-gray-900 dark:onvo-text-gray-50",
         // disabled
-        "data-[disabled]:cursor-default data-[disabled]:text-gray-400 dark:data-[disabled]:text-gray-600",
+        "data-[disabled]:onvo-cursor-default data-[disabled]:onvo-text-gray-400 dark:data-[disabled]:onvo-text-gray-600",
         //focus
-        "focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500",
+        "focus-visible:onvo-z-10 focus-visible:onvo-outline-none focus-visible:onvo-ring-2 focus-visible:onvo-ring-inset focus-visible:onvo-ring-blue-500",
         className
       )}
       {...props}
@@ -33,11 +33,11 @@ const AccordionTrigger = React.forwardRef<
       <PlusIcon
         className={cx(
           // base
-          "size-5 shrink-0 transition-transform duration-150 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:-rotate-45",
+          "onvo-size-5 onvo-shrink-0 onvo-transition-transform onvo-duration-150 onvo-ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:-onvo-rotate-45",
           // text color
-          "text-gray-400 dark:text-gray-600",
+          "onvo-text-gray-400 dark:onvo-text-gray-600",
           // disabled
-          " group-data-[disabled]:text-gray-300 group-data-[disabled]:dark:text-gray-700"
+          "group-data-[disabled]:onvo-text-gray-300 group-data-[disabled]:dark:onvo-text-gray-700"
         )}
         aria-hidden="true"
         focusable="false"
@@ -55,16 +55,16 @@ const AccordionContent = React.forwardRef<
   <AccordionPrimitives.Content
     ref={forwardedRef}
     className={cx(
-      "data-[state=closed]:animate-accordionClose data-[state=open]:animate-accordionOpen"
+      "data-[state=closed]:onvo-animate-accordionClose data-[state=open]:onvo-animate-accordionOpen"
     )}
     {...props}
   >
     <div
       className={cx(
         // base
-        "overflow-hidden pb-4 text-sm",
+        "onvo-overflow-hidden onvo-pb-4 onvo-text-sm",
         // text color
-        "text-gray-700 dark:text-gray-200",
+        "onvo-text-gray-700 dark:onvo-text-gray-200",
         className
       )}
     >
@@ -83,9 +83,9 @@ const AccordionItem = React.forwardRef<
     ref={forwardedRef}
     className={cx(
       // base
-      "overflow-hidden border-b first:mt-0",
+      "onvo-overflow-hidden onvo-border-b first:onvo-mt-0",
       // border color
-      "border-gray-200 dark:border-gray-800",
+      "onvo-border-gray-200 dark:onvo-border-gray-800",
       className
     )}
     {...props}

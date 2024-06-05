@@ -13,7 +13,7 @@ export default meta;
 type Story = StoryObj<typeof Badge>;
 
 export const Variants: Story = (args) => (
-  <div className="flex flex-row gap-2">
+  <div className="onvo-flex onvo-flex-row onvo-gap-2">
     <Badge>Default</Badge>
     <Badge variant="neutral">Neutral</Badge>
     <Badge variant="success">Success</Badge>

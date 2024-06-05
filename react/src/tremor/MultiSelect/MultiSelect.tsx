@@ -78,20 +78,20 @@ export const MultiSelect: React.FC<{
           ref={ref as any}
           className={cx(
             // base
-            "cursor-pointer group/trigger flex w-full select-none items-center justify-between truncate rounded-md border px-2 py-1.5 shadow-sm outline-none transition sm:text-sm",
+            "onvo-cursor-pointer onvo-group/trigger onvo-flex onvo-w-full onvo-select-none onvo-items-center onvo-justify-between onvo-truncate onvo-rounded-md onvo-border onvo-px-2 onvo-py-1.5 onvo-shadow-sm onvo-outline-none onvo-transition sm:onvo-text-sm",
             // border color
-            "border-slate-200 dark:border-slate-800",
+            "onvo-border-slate-200 dark:onvo-border-slate-800",
             // text color
-            "text-slate-900 dark:text-slate-50",
+            "onvo-text-slate-900 dark:onvo-text-slate-50",
             // placeholder
-            "data-[placeholder]:text-slate-400 data-[placeholder]:dark:text-slate-500",
+            "data-[placeholder]:onvo-text-slate-400 data-[placeholder]:dark:onvo-text-slate-500",
             // background color
-            "bg-white dark:bg-slate-950",
+            "onvo-bg-white dark:onvo-bg-slate-950",
             // hover
-            "hover:bg-slate-50 hover:dark:bg-slate-950/50",
+            "hover:onvo-bg-slate-50 hover:dark:onvo-bg-slate-950/50",
             // disabled
-            "data-[disabled]:bg-slate-100 data-[disabled]:text-slate-400",
-            "data-[disabled]:dark:border-slate-700 data-[disabled]:dark:bg-slate-800 data-[disabled]:dark:text-slate-500",
+            "data-[disabled]:onvo-bg-slate-100 data-[disabled]:onvo-text-slate-400",
+            "data-[disabled]:dark:onvo-border-slate-700 data-[disabled]:dark:onvo-bg-slate-800 data-[disabled]:dark:onvo-text-slate-500",
             ...(open ? focusRing : []),
             className
             // invalid (optional)
@@ -101,31 +101,31 @@ export const MultiSelect: React.FC<{
           {texts.length === 0 ? (
             <Text>{placeholder || "Multi select"}</Text>
           ) : (
-            <div className="flex-grow flex flex-row gap-2 overflow-x-hidden">
+            <div className="onvo-flex-grow onvo-flex onvo-flex-row onvo-gap-2 onvo-overflow-x-hidden">
               {texts.map((a) => (
                 <div
                   key={a.label}
-                  className="flex-shrink-0 px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-700"
+                  className="onvo-flex-shrink-0 onvo-px-2 onvo-py-0.5 onvo-rounded-md onvo-bg-slate-100 dark:onvo-bg-slate-700"
                 >
-                  <Text className="text-xs">{a.label}</Text>
+                  <Text className="onvo-text-xs">{a.label}</Text>
                 </div>
               ))}
             </div>
           )}
-          <ChevronUpDownIcon className=" flex-shrink-0 h-4 w-4" />
+          <ChevronUpDownIcon className="onvo-flex-shrink-0 onvo-h-4 onvo-w-4" />
         </div>
       </PopoverTrigger>
-      <PopoverContent className="p-1" style={{ width: width || 100 }}>
+      <PopoverContent className="onvo-p-1" style={{ width: width || 100 }}>
         <Input
           type="search"
           placeholder="Search"
-          className="mb-1"
+          className="onvo-mb-1"
           onChange={(e) => {
             setQuery(e.target.value);
             e.preventDefault();
           }}
         />
-        <div className="p-0">
+        <div className="onvo-p-0">
           {data.map((item) => (
             <div
               onClick={() => {
@@ -140,22 +140,22 @@ export const MultiSelect: React.FC<{
               key={item.value}
               className={cx(
                 // base
-                "grid cursor-pointer grid-cols-[20px_1fr] gap-x-2 rounded px-3 py-2 outline-none transition-colors data-[state=checked]:font-semibold sm:text-sm",
+                "onvo-grid onvo-cursor-pointer onvo-grid-cols-[20px_1fr] onvo-gap-x-2 onvo-rounded onvo-px-3 onvo-py-2 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
                 // text color
-                "text-slate-900 dark:text-slate-50",
+                "onvo-text-slate-900 dark:onvo-text-slate-50",
                 // disabled
-                "data-[disabled]:pointer-events-none data-[disabled]:text-slate-400 data-[disabled]:hover:bg-none dark:data-[disabled]:text-slate-600",
+                "data-[disabled]:onvo-pointer-events-none data-[disabled]:onvo-text-slate-400 data-[disabled]:hover:onvo-bg-none dark:data-[disabled]:onvo-text-slate-600",
                 // focus
-                "focus-visible:bg-slate-100 focus-visible:dark:bg-slate-900",
+                "focus-visible:onvo-bg-slate-100 focus-visible:dark:onvo-bg-slate-900",
                 // hover
-                "hover:bg-slate-100 hover:dark:bg-slate-900"
+                "hover:onvo-bg-slate-100 hover:dark:onvo-bg-slate-900"
               )}
             >
               <Checkbox
                 checked={internalValue.indexOf(item.value) >= 0}
-                className="mt-0.5"
+                className="onvo-mt-0.5"
               />
-              <Text className="flex-1 truncate">{item.label}</Text>
+              <Text className="onvo-flex-1 onvo-truncate">{item.label}</Text>
             </div>
           ))}
         </div>

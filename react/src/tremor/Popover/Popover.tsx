@@ -70,17 +70,17 @@ const PopoverContent = React.forwardRef<
           avoidCollisions
           className={cx(
             // base
-            "max-h-[var(--radix-popper-available-height)] min-w-60 overflow-hidden rounded-md border p-2.5 text-sm shadow-md",
+            "onvo-max-h-[var(--radix-popper-available-height)] onvo-min-w-60 onvo-overflow-hidden onvo-rounded-md onvo-border onvo-p-2.5 onvo-text-sm onvo-shadow-md",
             // border color
-            "border-gray-300 dark:border-gray-800",
+            "onvo-border-gray-300 dark:onvo-border-gray-800",
             // text color
-            "text-gray-900 dark:text-gray-50",
+            "onvo-text-gray-900 dark:onvo-text-gray-50",
             // background color
-            "bg-white dark:bg-gray-950",
+            "onvo-bg-white dark:onvo-bg-gray-950",
             // transition
-            "will-change-[transform,opacity]",
-            "data-[state=closed]:animate-hide",
-            "data-[state=open]:data-[side=bottom]:animate-slideDownAndFade data-[state=open]:data-[side=left]:animate-slideLeftAndFade data-[state=open]:data-[side=right]:animate-slideRightAndFade data-[state=open]:data-[side=top]:animate-slideUpAndFade",
+            "onvo-will-change-[transform,opacity]",
+            "data-[state=closed]:onvo-animate-hide",
+            "data-[state=open]:data-[side=bottom]:onvo-animate-slideDownAndFade data-[state=open]:data-[side=left]:onvo-animate-slideLeftAndFade data-[state=open]:data-[side=right]:onvo-animate-slideRightAndFade data-[state=open]:data-[side=top]:onvo-animate-slideUpAndFade",
 
             className
           )}

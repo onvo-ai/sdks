@@ -36,7 +36,7 @@ const data = [
 ];
 
 export const Variants: Story = (args) => (
-  <div className="flex flex-col gap-2 max-w-72">
+  <div className="onvo-flex onvo-flex-col onvo-gap-2 onvo-max-w-72">
     <SearchSelect items={data} />
 
     <SearchSelect items={data} placeholder="Search for item" />

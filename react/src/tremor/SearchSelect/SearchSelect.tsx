@@ -75,43 +75,43 @@ export const SearchSelect: React.FC<{
           ref={ref as any}
           className={cx(
             // base
-            "cursor-pointer group/trigger flex flex-row w-full select-none items-center justify-between truncate rounded-md border px-2 py-1.5 shadow-sm outline-none transition sm:text-sm",
+            "onvo-cursor-pointer group/trigger onvo-flex onvo-flex-row onvo-w-full onvo-select-none onvo-items-center onvo-justify-between onvo-truncate onvo-rounded-md onvo-border onvo-px-2 onvo-py-1.5 onvo-shadow-sm onvo-outline-none onvo-transition sm:onvo-text-sm",
             // border color
-            "border-gray-200 dark:border-gray-800",
+            "onvo-border-gray-200 dark:onvo-border-gray-800",
             // text color
-            "text-gray-900 dark:text-gray-50",
+            "onvo-text-gray-900 dark:onvo-text-gray-50",
             // placeholder
-            "data-[placeholder]:text-gray-400 data-[placeholder]:dark:text-gray-500",
+            "data-[placeholder]:onvo-text-gray-400 data-[placeholder]:dark:onvo-text-gray-500",
             // background color
-            "bg-white dark:bg-gray-950",
+            "onvo-bg-white dark:onvo-bg-gray-950",
             // hover
-            "hover:bg-gray-50 hover:dark:bg-gray-950/50",
+            "hover:onvo-bg-gray-50 hover:dark:onvo-bg-gray-950/50",
             // disabled
-            "data-[disabled]:bg-gray-100 data-[disabled]:text-gray-400",
-            "data-[disabled]:dark:border-gray-700 data-[disabled]:dark:bg-gray-800 data-[disabled]:dark:text-gray-500",
+            "data-[disabled]:onvo-bg-gray-100 data-[disabled]:onvo-text-gray-400",
+            "data-[disabled]:dark:onvo-border-gray-700 data-[disabled]:dark:onvo-bg-gray-800 data-[disabled]:dark:onvo-text-gray-500",
             ...(open ? focusRing : []),
             className
             // invalid (optional)
             // "aria-[invalid=true]:dark:ring-red-400/20 aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-red-200 aria-[invalid=true]:border-red-500 invalid:ring-2 invalid:ring-red-200 invalid:border-red-500"
           )}
         >
-          <Text className="flex-grow text-ellipsis min-w-0 overflow-x-hidden">
+          <Text className="onvo-flex-grow onvo-text-ellipsis onvo-min-w-0 onvo-overflow-x-hidden">
             {text}
           </Text>
-          <ChevronUpDownIcon className="h-4 w-4 flex-shrink-0" />
+          <ChevronUpDownIcon className="onvo-h-4 onvo-w-4 onvo-flex-shrink-0" />
         </div>
       </PopoverTrigger>
-      <PopoverContent className="p-1" style={{ width: width || 100 }}>
+      <PopoverContent className="onvo-p-1" style={{ width: width || 100 }}>
         <Input
           type="search"
           placeholder="Search"
-          className="mb-1"
+          className="onvo-mb-1"
           onChange={(e) => {
             setQuery(e.target.value);
             e.preventDefault();
           }}
         />
-        <div className="p-0">
+        <div className="onvo-p-0">
           {data.map((item) => (
             <div
               onClick={() => {
@@ -121,21 +121,21 @@ export const SearchSelect: React.FC<{
               key={item.value}
               className={cx(
                 // base
-                "grid cursor-pointer grid-cols-[1fr_20px] gap-x-2 rounded px-3 py-2 outline-none transition-colors data-[state=checked]:font-semibold sm:text-sm",
+                "onvo-grid onvo-cursor-pointer onvo-grid-cols-[1fr_20px] onvo-gap-x-2 onvo-rounded onvo-px-3 onvo-py-2 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
                 // text color
-                "text-gray-900 dark:text-gray-50",
+                "onvo-text-gray-900 dark:onvo-text-gray-50",
                 // disabled
-                "data-[disabled]:pointer-events-none data-[disabled]:text-gray-400 data-[disabled]:hover:bg-none dark:data-[disabled]:text-gray-600",
+                "data-[disabled]:onvo-pointer-events-none data-[disabled]:onvo-text-gray-400 data-[disabled]:hover:onvo-bg-none dark:data-[disabled]:onvo-text-gray-600",
                 // focus
-                "focus-visible:bg-gray-100 focus-visible:dark:bg-gray-900",
+                "focus-visible:onvo-bg-gray-100 focus-visible:dark:onvo-bg-gray-900",
                 // hover
-                "hover:bg-gray-100 hover:dark:bg-gray-900"
+                "hover:onvo-bg-gray-100 hover:dark:onvo-bg-gray-900"
               )}
             >
-              <Text className="flex-1 truncate">{item.label}</Text>
+              <Text className="onvo-flex-1 onvo-truncate">{item.label}</Text>
               {item.value === internalValue && (
                 <CheckIcon
-                  className="size-5 shrink-0 text-gray-800 dark:text-gray-200"
+                  className="onvo-size-5 onvo-shrink-0 onvo-text-gray-800 dark:onvo-text-gray-200"
                   aria-hidden="true"
                 />
               )}

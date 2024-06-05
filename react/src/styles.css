@@ -22,10 +22,10 @@
   }
 }
 
-.foreground-color {
+.onvo-foreground-color {
   background-color: var(--foreground-color) !important;
 }
-.background-color {
+.onvo-background-color {
   background-color: var(--background-color) !important;
 }
 .font-override {
@@ -72,7 +72,7 @@
 }
 
 /* ANIMATED GRADIENT BORDER STYLES */
-.gradient-border {
+.onvo-gradient-border {
   --borderWidth: 3px;
   position: absolute;
   top: 0px;
@@ -81,7 +81,7 @@
   height: 100%;
   border-radius: 6px;
 }
-.gradient-border:after {
+.onvo-gradient-border:after {
   content: "";
   position: absolute;
   top: calc(-1 * var(--borderWidth));

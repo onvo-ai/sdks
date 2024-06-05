@@ -143,14 +143,14 @@ const CreateSeparatorModal: React.FC<{
             <DialogTitle>
               {widget ? "Edit separator" : "Create separator"}
             </DialogTitle>
-            <DialogDescription className="mt-1 text-sm leading-6">
+            <DialogDescription className="onvo-mt-1 onvo-text-sm onvo-leading-6">
               <Text>Title</Text>
               <Input
                 placeholder="Type in a title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <Text className="mt-2">Subtitle</Text>
+              <Text className="onvo-mt-2">Subtitle</Text>
               <Textarea
                 placeholder="(Optional) Type in a subtitle"
                 value={subtitle}
@@ -158,7 +158,7 @@ const CreateSeparatorModal: React.FC<{
               />
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter className="mt-6">
+          <DialogFooter className="onvo-mt-6">
             <DialogClose asChild>
               <Button
                 onClick={() => setOpen(false)}

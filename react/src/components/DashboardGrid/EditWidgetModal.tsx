@@ -5,7 +5,7 @@ import { Button } from "../../tremor/Button";
 import { Card } from "../../tremor/Card";
 import { Icon } from "../../tremor/Icon";
 import { Dialog, DialogContent } from "../../tremor/Dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../tremor/Tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../tremor/Tabs";
 
 import { useEffect, useMemo, useState } from "react";
 import { Widget } from "@onvo-ai/js";
@@ -18,7 +18,7 @@ import {
 import Editor from "@monaco-editor/react";
 import { toast } from "sonner";
 import ChartBase from "../Chart/ChartBase";
-import SuggestionsBar from "./SuggestionsBar";
+import { SuggestionsBar } from "../SuggestionsBar";
 import React from "react";
 import Logo from "../QuestionModal/Logo";
 import { UserIcon } from "@heroicons/react/24/solid";
@@ -36,13 +36,13 @@ const Message: React.FC<{
   const [newMessage, setNewMessage] = useState(message.content);
 
   return (
-    <div className="onvo-message-wrapper relative mb-3 flex flex-row items-start justify-start gap-3 group">
+    <div className="onvo-message-wrapper onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3 onvo-group">
       {message.role === "assistant" ? (
         <Icon variant="shadow" icon={() => <Logo height={20} width={20} />} />
       ) : (
         <Icon variant="shadow" icon={UserIcon} />
       )}
-      <div className="onvo-message-text w-full">
+      <div className="onvo-message-text onvo-w-full">
         {editing ? (
           <Textarea
             defaultValue={message.content}
@@ -53,9 +53,9 @@ const Message: React.FC<{
         )}
 
         {editing ? (
-          <div className="onvo-message-edit-options flex flex-row gap-2 mt-2">
+          <div className="onvo-message-edit-options onvo-flex onvo-flex-row onvo-gap-2 onvo-mt-2">
             <Button
-              className="py-1"
+              className="onvo-py-1"
               onClick={() => {
                 onEdit(newMessage);
                 setEditing(false);
@@ -64,7 +64,7 @@ const Message: React.FC<{
               Regenerate chart
             </Button>
             <Button
-              className="py-1"
+              className="onvo-py-1"
               variant="destructive"
               onClick={() => {
                 onDelete();
@@ -73,9 +73,9 @@ const Message: React.FC<{
             >
               Delete prompt
             </Button>
-            <div className="flex-grow h-1" />
+            <div className="onvo-flex-grow onvo-h-1" />
             <Button
-              className="py-1"
+              className="onvo-py-1"
               variant="secondary"
               onClick={() => {
                 setEditing(false);
@@ -88,7 +88,7 @@ const Message: React.FC<{
           <Icon
             onClick={() => setEditing(true)}
             variant="shadow"
-            className="onvo-message-edit-button absolute top-1 right-1 hidden group-hover:block"
+            className="onvo-message-edit-button onvo-absolute onvo-top-1 onvo-right-1 onvo-hidden group-hover:onvo-block"
             icon={PencilIcon}
             size="sm"
           />
@@ -107,7 +107,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
     setSelectedWidget,
     selectedWidget,
     dashboard,
-    container
+    container,
   } = useDashboard();
 
   const [newMessage, setNewMessage] = useState("");
@@ -120,7 +120,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
     { role: "user" | "assistant"; content: string }[]
   >([]);
   const [settings, setSettings] = useState<any>({});
-  const [tab, setTab] = useState<"chat"|"editor">("chat");
+  const [tab, setTab] = useState<"chat" | "editor">("chat");
 
   useEffect(() => {
     if (selectedWidget) {
@@ -186,7 +186,6 @@ const EditChartModal: React.FC<{}> = ({}) => {
     );
   };
 
-
   const cleanup = () => {
     setOutput(null);
     setLoading(false);
@@ -230,210 +229,211 @@ const EditChartModal: React.FC<{}> = ({}) => {
       <Dialog open={open}>
         <DialogContent
           container={container}
-          className="max-w-none w-full h-full rounded-none p-0 border-0"
+          className="onvo-max-w-none onvo-w-full onvo-h-full onvo-rounded-none onvo-p-0 onvo-border-0"
         >
-          <div className="onvo-update-chart-modal foreground-color absolute flex flex-col left-0 top-0 z-20 h-full w-full">
+          <div className="onvo-update-chart-modal onvo-foreground-color onvo-absolute onvo-flex onvo-flex-col onvo-left-0 onvo-top-0 onvo-z-20 onvo-h-full onvo-w-full">
             <div
               className={
-                "foreground-color w-full left-0 top-0 z-10 flex flex-row justify-start items-center gap-4 border-b border-gray-200  p-2 dark:border-gray-800"
+                "onvo-foreground-color onvo-w-full onvo-left-0 onvo-top-0 onvo-z-10 onvo-flex onvo-flex-row onvo-justify-start onvo-items-center onvo-gap-4 onvo-border-b onvo-border-gray-200 onvo-p-2 dark:onvo-border-gray-800"
               }
             >
               <Icon
                 icon={ChevronLeftIcon}
                 variant="shadow"
-                className="ml-2"
+                className="onvo-ml-2"
                 onClick={() => {
                   cleanup();
                 }}
               />
 
-              <div className="flex flex-row w-full gap-1 flex-grow justify-start items-center">
+              <div className="onvo-flex onvo-flex-row onvo-w-full onvo-gap-1 onvo-flex-grow onvo-justify-start onvo-items-center">
                 <Text>{dashboard?.title}</Text>
-                <ChevronRightIcon className="h-4 w-4" />
+                <ChevronRightIcon className="onvo-h-4 onvo-w-4" />
                 <Label>Edit {title}</Label>
               </div>
-              <div className="flex flex-row gap-2 flex-shrink-0">
+              <div className="onvo-flex onvo-flex-row onvo-gap-2 onvo-flex-shrink-0">
                 <Button
                   onClick={saveChanges}
-                  className="flex-shrink-0"
+                  className="onvo-flex-shrink-0"
                   isLoading={loading}
                 >
                   Save changes
                 </Button>
               </div>
             </div>
-            <div className="relative flex flex-grow h-[calc(100%-55px)] w-full flex-row">
-              <div className="relative flex-grow h-full w-full pt-3 border-r border-gray-200 dark:border-gray-800">
+            <div className="onvo-relative onvo-flex onvo-flex-grow onvo-h-[calc(100%-55px)] onvo-w-full onvo-flex-row">
+              <div className="onvo-relative onvo-flex-grow onvo-h-full onvo-w-full onvo-pt-3 onvo-border-r onvo-border-gray-200 dark:onvo-border-gray-800">
                 {tab === "editor" && (
-              <Button
-                  variant="secondary"
-                  className="absolute top-1.5 right-1 z-10"
-                  onClick={executeCode}
+                  <Button
+                    variant="secondary"
+                    className="!onvo-absolute onvo-top-1.5 onvo-right-1 onvo-z-10"
+                    onClick={executeCode}
+                  >
+                    Execute code
+                  </Button>
+                )}
+                <Tabs
+                  defaultValue="chat"
+                  onValueChange={(val) => {
+                    setTab(val as "chat" | "editor");
+                  }}
+                  className="onvo-h-full onvo-flex onvo-flex-col"
                 >
-                  Execute code
-                </Button>)}
-              <Tabs defaultValue="chat" onValueChange={val => {
-                setTab(val as "chat" | "editor")
-              }} className="h-full flex flex-col">
-    <TabsList>
-      <TabsTrigger value="chat">Chat</TabsTrigger>
-      <TabsTrigger value="editor">Code editor</TabsTrigger>
-    </TabsList>
-    <div className="flex-grow h-full w-full">
-      <TabsContent
-        value="chat"
-        className="h-full"
-      >
-<div className="h-full relative flex-grow flex-col ">
-<div className="flex flex-col absolute bottom-8 overflow-y-auto top-0 pt-4 px-4 w-full">
-  {messages.map((a, index) => (
-    <Message
-      key={"message-" + index}
-      message={a}
-      onDelete={() => {
-        let newMessages = messages.filter(
-          (m, i) => i !== index
-        );
-        getGraph(newMessages);
-        setMessages(newMessages);
-      }}
-      onEdit={(msg) => {
-        let newMessages = messages.map((m, i) => {
-          if (i === index) {
-            return {
-              ...m,
-              content: msg,
-            };
-          }
-          return m;
-        });
-        getGraph(newMessages);
-        setMessages(newMessages);
-      }}
-    />
-  ))}
-</div>
-
-<div
-  className={
-    "onvo-input-text-wrapper absolute bottom-0 left-0 right-0 z-10 pb-4"
-  }
->
-  <SuggestionsBar onSelect={(val) => setNewMessage(val)} />
-  <div className="relative mx-auto flex w-full max-w-2xl flex-row items-center gap-2">
-    <Textarea
-      value={newMessage}
-      onChange={(e) => setNewMessage(e.target.value)}
-      className="onvo-ask-textarea background-color pr-[52px]"
-      placeholder={`Ask for changes to your chart...`}
-      autoFocus
-      onKeyUp={(evt) => {
-        if (evt.key === "Enter" && !evt.shiftKey) {
-          getGraph([
-            ...messages,
-            { role: "user", content: newMessage },
-          ]);
-          setMessages((m) => [
-            ...m,
-            { role: "user", content: newMessage },
-          ]);
-          setNewMessage("");
-        }
-      }}
-    />
-    <Icon
-      className="absolute right-2 top-1 z-10"
-      icon={ArrowUpIcon}
-      onClick={() => {
-        getGraph([
-          ...messages,
-          { role: "user", content: newMessage },
-        ]);
-        setMessages((m) => [
-          ...m,
-          { role: "user", content: newMessage },
-        ]);
-        setNewMessage("");
-      }}
-    />
-  </div>
-</div>
-</div>
-      </TabsContent>
-      <TabsContent
-        value="editor" 
-        className="h-full w-full"
-      >
-       
-  <Editor
-    defaultLanguage="python"
-    value={code} height="100%"
-    options={{
-      padding: {
-        top: 10,
-      },
-    }}
-    className="onvo-code-editor w-full"
-    theme="vs-dark"
-    onChange={(val) => setCode(val || "")}
-  />
-      </TabsContent>
-    </div>
-  </Tabs>
-
-              </div>
-              <div className="background-color w-full flex-grow relative p-4 overflow-y-auto  bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px]">
-
-                  {loading && (
-                    <div className="absolute top-0 left-0 bottom-0 right-0 z-10 backdrop-blur-md bg-white/50 dark:bg-gray-900/50 flex justify-center items-center">
-                      <Card className="onvo-loading-card flex flex-row gap-6 items-center w-72">
-                        <div role="status">
-                          <svg
-                            aria-hidden="true"
-                            className="inline w-10 h-10 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-                            viewBox="0 0 100 101"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                              fill="currentColor"
+                  <TabsList>
+                    <TabsTrigger value="chat">Chat</TabsTrigger>
+                    <TabsTrigger value="editor">Code editor</TabsTrigger>
+                  </TabsList>
+                  <div className="onvo-flex-grow onvo-h-full onvo-w-full">
+                    <TabsContent value="chat" className="onvo-h-full">
+                      <div className="onvo-h-full onvo-relative onvo-flex-grow onvo-flex-col">
+                        <div className="onvo-flex onvo-flex-col onvo-absolute onvo-overflow-y-auto onvo-flex-grow onvo-pt-4 onvo-px-4 onvo-w-full">
+                          {messages.map((a, index) => (
+                            <Message
+                              key={"message-" + index}
+                              message={a}
+                              onDelete={() => {
+                                let newMessages = messages.filter(
+                                  (m, i) => i !== index
+                                );
+                                getGraph(newMessages);
+                                setMessages(newMessages);
+                              }}
+                              onEdit={(msg) => {
+                                let newMessages = messages.map((m, i) => {
+                                  if (i === index) {
+                                    return {
+                                      ...m,
+                                      content: msg,
+                                    };
+                                  }
+                                  return m;
+                                });
+                                getGraph(newMessages);
+                                setMessages(newMessages);
+                              }}
                             />
-                            <path
-                              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                              fill="currentFill"
-                            />
-                          </svg>
+                          ))}
                         </div>
-                        <Title>Regenerating chart</Title>
-                      </Card>
-                    </div>
-                  )}
 
-
-                    <Card
-                      className={
-                        "foreground-color relative mt-2 flex w-full flex-col py-3 " +
-                        (output?.type === "metric" ? "h-32" : "h-96")
-                      }
+                        <div
+                          className={
+                            "onvo-input-text-wrapper onvo-bg-white dark:onvo-bg-slate-800 onvo-absolute onvo-bottom-0 onvo-left-0 onvo-right-0 onvo-z-10 onvo-pb-4"
+                          }
+                        >
+                          <SuggestionsBar
+                            onSelect={(val) => setNewMessage(val)}
+                          />
+                          <div className="onvo-relative onvo-mx-auto onvo-flex onvo-w-full onvo-max-w-2xl onvo-flex-row onvo-items-center onvo-gap-2">
+                            <Textarea
+                              value={newMessage}
+                              onChange={(e) => setNewMessage(e.target.value)}
+                              className="onvo-ask-textarea onvo-background-color onvo-pr-[52px]"
+                              placeholder={`Ask for changes to your chart...`}
+                              autoFocus
+                              onKeyUp={(evt) => {
+                                if (evt.key === "Enter" && !evt.shiftKey) {
+                                  getGraph([
+                                    ...messages,
+                                    { role: "user", content: newMessage },
+                                  ]);
+                                  setMessages((m) => [
+                                    ...m,
+                                    { role: "user", content: newMessage },
+                                  ]);
+                                  setNewMessage("");
+                                }
+                              }}
+                            />
+                            <Icon
+                              className="onvo-absolute onvo-right-2 onvo-top-1 onvo-z-10"
+                              icon={ArrowUpIcon}
+                              onClick={() => {
+                                getGraph([
+                                  ...messages,
+                                  { role: "user", content: newMessage },
+                                ]);
+                                setMessages((m) => [
+                                  ...m,
+                                  { role: "user", content: newMessage },
+                                ]);
+                                setNewMessage("");
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </TabsContent>
+                    <TabsContent
+                      value="editor"
+                      className="onvo-h-full onvo-w-full"
                     >
-                      {output && (
-                        <ChartBase
-                          json={output}
-                          id={selectedWidget?.id || ""}
-                          title={title}
-                          settings={settings}
-                          key={title + JSON.stringify(settings)}
-                        />
-                      )}
+                      <Editor
+                        defaultLanguage="python"
+                        value={code}
+                        height="100%"
+                        options={{
+                          padding: {
+                            top: 10,
+                          },
+                        }}
+                        className="onvo-code-editor onvo-w-full"
+                        theme="vs-dark"
+                        onChange={(val) => setCode(val || "")}
+                      />
+                    </TabsContent>
+                  </div>
+                </Tabs>
+              </div>
+              <div className="onvo-background-color onvo-w-full onvo-flex-grow onvo-relative onvo-p-4 onvo-overflow-y-auto onvo-bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:onvo-bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px]">
+                {loading && (
+                  <div className="onvo-absolute onvo-top-0 onvo-left-0 onvo-bottom-0 onvo-right-0 onvo-z-10 onvo-backdrop-blur-md onvo-bg-white/50 dark:onvo-bg-gray-900/50 onvo-flex onvo-justify-center onvo-items-center">
+                    <Card className="onvo-loading-card onvo-flex onvo-flex-row onvo-gap-6 onvo-items-center onvo-w-72">
+                      <div role="status">
+                        <svg
+                          aria-hidden="true"
+                          className="onvo-inline onvo-w-10 onvo-h-10 onvo-text-gray-200 onvo-animate-spin dark:onvo-text-gray-600 onvo-fill-blue-600"
+                          viewBox="0 0 100 101"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                            fill="currentColor"
+                          />
+                          <path
+                            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                            fill="currentFill"
+                          />
+                        </svg>
+                      </div>
+                      <Title>Regenerating chart</Title>
                     </Card>
+                  </div>
+                )}
+
+                <Card
+                  className={
+                    "onvo-foreground-color onvo-relative onvo-mt-2 onvo-flex onvo-w-full onvo-flex-col onvo-py-3 " +
+                    (output?.type === "metric" ? "onvo-h-32" : "onvo-h-96")
+                  }
+                >
+                  {output && (
+                    <ChartBase
+                      json={output}
+                      id={selectedWidget?.id || ""}
+                      title={title}
+                      settings={settings}
+                      key={title + JSON.stringify(settings)}
+                    />
+                  )}
+                </Card>
               </div>
 
-              <div className="justify-start h-full sticky top-14 gap-2 w-72 flex flex-col flex-shrink-0 border-l border-slate-200 bg-slate-100 p-4 dark:border-slate-700 dark:bg-slate-800">
-                <Text className="font-semibold">Settings</Text>
+              <div className="onvo-justify-start onvo-h-full onvo-sticky onvo-top-14 onvo-gap-2 onvo-w-72 onvo-flex onvo-flex-col onvo-flex-shrink-0 onvo-border-l onvo-border-slate-200 onvo-bg-slate-100 onvo-p-4 dark:onvo-border-slate-700 dark:onvo-bg-slate-800">
+                <Text className="onvo-font-semibold">Settings</Text>
 
-                <div className="flex flex-row items-center justify-between">
-                  <Text className="text-xs">Title</Text>{" "}
+                <div className="onvo-flex onvo-flex-row onvo-items-center onvo-justify-between">
+                  <Text className="onvo-text-xs">Title</Text>{" "}
                   <Icon
                     icon={settings.title_hidden ? EyeSlashIcon : EyeIcon}
                     onClick={() => {
@@ -446,21 +446,14 @@ const EditChartModal: React.FC<{}> = ({}) => {
                 </div>
                 <Input
                   placeholder="Title"
-                  className="text-xs -mt-2"
+                  className="onvo-text-xs -onvo-mt-2"
                   value={title}
                   onChange={(val) => setTitle(val.target.value)}
                   disabled={settings.title_hidden}
                 />
 
-                {false && (
-                  <Input
-                    placeholder="Subtitle"
-                    className="text-xs -mt-2"
-                    disabled={settings.subtitle_hidden}
-                  />
-                )}
-                <div className="my-2 h-[1px] w-full bg-gray-200 dark:bg-slate-600" />
-                <div className="flex flex-row items-center justify-start gap-2">
+                <div className="onvo-my-2 onvo-h-[1px]onvo- w-full onvo-bg-gray-200 dark:onvo-bg-slate-600" />
+                <div className="onvo-flex onvo-flex-row onvo-items-center onvo-justify-start onvo-gap-2">
                   <input
                     id="default-checkbox"
                     type="checkbox"
@@ -471,11 +464,11 @@ const EditChartModal: React.FC<{}> = ({}) => {
                         disable_download_images: val.target.checked,
                       }));
                     }}
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-md focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="onvo-w-4 onvo-h-4 onvo-text-blue-600 onvo-bg-gray-100 onvo-border-gray-300 onvo-rounded-md focus:onvo-ring-blue-500 dark:focus:onvo-ring-blue-600 dark:onvo-ring-offset-gray-800 focus:onvo-ring-2 dark:onvo-bg-gray-700 dark:onvo-border-gray-600"
                   />
-                  <Text className="text-xs">Disable image downloads</Text>
+                  <Text className="onvo-text-xs">Disable image downloads</Text>
                 </div>
-                <div className="flex flex-row items-center justify-start gap-2">
+                <div className="onvo-flex onvo-flex-row onvo-items-center onvo-justify-start onvo-gap-2">
                   <input
                     id="default-checkbox"
                     type="checkbox"
@@ -486,9 +479,11 @@ const EditChartModal: React.FC<{}> = ({}) => {
                         disable_download_reports: val.target.checked,
                       }));
                     }}
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-md focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="onvo-w-4 onvo-h-4 onvo-text-blue-600 onvo-bg-gray-100 onvo-border-gray-300 onvo-rounded-md focus:onvo-ring-blue-500 dark:focus:onvo-ring-blue-600 dark:onvo-ring-offset-gray-800 focus:onvo-ring-2 dark:onvo-bg-gray-700 dark:onvo-border-gray-600"
                   />
-                  <Text className="text-xs">Disable csv / excel downloads</Text>
+                  <Text className="onvo-text-xs">
+                    Disable csv / excel downloads
+                  </Text>
                 </div>
               </div>
             </div>
@@ -500,4 +495,3 @@ const EditChartModal: React.FC<{}> = ({}) => {
 };
 
 export default EditChartModal;
-

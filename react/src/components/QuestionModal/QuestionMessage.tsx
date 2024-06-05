@@ -161,9 +161,9 @@ const QuestionMessage: React.FC<{
   }
   if (role === "user") {
     return (
-      <div className="onvo-question-message-user group relative mb-3 flex flex-row items-start justify-start gap-3">
+      <div className="onvo-question-message-user onvo-group onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3">
         <Icon variant="shadow" icon={UserIcon} />
-        <div className="w-full">
+        <div className="onvo-w-full">
           {editing ? (
             <Textarea
               defaultValue={content}
@@ -174,9 +174,9 @@ const QuestionMessage: React.FC<{
           )}
 
           {editing ? (
-            <div className="flex flex-row gap-2 mt-2">
+            <div className="onvo-flex onvo-flex-row onvo-gap-2 onvo-mt-2">
               <Button
-                className="py-1 rounded-md"
+                className="!onvo-py-1"
                 onClick={() => {
                   onEdit(newMessage);
                   setEditing(false);
@@ -185,17 +185,17 @@ const QuestionMessage: React.FC<{
                 Regenerate chart
               </Button>
               <Button
-                className="py-1 rounded-md"
-                color="red"
+                className="!onvo-py-1"
+                variant="destructive"
                 onClick={() => {
                   onDelete();
                 }}
               >
                 Delete prompt
               </Button>
-              <div className="flex-grow h-1" />
+              <div className="onvo-flex-grow onvo-h-1" />
               <Button
-                className="py-1 rounded-md"
+                className="!onvo-py-1"
                 variant="secondary"
                 color="gray"
                 onClick={() => {
@@ -208,7 +208,7 @@ const QuestionMessage: React.FC<{
           ) : (
             <Icon
               onClick={() => setEditing(true)}
-              className="absolute top-2 right-2 hidden group-hover:block"
+              className="onvo-absolute onvo-top-2 onvo-right-2 onvo-hidden group-hover:onvo-block"
               icon={PencilIcon}
               variant="shadow"
               size="xs"
@@ -267,21 +267,21 @@ const QuestionMessage: React.FC<{
   let isLast = index === messages.length - 1;
   let nextMessage = isLast ? "" : messages[index + 1].content || "";
   return (
-    <div className="onvo-question-message-assistant relative mb-3 flex flex-row items-start justify-start gap-3">
+    <div className="onvo-question-message-assistant onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3">
       <Icon variant="shadow" icon={() => <Logo height={20} width={20} />} />
-      <div className="w-full">
+      <div className="onvo-w-full">
         {code.trim() !== "" && (
-          <Accordion type="single" className="leading-none" collapsible>
-            <AccordionItem value="item-1" className="border-b-0">
-              <AccordionTrigger className="border-b-0 py-2 px-2 rounded-md bg-slate-100 dark:bg-slate-700">
+          <Accordion type="single" className="onvo-leading-none" collapsible>
+            <AccordionItem value="item-1" className="onvo-border-b-0">
+              <AccordionTrigger className="onvo-border-b-0 !onvo-py-2 !onvo-px-2 onvo-rounded-md onvo-bg-slate-100 dark:onvo-bg-slate-700">
                 <span>Show working</span>
               </AccordionTrigger>
-              <AccordionContent className="pt-2">
+              <AccordionContent className="onvo-pt-2">
                 <ErrorBoundary
                   fallbackRender={({ error }) => <Text>{code}</Text>}
                 >
-                  <article className="onvo-question-assistant-code-wrapper prose prose-sm dark:prose-invert inline w-full">
-                    <ReactMarkdown className="onvo-question-assistant-code -mt-5 ">
+                  <article className="onvo-question-assistant-code-wrapper onvo-prose onvo-prose-sm dark:onvo-prose-invert onvo-inline onvo-w-full">
+                    <ReactMarkdown className="onvo-question-assistant-code -onvo-mt-5">
                       {"```python\n" + code + "\n```"}
                     </ReactMarkdown>
                   </article>
@@ -293,12 +293,12 @@ const QuestionMessage: React.FC<{
         {output && (
           <Card
             className={
-              "group onvo-question-assistant-chart foreground-color relative my-2 py-3 flex flex-col " +
-              (output.type === "metric" ? "h-32" : "h-96")
+              "onvo-group onvo-question-assistant-chart onvo-foreground-color onvo-relative onvo-my-2 onvo-py-3 onvo-flex onvo-flex-col " +
+              (output.type === "metric" ? "onvo-h-32" : "onvo-h-96")
             }
           >
             <div
-              className="onvo-chart-card-dropdown-wrapper z-20 absolute top-2 right-4 flex flex-row gap-2 items-center"
+              className="onvo-chart-card-dropdown-wrapper onvo-z-20 onvo-absolute onvo-top-2 onvo-right-4 onvo-flex onvo-flex-row onvo-gap-2 onvo-items-center"
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
@@ -322,7 +322,7 @@ const QuestionMessage: React.FC<{
                   <DropdownMenuTrigger asChild>
                     <Icon variant="shadow" icon={ArrowDownTrayIcon} />
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="min-w-56">
+                  <DropdownMenuContent className="onvo-min-w-56">
                     {ReportDownloadEnabled && (
                       <>
                         <DropdownMenuLabel>Reports</DropdownMenuLabel>
@@ -330,15 +330,15 @@ const QuestionMessage: React.FC<{
                           <DropdownMenuItem
                             onClick={() => exportWidget("xlsx")}
                           >
-                            <span className="flex items-center gap-x-2">
-                              <DocumentChartBarIcon className="size-4" />
+                            <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                              <DocumentChartBarIcon className="onvo-size-4" />
                               <span>Download as excel</span>
                             </span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => exportWidget("csv")}>
-                            <span className="flex items-center gap-x-2">
+                            <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                               <DropdownMenuIconWrapper>
-                                <DocumentChartBarIcon className="size-4 text-inherit" />
+                                <DocumentChartBarIcon className="onvo-size-4 onvo-text-inherit" />
                               </DropdownMenuIconWrapper>
                               <span>Download as CSV</span>
                             </span>
@@ -354,15 +354,15 @@ const QuestionMessage: React.FC<{
                         <DropdownMenuLabel>Images</DropdownMenuLabel>
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => exportWidget("svg")}>
-                            <span className="flex items-center gap-x-2">
-                              <PhotoIcon className="size-4" />
+                            <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                              <PhotoIcon className="onvo-size-4" />
                               <span>Download as SVG</span>
                             </span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => exportWidget("png")}>
-                            <span className="flex items-center gap-x-2">
+                            <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                               <DropdownMenuIconWrapper>
-                                <PhotoIcon className="size-4 text-inherit" />
+                                <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
                               </DropdownMenuIconWrapper>
                               <span>Download as PNG</span>
                             </span>
@@ -370,9 +370,9 @@ const QuestionMessage: React.FC<{
                           <DropdownMenuItem
                             onClick={() => exportWidget("jpeg")}
                           >
-                            <span className="flex items-center gap-x-2">
+                            <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                               <DropdownMenuIconWrapper>
-                                <PhotoIcon className="size-4 text-inherit" />
+                                <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
                               </DropdownMenuIconWrapper>
                               <span>Download as JPEG</span>
                             </span>
@@ -394,7 +394,7 @@ const QuestionMessage: React.FC<{
           </Card>
         )}
 
-        <article className="onvo-question-assistant-code-wrapper prose prose-sm dark:prose-invert w-full">
+        <article className="onvo-question-assistant-code-wrapper onvo-prose onvo-prose-sm dark:onvo-prose-invert onvo-w-full">
           {answer && answer.trim() !== "" && (
             <ErrorBoundary
               fallbackRender={({ error }) => <Text>{answer}</Text>}
@@ -405,7 +405,7 @@ const QuestionMessage: React.FC<{
             </ErrorBoundary>
           )}
           {options && options.length > 0 && (
-            <div className="flex flex-row gap-2 -mt-2">
+            <div className="onvo-flex onvo-flex-row onvo-gap-2 -onvo-mt-2">
               {options.map((a) => (
                 <Button
                   onClick={() => isLast && onReply(a)}

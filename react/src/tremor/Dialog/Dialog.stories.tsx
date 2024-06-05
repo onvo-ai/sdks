@@ -23,7 +23,7 @@ export default meta;
 type Story = StoryObj<typeof Dialog>;
 
 export const Variants: Story = (args) => (
-  <div className="flex flex-col gap-2">
+  <div className="onvo-flex onvo-flex-col onvo-max-w-lg onvo-gap-2">
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="secondary">Open Dialog</Button>
@@ -31,12 +31,12 @@ export const Variants: Story = (args) => (
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Account Created Successfully</DialogTitle>
-          <DialogDescription className="mt-1 text-sm leading-6">
+          <DialogDescription className="onvo-mt-1 onvo-text-sm onvo-leading-6">
             Your account has been created successfully. You can now login to
             your account. For more information, please contact us.
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="mt-6">
+        <DialogFooter className="onvo-mt-6">
           <DialogClose asChild>
             <Button
               className="mt-2 w-full sm:mt-0 sm:w-fit"

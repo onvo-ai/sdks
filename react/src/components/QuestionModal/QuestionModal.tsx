@@ -11,7 +11,7 @@ import { create } from "zustand";
 import QuestionMessage from "./QuestionMessage";
 import QuestionSidebar from "./QuestionSidebar";
 import React from "react";
-import SuggestionsBar from "./SuggestionsBar";
+import { SuggestionsBar } from "../SuggestionsBar";
 import { useBackend } from "../Wrapper";
 import { useDashboard } from "../Dashboard";
 import Logo from "./Logo";
@@ -227,20 +227,20 @@ export const QuestionModal: React.FC<{}> = ({}) => {
     <>
       <div
         className={
-          "relative right-0 z-10 w-full p-3 border-t border-gray-200 dark:border-gray-800"
+          "onvo-relative onvo-right-0 onvo-z-10 onvo-w-full onvo-p-3 onvo-border-t onvo-border-gray-200 dark:onvo-border-gray-800"
         }
       >
-        <div className="absolute top-0 left-0 w-full h-full foreground-color opacity-30 dark:opacity-50" />
+        <div className="onvo-absolute onvo-top-0 onvo-left-0 onvo-w-full onvo-h-full onvo-foreground-color onvo-opacity-30 dark:onvo-opacity-50" />
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <div className="rounded-lg cursor-text shadow-lg h-9 z-10 px-2 relative mx-auto flex w-full flex-grow flex-shrink-0 max-w-2xl flex-row items-center gap-2">
-              <div className="gradient-border foreground-color" />
-              <SparklesIcon className="h-5 w-5 text-blue-500 z-10" />
-              <Text className="z-10 flex-grow">
+            <div className="onvo-rounded-lg onvo-cursor-text onvo-shadow-lg onvo-h-9 onvo-z-10 onvo-px-2 onvo-relative onvo-mx-auto onvo-flex onvo-w-full onvo-flex-grow onvo-flex-shrink-0 onvo-max-w-2xl onvo-flex-row onvo-items-center onvo-gap-2">
+              <div className="onvo-gradient-border onvo-foreground-color" />
+              <SparklesIcon className="onvo-h-5 onvo-w-5 onvo-text-blue-500 onvo-z-10" />
+              <Text className="onvo-z-10 onvo-flex-grow">
                 Describe the chart you want to make...
               </Text>
               <Icon
-                className="z-10"
+                className="onvo-z-10"
                 icon={ArrowUpIcon}
                 size="xs"
                 variant="solid"
@@ -249,25 +249,25 @@ export const QuestionModal: React.FC<{}> = ({}) => {
           </DialogTrigger>
           <DialogContent
             container={container}
-            className="max-w-none w-full h-full rounded-none p-0 border-0"
+            className="onvo-max-w-none onvo-w-full onvo-h-full onvo-rounded-none onvo-p-0 onvo-border-0"
           >
-            <div className="onvo-question-modal-question-list flex flex-col foreground-color absolute w-full right-0 top-0 z-20 h-full">
+            <div className="onvo-question-modal-question-list onvo-flex onvo-flex-col onvo-foreground-color onvo-absolute onvo-w-full onvo-right-0 onvo-top-0 onvo-z-20 onvo-h-full">
               <div
                 className={
-                  "foreground-color top-0 w-full z-10 flex flex-row items-center gap-4 border-b border-gray-200 px-3 py-2 dark:border-gray-800"
+                  "onvo-foreground-color onvo-top-0 onvo-w-full onvo-z-10 onvo-flex onvo-flex-row onvo-items-center onvo-gap-4 onvo-border-b onvo-border-gray-200 onvo-px-3 onvo-py-2 dark:onvo-border-gray-800"
                 }
               >
                 <DialogClose asChild>
                   <Icon icon={ChevronLeftIcon} variant="shadow" />
                 </DialogClose>
-                <div className="flex flex-row w-full gap-1 flex-grow justify-start items-center">
+                <div className="onvo-flex onvo-flex-row onvo-w-full onvo-gap-1 onvo-flex-grow onvo-justify-start onvo-items-center">
                   <Text>{dashboard?.title}</Text>
-                  <ChevronRightIcon className="h-4 w-4" />
+                  <ChevronRightIcon className="onvo-h-4 onvo-w-4" />
                   <Label>Create a chart</Label>
                 </div>
-                <div className="w-[170px] h-4" />
+                <div className="onvo-w-[170px] onvo-h-4" />
               </div>
-              <div className="flex flex-grow w-full h-[calc(100%-52px)] flex-row">
+              <div className="onvo-flex onvo-flex-grow onvo-w-full onvo-h-[calc(100%-52px)] onvo-flex-row">
                 <QuestionSidebar
                   loading={loading}
                   questions={questions}
@@ -282,30 +282,30 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                     getQuestions();
                   }}
                 />
-                <div className="flex h-full w-full flex-col justify-between">
+                <div className="onvo-flex onvo-h-full onvo-w-full onvo-flex-col onvo-justify-between">
                   <div
-                    className="flex w-full flex-grow flex-col gap-4 overflow-y-auto px-2 py-4"
+                    className="onvo-flex onvo-w-full onvo-flex-grow onvo-flex-col onvo-gap-4 onvo-overflow-y-auto onvo-px-2 onvo-py-4"
                     ref={scroller}
                   >
-                    <div className="mx-auto w-full max-w-2xl">
+                    <div className="onvo-mx-auto onvo-flex onvo-flex-col onvo-max-w-2xl">
                       {messages.length === 0 && !questionLoading && (
                         <>
-                          <div className="flex w-full pt-8 pb-12 flex-col items-center justify-center">
+                          <div className="onvo-flex onvo-w-full onvo-pt-8 onvo-pb-12 onvo-flex-col onvo-items-center onvo-justify-center">
                             <Icon
                               size="xl"
                               variant="shadow"
                               icon={() => <Logo height={72} width={72} />}
                             />
-                            <Metric className="mt-2">
+                            <Metric className="onvo-mt-2">
                               Ask me for a widget or visualisation
                             </Metric>
                           </div>
-                          <div className="onvo-question-modal-suggestions-list grid grid-cols-2 gap-2">
+                          <div className="onvo-question-modal-suggestions-list onvo-grid onvo-grid-cols-2 onvo-gap-2">
                             {suggestions.length > 0
                               ? suggestions.map((a) => (
                                   <Card
                                     key={a}
-                                    className="foreground-color cursor-pointer p-3"
+                                    className="onvo-foreground-color onvo-cursor-pointer onvo-p-3"
                                     onClick={() => {
                                       let newMessages = [
                                         ...messages,
@@ -323,30 +323,28 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                                 ))
                               : [1, 2, 3, 4].map((a) => (
                                   <Card
-                                    className="foreground-color animate-pulse"
+                                    className="onvo-foreground-color onvo-animate-pulse"
                                     key={"skeleton-" + a}
                                   >
-                                    <div className="mb-2 h-2 w-10/12 rounded-full bg-gray-200 dark:bg-gray-700"></div>
-                                    <div className="h-2 w-7/12 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+                                    <div className="onvo-mb-2 onvo-h-2 onvo-w-10/12 onvo-rounded-full onvo-bg-gray-200 dark:onvo-bg-gray-700"></div>
+                                    <div className="onvo-h-2 onvo-w-7/12 onvo-rounded-full onvo-bg-gray-200 dark:onvo-bg-gray-700"></div>
                                   </Card>
                                 ))}
                           </div>
                         </>
                       )}
-
                       {questionMessageList}
-
                       {questionLoading && <QuestionLoader />}
                     </div>
                   </div>
 
-                  <div className="relative mx-auto mb-2 mt-4 w-full max-w-2xl px-2">
+                  <div className="onvo-relative onvo-mx-auto onvo-mb-2 onvo-mt-4 onvo-w-full onvo-max-w-2xl onvo-px-2">
                     {messages.length > 0 && (
                       <SuggestionsBar onSelect={(val) => setQuery(val)} />
                     )}
-                    <div className="relative flex w-full flex-col items-center justify-center gap-2">
+                    <div className="onvo-relative onvo-flex onvo-w-full onvo-flex-col onvo-items-center onvo-justify-center onvo-gap-2">
                       <Textarea
-                        className="background-color min-h-[58px] pr-[52px]"
+                        className="onvo-background-color onvo-min-h-[58px] onvo-pr-[52px]"
                         ref={input}
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
@@ -367,7 +365,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                         }}
                       />
                       <Icon
-                        className="absolute right-3 top-3 z-10"
+                        className="onvo-absolute onvo-right-3 onvo-top-3 onvo-z-10"
                         variant="solid"
                         icon={ArrowUpIcon}
                         onClick={() => {
@@ -382,12 +380,12 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                           setQuery("");
                         }}
                       />
-                      <Text className="mt-0 text-center text-xs">
+                      <Text className="onvo-mt-0 onvo-text-center onvo-text-xs">
                         Not sure how to write a prompt?{" "}
                         <a
                           href="https://onvo.ai/blog/writing-better-ai-prompts-for-dashboard-generation/"
                           target="_blank"
-                          className="text-blue-500"
+                          className="onvo-text-blue-500"
                         >
                           Check out this article
                         </a>

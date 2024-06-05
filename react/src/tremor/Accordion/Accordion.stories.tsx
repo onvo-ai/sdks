@@ -18,12 +18,12 @@ export default meta;
 type Story = StoryObj<typeof Accordion>;
 
 export const Variants: Story = (args) => (
-  <div className="flex flex-col gap-2 w-96">
-    <Accordion type="single" className="w-full" collapsible>
+  <div className="onvo-flex onvo-flex-col onvo-gap-2 onvo-w-96">
+    <Accordion type="single" className="onvo-w-full" collapsible>
       <AccordionItem value="item-1">
         <AccordionTrigger>In the app</AccordionTrigger>
         <AccordionContent>
-          <ol className="flex flex-col gap-2">
+          <ol className="onvo-flex onvo-flex-col onvo-gap-2">
             <li>
               <span className="font-semibold text-gray-900 dark:text-gray-50">
                 Step 1:

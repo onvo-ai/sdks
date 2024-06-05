@@ -103,9 +103,9 @@ const ChartBase: React.FC<{
   return (
     <ErrorBoundary
       fallbackRender={({ error }) => (
-        <div className="onvo-chart-base-error-fallback flex h-full w-full flex-col items-center justify-center">
-          <Title className="error-title">Error rendering chart</Title>
-          <Text className="error-message">{error.message}</Text>
+        <div className="onvo-chart-base-error-fallback onvo-flex onvo-h-full onvo-w-full onvo-flex-col onvo-items-center onvo-justify-center">
+          <Title className="onvo-error-title">Error rendering chart</Title>
+          <Text className="onvo-error-message">{error.message}</Text>
         </div>
       )}
     >
@@ -114,7 +114,10 @@ const ChartBase: React.FC<{
           <TableWidget data={chartConfig} />
         ) : (
           <div
-            className={"w-full " + (zoomed ? "h-[calc(100%-40px)]" : "h-full")}
+            className={
+              "onvo-w-full " +
+              (zoomed ? "onvo-h-[calc(100%-40px)]" : "onvo-h-full")
+            }
           >
             <Chart ref={chartRef} id={id} {...chartConfig} />
           </div>
@@ -124,19 +127,19 @@ const ChartBase: React.FC<{
       )}
       <div
         className={
-          "overflow-y-hidden w-full mt-1 px-2 transition-all bg-gray-50 dark:bg-gray-800 rounded-md flex flex-row items-center justify-between " +
-          (zoomed ? "h-10" : "h-0")
+          "onvo-overflow-y-hidden onvo-w-full onvo-mt-1 onvo-px-2 onvo-transition-all onvo-bg-gray-50 dark:onvo-bg-gray-800 onvo-rounded-md onvo-flex onvo-flex-row onvo-items-center onvo-justify-between " +
+          (zoomed ? "onvo-h-10" : "onvo-h-0")
         }
       >
-        <Text className="text-xs font-semibold">
+        <Text className="onvo-text-xs onvo-font-semibold">
           Hold{" "}
-          <span className="rounded-[4px] px-1 py-0.5 border shadow-sm border-gray-200 bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400">
+          <span className="onvo-rounded-[4px] onvo-px-1 onvo-py-0.5 onvo-border onvo-shadow-sm onvo-border-gray-200 onvo-bg-gray-100 dark:onvo-border-gray-600 dark:onvo-bg-gray-700 dark:onvo-text-gray-400">
             Shift
           </span>{" "}
           and drag to pan
         </Text>
         <Button
-          className="px-2 py-0.5 rounded-[4px] dark:rounded-[4px] text-gray-600 dark:text-gray-300"
+          className="onvo-px-2 onvo-py-0.5 onvo-rounded-[4px] dark:onvo-rounded-[4px] onvo-text-gray-600 dark:onvo-text-gray-300"
           onClick={resetZoom}
           color="gray"
         >

@@ -179,7 +179,9 @@ export const Dashboard: React.FC<{
       <div
         key={theme}
         ref={elementRef as any}
-        className={`onvo-dashboard-context translate-x-0 h-full relative background-color flex flex-col ${theme} ${className}`}
+        className={`onvo-dashboard-context onvo-translate-x-0 onvo-h-full onvo-relative onvo-background-color onvo-flex onvo-flex-col ${
+          theme === "dark" ? "onvo-dark" : ""
+        } ${className}`}
       >
         {children}
       </div>

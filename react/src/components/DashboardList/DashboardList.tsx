@@ -24,25 +24,27 @@ const DashboardCard: React.FC<{
     <Card
       onClick={() => onClick && onClick(dashboard)}
       className={
-        "onvo-dashboard-card gap-4 flex " +
-        (variant === "grid" ? "flex-col" : "flex-row items-center")
+        "onvo-dashboard-card onvo-gap-4 onvo-flex " +
+        (variant === "grid"
+          ? "onvo-flex-col"
+          : "onvo-flex-row onvo-items-center")
       }
     >
       <div
         className={
-          "relative rounded-lg border border-gray-200 bg-gray-50 object-contain object-top transition-all group-hover:shadow-lg dark:border-gray-700 dark:bg-gray-950 " +
-          (variant === "grid" ? "h-56  w-full" : "h-32 w-72")
+          "onvo-relative onvo-rounded-lg onvo-border onvo-border-gray-200 onvo-bg-gray-50 onvo-object-contain onvo-object-top onvo-transition-all group-hover:onvo-shadow-lg dark:onvo-border-gray-700 dark:onvo-bg-gray-950 " +
+          (variant === "grid" ? "onvo-h-56 onvo-w-full" : "onvo-h-32 onvo-w-72")
         }
       >
         <img
           src={dashboard.thumbnail || ""}
           alt={dashboard.title}
-          className="rounded-lg bg-gray-50 h-full w-full object-cover object-top dark:bg-gray-950 hover:object-bottom transition-all"
+          className="onvo-rounded-lg onvo-bg-gray-50 onvo-h-full onvo-w-full onvo-object-cover onvo-object-top dark:onvo-bg-gray-950 hover:onvo-object-bottom onvo-transition-all"
         />
       </div>
 
-      <div className="flex flex-grow flex-row items-center gap-2">
-        <div className="flex-grow">
+      <div className="onvo-flex onvo-flex-grow onvo-flex-row onvo-items-center onvo-gap-2">
+        <div className="onvo-flex-grow">
           <Title className="onvo-dashboard-card-title">{dashboard.title}</Title>
           <Text className="onvo-dashboard-card-description">
             {dashboard.description}
@@ -52,27 +54,30 @@ const DashboardCard: React.FC<{
 
       <Divider
         className={
-          "my-0 " + (variant === "list" ? "h-full w-[1px]" : "w-full h-[1px]")
+          "!onvo-my-0 " +
+          (variant === "list"
+            ? "onvo-h-full onvo-w-[1px]"
+            : "onvo-w-full onvo-h-[1px]")
         }
       />
 
-      <div className="grid grid-cols-2">
-        <div className="w-36 flex-shrink-0 flex flex-col gap-1">
-          <Text className="onvo-dashboard-card-details-text  flex flex-row items-center gap-2">
+      <div className="onvo-grid onvo-grid-cols-2">
+        <div className="onvo-w-36 onvo-flex-shrink-0 onvo-flex onvo-flex-col onvo-gap-1">
+          <Text className="onvo-dashboard-card-details-text onvo-flex onvo-flex-row onvo-items-center onvo-gap-2">
             <TableCellsIcon height={16} width={16} />{" "}
             {dashboard.widgets?.length} widgets
           </Text>
-          <Text className="onvo-dashboard-card-details-text flex flex-row items-center gap-2">
+          <Text className="onvo-dashboard-card-details-text onvo-flex onvo-flex-row onvo-items-center onvo-gap-2">
             <LinkIcon height={16} width={16} /> {dashboard.datasources.length}{" "}
             datasources
           </Text>
         </div>
-        <div className="w-48 flex-shrink-0 flex flex-col gap-1">
-          <Text className="onvo-dashboard-card-details-text flex flex-row items-center gap-2">
+        <div className="onvo-w-48 onvo-flex-shrink-0 onvo-flex onvo-flex-col onvo-gap-1">
+          <Text className="onvo-dashboard-card-details-text onvo-flex onvo-flex-row onvo-items-center onvo-gap-2">
             <ClockIcon height={16} width={16} />
             Created {dayjs(dashboard.created_at).fromNow()}
           </Text>
-          <Text className="onvo-dashboard-card-details-text flex flex-row items-center gap-2">
+          <Text className="onvo-dashboard-card-details-text onvo-flex onvo-flex-row onvo-items-center onvo-gap-2">
             <PencilIcon height={16} width={16} />
             Updated {dayjs(dashboard.last_updated_at).fromNow()}
           </Text>
@@ -104,16 +109,18 @@ export const DashboardList: React.FC<{
 
   let cols =
     {
-      1: "grid-cols-1",
-      2: "grid-cols-2",
-      3: "grid-cols-3",
-      4: "grid-cols-4",
-      5: "grid-cols-5",
-      6: "grid-cols-6",
-    }[columns] || "grid-cols-2";
+      1: "onvo-grid-cols-1",
+      2: "onvo-grid-cols-2",
+      3: "onvo-grid-cols-3",
+      4: "onvo-grid-cols-4",
+      5: "onvo-grid-cols-5",
+      6: "onvo-grid-cols-6",
+    }[columns] || "onvo-grid-cols-2";
 
   return (
-    <div className={"onvo-dashboard-list w-full grid gap-4 " + cols}>
+    <div
+      className={"onvo-dashboard-list onvo-w-full onvo-grid onvo-gap-4 " + cols}
+    >
       {dashboards.map((a) => (
         <DashboardCard
           key={a.id}

@@ -26,17 +26,17 @@ interface TabsListProps
 const variantStyles: Record<TabsListVariant, string> = {
   line: cx(
     // base
-    "flex items-center justify-start border-b",
+    "onvo-flex onvo-items-center onvo-justify-start onvo-border-b",
     // border color
-    "border-gray-200 dark:border-gray-800"
+    "onvo-border-gray-200 dark:onvo-border-gray-800"
   ),
   solid: cx(
     // base
-    "inline-flex items-center justify-center rounded-md p-1",
+    "onvo-inline-flex onvo-items-center onvo-justify-center onvo-rounded-md onvo-p-1",
     // border color
     // "border-gray-200 dark:border-gray-800",
     // background color
-    "bg-gray-100 dark:bg-gray-800"
+    "onvo-bg-gray-100 dark:onvo-bg-gray-800"
   ),
 };
 
@@ -62,33 +62,33 @@ function getVariantStyles(tabVariant: TabsListVariant) {
     case "line":
       return cx(
         // base
-        "-mb-px items-center justify-center whitespace-nowrap border-b-2 border-transparent px-3 pb-3 text-sm font-medium transition-all",
+        "-onvo-mb-px onvo-items-center onvo-justify-center onvo-whitespace-nowrap onvo-border-b-2 onvo-border-transparent onvo-px-3 onvo-pb-3 onvo-text-sm onvo-font-medium onvo-transition-all",
         // text color
-        "text-gray-500 dark:text-gray-500",
+        "onvo-text-gray-500 dark:onvo-text-gray-500",
         // hover
-        "hover:text-gray-700 hover:dark:text-gray-400",
+        "hover:onvo-text-gray-700 hover:dark:onvo-text-gray-400",
         // border hover
-        "hover:border-gray-300 hover:dark:border-gray-400",
+        "hover:onvo-border-gray-300 hover:dark:onvo-border-gray-400",
         // selected
-        "data-[state=active]:border-gray-900 data-[state=active]:text-gray-900",
-        "data-[state=active]:dark:border-gray-50 data-[state=active]:dark:text-gray-50",
+        "data-[state=active]:onvo-border-gray-900 data-[state=active]:onvo-text-gray-900",
+        "data-[state=active]:dark:onvo-border-gray-50 data-[state=active]:dark:onvo-text-gray-50",
         // disabled
-        "disabled:pointer-events-none",
-        "disabled:text-gray-300 disabled:dark:text-gray-700"
+        "disabled:onvo-pointer-events-none",
+        "disabled:onvo-text-gray-300 disabled:dark:onvo-text-gray-700"
       );
     case "solid":
       return cx(
         // base
-        "inline-flex items-center justify-center whitespace-nowrap rounded px-3 py-1 transition-all text-sm font-medium",
+        "onvo-inline-flex onvo-items-center onvo-justify-center onvo-whitespace-nowrap onvo-rounded onvo-px-3 onvo-py-1 onvo-transition-all onvo-text-sm onvo-font-medium",
         // text color
-        "text-gray-500 dark:text-gray-400",
+        "onvo-text-gray-500 dark:onvo-text-gray-400",
         // hover
-        "hover:text-gray-700 hover:dark:text-gray-200",
+        "hover:onvo-text-gray-700 hover:dark:onvo-text-gray-200",
         // selected
-        " data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow",
-        "data-[state=active]:dark:bg-gray-900 data-[state=active]:dark:text-gray-50",
+        " data-[state=active]:onvo-bg-white data-[state=active]:onvo-text-gray-900 data-[state=active]:onvo-shadow",
+        "data-[state=active]:dark:onvo-bg-gray-900 data-[state=active]:dark:onvo-text-gray-50",
         // disabled
-        "disabled:pointer-events-none disabled:text-gray-400 disabled:dark:text-gray-600 disabled:opacity-50"
+        "disabled:onvo-pointer-events-none disabled:onvo-text-gray-400 disabled:dark:onvo-text-gray-600 disabled:onvo-opacity-50"
       );
   }
 }
@@ -117,7 +117,7 @@ const TabsContent = React.forwardRef<
 >(({ className, ...props }, forwardedRef) => (
   <TabsPrimitives.Content
     ref={forwardedRef}
-    className={cx("outline-none", focusRing, className)}
+    className={cx("onvo-outline-none", focusRing, className)}
     {...props}
   />
 ));

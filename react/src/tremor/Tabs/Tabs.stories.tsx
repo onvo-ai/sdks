@@ -13,13 +13,13 @@ export default meta;
 type Story = StoryObj<typeof Tabs>;
 
 export const Variants: Story = (args) => (
-  <div className="flex flex-col gap-2">
+  <div className="onvo-flex onvo-flex-col onvo-gap-2">
     <Tabs defaultValue="tab1">
       <TabsList>
         <TabsTrigger value="tab1">Returns</TabsTrigger>
         <TabsTrigger value="tab2">Shipping</TabsTrigger>
       </TabsList>
-      <div className="ml-2 mt-4">
+      <div className="onvo-ml-2 onvo-mt-4">
         <TabsContent
           value="tab1"
           className="space-y-2 text-sm leading-7 text-gray-600 dark:text-gray-500"

@@ -14,28 +14,28 @@ export default meta;
 type Story = StoryObj<typeof Popover>;
 
 export const Variants: Story = (args) => (
-  <div className="flex justify-center">
+  <div className="onvo-flex onvo-justify-center">
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="primary">Open</Button>
       </PopoverTrigger>
-      <PopoverContent className="p-4">
-        <div className="flex flex-col gap-4">
-          <div className="space-y-1">
-            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+      <PopoverContent className="onvo-p-4">
+        <div className="onvo-flex onvo-flex-col onvo-gap-4">
+          <div className="onvo-space-y-1">
+            <p className="onvo-text-sm onvo-font-medium onvo-text-gray-700 dark:onvo-text-gray-300">
               Billed to:
             </p>
-            <p className="text-gray-800 dark:text-gray-200">
+            <p className="onvo-text-gray-800 dark:onvo-text-gray-200">
               ForDailyUseCo Ltd.
             </p>
           </div>
-          <div className="space-y-1">
-            <div className="flex items-center">
-              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <div className="onvo-space-y-1">
+            <div className="onvo-flex onvo-items-center">
+              <p className="onvo-text-sm onvo-font-medium onvo-text-gray-700 dark:onvo-text-gray-300">
                 Spent by:
               </p>
             </div>
-            <p className="text-gray-800 dark:text-gray-200">
+            <p className="onvo-text-gray-800 dark:onvo-text-gray-200">
               ForDailyUseCo Ltd.
             </p>
           </div>

@@ -7,29 +7,29 @@ import { cx } from "../../lib/utils";
 
 const badgeVariants = tv({
   base: cx(
-    "inline-flex items-center gap-x-1 whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset"
+    "onvo-inline-flex onvo-items-center onvo-gap-x-1 onvo-whitespace-nowrap onvo-rounded-md onvo-px-2 onvo-py-1 onvo-text-xs onvo-font-medium onvo-ring-1 onvo-ring-inset"
   ),
   variants: {
     variant: {
       default: [
-        "bg-blue-50 text-blue-900 ring-blue-500/30",
-        "dark:bg-blue-400/10 dark:text-blue-400 dark:ring-blue-400/30",
+        "onvo-bg-blue-50 onvo-text-blue-900 onvo-ring-blue-500/30",
+        "dark:onvo-bg-blue-400/10 dark:onvo-text-blue-400 dark:onvo-ring-blue-400/30",
       ],
       neutral: [
-        "bg-gray-50 text-gray-900 ring-gray-500/30",
-        "dark:bg-gray-400/10 dark:text-gray-400 dark:ring-gray-400/20",
+        "onvo-bg-gray-50 onvo-text-gray-900 onvo-ring-gray-500/30",
+        "dark:onvo-bg-gray-400/10 dark:onvo-text-gray-400 dark:onvo-ring-gray-400/20",
       ],
       success: [
-        "bg-emerald-50 text-emerald-900 ring-emerald-600/30",
-        "dark:bg-emerald-400/10 dark:text-emerald-400 dark:ring-emerald-400/20",
+        "onvo-bg-emerald-50 onvo-text-emerald-900 onvo-ring-emerald-600/30",
+        "dark:onvo-bg-emerald-400/10 dark:onvo-text-emerald-400 dark:onvo-ring-emerald-400/20",
       ],
       error: [
-        "bg-red-50 text-red-900 ring-red-600/20",
-        "dark:bg-red-400/10 dark:text-red-400 dark:ring-red-400/20",
+        "onvo-bg-red-50 onvo-text-red-900 onvo-ring-red-600/20",
+        "dark:onvo-bg-red-400/10 dark:onvo-text-red-400 dark:onvo-ring-red-400/20",
       ],
       warning: [
-        "bg-yellow-50 text-yellow-900 ring-yellow-600/30",
-        "dark:bg-yellow-400/10 dark:text-yellow-500 dark:ring-yellow-400/20",
+        "onvo-bg-yellow-50 onvo-text-yellow-900 onvo-ring-yellow-600/30",
+        "dark:onvo-bg-yellow-400/10 dark:onvo-text-yellow-500 dark:onvo-ring-yellow-400/20",
       ],
     },
   },

@@ -30,15 +30,15 @@ import { useSeparatorModal } from "./CreateSeparatorModal";
 
 const DragHandle = () => {
   return (
-    <div className="group chart-drag-handle hidden group-hover:grid absolute grid-cols-4 py-1 cursor-move px-1 items-center justify-center h-6 w-10 bg-gray-50 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-blue-900 rounded-md z-10 top-2 left-[50%] -ml-5">
-      <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-      <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-      <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-      <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-      <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-      <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-      <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-      <div className="h-1 w-1 ml-0.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+    <div className="onvo-group chart-drag-handle onvo-hidden group-hover:onvo-grid onvo-absolute onvo-grid-cols-4 onvo-py-1 onvo-cursor-move onvo-px-1 onvo-items-center onvo-justify-center onvo-h-6 onvo-w-10 onvo-bg-gray-50 hover:onvo-bg-blue-100 dark:onvo-bg-gray-800 dark:hover:onvo-bg-blue-900 onvo-rounded-md onvo-z-10 onvo-top-2 onvo-left-[50%] -onvo-ml-5">
+      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
     </div>
   );
 };
@@ -131,13 +131,13 @@ const ChartCard: React.FC<{
 
   if (output.type === "separator") {
     return (
-      <div className="group relative h-full w-full py-0 !bg-transparent !border-0 !ring-0 !shadow-none px-0">
+      <div className="onvo-group onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0">
         {layout_editable && <DragHandle />}
         {(widget_editable || deletable) && (
           <div
             className={
-              "z-20 absolute top-1 right-4  hidden group-hover:block " +
-              (editDropdownOpen ? "!block" : "")
+              "onvo-z-20 onvo-absolute onvo-top-1 onvo-right-4 onvo-hidden group-hover:onvo-block " +
+              (editDropdownOpen ? "!onvo-block" : "")
             }
             onClick={(e) => {
               e.stopPropagation();
@@ -156,7 +156,7 @@ const ChartCard: React.FC<{
               <DropdownMenuTrigger asChild>
                 <Icon icon={PencilSquareIcon} variant="shadow" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="min-w-56">
+              <DropdownMenuContent className="onvo-min-w-56">
                 {widget_editable && (
                   <DropdownMenuGroup>
                     <DropdownMenuItem
@@ -170,8 +170,8 @@ const ChartCard: React.FC<{
                         });
                       }}
                     >
-                      <span className="flex items-center gap-x-2">
-                        <PencilSquareIcon className="size-4" />
+                      <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                        <PencilSquareIcon className="onvo-size-4" />
                         <span>Edit separator</span>
                       </span>
                     </DropdownMenuItem>
@@ -181,9 +181,11 @@ const ChartCard: React.FC<{
                 {deletable && (
                   <DropdownMenuGroup>
                     <DropdownMenuItem onClick={deleteWidget}>
-                      <span className="flex items-center gap-x-2">
-                        <TrashIcon className="size-4 text-red-500" />
-                        <span className="text-red-500">Delete separator</span>
+                      <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                        <TrashIcon className="onvo-size-4 onvo-text-red-500" />
+                        <span className="onvo-text-red-500">
+                          Delete separator
+                        </span>
                       </span>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
@@ -251,13 +253,13 @@ const ChartCard: React.FC<{
   return (
     <Card
       key={widget.id}
-      className="onvo-chart-card group foreground-color relative flex h-full w-full flex-col -z-[1] py-3"
+      className="onvo-chart-card onvo-group onvo-foreground-color onvo-relative onvo-flex onvo-h-full onvo-w-full onvo-flex-col -onvo-z-[1] onvo-py-3"
     >
       {layout_editable && <DragHandle />}
       <div
         className={
-          "onvo-chart-card-dropdown-wrapper z-20 absolute top-1 right-4 flex-row gap-2 hidden group-hover:flex " +
-          (downloadDropdownOpen || editDropdownOpen ? "!flex" : "")
+          "onvo-chart-card-dropdown-wrapper onvo-z-20 onvo-absolute onvo-top-1 onvo-right-4 onvo-flex-row onvo-gap-2 onvo-hidden group-hover:onvo-flex " +
+          (downloadDropdownOpen || editDropdownOpen ? "!onvo-flex" : "")
         }
         onClick={(e) => {
           e.stopPropagation();
@@ -277,25 +279,25 @@ const ChartCard: React.FC<{
             <DropdownMenuTrigger asChild>
               <Icon
                 icon={ArrowDownTrayIcon}
-                className="relative"
+                className="onvo-relative"
                 variant="shadow"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="min-w-56">
+            <DropdownMenuContent className="onvo-min-w-56">
               {ReportDownloadEnabled && (
                 <>
                   <DropdownMenuLabel>Reports</DropdownMenuLabel>
                   <DropdownMenuGroup>
                     <DropdownMenuItem onClick={() => exportWidget("xlsx")}>
-                      <span className="flex items-center gap-x-2">
-                        <DocumentChartBarIcon className="size-4" />
+                      <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                        <DocumentChartBarIcon className="onvo-size-4" />
                         <span>Download as excel</span>
                       </span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => exportWidget("csv")}>
-                      <span className="flex items-center gap-x-2">
+                      <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                         <DropdownMenuIconWrapper>
-                          <DocumentChartBarIcon className="size-4 text-inherit" />
+                          <DocumentChartBarIcon className="onvo-size-4 onvo-text-inherit" />
                         </DropdownMenuIconWrapper>
                         <span>Download as CSV</span>
                       </span>
@@ -311,23 +313,23 @@ const ChartCard: React.FC<{
                   <DropdownMenuLabel>Images</DropdownMenuLabel>
                   <DropdownMenuGroup>
                     <DropdownMenuItem onClick={() => exportWidget("svg")}>
-                      <span className="flex items-center gap-x-2">
-                        <PhotoIcon className="size-4 " />
+                      <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                        <PhotoIcon className="onvo-size-4 onvo-" />
                         <span>Download as SVG</span>
                       </span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => exportWidget("png")}>
-                      <span className="flex items-center gap-x-2">
+                      <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                         <DropdownMenuIconWrapper>
-                          <PhotoIcon className="size-4 text-inherit" />
+                          <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
                         </DropdownMenuIconWrapper>
                         <span>Download as PNG</span>
                       </span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => exportWidget("jpeg")}>
-                      <span className="flex items-center gap-x-2">
+                      <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                         <DropdownMenuIconWrapper>
-                          <PhotoIcon className="size-4 text-inherit" />
+                          <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
                         </DropdownMenuIconWrapper>
                         <span>Download as JPEG</span>
                       </span>
@@ -343,18 +345,18 @@ const ChartCard: React.FC<{
             <DropdownMenuTrigger asChild>
               <Icon icon={PencilSquareIcon} variant="shadow" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="min-w-56">
+            <DropdownMenuContent className="onvo-min-w-56">
               <DropdownMenuGroup>
                 <DropdownMenuItem onClick={onRequestEdit}>
-                  <span className="flex items-center gap-x-2">
-                    <PencilSquareIcon className="size-4 " />
+                  <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                    <PencilSquareIcon className="onvo-size-4" />
                     <span>Edit widget</span>
                   </span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={duplicate}>
-                  <span className="flex items-center gap-x-2">
+                  <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                     <DropdownMenuIconWrapper>
-                      <DocumentDuplicateIcon className="size-4 text-inherit" />
+                      <DocumentDuplicateIcon className="onvo-size-4 onvo-text-inherit" />
                     </DropdownMenuIconWrapper>
                     <span>Duplicate widget</span>
                   </span>
@@ -367,9 +369,9 @@ const ChartCard: React.FC<{
               {deletable && (
                 <DropdownMenuGroup>
                   <DropdownMenuItem onClick={deleteWidget}>
-                    <span className="flex items-center gap-x-2">
-                      <TrashIcon className="size-4 text-red-500" />
-                      <span className="text-red-500">Delete widget</span>
+                    <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                      <TrashIcon className="onvo-size-4 onvo-text-red-500" />
+                      <span className="onvo-text-red-500">Delete widget</span>
                     </span>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>

@@ -11,7 +11,7 @@ const Loader: React.FC<{}> = ({}) => {
     <div className="onvo-loader-question-modal-content" role="status">
       <svg
         aria-hidden="true"
-        className="w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+        className="onvo-w-6 onvo-h-6 onvo-mr-2 onvo-text-gray-200 onvo-animate-spin dark:onvo-text-gray-600 onvo-fill-blue-600"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ const Loader: React.FC<{}> = ({}) => {
           fill="currentFill"
         />
       </svg>
-      <span className="sr-only">Loading...</span>
+      <span className="onvo-sr-only">Loading...</span>
     </div>
   );
 };
@@ -54,42 +54,45 @@ const QuestionLoader: React.FC<{}> = () => {
   ];
 
   return (
-    <div className="onvo-loader-question-modal relative flex flex-col items-start justify-start gap-3">
-      <div className="flex flex-row gap-3 items-start justify-start">
+    <div className="onvo-loader-question-modal onvo-relative onvo-flex onvo-flex-col onvo-items-start onvo-justify-start onvo-gap-3">
+      <div className="onvo-flex onvo-flex-row onvo-gap-3 onvo-items-start onvo-justify-start">
         <Icon
           variant="shadow"
           icon={() => <Logo height={20} width={20} />}
           size="sm"
         />
-        <div className="flex-grow flex flex-col gap-2 pt-1">
+        <div className="onvo-flex-grow onvo-flex onvo-flex-col onvo-gap-2 onvo-pt-1">
           {states.slice(0, state + 1).map((a, i) => (
-            <div className="flex flex-row items-center" key={"state-" + i}>
+            <div
+              className="onvo-flex onvo-flex-row onvo-items-center"
+              key={"state-" + i}
+            >
               {state === i ? (
                 <Loader />
               ) : (
-                <CheckCircleIcon className="h-6 w-6 mr-2 text-green-500" />
+                <CheckCircleIcon className="onvo-h-6 onvo-w-6 onvo-mr-2 onvo-text-green-500" />
               )}
               <Text>{a}</Text>
             </div>
           ))}
         </div>
       </div>
-      <Card className="animate-pulse">
-        <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2.5"></div>
-        <div className="w-48 h-2 mb-10 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-        <div className="flex items-baseline mt-4">
-          <div className="w-full bg-gray-200 rounded-t-lg h-72 dark:bg-gray-700"></div>
-          <div className="w-full h-56 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-          <div className="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-          <div className="w-full h-64 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-          <div className="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
-          <div className="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-          <div className="w-full bg-gray-200 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
-          <div className="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-          <div className="w-full h-56 ms-6 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-          <div className="w-full bg-gray-200 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
+      <Card className="onvo-animate-pulse">
+        <div className="onvo-h-2.5 onvo-bg-gray-200 onvo-rounded-full dark:onvo-bg-slate-700 onvo-w-32 onvo-mb-2.5"></div>
+        <div className="onvo-w-48 onvo-h-2 onvo-mb-10 onvo-bg-slate-200 onvo-rounded-full dark:onvo-bg-slate-700"></div>
+        <div className="onvo-flex onvo-items-baseline onvo-mt-4">
+          <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-72 dark:onvo-bg-slate-700"></div>
+          <div className="onvo-w-full onvo-h-56 onvo-ms-6 onvo-bg-slate-200 onvo-rounded-t-lg dark:onvo-bg-slate-700"></div>
+          <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-72 onvo-ms-6 dark:onvo-bg-slate-700"></div>
+          <div className="w-full h-64 onvo-ms-6 onvo-bg-slate-200 onvo-rounded-t-lg dark:onvo-bg-slate-700"></div>
+          <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-80 onvo-ms-6 dark:onvo-bg-slate-700"></div>
+          <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-72 onvo-ms-6 dark:onvo-bg-slate-700"></div>
+          <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-80 onvo-ms-6 dark:onvo-bg-slate-700"></div>
+          <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-72 onvo-ms-6 dark:onvo-bg-slate-700"></div>
+          <div className="onvo-w-full onvo-h-56 onvo-ms-6 onvo-bg-slate-200 onvo-rounded-t-lg dark:onvo-bg-slate-700"></div>
+          <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-72 onvo-ms-6 dark:onvo-bg-slate-700"></div>
         </div>
-        <span className="sr-only">Loading...</span>
+        <span className="onvo-sr-only">Loading...</span>
       </Card>
     </div>
   );

@@ -36,22 +36,25 @@ const DropdownMenuSubMenuTrigger = React.forwardRef<
     ref={forwardedRef}
     className={cx(
       // base
-      "relative flex cursor-default select-none items-center rounded py-1.5 pl-2 pr-1 outline-none transition-colors data-[state=checked]:font-semibold sm:text-sm",
+      "onvo-relative onvo-flex onvo-cursor-default onvo-select-none onvo-items-center onvo-rounded onvo-py-1.5 onvo-pl-2 onvo-pr-1 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "onvo-text-gray-900 dark:onvo-text-gray-50",
       // disabled
-      "data-[disabled]:pointer-events-none data-[disabled]:text-gray-400 data-[disabled]:hover:bg-none dark:data-[disabled]:text-gray-600",
+      "data-[disabled]:onvo-pointer-events-none data-[disabled]:onvo-text-gray-400 data-[disabled]:hover:onvo-bg-none dark:data-[disabled]:onvo-text-gray-600",
       // focus
-      "focus-visible:bg-gray-100 data-[state=open]:bg-gray-100  focus-visible:dark:bg-gray-900 data-[state=open]:dark:bg-gray-900",
+      "focus-visible:onvo-bg-gray-100 data-[state=open]:onvo-bg-gray-100 focus-visible:dark:onvo-bg-gray-900 data-[state=open]:dark:onvo-bg-gray-900",
       // hover
-      "hover:bg-gray-100 hover:dark:bg-gray-900",
+      "hover:onvo-bg-gray-100 hover:dark:onvo-bg-gray-900",
       //
       className
     )}
     {...props}
   >
     {children}
-    <ChevronRightIcon className="ml-auto size-4 shrink-0" aria-hidden="true" />
+    <ChevronRightIcon
+      className="onvo-ml-auto onvo-size-4 onvo-shrink-0"
+      aria-hidden="true"
+    />
   </DropdownMenuPrimitives.SubTrigger>
 ));
 DropdownMenuSubMenuTrigger.displayName = "DropdownMenuSubMenuTrigger";
@@ -66,22 +69,22 @@ const DropdownMenuSubMenuContent = React.forwardRef<
       collisionPadding={collisionPadding}
       className={cx(
         // base
-        "relative z-50 overflow-hidden rounded-md border p-1 shadow-xl shadow-black/[2.5%]",
+        "onvo-relative onvo-z-50 onvo-overflow-hidden onvo-rounded-md onvo-border onvo-p-1 onvo-shadow-xl onvo-shadow-black/[2.5%]",
         // widths
-        "min-w-32",
+        "onvo-min-w-32",
         // heights
-        "max-h-[var(--radix-popper-available-height)]",
+        "onvo-max-h-[var(--radix-popper-available-height)]",
         // background color
-        "bg-white dark:bg-gray-950",
+        "onvo-bg-white dark:onvo-bg-gray-950",
         // text color
-        "text-gray-900 dark:text-gray-50",
+        "onvo-text-gray-900 dark:onvo-text-gray-50",
         // border color
-        "border-gray-200 dark:border-gray-800",
+        "onvo-border-gray-200 dark:onvo-border-gray-800",
         // transition
-        "will-change-[transform,opacity]",
+        "onvo-will-change-[transform,opacity]",
         // "data-[state=open]:animate-slideDownAndFade",
-        "data-[state=closed]:animate-hide",
-        "data-[side=bottom]:animate-slideDownAndFade data-[side=left]:animate-slideLeftAndFade data-[side=right]:animate-slideRightAndFade data-[side=top]:animate-slideUpAndFade",
+        "data-[state=closed]:onvo-animate-hide",
+        "data-[side=bottom]:onvo-animate-slideDownAndFade data-[side=left]:onvo-animate-slideLeftAndFade data-[side=right]:onvo-animate-slideRightAndFade data-[side=top]:onvo-animate-slideUpAndFade",
         className
       )}
       {...props}
@@ -110,21 +113,21 @@ const DropdownMenuContent = React.forwardRef<
         ref={forwardedRef}
         className={cx(
           // base
-          "relative z-50 overflow-hidden rounded-md border p-1 shadow-xl shadow-black/[2.5%]",
+          "onvo-relative onvo-z-50 onvo-overflow-hidden onvo-rounded-md onvo-border onvo-p-1 onvo-shadow-xl onvo-shadow-black/[2.5%]",
           // widths
-          "min-w-48",
+          "onvo-min-w-48",
           // heights
-          "max-h-[var(--radix-popper-available-height)]",
+          "onvo-max-h-[var(--radix-popper-available-height)]",
           // background color
-          "bg-white dark:bg-gray-950",
+          "onvo-bg-white dark:onvo-bg-gray-950",
           // text color
-          "text-gray-900 dark:text-gray-50",
+          "onvo-text-gray-900 dark:onvo-text-gray-50",
           // border color
-          "border-gray-200 dark:border-gray-800",
+          "onvo-border-gray-200 dark:onvo-border-gray-800",
           // transition
-          "will-change-[transform,opacity]",
-          "data-[state=closed]:animate-hide",
-          "data-[side=bottom]:animate-slideDownAndFade data-[side=left]:animate-slideLeftAndFade data-[side=right]:animate-slideRightAndFade data-[side=top]:animate-slideUpAndFade",
+          "onvo-will-change-[transform,opacity]",
+          "data-[state=closed]:onvo-animate-hide",
+          "data-[side=bottom]:onvo-animate-slideDownAndFade data-[side=left]:onvo-animate-slideLeftAndFade data-[side=right]:onvo-animate-slideRightAndFade data-[side=top]:onvo-animate-slideUpAndFade",
           className
         )}
         sideOffset={sideOffset}
@@ -149,15 +152,15 @@ const DropdownMenuItem = React.forwardRef<
     ref={forwardedRef}
     className={cx(
       // base
-      "group/DropdownMenuItem relative flex cursor-pointer select-none items-center rounded py-1.5 pl-2 pr-1 outline-none transition-colors data-[state=checked]:font-semibold sm:text-sm",
+      "group/DropdownMenuItem onvo-relative onvo-flex onvo-cursor-pointer onvo-select-none onvo-items-center onvo-rounded onvo-py-1.5 onvo-pl-2 onvo-pr-1 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "onvo-text-gray-900 dark:onvo-text-gray-50",
       // disabled
-      "data-[disabled]:pointer-events-none data-[disabled]:text-gray-400 data-[disabled]:hover:bg-none dark:data-[disabled]:text-gray-600",
+      "data-[disabled]:onvo-pointer-events-none data-[disabled]:onvo-text-gray-400 data-[disabled]:hover:onvo-bg-none dark:data-[disabled]:onvo-text-gray-600",
       // focus
-      "focus-visible:bg-gray-100 focus-visible:dark:bg-gray-900",
+      "focus-visible:onvo-bg-gray-100 focus-visible:dark:onvo-bg-gray-900",
       // hover
-      "hover:bg-gray-100 hover:dark:bg-gray-900",
+      "hover:onvo-bg-gray-100 hover:dark:onvo-bg-gray-900",
       className
     )}
     {...props}
@@ -165,14 +168,18 @@ const DropdownMenuItem = React.forwardRef<
     {children}
     {hint && (
       <span
-        className={cx("ml-auto pl-2 text-sm text-gray-400 dark:text-gray-600")}
+        className={cx(
+          "onvo-ml-auto onvo-pl-2 onvo-text-sm onvo-text-gray-400 dark:onvo-text-gray-600"
+        )}
       >
         {hint}
       </span>
     )}
     {shortcut && (
       <span
-        className={cx("ml-auto pl-2 text-sm text-gray-400 dark:text-gray-600")}
+        className={cx(
+          "onvo-ml-auto onvo-pl-2 onvo-text-sm onvo-text-gray-400 dark:onvo-text-gray-600"
+        )}
       >
         {shortcut}
       </span>
@@ -196,25 +203,25 @@ const DropdownMenuCheckboxItem = React.forwardRef<
       ref={forwardedRef}
       className={cx(
         // base
-        "relative flex cursor-pointer select-none items-center gap-x-2 rounded py-1.5 pl-8 pr-1 outline-none transition-colors data-[state=checked]:font-semibold sm:text-sm",
+        "onvo-relative onvo-flex onvo-cursor-pointer onvo-select-none onvo-items-center onvo-gap-x-2 onvo-rounded onvo-py-1.5 onvo-pl-8 onvo-pr-1 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
         // text color
-        "text-gray-900 dark:text-gray-50",
+        "onvo-text-gray-900 dark:onvo-text-gray-50",
         // disabled
-        "data-[disabled]:pointer-events-none  data-[disabled]:text-gray-400 data-[disabled]:hover:bg-none dark:data-[disabled]:text-gray-600",
+        "data-[disabled]:onvo-pointer-events-none data-[disabled]:onvo-text-gray-400 data-[disabled]:hover:onvo-bg-none dark:data-[disabled]:onvo-text-gray-600",
         // focus
-        "focus-visible:bg-gray-100 focus-visible:dark:bg-gray-900",
+        "focus-visible:onvo-bg-gray-100 focus-visible:dark:onvo-bg-gray-900",
         // hover
-        "hover:bg-gray-100 hover:dark:bg-gray-900",
+        "hover:onvo-bg-gray-100 hover:dark:onvo-bg-gray-900",
         className
       )}
       checked={checked}
       {...props}
     >
-      <span className="absolute left-2 flex size-4 items-center justify-center">
+      <span className="onvo-absolute onvo-left-2 onvo-flex onvo-size-4 onvo-items-center onvo-justify-center">
         <DropdownMenuPrimitives.ItemIndicator>
           <CheckIcon
             aria-hidden="true"
-            className="size-full shrink-0 text-gray-800 dark:text-gray-200"
+            className="onvo-size-full onvo-shrink-0 onvo-text-gray-800 dark:onvo-text-gray-200"
           />
         </DropdownMenuPrimitives.ItemIndicator>
       </span>
@@ -222,7 +229,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
       {hint && (
         <span
           className={cx(
-            "ml-auto text-sm font-normal text-gray-400 dark:text-gray-600"
+            "onvo-ml-auto onvo-text-sm onvo-font-normal onvo-text-gray-400 dark:onvo-text-gray-600"
           )}
         >
           {hint}
@@ -231,7 +238,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
       {shortcut && (
         <span
           className={cx(
-            "ml-auto text-sm font-normal tracking-widest text-gray-400 dark:border-gray-800 dark:text-gray-600"
+            "onvo-ml-auto onvo-text-sm onvo-font-normal onvo-tracking-widest onvo-text-gray-400 dark:onvo-border-gray-800 dark:onvo-text-gray-600"
           )}
         >
           {shortcut}
@@ -253,34 +260,34 @@ const DropdownMenuRadioItem = React.forwardRef<
     ref={forwardedRef}
     className={cx(
       // base
-      "group/DropdownMenuRadioItem relative flex cursor-pointer select-none items-center gap-x-2 rounded py-1.5 pl-8 pr-1 outline-none transition-colors data-[state=checked]:font-semibold sm:text-sm",
+      "group/DropdownMenuRadioItem onvo-relative onvo-flex onvo-cursor-pointer onvo-select-none onvo-items-center onvo-gap-x-2 onvo-rounded onvo-py-1.5 onvo-pl-8 onvo-pr-1 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
       // text color
-      "text-gray-900 dark:text-gray-50",
+      "onvo-text-gray-900 dark:onvo-text-gray-50",
       // disabled
-      "data-[disabled]:pointer-events-none  data-[disabled]:text-gray-400 data-[disabled]:hover:bg-none dark:data-[disabled]:text-gray-600",
+      "data-[disabled]:onvo-pointer-events-none data-[disabled]:onvo-text-gray-400 data-[disabled]:hover:onvo-bg-none dark:data-[disabled]:onvo-text-gray-600",
       // focus
-      "focus-visible:bg-gray-100 focus-visible:dark:bg-gray-900",
+      "focus-visible:onvo-bg-gray-100 focus-visible:dark:onvo-bg-gray-900",
       // hover
-      "hover:bg-gray-100 hover:dark:bg-gray-900",
+      "hover:onvo-bg-gray-100 hover:dark:onvo-bg-gray-900",
       className
     )}
     {...props}
   >
-    <span className="absolute left-2 flex size-4 items-center justify-center">
+    <span className="onvo-absolute onvo-left-2 onvo-flex onvo-size-4 onvo-items-center onvo-justify-center">
       <CheckCircleIcon
         aria-hidden="true"
-        className="size-full shrink-0 text-blue-500 group-data-[state=checked]/DropdownMenuRadioItem:flex group-data-[state=unchecked]/DropdownMenuRadioItem:hidden dark:text-blue-500"
+        className="onvo-size-full onvo-shrink-0 onvo-text-blue-500 group-data-[state=checked]/DropdownMenuRadioItem:onvo-flex group-data-[state=unchecked]/DropdownMenuRadioItem:onvo-hidden dark:onvo-text-blue-500"
       />
       <MinusCircleIcon
         aria-hidden="true"
-        className="size-full shrink-0 text-gray-300 group-data-[state=unchecked]/DropdownMenuRadioItem:flex group-data-[state=checked]/DropdownMenuRadioItem:hidden dark:text-gray-700"
+        className="onvo-size-full onvo-shrink-0 onvo-text-gray-300 group-data-[state=unchecked]/DropdownMenuRadioItem:onvo-flex group-data-[state=checked]/DropdownMenuRadioItem:onvo-hidden dark:onvo-text-gray-700"
       />
     </span>
     {children}
     {hint && (
       <span
         className={cx(
-          "ml-auto text-sm font-normal text-gray-400 dark:text-gray-600"
+          "onvo-ml-auto onvo-text-sm onvo-font-normal onvo-text-gray-400 dark:onvo-text-gray-600"
         )}
       >
         {hint}
@@ -289,7 +296,7 @@ const DropdownMenuRadioItem = React.forwardRef<
     {shortcut && (
       <span
         className={cx(
-          "ml-auto text-sm font-normal tracking-widest text-gray-400 dark:border-gray-800 dark:text-gray-600"
+          "onvo-ml-auto onvo-text-sm onvo-font-normal onvo-tracking-widest onvo-text-gray-400 dark:onvo-border-gray-800 dark:onvo-text-gray-600"
         )}
       >
         {shortcut}
@@ -307,9 +314,9 @@ const DropdownMenuLabel = React.forwardRef<
     ref={forwardedRef}
     className={cx(
       // base
-      "px-2 py-2 text-xs font-medium tracking-wide",
+      "onvo-px-2 onvo-py-2 onvo-text-xs onvo-font-medium onvo-tracking-wide",
       // text color
-      " text-gray-500 dark:text-gray-500",
+      "onvo-text-gray-500 dark:onvo-text-gray-500",
       className
     )}
     {...props}
@@ -324,7 +331,7 @@ const DropdownMenuSeparator = React.forwardRef<
   <DropdownMenuPrimitives.Separator
     ref={forwardedRef}
     className={cx(
-      "-mx-1 my-1 h-px border-t border-gray-200 dark:border-gray-800",
+      "-onvo-mx-1 onvo-my-1 onvo-h-px onvo-border-t onvo-border-gray-200 dark:onvo-border-gray-800",
       className
     )}
     {...props}
@@ -340,9 +347,9 @@ const DropdownMenuIconWrapper = ({
     <div
       className={cx(
         // text color
-        "text-gray-600 dark:text-gray-400",
+        "onvo-text-gray-600 dark:onvo-text-gray-400",
         // disabled
-        "group-data-[disabled]/DropdownMenuItem:text-gray-400 group-data-[disabled]/DropdownMenuItem:dark:text-gray-700",
+        "group-data-[disabled]/DropdownMenuItem:onvo-text-gray-400 group-data-[disabled]/DropdownMenuItem:dark:onvo-text-gray-700",
         className
       )}
       {...props}

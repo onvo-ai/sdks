@@ -98,52 +98,53 @@ export const DashboardHeader: React.FC<{
 
   return (
     <section
-      className={`onvo-dashboard-header sticky z-10 border-b foreground-color border-gray-200 dark:border-gray-800 top-0 ${
+      className={`onvo-dashboard-header onvo-sticky onvo-z-10 onvo-border-b onvo-foreground-color onvo-border-gray-200 dark:onvo-border-gray-800 onvo-top-0 ${
         className ? className : ""
       }`}
     >
-      <main className="mx-auto px-6 py-3 lg:px-8 z-10 relative flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-        <div className="flex-grow">
+      <main className="onvo-mx-auto onvo-px-6 onvo-py-3 lg:onvo-px-8 onvo-z-10 onvo-relative onvo-flex onvo-flex-col onvo-items-start onvo-justify-between onvo-gap-4 md:onvo-flex-row md:onvo-items-center">
+        <div className="onvo-flex-grow">
           {dashboard ? (
             <>
-              <Metric className="onvo-dashboard-header-title font-override text-xl -mb-1">
+              <Metric className="onvo-dashboard-header-title onvo-font-override onvo-text-xl -onvo-mb-1">
                 {dashboard?.title || " "}
               </Metric>
-              <Label className="onvo-dashboard-header-description font-override">
+              <Label className="onvo-dashboard-header-description onvo-font-override">
                 {dashboard?.description || " "}{" "}
                 <LastUpdatedBadge date={dashboard.last_updated_at} />
               </Label>
             </>
           ) : (
-            <div className="w-3/5 animate-pulse">
-              <div className="mb-2 h-6 w-4/5 rounded-md bg-gray-100 dark:bg-gray-700" />
-              <div className="h-4 w-2/5 rounded-md bg-gray-100 dark:bg-gray-700" />
+            <div className="onvo-w-3/5 onvo-animate-pulse">
+              <div className="onvo-mb-2 onvo-h-6 onvo-w-4/5 onvo-rounded-md onvo-bg-gray-100 dark:onvo-bg-gray-700" />
+              <div className="onvo-h-4 onvo-w-2/5 onvo-rounded-md onvo-bg-gray-100 dark:onvo-bg-gray-700" />
             </div>
           )}
         </div>
-        <div className="flex flex-row gap-2">
+        <div className="onvo-flex onvo-flex-row onvo-gap-2">
           {(ImageDownloadEnabled || ReportDownloadEnabled) && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="secondary" disabled={!dashboard}>
-                  Download <ChevronDownIcon className="h-4 w-4 ml-1" />
+                  Download{" "}
+                  <ChevronDownIcon className="onvo-h-4 onvo-w-4 onvo-ml-1" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="min-w-56">
+              <DropdownMenuContent className="onvo-min-w-56">
                 {ReportDownloadEnabled && (
                   <>
                     <DropdownMenuLabel>Reports</DropdownMenuLabel>
                     <DropdownMenuGroup>
                       <DropdownMenuItem onClick={() => exportDashboard("xlsx")}>
-                        <span className="flex items-center gap-x-2">
-                          <DocumentChartBarIcon className="size-4" />
+                        <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                          <DocumentChartBarIcon className="onvo-size-4" />
                           <span>Download as excel</span>
                         </span>
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => exportDashboard("csv")}>
-                        <span className="flex items-center gap-x-2">
+                        <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                           <DropdownMenuIconWrapper>
-                            <DocumentChartBarIcon className="size-4 text-inherit" />
+                            <DocumentChartBarIcon className="onvo-size-4 onvo-text-inherit" />
                           </DropdownMenuIconWrapper>
                           <span>Download as CSV</span>
                         </span>
@@ -159,23 +160,23 @@ export const DashboardHeader: React.FC<{
                     <DropdownMenuLabel>Images</DropdownMenuLabel>
                     <DropdownMenuGroup>
                       <DropdownMenuItem onClick={() => exportDashboard("pdf")}>
-                        <span className="flex items-center gap-x-2">
-                          <PhotoIcon className="size-4" />
+                        <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                          <PhotoIcon className="onvo-size-4" />
                           <span>Download as PDF</span>
                         </span>
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => exportDashboard("png")}>
-                        <span className="flex items-center gap-x-2">
+                        <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                           <DropdownMenuIconWrapper>
-                            <PhotoIcon className="size-4 text-inherit" />
+                            <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
                           </DropdownMenuIconWrapper>
                           <span>Download as PNG</span>
                         </span>
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => exportDashboard("jpeg")}>
-                        <span className="flex items-center gap-x-2">
+                        <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                           <DropdownMenuIconWrapper>
-                            <PhotoIcon className="size-4 text-inherit" />
+                            <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
                           </DropdownMenuIconWrapper>
                           <span>Download as JPEG</span>
                         </span>
