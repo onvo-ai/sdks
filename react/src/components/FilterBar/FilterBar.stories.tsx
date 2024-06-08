@@ -1,14 +1,12 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { Dashboard } from "./Dashboard";
+import { FilterBar } from "./FilterBar";
 import { Wrapper } from "../Wrapper/Wrapper";
-import { DashboardHeader } from "../DashboardHeader/DashboardHeader";
-import { DashboardGrid } from "../DashboardGrid/DashboardGrid";
-import { QuestionModal } from "../QuestionModal/QuestionModal";
+import { Dashboard } from "../Dashboard";
 
-const meta: Meta<typeof Dashboard> = {
-  component: Dashboard,
-  title: "Onvo/Dashboard",
+const meta: Meta<typeof FilterBar> = {
+  component: FilterBar,
+  title: "Onvo/FilterBar",
   argTypes: {},
 };
 export default meta;
@@ -24,9 +22,7 @@ export const Standalone: Story = (args) => {
     <div className="onvo-h-screen onvo-w-screen">
       <Wrapper {...args}>
         <Dashboard id={args.id}>
-          <DashboardHeader />
-          <DashboardGrid />
-          <QuestionModal />
+          <FilterBar />
         </Dashboard>
       </Wrapper>
     </div>

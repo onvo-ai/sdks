@@ -16,7 +16,7 @@ const preview: Preview = {
     withThemeByClassName<ReactRenderer>({
       themes: {
         light: "",
-        dark: "dark",
+        dark: "onvo-dark",
       },
       defaultTheme: "light",
     }),

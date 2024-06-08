@@ -9,9 +9,9 @@ import { cx, focusRing } from "../../lib/utils";
 const buttonVariants = tv({
   base: [
     // base
-    "relative inline-flex items-center justify-center rounded-md border px-3 py-1.5 text-center text-sm font-medium shadow-sm transition-all duration-100 ease-in-out",
+    "onvo-relative onvo-inline-flex onvo-items-center onvo-justify-center onvo-rounded-md onvo-border onvo-px-3 onvo-py-1.5 onvo-text-center onvo-text-sm onvo-font-medium onvo-shadow-sm onvo-transition-all onvo-duration-100 onvo-ease-in-out",
     // disabled
-    "disabled:pointer-events-none disabled:shadow-none",
+    "disabled:onvo-pointer-events-none disabled:onvo-shadow-none",
     // focus
     focusRing,
   ],
@@ -19,57 +19,57 @@ const buttonVariants = tv({
     variant: {
       primary: [
         // border
-        "border-transparent",
+        "onvo-border-transparent",
         // text color
-        "text-white dark:text-slate-900",
+        "onvo-text-white dark:onvo-text-slate-900",
         // background color
-        "bg-slate-900 dark:bg-slate-50",
+        "onvo-bg-slate-900 dark:onvo-bg-slate-50",
         // hover color
-        "hover:bg-slate-800 dark:hover:bg-slate-200",
+        "hover:onvo-bg-slate-800 dark:hover:onvo-bg-slate-200",
         // disabled
-        "disabled:bg-slate-100 disabled:text-slate-400",
-        "disabled:dark:bg-slate-800 disabled:dark:text-slate-600",
+        "disabled:onvo-bg-slate-100 disabled:onvo-text-slate-400",
+        "disabled:dark:onvo-bg-slate-800 disabled:dark:onvo-text-slate-600",
       ],
       secondary: [
         // border
-        "border-slate-200 dark:border-slate-800",
+        "onvo-border-slate-200 dark:onvo-border-slate-800",
         // text color
-        "text-slate-900 dark:text-slate-50",
+        "onvo-text-slate-900 dark:onvo-text-slate-50",
         // background color
-        " bg-white dark:bg-slate-950",
+        "onvo-bg-white dark:onvo-bg-slate-950",
         //hover color
-        "hover:bg-slate-50 dark:hover:bg-slate-900/60",
+        "hover:onvo-bg-slate-50 dark:hover:onvo-bg-slate-900/60",
         // disabled
-        "disabled:text-slate-400",
-        "disabled:dark:text-slate-600",
+        "disabled:onvo-text-slate-400",
+        "disabled:dark:onvo-text-slate-600",
       ],
       light: [
         // base
-        "shadow-none",
+        "onvo-shadow-none",
         // border
-        "border-transparent",
+        "onvo-border-transparent",
         // text color
-        "text-slate-900 dark:text-slate-50",
+        "onvo-text-slate-900 dark:onvo-text-slate-50",
         // background color
-        "bg-slate-200 dark:bg-slate-900",
+        "onvo-bg-slate-200 dark:onvo-bg-slate-900",
         // hover color
-        "hover:bg-slate-300/70 dark:hover:bg-slate-800/80",
+        "hover:onvo-bg-slate-300/70 dark:hover:onvo-bg-slate-800/80",
         // disabled
-        "disabled:bg-slate-100 disabled:text-slate-400",
-        "disabled:dark:bg-slate-800 disabled:dark:text-slate-600",
+        "disabled:onvo-bg-slate-100 disabled:onvo-text-slate-400",
+        "disabled:dark:onvo-bg-slate-800 disabled:dark:onvo-text-slate-600",
       ],
       destructive: [
         // text color
-        "text-white",
+        "onvo-text-white",
         // border
-        "border-transparent",
+        "onvo-border-transparent",
         // background color
-        "bg-red-600 dark:bg-red-700",
+        "onvo-bg-red-600 dark:onvo-bg-red-700",
         // hover color
-        "hover:bg-red-700 dark:hover:bg-red-600",
+        "hover:onvo-bg-red-700 dark:hover:onvo-bg-red-600",
         // disabled
-        "disabled:bg-red-300 disabled:text-white",
-        "disabled:dark:bg-red-950 disabled:dark:text-red-400",
+        "disabled:onvo-bg-red-300 disabled:onvo-text-white",
+        "disabled:dark:onvo-bg-red-950 disabled:dark:onvo-text-red-400",
       ],
     },
   },
@@ -125,12 +125,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {isLoading ? (
-          <span className="pointer-events-none flex shrink-0 items-center justify-center gap-1.5">
+          <span className="onvo-pointer-events-none onvo-flex shrink-0 onvo-items-center onvo-justify-center onvo-gap-1.5">
             <Loader
-              className="size-4 shrink-0 animate-spin"
+              className="onvo-size-4 onvo-shrink-0 onvo-animate-spin"
               aria-hidden="true"
             />
-            <span className="sr-only">
+            <span className="onvo-sr-only">
               {loadingText ? loadingText : "Loading"}
             </span>
             {loadingText ? loadingText : children}

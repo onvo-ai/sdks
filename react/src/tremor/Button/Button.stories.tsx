@@ -13,7 +13,7 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Variants: Story = (args) => (
-  <div className="flex flex-row gap-2">
+  <div className="onvo-flex onvo-flex-row onvo-gap-2">
     <Button variant="primary">Primary</Button>
     <Button variant="secondary">Secondary</Button>
     <Button variant="light">Light</Button>

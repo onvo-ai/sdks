@@ -14,18 +14,18 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         ref={forwardedRef}
         className={cx(
           // base
-          "flex min-h-[4rem] w-full rounded-md border px-3 py-1.5 shadow-sm outline-none transition-all sm:text-sm",
+          "onvo-flex onvo-min-h-[4rem] onvo-w-full onvo-rounded-md onvo-border onvo-px-3 onvo-py-1.5 onvo-shadow-sm onvo-outline-none onvo-transition-all sm:onvo-text-sm",
           // text color
-          "text-gray-900 dark:text-gray-50",
+          "onvo-text-gray-900 dark:onvo-text-gray-50",
           // border color
-          "border-gray-300 dark:border-gray-800",
+          "onvo-border-gray-300 dark:onvo-border-gray-800",
           // background color
-          "bg-white dark:bg-gray-950",
+          "onvo-bg-white dark:onvo-bg-gray-950",
           // placeholder color
-          "placeholder-gray-400 dark:placeholder-gray-500",
+          "onvo-placeholder-gray-400 dark:onvo-placeholder-gray-500",
           // disabled
-          "disabled:border-gray-300 disabled:bg-gray-100 disabled:text-gray-300",
-          "disabled:dark:border-gray-700 disabled:dark:bg-gray-800 disabled:dark:text-gray-500",
+          "disabled:onvo-border-gray-300 disabled:onvo-bg-gray-100 disabled:onvo-text-gray-300",
+          "disabled:dark:onvo-border-gray-700 disabled:dark:onvo-bg-gray-800 disabled:dark:onvo-text-gray-500",
           // focus
           focusInput,
           // error

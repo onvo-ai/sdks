@@ -10,31 +10,31 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
 const inputStyles = tv({
   base: [
     // base
-    "relative block w-full appearance-none rounded-md border px-2.5 py-1.5 shadow-sm outline-none transition sm:text-sm",
+    "onvo-relative onvo-block onvo-w-full onvo-appearance-none onvo-rounded-md onvo-border onvo-px-2.5 onvo-py-1.5 onvo-shadow-sm onvo-outline-none onvo-transition onvo-sm:text-sm",
     // border color
-    "border-slate-200 dark:border-slate-800",
+    "onvo-border-slate-200 dark:onvo-border-slate-800",
     // text color
-    "text-slate-900 dark:text-slate-50",
+    "onvo-text-slate-900 dark:onvo-text-slate-50",
     // placeholder color
-    "placeholder-slate-400 dark:placeholder-slate-500",
+    "onvo-placeholder-slate-400 dark:onvo-placeholder-slate-500",
     // background color
-    "bg-white dark:bg-slate-950",
+    "onvo-bg-white dark:onvo-bg-slate-950",
     // disabled
-    "disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400",
-    "disabled:dark:border-slate-700 disabled:dark:bg-slate-800 disabled:dark:text-slate-500",
+    "disabled:onvo-border-slate-200 disabled:onvo-bg-slate-100 disabled:onvo-text-slate-400",
+    "disabled:dark:onvo-border-slate-700 disabled:dark:onvo-bg-slate-800 disabled:dark:onvo-text-slate-500",
     // file
     [
-      "file:-my-1.5 file:-ml-2.5 file:h-[36px] file:cursor-pointer file:rounded-l-md file:rounded-r-none file:border-0 file:px-3 file:py-1.5 file:outline-none focus:outline-none disabled:pointer-events-none file:disabled:pointer-events-none",
-      "file:border-solid file:border-slate-200 file:bg-slate-50 file:text-slate-500 file:hover:bg-slate-100 file:dark:border-slate-800 file:dark:bg-slate-950 file:hover:dark:bg-slate-900/20 file:disabled:dark:border-slate-700",
+      "file:-onvo-my-1.5 file:-onvo-ml-2.5 file:onvo-h-[36px] file:onvo-cursor-pointer file:onvo-rounded-l-md file:onvo-rounded-r-none file:onvo-border-0 file:onvo-px-3 file:py-1.5 file:onvo-outline-none focus:onvo-outline-none disabled:onvo-pointer-events-none file:disabled:onvo-pointer-events-none",
+      "file:onvo-border-solid file:onvo-border-slate-200 file:onvo-bg-slate-50 file:onvo-text-slate-500 file:hover:onvo-bg-slate-100 file:dark:onvo-border-slate-800 file:dark:onvo-bg-slate-950 file:hover:dark:onvo-bg-slate-900/20 file:disabled:dark:onvo-border-slate-700",
       "file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem]",
-      "file:disabled:bg-slate-100 file:disabled:text-slate-500 file:disabled:dark:bg-slate-800",
+      "file:disabled:onvo-bg-slate-100 file:disabled:onvo-text-slate-500 file:disabled:dark:onvo-bg-slate-800",
     ],
     // focus
     focusInput,
     // invalid (optional)
     // "aria-[invalid=true]:dark:ring-red-400/20 aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-red-200 aria-[invalid=true]:border-red-500 invalid:ring-2 invalid:ring-red-200 invalid:border-red-500"
     // remove search cancel button (optional)
-    "[&::--webkit-search-cancel-button]:hidden [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden",
+    "[&::--webkit-search-cancel-button]:onvo-hidden [&::-webkit-search-cancel-button]:onvo-hidden [&::-webkit-search-decoration]:onvo-hidden",
   ],
   variants: {
     hasError: {
@@ -42,7 +42,7 @@ const inputStyles = tv({
     },
     // number input
     enableStepper: {
-      true: "[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
+      true: "[appearance:textfield] [&::-webkit-inner-spin-button]:onvo-appearance-none [&::-webkit-outer-spin-button]:onvo-appearance-none",
     },
   },
 });
@@ -71,15 +71,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const isSearch = type === "search";
 
     return (
-      <div className={cx("relative w-full", className)}>
+      <div className={cx("onvo-relative onvo-w-full", className)}>
         <input
           ref={forwardedRef}
           type={isPassword ? typeState : type}
           className={cx(
             inputStyles({ hasError, enableStepper }),
             {
-              "pl-8": isSearch,
-              "pr-10": isPassword,
+              "onvo-pl-8": isSearch,
+              "onvo-pr-10": isPassword,
             },
             inputClassName
           )}
@@ -89,13 +89,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <div
             className={cx(
               // base
-              "pointer-events-none absolute bottom-0 left-2 flex h-full items-center justify-center",
+              "onvo-pointer-events-none onvo-absolute onvo-bottom-0 onvo-left-2 onvo-flex onvo-h-full onvo-items-center onvo-justify-center",
               // text color
-              "text-slate-400 dark:text-slate-600"
+              "onvo-text-slate-400 dark:onvo-text-slate-600"
             )}
           >
             <MagnifyingGlassIcon
-              className="size-[1.125rem] shrink-0"
+              className="onvo-size-[1.125rem] onvo-shrink-0"
               aria-hidden="true"
             />
           </div>
@@ -103,18 +103,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {isPassword && (
           <div
             className={cx(
-              "absolute bottom-0 right-0 flex h-full items-center justify-center px-3"
+              "onvo-absolute onvo-bottom-0 onvo-right-0 onvo-flex onvo-h-full onvo-items-center onvo-justify-center onvo-px-3"
             )}
           >
             <button
               aria-label="Change password visibility"
               className={cx(
                 // base
-                "h-fit w-fit rounded-sm outline-none transition-all",
+                "onvo-h-fit onvo-w-fit onvo-rounded-sm onvo-outline-none onvo-transition-all",
                 // text
-                "text-slate-400  dark:text-slate-600",
+                "onvo-text-slate-400  dark:onvo-text-slate-600",
                 // hover
-                "hover:text-slate-500 hover:dark:text-slate-500",
+                "hover:onvo-text-slate-500 hover:dark:onvo-text-slate-500",
                 focusRing
               )}
               type="button"
@@ -122,13 +122,19 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 setTypeState(typeState === "password" ? "text" : "password");
               }}
             >
-              <span className="sr-only">
+              <span className="onvo-sr-only">
                 {typeState === "password" ? "Show password" : "Hide password"}
               </span>
               {typeState === "password" ? (
-                <EyeIcon aria-hidden="true" className="size-5 shrink-0" />
+                <EyeIcon
+                  aria-hidden="true"
+                  className="onvo-size-5 onvo-shrink-0"
+                />
               ) : (
-                <EyeSlashIcon aria-hidden="true" className="size-5 shrink-0" />
+                <EyeSlashIcon
+                  aria-hidden="true"
+                  className="onvo-size-5 onvo-shrink-0"
+                />
               )}
             </button>
           </div>

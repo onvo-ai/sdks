@@ -6,7 +6,7 @@ export const Metric: React.FC<{ children: any; className?: string }> = ({
 }) => {
   return (
     <h3
-      className={`text-3xl font-semibold text-slate-800 dark:text-slate-200 ${
+      className={`onvo-text-3xl onvo-font-semibold onvo-text-slate-800 dark:onvo-text-slate-200 ${
         className || ""
       }`}
     >
@@ -23,7 +23,7 @@ export const Title: React.FC<{
   return (
     <h3
       onClick={onClick}
-      className={`text-lg font-semibold text-slate-800 dark:text-slate-200 ${
+      className={`onvo-text-lg onvo-font-semibold onvo-text-slate-800 dark:onvo-text-slate-200 ${
         className || ""
       }`}
     >
@@ -38,7 +38,7 @@ export const Label: React.FC<{ children: any; className?: string }> = ({
 }) => {
   return (
     <label
-      className={`text-sm font-semibold text-slate-500 dark:text-slate-400 ${
+      className={`onvo-text-sm onvo-font-semibold onvo-text-slate-500 dark:onvo-text-slate-400 ${
         className || ""
       }`}
     >
@@ -53,7 +53,7 @@ export const Text: React.FC<{ children: any; className?: string }> = ({
 }) => {
   return (
     <p
-      className={`text-sm text-slate-500 dark:text-slate-400 ${
+      className={`onvo-text-sm onvo-text-slate-500 dark:onvo-text-slate-400 ${
         className || ""
       }`}
     >

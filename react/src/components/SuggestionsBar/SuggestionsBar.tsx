@@ -2,7 +2,7 @@ import { SparklesIcon } from "@heroicons/react/24/solid";
 import { Text } from "../../tremor/Text";
 import React from "react";
 
-const SuggestionsBar: React.FC<{ onSelect: (str: string) => void }> = ({
+export const SuggestionsBar: React.FC<{ onSelect: (str: string) => void }> = ({
   onSelect,
 }) => {
   const suggestions = [
@@ -25,15 +25,15 @@ const SuggestionsBar: React.FC<{ onSelect: (str: string) => void }> = ({
   ];
 
   return (
-    <div className="onvo-suggestion-bar w-full flex flex-row gap-2 my-2 overflow-y-auto max-w-2xl mx-auto">
+    <div className="onvo-w-full onvo-flex onvo-flex-row onvo-gap-2 onvo-my-2 onvo-overflow-x-auto onvo-scrollbar-thin onvo-max-w-2xl onvo-mx-auto">
       {suggestions.map((a) => (
         <div
           key={a.name}
-          className="onvo-suggestion flex flex-shrink-0 flex-row items-center gap-1 bg-blue-50 dark:bg-blue-950 border border-blue-500 rounded-full py-1 px-2 hover:bg-blue-100 dark:hover:bg-blue-900 cursor-pointer"
+          className="onvo-flex onvo-flex-shrink-0 onvo-flex-row onvo-items-center onvo-gap-1 onvo-bg-blue-50 dark:onvo-bg-blue-950 onvo-border onvo-border-blue-500 onvo-rounded-full onvo-py-1 onvo-px-2 hover:onvo-bg-blue-100 dark:hover:onvo-bg-blue-900 onvo-cursor-pointer"
           onClick={() => onSelect(a.value)}
         >
-          <SparklesIcon className="h-4 w-4 text-blue-500" />
-          <Text className="text-blue-500 dark:text-blue-500 font-medium">
+          <SparklesIcon className="onvo-h-4 onvo-w-4 onvo-text-blue-500" />
+          <Text className="onvo-text-blue-500 dark:onvo-text-blue-500 onvo-font-medium">
             {a.name}
           </Text>
         </div>
@@ -41,5 +41,3 @@ const SuggestionsBar: React.FC<{ onSelect: (str: string) => void }> = ({
     </div>
   );
 };
-
-export default SuggestionsBar;

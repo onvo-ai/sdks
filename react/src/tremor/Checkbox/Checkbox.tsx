@@ -16,27 +16,27 @@ const Checkbox = React.forwardRef<
       checked={checked}
       className={cx(
         // base
-        "relative inline-flex size-4 shrink-0 appearance-none items-center justify-center rounded border shadow-sm outline-none transition duration-100 enabled:cursor-pointer",
+        "onvo-relative onvo-inline-flex onvo-size-4 onvo-shrink-0 onvo-appearance-none onvo-items-center onvo-justify-center onvo-rounded onvo-border onvo-shadow-sm onvo-outline-none onvo-transition onvo-duration-100 enabled:onvo-cursor-pointer",
         // text color
-        "text-white dark:text-gray-50",
+        "onvo-text-white dark:onvo-text-gray-50",
         // background color
-        "bg-white dark:bg-gray-950",
+        "onvo-bg-white dark:onvo-bg-gray-950",
         // border color
-        "border-gray-300 dark:border-gray-800",
+        "onvo-border-gray-300 dark:onvo-border-gray-800",
         // disabled
-        "data-[disabled]:border-gray-300 data-[disabled]:bg-gray-100 data-[disabled]:text-gray-400",
-        "data-[disabled]:dark:border-gray-700 data-[disabled]:dark:bg-gray-800 data-[disabled]:dark:text-gray-500",
+        "data-[disabled]:onvo-border-gray-300 data-[disabled]:onvo-bg-gray-100 data-[disabled]:onvo-text-gray-400",
+        "data-[disabled]:dark:onvo-border-gray-700 data-[disabled]:dark:onvo-bg-gray-800 data-[disabled]:dark:onvo-text-gray-500",
         // "disabled:dark:border-gray-700 disabled:dark:bg-gray-800 disabled:dark:text-gray-500",
         // checked and enabled
-        "enabled:data-[state=checked]:border-0 enabled:data-[state=checked]:border-transparent enabled:data-[state=checked]:bg-blue-500",
+        "enabled:data-[state=checked]:onvo-border-0 enabled:data-[state=checked]:onvo-border-transparent enabled:data-[state=checked]:onvo-bg-blue-500",
         // indeterminate
-        "enabled:data-[state=indeterminate]:border-0 enabled:data-[state=indeterminate]:border-transparent enabled:data-[state=indeterminate]:bg-blue-500",
+        "enabled:data-[state=indeterminate]:onvo-border-0 enabled:data-[state=indeterminate]:onvo-border-transparent enabled:data-[state=indeterminate]:onvo-bg-blue-500",
         // focus
         focusRing,
         className
       )}
     >
-      <CheckboxPrimitives.Indicator className="flex size-full items-center justify-center">
+      <CheckboxPrimitives.Indicator className="onvo-flex onvo-size-full onvo-items-center onvo-justify-center">
         {checked === "indeterminate" ? (
           <svg
             aria-hidden="true"

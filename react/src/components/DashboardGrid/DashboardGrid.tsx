@@ -9,7 +9,7 @@ import { useBackend } from "../Wrapper";
 import { Widget } from "@onvo-ai/js";
 import CreateSeparatorModal from "../Chart/CreateSeparatorModal";
 
-import FilterBar from "./FilterBar";
+import { FilterBar } from "../FilterBar";
 import EditChartModal from "./EditWidgetModal";
 
 export const DashboardGrid: React.FC<{ spacing?: number }> = ({
@@ -69,9 +69,11 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
     return (
       <div
         className={
-          "onvo-dashboard-grid-wrapper overflow-y-auto flex-grow font-override background-color relative w-full"
+          "onvo-dashboard-grid-wrapper onvo-overflow-y-auto onvo-flex-grow onvo-pt-2 onvo-font-override onvo-background-color onvo-relative onvo-w-full"
         }
-      ></div>
+      >
+        <CreateSeparatorModal maxHeight={0} />
+      </div>
     );
 
   const editable = adminMode || dashboard?.settings?.can_edit_widget_layout;
@@ -79,22 +81,21 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
   return (
     <div
       className={
-        "onvo-dashboard-grid-wrapper overflow-y-auto flex-grow font-override background-color w-full"
+        "onvo-dashboard-grid-wrapper onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-font-override onvo-background-color onvo-w-full"
       }
     >
       <EditChartModal />
       <FilterBar />
-
       <ResponsiveGridLayout
         resizeHandle={
           editable ? (
-            <div className="onvo-dashboard-grid-handle react-resizable-handle absolute bottom-2 right-2 cursor-pointer rounded-br-lg border-b-[3px] border-r-[3px] border-gray-300 dark:border-gray-700" />
+            <div className="onvo-dashboard-grid-handle react-resizable-handle onvo-absolute onvo-bottom-2 onvo-right-2 onvo-cursor-pointer onvo-rounded-br-lg onvo-border-b-[3px] onvo-border-r-[3px] onvo-border-gray-300 dark:onvo-border-white/30" />
           ) : (
             <></>
           )
         }
         draggableHandle=".chart-drag-handle"
-        className="onvo-dashboard-grid-layout layout"
+        className="onvo-dashboard-grid-layout onvo-layout"
         rowHeight={10}
         margin={[spacing, spacing]}
         breakpoints={{ lg: 768, sm: 480 }}
@@ -145,6 +146,7 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
           });
 
           if (dashboard && editable && updatedWidgets.length > 0) {
+            console.log("UPDATING ", updatedWidgets.length, " WIDGETS");
             setWidgets(newWidgets);
             updatedWidgets.forEach((i) => {
               backend?.widgets.update(i.id, {
@@ -155,8 +157,8 @@ export const DashboardGrid: React.FC<{ spacing?: number }> = ({
         }}
       >
         {children}
-        <CreateSeparatorModal maxHeight={maxHeight} />
       </ResponsiveGridLayout>
+      <CreateSeparatorModal maxHeight={maxHeight} />
     </div>
   );
 };

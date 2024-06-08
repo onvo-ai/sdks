@@ -23,9 +23,9 @@ type Story = StoryObj<{
 
 export const Embedded: Story = (args) => {
   return (
-    <div className="relative w-screen h-screen flex justify-between items-center bg-slate-700">
+    <div className="onvo-relative onvo-w-screen onvo-h-screen onvo-flex onvo-justify-between onvo-items-center onvo-bg-slate-700">
       <div
-        className=" overflow-y-auto mx-auto rounded-xl"
+        className="onvo-overflow-y-auto onvo-mx-auto onvo-rounded-xl"
         style={{ width: args.width, height: args.height }}
       >
         <Wrapper {...args}>

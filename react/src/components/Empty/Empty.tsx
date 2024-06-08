@@ -1,7 +1,7 @@
 import { Text, Title } from "../../tremor/Text";
 import React from "react";
 
-const Empty: React.FC<{
+export const Empty: React.FC<{
   icon?: any;
   video?: string;
   title: string;
@@ -12,19 +12,21 @@ const Empty: React.FC<{
   return (
     <div
       className={
-        "onvo-empty-question-modal flex gap-6 items-center p-6 " +
-        (direction === "row" ? "flex-row" : "flex-col text-center")
+        "onvo-empty-question-modal onvo-flex onvo-gap-6 onvo-items-center onvo-p-6 " +
+        (direction === "row"
+          ? "onvo-flex-row"
+          : "onvo-flex-col onvo-text-center")
       }
     >
       {icon && (
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-100">
+        <div className="onvo-flex onvo-h-16 onvo-w-16 onvo-items-center onvo-justify-center onvo-rounded-full onvo-bg-gray-100 onvo-text-gray-600 dark:onvo-bg-gray-700 dark:onvo-text-gray-100">
           {icon}
         </div>
       )}
       {video && (
         <video
           src={video}
-          className="max-w-xl rounded-lg shadow-xl"
+          className="onvo-max-w-xl onvo-rounded-lg onvo-shadow-xl"
           muted
           autoPlay
           loop
@@ -32,10 +34,10 @@ const Empty: React.FC<{
         ></video>
       )}
       <div>
-        <Title className="onvo-empty-question-modal-title mb-1 text-lg font-bold">
+        <Title className="onvo-empty-question-modal-title onvo-mb-1 onvo-text-lg onvo-font-bold">
           {title}
         </Title>
-        <Text className="onvo-empty-question-modal-subtitle mb-4 max-w-lg">
+        <Text className="onvo-empty-question-modal-subtitle onvo-mb-4 onvo-max-w-lg">
           {subtitle}
         </Text>
         {button}
@@ -43,5 +45,3 @@ const Empty: React.FC<{
     </div>
   );
 };
-
-export default Empty;

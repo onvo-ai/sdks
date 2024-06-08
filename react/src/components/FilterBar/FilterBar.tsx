@@ -13,7 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../../tremor/Accordion";
-const FilterBar = () => {
+export const FilterBar = () => {
   const { dashboard, refreshWidgets } = useDashboard();
   const backend = useBackend();
   const [reloading, setReloading] = useState(false);
@@ -67,7 +67,7 @@ const FilterBar = () => {
   const filters = (dashboard?.filters as any[]) || [];
 
   const FiltersInner = () => (
-    <div className="flex flex-col @xl:flex-row @xl:overflow-x-auto gap-2 items-end @xl:items-center">
+    <div className="onvo-flex onvo-flex-col @xl:onvo-flex-row @xl:onvo-overflow-x-auto onvo-gap-2 onvo-items-end @xl:onvo-items-center">
       {filters.map((a) => {
         let options = (a.options || "")
           .split(",")
@@ -76,9 +76,9 @@ const FilterBar = () => {
         return (
           <div
             key={a.title}
-            className="flex flex-row w-full @xl:w-auto justify-between @xl:justify-start items-center gap-2"
+            className="onvo-flex onvo-flex-row onvo-w-full @xl:onvo-w-auto onvo-justify-between @xl:onvo-justify-start onvo-items-center onvo-gap-2"
           >
-            <Text className="w-full @xl:w-auto">{a.title}</Text>
+            <Text className="onvo-w-full @xl:onvo-w-auto">{a.title}</Text>
             {a.type === "picker" && (
               <SearchSelect
                 defaultValue={a.default}
@@ -118,17 +118,17 @@ const FilterBar = () => {
     <>
       {reloading && (
         <div
-          className="fixed top-0 left-0 z-50 w-screen h-screen flex items-center justify-center"
+          className="onvo-fixed onvo-top-0 onvo-left-0 onvo-z-50 onvo-w-screen onvo-h-screen onvo-flex onvo-items-center onvo-justify-center"
           style={{ background: "rgba(0, 0, 0, 0.3)" }}
         >
-          <div className="bg-white border py-2 px-5 rounded-lg flex items-center flex-col">
-            <div className="loader-dots block relative w-20 h-5 mt-2">
-              <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-blue-500"></div>
-              <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-blue-500"></div>
-              <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-blue-500"></div>
-              <div className="absolute top-0 mt-1 w-3 h-3 rounded-full bg-blue-500"></div>
+          <div className="onvo-bg-white onvo-border onvo-py-2 onvo-px-5 onvo-rounded-lg onvo-flex onvo-items-center onvo-flex-col">
+            <div className="onvo-loader-dots onvo-block onvo-relative onvo-w-20 onvo-h-5 onvo-mt-2">
+              <div className="onvo-absolute onvo-top-0 onvo-mt-1 onvo-w-3 onvo-h-3 onvo-rounded-full onvo-bg-blue-500"></div>
+              <div className="onvo-absolute onvo-top-0 onvo-mt-1 onvo-w-3 onvo-h-3 onvo-rounded-full onvo-bg-blue-500"></div>
+              <div className="onvo-absolute onvo-top-0 onvo-mt-1 onvo-w-3 onvo-h-3 onvo-rounded-full onvo-bg-blue-500"></div>
+              <div className="onvo-absolute onvo-top-0 onvo-mt-1 onvo-w-3 onvo-h-3 onvo-rounded-full onvo-bg-blue-500"></div>
             </div>
-            <div className="text-gray-500 text-xs font-medium mt-2 text-center">
+            <div className="onvo-text-gray-500 onvo-text-xs onvo-font-medium onvo-mt-2 onvo-text-center">
               Refreshing dashboard...
             </div>
           </div>
@@ -136,17 +136,19 @@ const FilterBar = () => {
       )}
 
       {filtersEnabled && (
-        <div className="@container mx-[10px] mt-[10px]">
-          <Card className="hidden @xl:flex py-2 flex-row gap-2 justify-between items-center">
-            <Text className="font-semibold text-lg">Filters</Text>
+        <div className="onvo-@container/filters onvo-mx-[10px] onvo-mt-[10px]">
+          <Card className="onvo-foreground-color onvo-hidden @xl/filters:onvo-flex onvo-py-2 onvo-flex-row onvo-gap-2 onvo-justify-between onvo-items-center">
+            <Text className="onvo-font-semibold onvo-text-lg">Filters</Text>
             <FiltersInner />
           </Card>
 
-          <Card className="block @xl:hidden py-2">
-            <Accordion type="single" className="w-full" collapsible>
-              <AccordionItem value="item-1" className="border-b-0">
-                <AccordionTrigger className="py-1.5">
-                  <Text className="font-semibold text-lg">Filters</Text>
+          <Card className="onvo-foreground-color onvo-block @xl/filters:onvo-hidden onvo-py-2">
+            <Accordion type="single" className="onvo-w-full" collapsible>
+              <AccordionItem value="item-1" className="onvo-border-b-0">
+                <AccordionTrigger className="onvo-py-1.5">
+                  <Text className="onvo-font-semibold onvo-text-lg">
+                    Filters
+                  </Text>
                 </AccordionTrigger>
                 <AccordionContent>
                   <FiltersInner />
@@ -159,5 +161,3 @@ const FilterBar = () => {
     </>
   );
 };
-
-export default FilterBar;

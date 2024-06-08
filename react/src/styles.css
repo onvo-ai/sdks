@@ -7,29 +7,38 @@
 @tailwind utilities;
 
 /* DEFAULT STYLING */
-.onvo-dashboard-context {
+:root {
   font-family: "Inter", "Helvetica Neue", sans-serif;
-  --background-color: #f9fafb;
-  --foreground-color: #ffffff;
-  --font-override: inherit;
+  --onvo-background-color: #f9fafb;
+  --onvo-foreground-color: #ffffff;
+  --onvo-font-color: #64748b;
+  --onvo-font-override: inherit;
+  --onvo-dark-background-color: #030712;
+  --onvo-dark-foreground-color: #101827;
+  --onvo-dark-font-color: #64748b;
+  --onvo-dark-font-override: inherit;
 }
 
-@media (prefers-color-scheme: dark) {
-  .onvo-dashboard-context {
-    --background-color: #030712;
-    --foreground-color: #111827;
-    --font-override: inherit;
-  }
+.onvo-foreground-color {
+  background-color: var(--onvo-foreground-color);
+}
+.onvo-background-color {
+  background-color: var(--onvo-background-color);
+}
+.onvo-font-override {
+  font-family: var(--onvo-font-override);
+  color: var(--onvo-font-color);
 }
 
-.foreground-color {
-  background-color: var(--foreground-color) !important;
+.onvo-dark .onvo-foreground-color {
+  background-color: var(--onvo-dark-foreground-color);
 }
-.background-color {
-  background-color: var(--background-color) !important;
+.onvo-dark .onvo-background-color {
+  background-color: var(--onvo-dark-background-color);
 }
-.font-override {
-  font-family: var(--font-override) !important;
+.onvo-dark .onvo-font-override {
+  font-family: var(--onvo-font-override);
+  color: var(--onvo-dark-font-color);
 }
 
 /* SEPARATOR LINKS STYLING */
@@ -64,15 +73,19 @@
 .rdg-cell[role="columnheader"] {
   overflow-y: visible;
 }
-.dark .rdg {
-  --rdg-background-color: #111827 !important;
+.rdg {
+  --rdg-color: var(--onvo-font-color);
+}
+
+.onvo-dark .rdg {
+  --rdg-background-color: #101827 !important;
   --rdg-header-background-color: #1f2937 !important;
   --rdg-row-hover-background-color: #1f2937 !important;
-  --rdg-color: #ccc;
+  --rdg-color: var(--onvo-dark-font-color);
 }
 
 /* ANIMATED GRADIENT BORDER STYLES */
-.gradient-border {
+.onvo-gradient-border {
   --borderWidth: 3px;
   position: absolute;
   top: 0px;
@@ -81,7 +94,7 @@
   height: 100%;
   border-radius: 6px;
 }
-.gradient-border:after {
+.onvo-gradient-border:after {
   content: "";
   position: absolute;
   top: calc(-1 * var(--borderWidth));

@@ -9,13 +9,11 @@ import { useBackend } from "../Wrapper";
 import { Text } from "../../tremor/Text";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "../../tremor/Dialog";
 
 export const useSeparatorModal = create<{
@@ -32,14 +30,16 @@ export const useSeparatorModal = create<{
     wid?: { id: string; title: string; subtitle: string }
   ) => set({ open: op, widget: wid }),
 }));
+
 const CreateSeparatorModal: React.FC<{
   maxHeight: number;
 }> = ({ maxHeight }) => {
-  const { dashboard, refreshWidgets, container } = useDashboard();
+  const { dashboard, refreshWidgets, container, adminMode } = useDashboard();
   const backend = useBackend();
   const { open, setOpen, widget } = useSeparatorModal();
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (widget) {
@@ -53,6 +53,7 @@ const CreateSeparatorModal: React.FC<{
 
   const createSeparator = async () => {
     if (!dashboard) return;
+    setLoading(true);
     let lines = subtitle.split("\n");
     let cache = JSON.stringify({
       type: "separator",
@@ -108,7 +109,7 @@ const CreateSeparatorModal: React.FC<{
             x: 0,
             y: maxHeight,
             w: 24,
-            h: 1,
+            h: 5,
           },
         },
         cache: cache,
@@ -120,32 +121,36 @@ const CreateSeparatorModal: React.FC<{
       });
     }
     setOpen(false);
+    setLoading(false);
     setTitle("");
     setSubtitle("");
     refreshWidgets();
   };
 
+  if (!dashboard?.settings?.can_create_widgets && !adminMode) return <></>;
+
   return (
     <>
-      <Dialog>
-        <DialogTrigger asChild>
-          <div className="flex h-full justify-center items-center transition-opacity duration-300 opacity-30 hover:opacity-100 cursor-pointer border-dashed border-gray-200 dark:border-gray-700 border-2 rounded-lg">
-            <Text>+ Add separator</Text>
-          </div>
-        </DialogTrigger>
-        <DialogContent container={container} className="sm:max-w-lg">
+      <Dialog open={open}>
+        <div
+          onClick={() => setOpen(true)}
+          className="onvo-mx-[10px] onvo-mb-[10px] onvo-flex onvo-h-10 onvo-justify-center onvo-items-center onvo-transition-opacity onvo-duration-300 onvo-opacity-30 hover:onvo-opacity-100 onvo-cursor-pointer onvo-border-dashed onvo-border-gray-200 dark:onvo-border-gray-700 onvo-border-2 onvo-rounded-lg"
+        >
+          <Text>+ Add separator</Text>
+        </div>
+        <DialogContent container={container} className="sm:onvo-max-w-lg">
           <DialogHeader>
             <DialogTitle>
               {widget ? "Edit separator" : "Create separator"}
             </DialogTitle>
-            <DialogDescription className="mt-1 text-sm leading-6">
+            <DialogDescription className="onvo-mt-1 onvo-text-sm onvo-leading-6">
               <Text>Title</Text>
               <Input
                 placeholder="Type in a title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <Text className="mt-2">Subtitle</Text>
+              <Text className="onvo-mt-2">Subtitle</Text>
               <Textarea
                 placeholder="(Optional) Type in a subtitle"
                 value={subtitle}
@@ -153,20 +158,17 @@ const CreateSeparatorModal: React.FC<{
               />
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter className="mt-6">
-            <DialogClose asChild>
-              <Button
-                className="mt-2 w-full sm:mt-0 sm:w-fit"
-                variant="secondary"
-              >
-                Go back
-              </Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button onClick={createSeparator}>
-                {widget ? "Save" : "Create"}
-              </Button>
-            </DialogClose>
+          <DialogFooter className="onvo-mt-6">
+            <Button
+              onClick={() => setOpen(false)}
+              className="onvo-mt-2 onvo-w-full sm:onvo-mt-0 sm:onvo-w-fit"
+              variant="secondary"
+            >
+              Cancel
+            </Button>
+            <Button isLoading={loading} onClick={createSeparator}>
+              {widget ? "Save" : "Create"}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

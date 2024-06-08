@@ -12,8 +12,8 @@ const Loader: React.FC<{ time: Date }> = ({ time }) => {
   }, [time]);
 
   return (
-    <div className="onvo-loader-question-modal flex flex-row gap-2 items-center">
-      <Text className="my-0">{elapsed}s</Text>
+    <div className="onvo-loader-question-modal onvo-flex onvo-flex-row onvo-gap-2 onvo-items-center">
+      <Text className="onvo-my-0">{elapsed}s</Text>
       <div role="status">
         <svg
           aria-hidden="true"
@@ -31,7 +31,7 @@ const Loader: React.FC<{ time: Date }> = ({ time }) => {
             fill="currentFill"
           />
         </svg>
-        <span className="sr-only">Loading...</span>
+        <span className="onvo-sr-only">Loading...</span>
       </div>
     </div>
   );

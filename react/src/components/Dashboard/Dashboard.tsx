@@ -101,11 +101,10 @@ export const Dashboard: React.FC<{
   }, [id, backend]);
 
   useEffect(() => {
-    if (!elementRef || !elementRef.current) return;
-    const r = elementRef.current;
+    const r = document.documentElement;
 
     r.style.setProperty(
-      "--font-override",
+      "--onvo-font-override",
       "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
     );
     defaults.font.family =
@@ -113,7 +112,7 @@ export const Dashboard: React.FC<{
 
     let newTheme: "light" | "dark" =
       prefersColorScheme === "dark" ? "dark" : "light";
-    if (dashboard) {
+    if (dashboard && dashboard.settings) {
       if (dashboard.settings?.theme === "dark") {
         newTheme = "dark";
       } else if (dashboard.settings?.theme === "light") {
@@ -122,43 +121,50 @@ export const Dashboard: React.FC<{
         newTheme = prefersColorScheme === "dark" ? "dark" : "light";
       }
 
-      if (r && dashboard.settings) {
-        const settings = dashboard.settings;
-        r.style.setProperty(
-          "--background-color",
-          newTheme === "dark"
-            ? settings.dark_background
-            : settings.light_background
-        );
-        r.style.setProperty(
-          "--foreground-color",
-          newTheme === "dark"
-            ? settings.dark_foreground
-            : settings.light_foreground
-        );
+      const settings = dashboard.settings;
+      r.style.setProperty("--onvo-background-color", settings.light_background);
+      r.style.setProperty(
+        "--onvo-dark-background-color",
+        settings.dark_background
+      );
 
-        if (newTheme === "dark") {
-          defaults.color = settings.dark_text || "#666666";
-        } else {
-          defaults.color = settings.light_text || "#666666";
-        }
+      r.style.setProperty("--onvo-foreground-color", settings.light_foreground);
+      r.style.setProperty(
+        "--onvo-dark-foreground-color",
+        settings.dark_foreground
+      );
 
-        if (dashboard.settings.font !== "inter") {
-          r.style.setProperty("--font-override", settings.font);
-          defaults.font.family = settings.font;
-        }
+      r.style.setProperty(
+        "--onvo-dark-font-color",
+        settings.dark_text || "#aaaaaa"
+      );
+      r.style.setProperty(
+        "--onvo-font-color",
+        settings.light_text || "#666666"
+      );
+
+      if (newTheme === "dark") {
+        defaults.color = settings.dark_text || "#aaaaaa";
+      } else {
+        defaults.color = settings.light_text || "#666666";
       }
+
+      if (dashboard.settings.font !== "inter") {
+        r.style.setProperty("--onvo-font-override", settings.font);
+        defaults.font.family = settings.font;
+      }
+
+      setTheme(newTheme);
     }
-    setTheme(newTheme);
     return () => {
-      r.style.setProperty("--background-color", "");
-      r.style.setProperty("--foreground-color", "");
-      r.style.setProperty("--font-override", "");
+      r.style.setProperty("--onvo-background-color", "");
+      r.style.setProperty("--onvo-foreground-color", "");
+      r.style.setProperty("--onvo-font-override", "");
 
       defaults.font.family =
         "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
     };
-  }, [elementRef, dashboard, prefersColorScheme]);
+  }, [dashboard, prefersColorScheme]);
 
   return (
     <Context.Provider
@@ -177,9 +183,13 @@ export const Dashboard: React.FC<{
       }}
     >
       <div
-        key={theme}
+        key={theme === "dark" ? "dark" : "light"}
         ref={elementRef as any}
-        className={`onvo-dashboard-context translate-x-0 h-full relative background-color flex flex-col ${theme} ${className}`}
+        className={`onvo-dashboard-context onvo-scrollbar-thumb-rounded-full onvo-scrollbar-track-transparent onvo-translate-x-0 onvo-h-full onvo-relative onvo-background-color onvo-flex onvo-flex-col ${
+          theme === "dark"
+            ? "onvo-dark onvo-scrollbar-thumb-slate-500"
+            : "onvo-scrollbar-thumb-slate-400"
+        } ${className}`}
       >
         {children}
       </div>
