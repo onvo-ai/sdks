@@ -136,13 +136,13 @@ export const FilterBar = () => {
       )}
 
       {filtersEnabled && (
-        <div className="onvo-@container onvo-mx-[10px] onvo-mt-[10px]">
-          <Card className="onvo-foreground-color onvo-hidden @xl:onvo-flex onvo-py-2 onvo-flex-row onvo-gap-2 onvo-justify-between onvo-items-center">
+        <div className="onvo-@container/filters onvo-mx-[10px] onvo-mt-[10px]">
+          <Card className="onvo-foreground-color onvo-hidden @xl/filters:onvo-flex onvo-py-2 onvo-flex-row onvo-gap-2 onvo-justify-between onvo-items-center">
             <Text className="onvo-font-semibold onvo-text-lg">Filters</Text>
             <FiltersInner />
           </Card>
 
-          <Card className="onvo-foreground-color onvo-block @xl:onvo-hidden onvo-py-2">
+          <Card className="onvo-foreground-color onvo-block @xl/filters:onvo-hidden onvo-py-2">
             <Accordion type="single" className="onvo-w-full" collapsible>
               <AccordionItem value="item-1" className="onvo-border-b-0">
                 <AccordionTrigger className="onvo-py-1.5">

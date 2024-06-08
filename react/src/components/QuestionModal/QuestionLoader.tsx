@@ -82,14 +82,14 @@ const QuestionLoader: React.FC<{}> = () => {
         <div className="onvo-w-48 onvo-h-2 onvo-mb-10 onvo-bg-slate-200 onvo-rounded-full dark:onvo-bg-slate-700"></div>
         <div className="onvo-flex onvo-items-baseline onvo-mt-4">
           <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-72 dark:onvo-bg-slate-700"></div>
-          <div className="onvo-w-full onvo-h-56 onvo-ms-6 onvo-bg-slate-200 onvo-rounded-t-lg dark:onvo-bg-slate-700"></div>
+          <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-56 onvo-ms-6 dark:onvo-bg-slate-700"></div>
           <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-72 onvo-ms-6 dark:onvo-bg-slate-700"></div>
-          <div className="w-full h-64 onvo-ms-6 onvo-bg-slate-200 onvo-rounded-t-lg dark:onvo-bg-slate-700"></div>
+          <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-64 onvo-ms-6 dark:onvo-bg-slate-700"></div>
           <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-80 onvo-ms-6 dark:onvo-bg-slate-700"></div>
           <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-72 onvo-ms-6 dark:onvo-bg-slate-700"></div>
           <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-80 onvo-ms-6 dark:onvo-bg-slate-700"></div>
           <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-72 onvo-ms-6 dark:onvo-bg-slate-700"></div>
-          <div className="onvo-w-full onvo-h-56 onvo-ms-6 onvo-bg-slate-200 onvo-rounded-t-lg dark:onvo-bg-slate-700"></div>
+          <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-56 onvo-ms-6 dark:onvo-bg-slate-700"></div>
           <div className="onvo-w-full onvo-bg-slate-200 onvo-rounded-t-lg onvo-h-72 onvo-ms-6 dark:onvo-bg-slate-700"></div>
         </div>
         <span className="onvo-sr-only">Loading...</span>

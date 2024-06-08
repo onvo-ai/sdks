@@ -25,7 +25,7 @@ export const SuggestionsBar: React.FC<{ onSelect: (str: string) => void }> = ({
   ];
 
   return (
-    <div className="onvo-w-full onvo-flex onvo-flex-row onvo-gap-2 onvo-my-2 onvo-overflow-y-auto onvo-max-w-2xl onvo-mx-auto">
+    <div className="onvo-w-full onvo-flex onvo-flex-row onvo-gap-2 onvo-my-2 onvo-overflow-x-auto onvo-scrollbar-thin onvo-max-w-2xl onvo-mx-auto">
       {suggestions.map((a) => (
         <div
           key={a.name}

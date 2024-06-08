@@ -227,10 +227,9 @@ export const QuestionModal: React.FC<{}> = ({}) => {
     <>
       <div
         className={
-          "onvo-relative onvo-right-0 onvo-z-10 onvo-w-full onvo-p-3 onvo-border-t onvo-border-gray-200 dark:onvo-border-gray-800"
+          "onvo-relative onvo-right-0 onvo-z-10 onvo-w-full onvo-p-3 onvo-foreground-color onvo-border-t onvo-border-gray-200 dark:onvo-border-gray-800"
         }
       >
-        <div className="onvo-absolute onvo-top-0 onvo-left-0 onvo-w-full onvo-h-full onvo-foreground-color onvo-opacity-30 dark:onvo-opacity-50" />
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <div className="onvo-rounded-lg onvo-cursor-text onvo-shadow-lg onvo-h-9 onvo-z-10 onvo-px-2 onvo-relative onvo-mx-auto onvo-flex onvo-w-full onvo-flex-grow onvo-flex-shrink-0 onvo-max-w-2xl onvo-flex-row onvo-items-center onvo-gap-2">
@@ -249,7 +248,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
           </DialogTrigger>
           <DialogContent
             container={container}
-            className="onvo-max-w-none onvo-w-full onvo-h-full onvo-rounded-none onvo-p-0 onvo-border-0"
+            className="onvo-@container/questionmodal onvo-max-w-none onvo-w-full onvo-h-full onvo-rounded-none onvo-p-0 onvo-border-0"
           >
             <div className="onvo-question-modal-question-list onvo-flex onvo-flex-col onvo-foreground-color onvo-absolute onvo-w-full onvo-right-0 onvo-top-0 onvo-z-20 onvo-h-full">
               <div
@@ -261,14 +260,17 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                   <Icon icon={ChevronLeftIcon} variant="shadow" />
                 </DialogClose>
                 <div className="onvo-flex onvo-flex-row onvo-w-full onvo-gap-1 onvo-flex-grow onvo-justify-start onvo-items-center">
-                  <Text>{dashboard?.title}</Text>
-                  <ChevronRightIcon className="onvo-h-4 onvo-w-4" />
+                  <Text className="onvo-hidden @xl/questionmodal:onvo-block">
+                    {dashboard?.title}
+                  </Text>
+                  <ChevronRightIcon className="onvo-hidden @xl/questionmodal:onvo-block onvo-h-4 onvo-w-4 dark:onvo-fill-slate-500" />
                   <Label>Create a chart</Label>
                 </div>
                 <div className="onvo-w-[170px] onvo-h-4" />
               </div>
               <div className="onvo-flex onvo-flex-grow onvo-w-full onvo-h-[calc(100%-52px)] onvo-flex-row">
                 <QuestionSidebar
+                  className="onvo-hidden @xl/questionmodal:onvo-block"
                   loading={loading}
                   questions={questions}
                   selectedQuestionId={selectedQuestion?.id || undefined}
@@ -284,7 +286,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                 />
                 <div className="onvo-flex onvo-h-full onvo-w-full onvo-flex-col onvo-justify-between">
                   <div
-                    className="onvo-flex onvo-w-full onvo-flex-grow onvo-flex-col onvo-gap-4 onvo-overflow-y-auto onvo-px-2 onvo-py-4"
+                    className="onvo-flex onvo-w-full onvo-flex-grow onvo-flex-col onvo-gap-4 onvo-overflow-y-auto onvo-scrollbar-thin onvo-px-2 onvo-py-4"
                     ref={scroller}
                   >
                     <div className="onvo-mx-auto onvo-flex onvo-flex-col onvo-max-w-2xl">
@@ -292,11 +294,11 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                         <>
                           <div className="onvo-flex onvo-w-full onvo-pt-8 onvo-pb-12 onvo-flex-col onvo-items-center onvo-justify-center">
                             <Icon
-                              size="xl"
+                              size="lg"
                               variant="shadow"
                               icon={() => <Logo height={72} width={72} />}
                             />
-                            <Metric className="onvo-mt-2">
+                            <Metric className="onvo-mt-2 onvo-text-center">
                               Ask me for a widget or visualisation
                             </Metric>
                           </div>

@@ -20,7 +20,7 @@ const QuestionSidebarCard: React.FC<{
   return (
     <div
       className={
-        "onvo-group onvo-relative onvo-flex onvo-w-full onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3 onvo-rounded-lg onvo-p-2 hover:onvo-bg-gray-200 hover:onvo-dark:bg-gray-900" +
+        "onvo-transition-all onvo-group onvo-relative onvo-flex onvo-w-full onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3 onvo-rounded-lg onvo-p-2 hover:onvo-bg-black/10 hover:onvo-dark:bg-white/10" +
         (selected ? " onvo-bg-gray-200 dark:onvo-bg-gray-900" : "")
       }
     >
@@ -48,7 +48,15 @@ const QuestionSidebar: React.FC<{
   selectedQuestionId?: string;
   loading: boolean;
   questions: any[];
-}> = ({ onSelect, onDelete, selectedQuestionId, loading, questions }) => {
+  className?: string;
+}> = ({
+  onSelect,
+  onDelete,
+  selectedQuestionId,
+  loading,
+  questions,
+  className,
+}) => {
   const backend = useBackend();
 
   const deleteQuestion = (questionId: string) => {
@@ -68,7 +76,12 @@ const QuestionSidebar: React.FC<{
   };
 
   return (
-    <div className="onvo-background-color onvo-w-[320px] onvo-flex-shrink-0 onvo-overflow-y-auto onvo-border-r onvo-border-gray-200 onvo-p-2 dark:onvo-border-gray-800">
+    <div
+      className={
+        "onvo-background-color onvo-w-[320px] onvo-flex-shrink-0 onvo-overflow-y-auto onvo-scrollbar-thin onvo-border-r onvo-border-gray-200 onvo-p-2 dark:onvo-border-gray-800 " +
+        (className ? className : "")
+      }
+    >
       {loading && questions.length === 0 && (
         <div className="onvo-flex onvo-h-full onvo-w-full onvo-flex-col onvo-items-center onvo-justify-center">
           <div className="onvo-relative onvo-inline-flex onvo-h-12">

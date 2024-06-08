@@ -1,10 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 
-
 /* eslint-disable max-len */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./lib/**/*.{js,jsx,ts,tsx}"],
-  darkMode: "selector", 
+  darkMode: "selector",
   prefix: "onvo-",
   theme: {
     fontFamily: {
@@ -88,5 +87,6 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/container-queries"),
     require("@tailwindcss/forms"),
+    require("tailwind-scrollbar"),
   ],
 };

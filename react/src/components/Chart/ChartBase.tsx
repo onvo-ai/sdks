@@ -139,9 +139,8 @@ const ChartBase: React.FC<{
           and drag to pan
         </Text>
         <Button
-          className="onvo-px-2 onvo-py-0.5 onvo-rounded-[4px] dark:onvo-rounded-[4px] onvo-text-gray-600 dark:onvo-text-gray-300"
+          className="!onvo-px-2 !onvo-py-0.5 onvo-text-gray-600 dark:onvo-text-gray-300"
           onClick={resetZoom}
-          color="gray"
         >
           Reset zoom
         </Button>

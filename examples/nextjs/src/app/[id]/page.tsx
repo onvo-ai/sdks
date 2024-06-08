@@ -19,7 +19,7 @@ const DashboardInnerPage: React.FC<{
   if (token === "") return <div>Loading...</div>;
 
   return (
-    <main className="w-full min-h-[100vh]">
+    <main className="w-screen h-screen relative">
       <Wrapper
         baseUrl={
           process.env.NEXT_PUBLIC_BASE_URL || "https://dashboard.onvo.ai"

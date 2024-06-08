@@ -35,16 +35,27 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
     let newRows: any[] = [];
     let label = data.options?.scales?.x?.title?.text || "Label";
     data.data.datasets[0].data.map((item: any, i: number) => {
-      let row: any = {
-        [label]: data.data.labels[i],
-      };
+      let row: any = {};
+      if (data.data.labels && data.data.labels[i]) {
+        row = {
+          [label]: data.data.labels[i],
+        };
+      }
       data.data.datasets.map((a: any, j: number) => {
         row[a.label] = a.data[i];
       });
       newRows.push(row);
     });
-    let newFields = [label, ...data.data.datasets.map((a: any) => a.label)];
-    return [newRows, newFields];
+    if (data.data.labels) {
+      let newFields: string[] = [
+        label,
+        ...data.data.datasets.map((a: any) => a.label),
+      ];
+      return [newRows, newFields];
+    } else {
+      let newFields: string[] = data.data.datasets.map((a: any) => a.label);
+      return [newRows, newFields];
+    }
   }, [data]);
 
   useEffect(() => {
@@ -104,7 +115,7 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
           >
             <div className="onvo-table-widget-header-title onvo-flex onvo-flex-row onvo-items-center onvo-justify-between">
               {p.column.name}
-              <div className={`${filterTypeClass} flex flex-row`}>
+              <div className={`${filterTypeClass} onvo-flex onvo-flex-row`}>
                 {isMatchingFilterColumn && (
                   <Icon
                     icon={
@@ -151,12 +162,12 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
 
   return (
     <div className="onvo-table-widget onvo-h-full onvo-flex onvo-flex-col onvo-relative">
-      <Title className="onvo-table-widget-title text-md text-gray-600 dark:text-gray-500 my-0">
+      <Title className="onvo-table-widget-title onvo-text-md onvo-text-gray-600 dark:onvo-text-gray-500 onvo-font-override onvo-my-0">
         {data.options.plugins.title.text}
       </Title>
       <DataGrid
         className={
-          "onvo-table-widget-data-grid fill-grid mt-3 h-full rounded-md border border-gray-200 dark:border-gray-800 " +
+          "onvo-table-widget-data-grid onvo-fill-grid onvo-mt-3 onvo-h-full onvo-rounded-md onvo-border onvo-border-gray-200 dark:onvo-border-gray-800 " +
           (theme === "dark" ? "rdg-dark" : "rdg-light")
         }
         defaultColumnOptions={{

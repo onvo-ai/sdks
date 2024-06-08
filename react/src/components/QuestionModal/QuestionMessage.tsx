@@ -96,10 +96,12 @@ const QuestionMessage: React.FC<{
     let newObj: any = {
       title: title,
       layouts: {
-        x: 0,
-        y: maxHeight,
-        w: 4,
-        h: output.type === "metric" ? 10 : 20,
+        lg: {
+          x: 0,
+          y: maxHeight,
+          w: 4,
+          h: output.type === "metric" ? 10 : 20,
+        },
       },
       messages: messages.filter((a) => a.role !== "tool"),
       dashboard: dashboardId,

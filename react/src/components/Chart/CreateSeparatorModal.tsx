@@ -9,13 +9,11 @@ import { useBackend } from "../Wrapper";
 import { Text } from "../../tremor/Text";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "../../tremor/Dialog";
 
 export const useSeparatorModal = create<{
@@ -32,6 +30,7 @@ export const useSeparatorModal = create<{
     wid?: { id: string; title: string; subtitle: string }
   ) => set({ open: op, widget: wid }),
 }));
+
 const CreateSeparatorModal: React.FC<{
   maxHeight: number;
 }> = ({ maxHeight }) => {
@@ -40,6 +39,7 @@ const CreateSeparatorModal: React.FC<{
   const { open, setOpen, widget } = useSeparatorModal();
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (widget) {
@@ -53,6 +53,7 @@ const CreateSeparatorModal: React.FC<{
 
   const createSeparator = async () => {
     if (!dashboard) return;
+    setLoading(true);
     let lines = subtitle.split("\n");
     let cache = JSON.stringify({
       type: "separator",
@@ -120,6 +121,7 @@ const CreateSeparatorModal: React.FC<{
       });
     }
     setOpen(false);
+    setLoading(false);
     setTitle("");
     setSubtitle("");
     refreshWidgets();
@@ -130,15 +132,13 @@ const CreateSeparatorModal: React.FC<{
   return (
     <>
       <Dialog open={open}>
-        <DialogTrigger asChild>
-          <div
-            onClick={() => setOpen(true)}
-            className="mx-[10px] mb-[10px] flex h-10 justify-center items-center transition-opacity duration-300 opacity-30 hover:opacity-100 cursor-pointer border-dashed border-gray-200 dark:border-gray-700 border-2 rounded-lg"
-          >
-            <Text>+ Add separator</Text>
-          </div>
-        </DialogTrigger>
-        <DialogContent container={container} className="sm:max-w-lg">
+        <div
+          onClick={() => setOpen(true)}
+          className="onvo-mx-[10px] onvo-mb-[10px] onvo-flex onvo-h-10 onvo-justify-center onvo-items-center onvo-transition-opacity onvo-duration-300 onvo-opacity-30 hover:onvo-opacity-100 onvo-cursor-pointer onvo-border-dashed onvo-border-gray-200 dark:onvo-border-gray-700 onvo-border-2 onvo-rounded-lg"
+        >
+          <Text>+ Add separator</Text>
+        </div>
+        <DialogContent container={container} className="sm:onvo-max-w-lg">
           <DialogHeader>
             <DialogTitle>
               {widget ? "Edit separator" : "Create separator"}
@@ -159,20 +159,16 @@ const CreateSeparatorModal: React.FC<{
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="onvo-mt-6">
-            <DialogClose asChild>
-              <Button
-                onClick={() => setOpen(false)}
-                className="mt-2 w-full sm:mt-0 sm:w-fit"
-                variant="secondary"
-              >
-                Cancel
-              </Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button onClick={createSeparator}>
-                {widget ? "Save" : "Create"}
-              </Button>
-            </DialogClose>
+            <Button
+              onClick={() => setOpen(false)}
+              className="onvo-mt-2 onvo-w-full sm:onvo-mt-0 sm:onvo-w-fit"
+              variant="secondary"
+            >
+              Cancel
+            </Button>
+            <Button isLoading={loading} onClick={createSeparator}>
+              {widget ? "Save" : "Create"}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
