@@ -17,13 +17,14 @@ type Story = StoryObj<{
   token: string;
   baseUrl: string;
   id: string;
+  adminMode: boolean;
 }>;
 
 export const Standalone: Story = (args) => {
   return (
     <div className="onvo-h-screen onvo-w-screen">
       <Wrapper {...args}>
-        <Dashboard id={args.id}>
+        <Dashboard id={args.id} adminMode={args.adminMode}>
           <DashboardHeader />
           <DashboardGrid />
           <QuestionModal />

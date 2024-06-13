@@ -69,7 +69,12 @@ export const SearchSelect: React.FC<{
   }, [internalValue, placeholder]);
 
   return (
-    <Popover onOpenChange={setOpen}>
+    <Popover
+      onOpenChange={(o) => {
+        setOpen(o);
+        if (!o) onValueChange(internalValue);
+      }}
+    >
       <PopoverTrigger asChild>
         <div
           ref={ref as any}
@@ -116,7 +121,6 @@ export const SearchSelect: React.FC<{
             <div
               onClick={() => {
                 setInternalValue(item.value);
-                onValueChange(item.value);
               }}
               key={item.value}
               className={cx(

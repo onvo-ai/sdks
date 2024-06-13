@@ -19,6 +19,7 @@ type Story = StoryObj<{
   id: string;
   width: number;
   height: number;
+  adminMode: boolean;
 }>;
 
 export const Embedded: Story = (args) => {
@@ -29,7 +30,7 @@ export const Embedded: Story = (args) => {
         style={{ width: args.width, height: args.height }}
       >
         <Wrapper {...args}>
-          <Dashboard id={args.id}>
+          <Dashboard id={args.id} adminMode={args.adminMode}>
             <DashboardHeader />
             <DashboardGrid />
             <QuestionModal />

@@ -15,6 +15,7 @@ import zoomPlugin from "chartjs-plugin-zoom";
 
 import Metric from "./MetricChart";
 import Separator from "./SeparatorChart";
+import { WidgetSettings } from "@onvo-ai/js";
 
 ChartJS.register([
   FunnelController,
@@ -28,7 +29,7 @@ const ChartBase: React.FC<{
   json: any;
   id: string;
   title: string;
-  settings: any;
+  settings?: WidgetSettings;
 }> = ({ json, id, title, settings }) => {
   const chartRef = useRef<any>();
   const [zoomed, setZoomed] = useState(false);
@@ -47,7 +48,7 @@ const ChartBase: React.FC<{
       fullSize: true,
       font: {
         size: output.type === "separator" ? 24 : 18,
-        weight: output.type === "separator" ? 600 : 500,
+        weight: output.type === "separator" ? 600 : 600,
       },
       padding: {
         top: 5,

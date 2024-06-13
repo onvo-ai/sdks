@@ -22,7 +22,9 @@ class Metric extends LineController {
   draw() {
     const meta = this.getDataset();
     const pt0 = meta.data[0];
-    let value = numeral(pt0).value() ? numeral(pt0).format("0,0.00") : pt0 + "";
+    let value = numeral(pt0).value()
+      ? numeral(pt0).format("0,0.[00]")
+      : pt0 + "";
 
     const ctx = this.chart.ctx;
     ctx.save();

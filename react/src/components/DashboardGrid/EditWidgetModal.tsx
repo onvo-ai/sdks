@@ -4,11 +4,10 @@ import { Label, Text, Title } from "../../tremor/Text";
 import { Button } from "../../tremor/Button";
 import { Card } from "../../tremor/Card";
 import { Icon } from "../../tremor/Icon";
-import { Dialog, DialogContent } from "../../tremor/Dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../tremor/Tabs";
 
 import { useEffect, useMemo, useState } from "react";
-import { Widget } from "@onvo-ai/js";
+import { Widget, WidgetMessage, WidgetSettings } from "@onvo-ai/js";
 import {
   ArrowUpIcon,
   EyeIcon,
@@ -26,9 +25,10 @@ import { useBackend } from "../Wrapper";
 import { useDashboard } from "../Dashboard/Dashboard";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Divider } from "../../tremor/Divider";
+import { twMerge } from "tailwind-merge";
 
 const Message: React.FC<{
-  message: { role: "user" | "assistant"; content: string };
+  message: WidgetMessage;
   onDelete: () => void;
   onEdit: (msg: string) => void;
 }> = ({ message, onEdit, onDelete }) => {
@@ -102,62 +102,80 @@ const Message: React.FC<{
 };
 
 const EditChartModal: React.FC<{}> = ({}) => {
+  // EXTERNAL HOOKS
   const backend = useBackend();
-  const {
-    refreshWidgets,
-    setSelectedWidget,
-    selectedWidget,
-    dashboard,
-    container,
-  } = useDashboard();
+  const { refreshWidgets, setSelectedWidget, selectedWidget, dashboard } =
+    useDashboard();
 
-  const [newMessage, setNewMessage] = useState("");
-  const [widget, setWidget] = useState<Widget>();
+  // REVERT CHANGES STATES
+  const [changesMade, setChangesMade] = useState(false);
+  const [cachedWidget, setCachedWidget] = useState<
+    Pick<Widget, "cache" | "code" | "messages">
+  >({ cache: "", code: "", messages: [] });
+
+  // WIDGET STATES
   const [title, setTitle] = useState("");
-  let [output, setOutput] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [output, setOutput] = useState<any>(null);
+  const [messages, setMessages] = useState<WidgetMessage[]>([]);
   const [code, setCode] = useState("");
-  const [messages, setMessages] = useState<
-    { role: "user" | "assistant"; content: string }[]
-  >([]);
-  const [settings, setSettings] = useState<any>({});
+  const [settings, setSettings] = useState<WidgetSettings>({
+    disable_download_images: false,
+    disable_download_reports: false,
+    title_hidden: false,
+  });
+
+  // UI STATES
+  const [newMessage, setNewMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState<"chat" | "editor" | "settings">("chat");
 
   useEffect(() => {
     if (selectedWidget) {
-      setWidget(selectedWidget);
+      updateStates(selectedWidget);
+      setCachedWidget({
+        cache: selectedWidget.cache,
+        code: selectedWidget.code,
+        messages: selectedWidget.messages,
+      });
     } else {
-      setWidget(undefined);
+      updateStates(undefined);
     }
   }, [selectedWidget]);
 
-  useEffect(() => {
-    if (!widget) return;
+  const updateStates = (widget: Widget | undefined) => {
+    if (widget) {
+      let out = JSON.parse(widget && widget.cache ? widget.cache : "{}");
 
-    let out = JSON.parse(widget && widget.cache ? widget.cache : "{}");
+      setTitle(widget.title || "");
+      setCode(widget.code);
+      setOutput(out);
+      setSettings(
+        widget.settings || {
+          disable_download_images: false,
+          disable_download_reports: false,
+          title_hidden: false,
+        }
+      );
+      setMessages(widget.messages || []);
+    } else {
+      setTitle("");
+      setCode("");
+      setOutput(null);
+      setMessages([]);
+    }
+  };
 
-    setTitle(widget.title || "");
-    setCode(widget.code);
-    setOutput(out);
-    setSettings(widget.settings || {});
-    // @ts-ignore
-    setMessages(widget.messages || []);
-  }, [widget]);
-
-  const getGraph = async (
-    msg: { role: "user" | "assistant"; content: string }[]
-  ) => {
+  const requestEditWidget = async (msg: WidgetMessage[]) => {
     if (!selectedWidget) return;
     setCode("");
     setLoading(true);
 
     try {
-      let response = await backend
-        ?.widget(selectedWidget.id)
-        .updatePrompts(msg);
-
+      let widget = await backend?.widget(selectedWidget.id).updatePrompts(msg);
+      setChangesMade(true);
       toast.success("Your widget has been updated!");
-      setWidget(response);
+
+      updateStates(widget);
       setLoading(false);
     } catch (e: any) {
       toast.error("Failed to create widget: " + e.message);
@@ -172,14 +190,17 @@ const EditChartModal: React.FC<{}> = ({}) => {
         return backend?.widgets.update(selectedWidget.id, {
           title: title,
           code: code,
-          cache: output,
+          cache: JSON.stringify(output),
           settings: settings,
+          messages: messages,
         }) as Promise<any>;
       },
       {
         loading: "Saving changes...",
         success: () => {
           cleanup();
+
+          refreshWidgets();
           return "Changes saved!";
         },
         error: (error) => "Failed to save changes: " + error.message,
@@ -188,15 +209,13 @@ const EditChartModal: React.FC<{}> = ({}) => {
   };
 
   const cleanup = () => {
-    setOutput(null);
-    setLoading(false);
-    setCode("");
-    setTitle("");
-    setMessages([]);
-    setWidget(undefined);
-    setNewMessage("");
     setSelectedWidget(undefined);
-    refreshWidgets();
+
+    updateStates(undefined);
+
+    setNewMessage("");
+    setLoading(false);
+    setTab("chat");
   };
 
   const executeCode = async () => {
@@ -211,6 +230,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
         loading: "Executing code...",
         success: () => {
           setLoading(false);
+          setChangesMade(true);
           return "Successfully executed code";
         },
         error: (e: any) => {
@@ -227,10 +247,11 @@ const EditChartModal: React.FC<{}> = ({}) => {
 
   return (
     <>
-      <Dialog open={open}>
-        <DialogContent
-          container={container}
-          className="onvo-@container/widgetmodal onvo-max-w-none onvo-w-full onvo-h-full onvo-rounded-none !onvo-p-0 onvo-border-0 onvo-relative"
+      <dialog open={open}>
+        <div
+          className={twMerge(
+            "onvo-@container/widgetmodal onvo-h-full onvo-animate-dialogOpen onvo-w-full onvo-z-50 onvo-fixed onvo-left-0 onvo-foreground-color"
+          )}
         >
           <div
             className={
@@ -241,9 +262,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
               icon={ChevronLeftIcon}
               variant="shadow"
               className="onvo-ml-2"
-              onClick={() => {
-                cleanup();
-              }}
+              onClick={cleanup}
             />
 
             <div className="onvo-flex onvo-flex-row onvo-w-full onvo-gap-1 onvo-flex-grow onvo-justify-start onvo-items-center">
@@ -254,6 +273,26 @@ const EditChartModal: React.FC<{}> = ({}) => {
               <Label>Edit {title}</Label>
             </div>
             <div className="onvo-flex onvo-flex-row onvo-gap-2 onvo-flex-shrink-0">
+              {changesMade && (
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setChangesMade(false);
+                    setCode(cachedWidget.code);
+                    setMessages(cachedWidget.messages || []);
+                    setOutput(
+                      JSON.parse(
+                        cachedWidget && cachedWidget.cache
+                          ? cachedWidget.cache
+                          : "{}"
+                      )
+                    );
+                  }}
+                  className="onvo-flex-shrink-0"
+                >
+                  Revert changes
+                </Button>
+              )}
               <Button
                 onClick={saveChanges}
                 className="onvo-flex-shrink-0"
@@ -298,7 +337,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
                               let newMessages = messages.filter(
                                 (m, i) => i !== index
                               );
-                              getGraph(newMessages);
+                              requestEditWidget(newMessages);
                               setMessages(newMessages);
                             }}
                             onEdit={(msg) => {
@@ -311,7 +350,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
                                 }
                                 return m;
                               });
-                              getGraph(newMessages);
+                              requestEditWidget(newMessages);
                               setMessages(newMessages);
                             }}
                           />
@@ -334,7 +373,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
                             autoFocus
                             onKeyUp={(evt) => {
                               if (evt.key === "Enter" && !evt.shiftKey) {
-                                getGraph([
+                                requestEditWidget([
                                   ...messages,
                                   { role: "user", content: newMessage },
                                 ]);
@@ -351,7 +390,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
                             icon={ArrowUpIcon}
                             variant="solid"
                             onClick={() => {
-                              getGraph([
+                              requestEditWidget([
                                 ...messages,
                                 { role: "user", content: newMessage },
                               ]);
@@ -404,6 +443,35 @@ const EditChartModal: React.FC<{}> = ({}) => {
                         value={title}
                         onChange={(val) => setTitle(val.target.value)}
                         disabled={settings.title_hidden}
+                      />
+
+                      <Divider />
+                      <Text className="onvo-text-xs">CSS id</Text>
+                      <Input
+                        placeholder="CSS id"
+                        className="onvo-text-xs"
+                        value={settings.css_id}
+                        onChange={(val) => {
+                          setSettings((s: any) => ({
+                            ...s,
+                            css_id: val.target.value,
+                          }));
+                        }}
+                      />
+
+                      <Text className="onvo-text-xs onvo-mt-2">
+                        CSS class names
+                      </Text>
+                      <Input
+                        placeholder="CSS class names"
+                        className="onvo-text-xs"
+                        value={settings.css_classnames}
+                        onChange={(val) => {
+                          setSettings((s: any) => ({
+                            ...s,
+                            css_classnames: val.target.value,
+                          }));
+                        }}
                       />
 
                       <Divider />
@@ -493,8 +561,8 @@ const EditChartModal: React.FC<{}> = ({}) => {
               </Card>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </div>
+      </dialog>
     </>
   );
 };

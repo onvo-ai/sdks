@@ -40,7 +40,11 @@ describe("Widgets", () => {
           h: 3,
         },
       },
-      settings: {},
+      settings: {
+        disable_download_images: false,
+        disable_download_reports: false,
+        title_hidden: false,
+      },
       code: `import pandas as pd
 import numpy as np
 
@@ -190,9 +194,7 @@ def main():
 
   it("should update widget", async () => {
     let widget = await onvo.widgets.update(newWidget.id, {
-      settings: {
-        title: "Automation test",
-      },
+      title: "Automation test",
     });
     expect(widget).toBeDefined();
     expect(widget.id).toBeDefined();
