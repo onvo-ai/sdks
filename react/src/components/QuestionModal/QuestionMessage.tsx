@@ -91,7 +91,8 @@ const QuestionMessage: React.FC<{
     e.stopPropagation();
     let maxHeight = 0;
     widgets.forEach((i: any) => {
-      if (i.y + i.h > maxHeight) maxHeight = i.y + i.h;
+      if (i.layouts.lg.y + i.layouts.lg.h > maxHeight)
+        maxHeight = i.layouts.lg.y + i.layouts.lg.h;
     });
     let newObj: any = {
       title: title,
@@ -247,22 +248,19 @@ const QuestionMessage: React.FC<{
   const ImageDownloadEnabled = useMemo(() => {
     if (output && output.type === "table") return false;
     if (adminMode) return true;
-    if (dashboard?.settings && dashboard.settings.disable_download_images)
-      return false;
+    if (dashboard?.settings?.disable_download_images) return false;
     return true;
   }, [dashboard, adminMode, output]);
 
   const ReportDownloadEnabled = useMemo(() => {
     if (adminMode) return true;
-    if (dashboard?.settings && dashboard.settings.disable_download_reports)
-      return false;
+    if (dashboard?.settings?.disable_download_reports) return false;
     return true;
   }, [dashboard, adminMode]);
 
   const AddToDashboardEnabled = useMemo(() => {
     if (adminMode) return true;
-    if (dashboard?.settings && dashboard.settings.can_create_widgets)
-      return true;
+    if (dashboard?.settings?.can_create_widgets) return true;
     return false;
   }, [dashboard, adminMode]);
 
@@ -387,12 +385,7 @@ const QuestionMessage: React.FC<{
               )}
             </div>
 
-            <ChartBase
-              json={output}
-              id={questionId}
-              title={title}
-              settings={{}}
-            />
+            <ChartBase json={output} id={questionId} title={title} />
           </Card>
         )}
 

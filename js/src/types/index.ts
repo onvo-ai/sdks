@@ -6,7 +6,7 @@ export * from "./tables";
 export * from "./datasources";
 export * from "./utils";
 
-export type Settings = {
+export type DashboardSettings = {
   theme: "dark" | "light" | "auto";
   dark_background: string;
   dark_foreground: string;
@@ -16,7 +16,9 @@ export type Settings = {
   light_text: string;
   border_radius: number;
   font: string;
+  grid_spacing: number;
   hide_header: boolean;
+  custom_css: string;
   filters: boolean;
 
   can_ask_questions: boolean;
@@ -28,6 +30,28 @@ export type Settings = {
   disable_download_images: boolean;
   disable_download_reports: boolean;
 };
+
+export type WidgetSettings = {
+  disable_download_images: boolean;
+  disable_download_reports: boolean;
+  title_hidden: boolean;
+  css_id?: string;
+  css_classnames?: string;
+};
+
+export type DashboardFilter = {
+  title: string;
+  type: "picker" | "multi-picker" | "date-picker";
+  options: string;
+  default: string;
+  parameter: string;
+};
+
+export type WidgetMessage = {
+  role: "user" | "assistant";
+  content: string;
+};
+
 export type Invite = Database["public"]["Tables"]["invites"]["Row"];
 export type Member = Database["public"]["Tables"]["members"]["Row"];
 export type Team = Database["public"]["Tables"]["teams"]["Row"];
@@ -43,11 +67,22 @@ export type Subscription = Database["public"]["Tables"]["subscriptions"]["Row"];
 export type SubscriptionPlan =
   Database["public"]["Tables"]["subscription_plans"]["Row"];
 export type APIKey = Database["public"]["Tables"]["api_keys"]["Row"];
-export type Widget = Database["public"]["Tables"]["widgets"]["Row"];
+export type Widget = Modify<
+  Database["public"]["Tables"]["widgets"]["Row"],
+  {
+    settings?: WidgetSettings;
+    messages: WidgetMessage[];
+    layouts: {
+      lg: { x: number; y: number; w: number; h: number };
+      sm?: { x: number; y: number; w: number; h: number };
+    };
+  }
+>;
 export type Dashboard = Modify<
   Database["public"]["Tables"]["dashboards"]["Row"],
   {
-    settings?: Settings;
+    settings?: DashboardSettings;
+    filters: DashboardFilter[];
   }
 >;
 export type DashboardDatasource =

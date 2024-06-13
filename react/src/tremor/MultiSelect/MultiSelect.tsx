@@ -52,11 +52,11 @@ export const MultiSelect: React.FC<{
   }, [query, items]);
 
   useEffect(() => {
-    if (value && value.length > 0) {
+    if (value) {
       setInternalValue(value);
       return;
     }
-    if (defaultValue && defaultValue.length > 0) {
+    if (defaultValue) {
       setInternalValue(defaultValue);
       return;
     }
@@ -64,7 +64,7 @@ export const MultiSelect: React.FC<{
   }, [defaultValue, value]);
 
   const texts = useMemo(() => {
-    if (internalValue && internalValue.length > 0) {
+    if (internalValue) {
       let options = items.filter((a) => internalValue.indexOf(a.value) >= 0);
       return options;
     }
@@ -72,7 +72,14 @@ export const MultiSelect: React.FC<{
   }, [internalValue, placeholder]);
 
   return (
-    <Popover onOpenChange={setOpen}>
+    <Popover
+      onOpenChange={(o) => {
+        setOpen(o);
+        if (!o) {
+          onValueChange(internalValue);
+        }
+      }}
+    >
       <PopoverTrigger asChild>
         <div
           ref={ref as any}
@@ -115,7 +122,10 @@ export const MultiSelect: React.FC<{
           <ChevronUpDownIcon className="onvo-flex-shrink-0 onvo-h-4 onvo-w-4" />
         </div>
       </PopoverTrigger>
-      <PopoverContent className="onvo-p-1" style={{ width: width || 100 }}>
+      <PopoverContent
+        className="onvo-p-1 !onvo-foreground-color"
+        style={{ width: width || 100 }}
+      >
         <Input
           type="search"
           placeholder="Search"
@@ -128,16 +138,17 @@ export const MultiSelect: React.FC<{
         <div className="onvo-p-0">
           {data.map((item) => (
             <div
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 let exists = internalValue.find((a) => a === item.value);
                 let newValues = internalValue.filter((a) => a !== item.value);
                 if (!exists) {
                   newValues.push(item.value);
                 }
                 setInternalValue(newValues);
-                onValueChange(newValues);
               }}
-              key={item.value}
+              key={item.label}
               className={cx(
                 // base
                 "onvo-grid onvo-cursor-pointer onvo-grid-cols-[20px_1fr] onvo-gap-x-2 onvo-rounded onvo-px-3 onvo-py-2 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",

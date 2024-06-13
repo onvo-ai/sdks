@@ -15,14 +15,13 @@ type Story = StoryObj<{
   token: string;
   baseUrl: string;
   id: string;
-  spacing?: number;
 }>;
 
 export const Primary: Story = (args) => {
   return (
     <Wrapper {...args}>
       <Dashboard id={args.id}>
-        <DashboardGrid spacing={args.spacing} />
+        <DashboardGrid />
       </Dashboard>
     </Wrapper>
   );

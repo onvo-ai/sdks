@@ -1,20 +1,32 @@
 import React from "react";
-import { Textarea } from "../../tremor/Textarea";
+import { Icon } from "../../tremor/Icon";
 import { Input } from "../../tremor/Input";
 import { Button } from "../../tremor/Button";
 import { useEffect, useState } from "react";
 import { create } from "zustand";
 import { useDashboard } from "../Dashboard";
 import { useBackend } from "../Wrapper";
-import { Text } from "../../tremor/Text";
+import { Text, Label } from "../../tremor/Text";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "../../tremor/Dialog";
+  Editor,
+  EditorProvider,
+  BtnBold,
+  BtnBulletList,
+  BtnClearFormatting,
+  BtnItalic,
+  BtnLink,
+  BtnNumberedList,
+  BtnRedo,
+  BtnStrikeThrough,
+  BtnUnderline,
+  BtnUndo,
+  HtmlButton,
+  Separator,
+  Toolbar,
+} from "react-simple-wysiwyg";
+import { twMerge } from "tailwind-merge";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import ChartBase from "./ChartBase";
 
 export const useSeparatorModal = create<{
   open: boolean;
@@ -34,7 +46,7 @@ export const useSeparatorModal = create<{
 const CreateSeparatorModal: React.FC<{
   maxHeight: number;
 }> = ({ maxHeight }) => {
-  const { dashboard, refreshWidgets, container, adminMode } = useDashboard();
+  const { dashboard, refreshWidgets, adminMode } = useDashboard();
   const backend = useBackend();
   const { open, setOpen, widget } = useSeparatorModal();
   const [title, setTitle] = useState("");
@@ -54,7 +66,6 @@ const CreateSeparatorModal: React.FC<{
   const createSeparator = async () => {
     if (!dashboard) return;
     setLoading(true);
-    let lines = subtitle.split("\n");
     let cache = JSON.stringify({
       type: "separator",
       data: { datasets: [{ data: [], label: "" }] },
@@ -65,7 +76,7 @@ const CreateSeparatorModal: React.FC<{
           title: { display: true, text: title },
           subtitle: {
             display: false,
-            text: lines,
+            text: subtitle,
           },
         },
       },
@@ -73,10 +84,6 @@ const CreateSeparatorModal: React.FC<{
     let code = `title = "${title}"
     subtitle = "${subtitle}"
     def main():
-        if subtitle_text:
-            subtitle_lines = subtitle_text.split("\n")
-        else:
-            subtitle_lines = None
       
         return {
             "type": "separator",
@@ -89,8 +96,8 @@ const CreateSeparatorModal: React.FC<{
                         "display": True,
                         "text": title_text
                     },
-                    if subtitle_lines:
-                        .set("plugins", {"subtitle": {"display": False, "text": subtitle_lines}})
+                    if subtitle:
+                        .set("plugins", {"subtitle": {"display": False, "text": subtitle}})
                 },
             },
         }
@@ -117,7 +124,11 @@ const CreateSeparatorModal: React.FC<{
         team: dashboard.team,
         code: code,
         messages: [],
-        settings: {},
+        settings: {
+          disable_download_images: false,
+          disable_download_reports: false,
+          title_hidden: false,
+        },
       });
     }
     setOpen(false);
@@ -131,47 +142,105 @@ const CreateSeparatorModal: React.FC<{
 
   return (
     <>
-      <Dialog open={open}>
+      <dialog open={open}>
         <div
-          onClick={() => setOpen(true)}
-          className="onvo-mx-[10px] onvo-mb-[10px] onvo-flex onvo-h-10 onvo-justify-center onvo-items-center onvo-transition-opacity onvo-duration-300 onvo-opacity-30 hover:onvo-opacity-100 onvo-cursor-pointer onvo-border-dashed onvo-border-gray-200 dark:onvo-border-gray-700 onvo-border-2 onvo-rounded-lg"
+          className={twMerge(
+            "onvo-@container/widgetmodal onvo-h-full onvo-animate-dialogOpen onvo-w-full onvo-z-50 onvo-fixed onvo-left-0 onvo-foreground-color"
+          )}
         >
-          <Text>+ Add separator</Text>
-        </div>
-        <DialogContent container={container} className="sm:onvo-max-w-lg">
-          <DialogHeader>
-            <DialogTitle>
-              {widget ? "Edit separator" : "Create separator"}
-            </DialogTitle>
-            <DialogDescription className="onvo-mt-1 onvo-text-sm onvo-leading-6">
+          <div
+            className={
+              "onvo-foreground-color onvo-w-full onvo-left-0 onvo-top-0 onvo-z-10 onvo-flex onvo-flex-row onvo-justify-start onvo-items-center onvo-gap-4 onvo-border-b onvo-border-gray-200 onvo-p-2 dark:onvo-border-gray-800"
+            }
+          >
+            <Icon
+              icon={ChevronLeftIcon}
+              variant="shadow"
+              className="onvo-ml-2"
+              onClick={() => setOpen(false)}
+            />
+
+            <div className="onvo-flex onvo-flex-row onvo-w-full onvo-gap-1 onvo-flex-grow onvo-justify-start onvo-items-center">
+              <Text className="onvo-hidden @xl/widgetmodal:onvo-block">
+                {dashboard?.title}
+              </Text>
+              <ChevronRightIcon className="onvo-hidden @xl/widgetmodal:onvo-block onvo-h-4 onvo-w-4 dark:onvo-fill-slate-500" />
+              <Label>{widget ? `Edit ${title}` : "Create separator"}</Label>
+            </div>
+            <div className="onvo-flex onvo-flex-row onvo-gap-2 onvo-flex-shrink-0">
+              <Button
+                onClick={createSeparator}
+                className="onvo-flex-shrink-0"
+                isLoading={loading}
+              >
+                {widget ? "Save" : "Create"}
+              </Button>
+            </div>
+          </div>
+          <div className="onvo-relative onvo-flex onvo-flex-grow onvo-h-[calc(100%-52px)] onvo-w-full onvo-flex-col-reverse @xl/widgetmodal:onvo-flex-row">
+            <div className="onvo-relative onvo-flex-grow onvo-h-full onvo-w-full onvo-p-4 onvo-border-r onvo-border-gray-200 dark:onvo-border-gray-800">
               <Text>Title</Text>
               <Input
                 placeholder="Type in a title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <Text className="onvo-mt-2">Subtitle</Text>
-              <Textarea
-                placeholder="(Optional) Type in a subtitle"
-                value={subtitle}
-                onChange={(e) => setSubtitle(e.target.value)}
-              />
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="onvo-mt-6">
-            <Button
-              onClick={() => setOpen(false)}
-              className="onvo-mt-2 onvo-w-full sm:onvo-mt-0 sm:onvo-w-fit"
-              variant="secondary"
-            >
-              Cancel
-            </Button>
-            <Button isLoading={loading} onClick={createSeparator}>
-              {widget ? "Save" : "Create"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+              <Text className="onvo-mt-2">Description</Text>
+              <div className="onvo-min-h-48">
+                <EditorProvider>
+                  <Editor
+                    containerProps={{ style: { minHeight: 192 } }}
+                    value={subtitle}
+                    onChange={(e) => setSubtitle(e.target.value)}
+                  >
+                    <Toolbar>
+                      <BtnUndo />
+                      <BtnRedo />
+                      <Separator />
+                      <BtnBold />
+                      <BtnItalic />
+                      <BtnUnderline />
+                      <BtnStrikeThrough />
+                      <Separator />
+                      <BtnNumberedList />
+                      <BtnBulletList />
+                      <Separator />
+                      <BtnLink />
+                      <BtnClearFormatting />
+                      <HtmlButton />
+                    </Toolbar>
+                  </Editor>
+                </EditorProvider>
+              </div>
+            </div>
+            <div className="onvo-background-color onvo-flex onvo-flex-shrink-0 @xl/widgetmodal:onvo-flex-shrink onvo-flex-col onvo-justify-center onvo-w-full onvo-flex-grow onvo-relative onvo-p-4 onvo-overflow-y-auto onvo-bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:onvo-bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px]">
+              <div
+                className={" onvo-relative onvo-flex onvo-w-full onvo-flex-col"}
+              >
+                <ChartBase
+                  json={{
+                    type: "separator",
+                    data: { datasets: [{ data: [], label: "" }] },
+                    options: {
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      plugins: {
+                        title: { display: true, text: title },
+                        subtitle: {
+                          display: false,
+                          text: subtitle,
+                        },
+                      },
+                    },
+                  }}
+                  id={widget?.id || ""}
+                  title={title}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </dialog>
     </>
   );
 };

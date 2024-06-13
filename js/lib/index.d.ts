@@ -1268,7 +1268,7 @@ type FirestoreDatasourceConfig = {
     collection: string;
 };
 
-type Settings = {
+type DashboardSettings = {
     theme: "dark" | "light" | "auto";
     dark_background: string;
     dark_foreground: string;
@@ -1278,7 +1278,9 @@ type Settings = {
     light_text: string;
     border_radius: number;
     font: string;
+    grid_spacing: number;
     hide_header: boolean;
+    custom_css: string;
     filters: boolean;
     can_ask_questions: boolean;
     can_edit_widgets: boolean;
@@ -1287,6 +1289,24 @@ type Settings = {
     can_delete_widgets: boolean;
     disable_download_images: boolean;
     disable_download_reports: boolean;
+};
+type WidgetSettings = {
+    disable_download_images: boolean;
+    disable_download_reports: boolean;
+    title_hidden: boolean;
+    css_id?: string;
+    css_classnames?: string;
+};
+type DashboardFilter = {
+    title: string;
+    type: "picker" | "multi-picker" | "date-picker";
+    options: string;
+    default: string;
+    parameter: string;
+};
+type WidgetMessage = {
+    role: "user" | "assistant";
+    content: string;
 };
 type Invite = Database["public"]["Tables"]["invites"]["Row"];
 type Member = Database["public"]["Tables"]["members"]["Row"];
@@ -1302,9 +1322,27 @@ type EmbedUser = Database["public"]["Tables"]["embed_users"]["Row"];
 type Subscription = Database["public"]["Tables"]["subscriptions"]["Row"];
 type SubscriptionPlan = Database["public"]["Tables"]["subscription_plans"]["Row"];
 type APIKey = Database["public"]["Tables"]["api_keys"]["Row"];
-type Widget = Database["public"]["Tables"]["widgets"]["Row"];
+type Widget = Modify<Database["public"]["Tables"]["widgets"]["Row"], {
+    settings?: WidgetSettings;
+    messages: WidgetMessage[];
+    layouts: {
+        lg: {
+            x: number;
+            y: number;
+            w: number;
+            h: number;
+        };
+        sm?: {
+            x: number;
+            y: number;
+            w: number;
+            h: number;
+        };
+    };
+}>;
 type Dashboard = Modify<Database["public"]["Tables"]["dashboards"]["Row"], {
-    settings?: Settings;
+    settings?: DashboardSettings;
+    filters: DashboardFilter[];
 }>;
 type DashboardDatasource = Database["public"]["Tables"]["dashboard_datasources"]["Row"];
 type Session = Database["public"]["Tables"]["sessions"]["Row"];
@@ -1820,4 +1858,4 @@ declare class Onvo extends OnvoBase {
     });
 }
 
-export { type APIDatasourceConfig, type APIKey, type Account, type AirtableDatasourceConfig, type Automation, type AutomationRun, type ComprehensiveDashboard, type Dashboard, type DashboardDatasource, type DataSource, type Database, type EmbedUser, type Enums, type FileDatasourceConfig, type FirestoreDatasourceConfig, type GoogleSheetDatasourceConfig, type Integration, type Invite, type Json, type Log, type Member, type Modify, type MongoDBDatasourceConfig, type OauthConfig, Onvo, type PostgreSQLDatasourceConfig, type Question, type RedshiftDatasourceConfig, type RootfiDatasourceConfig, type SQLDatasourceConfig, type Session, type Settings, type Subscription, type SubscriptionPlan, Table, type Tables, type TablesInsert, type TablesUpdate, type Team, type Widget, type ZohoDatasourceConfig, Onvo as default };
+export { type APIDatasourceConfig, type APIKey, type Account, type AirtableDatasourceConfig, type Automation, type AutomationRun, type ComprehensiveDashboard, type Dashboard, type DashboardDatasource, type DashboardFilter, type DashboardSettings, type DataSource, type Database, type EmbedUser, type Enums, type FileDatasourceConfig, type FirestoreDatasourceConfig, type GoogleSheetDatasourceConfig, type Integration, type Invite, type Json, type Log, type Member, type Modify, type MongoDBDatasourceConfig, type OauthConfig, Onvo, type PostgreSQLDatasourceConfig, type Question, type RedshiftDatasourceConfig, type RootfiDatasourceConfig, type SQLDatasourceConfig, type Session, type Subscription, type SubscriptionPlan, Table, type Tables, type TablesInsert, type TablesUpdate, type Team, type Widget, type WidgetMessage, type WidgetSettings, type ZohoDatasourceConfig, Onvo as default };

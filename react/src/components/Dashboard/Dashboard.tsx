@@ -76,7 +76,8 @@ export const Dashboard: React.FC<{
     if (
       !initialized.current &&
       dashboard &&
-      new Date(dashboard.last_updated_at).getTime() + 60000 <
+      widgets.length > 0 &&
+      new Date(dashboard.last_updated_at).getTime() + 300000 <
         new Date().getTime()
     ) {
       initialized.current = true;
@@ -84,14 +85,14 @@ export const Dashboard: React.FC<{
         ?.dashboard(dashboard.id)
         .updateWidgetCache()
         .then((data) => {
-          refreshWidgets();
+          setWidgets(data);
           refreshDashboard();
           toast.success(
             "Your dashboard has been automatically updated in the background"
           );
         });
     }
-  }, [dashboard]);
+  }, [dashboard, widgets]);
 
   useEffect(() => {
     if (id && backend) {
@@ -109,16 +110,23 @@ export const Dashboard: React.FC<{
     );
     defaults.font.family =
       "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-
     let newTheme: "light" | "dark" =
       prefersColorScheme === "dark" ? "dark" : "light";
     if (dashboard && dashboard.settings) {
       if (dashboard.settings?.theme === "dark") {
         newTheme = "dark";
+        document.body.classList.add("onvo-dark");
       } else if (dashboard.settings?.theme === "light") {
         newTheme = "light";
+        document.body.classList.remove("onvo-dark");
       } else {
-        newTheme = prefersColorScheme === "dark" ? "dark" : "light";
+        if (prefersColorScheme === "dark") {
+          document.body.classList.add("onvo-dark");
+          newTheme = "dark";
+        } else {
+          newTheme = "light";
+          document.body.classList.remove("onvo-dark");
+        }
       }
 
       const settings = dashboard.settings;
@@ -166,6 +174,7 @@ export const Dashboard: React.FC<{
     };
   }, [dashboard, prefersColorScheme]);
 
+  const style = dashboard?.settings?.custom_css || "";
   return (
     <Context.Provider
       value={{
@@ -185,12 +194,14 @@ export const Dashboard: React.FC<{
       <div
         key={theme === "dark" ? "dark" : "light"}
         ref={elementRef as any}
-        className={`onvo-dashboard-context onvo-scrollbar-thumb-rounded-full onvo-scrollbar-track-transparent onvo-translate-x-0 onvo-h-full onvo-relative onvo-background-color onvo-flex onvo-flex-col ${
+        className={`onvo-dashboard-context onvo-relative onvo-scrollbar-thumb-rounded-full onvo-scrollbar-track-transparent onvo-translate-x-0 onvo-h-full onvo-background-color onvo-flex onvo-flex-col ${
           theme === "dark"
             ? "onvo-dark onvo-scrollbar-thumb-slate-500"
             : "onvo-scrollbar-thumb-slate-400"
         } ${className}`}
       >
+        <style>{style}</style>
+
         {children}
       </div>
     </Context.Provider>
