@@ -1638,10 +1638,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@onvo-ai/js@^0.13.30":
-  version "0.13.30"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.30.tgz#fdf592b414a4b72d581570dfbe23a80b88629198"
-  integrity sha512-VDcHUm6btPzxirgeC1c7A288jSaLtEiOEUjJcMWkG2a1CxZW76/eiYPanm10bbGWVzIdgn5K1piHiK5Be5+B7A==
+"@onvo-ai/js@^0.13.33":
+  version "0.13.33"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.33.tgz#40f3ba64466ae995ac95b0561b8d6c795cd9506e"
+  integrity sha512-cS0Y84FBd4qnKb8+60wFkPDw3teIoSZYCAAxpZEKIk7Dj9Dk9sRyJdA8PthcELURK4ivy0FVAcMV2oHJYyHOLA==
   dependencies:
     web-file-polyfill "^1.0.4"
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-const Logo = (props: any) => (
+export const Logo = (props: any) => (
   <svg
     className="onvo-logo-question-modal"
     xmlns="http://www.w3.org/2000/svg"
@@ -36,4 +36,3 @@ const Logo = (props: any) => (
     <circle cx={308.404} cy={82.741} r={12.735} fill="#19703D" />
   </svg>
 );
-export default Logo;

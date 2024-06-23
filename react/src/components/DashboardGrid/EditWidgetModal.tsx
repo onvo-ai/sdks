@@ -19,7 +19,7 @@ import { toast } from "sonner";
 import ChartBase from "../Chart/ChartBase";
 import { SuggestionsBar } from "../SuggestionsBar";
 import React from "react";
-import Logo from "../QuestionModal/Logo";
+import { Logo } from "../Logo";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { useBackend } from "../Wrapper";
 import { useDashboard } from "../Dashboard/Dashboard";
@@ -36,13 +36,11 @@ const Message: React.FC<{
 
   const [newMessage, setNewMessage] = useState(message.content);
 
+  if (message.role !== "user") return <></>;
   return (
     <div className="onvo-message-wrapper onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3 onvo-group">
-      {message.role === "assistant" ? (
-        <Icon variant="shadow" icon={() => <Logo height={20} width={20} />} />
-      ) : (
-        <Icon variant="shadow" icon={UserIcon} />
-      )}
+      <Icon variant="shadow" icon={UserIcon} />
+
       <div className="onvo-message-text onvo-w-full">
         {editing ? (
           <Textarea
@@ -144,7 +142,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
 
   const updateStates = (widget: Widget | undefined) => {
     if (widget) {
-      let out = JSON.parse(widget && widget.cache ? widget.cache : "{}");
+      let out = widget && widget.cache ? widget.cache : {};
 
       setTitle(widget.title || "");
       setCode(widget.code);
@@ -190,7 +188,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
         return backend?.widgets.update(selectedWidget.id, {
           title: title,
           code: code,
-          cache: JSON.stringify(output),
+          cache: output,
           settings: settings,
           messages: messages,
         }) as Promise<any>;
@@ -281,11 +279,9 @@ const EditChartModal: React.FC<{}> = ({}) => {
                     setCode(cachedWidget.code);
                     setMessages(cachedWidget.messages || []);
                     setOutput(
-                      JSON.parse(
-                        cachedWidget && cachedWidget.cache
-                          ? cachedWidget.cache
-                          : "{}"
-                      )
+                      cachedWidget && cachedWidget.cache
+                        ? cachedWidget.cache
+                        : {}
                     );
                   }}
                   className="onvo-flex-shrink-0"
@@ -514,7 +510,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
                 </div>
               </Tabs>
             </div>
-            <div className="onvo-background-color onvo-flex onvo-flex-shrink-0 @xl/widgetmodal:onvo-flex-shrink onvo-flex-col onvo-justify-center onvo-w-full onvo-flex-grow onvo-relative onvo-p-4 onvo-overflow-y-auto onvo-bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:onvo-bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px]">
+            <div className="onvo-background-color onvo-flex onvo-flex-shrink-0 @xl/widgetmodal:onvo-flex-shrink onvo-flex-col onvo-justify-center onvo-w-full onvo-flex-grow onvo-relative onvo-p-4 onvo-overflow-y-auto onvo-bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:onvo-bg-[radial-gradient(#0f172a_1px,transparent_1px)] [background-size:16px_16px]">
               {loading && (
                 <div className="onvo-absolute onvo-top-0 onvo-left-0 onvo-bottom-0 onvo-right-0 onvo-z-10 onvo-backdrop-blur-md onvo-bg-white/50 dark:onvo-bg-gray-900/50 onvo-flex onvo-justify-center onvo-items-center">
                   <Card className="onvo-loading-card onvo-flex onvo-flex-row onvo-gap-6 onvo-items-center !onvo-w-72">

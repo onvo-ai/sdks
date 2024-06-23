@@ -80,7 +80,7 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "api_keys_team_fkey";
+            foreignKeyName: "public_api_keys_team_fkey";
             columns: ["team"];
             isOneToOne: false;
             referencedRelation: "teams";
@@ -122,7 +122,7 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "automation_runs_team_fkey";
+            foreignKeyName: "public_automation_runs_team_fkey";
             columns: ["team"];
             isOneToOne: false;
             referencedRelation: "teams";
@@ -217,7 +217,7 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "automations_team_fkey";
+            foreignKeyName: "public_automations_team_fkey";
             columns: ["team"];
             isOneToOne: false;
             referencedRelation: "teams";
@@ -257,14 +257,7 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "dashboard_datasources_datasource_fkey";
-            columns: ["datasource"];
-            isOneToOne: false;
-            referencedRelation: "decrypted_datasources";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "dashboard_datasources_team_fkey";
+            foreignKeyName: "public_dashboard_datasources_team_fkey";
             columns: ["team"];
             isOneToOne: false;
             referencedRelation: "teams";
@@ -338,7 +331,7 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "dashboards_team_fkey";
+            foreignKeyName: "public_dashboards_team_fkey";
             columns: ["team"];
             isOneToOne: false;
             referencedRelation: "teams";
@@ -349,16 +342,16 @@ export type Database = {
       datasources: {
         Row: {
           columns: Json | null;
-          config: string | null;
+          config: Json | null;
           created_at: string;
           created_by: string | null;
-          description: string;
+          description: string | null;
           filters: Json;
           id: string;
           last_updated_at: string;
           last_updated_by: string | null;
-          parameters: string | null;
-          sample_data: string | null;
+          parameters: Json | null;
+          sample_data: Json | null;
           size: number;
           source: string;
           team: string;
@@ -366,16 +359,16 @@ export type Database = {
         };
         Insert: {
           columns?: Json | null;
-          config?: string | null;
+          config?: Json | null;
           created_at?: string;
           created_by?: string | null;
-          description?: string;
+          description?: string | null;
           filters?: Json;
           id?: string;
           last_updated_at?: string;
           last_updated_by?: string | null;
-          parameters?: string | null;
-          sample_data?: string | null;
+          parameters?: Json | null;
+          sample_data?: Json | null;
           size?: number;
           source: string;
           team: string;
@@ -383,16 +376,16 @@ export type Database = {
         };
         Update: {
           columns?: Json | null;
-          config?: string | null;
+          config?: Json | null;
           created_at?: string;
           created_by?: string | null;
-          description?: string;
+          description?: string | null;
           filters?: Json;
           id?: string;
           last_updated_at?: string;
           last_updated_by?: string | null;
-          parameters?: string | null;
-          sample_data?: string | null;
+          parameters?: Json | null;
+          sample_data?: Json | null;
           size?: number;
           source?: string;
           team?: string;
@@ -414,7 +407,7 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "datasources_team_fkey";
+            foreignKeyName: "public_datasources_team_fkey";
             columns: ["team"];
             isOneToOne: false;
             referencedRelation: "teams";
@@ -452,7 +445,7 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "organisation_users_team_fkey";
+            foreignKeyName: "public_embed_users_team_fkey";
             columns: ["team"];
             isOneToOne: false;
             referencedRelation: "teams";
@@ -462,26 +455,26 @@ export type Database = {
       };
       integrations: {
         Row: {
-          config: string;
+          config: Json;
           created_at: string;
           provider: string;
           team: string;
         };
         Insert: {
-          config: string;
+          config?: Json;
           created_at?: string;
           provider: string;
           team: string;
         };
         Update: {
-          config?: string;
+          config?: Json;
           created_at?: string;
           provider?: string;
           team?: string;
         };
         Relationships: [
           {
-            foreignKeyName: "integrations_team_fkey";
+            foreignKeyName: "public_integrations_team_fkey";
             columns: ["team"];
             isOneToOne: false;
             referencedRelation: "teams";
@@ -510,51 +503,7 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "invites_team_fkey";
-            columns: ["team"];
-            isOneToOne: false;
-            referencedRelation: "teams";
-            referencedColumns: ["id"];
-          }
-        ];
-      };
-      logs: {
-        Row: {
-          cost: number | null;
-          created_at: string;
-          id: string;
-          messages: Json | null;
-          model: string;
-          success: boolean | null;
-          team: string;
-          tokens: number | null;
-          type: string;
-        };
-        Insert: {
-          cost?: number | null;
-          created_at?: string;
-          id?: string;
-          messages?: Json | null;
-          model: string;
-          success?: boolean | null;
-          team: string;
-          tokens?: number | null;
-          type: string;
-        };
-        Update: {
-          cost?: number | null;
-          created_at?: string;
-          id?: string;
-          messages?: Json | null;
-          model?: string;
-          success?: boolean | null;
-          team?: string;
-          tokens?: number | null;
-          type?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "logs_team_fkey";
+            foreignKeyName: "public_invites_team_fkey";
             columns: ["team"];
             isOneToOne: false;
             referencedRelation: "teams";
@@ -577,17 +526,17 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "members_team_fkey";
-            columns: ["team"];
-            isOneToOne: false;
-            referencedRelation: "teams";
-            referencedColumns: ["id"];
-          },
-          {
             foreignKeyName: "members_user_fkey";
             columns: ["account"];
             isOneToOne: false;
             referencedRelation: "accounts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "public_members_team_fkey";
+            columns: ["team"];
+            isOneToOne: false;
+            referencedRelation: "teams";
             referencedColumns: ["id"];
           }
         ];
@@ -619,17 +568,17 @@ export type Database = {
         };
         Relationships: [
           {
+            foreignKeyName: "public_questions_team_fkey";
+            columns: ["team"];
+            isOneToOne: false;
+            referencedRelation: "teams";
+            referencedColumns: ["id"];
+          },
+          {
             foreignKeyName: "questions_dashboard_fkey";
             columns: ["dashboard"];
             isOneToOne: false;
             referencedRelation: "dashboards";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "questions_team_fkey";
-            columns: ["team"];
-            isOneToOne: false;
-            referencedRelation: "teams";
             referencedColumns: ["id"];
           }
         ];
@@ -639,37 +588,44 @@ export type Database = {
           created_at: string;
           dashboard: string;
           embed_user: string;
-          parameters: string;
+          parameters: Json;
           team: string;
         };
         Insert: {
           created_at?: string;
           dashboard: string;
           embed_user: string;
-          parameters?: string;
+          parameters?: Json;
           team: string;
         };
         Update: {
           created_at?: string;
           dashboard?: string;
           embed_user?: string;
-          parameters?: string;
+          parameters?: Json;
           team?: string;
         };
         Relationships: [
+          {
+            foreignKeyName: "public_sessions_embed_user_team_fkey";
+            columns: ["embed_user", "team"];
+            isOneToOne: false;
+            referencedRelation: "embed_users";
+            referencedColumns: ["id", "team"];
+          },
+          {
+            foreignKeyName: "public_sessions_team_fkey";
+            columns: ["team"];
+            isOneToOne: false;
+            referencedRelation: "teams";
+            referencedColumns: ["id"];
+          },
           {
             foreignKeyName: "sessions_dashboard_fkey";
             columns: ["dashboard"];
             isOneToOne: false;
             referencedRelation: "dashboards";
             referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "sessions_embed_user_fkey";
-            columns: ["embed_user", "team"];
-            isOneToOne: false;
-            referencedRelation: "embed_users";
-            referencedColumns: ["id", "team"];
           }
         ];
       };
@@ -739,18 +695,18 @@ export type Database = {
         };
         Relationships: [
           {
+            foreignKeyName: "public_subscriptions_team_fkey";
+            columns: ["team"];
+            isOneToOne: true;
+            referencedRelation: "teams";
+            referencedColumns: ["id"];
+          },
+          {
             foreignKeyName: "subscriptions_product_name_fkey";
             columns: ["product_name"];
             isOneToOne: false;
             referencedRelation: "subscription_plans";
             referencedColumns: ["name"];
-          },
-          {
-            foreignKeyName: "subscriptions_team_fkey";
-            columns: ["team"];
-            isOneToOne: true;
-            referencedRelation: "teams";
-            referencedColumns: ["id"];
           }
         ];
       };
@@ -786,7 +742,7 @@ export type Database = {
       };
       widgets: {
         Row: {
-          cache: string | null;
+          cache: Json | null;
           code: string;
           created_at: string;
           dashboard: string;
@@ -798,7 +754,7 @@ export type Database = {
           title: string;
         };
         Insert: {
-          cache?: string | null;
+          cache?: Json | null;
           code: string;
           created_at?: string;
           dashboard: string;
@@ -810,7 +766,7 @@ export type Database = {
           title: string;
         };
         Update: {
-          cache?: string | null;
+          cache?: Json | null;
           code?: string;
           created_at?: string;
           dashboard?: string;
@@ -823,221 +779,24 @@ export type Database = {
         };
         Relationships: [
           {
+            foreignKeyName: "public_widgets_team_fkey";
+            columns: ["team"];
+            isOneToOne: false;
+            referencedRelation: "teams";
+            referencedColumns: ["id"];
+          },
+          {
             foreignKeyName: "widgets_dashboard_fkey";
             columns: ["dashboard"];
             isOneToOne: false;
             referencedRelation: "dashboards";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "widgets_team_fkey";
-            columns: ["team"];
-            isOneToOne: false;
-            referencedRelation: "teams";
             referencedColumns: ["id"];
           }
         ];
       };
     };
     Views: {
-      decrypted_datasources: {
-        Row: {
-          columns: Json | null;
-          config: string | null;
-          created_at: string | null;
-          created_by: string | null;
-          description: string | null;
-          filters: Json | null;
-          id: string | null;
-          last_updated_at: string | null;
-          last_updated_by: string | null;
-          parameters: string | null;
-          sample_data: string | null;
-          size: number | null;
-          source: string | null;
-          team: string | null;
-          title: string | null;
-        };
-        Insert: {
-          columns?: Json | null;
-          config?: never;
-          created_at?: string | null;
-          created_by?: string | null;
-          description?: string | null;
-          filters?: Json | null;
-          id?: string | null;
-          last_updated_at?: string | null;
-          last_updated_by?: string | null;
-          parameters?: never;
-          sample_data?: never;
-          size?: number | null;
-          source?: string | null;
-          team?: string | null;
-          title?: string | null;
-        };
-        Update: {
-          columns?: Json | null;
-          config?: never;
-          created_at?: string | null;
-          created_by?: string | null;
-          description?: string | null;
-          filters?: Json | null;
-          id?: string | null;
-          last_updated_at?: string | null;
-          last_updated_by?: string | null;
-          parameters?: never;
-          sample_data?: never;
-          size?: number | null;
-          source?: string | null;
-          team?: string | null;
-          title?: string | null;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "datasources_created_by_fkey";
-            columns: ["created_by"];
-            isOneToOne: false;
-            referencedRelation: "accounts";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "datasources_last_updated_by_fkey";
-            columns: ["last_updated_by"];
-            isOneToOne: false;
-            referencedRelation: "accounts";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "datasources_team_fkey";
-            columns: ["team"];
-            isOneToOne: false;
-            referencedRelation: "teams";
-            referencedColumns: ["id"];
-          }
-        ];
-      };
-      decrypted_integrations: {
-        Row: {
-          config: string | null;
-          created_at: string | null;
-          provider: string | null;
-          team: string | null;
-        };
-        Insert: {
-          config?: never;
-          created_at?: string | null;
-          provider?: string | null;
-          team?: string | null;
-        };
-        Update: {
-          config?: never;
-          created_at?: string | null;
-          provider?: string | null;
-          team?: string | null;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "integrations_team_fkey";
-            columns: ["team"];
-            isOneToOne: false;
-            referencedRelation: "teams";
-            referencedColumns: ["id"];
-          }
-        ];
-      };
-      decrypted_sessions: {
-        Row: {
-          created_at: string | null;
-          dashboard: string | null;
-          embed_user: string | null;
-          parameters: string | null;
-          team: string | null;
-        };
-        Insert: {
-          created_at?: string | null;
-          dashboard?: string | null;
-          embed_user?: string | null;
-          parameters?: never;
-          team?: string | null;
-        };
-        Update: {
-          created_at?: string | null;
-          dashboard?: string | null;
-          embed_user?: string | null;
-          parameters?: never;
-          team?: string | null;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "sessions_dashboard_fkey";
-            columns: ["dashboard"];
-            isOneToOne: false;
-            referencedRelation: "dashboards";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "sessions_embed_user_fkey";
-            columns: ["embed_user", "team"];
-            isOneToOne: false;
-            referencedRelation: "embed_users";
-            referencedColumns: ["id", "team"];
-          }
-        ];
-      };
-      decrypted_widgets: {
-        Row: {
-          cache: string | null;
-          code: string | null;
-          created_at: string | null;
-          dashboard: string | null;
-          id: string | null;
-          layouts: Json | null;
-          messages: Json | null;
-          settings: Json | null;
-          team: string | null;
-          title: string | null;
-        };
-        Insert: {
-          cache?: never;
-          code?: string | null;
-          created_at?: string | null;
-          dashboard?: string | null;
-          id?: string | null;
-          layouts?: Json | null;
-          messages?: Json | null;
-          settings?: Json | null;
-          team?: string | null;
-          title?: string | null;
-        };
-        Update: {
-          cache?: never;
-          code?: string | null;
-          created_at?: string | null;
-          dashboard?: string | null;
-          id?: string | null;
-          layouts?: Json | null;
-          messages?: Json | null;
-          settings?: Json | null;
-          team?: string | null;
-          title?: string | null;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "widgets_dashboard_fkey";
-            columns: ["dashboard"];
-            isOneToOne: false;
-            referencedRelation: "dashboards";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "widgets_team_fkey";
-            columns: ["team"];
-            isOneToOne: false;
-            referencedRelation: "teams";
-            referencedColumns: ["id"];
-          }
-        ];
-      };
+      [_ in never]: never;
     };
     Functions: {
       can_create_widget: {

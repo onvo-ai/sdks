@@ -43,7 +43,7 @@ export const FilterBar = () => {
       });
     } else {
       let session = await backend?.sessions.get({ dashboard: dashboard?.id });
-      let params = JSON.parse(session?.parameters || "{}");
+      let params = session?.parameters || {};
 
       await backend?.sessions.upsert({
         // @ts-ignore

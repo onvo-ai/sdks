@@ -1,4 +1,21 @@
 import { Database } from "./database.types";
+import {
+  RedshiftDatasourceConfig,
+  MySQLDatasourceConfig,
+  MsSQLDatasourceConfig,
+  PostgreSQLDatasourceConfig,
+  RootfiDatasourceConfig,
+  MongoDBDatasourceConfig,
+  AirtableDatasourceConfig,
+  GoogleSheetDatasourceConfig,
+  ZohoDatasourceConfig,
+  FirestoreDatasourceConfig,
+  OauthConfig,
+  CSVDatasourceConfig,
+  ExcelDatasourceConfig,
+  JSONDatasourceConfig,
+  APIDatasourceConfig,
+} from "./datasources";
 import { Modify } from "./utils";
 
 export * from "./database.types";
@@ -60,6 +77,23 @@ export type DataSource = Modify<
   Database["public"]["Tables"]["datasources"]["Row"],
   {
     columns: { title: string; description: string }[];
+    sample_data: { [key: string]: any }[];
+    config:
+      | CSVDatasourceConfig
+      | ExcelDatasourceConfig
+      | JSONDatasourceConfig
+      | APIDatasourceConfig
+      | AirtableDatasourceConfig
+      | GoogleSheetDatasourceConfig
+      | ZohoDatasourceConfig
+      | RedshiftDatasourceConfig
+      | MySQLDatasourceConfig
+      | MsSQLDatasourceConfig
+      | PostgreSQLDatasourceConfig
+      | RootfiDatasourceConfig
+      | MongoDBDatasourceConfig
+      | FirestoreDatasourceConfig;
+    parameters: { id: string; wrap?: string; default: string }[];
   }
 >;
 export type EmbedUser = Database["public"]["Tables"]["embed_users"]["Row"];
@@ -76,6 +110,7 @@ export type Widget = Modify<
       lg: { x: number; y: number; w: number; h: number };
       sm?: { x: number; y: number; w: number; h: number };
     };
+    cache: any;
   }
 >;
 export type Dashboard = Modify<
@@ -87,11 +122,29 @@ export type Dashboard = Modify<
 >;
 export type DashboardDatasource =
   Database["public"]["Tables"]["dashboard_datasources"]["Row"];
-export type Session = Database["public"]["Tables"]["sessions"]["Row"];
+export type Session = Modify<
+  Database["public"]["Tables"]["sessions"]["Row"],
+  {
+    parameters: { [key: string]: any };
+  }
+>;
 
 export type Question = Database["public"]["Tables"]["questions"]["Row"];
 
-export type Integration = Database["public"]["Tables"]["integrations"]["Row"];
+export type Integration = Modify<
+  Database["public"]["Tables"]["integrations"]["Row"],
+  {
+    config:
+      | RedshiftDatasourceConfig
+      | MySQLDatasourceConfig
+      | MsSQLDatasourceConfig
+      | PostgreSQLDatasourceConfig
+      | RootfiDatasourceConfig
+      | MongoDBDatasourceConfig
+      | OauthConfig
+      | FirestoreDatasourceConfig;
+  }
+>;
 export type Automation = Database["public"]["Tables"]["automations"]["Row"];
 export type AutomationRun =
   Database["public"]["Tables"]["automation_runs"]["Row"];
@@ -100,5 +153,3 @@ export type ComprehensiveDashboard = Dashboard & {
   datasources: DataSource[];
   widgets: Widget[];
 };
-
-export type Log = Database["public"]["Tables"]["logs"]["Row"];

@@ -19,12 +19,12 @@ describe("Datasources", () => {
       description: "",
       source: "csv",
       filters: [],
-      config: JSON.stringify({
+      config: {
         url: "1234567890",
         filename: "Test file",
-      }),
+      },
       columns: [],
-      parameters: JSON.stringify({}),
+      parameters: [],
     });
     expect(newDatasource).toBeDefined();
     expect(newDatasource.id).toBeDefined();

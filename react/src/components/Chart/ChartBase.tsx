@@ -13,16 +13,21 @@ import { FunnelController, TrapezoidElement } from "chartjs-chart-funnel";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import zoomPlugin from "chartjs-plugin-zoom";
 
-import Metric from "./MetricChart";
-import Separator from "./SeparatorChart";
+import MetricChart from "./MetricChart";
+import TextChart from "./TextChart";
 import { WidgetSettings } from "@onvo-ai/js";
+import ImageChart from "./ImageChart";
+import { DividerChart, DividerPlugin } from "./DividerChart";
 
 ChartJS.register([
   FunnelController,
   TrapezoidElement,
+  MetricChart,
+  TextChart,
+  ImageChart,
+  DividerPlugin,
+  DividerChart,
   ChartDataLabels,
-  Metric,
-  Separator,
   zoomPlugin,
 ]);
 const ChartBase: React.FC<{
@@ -41,29 +46,32 @@ const ChartBase: React.FC<{
 
   let chartConfig = useMemo(() => {
     let output = Object.assign({}, json, {});
+    let legend =
+      output.options.plugins?.legend?.display !== false &&
+      (!output.options.plugins?.legend?.position ||
+        output.options.plugins?.legend?.position === "top");
+    let subtitle = output.options.plugins?.subtitle?.display !== false;
+
     output.options.plugins.title = {
       display: settings && settings.title_hidden === true ? false : true,
       text: title || output.options.plugins.title?.text || "",
-      align: "start",
+      align: output.options.plugins.title?.align || "start",
       fullSize: true,
       font: {
-        size: output.type === "separator" ? 24 : 18,
-        weight: output.type === "separator" ? 600 : 600,
+        size: output.type === "text" ? 24 : 18,
+        weight: output.type === "text" ? 600 : 600,
       },
       padding: {
         top: 5,
-        bottom: 2,
+        bottom: legend ? 0 : subtitle ? 0 : output.type === "metric" ? 0 : 25,
       },
     };
 
-    if (
-      output.options.plugins.subtitle &&
-      output.options.plugins.subtitle.display !== false
-    ) {
+    if (subtitle) {
       output.options.plugins.subtitle = {
         display: true,
         text: output.options.plugins.subtitle?.text || "",
-        align: output.options.plugins.subtitle.align || "start",
+        align: output.options.plugins.subtitle?.align || "start",
         fullSize: true,
         font: {
           size: 14,
@@ -71,7 +79,7 @@ const ChartBase: React.FC<{
         },
         padding: {
           top: 0,
-          bottom: 15,
+          bottom: legend ? 0 : 20,
         },
       };
     }
@@ -116,7 +124,7 @@ const ChartBase: React.FC<{
         ) : (
           <div
             className={
-              "onvo-w-full " +
+              "onvo-relative onvo-w-full " +
               (zoomed ? "onvo-h-[calc(100%-40px)]" : "onvo-h-full")
             }
           >

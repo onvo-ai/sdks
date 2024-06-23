@@ -7,7 +7,7 @@ import { Button } from "../../tremor/Button";
 
 const meta: Meta = {
   component: Empty,
-  title: "Onvo/Empty",
+  title: "Elements/Empty",
   argTypes: {},
 };
 export default meta;

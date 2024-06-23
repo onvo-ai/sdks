@@ -20,7 +20,7 @@ import {
 } from "@heroicons/react/24/outline";
 import ChartBase from "../Chart/ChartBase";
 import { useDashboard } from "../Dashboard";
-import Logo from "./Logo";
+import { Logo } from "../Logo";
 import { UserIcon } from "@heroicons/react/24/solid";
 import {
   DropdownMenu,
@@ -53,6 +53,7 @@ const QuestionMessage: React.FC<{
   onDelete: () => void;
   onEdit: (msg: string) => void;
   onReply: (msg: string) => void;
+  logo: string;
 }> = ({
   index,
   role,
@@ -65,6 +66,7 @@ const QuestionMessage: React.FC<{
   onDelete,
   onEdit,
   onReply,
+  logo,
 }) => {
   const backend = useBackend();
   const { refreshWidgets, widgets, dashboard, adminMode } = useDashboard();
@@ -104,11 +106,11 @@ const QuestionMessage: React.FC<{
           h: output.type === "metric" ? 10 : 20,
         },
       },
-      messages: messages.filter((a) => a.role !== "tool"),
+      messages: messages.filter((a) => a.role !== "user"),
       dashboard: dashboardId,
       team: teamId || "",
       code: code,
-      cache: JSON.stringify(output),
+      cache: output,
       created_at: new Date().toISOString(),
       settings: {},
     };
@@ -266,12 +268,32 @@ const QuestionMessage: React.FC<{
 
   let isLast = index === messages.length - 1;
   let nextMessage = isLast ? "" : messages[index + 1].content || "";
+  const LogoIcon = useMemo(() => {
+    return logo && logo.trim() !== "" ? (
+      <Icon
+        variant="shadow"
+        className="!onvo-p-0"
+        icon={() => (
+          <img
+            src={logo}
+            className="onvo-object-contain onvo-rounded-md onvo-h-[32px] onvo-w-[32px]"
+          />
+        )}
+      />
+    ) : (
+      <Icon variant="shadow" icon={() => <Logo height={20} width={20} />} />
+    );
+  }, [logo]);
   return (
     <div className="onvo-question-message-assistant onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3">
-      <Icon variant="shadow" icon={() => <Logo height={20} width={20} />} />
+      {LogoIcon}
       <div className="onvo-w-full">
-        {code.trim() !== "" && (
-          <Accordion type="single" className="onvo-leading-none" collapsible>
+        {adminMode && code.trim() !== "" && (
+          <Accordion
+            type="single"
+            className="onvo-leading-none onvo-mb-2"
+            collapsible
+          >
             <AccordionItem value="item-1" className="onvo-border-b-0">
               <AccordionTrigger className="onvo-border-b-0 !onvo-py-2 !onvo-px-2 onvo-rounded-md onvo-bg-slate-100 dark:onvo-bg-slate-700">
                 <span>Show working</span>
@@ -293,12 +315,19 @@ const QuestionMessage: React.FC<{
         {output && (
           <Card
             className={
-              "onvo-group onvo-question-assistant-chart onvo-foreground-color onvo-relative onvo-my-2 onvo-py-3 onvo-flex onvo-flex-col " +
-              (output.type === "metric" ? "onvo-h-32" : "onvo-h-96")
+              "onvo-group onvo-question-assistant-chart onvo-foreground-color onvo-relative onvo-mb-2 onvo-px-0 onvo-py-0 onvo-flex onvo-flex-col"
             }
           >
             <div
-              className="onvo-chart-card-dropdown-wrapper onvo-z-20 onvo-absolute onvo-top-2 onvo-right-4 onvo-flex onvo-flex-row onvo-gap-2 onvo-items-center"
+              className={
+                "onvo-py-3 onvo-px-2 " +
+                (output.type === "metric" ? "onvo-h-32" : "onvo-h-96")
+              }
+            >
+              <ChartBase json={output} id={questionId} title={title} />
+            </div>
+            <div
+              className="onvo-chart-card-dropdown-wrapper onvo-py-2 onvo-px-2 onvo-z-20 onvo-border-t onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-b-md onvo-bg-slate-50 dark:onvo-bg-slate-800 onvo-flex onvo-w-full onvo-justify-end onvo-flex-row onvo-gap-2 onvo-items-center"
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
@@ -384,8 +413,6 @@ const QuestionMessage: React.FC<{
                 </DropdownMenu>
               )}
             </div>
-
-            <ChartBase json={output} id={questionId} title={title} />
           </Card>
         )}
 

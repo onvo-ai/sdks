@@ -27,66 +27,99 @@ import {
 import { twMerge } from "tailwind-merge";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import ChartBase from "./ChartBase";
+import { Tabs, TabsList, TabsTrigger } from "../../tremor/Tabs";
 
-export const useSeparatorModal = create<{
+export const useTextWidgetModal = create<{
   open: boolean;
-  widget?: { id: string; title: string; subtitle: string };
+  widget?: {
+    id: string;
+    title: string;
+    subtitle: string;
+    titleAlignment: string;
+    descriptionAlignment: string;
+  };
   setOpen: (
     open: boolean,
-    widget?: { id: string; title: string; subtitle: string }
+    widget?: {
+      id: string;
+      title: string;
+      subtitle: string;
+      titleAlignment: string;
+      descriptionAlignment: string;
+    }
   ) => void;
 }>((set) => ({
   open: false,
   setOpen: (
     op: boolean,
-    wid?: { id: string; title: string; subtitle: string }
+    wid?: {
+      id: string;
+      title: string;
+      subtitle: string;
+      titleAlignment: string;
+      descriptionAlignment: string;
+    }
   ) => set({ open: op, widget: wid }),
 }));
 
-const CreateSeparatorModal: React.FC<{
+export const TextWidgetModal: React.FC<{
   maxHeight: number;
 }> = ({ maxHeight }) => {
   const { dashboard, refreshWidgets, adminMode } = useDashboard();
   const backend = useBackend();
-  const { open, setOpen, widget } = useSeparatorModal();
+  const { open, setOpen, widget } = useTextWidgetModal();
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [loading, setLoading] = useState(false);
+  const [titleAlignment, setTitleAlignment] = useState<
+    "start" | "center" | "end"
+  >("start");
+  const [descriptionAlignment, setDescriptionAlignment] = useState<
+    "start" | "center" | "end"
+  >("start");
 
   useEffect(() => {
     if (widget) {
       setTitle(widget.title);
       setSubtitle(widget.subtitle);
+
+      setTitleAlignment(widget.titleAlignment as "start" | "center" | "end");
+      setDescriptionAlignment(
+        widget.descriptionAlignment as "start" | "center" | "end"
+      );
     } else {
       setTitle("");
       setSubtitle("");
+      setTitleAlignment("start");
+      setDescriptionAlignment("start");
     }
   }, [widget]);
 
   const createSeparator = async () => {
     if (!dashboard) return;
     setLoading(true);
-    let cache = JSON.stringify({
-      type: "separator",
+    let cache = {
+      type: "text",
       data: { datasets: [{ data: [], label: "" }] },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          title: { display: true, text: title },
+          title: { display: true, text: title, align: titleAlignment },
           subtitle: {
             display: false,
             text: subtitle,
+            align: descriptionAlignment,
           },
         },
       },
-    });
+    };
     let code = `title = "${title}"
     subtitle = "${subtitle}"
     def main():
       
         return {
-            "type": "separator",
+            "type": "text",
             "data": {"datasets": [{"data": [], "label": ""}]},
             "options": {
                 "responsive": True,
@@ -94,14 +127,16 @@ const CreateSeparatorModal: React.FC<{
                 "plugins": {
                     "title": {
                         "display": True,
-                        "text": title_text
+                        "text": title_text,
+                        "align": "${titleAlignment}",
                     },
                     if subtitle:
-                        .set("plugins", {"subtitle": {"display": False, "text": subtitle}})
+                        .set("plugins", {"subtitle": {"display": False, "text": subtitle, "align": "${descriptionAlignment}"}})
                 },
             },
         }
       `;
+
     if (widget) {
       await backend?.widgets.update(widget.id, {
         title: title,
@@ -115,8 +150,8 @@ const CreateSeparatorModal: React.FC<{
           lg: {
             x: 0,
             y: maxHeight,
-            w: 24,
-            h: 5,
+            w: 12,
+            h: 10,
           },
         },
         cache: cache,
@@ -165,7 +200,7 @@ const CreateSeparatorModal: React.FC<{
                 {dashboard?.title}
               </Text>
               <ChevronRightIcon className="onvo-hidden @xl/widgetmodal:onvo-block onvo-h-4 onvo-w-4 dark:onvo-fill-slate-500" />
-              <Label>{widget ? `Edit ${title}` : "Create separator"}</Label>
+              <Label>{widget ? `Edit ${title}` : "Create text widget"}</Label>
             </div>
             <div className="onvo-flex onvo-flex-row onvo-gap-2 onvo-flex-shrink-0">
               <Button
@@ -178,15 +213,30 @@ const CreateSeparatorModal: React.FC<{
             </div>
           </div>
           <div className="onvo-relative onvo-flex onvo-flex-grow onvo-h-[calc(100%-52px)] onvo-w-full onvo-flex-col-reverse @xl/widgetmodal:onvo-flex-row">
-            <div className="onvo-relative onvo-flex-grow onvo-h-full onvo-w-full onvo-p-4 onvo-border-r onvo-border-gray-200 dark:onvo-border-gray-800">
+            <div className="onvo-relative onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-h-full onvo-w-full onvo-p-4 onvo-border-r onvo-border-gray-200 dark:onvo-border-gray-800">
               <Text>Title</Text>
               <Input
                 placeholder="Type in a title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
+              <div className="onvo-mt-2 onvo-flex onvo-items-center onvo-justify-between">
+                <Text>Title alignment</Text>
+                <Tabs
+                  value={titleAlignment}
+                  onValueChange={(val) => {
+                    setTitleAlignment(val as "start" | "center" | "end");
+                  }}
+                >
+                  <TabsList variant="solid">
+                    <TabsTrigger value="start">Left</TabsTrigger>
+                    <TabsTrigger value="center">Center</TabsTrigger>
+                    <TabsTrigger value="end">End</TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </div>
               <Text className="onvo-mt-2">Description</Text>
-              <div className="onvo-min-h-48">
+              <div className="onvo-min-h-48 onvo-max-w-full onvo-prose onvo-prose-sm dark:onvo-prose-invert">
                 <EditorProvider>
                   <Editor
                     containerProps={{ style: { minHeight: 192 } }}
@@ -212,23 +262,43 @@ const CreateSeparatorModal: React.FC<{
                   </Editor>
                 </EditorProvider>
               </div>
+              <div className="onvo-mt-2 onvo-flex onvo-items-center onvo-justify-between">
+                <Text>Description alignment</Text>
+                <Tabs
+                  value={descriptionAlignment}
+                  onValueChange={(val) => {
+                    setDescriptionAlignment(val as "start" | "center" | "end");
+                  }}
+                >
+                  <TabsList variant="solid">
+                    <TabsTrigger value="start">Left</TabsTrigger>
+                    <TabsTrigger value="center">Center</TabsTrigger>
+                    <TabsTrigger value="end">End</TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </div>
             </div>
-            <div className="onvo-background-color onvo-flex onvo-flex-shrink-0 @xl/widgetmodal:onvo-flex-shrink onvo-flex-col onvo-justify-center onvo-w-full onvo-flex-grow onvo-relative onvo-p-4 onvo-overflow-y-auto onvo-bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:onvo-bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px]">
+            <div className="onvo-background-color onvo-flex onvo-flex-shrink-0 @xl/widgetmodal:onvo-flex-shrink onvo-flex-col onvo-justify-center onvo-w-full onvo-flex-grow onvo-relative onvo-p-4 onvo-overflow-y-auto onvo-bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:onvo-bg-[radial-gradient(#0f172a_1px,transparent_1px)] [background-size:16px_16px]">
               <div
-                className={" onvo-relative onvo-flex onvo-w-full onvo-flex-col"}
+                className={"onvo-relative onvo-flex onvo-w-full onvo-flex-col"}
               >
                 <ChartBase
                   json={{
-                    type: "separator",
+                    type: "text",
                     data: { datasets: [{ data: [], label: "" }] },
                     options: {
                       responsive: true,
                       maintainAspectRatio: false,
                       plugins: {
-                        title: { display: true, text: title },
+                        title: {
+                          display: true,
+                          text: title,
+                          align: titleAlignment,
+                        },
                         subtitle: {
                           display: false,
                           text: subtitle,
+                          align: descriptionAlignment,
                         },
                       },
                     },
@@ -244,5 +314,3 @@ const CreateSeparatorModal: React.FC<{
     </>
   );
 };
-
-export default CreateSeparatorModal;
