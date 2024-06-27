@@ -1231,7 +1231,9 @@ declare class OnvoDatasources extends OnvoBase {
      * Lists all the datasources.
      * @returns {Promise<DataSource[]>} A promise that resolves to an array of datasources.
      */
-    list(): Promise<DataSource[]>;
+    list(filters?: {
+        dashboard: string;
+    }): Promise<DataSource[]>;
     /**
      * Gets a datasource by ID.
      * @param {string} id - The ID of the datasource.
@@ -1341,12 +1343,6 @@ declare class OnvoDashboardDatasources extends OnvoBase {
     constructor(dashboardId: string, apiKey: string, options?: {
         endpoint: string;
     });
-    /**
-     * Lists all the datasources linked to a dashboard.
-     *
-     * @return {Promise<DashboardDatasource[]>} A promise that resolves to an array of dashboard datasources.
-     */
-    list(): Promise<DashboardDatasource[]>;
     /**
      * Unlinks a datasource from a dashboard.
      *

@@ -43,6 +43,16 @@ describe("Datasources", () => {
     expect(automations[0].config).toBeDefined();
   });
 
+  it("should list dashboard datasources", async () => {
+    let datasources = await onvo.datasources.list({
+      dashboard: "f90182a2-f485-45a8-a9d6-b72021c03b50",
+    });
+
+    expect(datasources).toBeDefined();
+    expect(datasources.length).toBeDefined();
+    expect(datasources.length).toBeGreaterThan(0);
+  });
+
   it("should get a datasource", async () => {
     const automation = await onvo.datasources.get(newDatasource.id);
     expect(automation.id).toBeDefined();

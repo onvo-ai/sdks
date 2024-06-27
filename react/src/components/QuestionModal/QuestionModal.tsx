@@ -23,6 +23,12 @@ import { twMerge } from "tailwind-merge";
 
 dayjs.extend(relativeTime);
 
+export interface MessageType {
+  role: "user" | "assistant" | "tool";
+  content: string | ({ text: string; type: "text" } | { type: "tool_user" })[];
+  tool_calls?: any[];
+}
+
 export const QuestionModal: React.FC<{}> = ({}) => {
   const backend = useBackend();
   const { dashboard, adminMode } = useDashboard();
@@ -35,9 +41,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
   const [questionLoading, setQuestionLoading] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedQuestion, setSelectedQuestion] = useState<Question>();
-  const [messages, setMessages] = useState<
-    { role: "user" | "assistant"; content: string }[]
-  >([]);
+  const [messages, setMessages] = useState<MessageType[]>([]);
 
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -110,9 +114,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
     }
   }, [selectedQuestion]);
 
-  const askQuestion = async (
-    msg: { role: "user" | "assistant"; content: string }[]
-  ) => {
+  const askQuestion = async (msg: MessageType[]) => {
     setMessages(msg);
     setQuestionLoading(true);
     window.setTimeout(scrollToBottom, 300);
@@ -124,7 +126,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
       let response = await backend?.questions.create({
         dashboardId: dashboard?.id,
         questionId: selectedQuestion?.id || undefined,
-        messages: msg,
+        messages: msg as any,
       });
       setSelectedQuestion(response);
     } catch (e: any) {
@@ -151,7 +153,11 @@ export const QuestionModal: React.FC<{}> = ({}) => {
 
     return messages.map((a, index) => (
       <QuestionMessage
+        key={
+          (selectedQuestion?.id || "null") + "-" + messages.length + "-" + index
+        }
         logo={logo}
+        messages={messages}
         index={index}
         dashboardId={dashboard?.id}
         teamId={dashboard?.team || selectedQuestion?.team || undefined}
@@ -159,7 +165,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
         onDelete={() => {
           let newMessages = messages.filter((m, i) => i < index);
           backend?.questions.update(selectedQuestion?.id || "null", {
-            messages: newMessages,
+            messages: newMessages as any,
           });
           setMessages(newMessages);
         }}
@@ -187,23 +193,11 @@ export const QuestionModal: React.FC<{}> = ({}) => {
             .filter((m, i) => i <= index);
           askQuestion(newMessages);
         }}
-        key={
-          (selectedQuestion?.id || "null") +
-          "-" +
-          messages.length +
-          "-" +
-          index +
-          "-" +
-          (a.content || "").substring(0, 10)
-        }
         onClose={() => {
           setSelectedQuestion(undefined);
           setMessages([]);
           setOpen(false);
         }}
-        messages={messages}
-        role={a.role}
-        content={a.content}
       />
     ));
   }, [messages, dashboard, selectedQuestion, logo]);
@@ -359,15 +353,17 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                       variant="solid"
                       icon={ArrowUpIcon}
                       onClick={() => {
-                        let newMessages = [
-                          ...messages,
-                          {
-                            role: "user" as const,
-                            content: query,
-                          },
-                        ];
-                        askQuestion(newMessages);
-                        setQuery("");
+                        if (query.trim() !== "") {
+                          let newMessages = [
+                            ...messages,
+                            {
+                              role: "user" as const,
+                              content: query,
+                            },
+                          ];
+                          askQuestion(newMessages);
+                          setQuery("");
+                        }
                       }}
                     />
                     <Text className="onvo-mt-0 onvo-text-center onvo-text-xs">

@@ -38,6 +38,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../../tremor/Accordion";
+import { MessageType } from "./QuestionModal";
 
 dayjs.extend(relativeTime);
 
@@ -45,9 +46,7 @@ const QuestionMessage: React.FC<{
   index: number;
   dashboardId: string;
   questionId: string;
-  messages: { role: "user" | "assistant" | "tool"; content: string }[];
-  role: "user" | "assistant" | "tool";
-  content: string;
+  messages: MessageType[];
   teamId?: string;
   onClose: () => void;
   onDelete: () => void;
@@ -56,8 +55,6 @@ const QuestionMessage: React.FC<{
   logo: string;
 }> = ({
   index,
-  role,
-  content,
   questionId,
   dashboardId,
   messages,
@@ -85,6 +82,8 @@ const QuestionMessage: React.FC<{
     }
     return "Chart";
   }, [output]);
+
+  const { role, content } = messages[index];
 
   const addToDashboard = async (e: any) => {
     if (!questionId) return;
@@ -135,35 +134,38 @@ const QuestionMessage: React.FC<{
 
   useEffect(() => {
     if (role === "assistant" || role === "tool") {
-      if ((content || "").search("```") >= 0) {
-        if (content.split("```python")[1]) {
-          let code = content.split("```python")[1].split("```")[0].trim();
+      let textContent =
+        typeof content === "string"
+          ? content
+          : content.map((a) => (a.type === "text" ? a.text : "")).join("\n");
+      if ((textContent || "").search("```") >= 0) {
+        if (textContent.split("```python")[1]) {
+          let code = textContent.split("```python")[1].split("```")[0].trim();
           setCode(code);
         }
-        if (content.split("```json")[1]) {
-          let out = content.split("```json")[1].split("```")[0].trim();
+        if (textContent.split("```json")[1]) {
+          let out = textContent.split("```json")[1].split("```")[0].trim();
           setOutput(JSON.parse(out));
-          let ans = content.split("```json")[1].split("```")[1];
+          let ans = textContent.split("```json")[1].split("```")[1];
           setAnswer(ans || "");
         }
         setOptions([]);
-      } else if ((content || "").search("`") >= 0) {
-        let opts = content.match(/(\`.*?\`)/g)?.map((a) => a.replace(/`/g, ""));
-        let ans = content.split("`")[0];
+      } else if ((textContent || "").search("`") >= 0) {
+        let opts = textContent
+          .match(/(\`.*?\`)/g)
+          ?.map((a) => a.replace(/`/g, ""));
+        let ans = textContent.split("`")[0];
         setAnswer(ans);
         setOptions(opts || []);
       } else {
-        setAnswer(content);
+        setAnswer(textContent);
         setOptions([]);
       }
     } else {
-      setAnswer(content);
+      setAnswer(content as string);
     }
   }, [content, role]);
 
-  if (!content || content.trim() === "") {
-    return <></>;
-  }
   if (role === "user") {
     return (
       <div className="onvo-question-message-user onvo-group onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3">
@@ -171,7 +173,7 @@ const QuestionMessage: React.FC<{
         <div className="onvo-w-full">
           {editing ? (
             <Textarea
-              defaultValue={content}
+              defaultValue={content as string}
               onChange={(e) => setNewMessage(e.target.value)}
             />
           ) : (
@@ -284,6 +286,7 @@ const QuestionMessage: React.FC<{
       <Icon variant="shadow" icon={() => <Logo height={20} width={20} />} />
     );
   }, [logo]);
+  if (role === "assistant" && (!answer || answer.trim() === "")) return null;
   return (
     <div className="onvo-question-message-assistant onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3">
       {LogoIcon}
