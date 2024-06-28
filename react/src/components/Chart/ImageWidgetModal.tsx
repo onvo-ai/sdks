@@ -139,7 +139,7 @@ export const ImageWidgetModal: React.FC<{
     toast.promise(
       async () => {
         if (!e.target.files) return;
-        await backend?.utils.uploadFile(e.target.files[0]);
+        return backend?.utils.uploadFile(e.target.files[0]);
       },
       {
         loading: "Uploading file...",
