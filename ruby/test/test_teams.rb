@@ -1,16 +1,9 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
-require_relative '../lib/onvo'
+require_relative './base_template'
 
 # All tests related to Onvo's teams endpoints
-class TeamsTest < Minitest::Test
-  def setup
-    @endpoint = ENV['ONVO_API_ENDPOINT']
-    @api_key = ENV['ONVO_API_KEY']
-    @onvo = Onvo.new(@endpoint, @api_key)
-  end
-
+class TeamsTest < BaseTemplate
   def test_team_list
     assert_silent { @onvo.teams.list }
   end
@@ -18,5 +11,10 @@ class TeamsTest < Minitest::Test
   def test_team_get
     sample_test_id = @onvo.teams.list[0]['id']
     assert_silent { @onvo.teams.get(sample_test_id) }
+  end
+
+  def test_update
+    sample_test_id = @onvo.teams.list[0]['id']
+    assert_silent { @onvo.teams.update(sample_test_id, { 'name': 'Onvo AI', 'phone_number': '+91 807 506 5108' }) }
   end
 end

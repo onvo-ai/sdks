@@ -16,3 +16,4 @@ class BaseTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.onvoSDK = Onvo()
+        cls.sample_user_id = "96460c6b-87e9-464c-a0fe-5e47b5dae3d9"

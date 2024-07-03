@@ -30,7 +30,7 @@ class Onvo
     @automations = Automations.new(*params)
     @questions = Questions.new(*params)
     @sessions = Sessions.new(*params)
-    @widgets = Widgets.new(*params)
+    @widgets = Widgets.new(*params, @questions)
   end
 
   def dashboard(dashboard_id)

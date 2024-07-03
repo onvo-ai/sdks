@@ -32,6 +32,12 @@ class TestDashboards(BaseTest):
             ),
         )
 
+    def test_update_cache(self):
+        self.assertShouldRaise(
+            None,
+            lambda: self.onvoSDK.dashboards.update_cache(self.sampleDashboardId),
+        )
+
     @classmethod
     def tearDownClass(cls) -> None:
         cls.onvoSDK.dashboards.delete(cls.sampleDashboardId)  # Skipping test delete

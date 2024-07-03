@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative './dashboard_test_base'
+require_relative './base_dashboard_template'
 
 # All tests related to Onvo's dashboard question endpoints
-class DashboardDatasourcesTest < DashboardTestBase
+class DashboardDatasourcesTest < BaseDashboardTemplate
   def test_list_datasources
     assert_silent { @dashboard.datasources.list }
   end

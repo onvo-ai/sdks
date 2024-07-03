@@ -18,18 +18,18 @@ class DashboardBaseTest(BaseTest):
     def setUpClass(cls):
         super().setUpClass()
 
-        cls.sampleDashboardId = cls.onvoSDK.dashboards.create(SAMPLE_DASHBOARD_PARAMS)[
-            "id"
-        ]
-        cls.sampleDatasourceId = cls.onvoSDK.datasources.create(
+        cls.sample_dashboard_id = cls.onvoSDK.dashboards.create(
+            SAMPLE_DASHBOARD_PARAMS
+        )["id"]
+        cls.sample_datasource_id = cls.onvoSDK.datasources.create(
             SAMPLE_DATASOURCE_PARAMS
         )["id"]
 
-        cls.onvoSDK.datasources.populate_columns(cls.sampleDatasourceId)
+        cls.onvoSDK.datasources.initialize(cls.sample_datasource_id)
 
-        cls.sampleDashboard = cls.onvoSDK.dashboard(cls.sampleDashboardId)
+        cls.sample_dashboard = cls.onvoSDK.dashboard(cls.sample_dashboard_id)
 
     @classmethod
     def tearDownClass(cls) -> None:
-        cls.onvoSDK.dashboards.delete(cls.sampleDashboardId)
-        cls.onvoSDK.datasources.delete(cls.sampleDatasourceId)
+        cls.onvoSDK.dashboards.delete(cls.sample_dashboard_id)
+        cls.onvoSDK.datasources.delete(cls.sample_datasource_id)
