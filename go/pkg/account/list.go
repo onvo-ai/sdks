@@ -1,7 +1,9 @@
 package account
 
 import (
+	"context"
 	"encoding/json"
+	"fmt"
 
 	sdk "github.com/SirPhemmiey/sdks/pkg"
 )
@@ -12,7 +14,13 @@ import (
 // Returns:
 // - []Account: Array of Account objects.
 // - error: An error if any occurred during the process.
-func (s *Service) listAccounts() ([]Account, error) {
+func (s *Service) ListAccounts(ctx context.Context) ([]*Account, error) {
+
+	// Check if context has been cancelled
+	if ctx.Err() != nil {
+		return nil, fmt.Errorf("context canceled: %v", ctx.Err())
+	}
+
 	response, err := s.baseClient.FetchJSON(sdk.GET, "/api/accounts", nil, false)
 	if err != nil {
 		return nil, err
@@ -24,7 +32,7 @@ func (s *Service) listAccounts() ([]Account, error) {
 		return nil, err
 	}
 
-	var accounts []Account
+	var accounts []*Account
 	err = json.Unmarshal(responseBytes, &accounts)
 	if err != nil {
 		return nil, err

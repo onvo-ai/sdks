@@ -19,6 +19,16 @@ type AccountClient struct {
 	baseClient *sdk.BaseClient
 }
 
+// Error represents a custom error structure
+type Error struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+}
+
+func NewError(code int, message string) *Error {
+	return &Error{Code: code, Message: message}
+}
+
 func NewAccountClient(apiKey string) *AccountClient {
 	baseClient := sdk.NewBaseClient(apiKey)
 	return &AccountClient{baseClient: baseClient}
