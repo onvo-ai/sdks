@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/react",
-  "version": "0.3.58",
+  "version": "0.3.59",
   "description": "The react SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "module": "dist/esm/index.js",
@@ -30,7 +30,7 @@
     "@heroicons/react": "^2.1.1",
     "@internationalized/date": "^3.5.4",
     "@monaco-editor/react": "^4.6.0",
-    "@onvo-ai/js": "^0.13.40",
+    "@onvo-ai/js": "^0.13.41",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-dropdown-menu": "^2.0.7-rc.10",
