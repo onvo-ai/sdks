@@ -14,19 +14,17 @@ You can find the API documentation at https://docs.onvo.ai
 
 #### 🚧 Rust - Work ongoing
 
+#### 🚧 Go - Work ongoing
+
 #### Java - Coming soon
-
-#### Go - Coming soon
-
-#### PHP - Coming soon
 
 ## Client library progress
 
 #### ✅ HTML iframe
 
-#### ✅ React component library
+#### ✅ [React component library](https://www.npmjs.com/package/@onvo-ai/react) : Available on NPM
 
-#### 🚧 HTML web component - Work ongoing
+#### ✅ ✅ [HTML web components library](https://www.npmjs.com/package/@onvo-ai/web-components) : Available on NPM
 
 #### Angular - Coming soon
 

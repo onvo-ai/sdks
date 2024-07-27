@@ -5,16 +5,16 @@ import { SuggestionsBar } from "./SuggestionsBar";
 
 const meta: Meta = {
   component: SuggestionsBar,
-  title: "Elements/SuggestionsBar",
+  title: "Components/Suggestions Bar",
   argTypes: {},
 };
 export default meta;
 
 type Story = StoryObj<typeof SuggestionsBar>;
 
-export const Variants: Story = (args) => (
+export const Primary: Story = (args) => (
   <div className="onvo-flex onvo-flex-col onvo-gap-2">
     <SuggestionsBar onSelect={() => {}} />
   </div>
 );
-Variants.args = {};
+Primary.args = {};

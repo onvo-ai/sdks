@@ -5,7 +5,7 @@ import { Divider } from "./Divider";
 
 const meta: Meta = {
   component: Divider,
-  title: "Tremor/Divider",
+  title: "Primitives/Divider",
   argTypes: {},
 };
 export default meta;

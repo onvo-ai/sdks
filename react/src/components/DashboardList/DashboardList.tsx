@@ -13,11 +13,12 @@ import {
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { Dashboard, DashboardMeta } from "@onvo-ai/js";
 dayjs.extend(relativeTime);
 
 const DashboardCard: React.FC<{
-  dashboard: any;
-  onClick?: (dashboard: any) => void;
+  dashboard: Dashboard & { _meta: DashboardMeta };
+  onClick?: (dashboard: Dashboard & { _meta: DashboardMeta }) => void;
   variant?: "list" | "grid";
 }> = ({ dashboard, onClick, variant = "grid" }) => {
   return (
@@ -64,11 +65,11 @@ const DashboardCard: React.FC<{
       <div className="onvo-grid onvo-grid-cols-2">
         <div className="onvo-w-36 onvo-flex-shrink-0 onvo-flex onvo-flex-col onvo-gap-1">
           <Text className="onvo-dashboard-card-details-text onvo-flex onvo-flex-row onvo-items-center onvo-gap-2">
-            <TableCellsIcon height={16} width={16} />{" "}
-            {dashboard.widgets?.length} widgets
+            <TableCellsIcon height={16} width={16} /> {dashboard._meta.widgets}{" "}
+            widgets
           </Text>
           <Text className="onvo-dashboard-card-details-text onvo-flex onvo-flex-row onvo-items-center onvo-gap-2">
-            <LinkIcon height={16} width={16} /> {dashboard.datasources.length}{" "}
+            <LinkIcon height={16} width={16} /> {dashboard._meta.datasources}{" "}
             datasources
           </Text>
         </div>

@@ -7,7 +7,7 @@ export const SuggestionsBar: React.FC<{ onSelect: (str: string) => void }> = ({
 }) => {
   const suggestions = [
     {
-      name: "Change chart type",
+      name: "Change widget type",
       value: "Change the chart type to be …",
     },
     {
@@ -15,7 +15,7 @@ export const SuggestionsBar: React.FC<{ onSelect: (str: string) => void }> = ({
       value: "Show data labels on the chart",
     },
     {
-      name: "Edit chart colors",
+      name: "Edit widget colors",
       value: "Change the chart colors to be shades of …",
     },
     {
@@ -25,7 +25,7 @@ export const SuggestionsBar: React.FC<{ onSelect: (str: string) => void }> = ({
   ];
 
   return (
-    <div className="onvo-w-full onvo-flex onvo-flex-row onvo-gap-2 onvo-my-2 onvo-overflow-x-auto onvo-scrollbar-thin onvo-max-w-2xl onvo-mx-auto">
+    <div className="onvo-w-full onvo-flex onvo-flex-row onvo-gap-2 onvo-my-2 onvo-overflow-x-auto onvo-scrollbar-thin onvo-max-w-screen-lg onvo-mx-auto">
       {suggestions.map((a) => (
         <div
           key={a.name}

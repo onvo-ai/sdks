@@ -8,10 +8,19 @@ export class OnvoSessions extends OnvoBase {
    * @param filters - Object containing the parent_dashboard field
    * @returns Promise of an array of Session objects
    */
-  list(filters: { parent_dashboard: string }): Promise<Session[]> {
-    return this.fetchBase(
-      "/api/sessions?parent_dashboard=" + filters.parent_dashboard
-    ) as Promise<Session[]>;
+  list(filters: {
+    parent_dashboard?: string;
+    embed_user?: string;
+  }): Promise<Session[]> {
+    if (filters.embed_user) {
+      return this.fetchBase(
+        "/api/sessions?embed_user=" + filters.embed_user
+      ) as Promise<Session[]>;
+    } else {
+      return this.fetchBase(
+        "/api/sessions?parent_dashboard=" + filters.parent_dashboard
+      ) as Promise<Session[]>;
+    }
   }
 
   /**

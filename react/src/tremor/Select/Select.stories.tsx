@@ -11,7 +11,7 @@ import {
 
 const meta: Meta = {
   component: Select,
-  title: "Tremor/Select",
+  title: "Primitives/Select",
   argTypes: {},
 };
 export default meta;

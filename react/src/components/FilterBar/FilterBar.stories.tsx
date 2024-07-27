@@ -6,7 +6,7 @@ import { Dashboard } from "../Dashboard";
 
 const meta: Meta<typeof FilterBar> = {
   component: FilterBar,
-  title: "Onvo/FilterBar",
+  title: "Components/Filter Bar",
   argTypes: {},
 };
 export default meta;

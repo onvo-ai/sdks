@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./Tabs";
 
 const meta: Meta = {
   component: Tabs,
-  title: "Tremor/Tabs",
+  title: "Primitives/Tabs",
   argTypes: {},
 };
 export default meta;

@@ -531,6 +531,65 @@ type Database = {
                     }
                 ];
             };
+            llm_settings: {
+                Row: {
+                    analyst_agent_model: string;
+                    analyst_agent_provider: string;
+                    annotator_agent_model: string;
+                    annotator_agent_provider: string;
+                    anthropic_api_key: string | null;
+                    google_api_key: string | null;
+                    groq_api_key: string | null;
+                    ollama_api_url: string | null;
+                    openai_api_key: string | null;
+                    programmer_agent_model: string;
+                    programmer_agent_provider: string;
+                    team: string;
+                    type: Database["public"]["Enums"]["LLM hosting type"];
+                    updated: boolean;
+                };
+                Insert: {
+                    analyst_agent_model?: string;
+                    analyst_agent_provider?: string;
+                    annotator_agent_model?: string;
+                    annotator_agent_provider?: string;
+                    anthropic_api_key?: string | null;
+                    google_api_key?: string | null;
+                    groq_api_key?: string | null;
+                    ollama_api_url?: string | null;
+                    openai_api_key?: string | null;
+                    programmer_agent_model?: string;
+                    programmer_agent_provider?: string;
+                    team: string;
+                    type?: Database["public"]["Enums"]["LLM hosting type"];
+                    updated?: boolean;
+                };
+                Update: {
+                    analyst_agent_model?: string;
+                    analyst_agent_provider?: string;
+                    annotator_agent_model?: string;
+                    annotator_agent_provider?: string;
+                    anthropic_api_key?: string | null;
+                    google_api_key?: string | null;
+                    groq_api_key?: string | null;
+                    ollama_api_url?: string | null;
+                    openai_api_key?: string | null;
+                    programmer_agent_model?: string;
+                    programmer_agent_provider?: string;
+                    team?: string;
+                    type?: Database["public"]["Enums"]["LLM hosting type"];
+                    updated?: boolean;
+                };
+                Relationships: [
+                    {
+                        foreignKeyName: "public_llm_settings_team_fkey";
+                        columns: ["team"];
+                        isOneToOne: true;
+                        referencedRelation: "teams";
+                        referencedColumns: ["id"];
+                    }
+                ];
+            };
             members: {
                 Row: {
                     account: string;
@@ -772,6 +831,8 @@ type Database = {
                     settings: Json;
                     team: string;
                     title: string;
+                    use_as_example: boolean | null;
+                    use_in_library: boolean | null;
                 };
                 Insert: {
                     cache?: Json | null;
@@ -784,6 +845,8 @@ type Database = {
                     settings?: Json;
                     team: string;
                     title: string;
+                    use_as_example?: boolean | null;
+                    use_in_library?: boolean | null;
                 };
                 Update: {
                     cache?: Json | null;
@@ -796,6 +859,8 @@ type Database = {
                     settings?: Json;
                     team?: string;
                     title?: string;
+                    use_as_example?: boolean | null;
+                    use_in_library?: boolean | null;
                 };
                 Relationships: [
                     {
@@ -859,7 +924,7 @@ type Database = {
             };
         };
         Enums: {
-            [_ in never]: never;
+            "LLM hosting type": "onvo-hosted" | "self-hosted";
         };
         CompositeTypes: {
             [_ in never]: never;
@@ -1066,7 +1131,14 @@ type DashboardSettings = {
     can_delete_widgets: boolean;
     disable_download_images: boolean;
     disable_download_reports: boolean;
+    help_url?: string;
 };
+interface DashboardMeta {
+    created_by: Account;
+    last_updated_by?: Account;
+    widgets: number;
+    datasources: number;
+}
 type WidgetSettings = {
     disable_download_images: boolean;
     disable_download_reports: boolean;
@@ -1302,16 +1374,20 @@ declare class OnvoDashboards extends OnvoBase {
     /**
      * Lists all the dashboards.
      *
-     * @return {Promise<Dashboard[]>} A promise that resolves to an array of dashboards.
+     * @return {Promise<(Dashboard & {_meta: DashboardMeta})[]>} A promise that resolves to an array of dashboards.
      */
-    list(): Promise<Dashboard[]>;
+    list(): Promise<(Dashboard & {
+        _meta: DashboardMeta;
+    })[]>;
     /**
      * Gets a dashboard by ID.
      *
      * @param {string} id - The ID of the dashboard.
      * @return {Promise<Dashboard>} A promise that resolves to the dashboard.
      */
-    get(id: string): Promise<Dashboard>;
+    get(id: string): Promise<Dashboard & {
+        _meta: DashboardMeta;
+    }>;
     /**
      * Deletes a dashboard by ID.
      *
@@ -1359,6 +1435,13 @@ declare class OnvoDashboardDatasources extends OnvoBase {
      * @return {Promise<DashboardDatasource>} A promise that resolves to the linked dashboard datasource.
      */
     link(datasourceId: string): Promise<DashboardDatasource>;
+    /**
+     * Links a datasource to a dashboard.
+     *
+     * @param {array} datasourceIds - The IDs of the datasources to link.
+     * @return {Promise<DashboardDatasource>} A promise that resolves to the linked dashboard datasource.
+     */
+    linkMultiple(datasourceIds: string[]): Promise<DashboardDatasource>;
 }
 
 declare class OnvoDashboard extends OnvoBase {
@@ -1386,6 +1469,16 @@ declare class OnvoDashboard extends OnvoBase {
      * @return {Promise<Blob>} A promise that resolves to a Blob representing the exported dashboard.
      */
     export(format: "csv" | "xlsx" | "pdf" | "png" | "jpeg"): Promise<Blob>;
+    /**
+     * Summarizes the dashboard using the provided prompt.
+     *
+     * @param {string} prompt - The prompt to use for summarizing the dashboard.
+     * @return {Promise<{title: string, description: string}>} A promise that resolves to an object containing the title and description of the summarized dashboard.
+     */
+    summarize(prompt: string): Promise<{
+        title: string;
+        description: string;
+    }>;
 }
 
 declare class OnvoEmbedUser extends OnvoBase {
@@ -1519,7 +1612,8 @@ declare class OnvoSessions extends OnvoBase {
      * @returns Promise of an array of Session objects
      */
     list(filters: {
-        parent_dashboard: string;
+        parent_dashboard?: string;
+        embed_user?: string;
     }): Promise<Session[]>;
     /**
      * Gets a specific session by its dashboard id
@@ -1576,6 +1670,7 @@ declare class OnvoWidgets extends OnvoBase {
      */
     list(filters: {
         dashboard: string;
+        use_in_library?: boolean;
     }): Promise<Widget[]>;
     /**
      * Retrieves a specific widget by its ID.
@@ -1638,6 +1733,20 @@ declare class OnvoUtils extends OnvoBase {
     }>;
 }
 
+declare class OnvoTeam extends OnvoBase {
+    #private;
+    constructor(id: string, apiKey: string, options?: {
+        endpoint: string;
+    });
+    /**
+     * Gets the subscription for the datasource
+     * @returns {Promise<Subscription & {subscription_plans: SubscriptionPlan}>} A promise that resolves to a subcription.
+     */
+    getSubscription(): Promise<Subscription & {
+        subscription_plans: SubscriptionPlan;
+    }>;
+}
+
 declare class Onvo extends OnvoBase {
     accounts: OnvoAccounts;
     teams: OnvoTeams;
@@ -1655,9 +1764,10 @@ declare class Onvo extends OnvoBase {
     datasource: (datasourceId: string) => OnvoDatasource;
     widget: (widgetId: string) => OnvoWidget;
     question: (questionId: string) => OnvoQuestion;
+    team: (teamId: string) => OnvoTeam;
     constructor(apiKey: string, options?: {
         endpoint: string;
     });
 }
 
-export { type APIDatasourceConfig, type APIKey, type Account, type AirtableDatasourceConfig, type Automation, type AutomationRun, type CSVDatasourceConfig, type ComprehensiveDashboard, type Dashboard, type DashboardDatasource, type DashboardFilter, type DashboardSettings, type DataSource, type Database, type EmbedUser, type Enums, type ExcelDatasourceConfig, type FirestoreDatasourceConfig, type GoogleSheetDatasourceConfig, type Integration, type Invite, type JSONDatasourceConfig, type Json, type Member, type Modify, type MongoDBDatasourceConfig, type MsSQLDatasourceConfig, type MySQLDatasourceConfig, type OauthConfig, Onvo, type PostgreSQLDatasourceConfig, type Question, type RedshiftDatasourceConfig, type RootfiDatasourceConfig, type Session, type Subscription, type SubscriptionPlan, Table, type Tables, type TablesInsert, type TablesUpdate, type Team, type Widget, type WidgetMessage, type WidgetSettings, type ZohoDatasourceConfig, Onvo as default };
+export { type APIDatasourceConfig, type APIKey, type Account, type AirtableDatasourceConfig, type Automation, type AutomationRun, type CSVDatasourceConfig, type ComprehensiveDashboard, type Dashboard, type DashboardDatasource, type DashboardFilter, type DashboardMeta, type DashboardSettings, type DataSource, type Database, type EmbedUser, type Enums, type ExcelDatasourceConfig, type FirestoreDatasourceConfig, type GoogleSheetDatasourceConfig, type Integration, type Invite, type JSONDatasourceConfig, type Json, type Member, type Modify, type MongoDBDatasourceConfig, type MsSQLDatasourceConfig, type MySQLDatasourceConfig, type OauthConfig, Onvo, type PostgreSQLDatasourceConfig, type Question, type RedshiftDatasourceConfig, type RootfiDatasourceConfig, type Session, type Subscription, type SubscriptionPlan, Table, type Tables, type TablesInsert, type TablesUpdate, type Team, type Widget, type WidgetMessage, type WidgetSettings, type ZohoDatasourceConfig, Onvo as default };

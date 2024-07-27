@@ -1,32 +1,53 @@
 import type { StorybookConfig } from "@storybook/react-webpack5";
 const config: StorybookConfig = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: [
+    "../src/components/**/*.stories.tsx",
+    "../src/tremor/**/*.stories.tsx",
+  ],
 
   addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
+    {
+      name: "@storybook/addon-essentials",
+      options: {
+        docs: false,
+      },
+    },
     "@storybook/addon-interactions",
     "@storybook/addon-themes",
+    "@storybook/addon-links",
     "@storybook/addon-webpack5-compiler-swc",
     {
-      name: '@storybook/addon-postcss',
+      name: "@storybook/addon-styling-webpack",
+
       options: {
-        postcssLoaderOptions: {
-          implementation: require('postcss'),
-        },
+        rules: [
+          {
+            test: /\.css$/,
+            sideEffects: true,
+            use: [
+              require.resolve("style-loader"),
+              {
+                loader: require.resolve("css-loader"),
+                options: {
+                  importLoaders: 1,
+                },
+              },
+              {
+                loader: require.resolve("postcss-loader"),
+                options: {
+                  implementation: require.resolve("postcss"),
+                },
+              },
+            ],
+          },
+        ],
       },
-    }
+    },
   ],
 
   framework: {
     name: "@storybook/react-webpack5",
     options: {},
   },
-
-  docs: {},
-
-  typescript: {
-    reactDocgen: "react-docgen-typescript"
-  }
 };
 export default config;

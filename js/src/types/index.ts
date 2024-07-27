@@ -46,7 +46,16 @@ export type DashboardSettings = {
 
   disable_download_images: boolean;
   disable_download_reports: boolean;
+
+  help_url?: string;
 };
+
+export interface DashboardMeta {
+  created_by: Account;
+  last_updated_by?: Account;
+  widgets: number;
+  datasources: number;
+}
 
 export type WidgetSettings = {
   disable_download_images: boolean;

@@ -6,7 +6,7 @@ import { UserIcon } from "@heroicons/react/24/solid";
 
 const meta: Meta = {
   component: Icon,
-  title: "Tremor/Icon",
+  title: "Primitives/Icon",
   argTypes: {},
 };
 export default meta;
@@ -14,7 +14,7 @@ export default meta;
 type Story = StoryObj<typeof Icon>;
 
 export const Variants: Story = (args) => (
-  <div className="flex flex-col gap-8 p-8 dark:bg-slate-800 items-start justify-start h-screen w-screen">
+  <div className="onvo-bg-slate-50 dark:onvo-bg-slate-800">
     <div className="onvo-flex onvo-w-full onvo-p-8 onvo-flex-row onvo-gap-2 onvo-justify-start onvo-items-start">
       <Icon icon={UserIcon} />
       <Icon variant="shadow" icon={UserIcon} />

@@ -166,7 +166,7 @@ export const FilterBar = () => {
                 />
               </svg>
             </div>
-            <Title>Regenerating chart</Title>
+            <Title>Regenerating widgets</Title>
           </Card>
         </div>
       )}

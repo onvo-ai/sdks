@@ -1,9 +1,10 @@
 {
   "name": "@onvo-ai/web-components",
   "version": "0.0.1",
-"description": "The web component SDK for Onvo AI dashboard builder",
-"repository": "https://github.com/onvo-ai/sdks",
+  "description": "The web component SDK for Onvo AI dashboard builder",
+  "repository": "https://github.com/onvo-ai/sdks",
   "type": "module",
+  "private": false,
   "main": "build/static/js/main.js",
   "dependencies": {
     "@onvo-ai/react": "^0.3.59",
@@ -13,20 +14,20 @@
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1"
   },
-"keywords": [
-  "onvo",
-  "ui",
-  "react",
-  "library",
-  "tutorial",
-  "learning",
-  "educational",
-  "example",
-  "beginner-friendly",
-  "practice"
-],
-"author": "Ashiq Muhammed",
-"license": "MIT",
+  "keywords": [
+    "onvo",
+    "ui",
+    "react",
+    "library",
+    "tutorial",
+    "learning",
+    "educational",
+    "example",
+    "beginner-friendly",
+    "practice"
+  ],
+  "author": "Ashiq Muhammed",
+  "license": "MIT",
   "devDependencies": {
     "@types/react": "18.2.2",
     "@types/react-dom": "18.3.0",

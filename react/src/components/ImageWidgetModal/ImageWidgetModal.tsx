@@ -14,11 +14,12 @@ import {
   ChevronRightIcon,
   PaperClipIcon,
 } from "@heroicons/react/20/solid";
-import ChartBase from "./ChartBase";
+import ChartBase from "../Chart/ChartBase";
 import { Tabs, TabsList, TabsTrigger } from "../../tremor/Tabs";
 import { Divider } from "../../tremor/Divider";
 import { Card } from "../../tremor/Card";
 import { toast } from "sonner";
+import { useMaxHeight } from "../../lib/maxHeight";
 
 export const useImageWidgetModal = create<{
   open: boolean;
@@ -47,12 +48,12 @@ export const useImageWidgetModal = create<{
   ) => set({ open: op, widget: wid }),
 }));
 
-export const ImageWidgetModal: React.FC<{
-  maxHeight: number;
-}> = ({ maxHeight }) => {
+export const ImageWidgetModal: React.FC<{}> = ({}) => {
   const { dashboard, refreshWidgets, adminMode } = useDashboard();
   const backend = useBackend();
   const { open, setOpen, widget } = useImageWidgetModal();
+  const { lg, sm } = useMaxHeight();
+
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [imageFill, setImageFill] = useState<"fit" | "fill">("fill");
@@ -112,11 +113,19 @@ export const ImageWidgetModal: React.FC<{
         layouts: {
           lg: {
             x: 0,
-            y: maxHeight,
+            y: lg,
             w: 12,
             h: 10,
           },
+          sm: {
+            x: 0,
+            y: sm,
+            w: 3,
+            h: 10,
+          },
         },
+        use_as_example: false,
+        use_in_library: false,
         cache: cache,
         title: url,
         team: dashboard.team,

@@ -2,13 +2,14 @@ import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { Dashboard } from "./Dashboard";
 import { Wrapper } from "../Wrapper/Wrapper";
-import { DashboardHeader } from "../DashboardHeader/DashboardHeader";
-import { DashboardGrid } from "../DashboardGrid/DashboardGrid";
-import { QuestionModal } from "../QuestionModal/QuestionModal";
+import { DashboardHeader } from "../DashboardHeader";
+import { DashboardGrid } from "../DashboardGrid";
+import { QuestionModal } from "../QuestionModal";
+import { CreateToolbar } from "../CreateToolbar";
 
 const meta: Meta<typeof Dashboard> = {
   component: Dashboard,
-  title: "Onvo/Dashboard",
+  title: "Layouts/Dashboard",
   argTypes: {},
 };
 export default meta;
@@ -27,7 +28,7 @@ export const Standalone: Story = (args) => {
         <Dashboard id={args.id} adminMode={args.adminMode}>
           <DashboardHeader />
           <DashboardGrid />
-          <QuestionModal />
+          <QuestionModal variant="fullscreen" trigger={<CreateToolbar />} />
         </Dashboard>
       </Wrapper>
     </div>

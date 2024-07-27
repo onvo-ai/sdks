@@ -106,7 +106,7 @@ export const DashboardHeader: React.FC<{
         <div className="onvo-flex-grow">
           {dashboard ? (
             <>
-              <Metric className="onvo-dashboard-header-title onvo-font-override onvo-text-xl -onvo-mb-1">
+              <Metric className="onvo-dashboard-header-title onvo-font-override onvo-text-xl">
                 {dashboard?.title || " "}
               </Metric>
               <Label className="onvo-dashboard-header-description onvo-font-override">

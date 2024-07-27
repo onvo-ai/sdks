@@ -30,6 +30,7 @@ ChartJS.register([
   ChartDataLabels,
   zoomPlugin,
 ]);
+
 const ChartBase: React.FC<{
   json: any;
   id: string;
@@ -46,41 +47,36 @@ const ChartBase: React.FC<{
 
   let chartConfig = useMemo(() => {
     let output = Object.assign({}, json, {});
-    let legend =
-      output.options.plugins?.legend?.display !== false &&
-      (!output.options.plugins?.legend?.position ||
-        output.options.plugins?.legend?.position === "top");
     let subtitle = output.options.plugins?.subtitle?.display !== false;
 
     output.options.plugins.title = {
-      display: settings && settings.title_hidden === true ? false : true,
+      display:
+        settings && settings.title_hidden === true
+          ? false
+          : output.options.plugins?.title?.display || true,
       text: title || output.options.plugins.title?.text || "",
       align: output.options.plugins.title?.align || "start",
+      position: output.options.plugins.title?.position || "top",
       fullSize: true,
       font: {
         size: output.type === "text" ? 24 : 18,
         weight: output.type === "text" ? 600 : 600,
       },
-      padding: {
-        top: 5,
-        bottom: legend ? 0 : subtitle ? 0 : output.type === "metric" ? 0 : 25,
-      },
+      padding: output.options.plugins.title?.padding || undefined,
     };
 
     if (subtitle) {
       output.options.plugins.subtitle = {
-        display: true,
+        display: output.options.plugins?.subtitle?.display || true,
         text: output.options.plugins.subtitle?.text || "",
         align: output.options.plugins.subtitle?.align || "start",
+        position: output.options.plugins.subtitle?.position || "top",
         fullSize: true,
         font: {
           size: 14,
           weight: 400,
         },
-        padding: {
-          top: 0,
-          bottom: legend ? 0 : 20,
-        },
+        padding: output.options.plugins.subtitle?.padding || undefined,
       };
     }
 

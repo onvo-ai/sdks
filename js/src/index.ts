@@ -16,6 +16,7 @@ import { OnvoSessions } from "./sessions";
 import { OnvoWidgets } from "./widgets";
 import { OnvoQuestion } from "./question";
 import { OnvoUtils } from "./utils";
+import { OnvoTeam } from "./team";
 export * from "./types";
 
 export class Onvo extends OnvoBase {
@@ -36,6 +37,7 @@ export class Onvo extends OnvoBase {
   datasource: (datasourceId: string) => OnvoDatasource;
   widget: (widgetId: string) => OnvoWidget;
   question: (questionId: string) => OnvoQuestion;
+  team: (teamId: string) => OnvoTeam;
 
   constructor(apiKey: string, options?: { endpoint: string }) {
     super(apiKey, options);
@@ -71,6 +73,10 @@ export class Onvo extends OnvoBase {
 
     this.question = (questionId: string) => {
       return new OnvoQuestion(questionId, apiKey, options);
+    };
+
+    this.team = (teamId: string) => {
+      return new OnvoTeam(teamId, apiKey, options);
     };
   }
 }

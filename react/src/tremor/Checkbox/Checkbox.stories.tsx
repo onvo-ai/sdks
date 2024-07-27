@@ -5,7 +5,7 @@ import { Checkbox } from "./Checkbox";
 
 const meta: Meta = {
   component: Checkbox,
-  title: "Tremor/Checkbox",
+  title: "Primitives/Checkbox",
   argTypes: {},
 };
 export default meta;

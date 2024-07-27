@@ -8,22 +8,22 @@ const iconVariants = tv({
   ),
   variants: {
     variant: {
-      simple: ["onvo-text-blue-500", "dark:onvo-text-blue-500"],
+      simple: ["onvo-text-slate-900", "dark:onvo-text-slate-50"],
       shadow: [
-        "onvo-bg-white onvo-text-blue-500 onvo-border-slate-100 onvo-border onvo-shadow-md",
-        "dark:onvo-bg-slate-800 dark:onvo-text-blue-500 dark:onvo-border-slate-700",
+        "onvo-bg-white onvo-text-slate-900 onvo-border-slate-100 onvo-border onvo-shadow-md",
+        "dark:onvo-bg-slate-700 dark:onvo-text-slate-50 dark:onvo-border-slate-700",
       ],
       outlined: [
-        "onvobg-white onvotext-blue-500 onvoborder-blue-500/60 onvoring-blue-500/20 onvoborder onvoring-2",
-        "dark:onvobg-slate-800 dark:onvotext-blue-500 dark:onvoborder-blue-500/60 dark:onvoring-blue-500/20",
+        "onvo-bg-white onvo-text-slate-900 onvo-border-slate-900/60 onvo-ring-slate-900/20 onvo-border onvo-ring-2",
+        "dark:onvo-bg-slate-700 dark:onvo-text-slate-50 dark:onvo-border-slate-50/60 dark:onvo-ring-slate-50/20",
       ],
       light: [
-        "onvo-bg-blue-100 onvo-text-blue-500",
-        "dark:onvo-bg-blue-800 dark:onvo-text-blue-500",
+        "onvo-bg-slate-100 onvo-text-slate-900",
+        "dark:onvo-bg-slate-900 dark:onvo-text-slate-50",
       ],
       solid: [
-        "onvo-bg-blue-500 onvo-text-white onvo-border-white onvo-ring-slate-200 onvo-border-2 onvo-ring-1",
-        "dark:onvo-bg-blue-500 dark:onvo-text-white dark:onvo-border-slate-800 dark:onvo-ring-slate-700",
+        "onvo-bg-slate-900 onvo-text-white onvo-border-white onvo-ring-slate-200 onvo-border-2 onvo-ring-1",
+        "dark:onvo-bg-slate-50 dark:onvo-text-slate-900 dark:onvo-border-slate-800 dark:onvo-ring-slate-700",
       ],
     },
     size: {
@@ -73,7 +73,11 @@ const Icon = React.forwardRef<HTMLSpanElement, IconProps>(
         className={cx(iconVariants({ variant, size }), className)}
         {...props}
       >
-        <IconElement className={iconInnerVariants({ size })} />
+        {IconElement ? (
+          <IconElement className={iconInnerVariants({ size })} />
+        ) : (
+          <></>
+        )}
       </span>
     );
   }

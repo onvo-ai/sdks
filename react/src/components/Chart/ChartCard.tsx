@@ -1,16 +1,18 @@
-import { Card } from "../../tremor/Card";
-import { Icon } from "../../tremor/Icon";
 import React, { useMemo, useState } from "react";
-import ChartBase from "./ChartBase";
+import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { toast } from "sonner";
+import { Widget } from "@onvo-ai/js";
 import {
-  ArrowDownTrayIcon,
   DocumentChartBarIcon,
   DocumentDuplicateIcon,
   PencilSquareIcon,
   PhotoIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
+
+import ChartBase from "./ChartBase";
+import { Card } from "../../tremor/Card";
+import { Icon } from "../../tremor/Icon";
 import { useDashboard } from "../Dashboard";
 import { useBackend } from "../Wrapper";
 import {
@@ -23,10 +25,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../tremor/DropdownMenu";
-import { Widget } from "@onvo-ai/js";
-import { useTextWidgetModal } from "./TextWidgetModal";
-import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
-import { useImageWidgetModal } from "./ImageWidgetModal";
+import { useTextWidgetModal } from "../TextWidgetModal";
+import { useImageWidgetModal } from "../ImageWidgetModal";
+import { useEditWidgetModal } from "../EditWidgetModal";
 
 const DragHandle = () => {
   return (
@@ -47,9 +48,12 @@ const DragHandle = () => {
 
 const ChartCard: React.FC<{
   widget: Widget;
-}> = ({ widget }) => {
-  const { dashboard, refreshWidgets, setSelectedWidget, adminMode } =
-    useDashboard();
+  className?: string;
+  hideOptions?: boolean;
+  footer?: React.ReactNode;
+}> = ({ widget, className, footer, hideOptions }) => {
+  const { dashboard, refreshWidgets, adminMode } = useDashboard();
+  const { setOpen: setEditModalOpen } = useEditWidgetModal();
   const { setOpen: setTextModalOpen } = useTextWidgetModal();
   const { setOpen: setImageModalOpen } = useImageWidgetModal();
   const backend = useBackend();
@@ -126,11 +130,37 @@ const ChartCard: React.FC<{
   const addable = adminMode || dashboard?.settings?.can_create_widgets;
   const deletable = adminMode || dashboard?.settings?.can_delete_widgets;
 
+  const ImageDownloadEnabled = useMemo(() => {
+    const isTable =
+      widget && widget.cache && (widget.cache || {}).type === "table";
+    if (isTable) return false;
+    if (adminMode) return true;
+    if (dashboard?.settings && dashboard.settings.disable_download_images)
+      return false;
+    if (widget.settings && widget.settings.disable_download_images)
+      return false;
+    return true;
+  }, [dashboard, widget, adminMode]);
+
+  const ReportDownloadEnabled = useMemo(() => {
+    if (adminMode) return true;
+    if (dashboard?.settings && dashboard.settings.disable_download_reports)
+      return false;
+    if (widget.settings && widget.settings.disable_download_reports)
+      return false;
+    return true;
+  }, [dashboard, widget, adminMode]);
+
   if (output.type === "divider") {
     return (
-      <div className="onvo-group/chartcard onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0">
-        {layout_editable && <DragHandle />}
-        {deletable && (
+      <div
+        className={
+          "onvo-group/chartcard onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
+          (className || "")
+        }
+      >
+        {layout_editable && !hideOptions && <DragHandle />}
+        {deletable && !hideOptions && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Icon
@@ -153,6 +183,7 @@ const ChartCard: React.FC<{
           </DropdownMenu>
         )}
         <ChartBase json={output} id={widget.id} title="" />
+        {footer}
       </div>
     );
   }
@@ -162,9 +193,14 @@ const ChartCard: React.FC<{
       sub = sub.join("<br />");
     }
     return (
-      <div className="onvo-group/chartcard onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0">
-        {layout_editable && <DragHandle />}
-        {(widget_editable || deletable) && (
+      <div
+        className={
+          "onvo-group/chartcard onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
+          (className || "")
+        }
+      >
+        {layout_editable && !hideOptions && <DragHandle />}
+        {(widget_editable || deletable) && !hideOptions && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Icon
@@ -182,6 +218,7 @@ const ChartCard: React.FC<{
                           id: widget.id,
                           title: widget.title,
                           subtitle: sub,
+                          prompt: output.options.plugins.text.prompt,
                           titleAlignment:
                             output.options.plugins?.title?.align || "start",
                           descriptionAlignment:
@@ -212,15 +249,21 @@ const ChartCard: React.FC<{
           </DropdownMenu>
         )}
         <ChartBase json={output} id={widget.id} title={widget.title} />
+        {footer}
       </div>
     );
   }
 
   if (output.type === "image") {
     return (
-      <div className="onvo-group/chartcard onvo-rounded-md onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0">
-        {layout_editable && <DragHandle />}
-        {(widget_editable || deletable) && (
+      <div
+        className={
+          "onvo-group/chartcard onvo-rounded-md onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
+          (className || "")
+        }
+      >
+        {layout_editable && !hideOptions && <DragHandle />}
+        {(widget_editable || deletable) && !hideOptions && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Icon
@@ -265,180 +308,165 @@ const ChartCard: React.FC<{
           </DropdownMenu>
         )}
         <ChartBase json={output} id={widget.id} title={""} />
+        {footer}
       </div>
     );
   }
-
-  const ImageDownloadEnabled = useMemo(() => {
-    const isTable =
-      widget && widget.cache && (widget.cache || {}).type === "table";
-    if (isTable) return false;
-    if (adminMode) return true;
-    if (dashboard?.settings && dashboard.settings.disable_download_images)
-      return false;
-    if (widget.settings && widget.settings.disable_download_images)
-      return false;
-    return true;
-  }, [dashboard, widget, adminMode]);
-
-  const ReportDownloadEnabled = useMemo(() => {
-    if (adminMode) return true;
-    if (dashboard?.settings && dashboard.settings.disable_download_reports)
-      return false;
-    if (widget.settings && widget.settings.disable_download_reports)
-      return false;
-    return true;
-  }, [dashboard, widget, adminMode]);
 
   return (
     <Card
       key={widget.id}
       id={widget.settings?.css_id}
       className={
-        "onvo-chart-card onvo-group/chartcard onvo-foreground-color onvo-relative onvo-flex onvo-h-full onvo-w-full onvo-flex-col -onvo-z-[1] onvo-py-3 " +
+        "onvo-chart-card onvo-overflow-hidden onvo-h-full onvo-group/chartcard onvo-foreground-color onvo-relative -onvo-z-[1] onvo-flex onvo-flex-col onvo-px-0 onvo-py-0 " +
+        (className || "") +
+        " " +
         (widget.settings?.css_classnames ? widget.settings?.css_classnames : "")
       }
     >
-      {layout_editable && <DragHandle />}
+      {layout_editable && !hideOptions && <DragHandle />}
 
       {(addable ||
         deletable ||
         widget_editable ||
         ImageDownloadEnabled ||
-        ReportDownloadEnabled) && (
-        <DropdownMenu modal={false}>
-          <DropdownMenuTrigger asChild>
-            <Icon
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-              onMouseDown={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-              onMouseUp={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-              className="onvo-z-20 onvo-cursor-pointer onvo-absolute onvo-top-1 onvo-right-1 onvo-font-override"
-              icon={EllipsisVerticalIcon}
-            />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="onvo-min-w-56">
-            {(addable || widget_editable) && (
-              <>
-                <DropdownMenuLabel>Edit widget</DropdownMenuLabel>
-                <DropdownMenuGroup>
-                  {widget_editable && (
-                    <DropdownMenuItem
-                      onClick={() => {
-                        setTimeout(() => {
-                          setSelectedWidget(widget);
-                        }, 10);
-                      }}
-                    >
+        ReportDownloadEnabled) &&
+        !hideOptions && (
+          <DropdownMenu modal={false}>
+            <DropdownMenuTrigger asChild>
+              <Icon
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                }}
+                onMouseDown={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                }}
+                onMouseUp={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                }}
+                className="onvo-z-20 onvo-cursor-pointer onvo-absolute onvo-top-1 onvo-right-1"
+                icon={EllipsisVerticalIcon}
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="onvo-min-w-56">
+              {(addable || widget_editable) && (
+                <>
+                  <DropdownMenuLabel>Edit widget</DropdownMenuLabel>
+                  <DropdownMenuGroup>
+                    {widget_editable && (
+                      <DropdownMenuItem
+                        onClick={() => {
+                          console.log("Editing widget");
+                          setEditModalOpen(true, widget);
+                        }}
+                      >
+                        <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                          <PencilSquareIcon className="onvo-size-4" />
+                          <span>Edit widget</span>
+                        </span>
+                      </DropdownMenuItem>
+                    )}
+                    {addable && (
+                      <DropdownMenuItem onClick={duplicate}>
+                        <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                          <DropdownMenuIconWrapper>
+                            <DocumentDuplicateIcon className="onvo-size-4 onvo-text-inherit" />
+                          </DropdownMenuIconWrapper>
+                          <span>Duplicate widget</span>
+                        </span>
+                      </DropdownMenuItem>
+                    )}
+                  </DropdownMenuGroup>
+                </>
+              )}
+
+              {(addable || widget_editable) && ReportDownloadEnabled && (
+                <DropdownMenuSeparator />
+              )}
+              {ReportDownloadEnabled && (
+                <>
+                  <DropdownMenuLabel>Download reports</DropdownMenuLabel>
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem onClick={() => exportWidget("xlsx")}>
                       <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                        <PencilSquareIcon className="onvo-size-4" />
-                        <span>Edit widget</span>
+                        <DocumentChartBarIcon className="onvo-size-4" />
+                        <span>Download as excel</span>
                       </span>
                     </DropdownMenuItem>
-                  )}
-                  {addable && (
-                    <DropdownMenuItem onClick={duplicate}>
+                    <DropdownMenuItem onClick={() => exportWidget("csv")}>
                       <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                         <DropdownMenuIconWrapper>
-                          <DocumentDuplicateIcon className="onvo-size-4 onvo-text-inherit" />
+                          <DocumentChartBarIcon className="onvo-size-4 onvo-text-inherit" />
                         </DropdownMenuIconWrapper>
-                        <span>Duplicate widget</span>
+                        <span>Download as CSV</span>
                       </span>
                     </DropdownMenuItem>
-                  )}
-                </DropdownMenuGroup>
-              </>
-            )}
+                  </DropdownMenuGroup>
+                </>
+              )}
+              {(addable || widget_editable || ReportDownloadEnabled) &&
+                ImageDownloadEnabled && <DropdownMenuSeparator />}
+              {ImageDownloadEnabled && (
+                <>
+                  <DropdownMenuLabel>Download images</DropdownMenuLabel>
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem onClick={() => exportWidget("svg")}>
+                      <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                        <PhotoIcon className="onvo-size-4 onvo-" />
+                        <span>Download as SVG</span>
+                      </span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => exportWidget("png")}>
+                      <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                        <DropdownMenuIconWrapper>
+                          <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
+                        </DropdownMenuIconWrapper>
+                        <span>Download as PNG</span>
+                      </span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => exportWidget("jpeg")}>
+                      <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                        <DropdownMenuIconWrapper>
+                          <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
+                        </DropdownMenuIconWrapper>
+                        <span>Download as JPEG</span>
+                      </span>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </>
+              )}
 
-            {(addable || widget_editable) && ReportDownloadEnabled && (
-              <DropdownMenuSeparator />
-            )}
-            {ReportDownloadEnabled && (
-              <>
-                <DropdownMenuLabel>Download reports</DropdownMenuLabel>
+              {(addable ||
+                widget_editable ||
+                ImageDownloadEnabled ||
+                ReportDownloadEnabled) &&
+                deletable && <DropdownMenuSeparator />}
+
+              {deletable && (
                 <DropdownMenuGroup>
-                  <DropdownMenuItem onClick={() => exportWidget("xlsx")}>
+                  <DropdownMenuItem onClick={deleteWidget}>
                     <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                      <DocumentChartBarIcon className="onvo-size-4" />
-                      <span>Download as excel</span>
-                    </span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => exportWidget("csv")}>
-                    <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                      <DropdownMenuIconWrapper>
-                        <DocumentChartBarIcon className="onvo-size-4 onvo-text-inherit" />
-                      </DropdownMenuIconWrapper>
-                      <span>Download as CSV</span>
+                      <TrashIcon className="onvo-size-4 onvo-text-red-500" />
+                      <span className="onvo-text-red-500">Delete widget</span>
                     </span>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
-              </>
-            )}
-            {(addable || widget_editable || ReportDownloadEnabled) &&
-              ImageDownloadEnabled && <DropdownMenuSeparator />}
-            {ImageDownloadEnabled && (
-              <>
-                <DropdownMenuLabel>Download images</DropdownMenuLabel>
-                <DropdownMenuGroup>
-                  <DropdownMenuItem onClick={() => exportWidget("svg")}>
-                    <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                      <PhotoIcon className="onvo-size-4 onvo-" />
-                      <span>Download as SVG</span>
-                    </span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => exportWidget("png")}>
-                    <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                      <DropdownMenuIconWrapper>
-                        <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
-                      </DropdownMenuIconWrapper>
-                      <span>Download as PNG</span>
-                    </span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => exportWidget("jpeg")}>
-                    <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                      <DropdownMenuIconWrapper>
-                        <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
-                      </DropdownMenuIconWrapper>
-                      <span>Download as JPEG</span>
-                    </span>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </>
-            )}
-
-            {(addable ||
-              widget_editable ||
-              ImageDownloadEnabled ||
-              ReportDownloadEnabled) &&
-              deletable && <DropdownMenuSeparator />}
-
-            {deletable && (
-              <DropdownMenuGroup>
-                <DropdownMenuItem onClick={deleteWidget}>
-                  <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                    <TrashIcon className="onvo-size-4 onvo-text-red-500" />
-                    <span className="onvo-text-red-500">Delete widget</span>
-                  </span>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-            )}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )}
-      <ChartBase
-        json={output}
-        title={widget.title}
-        id={widget.id}
-        settings={widget.settings}
-      />
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+      <div className="onvo-py-3 onvo-px-4 onvo-h-full onvo-w-full onvo-flex onvo-flex-grow onvo-flex-col">
+        <ChartBase
+          json={output}
+          title={widget.title}
+          id={widget.id}
+          settings={widget.settings}
+        />
+      </div>
+      {footer}
     </Card>
   );
 };

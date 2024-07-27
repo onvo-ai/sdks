@@ -6,7 +6,7 @@ import { Button } from "../Button";
 
 const meta: Meta = {
   component: Popover,
-  title: "Tremor/Popover",
+  title: "Primitives/Popover",
   argTypes: {},
 };
 export default meta;
