@@ -5,7 +5,7 @@ import { Textarea } from "./Textarea";
 
 const meta: Meta = {
   component: Textarea,
-  title: "Tremor/Textarea",
+  title: "Primitives/Textarea",
   argTypes: {},
 };
 export default meta;

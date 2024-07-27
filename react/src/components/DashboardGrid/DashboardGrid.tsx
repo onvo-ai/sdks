@@ -1,106 +1,28 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import React from "react";
-
 import { Responsive, WidthProvider } from "react-grid-layout";
+
+import { Widget } from "@onvo-ai/js";
+import { create } from "zustand";
 
 import ChartCard from "../Chart/ChartCard";
 import { useDashboard } from "../Dashboard/Dashboard";
 import { useBackend } from "../Wrapper";
-import { Text } from "../../tremor/Text";
-import { Widget } from "@onvo-ai/js";
-import { TextWidgetModal, useTextWidgetModal } from "../Chart/TextWidgetModal";
+import { TextWidgetModal } from "../TextWidgetModal";
 
 import { FilterBar } from "../FilterBar";
-import EditChartModal from "./EditWidgetModal";
-import {
-  ImageWidgetModal,
-  useImageWidgetModal,
-} from "../Chart/ImageWidgetModal";
+import { EditWidgetModal } from "../EditWidgetModal";
+import { ImageWidgetModal } from "../ImageWidgetModal";
 
 export const DashboardGrid: React.FC<{}> = ({}) => {
-  const { dashboard, widgets, setWidgets, adminMode, refreshWidgets } =
-    useDashboard();
+  const { dashboard, widgets, setWidgets, adminMode } = useDashboard();
+
   const backend = useBackend();
-  const { setOpen: setTextModalOpen } = useTextWidgetModal();
-  const { setOpen: setImageModalOpen } = useImageWidgetModal();
 
   const ResponsiveGridLayout = useMemo(
     () => WidthProvider(Responsive) as any,
     []
   );
-
-  const addDividerWidget = async () => {
-    if (!dashboard) return;
-    let cache = {
-      type: "divider",
-      data: { datasets: [{ data: [], label: "" }] },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          divider: {
-            display: true,
-          },
-          title: {
-            display: false,
-          },
-          legend: {
-            display: false,
-          },
-          subtitle: {
-            display: false,
-          },
-        },
-      },
-    };
-    let code = `
-    def main():  
-        return {
-            "type": "divider",
-            "data": {"datasets": [{"data": [], "label": ""}]},
-            "options": {
-                "responsive": True,
-                "maintainAspectRatio": False,
-                "plugins": {
-                    "divider": {
-                        "display": True
-                    },
-                    "title": {
-                        "display": False
-                    },
-                    "subtitle": {
-                        "display": False
-                    },
-                    "legend": {
-                        "display": False
-                    }
-                },
-            },
-        }
-      `;
-    await backend?.widgets.create({
-      dashboard: dashboard.id,
-      layouts: {
-        lg: {
-          x: 0,
-          y: maxHeight,
-          w: 12,
-          h: 4,
-        },
-      },
-      cache: cache,
-      title: "Divider",
-      team: dashboard.team,
-      code: code,
-      messages: [],
-      settings: {
-        disable_download_images: false,
-        disable_download_reports: false,
-        title_hidden: true,
-      },
-    });
-    refreshWidgets();
-  };
 
   let [layouts, children] = useMemo(() => {
     return [
@@ -138,14 +60,6 @@ export const DashboardGrid: React.FC<{}> = ({}) => {
     ];
   }, [widgets, dashboard]);
 
-  const maxHeight = useMemo(() => {
-    let h = 0;
-    layouts.lg.forEach((i: any) => {
-      if (i.y + i.h > h) h = i.y + i.h;
-    });
-    return h;
-  }, [layouts]);
-
   const editable = useMemo(() => {
     return adminMode || dashboard?.settings?.can_edit_widget_layout;
   }, [adminMode, dashboard]);
@@ -156,22 +70,31 @@ export const DashboardGrid: React.FC<{}> = ({}) => {
       : dashboard?.settings?.grid_spacing;
   }, [dashboard]);
 
-  if (!dashboard || layouts.lg.length === 0)
+  if (!dashboard)
     return (
       <div
         className={
           "onvo-dashboard-grid-wrapper onvo-overflow-y-auto onvo-flex-grow onvo-pt-2 onvo-font-override onvo-background-color onvo-relative onvo-w-full"
         }
-      >
-        <TextWidgetModal maxHeight={0} />
-      </div>
+      ></div>
     );
 
+  if (
+    layouts.lg.length === 0 &&
+    (dashboard?.settings?.can_create_widgets || adminMode)
+  ) {
+    return (
+      <>
+        <TextWidgetModal />
+        <ImageWidgetModal />
+      </>
+    );
+  }
   return (
     <>
-      <EditChartModal />
-      <TextWidgetModal maxHeight={maxHeight} />
-      <ImageWidgetModal maxHeight={maxHeight} />
+      <EditWidgetModal />
+      <TextWidgetModal />
+      <ImageWidgetModal />
 
       <div
         className={
@@ -254,28 +177,6 @@ export const DashboardGrid: React.FC<{}> = ({}) => {
         >
           {children}
         </ResponsiveGridLayout>
-        {(dashboard?.settings?.can_create_widgets || adminMode) && (
-          <div className="onvo-relative onvo-mx-[10px] onvo-mb-[10px] onvo-grid onvo-grid-cols-3 onvo-h-10 onvo-justify-center onvo-items-center onvo-gap-2">
-            <div
-              onClick={() => setTextModalOpen(true)}
-              className="onvo-flex onvo-justify-center onvo-items-center onvo-h-full onvo-flex-grow onvo-transition-opacity onvo-duration-300 onvo-opacity-50 hover:onvo-opacity-100 onvo-cursor-pointer onvo-border-dashed onvo-border-gray-200 dark:onvo-border-gray-700 onvo-border-2 onvo-rounded-lg"
-            >
-              <Text>+ Add text widget</Text>
-            </div>
-            <div
-              onClick={() => setImageModalOpen(true)}
-              className="onvo-flex onvo-justify-center onvo-items-center onvo-h-full onvo-flex-grow onvo-transition-opacity onvo-duration-300 onvo-opacity-50 hover:onvo-opacity-100 onvo-cursor-pointer onvo-border-dashed onvo-border-gray-200 dark:onvo-border-gray-700 onvo-border-2 onvo-rounded-lg"
-            >
-              <Text>+ Add image widget</Text>
-            </div>
-            <div
-              onClick={() => addDividerWidget()}
-              className="onvo-flex onvo-justify-center onvo-items-center onvo-h-full onvo-flex-grow onvo-transition-opacity onvo-duration-300 onvo-opacity-50 hover:onvo-opacity-100 onvo-cursor-pointer onvo-border-dashed onvo-border-gray-200 dark:onvo-border-gray-700 onvo-border-2 onvo-rounded-lg"
-            >
-              <Text>+ Add divider</Text>
-            </div>
-          </div>
-        )}
       </div>
     </>
   );

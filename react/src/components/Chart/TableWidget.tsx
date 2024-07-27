@@ -13,7 +13,8 @@ import { MultiSelect } from "../../tremor/MultiSelect";
 function urlify(text: string) {
   var urlRegex = /(https?:\/\/[^\s]+)/g;
   return (text + "").replace(urlRegex, function (url) {
-    return '<a target="_blank" href="' + url + '">' + url + "</a>";
+    let properUrl = url.search("http") !== -1 ? url : "https://" + url;
+    return '<a target="_blank" href="' + properUrl + '">' + url + "</a>";
   });
 }
 

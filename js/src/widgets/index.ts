@@ -10,9 +10,12 @@ export class OnvoWidgets extends OnvoBase {
    * @param {string} filters.dashboard - The ID of the dashboard to retrieve widgets for.
    * @return {Promise<Widget[]>} A promise that resolves to an array of widgets.
    */
-  list(filters: { dashboard: string }): Promise<Widget[]> {
+  list(filters: {
+    dashboard: string;
+    use_in_library?: boolean;
+  }): Promise<Widget[]> {
     return this.fetchBase(
-      "/api/widgets?dashboard=" + filters.dashboard
+      `/api/widgets?dashboard=${filters.dashboard}&use_in_library=${filters.use_in_library}`
     ) as Promise<Widget[]>;
   }
   /**

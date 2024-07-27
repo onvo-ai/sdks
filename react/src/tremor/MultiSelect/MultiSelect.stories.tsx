@@ -5,7 +5,7 @@ import { MultiSelect } from "./MultiSelect";
 
 const meta: Meta = {
   component: MultiSelect,
-  title: "Tremor/MultiSelect",
+  title: "Primitives/Multi Select",
   argTypes: {},
 };
 export default meta;
@@ -37,10 +37,18 @@ const data = [
 
 export const Variants: Story = (args) => (
   <div className="onvo-flex onvo-flex-col onvo-gap-2 onvo-max-w-72">
-    <MultiSelect items={data} />
+    <MultiSelect onValueChange={(e) => console.log(e)} items={data} />
 
-    <MultiSelect items={data} placeholder="Search for item" />
-    <MultiSelect items={data} value={["relaxed-button-down"]} />
+    <MultiSelect
+      onValueChange={(e) => console.log(e)}
+      items={data}
+      placeholder="Search for item"
+    />
+    <MultiSelect
+      onValueChange={(e) => console.log(e)}
+      items={data}
+      value={["relaxed-button-down"]}
+    />
   </div>
 );
 Variants.args = {};

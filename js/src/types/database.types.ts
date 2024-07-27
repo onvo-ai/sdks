@@ -511,6 +511,65 @@ export type Database = {
           }
         ];
       };
+      llm_settings: {
+        Row: {
+          analyst_agent_model: string;
+          analyst_agent_provider: string;
+          annotator_agent_model: string;
+          annotator_agent_provider: string;
+          anthropic_api_key: string | null;
+          google_api_key: string | null;
+          groq_api_key: string | null;
+          ollama_api_url: string | null;
+          openai_api_key: string | null;
+          programmer_agent_model: string;
+          programmer_agent_provider: string;
+          team: string;
+          type: Database["public"]["Enums"]["LLM hosting type"];
+          updated: boolean;
+        };
+        Insert: {
+          analyst_agent_model?: string;
+          analyst_agent_provider?: string;
+          annotator_agent_model?: string;
+          annotator_agent_provider?: string;
+          anthropic_api_key?: string | null;
+          google_api_key?: string | null;
+          groq_api_key?: string | null;
+          ollama_api_url?: string | null;
+          openai_api_key?: string | null;
+          programmer_agent_model?: string;
+          programmer_agent_provider?: string;
+          team: string;
+          type?: Database["public"]["Enums"]["LLM hosting type"];
+          updated?: boolean;
+        };
+        Update: {
+          analyst_agent_model?: string;
+          analyst_agent_provider?: string;
+          annotator_agent_model?: string;
+          annotator_agent_provider?: string;
+          anthropic_api_key?: string | null;
+          google_api_key?: string | null;
+          groq_api_key?: string | null;
+          ollama_api_url?: string | null;
+          openai_api_key?: string | null;
+          programmer_agent_model?: string;
+          programmer_agent_provider?: string;
+          team?: string;
+          type?: Database["public"]["Enums"]["LLM hosting type"];
+          updated?: boolean;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "public_llm_settings_team_fkey";
+            columns: ["team"];
+            isOneToOne: true;
+            referencedRelation: "teams";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       members: {
         Row: {
           account: string;
@@ -752,6 +811,8 @@ export type Database = {
           settings: Json;
           team: string;
           title: string;
+          use_as_example: boolean | null;
+          use_in_library: boolean | null;
         };
         Insert: {
           cache?: Json | null;
@@ -764,6 +825,8 @@ export type Database = {
           settings?: Json;
           team: string;
           title: string;
+          use_as_example?: boolean | null;
+          use_in_library?: boolean | null;
         };
         Update: {
           cache?: Json | null;
@@ -776,6 +839,8 @@ export type Database = {
           settings?: Json;
           team?: string;
           title?: string;
+          use_as_example?: boolean | null;
+          use_in_library?: boolean | null;
         };
         Relationships: [
           {
@@ -839,7 +904,7 @@ export type Database = {
       };
     };
     Enums: {
-      [_ in never]: never;
+      "LLM hosting type": "onvo-hosted" | "self-hosted";
     };
     CompositeTypes: {
       [_ in never]: never;

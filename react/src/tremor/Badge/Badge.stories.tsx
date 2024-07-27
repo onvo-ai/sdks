@@ -5,7 +5,7 @@ import { Badge } from "./Badge";
 
 const meta: Meta = {
   component: Badge,
-  title: "Tremor/Badge",
+  title: "Primitives/Badge",
   argTypes: {},
 };
 export default meta;

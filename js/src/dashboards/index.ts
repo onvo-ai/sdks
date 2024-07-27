@@ -1,15 +1,17 @@
 import OnvoBase from "../base";
-import { Dashboard } from "../types";
+import { Dashboard, DashboardMeta } from "../types";
 
 // Dashboard endpoints
 export class OnvoDashboards extends OnvoBase {
   /**
    * Lists all the dashboards.
    *
-   * @return {Promise<Dashboard[]>} A promise that resolves to an array of dashboards.
+   * @return {Promise<(Dashboard & {_meta: DashboardMeta})[]>} A promise that resolves to an array of dashboards.
    */
-  list(): Promise<Dashboard[]> {
-    return this.fetchBase("/api/dashboards") as Promise<Dashboard[]>;
+  list(): Promise<(Dashboard & { _meta: DashboardMeta })[]> {
+    return this.fetchBase("/api/dashboards") as Promise<
+      (Dashboard & { _meta: DashboardMeta })[]
+    >;
   }
   /**
    * Gets a dashboard by ID.
@@ -17,8 +19,10 @@ export class OnvoDashboards extends OnvoBase {
    * @param {string} id - The ID of the dashboard.
    * @return {Promise<Dashboard>} A promise that resolves to the dashboard.
    */
-  get(id: string): Promise<Dashboard> {
-    return this.fetchBase("/api/dashboards/" + id) as Promise<Dashboard>;
+  get(id: string): Promise<Dashboard & { _meta: DashboardMeta }> {
+    return this.fetchBase("/api/dashboards/" + id) as Promise<
+      Dashboard & { _meta: DashboardMeta }
+    >;
   }
   /**
    * Deletes a dashboard by ID.

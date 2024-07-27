@@ -6,7 +6,7 @@ import { Card } from "./Card";
 
 const meta: Meta = {
   component: Card,
-  title: "Tremor/Card",
+  title: "Primitives/Card",
   argTypes: {},
 };
 export default meta;

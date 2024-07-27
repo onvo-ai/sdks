@@ -41,4 +41,20 @@ export class OnvoDashboardDatasources extends OnvoBase {
       }
     ) as Promise<DashboardDatasource>;
   }
+
+  /**
+   * Links a datasource to a dashboard.
+   *
+   * @param {array} datasourceIds - The IDs of the datasources to link.
+   * @return {Promise<DashboardDatasource>} A promise that resolves to the linked dashboard datasource.
+   */
+  linkMultiple(datasourceIds: string[]): Promise<DashboardDatasource> {
+    return this.fetchBase(
+      "/api/dashboards/" + this.#dashboardId + "/datasources",
+      "PUT",
+      {
+        datasourceIds: datasourceIds,
+      }
+    ) as Promise<DashboardDatasource>;
+  }
 }

@@ -49,15 +49,29 @@ const buttonVariants = tv({
         // border
         "onvo-border-transparent",
         // text color
-        "onvo-text-slate-900 dark:onvo-text-slate-50",
+        "onvo-text-gray-900 dark:onvo-text-gray-50",
         // background color
-        "onvo-bg-slate-200 dark:onvo-bg-slate-900",
+        "onvo-bg-gray-200 dark:onvo-bg-gray-900",
         // hover color
-        "hover:onvo-bg-slate-300/70 dark:hover:onvo-bg-slate-800/80",
+        "hover:onvo-bg-gray-300/70 dark:hover:onvo-bg-gray-800/80",
         // disabled
-        "disabled:onvo-bg-slate-100 disabled:onvo-text-slate-400",
-        "disabled:dark:onvo-bg-slate-800 disabled:dark:onvo-text-slate-600",
+        "disabled:onvo-bg-gray-100 disabled:onvo-text-gray-400",
+        "disabled:dark:onvo-bg-gray-800 disabled:dark:onvo-text-gray-600",
       ],
+      ghost: [
+        // base
+        "!onvo-shadow-none",
+        // border
+        "onvo-border-transparent",
+        // text color
+        "onvo-text-gray-900 dark:onvo-text-gray-50",
+        // hover color
+        "onvo-bg-transparent hover:onvo-bg-gray-100 dark:hover:onvo-bg-gray-800/80",
+        // disabled
+        "disabled:onvo-text-gray-400",
+        "disabled:dark:onvo-text-gray-600",
+      ],
+
       destructive: [
         // text color
         "onvo-text-white",

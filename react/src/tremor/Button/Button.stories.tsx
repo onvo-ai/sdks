@@ -5,7 +5,7 @@ import { Button } from "./Button";
 
 const meta: Meta = {
   component: Button,
-  title: "Tremor/Button",
+  title: "Primitives/Button",
   argTypes: {},
 };
 export default meta;

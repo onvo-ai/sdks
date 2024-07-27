@@ -5,10 +5,11 @@ import { Wrapper } from "../Wrapper/Wrapper";
 import { DashboardHeader } from "../DashboardHeader/DashboardHeader";
 import { DashboardGrid } from "../DashboardGrid/DashboardGrid";
 import { QuestionModal } from "../QuestionModal/QuestionModal";
+import { CreateToolbar } from "../CreateToolbar";
 
 const meta: Meta<typeof Dashboard> = {
   component: Dashboard,
-  title: "Onvo/Dashboard",
+  title: "Layouts/Dashboard",
   argTypes: {},
 };
 export default meta;
@@ -34,7 +35,7 @@ export const Scrollable: Story = (args) => {
           <Dashboard id={args.id} adminMode={args.adminMode}>
             <DashboardHeader />
             <DashboardGrid />
-            <QuestionModal />
+            <QuestionModal variant="fullscreen" trigger={<CreateToolbar />} />
           </Dashboard>
         </Wrapper>
       </div>

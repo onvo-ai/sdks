@@ -39,6 +39,7 @@ import {
   AccordionTrigger,
 } from "../../tremor/Accordion";
 import { MessageType } from "./QuestionModal";
+import { useMaxHeight } from "../../lib/maxHeight";
 
 dayjs.extend(relativeTime);
 
@@ -66,7 +67,8 @@ const QuestionMessage: React.FC<{
   logo,
 }) => {
   const backend = useBackend();
-  const { refreshWidgets, widgets, dashboard, adminMode } = useDashboard();
+  const { refreshWidgets, dashboard, adminMode } = useDashboard();
+  const { lg, sm } = useMaxHeight();
 
   const [output, setOutput] = useState<any>();
   const [code, setCode] = useState("");
@@ -85,59 +87,84 @@ const QuestionMessage: React.FC<{
 
   const { role, content } = messages[index];
 
-  const addToDashboard = async (e: any) => {
-    if (!questionId) return;
+  const addToDashboard =
+    ({
+      use_in_library,
+      use_as_example,
+    }: {
+      use_in_library: boolean;
+      use_as_example: boolean;
+    }) =>
+    async (e: any) => {
+      if (!questionId) return;
 
-    e.preventDefault();
-    e.stopPropagation();
-    let maxHeight = 0;
-    widgets.forEach((i: any) => {
-      if (i.layouts.lg.y + i.layouts.lg.h > maxHeight)
-        maxHeight = i.layouts.lg.y + i.layouts.lg.h;
-    });
-    let newObj: any = {
-      title: title,
-      layouts: {
-        lg: {
-          x: 0,
-          y: maxHeight,
-          w: 4,
-          h: output.type === "metric" ? 10 : 20,
+      e.preventDefault();
+      e.stopPropagation();
+
+      let newObj: any = {
+        title: title,
+        layouts: {
+          lg: {
+            x: 0,
+            y: lg,
+            w: 4,
+            h: output.type === "metric" ? 10 : 20,
+          },
+          sm: {
+            x: 0,
+            y: sm,
+            w: 3,
+            h: output.type === "metric" ? 10 : 20,
+          },
         },
-      },
-      messages: messages.filter((a) => a.role !== "user"),
-      dashboard: dashboardId,
-      team: teamId || "",
-      code: code,
-      cache: output,
-      created_at: new Date().toISOString(),
-      settings: {},
+        messages: messages.filter((a) => a.role === "user"),
+        dashboard: dashboardId,
+        team: teamId || "",
+        code: code,
+        cache: output,
+        created_at: new Date().toISOString(),
+        settings: {},
+        use_in_library: use_in_library,
+        use_as_example: use_as_example,
+      };
+
+      if (!backend) return;
+
+      toast.promise(
+        () => {
+          return backend.widgets.create(newObj);
+        },
+        {
+          loading: use_in_library
+            ? "Adding widget to library..."
+            : "Adding widget to dashboard...",
+          success: () => {
+            refreshWidgets();
+            if (use_in_library) {
+              return "Widget added to library";
+            } else {
+              onClose();
+              return "Widget added to dashboard";
+            }
+          },
+          error: (error) =>
+            use_in_library
+              ? "Error adding widget to library: " + error.message
+              : "Error adding widget to dashboard: " + error.message,
+        }
+      );
     };
-
-    if (!backend) return;
-
-    toast.promise(
-      () => {
-        return backend.widgets.create(newObj);
-      },
-      {
-        loading: "Adding widget to dashboard...",
-        success: () => {
-          refreshWidgets();
-          onClose();
-          return "Widget added to dashboard";
-        },
-        error: (error) => "Error adding widget to dashboard: " + error.message,
-      }
-    );
-  };
 
   useEffect(() => {
     if (role === "assistant" || role === "tool") {
-      let textContent =
-        typeof content === "string"
-          ? content
-          : content.map((a) => (a.type === "text" ? a.text : "")).join("\n");
+      let textContent = "";
+      if (content) {
+        textContent =
+          typeof content === "string"
+            ? content
+            : content.map((a) => (a.type === "text" ? a.text : "")).join("\n");
+      }
+
       if ((textContent || "").search("```") >= 0) {
         if (textContent.split("```python")[1]) {
           let code = textContent.split("```python")[1].split("```")[0].trim();
@@ -170,14 +197,20 @@ const QuestionMessage: React.FC<{
     return (
       <div className="onvo-question-message-user onvo-group onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3">
         <Icon variant="shadow" icon={UserIcon} />
-        <div className="onvo-w-full">
+        <div className="onvo-w-full onvo-max-w-none onvo-prose onvo-prose-sm dark:onvo-prose-invert ">
           {editing ? (
             <Textarea
               defaultValue={content as string}
               onChange={(e) => setNewMessage(e.target.value)}
             />
           ) : (
-            <Text>{content}</Text>
+            <ErrorBoundary
+              fallbackRender={({ error }) => <Text>{content}</Text>}
+            >
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {content as string}
+              </ReactMarkdown>
+            </ErrorBoundary>
           )}
 
           {editing ? (
@@ -189,7 +222,7 @@ const QuestionMessage: React.FC<{
                   setEditing(false);
                 }}
               >
-                Regenerate chart
+                Regenerate visualization
               </Button>
               <Button
                 className="!onvo-py-1"
@@ -233,7 +266,7 @@ const QuestionMessage: React.FC<{
         return backend.question(questionId).export(index, format);
       },
       {
-        loading: `Exporting chart as ${format}...`,
+        loading: `Exporting widget as ${format}...`,
         success: (blob) => {
           let blobUrl = window.URL.createObjectURL(blob);
           let a = document.createElement("a");
@@ -242,9 +275,9 @@ const QuestionMessage: React.FC<{
           document.body.appendChild(a);
           a.click();
           a.remove();
-          return "Chart exported";
+          return "Widget exported";
         },
-        error: (error) => "Error exporting chart: " + error.message,
+        error: (error) => "Error exporting widget: " + error.message,
       }
     );
   };
@@ -330,7 +363,7 @@ const QuestionMessage: React.FC<{
               <ChartBase json={output} id={questionId} title={title} />
             </div>
             <div
-              className="onvo-chart-card-dropdown-wrapper onvo-py-2 onvo-px-2 onvo-z-20 onvo-border-t onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-b-md onvo-bg-slate-50 dark:onvo-bg-slate-800 onvo-flex onvo-w-full onvo-justify-end onvo-flex-row onvo-gap-2 onvo-items-center"
+              className="onvo-chart-card-dropdown-wrapper onvo-py-2 onvo-px-2 onvo-z-20 onvo-border-t onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-b-md onvo-bg-slate-50 dark:onvo-bg-slate-800 onvo-flex onvo-w-full onvo-justify-between onvo-flex-row onvo-items-center"
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
@@ -344,82 +377,109 @@ const QuestionMessage: React.FC<{
                 e.preventDefault();
               }}
             >
-              {AddToDashboardEnabled && (
-                <Button variant="primary" onClick={addToDashboard}>
-                  Add to dashboard
-                </Button>
-              )}
-              {(ImageDownloadEnabled || ReportDownloadEnabled) && (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Icon variant="shadow" icon={ArrowDownTrayIcon} />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="onvo-min-w-56">
-                    {ReportDownloadEnabled && (
-                      <>
-                        <DropdownMenuLabel>Reports</DropdownMenuLabel>
-                        <DropdownMenuGroup>
-                          <DropdownMenuItem
-                            onClick={() => exportWidget("xlsx")}
-                          >
-                            <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                              <DocumentChartBarIcon className="onvo-size-4" />
-                              <span>Download as excel</span>
-                            </span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => exportWidget("csv")}>
-                            <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                              <DropdownMenuIconWrapper>
-                                <DocumentChartBarIcon className="onvo-size-4 onvo-text-inherit" />
-                              </DropdownMenuIconWrapper>
-                              <span>Download as CSV</span>
-                            </span>
-                          </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                      </>
-                    )}
-                    {ImageDownloadEnabled && ReportDownloadEnabled && (
-                      <DropdownMenuSeparator />
-                    )}
-                    {ImageDownloadEnabled && (
-                      <>
-                        <DropdownMenuLabel>Images</DropdownMenuLabel>
-                        <DropdownMenuGroup>
-                          <DropdownMenuItem onClick={() => exportWidget("svg")}>
-                            <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                              <PhotoIcon className="onvo-size-4" />
-                              <span>Download as SVG</span>
-                            </span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => exportWidget("png")}>
-                            <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                              <DropdownMenuIconWrapper>
-                                <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
-                              </DropdownMenuIconWrapper>
-                              <span>Download as PNG</span>
-                            </span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => exportWidget("jpeg")}
-                          >
-                            <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                              <DropdownMenuIconWrapper>
-                                <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
-                              </DropdownMenuIconWrapper>
-                              <span>Download as JPEG</span>
-                            </span>
-                          </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                      </>
-                    )}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              )}
+              <div className="onvo-flex onvo-gap-2 onvo-items-center">
+                {adminMode && (
+                  <Button
+                    variant="secondary"
+                    onClick={addToDashboard({
+                      use_as_example: false,
+                      use_in_library: true,
+                    })}
+                  >
+                    Add to library
+                  </Button>
+                )}
+              </div>
+              <div className="onvo-flex onvo-gap-2 onvo-items-center">
+                {AddToDashboardEnabled && (
+                  <Button
+                    variant="primary"
+                    onClick={addToDashboard({
+                      use_as_example: false,
+                      use_in_library: false,
+                    })}
+                  >
+                    Add to dashboard
+                  </Button>
+                )}
+                {(ImageDownloadEnabled || ReportDownloadEnabled) && (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Icon variant="shadow" icon={ArrowDownTrayIcon} />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="onvo-min-w-56">
+                      {ReportDownloadEnabled && (
+                        <>
+                          <DropdownMenuLabel>Reports</DropdownMenuLabel>
+                          <DropdownMenuGroup>
+                            <DropdownMenuItem
+                              onClick={() => exportWidget("xlsx")}
+                            >
+                              <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                                <DocumentChartBarIcon className="onvo-size-4" />
+                                <span>Download as excel</span>
+                              </span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() => exportWidget("csv")}
+                            >
+                              <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                                <DropdownMenuIconWrapper>
+                                  <DocumentChartBarIcon className="onvo-size-4 onvo-text-inherit" />
+                                </DropdownMenuIconWrapper>
+                                <span>Download as CSV</span>
+                              </span>
+                            </DropdownMenuItem>
+                          </DropdownMenuGroup>
+                        </>
+                      )}
+                      {ImageDownloadEnabled && ReportDownloadEnabled && (
+                        <DropdownMenuSeparator />
+                      )}
+                      {ImageDownloadEnabled && (
+                        <>
+                          <DropdownMenuLabel>Images</DropdownMenuLabel>
+                          <DropdownMenuGroup>
+                            <DropdownMenuItem
+                              onClick={() => exportWidget("svg")}
+                            >
+                              <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                                <PhotoIcon className="onvo-size-4" />
+                                <span>Download as SVG</span>
+                              </span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() => exportWidget("png")}
+                            >
+                              <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                                <DropdownMenuIconWrapper>
+                                  <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
+                                </DropdownMenuIconWrapper>
+                                <span>Download as PNG</span>
+                              </span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() => exportWidget("jpeg")}
+                            >
+                              <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                                <DropdownMenuIconWrapper>
+                                  <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
+                                </DropdownMenuIconWrapper>
+                                <span>Download as JPEG</span>
+                              </span>
+                            </DropdownMenuItem>
+                          </DropdownMenuGroup>
+                        </>
+                      )}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                )}
+              </div>
             </div>
           </Card>
         )}
 
-        <article className="onvo-question-assistant-code-wrapper onvo-prose onvo-prose-sm dark:onvo-prose-invert onvo-w-full">
+        <article className="onvo-question-assistant-code-wrapper onvo-max-w-none onvo-prose onvo-prose-sm dark:onvo-prose-invert onvo-w-full">
           {answer && answer.trim() !== "" && (
             <ErrorBoundary
               fallbackRender={({ error }) => <Text>{answer}</Text>}

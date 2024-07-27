@@ -10,7 +10,7 @@ import {
 
 const meta: Meta = {
   component: Accordion,
-  title: "Tremor/Accordion",
+  title: "Primitives/Accordion",
   argTypes: {},
 };
 export default meta;

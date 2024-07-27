@@ -21,7 +21,7 @@ import {
 
 const meta: Meta = {
   component: DropdownMenu,
-  title: "Tremor/DropdownMenu",
+  title: "Primitives/Dropdown Menu",
   argTypes: {},
 };
 export default meta;

@@ -6,35 +6,46 @@ import React, {
   useState,
 } from "react";
 import { useBackend } from "../Wrapper";
-import { Dashboard as DashboardType, Widget } from "@onvo-ai/js";
+import {
+  Dashboard as DashboardType,
+  Subscription,
+  SubscriptionPlan,
+  Widget,
+} from "@onvo-ai/js";
 import usePrefersColorScheme from "use-prefers-color-scheme";
 import { defaults } from "chart.js";
 import { toast } from "sonner";
+import { Card } from "../../tremor/Card";
+import { Title, Text } from "../../tremor/Text";
 
 type DashboardContext = {
   id: string | undefined;
   dashboard?: DashboardType;
   widgets: Widget[];
+  subscription: Subscription | undefined;
+  setSubscription: (subscription: Subscription | undefined) => void;
+  subscriptionPlan: SubscriptionPlan | undefined;
+  setSubscriptionPlan: (subscriptionPlan: SubscriptionPlan | undefined) => void;
   setWidgets: (widgets: Widget[]) => void;
   refreshDashboard: () => Promise<void>;
   refreshWidgets: () => Promise<void>;
   theme: "light" | "dark";
   adminMode?: boolean;
-  selectedWidget: Widget | undefined;
-  setSelectedWidget: (widget: Widget | undefined) => void;
 };
 
 const Context = createContext<DashboardContext>({
   id: undefined,
   dashboard: undefined,
+  subscription: undefined,
+  setSubscription: () => {},
+  subscriptionPlan: undefined,
+  setSubscriptionPlan: () => {},
   widgets: [],
   setWidgets: () => {},
   refreshDashboard: async () => {},
   refreshWidgets: async () => {},
   theme: "light",
   adminMode: false,
-  selectedWidget: undefined,
-  setSelectedWidget: () => {},
 });
 
 const r = document.querySelector(":root") as any;
@@ -51,17 +62,42 @@ export const Dashboard: React.FC<{
   children: any;
   className?: string;
 }> = ({ id, children, adminMode, className }) => {
+  const backend = useBackend();
+  const prefersColorScheme = usePrefersColorScheme();
+  const initialized = useRef(false);
+
   const [dashboard, setDashboard] = useState<DashboardType>();
   const [widgets, setWidgets] = useState<Widget[]>([]);
-  const backend = useBackend();
   const [theme, setTheme] = useState<"light" | "dark">("light");
-  const prefersColorScheme = usePrefersColorScheme();
   const [selectedWidget, setSelectedWidget] = useState<Widget>();
-  const initialized = useRef(false);
+
+  const [subscription, setSubscription] = useState<Subscription>();
+  const [subscriptionPlan, setSubscriptionPlan] = useState<SubscriptionPlan>();
+  const [subscriptionLoaded, setSubscriptionLoaded] = useState(false);
 
   const refreshDashboard = async () => {
     if (!backend) return;
-    await backend.dashboards.get(id).then(setDashboard);
+    await backend.dashboards.get(id).then((dash) => {
+      backend
+        .team(dash.team)
+        .getSubscription()
+        .then((sub) => {
+          let { subscription_plans, ...rest } = sub;
+
+          if (
+            new Date(rest.period_end).getTime() + 86400000 >=
+            new Date().getTime()
+          ) {
+            setSubscriptionPlan(subscription_plans);
+            setSubscription(rest);
+          } else {
+            setSubscriptionPlan(undefined);
+            setSubscription(undefined);
+          }
+          setSubscriptionLoaded(true);
+        });
+      setDashboard(dash);
+    });
   };
 
   const refreshWidgets = async () => {
@@ -176,6 +212,10 @@ export const Dashboard: React.FC<{
   }, [dashboard, prefersColorScheme]);
 
   const style = dashboard?.settings?.custom_css || "";
+
+  let paymentModalOpen =
+    subscriptionLoaded && dashboard && subscription === undefined;
+
   return (
     <Context.Provider
       value={{
@@ -186,9 +226,11 @@ export const Dashboard: React.FC<{
         refreshDashboard,
         refreshWidgets,
         theme,
-        selectedWidget,
-        setSelectedWidget,
         adminMode,
+        subscription,
+        setSubscription,
+        subscriptionPlan,
+        setSubscriptionPlan,
       }}
     >
       <div
@@ -200,6 +242,25 @@ export const Dashboard: React.FC<{
         } ${className}`}
       >
         <style>{style}</style>
+
+        {paymentModalOpen && (
+          <div className="onvo-absolute onvo-top-0 onvo-left-0 onvo-right-0 onvo-bottom-0 onvo-bg-black/50 onvo-z-[1000] onvo-backdrop-blur-md onvo-flex onvo-justify-center onvo-items-center">
+            <Card className="onvo-max-w-screen-md">
+              <Title>Dashboard unavailable</Title>
+              <Text>
+                The dashboard you are trying to access is currently unavailable.
+                If you are the administrator, click{" "}
+                <a
+                  href="https://dashboard.onvo.ai/settings/billing"
+                  className="onvo-text-blue-500 onvo-underline"
+                >
+                  here
+                </a>{" "}
+                to update your billing.
+              </Text>
+            </Card>
+          </div>
+        )}
 
         {children}
       </div>

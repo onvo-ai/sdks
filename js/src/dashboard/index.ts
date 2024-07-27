@@ -46,4 +46,16 @@ export class OnvoDashboard extends OnvoBase {
       "/api/dashboards/" + this.#id + "/export?format=" + format
     );
   }
+
+  /**
+   * Summarizes the dashboard using the provided prompt.
+   *
+   * @param {string} prompt - The prompt to use for summarizing the dashboard.
+   * @return {Promise<{title: string, description: string}>} A promise that resolves to an object containing the title and description of the summarized dashboard.
+   */
+  summarize(prompt: string): Promise<{ title: string; description: string }> {
+    return this.fetchBase(`/api/dashboards/${this.#id}/summarize`, "POST", {
+      prompt,
+    });
+  }
 }

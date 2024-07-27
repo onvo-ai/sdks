@@ -5,7 +5,7 @@ import { SearchSelect } from "./SearchSelect";
 
 const meta: Meta = {
   component: SearchSelect,
-  title: "Tremor/SearchSelect",
+  title: "Primitives/Search Select",
   argTypes: {},
 };
 export default meta;
@@ -37,10 +37,18 @@ const data = [
 
 export const Variants: Story = (args) => (
   <div className="onvo-flex onvo-flex-col onvo-gap-2 onvo-max-w-72">
-    <SearchSelect items={data} />
+    <SearchSelect onValueChange={(e) => console.log(e)} items={data} />
 
-    <SearchSelect items={data} placeholder="Search for item" />
-    <SearchSelect items={data} value="relaxed-button-down" />
+    <SearchSelect
+      onValueChange={(e) => console.log(e)}
+      items={data}
+      placeholder="Search for item"
+    />
+    <SearchSelect
+      onValueChange={(e) => console.log(e)}
+      items={data}
+      value="relaxed-button-down"
+    />
   </div>
 );
 Variants.args = {};

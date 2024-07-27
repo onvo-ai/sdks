@@ -26,8 +26,19 @@ import {
 } from "react-simple-wysiwyg";
 import { twMerge } from "tailwind-merge";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import ChartBase from "./ChartBase";
+import ChartBase from "../Chart/ChartBase";
 import { Tabs, TabsList, TabsTrigger } from "../../tremor/Tabs";
+import { Card } from "../../tremor/Card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../../tremor/Accordion";
+import { Textarea } from "../../tremor/Textarea";
+import { SparklesIcon } from "@heroicons/react/24/solid";
+import { toast } from "sonner";
+import { useMaxHeight } from "../../lib/maxHeight";
 
 export const useTextWidgetModal = create<{
   open: boolean;
@@ -35,6 +46,7 @@ export const useTextWidgetModal = create<{
     id: string;
     title: string;
     subtitle: string;
+    prompt: string;
     titleAlignment: string;
     descriptionAlignment: string;
   };
@@ -44,6 +56,7 @@ export const useTextWidgetModal = create<{
       id: string;
       title: string;
       subtitle: string;
+      prompt: string;
       titleAlignment: string;
       descriptionAlignment: string;
     }
@@ -56,20 +69,23 @@ export const useTextWidgetModal = create<{
       id: string;
       title: string;
       subtitle: string;
+      prompt: string;
       titleAlignment: string;
       descriptionAlignment: string;
     }
   ) => set({ open: op, widget: wid }),
 }));
 
-export const TextWidgetModal: React.FC<{
-  maxHeight: number;
-}> = ({ maxHeight }) => {
+export const TextWidgetModal: React.FC<{}> = ({}) => {
   const { dashboard, refreshWidgets, adminMode } = useDashboard();
   const backend = useBackend();
   const { open, setOpen, widget } = useTextWidgetModal();
+  const { lg, sm } = useMaxHeight();
+
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
+  const [prompt, setPrompt] = useState("");
+  const [summaryLoading, setSummaryLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [titleAlignment, setTitleAlignment] = useState<
     "start" | "center" | "end"
@@ -87,9 +103,12 @@ export const TextWidgetModal: React.FC<{
       setDescriptionAlignment(
         widget.descriptionAlignment as "start" | "center" | "end"
       );
+
+      setPrompt(widget.prompt);
     } else {
       setTitle("");
       setSubtitle("");
+      setPrompt("");
       setTitleAlignment("start");
       setDescriptionAlignment("start");
     }
@@ -106,6 +125,9 @@ export const TextWidgetModal: React.FC<{
         maintainAspectRatio: false,
         plugins: {
           title: { display: true, text: title, align: titleAlignment },
+          text: {
+            prompt: prompt,
+          },
           subtitle: {
             display: false,
             text: subtitle,
@@ -116,6 +138,7 @@ export const TextWidgetModal: React.FC<{
     };
     let code = `title = "${title}"
     subtitle = "${subtitle}"
+    prompt = "${prompt}"
     def main():
       
         return {
@@ -129,6 +152,9 @@ export const TextWidgetModal: React.FC<{
                         "display": True,
                         "text": title_text,
                         "align": "${titleAlignment}",
+                    },
+                    "text": {
+                        "prompt": prompt,
                     },
                     if subtitle:
                         .set("plugins", {"subtitle": {"display": False, "text": subtitle, "align": "${descriptionAlignment}"}})
@@ -149,11 +175,19 @@ export const TextWidgetModal: React.FC<{
         layouts: {
           lg: {
             x: 0,
-            y: maxHeight,
+            y: lg,
             w: 12,
             h: 10,
           },
+          sm: {
+            x: 0,
+            y: sm,
+            w: 3,
+            h: 10,
+          },
         },
+        use_as_example: false,
+        use_in_library: false,
         cache: cache,
         title: title,
         team: dashboard.team,
@@ -171,6 +205,20 @@ export const TextWidgetModal: React.FC<{
     setTitle("");
     setSubtitle("");
     refreshWidgets();
+  };
+
+  const summarize = async () => {
+    if (!backend || !dashboard) return;
+    setSummaryLoading(true);
+    try {
+      let data = await backend.dashboard(dashboard.id).summarize(prompt);
+      setTitle(data.title);
+      setSubtitle(data.description);
+      setSummaryLoading(false);
+    } catch (e: any) {
+      toast.error("Failed to summarize: " + e.message);
+      setSummaryLoading(false);
+    }
   };
 
   if (!dashboard?.settings?.can_create_widgets && !adminMode) return <></>;
@@ -276,6 +324,37 @@ export const TextWidgetModal: React.FC<{
                     <TabsTrigger value="end">End</TabsTrigger>
                   </TabsList>
                 </Tabs>
+              </div>
+
+              <div className="onvo-mt-2 onvo-flex onvo-items-center onvo-justify-between">
+                <Card className="!onvo-p-0">
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1" className="onvo-border-b-0">
+                      <AccordionTrigger className="onvo-bg-slate-50 dark:onvo-bg-slate-800 onvo-px-3 onvo-rounded-md">
+                        <div className="onvo-flex onvo-gap-2 onvo-items-center onvo-justify-start">
+                          <SparklesIcon className="onvo-h-4 onvo-w-4" />
+                          Generate text with AI
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="onvo-px-3 onvo-relative">
+                        <Textarea
+                          placeholder="Enter prompt for AI"
+                          className="onvo-mt-2"
+                          value={prompt}
+                          onChange={(e) => setPrompt(e.target.value)}
+                        />
+                        <div className="onvo-w-full onvo-flex onvo-justify-end onvo-mt-2">
+                          <Button
+                            isLoading={summaryLoading}
+                            onClick={summarize}
+                          >
+                            Generate
+                          </Button>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </Card>
               </div>
             </div>
             <div className="onvo-background-color onvo-flex onvo-flex-shrink-0 @xl/widgetmodal:onvo-flex-shrink onvo-flex-col onvo-justify-center onvo-w-full onvo-flex-grow onvo-relative onvo-p-4 onvo-overflow-y-auto onvo-bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:onvo-bg-[radial-gradient(#0f172a_1px,transparent_1px)] [background-size:16px_16px]">

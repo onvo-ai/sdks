@@ -19,13 +19,23 @@ import { toast } from "sonner";
 import ChartBase from "../Chart/ChartBase";
 import { SuggestionsBar } from "../SuggestionsBar";
 import React from "react";
-import { Logo } from "../Logo";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { useBackend } from "../Wrapper";
 import { useDashboard } from "../Dashboard/Dashboard";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Divider } from "../../tremor/Divider";
 import { twMerge } from "tailwind-merge";
+import { create } from "zustand";
+
+export const useEditWidgetModal = create<{
+  open: boolean;
+  widget: Widget | undefined;
+  setOpen: (open: boolean, widget?: Widget) => void;
+}>((set) => ({
+  open: false,
+  widget: undefined,
+  setOpen: (op: boolean, wid?: Widget) => set({ open: op, widget: wid }),
+}));
 
 const Message: React.FC<{
   message: WidgetMessage;
@@ -99,11 +109,11 @@ const Message: React.FC<{
   );
 };
 
-const EditChartModal: React.FC<{}> = ({}) => {
+export const EditWidgetModal: React.FC<{}> = ({}) => {
   // EXTERNAL HOOKS
   const backend = useBackend();
-  const { refreshWidgets, setSelectedWidget, selectedWidget, dashboard } =
-    useDashboard();
+  const { refreshWidgets, dashboard } = useDashboard();
+  const { widget, setOpen, open } = useEditWidgetModal();
 
   // REVERT CHANGES STATES
   const [changesMade, setChangesMade] = useState(false);
@@ -128,17 +138,17 @@ const EditChartModal: React.FC<{}> = ({}) => {
   const [tab, setTab] = useState<"chat" | "editor" | "settings">("chat");
 
   useEffect(() => {
-    if (selectedWidget) {
-      updateStates(selectedWidget);
+    if (widget) {
+      updateStates(widget);
       setCachedWidget({
-        cache: selectedWidget.cache,
-        code: selectedWidget.code,
-        messages: selectedWidget.messages,
+        cache: widget.cache,
+        code: widget.code,
+        messages: widget.messages,
       });
     } else {
       updateStates(undefined);
     }
-  }, [selectedWidget]);
+  }, [widget]);
 
   const updateStates = (widget: Widget | undefined) => {
     if (widget) {
@@ -164,16 +174,16 @@ const EditChartModal: React.FC<{}> = ({}) => {
   };
 
   const requestEditWidget = async (msg: WidgetMessage[]) => {
-    if (!selectedWidget) return;
+    if (!widget) return;
     setCode("");
     setLoading(true);
 
     try {
-      let widget = await backend?.widget(selectedWidget.id).updatePrompts(msg);
+      let wid = await backend?.widget(widget.id).updatePrompts(msg);
       setChangesMade(true);
       toast.success("Your widget has been updated!");
 
-      updateStates(widget);
+      updateStates(wid);
       setLoading(false);
     } catch (e: any) {
       toast.error("Failed to create widget: " + e.message);
@@ -182,10 +192,10 @@ const EditChartModal: React.FC<{}> = ({}) => {
   };
 
   const saveChanges = () => {
-    if (!selectedWidget) return;
+    if (!widget) return;
     toast.promise(
       () => {
-        return backend?.widgets.update(selectedWidget.id, {
+        return backend?.widgets.update(widget.id, {
           title: title,
           code: code,
           cache: output,
@@ -207,7 +217,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
   };
 
   const cleanup = () => {
-    setSelectedWidget(undefined);
+    setOpen(false, undefined);
 
     updateStates(undefined);
 
@@ -218,10 +228,10 @@ const EditChartModal: React.FC<{}> = ({}) => {
 
   const executeCode = async () => {
     setLoading(true);
-    if (!selectedWidget) return;
+    if (!widget) return;
     toast.promise(
       async () => {
-        let data = await backend?.widget(selectedWidget.id).executeCode(code);
+        let data = await backend?.widget(widget.id).executeCode(code);
         setOutput(data);
       },
       {
@@ -238,10 +248,6 @@ const EditChartModal: React.FC<{}> = ({}) => {
       }
     );
   };
-
-  const open = useMemo(() => {
-    return selectedWidget !== undefined;
-  }, [selectedWidget]);
 
   return (
     <>
@@ -365,7 +371,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
                             className="onvo-ask-textarea onvo-background-color onvo-pr-[52px]"
-                            placeholder={`Ask for changes to your chart...`}
+                            placeholder={`Ask for changes to your widget...`}
                             autoFocus
                             onKeyUp={(evt) => {
                               if (evt.key === "Enter" && !evt.shiftKey) {
@@ -424,6 +430,11 @@ const EditChartModal: React.FC<{}> = ({}) => {
                       <div className="onvo-flex onvo-flex-row onvo-items-center onvo-justify-between">
                         <Text className="onvo-text-xs">Title</Text>{" "}
                         <Icon
+                          key={
+                            settings.title_hidden
+                              ? "slash-eye-icon"
+                              : "eye-icon"
+                          }
                           icon={settings.title_hidden ? EyeSlashIcon : EyeIcon}
                           onClick={() => {
                             setSettings((s: any) => ({
@@ -548,7 +559,7 @@ const EditChartModal: React.FC<{}> = ({}) => {
                 {output && (
                   <ChartBase
                     json={output}
-                    id={selectedWidget?.id || ""}
+                    id={widget?.id || ""}
                     title={title}
                     settings={settings}
                     key={title + JSON.stringify(settings)}
@@ -562,5 +573,3 @@ const EditChartModal: React.FC<{}> = ({}) => {
     </>
   );
 };
-
-export default EditChartModal;

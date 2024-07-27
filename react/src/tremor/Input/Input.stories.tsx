@@ -5,7 +5,7 @@ import { Input } from "./Input";
 
 const meta: Meta = {
   component: Input,
-  title: "Tremor/Input",
+  title: "Primitives/Input",
   argTypes: {},
 };
 export default meta;

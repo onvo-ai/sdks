@@ -24,18 +24,18 @@ const selectTriggerStyles = [
     // base
     "onvo-group/trigger onvo-flex onvo-w-full onvo-select-none onvo-items-center onvo-justify-between onvo-truncate onvo-rounded-md onvo-border onvo-px-2 onvo-py-1.5 onvo-shadow-sm onvo-outline-none onvo-transition sm:onvo-text-sm",
     // border color
-    "onvo-border-gray-300 dark:onvo-border-gray-800",
+    "onvo-border-slate-200 dark:onvo-border-slate-800",
     // text color
-    "onvo-text-gray-900 dark:onvo-text-gray-50",
+    "onvo-text-slate-900 dark:onvo-text-slate-50",
     // placeholder
-    "data-[placeholder]:onvo-text-gray-400 data-[placeholder]:dark:onvo-text-gray-500",
+    "data-[placeholder]:onvo-text-slate-400 data-[placeholder]:dark:onvo-text-slate-500",
     // background color
-    "bg-white dark:bg-gray-950",
+    "bg-white dark:bg-slate-950",
     // hover
-    "hover:onvo-bg-gray-50 hover:dark:onvo-bg-gray-950/50",
+    "hover:onvo-bg-slate-50 hover:dark:onvo-bg-slate-950/50",
     // disabled
-    "data-[disabled]:onvo-bg-gray-100 data-[disabled]:onvo-text-gray-400",
-    "data-[disabled]:dark:onvo-border-gray-700 data-[disabled]:dark:onvo-bg-gray-800 data-[disabled]:dark:onvo-text-gray-500",
+    "data-[disabled]:onvo-bg-slate-100 data-[disabled]:onvo-text-slate-400",
+    "data-[disabled]:dark:onvo-border-slate-700 data-[disabled]:dark:onvo-bg-slate-800 data-[disabled]:dark:onvo-text-slate-500",
     focusInput
     // invalid (optional)
     // "aria-[invalid=true]:dark:ring-red-400/20 aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-red-200 aria-[invalid=true]:border-red-500 invalid:ring-2 invalid:ring-red-200 invalid:border-red-500"
@@ -65,9 +65,9 @@ const SelectTrigger = React.forwardRef<
             // base
             "onvo-size-4 onvo-shrink-0",
             // text color
-            "onvo-text-gray-400 dark:onvo-text-gray-600",
+            "onvo-text-slate-400 dark:onvo-text-slate-600",
             // disabled
-            "group-data-[disabled]/trigger:onvo-text-gray-300 group-data-[disabled]/trigger:dark:onvo-text-gray-600"
+            "group-data-[disabled]/trigger:onvo-text-slate-300 group-data-[disabled]/trigger:dark:onvo-text-slate-600"
           )}
         />
       </SelectPrimitives.Icon>
@@ -138,11 +138,11 @@ const SelectContent = React.forwardRef<
           // heights
           "onvo-max-h-[--radix-select-content-available-height]",
           // background color
-          "onvo-bg-white dark:onvo-bg-gray-950",
+          "onvo-bg-white dark:onvo-bg-slate-950",
           // text color
-          "onvo-text-gray-900 dark:onvo-text-gray-50",
+          "onvo-text-slate-900 dark:onvo-text-slate-50",
           // border color
-          "onvo-border-gray-300 dark:onvo-border-gray-800",
+          "onvo-border-slate-300 dark:onvo-border-slate-800",
           // transition
           "onvo-will-change-[transform,opacity]",
           // "data-[state=open]:animate-slideDownAndFade",
@@ -183,7 +183,7 @@ const SelectGroupLabel = React.forwardRef<
       // base
       "onvo-px-3 onvo-py-2 onvo-text-xs onvo-font-medium onvo-tracking-wide",
       // text color
-      "onvo-text-gray-500 dark:onvo-text-gray-500",
+      "onvo-text-slate-500 dark:onvo-text-slate-500",
       className
     )}
     {...props}
@@ -203,13 +203,13 @@ const SelectItem = React.forwardRef<
         // base
         "onvo-grid onvo-cursor-pointer onvo-grid-cols-[1fr_20px] onvo-gap-x-2 onvo-rounded onvo-px-3 onvo-py-2 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
         // text color
-        "onvo-text-gray-900 dark:onvo-text-gray-50",
+        "onvo-text-slate-900 dark:onvo-text-slate-50",
         // disabled
-        "data-[disabled]:onvo-pointer-events-none data-[disabled]:onvo-text-gray-400 data-[disabled]:hover:onvo-bg-none dark:data-[disabled]:onvo-text-gray-600",
+        "data-[disabled]:onvo-pointer-events-none data-[disabled]:onvo-text-slate-400 data-[disabled]:hover:onvo-bg-none dark:data-[disabled]:onvo-text-slate-600",
         // focus
-        "focus-visible:onvo-bg-gray-100 focus-visible:dark:onvo-bg-gray-900",
+        "focus-visible:onvo-bg-slate-100 focus-visible:dark:onvo-bg-slate-900",
         // hover
-        "hover:onvo-bg-gray-100 hover:dark:onvo-bg-gray-900",
+        "hover:onvo-bg-slate-100 hover:dark:onvo-bg-slate-900",
         className
       )}
       {...props}
@@ -219,7 +219,7 @@ const SelectItem = React.forwardRef<
       </SelectPrimitives.ItemText>
       <SelectPrimitives.ItemIndicator>
         <CheckIcon
-          className="onvo-size-5 onvo-shrink-0 onvo-text-gray-800 dark:onvo-text-gray-200"
+          className="onvo-size-5 onvo-shrink-0 onvo-text-slate-800 dark:onvo-text-slate-200"
           aria-hidden="true"
         />
       </SelectPrimitives.ItemIndicator>
@@ -239,7 +239,7 @@ const SelectSeparator = React.forwardRef<
       // base
       "-onvo-mx-1 onvo-my-1 onvo-h-px",
       // background color
-      "onvo-bg-gray-300 dark:onvo-bg-gray-700",
+      "onvo-bg-slate-300 dark:onvo-bg-slate-700",
       className
     )}
     {...props}

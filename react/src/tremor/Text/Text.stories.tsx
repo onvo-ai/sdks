@@ -5,7 +5,7 @@ import { Text, Label, Title, Metric } from "./Text";
 
 const meta: Meta = {
   component: Text,
-  title: "Tremor/Text",
+  title: "Primitives/Text",
   argTypes: {},
 };
 export default meta;
