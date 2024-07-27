@@ -43,9 +43,7 @@ class Onvo:
         self.teams = Teams(*params)
         self.sessions = Sessions(*params)
         self.questions = Questions(*params)
-        self.widgets = Widgets(
-            *params, self.questions, self.dashboards
-        )  # TODO: remove self.dashboards once back-end is fixed
+        self.widgets = Widgets(*params, self.questions)
 
     def dashboard(self, dashboard_id):
         """Creates a dashboard object that can be used to modify properties of Dashboard such as the datasources it's connected to.
