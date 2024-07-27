@@ -91,7 +91,7 @@ def main():
     return chart`,
       team: "3d05b990-c855-4945-bdd1-b3a8305ffc59",
       dashboard: "f90182a2-f485-45a8-a9d6-b72021c03b50",
-      cache: JSON.stringify({
+      cache: {
         type: "bar",
         data: {
           labels: [
@@ -185,7 +185,7 @@ def main():
             ],
           },
         },
-      }),
+      },
     });
 
     expect(newWidget).toBeDefined();

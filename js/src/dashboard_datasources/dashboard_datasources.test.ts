@@ -21,15 +21,6 @@ describe("Dashboard Datasources", () => {
     expect(response.dashboard).toBeDefined();
     expect(response.datasource).toBeDefined();
   });
-  it("should list dashboard datasources", async () => {
-    let datasources = await onvo
-      .dashboard("f90182a2-f485-45a8-a9d6-b72021c03b50")
-      .datasources.list();
-
-    expect(datasources).toBeDefined();
-    expect(datasources.length).toBeDefined();
-    expect(datasources.length).toBeGreaterThan(0);
-  });
 
   it("should unlink dashboard datasource", async () => {
     let response = await onvo

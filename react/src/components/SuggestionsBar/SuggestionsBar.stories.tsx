@@ -5,7 +5,7 @@ import { SuggestionsBar } from "./SuggestionsBar";
 
 const meta: Meta = {
   component: SuggestionsBar,
-  title: "Onvo/SuggestionsBar",
+  title: "Elements/SuggestionsBar",
   argTypes: {},
 };
 export default meta;

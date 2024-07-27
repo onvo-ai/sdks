@@ -15,7 +15,6 @@ type DashboardContext = {
   id: string | undefined;
   dashboard?: DashboardType;
   widgets: Widget[];
-  container: HTMLDivElement | undefined;
   setWidgets: (widgets: Widget[]) => void;
   refreshDashboard: () => Promise<void>;
   refreshWidgets: () => Promise<void>;
@@ -28,7 +27,6 @@ type DashboardContext = {
 const Context = createContext<DashboardContext>({
   id: undefined,
   dashboard: undefined,
-  container: undefined,
   widgets: [],
   setWidgets: () => {},
   refreshDashboard: async () => {},
@@ -60,7 +58,6 @@ export const Dashboard: React.FC<{
   const prefersColorScheme = usePrefersColorScheme();
   const [selectedWidget, setSelectedWidget] = useState<Widget>();
   const initialized = useRef(false);
-  const elementRef = useRef<HTMLDivElement>();
 
   const refreshDashboard = async () => {
     if (!backend) return;
@@ -116,16 +113,20 @@ export const Dashboard: React.FC<{
       if (dashboard.settings?.theme === "dark") {
         newTheme = "dark";
         document.body.classList.add("onvo-dark");
+        defaults.borderColor = "#334155";
       } else if (dashboard.settings?.theme === "light") {
         newTheme = "light";
         document.body.classList.remove("onvo-dark");
+        defaults.borderColor = "#cbd5e1";
       } else {
         if (prefersColorScheme === "dark") {
           document.body.classList.add("onvo-dark");
           newTheme = "dark";
+          defaults.borderColor = "#334155";
         } else {
           newTheme = "light";
           document.body.classList.remove("onvo-dark");
+          defaults.borderColor = "#cbd5e1";
         }
       }
 
@@ -188,12 +189,10 @@ export const Dashboard: React.FC<{
         selectedWidget,
         setSelectedWidget,
         adminMode,
-        container: elementRef.current,
       }}
     >
       <div
         key={theme === "dark" ? "dark" : "light"}
-        ref={elementRef as any}
         className={`onvo-dashboard-context onvo-relative onvo-scrollbar-thumb-rounded-full onvo-scrollbar-track-transparent onvo-translate-x-0 onvo-h-full onvo-background-color onvo-flex onvo-flex-col ${
           theme === "dark"
             ? "onvo-dark onvo-scrollbar-thumb-slate-500"

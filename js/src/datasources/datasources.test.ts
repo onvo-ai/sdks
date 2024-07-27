@@ -19,12 +19,12 @@ describe("Datasources", () => {
       description: "",
       source: "csv",
       filters: [],
-      config: JSON.stringify({
+      config: {
         url: "1234567890",
         filename: "Test file",
-      }),
+      },
       columns: [],
-      parameters: JSON.stringify({}),
+      parameters: [],
     });
     expect(newDatasource).toBeDefined();
     expect(newDatasource.id).toBeDefined();
@@ -41,6 +41,16 @@ describe("Datasources", () => {
     expect(automations[0].title).toBeDefined();
     expect(automations[0].source).toBeDefined();
     expect(automations[0].config).toBeDefined();
+  });
+
+  it("should list dashboard datasources", async () => {
+    let datasources = await onvo.datasources.list({
+      dashboard: "f90182a2-f485-45a8-a9d6-b72021c03b50",
+    });
+
+    expect(datasources).toBeDefined();
+    expect(datasources.length).toBeDefined();
+    expect(datasources.length).toBeGreaterThan(0);
   });
 
   it("should get a datasource", async () => {

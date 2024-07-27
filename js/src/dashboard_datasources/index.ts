@@ -13,18 +13,6 @@ export class OnvoDashboardDatasources extends OnvoBase {
     this.#dashboardId = dashboardId;
   }
 
-  // Dashboard Datasource endpoints
-  /**
-   * Lists all the datasources linked to a dashboard.
-   *
-   * @return {Promise<DashboardDatasource[]>} A promise that resolves to an array of dashboard datasources.
-   */
-  list(): Promise<DashboardDatasource[]> {
-    return this.fetchBase(
-      "/api/dashboards/" + this.#dashboardId + "/datasources"
-    ) as Promise<DashboardDatasource[]>;
-  }
-
   /**
    * Unlinks a datasource from a dashboard.
    *

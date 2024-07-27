@@ -41,8 +41,8 @@
   color: var(--onvo-dark-font-color);
 }
 
-/* SEPARATOR LINKS STYLING */
-.onvo-separator a {
+/* TEXT WIDGET LINKS STYLING */
+.onvo-text-widget a {
   text-decoration: underline;
   color: #3366cc;
 }
@@ -53,7 +53,9 @@
   width: 12px !important;
   height: 12px !important;
 }
-
+.react-grid-item:hover {
+  z-index: 20;
+}
 .react-resizable-handle::after {
   display: none !important;
 }
@@ -82,6 +84,34 @@
   --rdg-header-background-color: #1f2937 !important;
   --rdg-row-hover-background-color: #1f2937 !important;
   --rdg-color: var(--onvo-dark-font-color);
+}
+
+/* RICH TEXT EDITOR STYLES */
+.onvo-dark .rsw-editor {
+  border-color: #1e293b;
+  background-color: #020617;
+  margin-top: 4px;
+}
+.onvo-dark .rsw-toolbar {
+  background-color: #1e293b;
+  border-bottom-color: #1e293b;
+}
+.onvo-dark .rsw-separator {
+  border-right-color: #020617;
+}
+.onvo-dark .rsw-btn {
+  color: #e2e8f0;
+}
+
+.onvo-dark .rsw-btn {
+  color: #e2e8f0;
+}
+.onvo-dark .rsw-btn:hover {
+  background: #334155;
+}
+
+.onvo-dark .rsw-btn[data-active="true"] {
+  background: #334155;
 }
 
 /* ANIMATED GRADIENT BORDER STYLES */

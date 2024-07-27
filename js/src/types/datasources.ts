@@ -1,23 +1,33 @@
-export type APIDatasourceConfig = {
-  url?: string;
-  type?: "json" | "csv" | "xml" | "excel";
-  method?: "GET" | "POST";
-  headers?: string;
-  body?: string;
-  transform?: string;
-};
-
 export type OauthConfig = {
   access_token: string;
   refresh_token: string;
   access_expires_at: string;
   refresh_expires_at: string;
 };
+export type APIDatasourceConfig = {
+  url?: string;
+  type?: "json" | "csv" | "xml";
+  method?: "GET" | "POST";
+  headers?: string;
+  body?: string;
+  transform?: string;
+};
 
-export type FileDatasourceConfig = {
+export type CSVDatasourceConfig = {
   url?: string;
   filename?: string;
-  type?: "json" | "csv" | "xml" | "excel";
+};
+
+export type ExcelDatasourceConfig = {
+  url?: string;
+  filename?: string;
+  sheetName?: string;
+};
+
+export type JSONDatasourceConfig = {
+  url?: string;
+  filename?: string;
+  transform?: string;
 };
 
 export type RedshiftDatasourceConfig = {
@@ -29,8 +39,18 @@ export type RedshiftDatasourceConfig = {
   query: string;
 };
 
-export type SQLDatasourceConfig = {
+export type MySQLDatasourceConfig = {
   host: string;
+  user: string;
+  port: string;
+  password: string;
+  database: string;
+  query: string;
+};
+
+export type MsSQLDatasourceConfig = {
+  server: string;
+  port: string;
   user: string;
   password: string;
   database: string;

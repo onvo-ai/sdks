@@ -13,24 +13,25 @@ import React from "react";
 import { SuggestionsBar } from "../SuggestionsBar";
 import { useBackend } from "../Wrapper";
 import { useDashboard } from "../Dashboard";
-import Logo from "./Logo";
-import QuestionLoader from "./QuestionLoader";
+import { Logo } from "../Logo";
+import { ChartLoader } from "../ChartLoader";
 import { Question } from "@onvo-ai/js";
 import { SparklesIcon } from "@heroicons/react/24/solid";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogTrigger,
-} from "../../tremor/Dialog";
+
 import { twMerge } from "tailwind-merge";
 
 dayjs.extend(relativeTime);
 
+export interface MessageType {
+  role: "user" | "assistant" | "tool";
+  content: string | ({ text: string; type: "text" } | { type: "tool_user" })[];
+  tool_calls?: any[];
+}
+
 export const QuestionModal: React.FC<{}> = ({}) => {
   const backend = useBackend();
-  const { dashboard, container, adminMode } = useDashboard();
+  const { dashboard, adminMode } = useDashboard();
 
   const input = useRef<HTMLTextAreaElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
@@ -40,12 +41,11 @@ export const QuestionModal: React.FC<{}> = ({}) => {
   const [questionLoading, setQuestionLoading] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedQuestion, setSelectedQuestion] = useState<Question>();
-  const [messages, setMessages] = useState<
-    { role: "user" | "assistant"; content: string }[]
-  >([]);
+  const [messages, setMessages] = useState<MessageType[]>([]);
 
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [logo, setLogo] = useState("");
 
   const getQuestions = async () => {
     setLoading(true);
@@ -92,13 +92,16 @@ export const QuestionModal: React.FC<{}> = ({}) => {
       setMessages([]);
       setSelectedQuestion(undefined);
     }
-  }, [open, dashboard]);
+  }, [open]);
 
   useEffect(() => {
-    return () => {
-      setOpen(false);
-    };
-  }, []);
+    if (!dashboard) return;
+    backend?.teams.get(dashboard?.team).then((team) => {
+      if (team && team.logo) {
+        setLogo(team.logo);
+      }
+    });
+  }, [dashboard]);
 
   useEffect(() => {
     if (selectedQuestion) {
@@ -111,9 +114,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
     }
   }, [selectedQuestion]);
 
-  const askQuestion = async (
-    msg: { role: "user" | "assistant"; content: string }[]
-  ) => {
+  const askQuestion = async (msg: MessageType[]) => {
     setMessages(msg);
     setQuestionLoading(true);
     window.setTimeout(scrollToBottom, 300);
@@ -125,7 +126,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
       let response = await backend?.questions.create({
         dashboardId: dashboard?.id,
         questionId: selectedQuestion?.id || undefined,
-        messages: msg,
+        messages: msg as any,
       });
       setSelectedQuestion(response);
     } catch (e: any) {
@@ -152,6 +153,11 @@ export const QuestionModal: React.FC<{}> = ({}) => {
 
     return messages.map((a, index) => (
       <QuestionMessage
+        key={
+          (selectedQuestion?.id || "null") + "-" + messages.length + "-" + index
+        }
+        logo={logo}
+        messages={messages}
         index={index}
         dashboardId={dashboard?.id}
         teamId={dashboard?.team || selectedQuestion?.team || undefined}
@@ -159,7 +165,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
         onDelete={() => {
           let newMessages = messages.filter((m, i) => i < index);
           backend?.questions.update(selectedQuestion?.id || "null", {
-            messages: newMessages,
+            messages: newMessages as any,
           });
           setMessages(newMessages);
         }}
@@ -187,26 +193,36 @@ export const QuestionModal: React.FC<{}> = ({}) => {
             .filter((m, i) => i <= index);
           askQuestion(newMessages);
         }}
-        key={
-          (selectedQuestion?.id || "null") +
-          "-" +
-          messages.length +
-          "-" +
-          index +
-          "-" +
-          (a.content || "").substring(0, 10)
-        }
         onClose={() => {
           setSelectedQuestion(undefined);
           setMessages([]);
           setOpen(false);
         }}
-        messages={messages}
-        role={a.role}
-        content={a.content}
       />
     ));
-  }, [messages, dashboard, selectedQuestion]);
+  }, [messages, dashboard, selectedQuestion, logo]);
+
+  const LogoIcon = useMemo(() => {
+    return logo && logo.trim() !== "" ? (
+      <Icon
+        size="lg"
+        variant="shadow"
+        className="!onvo-p-0"
+        icon={() => (
+          <img
+            src={logo}
+            className="onvo-object-contain onvo-rounded-lg onvo-h-[88px] onvo-w-[88px]"
+          />
+        )}
+      />
+    ) : (
+      <Icon
+        size="lg"
+        variant="shadow"
+        icon={() => <Logo height={72} width={72} />}
+      />
+    );
+  }, [logo]);
 
   if (!dashboard?.settings?.can_ask_questions && !adminMode) return <></>;
 
@@ -259,15 +275,11 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                   className="onvo-flex onvo-w-full onvo-flex-grow onvo-flex-col onvo-gap-4 onvo-overflow-y-auto onvo-scrollbar-thin onvo-px-2 onvo-py-4"
                   ref={scroller}
                 >
-                  <div className="onvo-mx-auto onvo-flex onvo-flex-col onvo-max-w-2xl">
+                  <div className="onvo-mx-auto onvo-flex onvo-flex-col onvo-max-w-2xl onvo-w-full">
                     {messages.length === 0 && !questionLoading && (
                       <>
                         <div className="onvo-flex onvo-w-full onvo-pt-8 onvo-pb-12 onvo-flex-col onvo-items-center onvo-justify-center">
-                          <Icon
-                            size="lg"
-                            variant="shadow"
-                            icon={() => <Logo height={72} width={72} />}
-                          />
+                          {LogoIcon}
                           <Metric className="onvo-mt-2 onvo-text-center">
                             Ask me for a widget or visualisation
                           </Metric>
@@ -306,7 +318,7 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                       </>
                     )}
                     {questionMessageList}
-                    {questionLoading && <QuestionLoader />}
+                    {questionLoading && <ChartLoader logo={logo} />}
                   </div>
                 </div>
 
@@ -341,15 +353,17 @@ export const QuestionModal: React.FC<{}> = ({}) => {
                       variant="solid"
                       icon={ArrowUpIcon}
                       onClick={() => {
-                        let newMessages = [
-                          ...messages,
-                          {
-                            role: "user" as const,
-                            content: query,
-                          },
-                        ];
-                        askQuestion(newMessages);
-                        setQuery("");
+                        if (query.trim() !== "") {
+                          let newMessages = [
+                            ...messages,
+                            {
+                              role: "user" as const,
+                              content: query,
+                            },
+                          ];
+                          askQuestion(newMessages);
+                          setQuery("");
+                        }
                       }}
                     />
                     <Text className="onvo-mt-0 onvo-text-center onvo-text-xs">

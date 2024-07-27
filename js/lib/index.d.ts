@@ -100,7 +100,7 @@ type Database = {
                 };
                 Relationships: [
                     {
-                        foreignKeyName: "api_keys_team_fkey";
+                        foreignKeyName: "public_api_keys_team_fkey";
                         columns: ["team"];
                         isOneToOne: false;
                         referencedRelation: "teams";
@@ -142,7 +142,7 @@ type Database = {
                         referencedColumns: ["id"];
                     },
                     {
-                        foreignKeyName: "automation_runs_team_fkey";
+                        foreignKeyName: "public_automation_runs_team_fkey";
                         columns: ["team"];
                         isOneToOne: false;
                         referencedRelation: "teams";
@@ -237,7 +237,7 @@ type Database = {
                         referencedColumns: ["id"];
                     },
                     {
-                        foreignKeyName: "automations_team_fkey";
+                        foreignKeyName: "public_automations_team_fkey";
                         columns: ["team"];
                         isOneToOne: false;
                         referencedRelation: "teams";
@@ -277,14 +277,7 @@ type Database = {
                         referencedColumns: ["id"];
                     },
                     {
-                        foreignKeyName: "dashboard_datasources_datasource_fkey";
-                        columns: ["datasource"];
-                        isOneToOne: false;
-                        referencedRelation: "decrypted_datasources";
-                        referencedColumns: ["id"];
-                    },
-                    {
-                        foreignKeyName: "dashboard_datasources_team_fkey";
+                        foreignKeyName: "public_dashboard_datasources_team_fkey";
                         columns: ["team"];
                         isOneToOne: false;
                         referencedRelation: "teams";
@@ -358,7 +351,7 @@ type Database = {
                         referencedColumns: ["id"];
                     },
                     {
-                        foreignKeyName: "dashboards_team_fkey";
+                        foreignKeyName: "public_dashboards_team_fkey";
                         columns: ["team"];
                         isOneToOne: false;
                         referencedRelation: "teams";
@@ -369,16 +362,16 @@ type Database = {
             datasources: {
                 Row: {
                     columns: Json | null;
-                    config: string | null;
+                    config: Json | null;
                     created_at: string;
                     created_by: string | null;
-                    description: string;
+                    description: string | null;
                     filters: Json;
                     id: string;
                     last_updated_at: string;
                     last_updated_by: string | null;
-                    parameters: string | null;
-                    sample_data: string | null;
+                    parameters: Json | null;
+                    sample_data: Json | null;
                     size: number;
                     source: string;
                     team: string;
@@ -386,16 +379,16 @@ type Database = {
                 };
                 Insert: {
                     columns?: Json | null;
-                    config?: string | null;
+                    config?: Json | null;
                     created_at?: string;
                     created_by?: string | null;
-                    description?: string;
+                    description?: string | null;
                     filters?: Json;
                     id?: string;
                     last_updated_at?: string;
                     last_updated_by?: string | null;
-                    parameters?: string | null;
-                    sample_data?: string | null;
+                    parameters?: Json | null;
+                    sample_data?: Json | null;
                     size?: number;
                     source: string;
                     team: string;
@@ -403,16 +396,16 @@ type Database = {
                 };
                 Update: {
                     columns?: Json | null;
-                    config?: string | null;
+                    config?: Json | null;
                     created_at?: string;
                     created_by?: string | null;
-                    description?: string;
+                    description?: string | null;
                     filters?: Json;
                     id?: string;
                     last_updated_at?: string;
                     last_updated_by?: string | null;
-                    parameters?: string | null;
-                    sample_data?: string | null;
+                    parameters?: Json | null;
+                    sample_data?: Json | null;
                     size?: number;
                     source?: string;
                     team?: string;
@@ -434,7 +427,7 @@ type Database = {
                         referencedColumns: ["id"];
                     },
                     {
-                        foreignKeyName: "datasources_team_fkey";
+                        foreignKeyName: "public_datasources_team_fkey";
                         columns: ["team"];
                         isOneToOne: false;
                         referencedRelation: "teams";
@@ -472,7 +465,7 @@ type Database = {
                 };
                 Relationships: [
                     {
-                        foreignKeyName: "organisation_users_team_fkey";
+                        foreignKeyName: "public_embed_users_team_fkey";
                         columns: ["team"];
                         isOneToOne: false;
                         referencedRelation: "teams";
@@ -482,26 +475,26 @@ type Database = {
             };
             integrations: {
                 Row: {
-                    config: string;
+                    config: Json;
                     created_at: string;
                     provider: string;
                     team: string;
                 };
                 Insert: {
-                    config: string;
+                    config?: Json;
                     created_at?: string;
                     provider: string;
                     team: string;
                 };
                 Update: {
-                    config?: string;
+                    config?: Json;
                     created_at?: string;
                     provider?: string;
                     team?: string;
                 };
                 Relationships: [
                     {
-                        foreignKeyName: "integrations_team_fkey";
+                        foreignKeyName: "public_integrations_team_fkey";
                         columns: ["team"];
                         isOneToOne: false;
                         referencedRelation: "teams";
@@ -530,51 +523,7 @@ type Database = {
                 };
                 Relationships: [
                     {
-                        foreignKeyName: "invites_team_fkey";
-                        columns: ["team"];
-                        isOneToOne: false;
-                        referencedRelation: "teams";
-                        referencedColumns: ["id"];
-                    }
-                ];
-            };
-            logs: {
-                Row: {
-                    cost: number | null;
-                    created_at: string;
-                    id: string;
-                    messages: Json | null;
-                    model: string;
-                    success: boolean | null;
-                    team: string;
-                    tokens: number | null;
-                    type: string;
-                };
-                Insert: {
-                    cost?: number | null;
-                    created_at?: string;
-                    id?: string;
-                    messages?: Json | null;
-                    model: string;
-                    success?: boolean | null;
-                    team: string;
-                    tokens?: number | null;
-                    type: string;
-                };
-                Update: {
-                    cost?: number | null;
-                    created_at?: string;
-                    id?: string;
-                    messages?: Json | null;
-                    model?: string;
-                    success?: boolean | null;
-                    team?: string;
-                    tokens?: number | null;
-                    type?: string;
-                };
-                Relationships: [
-                    {
-                        foreignKeyName: "logs_team_fkey";
+                        foreignKeyName: "public_invites_team_fkey";
                         columns: ["team"];
                         isOneToOne: false;
                         referencedRelation: "teams";
@@ -597,17 +546,17 @@ type Database = {
                 };
                 Relationships: [
                     {
-                        foreignKeyName: "members_team_fkey";
-                        columns: ["team"];
-                        isOneToOne: false;
-                        referencedRelation: "teams";
-                        referencedColumns: ["id"];
-                    },
-                    {
                         foreignKeyName: "members_user_fkey";
                         columns: ["account"];
                         isOneToOne: false;
                         referencedRelation: "accounts";
+                        referencedColumns: ["id"];
+                    },
+                    {
+                        foreignKeyName: "public_members_team_fkey";
+                        columns: ["team"];
+                        isOneToOne: false;
+                        referencedRelation: "teams";
                         referencedColumns: ["id"];
                     }
                 ];
@@ -639,17 +588,17 @@ type Database = {
                 };
                 Relationships: [
                     {
+                        foreignKeyName: "public_questions_team_fkey";
+                        columns: ["team"];
+                        isOneToOne: false;
+                        referencedRelation: "teams";
+                        referencedColumns: ["id"];
+                    },
+                    {
                         foreignKeyName: "questions_dashboard_fkey";
                         columns: ["dashboard"];
                         isOneToOne: false;
                         referencedRelation: "dashboards";
-                        referencedColumns: ["id"];
-                    },
-                    {
-                        foreignKeyName: "questions_team_fkey";
-                        columns: ["team"];
-                        isOneToOne: false;
-                        referencedRelation: "teams";
                         referencedColumns: ["id"];
                     }
                 ];
@@ -659,37 +608,44 @@ type Database = {
                     created_at: string;
                     dashboard: string;
                     embed_user: string;
-                    parameters: string;
+                    parameters: Json;
                     team: string;
                 };
                 Insert: {
                     created_at?: string;
                     dashboard: string;
                     embed_user: string;
-                    parameters?: string;
+                    parameters?: Json;
                     team: string;
                 };
                 Update: {
                     created_at?: string;
                     dashboard?: string;
                     embed_user?: string;
-                    parameters?: string;
+                    parameters?: Json;
                     team?: string;
                 };
                 Relationships: [
+                    {
+                        foreignKeyName: "public_sessions_embed_user_team_fkey";
+                        columns: ["embed_user", "team"];
+                        isOneToOne: false;
+                        referencedRelation: "embed_users";
+                        referencedColumns: ["id", "team"];
+                    },
+                    {
+                        foreignKeyName: "public_sessions_team_fkey";
+                        columns: ["team"];
+                        isOneToOne: false;
+                        referencedRelation: "teams";
+                        referencedColumns: ["id"];
+                    },
                     {
                         foreignKeyName: "sessions_dashboard_fkey";
                         columns: ["dashboard"];
                         isOneToOne: false;
                         referencedRelation: "dashboards";
                         referencedColumns: ["id"];
-                    },
-                    {
-                        foreignKeyName: "sessions_embed_user_fkey";
-                        columns: ["embed_user", "team"];
-                        isOneToOne: false;
-                        referencedRelation: "embed_users";
-                        referencedColumns: ["id", "team"];
                     }
                 ];
             };
@@ -759,18 +715,18 @@ type Database = {
                 };
                 Relationships: [
                     {
+                        foreignKeyName: "public_subscriptions_team_fkey";
+                        columns: ["team"];
+                        isOneToOne: true;
+                        referencedRelation: "teams";
+                        referencedColumns: ["id"];
+                    },
+                    {
                         foreignKeyName: "subscriptions_product_name_fkey";
                         columns: ["product_name"];
                         isOneToOne: false;
                         referencedRelation: "subscription_plans";
                         referencedColumns: ["name"];
-                    },
-                    {
-                        foreignKeyName: "subscriptions_team_fkey";
-                        columns: ["team"];
-                        isOneToOne: true;
-                        referencedRelation: "teams";
-                        referencedColumns: ["id"];
                     }
                 ];
             };
@@ -806,7 +762,7 @@ type Database = {
             };
             widgets: {
                 Row: {
-                    cache: string | null;
+                    cache: Json | null;
                     code: string;
                     created_at: string;
                     dashboard: string;
@@ -818,7 +774,7 @@ type Database = {
                     title: string;
                 };
                 Insert: {
-                    cache?: string | null;
+                    cache?: Json | null;
                     code: string;
                     created_at?: string;
                     dashboard: string;
@@ -830,7 +786,7 @@ type Database = {
                     title: string;
                 };
                 Update: {
-                    cache?: string | null;
+                    cache?: Json | null;
                     code?: string;
                     created_at?: string;
                     dashboard?: string;
@@ -843,221 +799,24 @@ type Database = {
                 };
                 Relationships: [
                     {
+                        foreignKeyName: "public_widgets_team_fkey";
+                        columns: ["team"];
+                        isOneToOne: false;
+                        referencedRelation: "teams";
+                        referencedColumns: ["id"];
+                    },
+                    {
                         foreignKeyName: "widgets_dashboard_fkey";
                         columns: ["dashboard"];
                         isOneToOne: false;
                         referencedRelation: "dashboards";
-                        referencedColumns: ["id"];
-                    },
-                    {
-                        foreignKeyName: "widgets_team_fkey";
-                        columns: ["team"];
-                        isOneToOne: false;
-                        referencedRelation: "teams";
                         referencedColumns: ["id"];
                     }
                 ];
             };
         };
         Views: {
-            decrypted_datasources: {
-                Row: {
-                    columns: Json | null;
-                    config: string | null;
-                    created_at: string | null;
-                    created_by: string | null;
-                    description: string | null;
-                    filters: Json | null;
-                    id: string | null;
-                    last_updated_at: string | null;
-                    last_updated_by: string | null;
-                    parameters: string | null;
-                    sample_data: string | null;
-                    size: number | null;
-                    source: string | null;
-                    team: string | null;
-                    title: string | null;
-                };
-                Insert: {
-                    columns?: Json | null;
-                    config?: never;
-                    created_at?: string | null;
-                    created_by?: string | null;
-                    description?: string | null;
-                    filters?: Json | null;
-                    id?: string | null;
-                    last_updated_at?: string | null;
-                    last_updated_by?: string | null;
-                    parameters?: never;
-                    sample_data?: never;
-                    size?: number | null;
-                    source?: string | null;
-                    team?: string | null;
-                    title?: string | null;
-                };
-                Update: {
-                    columns?: Json | null;
-                    config?: never;
-                    created_at?: string | null;
-                    created_by?: string | null;
-                    description?: string | null;
-                    filters?: Json | null;
-                    id?: string | null;
-                    last_updated_at?: string | null;
-                    last_updated_by?: string | null;
-                    parameters?: never;
-                    sample_data?: never;
-                    size?: number | null;
-                    source?: string | null;
-                    team?: string | null;
-                    title?: string | null;
-                };
-                Relationships: [
-                    {
-                        foreignKeyName: "datasources_created_by_fkey";
-                        columns: ["created_by"];
-                        isOneToOne: false;
-                        referencedRelation: "accounts";
-                        referencedColumns: ["id"];
-                    },
-                    {
-                        foreignKeyName: "datasources_last_updated_by_fkey";
-                        columns: ["last_updated_by"];
-                        isOneToOne: false;
-                        referencedRelation: "accounts";
-                        referencedColumns: ["id"];
-                    },
-                    {
-                        foreignKeyName: "datasources_team_fkey";
-                        columns: ["team"];
-                        isOneToOne: false;
-                        referencedRelation: "teams";
-                        referencedColumns: ["id"];
-                    }
-                ];
-            };
-            decrypted_integrations: {
-                Row: {
-                    config: string | null;
-                    created_at: string | null;
-                    provider: string | null;
-                    team: string | null;
-                };
-                Insert: {
-                    config?: never;
-                    created_at?: string | null;
-                    provider?: string | null;
-                    team?: string | null;
-                };
-                Update: {
-                    config?: never;
-                    created_at?: string | null;
-                    provider?: string | null;
-                    team?: string | null;
-                };
-                Relationships: [
-                    {
-                        foreignKeyName: "integrations_team_fkey";
-                        columns: ["team"];
-                        isOneToOne: false;
-                        referencedRelation: "teams";
-                        referencedColumns: ["id"];
-                    }
-                ];
-            };
-            decrypted_sessions: {
-                Row: {
-                    created_at: string | null;
-                    dashboard: string | null;
-                    embed_user: string | null;
-                    parameters: string | null;
-                    team: string | null;
-                };
-                Insert: {
-                    created_at?: string | null;
-                    dashboard?: string | null;
-                    embed_user?: string | null;
-                    parameters?: never;
-                    team?: string | null;
-                };
-                Update: {
-                    created_at?: string | null;
-                    dashboard?: string | null;
-                    embed_user?: string | null;
-                    parameters?: never;
-                    team?: string | null;
-                };
-                Relationships: [
-                    {
-                        foreignKeyName: "sessions_dashboard_fkey";
-                        columns: ["dashboard"];
-                        isOneToOne: false;
-                        referencedRelation: "dashboards";
-                        referencedColumns: ["id"];
-                    },
-                    {
-                        foreignKeyName: "sessions_embed_user_fkey";
-                        columns: ["embed_user", "team"];
-                        isOneToOne: false;
-                        referencedRelation: "embed_users";
-                        referencedColumns: ["id", "team"];
-                    }
-                ];
-            };
-            decrypted_widgets: {
-                Row: {
-                    cache: string | null;
-                    code: string | null;
-                    created_at: string | null;
-                    dashboard: string | null;
-                    id: string | null;
-                    layouts: Json | null;
-                    messages: Json | null;
-                    settings: Json | null;
-                    team: string | null;
-                    title: string | null;
-                };
-                Insert: {
-                    cache?: never;
-                    code?: string | null;
-                    created_at?: string | null;
-                    dashboard?: string | null;
-                    id?: string | null;
-                    layouts?: Json | null;
-                    messages?: Json | null;
-                    settings?: Json | null;
-                    team?: string | null;
-                    title?: string | null;
-                };
-                Update: {
-                    cache?: never;
-                    code?: string | null;
-                    created_at?: string | null;
-                    dashboard?: string | null;
-                    id?: string | null;
-                    layouts?: Json | null;
-                    messages?: Json | null;
-                    settings?: Json | null;
-                    team?: string | null;
-                    title?: string | null;
-                };
-                Relationships: [
-                    {
-                        foreignKeyName: "widgets_dashboard_fkey";
-                        columns: ["dashboard"];
-                        isOneToOne: false;
-                        referencedRelation: "dashboards";
-                        referencedColumns: ["id"];
-                    },
-                    {
-                        foreignKeyName: "widgets_team_fkey";
-                        columns: ["team"];
-                        isOneToOne: false;
-                        referencedRelation: "teams";
-                        referencedColumns: ["id"];
-                    }
-                ];
-            };
+            [_ in never]: never;
         };
         Functions: {
             can_create_widget: {
@@ -1149,61 +908,33 @@ type Enums<PublicEnumNameOrOptions extends keyof PublicSchema["Enums"] | {
     schema: keyof Database;
 } ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName] : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"] ? PublicSchema["Enums"][PublicEnumNameOrOptions] : never;
 
-type Modify<A, B extends DeepPartialAny<A>> = {
-    [K in keyof A | keyof B]: K extends keyof A ? K extends keyof B ? A[K] extends AnyObject ? B[K] extends AnyObject ? Modify<A[K], B[K]> : B[K] : B[K] : A[K] : B[K];
-};
-type AnyObject = Record<string, any>;
-type DeepPartialAny<T> = {
-    [P in keyof T]?: T[P] extends AnyObject ? DeepPartialAny<T[P]> : any;
-};
-
-declare enum Table {
-    Countries = "countries",
-    Invites = "invites",
-    ItineraryInvites = "itinerary_invites",
-    Itineraries = "itineraries",
-    Members = "members",
-    Teams = "teams",
-    Travelers = "travelers",
-    Accounts = "accounts",
-    DataSources = "datasources",
-    EmbedUsers = "embed_users",
-    APIKeys = "api_keys",
-    Widgets = "widgets",
-    Dashboards = "dashboards",
-    DashboardDatasources = "dashboard_datasources",
-    Sessions = "sessions",
-    Questions = "questions",
-    Integrations = "integrations",
-    DecryptedIntegrations = "decrypted_integrations",
-    DecryptedSessions = "decrypted_sessions",
-    DecryptedWidgets = "decrypted_widgets",
-    DecryptedDatasources = "decrypted_datasources",
-    Subscriptions = "subscriptions",
-    SubscriptionPlans = "subscription_plans",
-    Automations = "automations",
-    AutomationRuns = "automation_runs",
-    Logs = "logs"
-}
-
-type APIDatasourceConfig = {
-    url?: string;
-    type?: "json" | "csv" | "xml" | "excel";
-    method?: "GET" | "POST";
-    headers?: string;
-    body?: string;
-    transform?: string;
-};
 type OauthConfig = {
     access_token: string;
     refresh_token: string;
     access_expires_at: string;
     refresh_expires_at: string;
 };
-type FileDatasourceConfig = {
+type APIDatasourceConfig = {
+    url?: string;
+    type?: "json" | "csv" | "xml";
+    method?: "GET" | "POST";
+    headers?: string;
+    body?: string;
+    transform?: string;
+};
+type CSVDatasourceConfig = {
     url?: string;
     filename?: string;
-    type?: "json" | "csv" | "xml" | "excel";
+};
+type ExcelDatasourceConfig = {
+    url?: string;
+    filename?: string;
+    sheetName?: string;
+};
+type JSONDatasourceConfig = {
+    url?: string;
+    filename?: string;
+    transform?: string;
 };
 type RedshiftDatasourceConfig = {
     host: string;
@@ -1213,8 +944,17 @@ type RedshiftDatasourceConfig = {
     database: string;
     query: string;
 };
-type SQLDatasourceConfig = {
+type MySQLDatasourceConfig = {
     host: string;
+    user: string;
+    port: string;
+    password: string;
+    database: string;
+    query: string;
+};
+type MsSQLDatasourceConfig = {
+    server: string;
+    port: string;
     user: string;
     password: string;
     database: string;
@@ -1268,6 +1008,43 @@ type FirestoreDatasourceConfig = {
     collection: string;
 };
 
+type Modify<A, B extends DeepPartialAny<A>> = {
+    [K in keyof A | keyof B]: K extends keyof A ? K extends keyof B ? A[K] extends AnyObject ? B[K] extends AnyObject ? Modify<A[K], B[K]> : B[K] : B[K] : A[K] : B[K];
+};
+type AnyObject = Record<string, any>;
+type DeepPartialAny<T> = {
+    [P in keyof T]?: T[P] extends AnyObject ? DeepPartialAny<T[P]> : any;
+};
+
+declare enum Table {
+    Countries = "countries",
+    Invites = "invites",
+    ItineraryInvites = "itinerary_invites",
+    Itineraries = "itineraries",
+    Members = "members",
+    Teams = "teams",
+    Travelers = "travelers",
+    Accounts = "accounts",
+    DataSources = "datasources",
+    EmbedUsers = "embed_users",
+    APIKeys = "api_keys",
+    Widgets = "widgets",
+    Dashboards = "dashboards",
+    DashboardDatasources = "dashboard_datasources",
+    Sessions = "sessions",
+    Questions = "questions",
+    Integrations = "integrations",
+    DecryptedIntegrations = "decrypted_integrations",
+    DecryptedSessions = "decrypted_sessions",
+    DecryptedWidgets = "decrypted_widgets",
+    DecryptedDatasources = "decrypted_datasources",
+    Subscriptions = "subscriptions",
+    SubscriptionPlans = "subscription_plans",
+    Automations = "automations",
+    AutomationRuns = "automation_runs",
+    Logs = "logs"
+}
+
 type DashboardSettings = {
     theme: "dark" | "light" | "auto";
     dark_background: string;
@@ -1317,6 +1094,15 @@ type DataSource = Modify<Database["public"]["Tables"]["datasources"]["Row"], {
         title: string;
         description: string;
     }[];
+    sample_data: {
+        [key: string]: any;
+    }[];
+    config: CSVDatasourceConfig | ExcelDatasourceConfig | JSONDatasourceConfig | APIDatasourceConfig | AirtableDatasourceConfig | GoogleSheetDatasourceConfig | ZohoDatasourceConfig | RedshiftDatasourceConfig | MySQLDatasourceConfig | MsSQLDatasourceConfig | PostgreSQLDatasourceConfig | RootfiDatasourceConfig | MongoDBDatasourceConfig | FirestoreDatasourceConfig;
+    parameters: {
+        id: string;
+        wrap?: string;
+        default: string;
+    }[];
 }>;
 type EmbedUser = Database["public"]["Tables"]["embed_users"]["Row"];
 type Subscription = Database["public"]["Tables"]["subscriptions"]["Row"];
@@ -1339,22 +1125,28 @@ type Widget = Modify<Database["public"]["Tables"]["widgets"]["Row"], {
             h: number;
         };
     };
+    cache: any;
 }>;
 type Dashboard = Modify<Database["public"]["Tables"]["dashboards"]["Row"], {
     settings?: DashboardSettings;
     filters: DashboardFilter[];
 }>;
 type DashboardDatasource = Database["public"]["Tables"]["dashboard_datasources"]["Row"];
-type Session = Database["public"]["Tables"]["sessions"]["Row"];
+type Session = Modify<Database["public"]["Tables"]["sessions"]["Row"], {
+    parameters: {
+        [key: string]: any;
+    };
+}>;
 type Question = Database["public"]["Tables"]["questions"]["Row"];
-type Integration = Database["public"]["Tables"]["integrations"]["Row"];
+type Integration = Modify<Database["public"]["Tables"]["integrations"]["Row"], {
+    config: RedshiftDatasourceConfig | MySQLDatasourceConfig | MsSQLDatasourceConfig | PostgreSQLDatasourceConfig | RootfiDatasourceConfig | MongoDBDatasourceConfig | OauthConfig | FirestoreDatasourceConfig;
+}>;
 type Automation = Database["public"]["Tables"]["automations"]["Row"];
 type AutomationRun = Database["public"]["Tables"]["automation_runs"]["Row"];
 type ComprehensiveDashboard = Dashboard & {
     datasources: DataSource[];
     widgets: Widget[];
 };
-type Log = Database["public"]["Tables"]["logs"]["Row"];
 
 /**
  * Endpoints for managing accounts.
@@ -1439,7 +1231,9 @@ declare class OnvoDatasources extends OnvoBase {
      * Lists all the datasources.
      * @returns {Promise<DataSource[]>} A promise that resolves to an array of datasources.
      */
-    list(): Promise<DataSource[]>;
+    list(filters?: {
+        dashboard: string;
+    }): Promise<DataSource[]>;
     /**
      * Gets a datasource by ID.
      * @param {string} id - The ID of the datasource.
@@ -1549,12 +1343,6 @@ declare class OnvoDashboardDatasources extends OnvoBase {
     constructor(dashboardId: string, apiKey: string, options?: {
         endpoint: string;
     });
-    /**
-     * Lists all the datasources linked to a dashboard.
-     *
-     * @return {Promise<DashboardDatasource[]>} A promise that resolves to an array of dashboard datasources.
-     */
-    list(): Promise<DashboardDatasource[]>;
     /**
      * Unlinks a datasource from a dashboard.
      *
@@ -1837,6 +1625,19 @@ declare class OnvoQuestion extends OnvoBase {
     export(messageIndex: number, format: "svg" | "csv" | "xlsx" | "png" | "jpeg"): Promise<Blob>;
 }
 
+declare class OnvoUtils extends OnvoBase {
+    /**
+     * Uploads a file to a given bucket
+     *
+     * @param {Object} filters - The filters to apply to the question list.
+     * @param {string} filters.dashboard - The ID of the dashboard to list questions for.
+     * @returns {Promise<Question[]>} A promise that resolves to an array of questions.
+     */
+    uploadFile(file: File): Promise<{
+        url: string;
+    }>;
+}
+
 declare class Onvo extends OnvoBase {
     accounts: OnvoAccounts;
     teams: OnvoTeams;
@@ -1847,6 +1648,7 @@ declare class Onvo extends OnvoBase {
     questions: OnvoQuestions;
     widgets: OnvoWidgets;
     sessions: OnvoSessions;
+    utils: OnvoUtils;
     automation: (automationId: string) => OnvoAutomation;
     dashboard: (dashboardId: string) => OnvoDashboard;
     embed_user: (embedUserId: string) => OnvoEmbedUser;
@@ -1858,4 +1660,4 @@ declare class Onvo extends OnvoBase {
     });
 }
 
-export { type APIDatasourceConfig, type APIKey, type Account, type AirtableDatasourceConfig, type Automation, type AutomationRun, type ComprehensiveDashboard, type Dashboard, type DashboardDatasource, type DashboardFilter, type DashboardSettings, type DataSource, type Database, type EmbedUser, type Enums, type FileDatasourceConfig, type FirestoreDatasourceConfig, type GoogleSheetDatasourceConfig, type Integration, type Invite, type Json, type Log, type Member, type Modify, type MongoDBDatasourceConfig, type OauthConfig, Onvo, type PostgreSQLDatasourceConfig, type Question, type RedshiftDatasourceConfig, type RootfiDatasourceConfig, type SQLDatasourceConfig, type Session, type Subscription, type SubscriptionPlan, Table, type Tables, type TablesInsert, type TablesUpdate, type Team, type Widget, type WidgetMessage, type WidgetSettings, type ZohoDatasourceConfig, Onvo as default };
+export { type APIDatasourceConfig, type APIKey, type Account, type AirtableDatasourceConfig, type Automation, type AutomationRun, type CSVDatasourceConfig, type ComprehensiveDashboard, type Dashboard, type DashboardDatasource, type DashboardFilter, type DashboardSettings, type DataSource, type Database, type EmbedUser, type Enums, type ExcelDatasourceConfig, type FirestoreDatasourceConfig, type GoogleSheetDatasourceConfig, type Integration, type Invite, type JSONDatasourceConfig, type Json, type Member, type Modify, type MongoDBDatasourceConfig, type MsSQLDatasourceConfig, type MySQLDatasourceConfig, type OauthConfig, Onvo, type PostgreSQLDatasourceConfig, type Question, type RedshiftDatasourceConfig, type RootfiDatasourceConfig, type Session, type Subscription, type SubscriptionPlan, Table, type Tables, type TablesInsert, type TablesUpdate, type Team, type Widget, type WidgetMessage, type WidgetSettings, type ZohoDatasourceConfig, Onvo as default };

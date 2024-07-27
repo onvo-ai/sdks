@@ -7,7 +7,12 @@ export class OnvoDatasources extends OnvoBase {
    * Lists all the datasources.
    * @returns {Promise<DataSource[]>} A promise that resolves to an array of datasources.
    */
-  list(): Promise<DataSource[]> {
+  list(filters?: { dashboard: string }): Promise<DataSource[]> {
+    if (filters && filters.dashboard) {
+      return this.fetchBase(
+        "/api/datasources?dashboard=" + filters.dashboard
+      ) as Promise<DataSource[]>;
+    }
     return this.fetchBase("/api/datasources") as Promise<DataSource[]>;
   }
 

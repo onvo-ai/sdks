@@ -24,20 +24,23 @@ import {
   DropdownMenuTrigger,
 } from "../../tremor/DropdownMenu";
 import { Widget } from "@onvo-ai/js";
-import { useSeparatorModal } from "./CreateSeparatorModal";
+import { useTextWidgetModal } from "./TextWidgetModal";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
+import { useImageWidgetModal } from "./ImageWidgetModal";
 
 const DragHandle = () => {
   return (
-    <div className="onvo-chart-card-drag-handle onvo-hidden group-hover/chartcard:onvo-grid onvo-absolute onvo-grid-cols-4 onvo-py-1 onvo-cursor-move onvo-px-1 onvo-items-center onvo-justify-center onvo-h-6 onvo-w-10 onvo-bg-gray-50 hover:onvo-bg-blue-100 dark:onvo-bg-gray-800 dark:hover:onvo-bg-blue-900 onvo-rounded-md onvo-z-10 onvo-top-2 onvo-left-[50%] -onvo-ml-5">
-      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
-      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
-      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
-      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
-      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
-      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
-      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
-      <div className="onvo-h-1 onvo-w-1 onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+    <div className="onvo-absolute -onvo-top-6 onvo-w-10 onvo-h-6 onvo-z-10 onvo-hidden group-hover/chartcard:onvo-flex  onvo-left-[50%] -onvo-ml-5 onvo-justify-center onvo-items-center onvo-foreground-color onvo-border onvo-border-b-0 onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-t-md">
+      <div className="onvo-chart-card-drag-handle  onvo-absolute onvo-grid-cols-4 onvo-py-1 onvo-cursor-move onvo-grid onvo-px-1 onvo-items-center onvo-justify-center onvo-h-6 onvo-w-10">
+        <div className="onvo-h-[3px] onvo-w-[3px] onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+        <div className="onvo-h-[3px] onvo-w-[3px] onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+        <div className="onvo-h-[3px] onvo-w-[3px] onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+        <div className="onvo-h-[3px] onvo-w-[3px] onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+        <div className="onvo-h-[3px] onvo-w-[3px] onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+        <div className="onvo-h-[3px] onvo-w-[3px] onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+        <div className="onvo-h-[3px] onvo-w-[3px] onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+        <div className="onvo-h-[3px] onvo-w-[3px] onvo-ml-0.5 onvo-rounded-full onvo-bg-gray-300 dark:onvo-bg-gray-700"></div>
+      </div>
     </div>
   );
 };
@@ -47,7 +50,8 @@ const ChartCard: React.FC<{
 }> = ({ widget }) => {
   const { dashboard, refreshWidgets, setSelectedWidget, adminMode } =
     useDashboard();
-  const { setOpen } = useSeparatorModal();
+  const { setOpen: setTextModalOpen } = useTextWidgetModal();
+  const { setOpen: setImageModalOpen } = useImageWidgetModal();
   const backend = useBackend();
 
   const duplicate = async () => {
@@ -110,7 +114,7 @@ const ChartCard: React.FC<{
 
   let output = useMemo(() => {
     if (widget && widget.cache) {
-      return JSON.parse(widget.cache);
+      return widget.cache;
     } else {
       return undefined;
     }
@@ -122,9 +126,38 @@ const ChartCard: React.FC<{
   const addable = adminMode || dashboard?.settings?.can_create_widgets;
   const deletable = adminMode || dashboard?.settings?.can_delete_widgets;
 
-  if (output.type === "separator") {
+  if (output.type === "divider") {
+    return (
+      <div className="onvo-group/chartcard onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0">
+        {layout_editable && <DragHandle />}
+        {deletable && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Icon
+                className="onvo-z-20 onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
+                icon={EllipsisVerticalIcon}
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="onvo-min-w-56">
+              {deletable && (
+                <DropdownMenuGroup>
+                  <DropdownMenuItem onClick={deleteWidget}>
+                    <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                      <TrashIcon className="onvo-size-4 onvo-text-red-500" />
+                      <span className="onvo-text-red-500">Delete widget</span>
+                    </span>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+        <ChartBase json={output} id={widget.id} title="" />
+      </div>
+    );
+  }
+  if (output.type === "text") {
     let sub = output.options.plugins.subtitle.text || "";
-    console.log("SUB: ", typeof sub, sub);
     if (typeof sub !== "string") {
       sub = sub.join("<br />");
     }
@@ -145,17 +178,21 @@ const ChartCard: React.FC<{
                   <DropdownMenuItem
                     onClick={() => {
                       setTimeout(() => {
-                        setOpen(true, {
+                        setTextModalOpen(true, {
                           id: widget.id,
                           title: widget.title,
                           subtitle: sub,
+                          titleAlignment:
+                            output.options.plugins?.title?.align || "start",
+                          descriptionAlignment:
+                            output.options.plugins?.subtitle?.align || "start",
                         });
                       }, 30);
                     }}
                   >
                     <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                       <PencilSquareIcon className="onvo-size-4" />
-                      <span>Edit separator</span>
+                      <span>Edit widget</span>
                     </span>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
@@ -166,9 +203,7 @@ const ChartCard: React.FC<{
                   <DropdownMenuItem onClick={deleteWidget}>
                     <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                       <TrashIcon className="onvo-size-4 onvo-text-red-500" />
-                      <span className="onvo-text-red-500">
-                        Delete separator
-                      </span>
+                      <span className="onvo-text-red-500">Delete widget</span>
                     </span>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
@@ -181,11 +216,62 @@ const ChartCard: React.FC<{
     );
   }
 
+  if (output.type === "image") {
+    return (
+      <div className="onvo-group/chartcard onvo-rounded-md onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0">
+        {layout_editable && <DragHandle />}
+        {(widget_editable || deletable) && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Icon
+                className="onvo-z-20 onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
+                icon={EllipsisVerticalIcon}
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="onvo-min-w-56">
+              {widget_editable && (
+                <DropdownMenuGroup>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      setTimeout(() => {
+                        setImageModalOpen(true, {
+                          id: widget.id,
+                          url: output.options.plugins?.image?.url || "",
+                          imageFill:
+                            output.options.plugins?.image?.fill || "fill",
+                        });
+                      }, 30);
+                    }}
+                  >
+                    <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                      <PencilSquareIcon className="onvo-size-4" />
+                      <span>Edit widget</span>
+                    </span>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              )}
+              {widget_editable && deletable && <DropdownMenuSeparator />}
+              {deletable && (
+                <DropdownMenuGroup>
+                  <DropdownMenuItem onClick={deleteWidget}>
+                    <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                      <TrashIcon className="onvo-size-4 onvo-text-red-500" />
+                      <span className="onvo-text-red-500">Delete widget</span>
+                    </span>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+        <ChartBase json={output} id={widget.id} title={""} />
+      </div>
+    );
+  }
+
   const ImageDownloadEnabled = useMemo(() => {
     const isTable =
-      widget &&
-      widget.cache &&
-      JSON.parse(widget.cache || "{}").type === "table";
+      widget && widget.cache && (widget.cache || {}).type === "table";
     if (isTable) return false;
     if (adminMode) return true;
     if (dashboard?.settings && dashboard.settings.disable_download_images)

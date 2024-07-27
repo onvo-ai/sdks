@@ -82,16 +82,6 @@ const QuestionSidebar: React.FC<{
         (className ? className : "")
       }
     >
-      {loading && questions.length === 0 && (
-        <div className="onvo-flex onvo-h-full onvo-w-full onvo-flex-col onvo-items-center onvo-justify-center">
-          <div className="onvo-relative onvo-inline-flex onvo-h-12">
-            <div className="onvo-w-8 onvo-h-8 onvo-bg-blue-500 onvo-rounded-full"></div>
-            <div className="onvo-w-8 onvo-h-8 onvo-bg-blue-500 onvo-rounded-full onvo-absolute onvo-top-0 onvo-left-0 onvo-animate-ping"></div>
-            <div className="onvo-w-8 onvo-h-8 onvo-bg-blue-500 onvo-rounded-full onvo-absolute onvo-top-0 onvo-left-0 onvo-animate-pulse"></div>
-          </div>
-          <Text>Loading questions...</Text>
-        </div>
-      )}
       {onSelect && (
         <Button
           variant="secondary"
@@ -101,6 +91,16 @@ const QuestionSidebar: React.FC<{
         >
           Build a new visualization
         </Button>
+      )}
+      {loading && questions.length === 0 && (
+        <div className="onvo-flex onvo-h-full onvo-w-full onvo-flex-col onvo-items-center onvo-justify-center">
+          <div className="onvo-relative onvo-inline-flex onvo-h-12">
+            <div className="onvo-w-8 onvo-h-8 onvo-bg-blue-500 onvo-rounded-full"></div>
+            <div className="onvo-w-8 onvo-h-8 onvo-bg-blue-500 onvo-rounded-full onvo-absolute onvo-top-0 onvo-left-0 onvo-animate-ping"></div>
+            <div className="onvo-w-8 onvo-h-8 onvo-bg-blue-500 onvo-rounded-full onvo-absolute onvo-top-0 onvo-left-0 onvo-animate-pulse"></div>
+          </div>
+          <Text>Loading questions...</Text>
+        </div>
       )}
       {!loading && questions.length === 0 && (
         <div className="onvo-flex onvo-h-full onvo-flex-col onvo-justify-center">
