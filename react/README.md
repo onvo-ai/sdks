@@ -4,15 +4,19 @@ This react package can be used to display the list of dashboards available to a 
 
 ## Installation
 
-You can install this demo UI library using npm:
+You can install this UI library using npm or yarn:
 
-```
+```bash
 npm install @onvo-ai/react
+```
+
+```bash
+yarn add @onvo-ai/react
 ```
 
 ## Usage
 
-To use this demo UI library in your project, import the components you need from the library and use them in your React components.
+To use this UI library in your project, import the components you need from the library and use them in your React apps.
 
 ```jsx
 import { Wrapper, DashboardList } from "@onvo-ai/react";

@@ -4,29 +4,63 @@ This repository contains packages to provides utilities to seamlessly communicat
 
 You can find the API documentation at https://docs.onvo.ai
 
-## Server library progress
+## Server libraries
 
-#### ✅ [Javascript](https://www.npmjs.com/package/@onvo-ai/js) : Available on NPM
+#### Javascript - [NPM](https://www.npmjs.com/package/@onvo-ai/js)
 
-#### ✅ [Ruby](https://rubygems.org/gems/onvo) : Available on RubyGems
+```bash
+npm install @onvo-ai/js
+```
 
-#### ✅ [Python](https://pypi.org/project/onvo/) : Available on pip
+```bash
+yarn add @onvo-ai/js
+```
+
+#### Ruby - [RubyGems](https://rubygems.org/gems/onvo)
+
+```bash
+gem install onvo
+```
+
+#### Python- [Pypi](https://pypi.org/project/onvo/)
+
+```bash
+pip install onvo
+```
 
 #### 🚧 Rust - Work ongoing
 
 #### 🚧 Go - Work ongoing
 
-#### Java - Coming soon
+#### ⏰ Java - Coming soon
 
-## Client library progress
+## Client libraries
 
-#### ✅ HTML iframe
+#### React component library - [NPM](https://www.npmjs.com/package/@onvo-ai/react)
 
-#### ✅ [React component library](https://www.npmjs.com/package/@onvo-ai/react) : Available on NPM
+```bash
+npm install @onvo-ai/react
+```
 
-#### ✅ ✅ [HTML web components library](https://www.npmjs.com/package/@onvo-ai/web-components) : Available on NPM
+```bash
+yarn add @onvo-ai/react
+```
 
-#### Angular - Coming soon
+#### HTML web components library- [NPM](https://www.npmjs.com/package/@onvo-ai/web-components), [JSDelivr](https://cdn.jsdelivr.net/npm/@onvo-ai/web-components/build/static/js/main.js)
+
+```bash
+npm install @onvo-ai/web-components
+```
+
+```bash
+yarn add @onvo-ai/web-components
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@onvo-ai/web-components/build/static/js/main.js"></script>
+```
+
+#### ⏰ Angular - Coming soon
 
 ## We are looking for contributors
 
@@ -40,4 +74,4 @@ For any issues, questions, or feedback, please contact our support team at info@
 
 This package is distributed under the MIT License.
 
-Thank you for choosing the @onvo-ai/js package to integrate AI-powered dashboards from the Onvo platform into your product! We hope this package enhances your development experience and empowers your applications with advanced analytics capabilities.
+Thank you for choosing the Onvo AI to integrate AI-powered dashboards into your product! We hope this package enhances your development experience and empowers your applications with advanced analytics capabilities.
