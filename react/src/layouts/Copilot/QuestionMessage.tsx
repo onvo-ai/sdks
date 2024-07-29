@@ -201,22 +201,54 @@ const QuestionMessage: React.FC<{
   }, [content, role]);
 
   if (role === "user") {
+    let text = content as string;
+    let code = "";
+    if (text.search("```") >= 0) {
+      text =
+        text.split("```json")[0] + text.split("```json")[1].split("```")[1];
+      code = (content as string).split("```json")[1].split("```")[0].trim();
+    }
     return (
       <div className="onvo-question-message-user onvo-group onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3">
         <Icon variant="shadow" icon={UserIcon} />
-        <div className="onvo-w-full onvo-max-w-none onvo-prose onvo-prose-sm dark:onvo-prose-invert ">
+        <div className="onvo-w-full onvo-max-w-none ">
           {editing ? (
             <Textarea
               defaultValue={content as string}
               onChange={(e) => setNewMessage(e.target.value)}
             />
           ) : (
-            <ErrorBoundary
-              fallbackRender={({ error }) => <Text>{content}</Text>}
-            >
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {content as string}
+            <ErrorBoundary fallbackRender={({ error }) => <Text>{text}</Text>}>
+              <ReactMarkdown
+                className="onvo-prose onvo-prose-sm dark:onvo-prose-invert "
+                remarkPlugins={[remarkGfm]}
+              >
+                {text}
               </ReactMarkdown>
+              {code.trim() !== "" && (
+                <Accordion
+                  type="single"
+                  className="onvo-leading-none onvo-mb-2 onvo-mt-2"
+                  collapsible
+                >
+                  <AccordionItem value="item-1" className="onvo-border-b-0">
+                    <AccordionTrigger className="onvo-border-b-0 !onvo-py-2 !onvo-px-2 onvo-rounded-md onvo-bg-slate-100 dark:onvo-bg-slate-700">
+                      <span>Show advanced widget builder output</span>
+                    </AccordionTrigger>
+                    <AccordionContent className="onvo-pt-2">
+                      <ErrorBoundary
+                        fallbackRender={({ error }) => <Text>{code}</Text>}
+                      >
+                        <article className="onvo-question-assistant-code-wrapper onvo-prose onvo-prose-sm dark:onvo-prose-invert onvo-inline onvo-w-full">
+                          <ReactMarkdown className="onvo-question-assistant-code -onvo-mt-5">
+                            {"```json\n" + code + "\n```"}
+                          </ReactMarkdown>
+                        </article>
+                      </ErrorBoundary>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              )}
             </ErrorBoundary>
           )}
 
