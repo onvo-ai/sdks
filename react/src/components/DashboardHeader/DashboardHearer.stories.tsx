@@ -1,8 +1,8 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { DashboardHeader } from "./DashboardHeader";
-import { Wrapper } from "../Wrapper/Wrapper";
-import { Dashboard } from "../Dashboard/Dashboard";
+import { Wrapper } from "../../layouts/Wrapper";
+import { DashboardWrapper } from "../../layouts/Dashboard";
 
 const meta: Meta<typeof DashboardHeader> = {
   component: DashboardHeader,
@@ -16,9 +16,9 @@ type Story = StoryObj<{ token: string; baseUrl: string; id: string }>;
 export const Primary: Story = (args) => {
   return (
     <Wrapper {...args}>
-      <Dashboard id={args.id} adminMode>
+      <DashboardWrapper id={args.id} adminMode>
         <DashboardHeader></DashboardHeader>
-      </Dashboard>
+      </DashboardWrapper>
     </Wrapper>
   );
 };

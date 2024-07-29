@@ -6,7 +6,7 @@ import { Card } from "../../tremor/Card";
 import { Icon } from "../../tremor/Icon";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../tremor/Tabs";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Widget, WidgetMessage, WidgetSettings } from "@onvo-ai/js";
 import {
   ArrowUpIcon,
@@ -20,8 +20,8 @@ import ChartBase from "../Chart/ChartBase";
 import { SuggestionsBar } from "../SuggestionsBar";
 import React from "react";
 import { UserIcon } from "@heroicons/react/24/solid";
-import { useBackend } from "../Wrapper";
-import { useDashboard } from "../Dashboard/Dashboard";
+import { useBackend } from "../../layouts/Wrapper";
+import { useDashboard } from "../../layouts/Dashboard/useDashboard";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Divider } from "../../tremor/Divider";
 import { twMerge } from "tailwind-merge";
@@ -111,7 +111,7 @@ const Message: React.FC<{
 
 export const EditWidgetModal: React.FC<{}> = ({}) => {
   // EXTERNAL HOOKS
-  const backend = useBackend();
+  const { backend } = useBackend();
   const { refreshWidgets, dashboard } = useDashboard();
   const { widget, setOpen, open } = useEditWidgetModal();
 
@@ -192,10 +192,10 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
   };
 
   const saveChanges = () => {
-    if (!widget) return;
+    if (!widget || !backend) return;
     toast.promise(
       () => {
-        return backend?.widgets.update(widget.id, {
+        return backend.widgets.update(widget.id, {
           title: title,
           code: code,
           cache: output,
@@ -207,8 +207,7 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
         loading: "Saving changes...",
         success: () => {
           cleanup();
-
-          refreshWidgets();
+          refreshWidgets(backend);
           return "Changes saved!";
         },
         error: (error) => "Failed to save changes: " + error.message,

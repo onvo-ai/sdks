@@ -10,9 +10,9 @@ import { Tooltip } from "../../tremor/Tooltip/Tooltip";
 import React from "react";
 import { useTextWidgetModal } from "../TextWidgetModal";
 import { useImageWidgetModal } from "../ImageWidgetModal";
-import { useDashboard } from "../Dashboard";
-import { useBackend } from "../Wrapper";
-import { useMaxHeight } from "../../lib/maxHeight";
+import { useDashboard } from "../../layouts/Dashboard/useDashboard";
+import { useBackend } from "../../layouts/Wrapper";
+import { useMaxHeight } from "../../lib/useMaxHeight";
 
 export const CreateToolbar: React.FC<{ onClick?: () => void }> = ({
   onClick,
@@ -20,11 +20,11 @@ export const CreateToolbar: React.FC<{ onClick?: () => void }> = ({
   const { setOpen: setTextModalOpen } = useTextWidgetModal();
   const { setOpen: setImageModalOpen } = useImageWidgetModal();
   const { dashboard, adminMode, refreshWidgets } = useDashboard();
-  const backend = useBackend();
+  const { backend } = useBackend();
   const { lg, sm } = useMaxHeight();
 
   const addDividerWidget = async () => {
-    if (!dashboard) return;
+    if (!dashboard || !backend) return;
     let cache = {
       type: "divider",
       data: { datasets: [{ data: [], label: "" }] },
@@ -72,7 +72,7 @@ export const CreateToolbar: React.FC<{ onClick?: () => void }> = ({
             },
         }
       `;
-    await backend?.widgets.create({
+    await backend.widgets.create({
       dashboard: dashboard.id,
       layouts: {
         lg: {
@@ -101,7 +101,7 @@ export const CreateToolbar: React.FC<{ onClick?: () => void }> = ({
         title_hidden: true,
       },
     });
-    refreshWidgets();
+    refreshWidgets(backend);
   };
 
   if (!dashboard?.settings?.can_create_widgets && !adminMode) {

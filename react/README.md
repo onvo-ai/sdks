@@ -55,10 +55,7 @@ const DashboardPage = (id) => {
 
   return (
     <Wrapper baseUrl={baseUrl} token={accessToken}>
-      <Dashboard id={id}>
-        <DashboardHeader />
-        <DashboardGrid />
-      </Dashboard>
+      <Dashboard id={id} />
     </Wrapper>
   );
 };

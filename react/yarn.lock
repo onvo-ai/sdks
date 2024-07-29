@@ -1602,10 +1602,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@onvo-ai/js@^0.13.43":
-  version "0.13.43"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.43.tgz#785818393922f8729cdb716d4717657e7c8c1528"
-  integrity sha512-yJOPHBM6YAyrtc5oWm4HT4ZHE0qDHFECqoz8CuW0EO/hT1sXFQ0g6cBKH1zDOLLrGI2NUI2WsBgzWBqvZ4HfxQ==
+"@onvo-ai/js@^0.13.44":
+  version "0.13.44"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.44.tgz#7f58d25394cbf80882c9985b53267128a367684f"
+  integrity sha512-HI3tDoZybIZdBj+3nJiwYtA/8QkqoRfic3CKPNWHeoKOTyX7ABToBc9keKNtV1qMiRZzEH/v4xvMmuoeOPYbuA==
   dependencies:
     web-file-polyfill "^1.0.4"
 
@@ -7137,6 +7137,11 @@ jsonfile@^6.0.1:
     universalify "^2.0.0"
   optionalDependencies:
     graceful-fs "^4.1.6"
+
+jwt-decode@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-4.0.0.tgz#2270352425fd413785b2faf11f6e755c5151bd4b"
+  integrity sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==
 
 keyv@^4.5.3:
   version "4.5.4"

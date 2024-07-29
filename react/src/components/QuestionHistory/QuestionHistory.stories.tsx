@@ -1,8 +1,8 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { QuestionHistory } from "./QuestionHistory";
-import { Wrapper } from "../Wrapper/Wrapper";
-import { Dashboard } from "../Dashboard/Dashboard";
+import { Wrapper } from "../../layouts/Wrapper";
+import { DashboardWrapper } from "../../layouts/Dashboard";
 
 const meta: Meta<typeof QuestionHistory> = {
   component: QuestionHistory,
@@ -17,11 +17,11 @@ export const Primary: Story = (args) => {
   return (
     <div className="onvo-h-screen onvo-w-screen onvo-relative">
       <Wrapper {...args}>
-        <Dashboard id={args.id} adminMode>
+        <DashboardWrapper id={args.id} adminMode>
           <div className=" onvo-w-full onvo-relative onvo-max-w-screen-lg onvo-mx-auto">
             <QuestionHistory onExpanded={() => {}} onSelect={(q) => {}} />
           </div>
-        </Dashboard>
+        </DashboardWrapper>
       </Wrapper>
     </div>
   );

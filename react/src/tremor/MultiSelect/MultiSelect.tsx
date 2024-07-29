@@ -133,6 +133,7 @@ export const MultiSelect: React.FC<{
           onChange={(e) => {
             setQuery(e.target.value);
             e.preventDefault();
+            e.stopPropagation();
           }}
         />
         <div className="onvo-p-0">

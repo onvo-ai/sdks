@@ -2,11 +2,10 @@ import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { CreateToolbar } from "./CreateToolbar";
-import { Wrapper } from "../Wrapper";
-import { Dashboard } from "../Dashboard";
+import { Wrapper } from "../../layouts/Wrapper";
+import { DashboardWrapper } from "../../layouts/Dashboard";
 import { TextWidgetModal } from "../TextWidgetModal";
 import { ImageWidgetModal } from "../ImageWidgetModal";
-import { QuestionModal } from "../QuestionModal";
 
 const meta: Meta = {
   component: CreateToolbar,
@@ -25,11 +24,11 @@ export const Primary: Story = (args) => {
   return (
     <div className="onvo-h-screen onvo-w-screen">
       <Wrapper {...args}>
-        <Dashboard id={args.id}>
+        <DashboardWrapper id={args.id}>
           <TextWidgetModal />
           <ImageWidgetModal />
           <CreateToolbar />
-        </Dashboard>
+        </DashboardWrapper>
       </Wrapper>
     </div>
   );

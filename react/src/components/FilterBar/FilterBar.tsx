@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useDashboard } from "../Dashboard/Dashboard";
-import { useBackend } from "../Wrapper";
+import { useDashboard } from "../../layouts/Dashboard/useDashboard";
+import { useBackend } from "../../layouts/Wrapper";
 import React from "react";
 import { Button } from "../../tremor/Button";
 import { Card } from "../../tremor/Card";
-import { Label, Text, Title } from "../../tremor/Text";
+import { Text, Title } from "../../tremor/Text";
 import { SearchSelect } from "../../tremor/SearchSelect";
 import { MultiSelect } from "../../tremor/MultiSelect";
 import {
@@ -18,8 +18,8 @@ import { DatePicker } from "../../tremor/DatePicker";
 import dayjs from "dayjs";
 import { DashboardFilter } from "@onvo-ai/js";
 export const FilterBar = () => {
-  const { dashboard, refreshWidgets, setWidgets } = useDashboard();
-  const backend = useBackend();
+  const { dashboard, setWidgets } = useDashboard();
+  const { backend } = useBackend();
   const [reloading, setReloading] = useState(false);
   const [filterValues, setFilterValues] = useState<{ [key: string]: string }>(
     {}

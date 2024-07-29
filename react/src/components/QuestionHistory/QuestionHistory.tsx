@@ -11,9 +11,9 @@ import {
 import { toast } from "sonner";
 import { Empty } from "../Empty";
 import React, { useEffect, useMemo, useState } from "react";
-import { useBackend } from "../Wrapper";
+import { useBackend } from "../../layouts/Wrapper";
 import { Question } from "@onvo-ai/js";
-import { useDashboard } from "../Dashboard";
+import { useDashboard } from "../../layouts/Dashboard/useDashboard";
 import { twMerge } from "tailwind-merge";
 dayjs.extend(relativeTime);
 
@@ -56,7 +56,7 @@ export const QuestionHistory: React.FC<{
   onDelete?: () => void;
   onExpanded: (val: boolean) => void;
 }> = ({ onSelect, onDelete, onExpanded }) => {
-  const backend = useBackend();
+  const { backend } = useBackend();
   const { dashboard } = useDashboard();
 
   const [expanded, setExpanded] = useState(false);

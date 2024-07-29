@@ -4,8 +4,8 @@ import { Input } from "../../tremor/Input";
 import { Button } from "../../tremor/Button";
 import { useEffect, useState } from "react";
 import { create } from "zustand";
-import { useDashboard } from "../Dashboard";
-import { useBackend } from "../Wrapper";
+import { useDashboard } from "../../layouts/Dashboard/useDashboard";
+import { useBackend } from "../../layouts/Wrapper";
 import { Text, Label, Title } from "../../tremor/Text";
 
 import { twMerge } from "tailwind-merge";
@@ -19,7 +19,7 @@ import { Tabs, TabsList, TabsTrigger } from "../../tremor/Tabs";
 import { Divider } from "../../tremor/Divider";
 import { Card } from "../../tremor/Card";
 import { toast } from "sonner";
-import { useMaxHeight } from "../../lib/maxHeight";
+import { useMaxHeight } from "../../lib/useMaxHeight";
 
 export const useImageWidgetModal = create<{
   open: boolean;
@@ -49,8 +49,8 @@ export const useImageWidgetModal = create<{
 }));
 
 export const ImageWidgetModal: React.FC<{}> = ({}) => {
-  const { dashboard, refreshWidgets, adminMode } = useDashboard();
-  const backend = useBackend();
+  const { dashboard, adminMode, refreshWidgets } = useDashboard();
+  const { backend } = useBackend();
   const { open, setOpen, widget } = useImageWidgetModal();
   const { lg, sm } = useMaxHeight();
 
@@ -69,7 +69,7 @@ export const ImageWidgetModal: React.FC<{}> = ({}) => {
   }, [widget]);
 
   const createSeparator = async () => {
-    if (!dashboard) return;
+    if (!dashboard || !backend) return;
     setLoading(true);
     let cache = {
       type: "image",
@@ -102,13 +102,13 @@ export const ImageWidgetModal: React.FC<{}> = ({}) => {
       `;
 
     if (widget) {
-      await backend?.widgets.update(widget.id, {
+      await backend.widgets.update(widget.id, {
         title: url,
         code: code,
         cache: cache,
       });
     } else {
-      await backend?.widgets.create({
+      await backend.widgets.create({
         dashboard: dashboard.id,
         layouts: {
           lg: {
@@ -141,7 +141,7 @@ export const ImageWidgetModal: React.FC<{}> = ({}) => {
     setOpen(false);
     setLoading(false);
     setUrl("");
-    refreshWidgets();
+    refreshWidgets(backend);
   };
 
   const uploadFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
