@@ -2,7 +2,7 @@ import { Divider } from "../../tremor/Divider";
 import { Text, Title } from "../../tremor/Text";
 import { Card } from "../../tremor/Card";
 import React, { useEffect, useState } from "react";
-import { useBackend } from "../../layouts/Wrapper";
+import { useBackend, Wrapper } from "../../layouts/Wrapper";
 
 import {
   ClockIcon,
@@ -14,6 +14,7 @@ import {
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Dashboard, DashboardMeta } from "@onvo-ai/js";
+import r2wc from "@r2wc/react-to-web-component";
 dayjs.extend(relativeTime);
 
 const DashboardCard: React.FC<{

@@ -3,13 +3,14 @@ import r2wc from "@r2wc/react-to-web-component";
 import { Wrapper, Dashboard, DashboardList, Copilot } from "@onvo-ai/react";
 import React from "react";
 
-const ChatButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
+const ChatButton: React.FC<{
+  onClick: () => void;
+  variant: "none" | "small" | "large";
+}> = ({ onClick, variant = "large" }) => {
   const buttonStyle = {
     position: "fixed",
     bottom: "1.25rem",
     right: "1.25rem",
-    height: "3rem",
-    width: "9rem",
     fontSize: "0.75rem",
     fontWeight: "600",
     borderRadius: "9999px",
@@ -17,8 +18,7 @@ const ChatButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
     backgroundColor: "black",
     boxShadow:
       "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-    paddingLeft: "1rem",
-    paddingRight: "1rem",
+    padding: "0.75rem",
     display: "flex",
     flexDirection: "row",
     gap: "0.75rem",
@@ -26,14 +26,19 @@ const ChatButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   };
 
   const iconStyle = {
-    width: "3rem",
-    height: "3rem",
+    width: "1.75rem",
+    height: "1.75rem",
   };
 
   const labelStyle = {
     color: "#cbd5e0",
     lineHeight: "1",
+    width: "4rem",
   };
+
+  if (variant === "none") {
+    return <></>;
+  }
 
   return (
     <div style={buttonStyle} onClick={onClick}>
@@ -63,7 +68,7 @@ const ChatButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
           d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
         />
       </svg>
-      <p style={labelStyle}>Chat with your data</p>
+      {variant === "large" && <p style={labelStyle}>Chat with your data</p>}
     </div>
   );
 };
@@ -121,17 +126,19 @@ const OnvoCopilot = ({
   baseUrl,
   dashboardId,
   variant,
+  icon,
 }: {
   token: string;
   baseUrl: string;
   dashboardId: string;
   variant: "fullscreen" | "copilot";
+  icon: "none" | "small" | "large";
 }) => {
   return (
     <Wrapper token={token} baseUrl={baseUrl}>
       <Copilot
         dashboardId={dashboardId}
-        trigger={<ChatButton />}
+        trigger={<ChatButton variant={icon} />}
         variant={variant}
       />
     </Wrapper>
@@ -145,7 +152,8 @@ customElements.define(
       token: "string",
       baseUrl: "string",
       dashboardId: "string",
-      variant: "fullscreen" | "copilot",
+      variant: "string",
+      icon: "string",
     },
   })
 );

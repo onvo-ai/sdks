@@ -52,15 +52,22 @@ const ChartCard: React.FC<{
   hideOptions?: boolean;
   footer?: React.ReactNode;
 }> = ({ widget, className, footer, hideOptions }) => {
-  const { dashboard, adminMode, refreshWidgets } = useDashboard();
+  const { dashboard, refreshWidgets, widgets } = useDashboard();
   const { setOpen: setEditModalOpen } = useEditWidgetModal();
   const { setOpen: setTextModalOpen } = useTextWidgetModal();
   const { setOpen: setImageModalOpen } = useImageWidgetModal();
-  const { backend } = useBackend();
+  const { backend, adminMode } = useBackend();
 
   const duplicate = async () => {
     let newObj: any = { ...widget };
     delete newObj.id;
+
+    let limit = dashboard?.settings?.widget_limit || 100;
+    if (widgets.length >= limit) {
+      return toast.error(
+        `You can only have ${limit} widgets in your dashboard. Please delete some of your widgets first or contact the administrator.`
+      );
+    }
 
     if (!backend) return;
     toast.promise(
@@ -315,7 +322,6 @@ const ChartCard: React.FC<{
     );
   }
 
-  console.log("HERE: ", layout_editable, hideOptions);
   return (
     <Card
       key={widget.id}

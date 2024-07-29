@@ -10,6 +10,7 @@ type OnvoWrapperContext = {
   subscriptionPlan: SubscriptionPlan | undefined;
   subscriptionLoaded: boolean;
   team: Team | undefined;
+  adminMode: boolean;
 };
 
 const Context = createContext<OnvoWrapperContext>({
@@ -18,20 +19,27 @@ const Context = createContext<OnvoWrapperContext>({
   subscription: undefined,
   subscriptionPlan: undefined,
   team: undefined,
+  adminMode: false,
 });
 
 export const Wrapper: React.FC<{
   token: string;
   baseUrl?: string;
   children: any;
-}> = ({ token, children, baseUrl = "https://dashboard.onvo.ai" }) => {
+  adminMode?: boolean;
+}> = ({
+  token,
+  children,
+  baseUrl = "https://dashboard.onvo.ai",
+  adminMode,
+}) => {
   const [subscription, setSubscription] = useState<Subscription>();
   const [subscriptionPlan, setSubscriptionPlan] = useState<SubscriptionPlan>();
   const [subscriptionLoaded, setSubscriptionLoaded] = useState(false);
   const [team, setTeam] = useState<Team>();
 
   // Initialize Onvo backend with token and base URL
-  let backend = new Onvo(token, {
+  let backend = new Onvo(adminMode ? "" : token, {
     endpoint: baseUrl,
   });
 
@@ -75,6 +83,7 @@ export const Wrapper: React.FC<{
         subscriptionPlan,
         subscriptionLoaded,
         team,
+        adminMode: adminMode || false,
       }}
     >
       <Toaster position="bottom-right" richColors />

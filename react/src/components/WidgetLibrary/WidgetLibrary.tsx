@@ -16,9 +16,9 @@ export const WidgetLibrary: React.FC<{
   onExpanded: (val: boolean) => void;
 }> = ({ onExpanded }) => {
   const [library, setLibrary] = useState<Widget[]>([]);
-  const { dashboard, adminMode } = useDashboard();
+  const { dashboard, widgets, refreshWidgets } = useDashboard();
   const [expanded, setExpanded] = useState(false);
-  const { backend } = useBackend();
+  const { backend, adminMode } = useBackend();
   const [loading, setLoading] = useState(true);
 
   const getLibrary = async () => {
@@ -57,7 +57,34 @@ export const WidgetLibrary: React.FC<{
     );
   };
 
-  const addToDashboard = async (id: string) => {};
+  const addToDashboard = async (wid: Widget) => {
+    let newObj = { ...wid, use_in_library: false, use_as_example: false };
+    // @ts-ignore
+    delete newObj.id;
+
+    let limit = dashboard?.settings?.widget_limit || 100;
+    if (widgets.length >= limit) {
+      return toast.error(
+        `You can only have ${limit} widgets in your dashboard. Please delete some of your widgets first or contact the administrator.`
+      );
+    }
+
+    if (!backend) return;
+
+    toast.promise(
+      () => {
+        return backend.widgets.create(newObj);
+      },
+      {
+        loading: "Adding widget to dashboard...",
+        success: () => {
+          refreshWidgets(backend);
+          return "Widget added to dashboard";
+        },
+        error: (error) => "Error adding widget to dashboard: " + error.message,
+      }
+    );
+  };
 
   const AddToDashboardEnabled = useMemo(() => {
     if (adminMode) return true;
@@ -142,7 +169,7 @@ export const WidgetLibrary: React.FC<{
                     {AddToDashboardEnabled && (
                       <Button
                         variant="secondary"
-                        onClick={() => addToDashboard(a.id)}
+                        onClick={() => addToDashboard(a)}
                       >
                         Add to dashboard
                       </Button>

@@ -21,8 +21,7 @@ export const Standalone: Story = (args) => {
   return (
     <div className="onvo-h-screen onvo-w-screen">
       <Wrapper {...args}>
-        <Dashboard id={args.id} adminMode={args.adminMode}>
-        </Dashboard>
+        <Dashboard id={args.id}></Dashboard>
       </Wrapper>
     </div>
   );

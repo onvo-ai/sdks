@@ -36,6 +36,7 @@ export type DashboardSettings = {
   grid_spacing: number;
   hide_header: boolean;
   custom_css: string;
+
   filters: boolean;
 
   can_ask_questions: boolean;
@@ -47,9 +48,13 @@ export type DashboardSettings = {
   disable_download_images: boolean;
   disable_download_reports: boolean;
 
-  help_url?: string;
+  widget_limit?: number;
+  enable_widget_code_editor?: boolean;
 
+  help_url?: string;
   enable_advanced_widget_creator?: boolean;
+  copilot_title: string;
+  copilot_description: string;
 };
 
 export interface DashboardMeta {

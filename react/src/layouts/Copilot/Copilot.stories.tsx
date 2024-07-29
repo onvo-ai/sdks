@@ -19,7 +19,6 @@ export const Primary: Story = (args) => {
     <Wrapper token={args.token} baseUrl={args.baseUrl}>
       <Copilot
         dashboardId={args.id}
-        adminMode
         variant="copilot"
         trigger={
           <div className="onvo-fixed onvo-bottom-5 onvo-right-5 onvo-h-12 onvo-w-36 onvo-rounded-full onvo-cursor-pointer onvo-bg-black onvo-shadow-xl onvo-px-4 onvo-flex onvo-flex-row onvo-gap-3 onvo-items-center">
@@ -59,7 +58,6 @@ export const Primary: Story = (args) => {
       <Copilot
         variant="fullscreen"
         dashboardId={args.id}
-        adminMode
         trigger={<Button className="onvo-w-64">Open full screen</Button>}
       />
     </Wrapper>

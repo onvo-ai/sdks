@@ -19,8 +19,8 @@ export const CreateToolbar: React.FC<{ onClick?: () => void }> = ({
 }) => {
   const { setOpen: setTextModalOpen } = useTextWidgetModal();
   const { setOpen: setImageModalOpen } = useImageWidgetModal();
-  const { dashboard, adminMode, refreshWidgets } = useDashboard();
-  const { backend } = useBackend();
+  const { dashboard, refreshWidgets } = useDashboard();
+  const { backend, adminMode } = useBackend();
   const { lg, sm } = useMaxHeight();
 
   const addDividerWidget = async () => {

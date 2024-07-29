@@ -111,7 +111,7 @@ const Message: React.FC<{
 
 export const EditWidgetModal: React.FC<{}> = ({}) => {
   // EXTERNAL HOOKS
-  const { backend } = useBackend();
+  const { backend, adminMode } = useBackend();
   const { refreshWidgets, dashboard } = useDashboard();
   const { widget, setOpen, open } = useEditWidgetModal();
 
@@ -323,7 +323,10 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
               >
                 <TabsList>
                   <TabsTrigger value="chat">Chat</TabsTrigger>
-                  <TabsTrigger value="editor">Code editor</TabsTrigger>
+                  {(adminMode ||
+                    dashboard?.settings?.enable_widget_code_editor) && (
+                    <TabsTrigger value="editor">Code editor</TabsTrigger>
+                  )}
                   <TabsTrigger value="settings">Settings</TabsTrigger>
                 </TabsList>
                 <div className="onvo-relative onvo-flex-grow onvo-h-[calc(100%-33px)] onvo-w-full">
@@ -406,24 +409,27 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
                       </div>
                     </div>
                   </TabsContent>
-                  <TabsContent
-                    value="editor"
-                    className="onvo-h-full onvo-w-full"
-                  >
-                    <Editor
-                      defaultLanguage="python"
-                      value={code}
-                      height="100%"
-                      options={{
-                        padding: {
-                          top: 10,
-                        },
-                      }}
-                      className="onvo-code-editor onvo-w-full"
-                      theme="vs-dark"
-                      onChange={(val) => setCode(val || "")}
-                    />
-                  </TabsContent>
+                  {(adminMode ||
+                    dashboard?.settings?.enable_widget_code_editor) && (
+                    <TabsContent
+                      value="editor"
+                      className="onvo-h-full onvo-w-full"
+                    >
+                      <Editor
+                        defaultLanguage="python"
+                        value={code}
+                        height="100%"
+                        options={{
+                          padding: {
+                            top: 10,
+                          },
+                        }}
+                        className="onvo-code-editor onvo-w-full"
+                        theme="vs-dark"
+                        onChange={(val) => setCode(val || "")}
+                      />
+                    </TabsContent>
+                  )}
                   <TabsContent value="settings" className="onvo-h-full">
                     <div className="onvo-p-2">
                       <div className="onvo-flex onvo-flex-row onvo-items-center onvo-justify-between">

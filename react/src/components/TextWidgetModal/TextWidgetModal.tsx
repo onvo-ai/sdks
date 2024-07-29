@@ -77,8 +77,8 @@ export const useTextWidgetModal = create<{
 }));
 
 export const TextWidgetModal: React.FC<{}> = ({}) => {
-  const { dashboard, adminMode, refreshWidgets } = useDashboard();
-  const { backend } = useBackend();
+  const { dashboard, refreshWidgets } = useDashboard();
+  const { backend, adminMode } = useBackend();
   const { open, setOpen, widget } = useTextWidgetModal();
   const { lg, sm } = useMaxHeight();
 

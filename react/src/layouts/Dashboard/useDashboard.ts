@@ -6,11 +6,9 @@ interface DashboardState {
   loading: boolean;
   dashboard: Dashboard | undefined;
   widgets: Widget[];
-  adminMode: boolean;
   setId: (id: string, backend: Onvo) => void;
   setDashboard: (dashboard: Dashboard | undefined) => void;
   setWidgets: (widgets: Widget[]) => void;
-  setAdminMode: (adminMode: boolean) => void;
   refreshDashboard: (backend: Onvo) => Promise<void>;
   refreshWidgets: (backend: Onvo) => Promise<void>;
 }
@@ -22,8 +20,6 @@ export const useDashboard = create<DashboardState>((set, get) => ({
   loading: false,
   subscription: undefined,
   subscriptionPlan: undefined,
-  adminMode: false,
-  setAdminMode: (adminMode) => set({ adminMode }),
   setId: (id, backend) => {
     let loading = get().loading;
     set({ id });

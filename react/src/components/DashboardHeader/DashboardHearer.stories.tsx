@@ -11,12 +11,17 @@ const meta: Meta<typeof DashboardHeader> = {
 };
 export default meta;
 
-type Story = StoryObj<{ token: string; baseUrl: string; id: string }>;
+type Story = StoryObj<{
+  token: string;
+  baseUrl: string;
+  id: string;
+  adminMode: boolean;
+}>;
 
 export const Primary: Story = (args) => {
   return (
     <Wrapper {...args}>
-      <DashboardWrapper id={args.id} adminMode>
+      <DashboardWrapper id={args.id}>
         <DashboardHeader></DashboardHeader>
       </DashboardWrapper>
     </Wrapper>

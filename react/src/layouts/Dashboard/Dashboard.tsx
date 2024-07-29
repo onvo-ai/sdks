@@ -11,27 +11,24 @@ import { CreateToolbar } from "../../components/CreateToolbar";
 
 export const DashboardWrapper: React.FC<{
   id: string;
-  adminMode?: boolean;
   children: React.ReactNode;
-}> = ({ id: dashboardId, adminMode, children }) => {
+}> = ({ id: dashboardId, children }) => {
   const { backend } = useBackend();
-  const { setId, setAdminMode, refreshWidgets } = useDashboard();
+  const { setId, refreshWidgets } = useDashboard();
 
   useEffect(() => {
     if (dashboardId && backend) {
       setId(dashboardId, backend);
-      setAdminMode(adminMode || false);
       refreshWidgets(backend);
     }
-  }, [dashboardId, backend, adminMode]);
+  }, [dashboardId, backend]);
   return children;
 };
 
 export const Dashboard: React.FC<{
   id: string;
-  adminMode?: boolean;
   className?: string;
-}> = ({ id: dashboardId, adminMode, className }) => {
+}> = ({ id: dashboardId, className }) => {
   const { subscription, subscriptionLoaded } = useBackend();
   const theme = useTheme();
   const { dashboard } = useDashboard();
@@ -42,7 +39,7 @@ export const Dashboard: React.FC<{
     subscriptionLoaded && dashboard && subscription === undefined;
 
   return (
-    <DashboardWrapper id={dashboardId} adminMode={adminMode}>
+    <DashboardWrapper id={dashboardId}>
       <div
         key={theme === "dark" ? "dark" : "light"}
         className={`onvo-dashboard-context onvo-relative onvo-scrollbar-thumb-rounded-full onvo-scrollbar-track-transparent onvo-translate-x-0 onvo-h-full onvo-background-color onvo-flex onvo-flex-col ${
@@ -76,7 +73,6 @@ export const Dashboard: React.FC<{
         <DashboardGrid />
         <Copilot
           dashboardId={dashboardId}
-          adminMode={adminMode}
           variant="fullscreen"
           trigger={<CreateToolbar />}
         />

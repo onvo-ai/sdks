@@ -1736,22 +1736,23 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@onvo-ai/js@^0.13.44":
-  version "0.13.44"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.44.tgz#7f58d25394cbf80882c9985b53267128a367684f"
-  integrity sha512-HI3tDoZybIZdBj+3nJiwYtA/8QkqoRfic3CKPNWHeoKOTyX7ABToBc9keKNtV1qMiRZzEH/v4xvMmuoeOPYbuA==
+"@onvo-ai/js@^0.13.49":
+  version "0.13.49"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.49.tgz#ad6fe77de7e7bd7479aedd22339a2035bb91f028"
+  integrity sha512-x55duHBUtMN+ZII/y9CBfANSHhhs1vTrYtMh49uWTf2oukpyu8fzcA4kH1J7HQnB7BXg30/gsnhIbUngh/js4A==
   dependencies:
     web-file-polyfill "^1.0.4"
 
-"@onvo-ai/react@^0.3.68":
-  version "0.3.68"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.3.68.tgz#38afe8cb38723d82e9c56e1a78f72570ca11b3eb"
-  integrity sha512-JzUmYTgAHYHiD0L8chV69WlwFEkTkCN3/unxx7jxF3lRhhVvOd7ZIxPvVFXgRmLbPhQGTLBYpyCu2rOuZcrZDg==
+"@onvo-ai/react@^0.3.72":
+  version "0.3.72"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.3.72.tgz#4fd1a5f6cf7d55d99ad9f0d91f4f195dcc3b4b79"
+  integrity sha512-OVw8Zfj1qQdoVdJ7xqxCifKfXTuCobY6fWDzNGV4LmxiVtFuCypmh4bJdWtCtLrWzuPEvBBi3bsooXNCyFf5pw==
   dependencies:
     "@heroicons/react" "^2.1.5"
     "@internationalized/date" "^3.5.4"
     "@monaco-editor/react" "^4.6.0"
-    "@onvo-ai/js" "^0.13.44"
+    "@onvo-ai/js" "^0.13.49"
+    "@r2wc/react-to-web-component" "^2.0.3"
     "@radix-ui/react-accordion" "^1.1.2"
     "@radix-ui/react-checkbox" "^1.0.4"
     "@radix-ui/react-dropdown-menu" "^2.0.7-rc.10"
@@ -1817,6 +1818,13 @@
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@r2wc/react-to-web-component/-/react-to-web-component-2.0.1.tgz#cda73451dd2995b4939636df0cc6c959c817d9f5"
   integrity sha512-w/96bHkQoimZ5lHKH/VCesyBlQ2rmuZNczD9KbveB8FiYGTaiWL3zBAYAtXm6GObOT74FiMuny3VGGY31hQUTg==
+  dependencies:
+    "@r2wc/core" "^1.0.0"
+
+"@r2wc/react-to-web-component@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@r2wc/react-to-web-component/-/react-to-web-component-2.0.3.tgz#3253067dbedf3f9d80cdaac3081c508729e5af57"
+  integrity sha512-nlDJ0LHiWLG/EFB5tBtA+9KLF2oMBeDSAXL08NUzAuj/ac+V0NkMl/RvCFdDFnyrPQqpzpD9uOvOY2E5IFpdCQ==
   dependencies:
     "@r2wc/core" "^1.0.0"
 

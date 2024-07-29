@@ -38,6 +38,7 @@ To use this demo UI library in your project, import the components you need from
 <onvo-copilot
   baseUrl="https:dashboard.onvo.ai"
   token="..."
+  icon="none|small|large"
   id="31f4f9ec-3881-448a-b3e7-02485290ca9f"
   variant="fullscreen|copilot"
 />
