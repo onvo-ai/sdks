@@ -11,13 +11,18 @@ const meta: Meta<typeof WidgetLibrary> = {
 };
 export default meta;
 
-type Story = StoryObj<{ token: string; baseUrl: string; id: string }>;
+type Story = StoryObj<{
+  token: string;
+  baseUrl: string;
+  id: string;
+  adminMode: boolean;
+}>;
 
 export const Primary: Story = (args) => {
   return (
     <div className="onvo-h-screen onvo-w-screen onvo-relative">
       <Wrapper {...args}>
-        <DashboardWrapper id={args.id} adminMode>
+        <DashboardWrapper id={args.id}>
           <div className="onvo-@container/questionmodal onvo-w-full onvo-relative onvo-max-w-screen-lg onvo-mx-auto">
             <WidgetLibrary onExpanded={() => {}} />
           </div>

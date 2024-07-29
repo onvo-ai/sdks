@@ -49,8 +49,8 @@ export const DashboardHeader: React.FC<{
   children?: React.ReactNode;
   className?: string;
 }> = ({ children, className }) => {
-  const { dashboard, adminMode } = useDashboard();
-  const { backend } = useBackend();
+  const { dashboard } = useDashboard();
+  const { backend, adminMode } = useBackend();
 
   const exportDashboard = useCallback(
     (format: "csv" | "xlsx" | "pdf" | "png" | "jpeg") => {

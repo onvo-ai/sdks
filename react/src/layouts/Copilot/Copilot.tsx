@@ -83,19 +83,17 @@ const SimpleCreatorTool: React.FC<{ onSubmit: (val: string) => void }> = ({
 };
 export const Copilot: React.FC<{
   dashboardId: string;
-  adminMode?: boolean;
   trigger: React.ReactNode;
   variant: "fullscreen" | "copilot";
-}> = ({ trigger, variant, dashboardId, adminMode }) => {
-  const { backend, team } = useBackend();
-  const { dashboard, setAdminMode, setId } = useDashboard();
+}> = ({ trigger, variant, dashboardId }) => {
+  const { backend, team, adminMode } = useBackend();
+  const { dashboard, setId } = useDashboard();
 
   useEffect(() => {
-    setAdminMode(adminMode || false);
     if (backend) {
       setId(dashboardId, backend);
     }
-  }, [adminMode, dashboardId, backend]);
+  }, [dashboardId, backend]);
 
   const scroller = useRef<HTMLDivElement>(null);
 
@@ -107,6 +105,13 @@ export const Copilot: React.FC<{
   const [tab, setTab] = useState<"home" | "history" | "library" | "chat">(
     "home"
   );
+
+  useEffect(() => {
+    if (!(window as any).Onvo) {
+      (window as any).Onvo = {};
+    }
+    (window as any).Onvo.setCopilotOpen = (val: boolean) => setOpen(val);
+  }, []);
 
   const scrollToBottom = () => {
     if (scroller.current) {
@@ -252,7 +257,7 @@ export const Copilot: React.FC<{
                   {dashboard?.title}
                 </Text>
                 <ChevronRightIcon className="onvo-hidden @xl/questionmodal:onvo-block onvo-h-4 onvo-w-4 dark:onvo-fill-slate-500" />
-                <Label>Create a widget</Label>
+                <Label>{dashboard?.settings?.copilot_title || "Copilot"}</Label>
               </div>
               <Button
                 variant="primary"
@@ -273,7 +278,8 @@ export const Copilot: React.FC<{
                   {tab === "home" && (
                     <div className="onvo-w-full onvo-flex onvo-flex-col onvo-items-center">
                       <Metric className="onvo-pt-10 onvo-text-center onvo-mb-4">
-                        Create a new widget
+                        {dashboard?.settings?.copilot_description ||
+                          "Create a widget"}
                       </Metric>
                       {dashboard?.settings?.enable_advanced_widget_creator ? (
                         <Tabs

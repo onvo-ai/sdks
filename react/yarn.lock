@@ -1602,10 +1602,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@onvo-ai/js@^0.13.44":
-  version "0.13.44"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.44.tgz#7f58d25394cbf80882c9985b53267128a367684f"
-  integrity sha512-HI3tDoZybIZdBj+3nJiwYtA/8QkqoRfic3CKPNWHeoKOTyX7ABToBc9keKNtV1qMiRZzEH/v4xvMmuoeOPYbuA==
+"@onvo-ai/js@^0.13.49":
+  version "0.13.49"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.49.tgz#ad6fe77de7e7bd7479aedd22339a2035bb91f028"
+  integrity sha512-x55duHBUtMN+ZII/y9CBfANSHhhs1vTrYtMh49uWTf2oukpyu8fzcA4kH1J7HQnB7BXg30/gsnhIbUngh/js4A==
   dependencies:
     web-file-polyfill "^1.0.4"
 
@@ -1613,6 +1613,18 @@
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
+
+"@r2wc/core@^1.0.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@r2wc/core/-/core-1.1.0.tgz#93c16cd5bf5bc6d9a52b23536aed4e6a4d2a6ef2"
+  integrity sha512-pEgtPXhfgg8mv/MooU83cb5sXC2aQOXPLm9UX7E7Oz/OXmrnP5r8hD/nJL1empWxC4wo1YeBXvrFu8fXsMgGZQ==
+
+"@r2wc/react-to-web-component@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@r2wc/react-to-web-component/-/react-to-web-component-2.0.3.tgz#3253067dbedf3f9d80cdaac3081c508729e5af57"
+  integrity sha512-nlDJ0LHiWLG/EFB5tBtA+9KLF2oMBeDSAXL08NUzAuj/ac+V0NkMl/RvCFdDFnyrPQqpzpD9uOvOY2E5IFpdCQ==
+  dependencies:
+    "@r2wc/core" "^1.0.0"
 
 "@radix-ui/number@1.0.1":
   version "1.0.1"

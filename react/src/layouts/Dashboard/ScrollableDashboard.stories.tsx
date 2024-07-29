@@ -28,7 +28,7 @@ export const Scrollable: Story = (args) => {
         style={{ width: args.width, height: args.height }}
       >
         <Wrapper {...args}>
-          <Dashboard id={args.id} adminMode={args.adminMode}></Dashboard>
+          <Dashboard id={args.id}></Dashboard>
         </Wrapper>
       </div>
     </div>

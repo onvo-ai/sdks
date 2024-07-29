@@ -2,10 +2,6 @@ import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { Dashboard } from "./Dashboard";
 import { Wrapper } from "../Wrapper/Wrapper";
-import { DashboardHeader } from "../../components/DashboardHeader";
-import { DashboardGrid } from "../../components/DashboardGrid";
-import { QuestionModal } from "../QuestionModal";
-import { CreateToolbar } from "../../components/CreateToolbar";
 
 const meta: Meta<typeof Dashboard> = {
   component: Dashboard,
@@ -31,7 +27,7 @@ export const Embedded: Story = (args) => {
         style={{ width: args.width, height: args.height }}
       >
         <Wrapper {...args}>
-          <Dashboard id={args.id} adminMode={args.adminMode}></Dashboard>
+          <Dashboard id={args.id}></Dashboard>
         </Wrapper>
       </div>
     </div>

@@ -66,8 +66,8 @@ const QuestionMessage: React.FC<{
   onReply,
   logo,
 }) => {
-  const { backend } = useBackend();
-  const { dashboard, adminMode, refreshWidgets } = useDashboard();
+  const { backend, adminMode } = useBackend();
+  const { dashboard, widgets, refreshWidgets } = useDashboard();
   const { lg, sm } = useMaxHeight();
 
   const [output, setOutput] = useState<any>();
@@ -100,6 +100,13 @@ const QuestionMessage: React.FC<{
 
       e.preventDefault();
       e.stopPropagation();
+
+      let limit = dashboard?.settings?.widget_limit || 100;
+      if (widgets.length >= limit) {
+        return toast.error(
+          `You can only have ${limit} widgets in your dashboard. Please delete some of your widgets first or contact the administrator.`
+        );
+      }
 
       let newObj: any = {
         title: title,

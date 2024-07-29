@@ -13,8 +13,8 @@ import { EditWidgetModal } from "../EditWidgetModal";
 import { ImageWidgetModal } from "../ImageWidgetModal";
 
 export const DashboardGrid: React.FC<{}> = ({}) => {
-  const { dashboard, widgets, setWidgets, adminMode } = useDashboard();
-  const { backend } = useBackend();
+  const { dashboard, widgets, setWidgets } = useDashboard();
+  const { backend, adminMode } = useBackend();
 
   const ResponsiveGridLayout = useMemo(
     () => WidthProvider(Responsive) as any,

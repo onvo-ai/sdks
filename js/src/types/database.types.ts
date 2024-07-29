@@ -515,8 +515,6 @@ export type Database = {
         Row: {
           analyst_agent_model: string;
           analyst_agent_provider: string;
-          annotator_agent_model: string;
-          annotator_agent_provider: string;
           anthropic_api_key: string | null;
           google_api_key: string | null;
           groq_api_key: string | null;
@@ -531,8 +529,6 @@ export type Database = {
         Insert: {
           analyst_agent_model?: string;
           analyst_agent_provider?: string;
-          annotator_agent_model?: string;
-          annotator_agent_provider?: string;
           anthropic_api_key?: string | null;
           google_api_key?: string | null;
           groq_api_key?: string | null;
@@ -547,8 +543,6 @@ export type Database = {
         Update: {
           analyst_agent_model?: string;
           analyst_agent_provider?: string;
-          annotator_agent_model?: string;
-          annotator_agent_provider?: string;
           anthropic_api_key?: string | null;
           google_api_key?: string | null;
           groq_api_key?: string | null;

@@ -535,8 +535,6 @@ type Database = {
                 Row: {
                     analyst_agent_model: string;
                     analyst_agent_provider: string;
-                    annotator_agent_model: string;
-                    annotator_agent_provider: string;
                     anthropic_api_key: string | null;
                     google_api_key: string | null;
                     groq_api_key: string | null;
@@ -551,8 +549,6 @@ type Database = {
                 Insert: {
                     analyst_agent_model?: string;
                     analyst_agent_provider?: string;
-                    annotator_agent_model?: string;
-                    annotator_agent_provider?: string;
                     anthropic_api_key?: string | null;
                     google_api_key?: string | null;
                     groq_api_key?: string | null;
@@ -567,8 +563,6 @@ type Database = {
                 Update: {
                     analyst_agent_model?: string;
                     analyst_agent_provider?: string;
-                    annotator_agent_model?: string;
-                    annotator_agent_provider?: string;
                     anthropic_api_key?: string | null;
                     google_api_key?: string | null;
                     groq_api_key?: string | null;
@@ -1131,8 +1125,12 @@ type DashboardSettings = {
     can_delete_widgets: boolean;
     disable_download_images: boolean;
     disable_download_reports: boolean;
+    widget_limit?: number;
+    enable_widget_code_editor?: boolean;
     help_url?: string;
     enable_advanced_widget_creator?: boolean;
+    copilot_title: string;
+    copilot_description: string;
 };
 interface DashboardMeta {
     created_by: Account;
