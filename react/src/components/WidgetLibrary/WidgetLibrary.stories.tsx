@@ -1,8 +1,8 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { WidgetLibrary } from "./WidgetLibrary";
-import { Wrapper } from "../Wrapper/Wrapper";
-import { Dashboard } from "../Dashboard/Dashboard";
+import { Wrapper } from "../../layouts/Wrapper";
+import { DashboardWrapper } from "../../layouts/Dashboard";
 
 const meta: Meta<typeof WidgetLibrary> = {
   component: WidgetLibrary,
@@ -17,11 +17,11 @@ export const Primary: Story = (args) => {
   return (
     <div className="onvo-h-screen onvo-w-screen onvo-relative">
       <Wrapper {...args}>
-        <Dashboard id={args.id} adminMode>
-          <div className=" onvo-w-full onvo-relative onvo-max-w-screen-lg onvo-mx-auto">
+        <DashboardWrapper id={args.id} adminMode>
+          <div className="onvo-@container/questionmodal onvo-w-full onvo-relative onvo-max-w-screen-lg onvo-mx-auto">
             <WidgetLibrary onExpanded={() => {}} />
           </div>
-        </Dashboard>
+        </DashboardWrapper>
       </Wrapper>
     </div>
   );

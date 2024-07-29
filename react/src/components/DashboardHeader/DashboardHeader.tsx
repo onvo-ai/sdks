@@ -2,7 +2,7 @@ import { Badge } from "../../tremor/Badge";
 import { Label, Metric } from "../../tremor/Text";
 import { Button } from "../../tremor/Button";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useDashboard } from "../Dashboard/Dashboard";
+import { useDashboard } from "../../layouts/Dashboard/useDashboard";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {
@@ -11,7 +11,7 @@ import {
   PhotoIcon,
 } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
-import { useBackend } from "../Wrapper";
+import { useBackend } from "../../layouts/Wrapper";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -50,7 +50,7 @@ export const DashboardHeader: React.FC<{
   className?: string;
 }> = ({ children, className }) => {
   const { dashboard, adminMode } = useDashboard();
-  const backend = useBackend();
+  const { backend } = useBackend();
 
   const exportDashboard = useCallback(
     (format: "csv" | "xlsx" | "pdf" | "png" | "jpeg") => {

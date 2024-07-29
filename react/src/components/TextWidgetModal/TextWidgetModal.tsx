@@ -4,8 +4,8 @@ import { Input } from "../../tremor/Input";
 import { Button } from "../../tremor/Button";
 import { useEffect, useState } from "react";
 import { create } from "zustand";
-import { useDashboard } from "../Dashboard";
-import { useBackend } from "../Wrapper";
+import { useDashboard } from "../../layouts/Dashboard/useDashboard";
+import { useBackend } from "../../layouts/Wrapper";
 import { Text, Label } from "../../tremor/Text";
 import {
   Editor,
@@ -38,7 +38,7 @@ import {
 import { Textarea } from "../../tremor/Textarea";
 import { SparklesIcon } from "@heroicons/react/24/solid";
 import { toast } from "sonner";
-import { useMaxHeight } from "../../lib/maxHeight";
+import { useMaxHeight } from "../../lib/useMaxHeight";
 
 export const useTextWidgetModal = create<{
   open: boolean;
@@ -77,8 +77,8 @@ export const useTextWidgetModal = create<{
 }));
 
 export const TextWidgetModal: React.FC<{}> = ({}) => {
-  const { dashboard, refreshWidgets, adminMode } = useDashboard();
-  const backend = useBackend();
+  const { dashboard, adminMode, refreshWidgets } = useDashboard();
+  const { backend } = useBackend();
   const { open, setOpen, widget } = useTextWidgetModal();
   const { lg, sm } = useMaxHeight();
 
@@ -114,8 +114,8 @@ export const TextWidgetModal: React.FC<{}> = ({}) => {
     }
   }, [widget]);
 
-  const createSeparator = async () => {
-    if (!dashboard) return;
+  const createWidget = async () => {
+    if (!dashboard || !backend) return;
     setLoading(true);
     let cache = {
       type: "text",
@@ -164,13 +164,13 @@ export const TextWidgetModal: React.FC<{}> = ({}) => {
       `;
 
     if (widget) {
-      await backend?.widgets.update(widget.id, {
+      await backend.widgets.update(widget.id, {
         title: title,
         code: code,
         cache: cache,
       });
     } else {
-      await backend?.widgets.create({
+      await backend.widgets.create({
         dashboard: dashboard.id,
         layouts: {
           lg: {
@@ -204,7 +204,7 @@ export const TextWidgetModal: React.FC<{}> = ({}) => {
     setLoading(false);
     setTitle("");
     setSubtitle("");
-    refreshWidgets();
+    refreshWidgets(backend);
   };
 
   const summarize = async () => {
@@ -252,7 +252,7 @@ export const TextWidgetModal: React.FC<{}> = ({}) => {
             </div>
             <div className="onvo-flex onvo-flex-row onvo-gap-2 onvo-flex-shrink-0">
               <Button
-                onClick={createSeparator}
+                onClick={createWidget}
                 className="onvo-flex-shrink-0"
                 isLoading={loading}
               >

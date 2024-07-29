@@ -1,13 +1,11 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import React from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
 import { Widget } from "@onvo-ai/js";
-import { create } from "zustand";
-
 import ChartCard from "../Chart/ChartCard";
-import { useDashboard } from "../Dashboard/Dashboard";
-import { useBackend } from "../Wrapper";
+import { useDashboard } from "../../layouts/Dashboard/useDashboard";
+import { useBackend } from "../../layouts/Wrapper";
 import { TextWidgetModal } from "../TextWidgetModal";
 
 import { FilterBar } from "../FilterBar";
@@ -16,8 +14,7 @@ import { ImageWidgetModal } from "../ImageWidgetModal";
 
 export const DashboardGrid: React.FC<{}> = ({}) => {
   const { dashboard, widgets, setWidgets, adminMode } = useDashboard();
-
-  const backend = useBackend();
+  const { backend } = useBackend();
 
   const ResponsiveGridLayout = useMemo(
     () => WidthProvider(Responsive) as any,

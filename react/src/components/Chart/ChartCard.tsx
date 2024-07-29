@@ -13,8 +13,8 @@ import {
 import ChartBase from "./ChartBase";
 import { Card } from "../../tremor/Card";
 import { Icon } from "../../tremor/Icon";
-import { useDashboard } from "../Dashboard";
-import { useBackend } from "../Wrapper";
+import { useDashboard } from "../../layouts/Dashboard/useDashboard";
+import { useBackend } from "../../layouts/Wrapper";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -52,24 +52,25 @@ const ChartCard: React.FC<{
   hideOptions?: boolean;
   footer?: React.ReactNode;
 }> = ({ widget, className, footer, hideOptions }) => {
-  const { dashboard, refreshWidgets, adminMode } = useDashboard();
+  const { dashboard, adminMode, refreshWidgets } = useDashboard();
   const { setOpen: setEditModalOpen } = useEditWidgetModal();
   const { setOpen: setTextModalOpen } = useTextWidgetModal();
   const { setOpen: setImageModalOpen } = useImageWidgetModal();
-  const backend = useBackend();
+  const { backend } = useBackend();
 
   const duplicate = async () => {
     let newObj: any = { ...widget };
     delete newObj.id;
 
+    if (!backend) return;
     toast.promise(
       () => {
-        return backend?.widgets.create(newObj) as Promise<any>;
+        return backend.widgets.create(newObj) as Promise<any>;
       },
       {
         loading: "Duplicating widget...",
         success: () => {
-          refreshWidgets();
+          refreshWidgets(backend);
           return "Widget duplicated";
         },
         error: (error) => "Error duplicating widget: " + error.message,
@@ -78,14 +79,15 @@ const ChartCard: React.FC<{
   };
 
   const deleteWidget = async () => {
+    if (!backend) return;
     toast.promise(
       () => {
-        return backend?.widgets.delete(widget.id) as Promise<any>;
+        return backend.widgets.delete(widget.id) as Promise<any>;
       },
       {
         loading: "Deleting widget...",
         success: () => {
-          refreshWidgets();
+          refreshWidgets(backend);
           return "Widget deleted";
         },
         error: (error) => "Error deleting widget: " + error.message,
@@ -313,12 +315,13 @@ const ChartCard: React.FC<{
     );
   }
 
+  console.log("HERE: ", layout_editable, hideOptions);
   return (
     <Card
       key={widget.id}
       id={widget.settings?.css_id}
       className={
-        "onvo-chart-card onvo-overflow-hidden onvo-h-full onvo-group/chartcard onvo-foreground-color onvo-relative -onvo-z-[1] onvo-flex onvo-flex-col onvo-px-0 onvo-py-0 " +
+        "onvo-chart-card onvo-h-full onvo-group/chartcard onvo-foreground-color onvo-relative -onvo-z-[1] onvo-flex onvo-flex-col onvo-px-0 onvo-py-0 " +
         (className || "") +
         " " +
         (widget.settings?.css_classnames ? widget.settings?.css_classnames : "")

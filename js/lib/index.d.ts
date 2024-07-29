@@ -1132,6 +1132,7 @@ type DashboardSettings = {
     disable_download_images: boolean;
     disable_download_reports: boolean;
     help_url?: string;
+    enable_advanced_widget_creator?: boolean;
 };
 interface DashboardMeta {
     created_by: Account;

@@ -3,8 +3,8 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { TextWidgetModal, useTextWidgetModal } from "./TextWidgetModal";
 import { Button } from "../../tremor/Button";
-import { Wrapper } from "../Wrapper";
-import { Dashboard } from "../Dashboard";
+import { Wrapper } from "../../layouts/Wrapper";
+import { DashboardWrapper } from "../../layouts/Dashboard";
 
 const meta: Meta = {
   component: TextWidgetModal,
@@ -24,8 +24,7 @@ export const Primary: Story = (args) => {
   return (
     <div className="onvo-h-screen onvo-w-screen">
       <Wrapper {...args}>
-        <Dashboard id={args.id}>
-          {" "}
+        <DashboardWrapper id={args.id}>
           <Button
             className="onvo-w-44"
             onClick={() => {
@@ -35,7 +34,7 @@ export const Primary: Story = (args) => {
             Open Modal
           </Button>
           <TextWidgetModal />
-        </Dashboard>
+        </DashboardWrapper>
       </Wrapper>
     </div>
   );

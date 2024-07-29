@@ -48,6 +48,8 @@ export type DashboardSettings = {
   disable_download_reports: boolean;
 
   help_url?: string;
+
+  enable_advanced_widget_creator?: boolean;
 };
 
 export interface DashboardMeta {

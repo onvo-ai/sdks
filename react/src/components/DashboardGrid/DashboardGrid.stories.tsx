@@ -1,12 +1,12 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { DashboardGrid } from "./DashboardGrid";
-import { Wrapper } from "../Wrapper/Wrapper";
-import { Dashboard } from "../Dashboard/Dashboard";
+import { Wrapper } from "../../layouts/Wrapper";
+import { DashboardWrapper } from "../../layouts/Dashboard";
 
 const meta: Meta<typeof DashboardGrid> = {
   component: DashboardGrid,
-  title: "Layouts/Dashboard Grid",
+  title: "Components/Dashboard Grid",
   argTypes: {},
 };
 export default meta;
@@ -20,9 +20,9 @@ type Story = StoryObj<{
 export const Primary: Story = (args) => {
   return (
     <Wrapper {...args}>
-      <Dashboard id={args.id}>
+      <DashboardWrapper id={args.id}>
         <DashboardGrid />
-      </Dashboard>
+      </DashboardWrapper>
     </Wrapper>
   );
 };

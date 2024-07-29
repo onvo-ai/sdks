@@ -1,11 +1,5 @@
 "use client";
-import {
-  Wrapper,
-  Dashboard,
-  DashboardHeader,
-  DashboardGrid,
-  QuestionModal,
-} from "@onvo-ai/react";
+import { Wrapper, Dashboard } from "@onvo-ai/react";
 import { useState, useEffect } from "react";
 
 const DashboardInnerPage: React.FC<{
@@ -26,11 +20,7 @@ const DashboardInnerPage: React.FC<{
         }
         token={token}
       >
-        <Dashboard id={params.id}>
-          <DashboardHeader />
-          <DashboardGrid />
-          <QuestionModal />
-        </Dashboard>
+        <Dashboard id={params.id} />
       </Wrapper>
     </main>
   );

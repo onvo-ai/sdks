@@ -1,8 +1,8 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { FilterBar } from "./FilterBar";
-import { Wrapper } from "../Wrapper/Wrapper";
-import { Dashboard } from "../Dashboard";
+import { Wrapper } from "../../layouts/Wrapper";
+import { DashboardWrapper } from "../../layouts/Dashboard";
 
 const meta: Meta<typeof FilterBar> = {
   component: FilterBar,
@@ -21,9 +21,9 @@ export const Standalone: Story = (args) => {
   return (
     <div className="onvo-h-screen onvo-w-screen">
       <Wrapper {...args}>
-        <Dashboard id={args.id}>
+        <DashboardWrapper id={args.id}>
           <FilterBar />
-        </Dashboard>
+        </DashboardWrapper>
       </Wrapper>
     </div>
   );
