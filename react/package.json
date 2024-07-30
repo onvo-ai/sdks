@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/react",
-  "version": "0.3.75",
+  "version": "0.3.76",
   "description": "The react SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "module": "dist/esm/index.js",
