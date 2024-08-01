@@ -99,7 +99,6 @@ onvo.dashboards.update(id:string, body:object)
 onvo.dashboards.delete(id:string)
 
 onvo.dashboard(id:string).updateWidgetCache()
-onvo.dashboard(id:string).getWidgetSuggestions()
 
 onvo.dashboard(dashboardId:string).datasources.list()
 onvo.dashboard(dashboardId:string).datasources.link(datasourceId:string)

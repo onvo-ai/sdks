@@ -49,7 +49,8 @@ const ChartBase: React.FC<{
     let output = Object.assign({}, json, {});
     let subtitle =
       output.options.plugins?.subtitle?.display !== false &&
-      output.options.plugins?.subtitle?.text.trim() !== "";
+      output.options.plugins?.subtitle?.text?.trim &&
+      output.options.plugins?.subtitle?.text?.trim() !== "";
 
     output.options.plugins.title = {
       display:

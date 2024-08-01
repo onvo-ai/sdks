@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/web-components",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "The web component SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "type": "module",
