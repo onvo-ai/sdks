@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 
 import { Card } from "../../tremor/Card";
 import ChartCard from "../Chart/ChartCard";
@@ -12,13 +12,14 @@ import { ArrowRightIcon, XMarkIcon } from "@heroicons/react/16/solid";
 import { ChartLoader } from "../ChartLoader";
 import { Badge } from "../../tremor/Badge";
 
-export const WidgetLibrary: React.FC<{
+const WidgetLibraryRaw: React.FC<{
   onExpanded: (val: boolean) => void;
 }> = ({ onExpanded }) => {
-  const [library, setLibrary] = useState<Widget[]>([]);
-  const { dashboard, widgets, refreshWidgets } = useDashboard();
-  const [expanded, setExpanded] = useState(false);
   const { backend, adminMode } = useBackend();
+  const { dashboard, widgets, refreshWidgets } = useDashboard();
+
+  const [library, setLibrary] = useState<Widget[]>([]);
+  const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const getLibrary = async () => {
@@ -39,7 +40,7 @@ export const WidgetLibrary: React.FC<{
     if (dashboard && dashboard.id) {
       getLibrary();
     }
-  }, [dashboard]);
+  }, [dashboard?.id]);
 
   const removeFromLibrary = async (id: string) => {
     toast.promise(
@@ -193,3 +194,5 @@ export const WidgetLibrary: React.FC<{
     </div>
   );
 };
+
+export const WidgetLibrary = memo(WidgetLibraryRaw);

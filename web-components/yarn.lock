@@ -1743,10 +1743,10 @@
   dependencies:
     web-file-polyfill "^1.0.4"
 
-"@onvo-ai/react@^0.3.72":
-  version "0.3.72"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.3.72.tgz#4fd1a5f6cf7d55d99ad9f0d91f4f195dcc3b4b79"
-  integrity sha512-OVw8Zfj1qQdoVdJ7xqxCifKfXTuCobY6fWDzNGV4LmxiVtFuCypmh4bJdWtCtLrWzuPEvBBi3bsooXNCyFf5pw==
+"@onvo-ai/react@^0.3.75":
+  version "0.3.75"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.3.75.tgz#1f04a42422cea26f77de5a246855558323215280"
+  integrity sha512-UIn43KFd6r4CUGLcvt2jYe58AucR++jkv73MEVHksKRvY3iE1Li7cDmX+EJ8Y7TJojGhiDrJlPjuzvM9qCyLKg==
   dependencies:
     "@heroicons/react" "^2.1.5"
     "@internationalized/date" "^3.5.4"

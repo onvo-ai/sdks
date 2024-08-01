@@ -27,7 +27,12 @@ To use this demo UI library in your project, import the components you need from
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@onvo-ai/web-components/build/static/js/main.js"></script>
 
-<onvo-dashboard-list baseUrl="https:dashboard.onvo.ai" token="..." />
+<onvo-dashboard-list
+  baseUrl="https:dashboard.onvo.ai"
+  variant="list|grid"
+  columns="3"
+  token="..."
+/>
 
 <onvo-dashboard
   baseUrl="https:dashboard.onvo.ai"

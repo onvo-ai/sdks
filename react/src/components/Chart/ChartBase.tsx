@@ -47,7 +47,10 @@ const ChartBase: React.FC<{
 
   let chartConfig = useMemo(() => {
     let output = Object.assign({}, json, {});
-    let subtitle = output.options.plugins?.subtitle?.display !== false;
+    let subtitle =
+      output.options.plugins?.subtitle?.display !== false &&
+      output.options.plugins?.subtitle?.text?.trim &&
+      output.options.plugins?.subtitle?.text?.trim() !== "";
 
     output.options.plugins.title = {
       display:
@@ -62,7 +65,9 @@ const ChartBase: React.FC<{
         size: output.type === "text" ? 24 : 18,
         weight: output.type === "text" ? 600 : 600,
       },
-      padding: output.options.plugins.title?.padding || undefined,
+      padding: output.options.plugins.title?.padding || {
+        bottom: 5,
+      },
     };
 
     if (subtitle) {
@@ -73,10 +78,12 @@ const ChartBase: React.FC<{
         position: output.options.plugins.subtitle?.position || "top",
         fullSize: true,
         font: {
-          size: 14,
+          size: 12,
           weight: 400,
         },
-        padding: output.options.plugins.subtitle?.padding || undefined,
+        padding: output.options.plugins.subtitle?.padding || {
+          bottom: 10,
+        },
       };
     }
 

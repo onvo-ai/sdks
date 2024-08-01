@@ -10,7 +10,7 @@ import {
 } from "@heroicons/react/16/solid";
 import { toast } from "sonner";
 import { Empty } from "../Empty";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { useBackend } from "../../layouts/Wrapper";
 import { Question } from "@onvo-ai/js";
 import { useDashboard } from "../../layouts/Dashboard/useDashboard";
@@ -51,7 +51,7 @@ const QuestionSidebarCard: React.FC<{
   );
 };
 
-export const QuestionHistory: React.FC<{
+const QuestionHistoryRaw: React.FC<{
   onSelect: (question: any | undefined) => void;
   onDelete?: () => void;
   onExpanded: (val: boolean) => void;
@@ -171,3 +171,5 @@ export const QuestionHistory: React.FC<{
     </div>
   );
 };
+
+export const QuestionHistory = memo(QuestionHistoryRaw);

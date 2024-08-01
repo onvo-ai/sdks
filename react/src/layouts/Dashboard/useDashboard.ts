@@ -15,20 +15,19 @@ interface DashboardState {
 
 export const useDashboard = create<DashboardState>((set, get) => ({
   id: undefined,
+  loading: false,
   dashboard: undefined,
   widgets: [],
-  loading: false,
-  subscription: undefined,
-  subscriptionPlan: undefined,
   setId: (id, backend) => {
     let loading = get().loading;
-    set({ id });
+    set({ id, loading: true });
 
-    set({ loading: true });
     backend.dashboards.get(id).then((dash) => {
       set({
         dashboard: dash,
+        loading: false,
       });
+
       if (
         !loading &&
         new Date(dash.last_updated_at).getTime() + 300000 < new Date().getTime()
@@ -46,8 +45,6 @@ export const useDashboard = create<DashboardState>((set, get) => ({
               },
             });
           });
-      } else {
-        set({ loading: false });
       }
     });
   },

@@ -81,10 +81,14 @@ export const DashboardGrid: React.FC<{}> = ({}) => {
     (dashboard?.settings?.can_create_widgets || adminMode)
   ) {
     return (
-      <>
+      <div
+        className={
+          "onvo-dashboard-grid-wrapper onvo-overflow-y-auto onvo-flex-grow onvo-pt-2 onvo-font-override onvo-background-color onvo-relative onvo-w-full"
+        }
+      >
         <TextWidgetModal />
         <ImageWidgetModal />
-      </>
+      </div>
     );
   }
   return (

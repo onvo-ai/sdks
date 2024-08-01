@@ -1,7 +1,7 @@
 import { Textarea } from "../../tremor/Textarea";
 import { Label, Metric, Text } from "../../tremor/Text";
 import { Icon } from "../../tremor/Icon";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { toast } from "sonner";
@@ -81,7 +81,7 @@ const SimpleCreatorTool: React.FC<{ onSubmit: (val: string) => void }> = ({
     </div>
   );
 };
-export const Copilot: React.FC<{
+const CopilotRaw: React.FC<{
   dashboardId: string;
   trigger: React.ReactNode;
   variant: "fullscreen" | "copilot";
@@ -90,10 +90,10 @@ export const Copilot: React.FC<{
   const { dashboard, setId } = useDashboard();
 
   useEffect(() => {
-    if (backend) {
+    if (backend && (!dashboard || dashboard.id !== dashboardId)) {
       setId(dashboardId, backend);
     }
-  }, [dashboardId, backend]);
+  }, [dashboard, dashboardId, backend]);
 
   const scroller = useRef<HTMLDivElement>(null);
 
@@ -462,3 +462,5 @@ export const Copilot: React.FC<{
     </>
   );
 };
+
+export const Copilot = memo(CopilotRaw);

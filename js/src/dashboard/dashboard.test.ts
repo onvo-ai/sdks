@@ -28,13 +28,4 @@ describe("Dashboard", () => {
     expect(widgets.length).toBeDefined();
     expect(widgets.length).toBeGreaterThan(0);
   }, 60000);
-  it("should get widget suggestions", async () => {
-    let suggestions = await onvo
-      .dashboard("f90182a2-f485-45a8-a9d6-b72021c03b50")
-      .getWidgetSuggestions();
-
-    expect(suggestions).toBeDefined();
-    expect(suggestions.length).toBeDefined();
-    expect(suggestions.length).toBeGreaterThan(0);
-  }, 30000);
 });

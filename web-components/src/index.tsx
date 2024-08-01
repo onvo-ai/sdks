@@ -78,15 +78,23 @@ const OnvoDashboardList = ({
   baseUrl,
   id,
   onClickItem,
+  variant = "grid",
+  columns,
 }: {
   token: string;
   baseUrl: string;
   id: string;
   onClickItem: (dashboard: any) => void;
+  columns: number;
+  variant: "list" | "grid";
 }) => {
   return (
     <Wrapper token={token} baseUrl={baseUrl}>
-      <DashboardList onClickItem={onClickItem} />
+      <DashboardList
+        columns={columns}
+        variant={variant}
+        onClickItem={onClickItem}
+      />
     </Wrapper>
   );
 };
@@ -94,7 +102,13 @@ const OnvoDashboardList = ({
 customElements.define(
   "onvo-dashboard-list",
   r2wc(OnvoDashboardList, {
-    props: { token: "string", baseUrl: "string", onClickItem: "function" },
+    props: {
+      token: "string",
+      baseUrl: "string",
+      onClickItem: "function",
+      variant: "string",
+      columns: "number",
+    },
   })
 );
 
