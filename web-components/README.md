@@ -31,7 +31,6 @@ To use this demo UI library in your project, import the components you need from
   base-url="https:dashboard.onvo.ai"
   variant="list|grid"
   on-click-item="clickHandler"
-  columns="1"
   columns="3"
   token="..."
 />
