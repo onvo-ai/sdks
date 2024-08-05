@@ -28,25 +28,39 @@ To use this demo UI library in your project, import the components you need from
 <script src="https://cdn.jsdelivr.net/npm/@onvo-ai/web-components/build/static/js/main.js"></script>
 
 <onvo-dashboard-list
-  baseUrl="https:dashboard.onvo.ai"
+  base-url="https:dashboard.onvo.ai"
   variant="list|grid"
+  on-click-item="clickHandler"
+  columns="1"
   columns="3"
   token="..."
 />
 
 <onvo-dashboard
-  baseUrl="https:dashboard.onvo.ai"
+  base-url="https:dashboard.onvo.ai"
   token="..."
-  id="31f4f9ec-3881-448a-b3e7-02485290ca9f"
+  dashboard-id="31f4f9ec-3881-448a-b3e7-02485290ca9f"
 />
 
 <onvo-copilot
-  baseUrl="https:dashboard.onvo.ai"
+  base-url="https:dashboard.onvo.ai"
   token="..."
   icon="none|small|large"
-  id="31f4f9ec-3881-448a-b3e7-02485290ca9f"
+  dashboard-id="31f4f9ec-3881-448a-b3e7-02485290ca9f"
   variant="fullscreen|copilot"
 />
+```
+
+## Copilot component
+
+You can also programmatically control the opening and closing of the copilot component using the `Onvo.setCopilotOpen()` method
+
+```javascript
+// Opening the copilot component
+Onvo.setCopilotOpen(true);
+
+// Closing the copilot component
+Onvo.setCopilotOpen(false);
 ```
 
 ## Contributing
