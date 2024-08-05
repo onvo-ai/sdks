@@ -115,15 +115,15 @@ customElements.define(
 const OnvoDashboard = ({
   token,
   baseUrl,
-  id,
+  dashboardId,
 }: {
   token: string;
   baseUrl: string;
-  id: string;
+  dashboardId: string;
 }) => {
   return (
     <Wrapper token={token} baseUrl={baseUrl}>
-      <Dashboard id={id} />
+      <Dashboard id={dashboardId} />
     </Wrapper>
   );
 };
@@ -131,7 +131,7 @@ const OnvoDashboard = ({
 customElements.define(
   "onvo-dashboard",
   r2wc(OnvoDashboard, {
-    props: { token: "string", baseUrl: "string", id: "string" },
+    props: { token: "string", baseUrl: "string", dashboardId: "string" },
   })
 );
 
