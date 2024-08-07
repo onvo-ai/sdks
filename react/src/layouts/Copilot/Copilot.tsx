@@ -85,7 +85,7 @@ const CopilotRaw: React.FC<{
   dashboardId: string;
   trigger: React.ReactNode;
   variant: "fullscreen" | "copilot";
-}> = ({ trigger, variant, dashboardId }) => {
+}> = ({ trigger, variant, dashboardId }): React.ReactNode => {
   const { backend, team, adminMode } = useBackend();
   const { dashboard, setId } = useDashboard();
 

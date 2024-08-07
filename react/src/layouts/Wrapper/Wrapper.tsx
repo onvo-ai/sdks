@@ -32,7 +32,7 @@ export const Wrapper: React.FC<{
   children,
   baseUrl = "https://dashboard.onvo.ai",
   adminMode,
-}) => {
+}): React.ReactNode => {
   const [subscription, setSubscription] = useState<Subscription>();
   const [subscriptionPlan, setSubscriptionPlan] = useState<SubscriptionPlan>();
   const [subscriptionLoaded, setSubscriptionLoaded] = useState(false);

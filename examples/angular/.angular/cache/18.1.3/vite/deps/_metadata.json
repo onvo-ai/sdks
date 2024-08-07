@@ -1,0 +1,34 @@
+{
+  "hash": "cee5293c",
+  "configHash": "5decc954",
+  "lockfileHash": "4b24b5b7",
+  "browserHash": "04df4621",
+  "optimized": {
+    "@angular/core": {
+      "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "ca4162d4",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "08d7b391",
+      "needsInterop": false
+    },
+    "@onvo-ai/web-components": {
+      "src": "../../../../../node_modules/@onvo-ai/web-components/build/static/js/main.js",
+      "file": "@onvo-ai_web-components.js",
+      "fileHash": "06ea2085",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-5KPL7KR6": {
+      "file": "chunk-5KPL7KR6.js"
+    },
+    "chunk-BJWEDLTQ": {
+      "file": "chunk-BJWEDLTQ.js"
+    }
+  }
+}

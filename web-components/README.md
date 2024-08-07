@@ -29,25 +29,25 @@ To use this demo UI library in your project, import the components you need from
 
 <onvo-dashboard-list
   base-url="https:dashboard.onvo.ai"
-  variant="list|grid"
+  list-variant="list|grid"
   on-click-item="clickHandler"
-  columns="3"
-  token="..."
-/>
+  num-columns="3"
+  user-token="..."
+></onvo-dashboard-list>
 
 <onvo-dashboard
   base-url="https:dashboard.onvo.ai"
-  token="..."
+  user-token="..."
   dashboard-id="31f4f9ec-3881-448a-b3e7-02485290ca9f"
-/>
+></onvo-dashboard>
 
 <onvo-copilot
   base-url="https:dashboard.onvo.ai"
-  token="..."
-  icon="none|small|large"
+  user-token="..."
+  icon-variant="none|small|large"
   dashboard-id="31f4f9ec-3881-448a-b3e7-02485290ca9f"
-  variant="fullscreen|copilot"
-/>
+  copilot-variant="fullscreen|copilot"
+></onvo-copilot>
 ```
 
 ## Copilot component

@@ -28,7 +28,7 @@ export const DashboardWrapper: React.FC<{
 export const Dashboard: React.FC<{
   id: string;
   className?: string;
-}> = ({ id: dashboardId, className }) => {
+}> = ({ id: dashboardId, className }): React.ReactNode => {
   const { subscription, subscriptionLoaded } = useBackend();
   const theme = useTheme();
   const { dashboard } = useDashboard();
