@@ -93,7 +93,7 @@ export const DashboardList: React.FC<{
   columns?: number;
   onClickItem?: (dashboard: any) => void;
   variant?: "list" | "grid";
-}> = ({ columns = 3, onClickItem, variant = "grid" }) => {
+}> = ({ columns = 3, onClickItem, variant = "grid" }): React.ReactNode => {
   const [dashboards, setDashboards] = useState<any[]>([]);
   const { backend } = useBackend();
 
