@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/web-components",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "The web component SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "type": "module",
@@ -38,7 +38,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "yarn build && sh predeploy.sh && yarn publish"
+    "deploy": "rm -rf ./build && yarn build && sh predeploy.sh && yarn publish"
   },
   "browserslist": [
     ">0.2%",
