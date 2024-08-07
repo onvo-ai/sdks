@@ -17,7 +17,11 @@ yarn add @onvo-ai/web-components
 You can also include it as a script tag in your html web pages
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@onvo-ai/web-components/build/static/js/main.js"></script>
+<!-- Load the latest version (RECOMMENDED) -->
+<script src="http://cdn.jsdelivr.net/npm/@onvo-ai/web-components"></script>
+
+<!-- Load a specific version -->
+<script src="http://cdn.jsdelivr.net/npm/@onvo-ai/web-components@0.0.16"></script>
 ```
 
 ## Usage
@@ -25,7 +29,13 @@ You can also include it as a script tag in your html web pages
 To use this demo UI library in your project, import the components you need from the library and use them in your React components.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@onvo-ai/web-components/build/static/js/main.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/@onvo-ai/web-components"></script>
+<script>
+  function clickHandler(dashboard) {
+    console.log("Dashboard clicked");
+    console.log(dashboard);
+  }
+</script>
 
 <onvo-dashboard-list
   base-url="https:dashboard.onvo.ai"
