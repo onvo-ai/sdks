@@ -17,12 +17,10 @@ yarn add @onvo-ai/web-components
 You can also include it as a script tag in your html web pages
 
 ```html
+<!-- Load the latest version (RECOMMENDED) -->
 <script src="http://cdn.jsdelivr.net/npm/@onvo-ai/web-components"></script>
-```
 
-You can also load a specific version of the SDK
-
-```html
+<!-- Load a specific version -->
 <script src="http://cdn.jsdelivr.net/npm/@onvo-ai/web-components@0.0.16"></script>
 ```
 
