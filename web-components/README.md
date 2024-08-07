@@ -26,6 +26,12 @@ To use this demo UI library in your project, import the components you need from
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@onvo-ai/web-components/build/static/js/main.js"></script>
+<script>
+  function clickHandler(dashboard) {
+    console.log("Dashboard clicked");
+    console.log(dashboard);
+  }
+</script>
 
 <onvo-dashboard-list
   base-url="https:dashboard.onvo.ai"
