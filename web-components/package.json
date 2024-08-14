@@ -7,7 +7,7 @@
   "private": false,
   "main": "build/static/js/main.js",
   "dependencies": {
-    "@onvo-ai/react": "^0.3.79",
+    "@onvo-ai/react": "^0.3.80",
     "@r2wc/react-to-web-component": "2.0.1",
     "loader-utils": "3.2.1",
     "react": "18.2.0",

@@ -226,8 +226,6 @@ const CopilotRaw: React.FC<{
     ));
   }, [messages, dashboard, selectedQuestion, team]);
 
-  if (!dashboard?.settings?.can_ask_questions && !adminMode) return <></>;
-
   return (
     <>
       <dialog open={open}>
