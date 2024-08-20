@@ -9,7 +9,6 @@ import {
   XMarkIcon,
 } from "@heroicons/react/16/solid";
 import { toast } from "sonner";
-import { Empty } from "../Empty";
 import React, { memo, useEffect, useMemo, useState } from "react";
 import { useBackend } from "../../layouts/Wrapper";
 import { Question } from "@onvo-ai/js";
@@ -29,7 +28,7 @@ const QuestionSidebarCard: React.FC<{
   return (
     <div
       className={
-        "onvo-transition-all onvo-group onvo-relative onvo-flex onvo-w-full onvo-px-3 onvo-py-2 hover:onvo-bg-black/10 hover:onvo-dark:bg-white/10 onvo-rounded-lg onvo-border dark:onvo-border-slate-700"
+        "onvo-transition-all onvo-group onvo-relative onvo-flex onvo-w-full onvo-px-3 onvo-py-2 hover:onvo-bg-black/10 hover:onvo-dark:bg-white/10 onvo-rounded-lg onvo-border onvo-border-black/10 dark:onvo-border-white/10"
       }
     >
       <div className="onvo-flex-grow onvo-cursor-pointer" onClick={onClick}>
@@ -42,7 +41,7 @@ const QuestionSidebarCard: React.FC<{
         <Icon
           variant="shadow"
           size="xs"
-          className="onvo-absolute onvo-text-red-500 onvo-right-2 onvo-top-2 onvo-cursor-pointer onvo-opacity-0 group-hover:onvo-opacity-100"
+          className="onvo-absolute onvo-background-color onvo-border-black/10 dark:onvo-border-white/10 onvo-text-red-500 onvo-right-2 onvo-top-2 onvo-cursor-pointer onvo-opacity-0 group-hover:onvo-opacity-100"
           icon={TrashIcon}
           onClick={onDelete}
         />

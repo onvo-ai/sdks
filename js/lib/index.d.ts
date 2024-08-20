@@ -1456,12 +1456,6 @@ declare class OnvoDashboard extends OnvoBase {
      */
     updateWidgetCache(): Promise<Widget[]>;
     /**
-     * Retrieves widget suggestions for the dashboard.
-     *
-     * @return {Promise<string[]>} A promise that resolves to an array of widget suggestions.
-     */
-    getWidgetSuggestions(): Promise<string[]>;
-    /**
      * Exports the dashboard in the specified format.
      *
      * @param {("csv" | "xlsx" | "pdf" | "png" | "jpeg")} format - The format to export the dashboard in.

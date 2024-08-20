@@ -117,7 +117,7 @@ export const WidgetWizard: React.FC<{
     type: '${type}',
     data: {
         datasets: [${datasets.map(
-          (d) => `{
+      (d) => `{
             label: '${d.title}',
             data: [
                 //${d.description}
@@ -126,7 +126,7 @@ export const WidgetWizard: React.FC<{
             borderColor: '${d.borderColor}',
             borderWidth: ${d.borderWidth},    
         }`
-        )}]
+    )}]
     },
     options: {
         plugins: {
@@ -172,7 +172,7 @@ Additional information: ${additionalInformation}
   };
 
   return (
-    <Card className="!onvo-p-0">
+    <Card className="onvo-background-color onvo-border-black/20 dark:onvo-border-white/20 !onvo-rounded-lg !onvo-p-0">
       <div className="onvo-p-4 onvo-relative onvo-flex onvo-flex-row onvo-divide-x onvo-divide-slate-200 dark:onvo-divide-slate-800 onvo-gap-4">
         <div className="onvo-w-full onvo-flex onvo-flex-col onvo-gap-2 onvo-flex-grow">
           <div className="onvo-flex onvo-flex-row onvo-items-center onvo-gap-2">
@@ -544,7 +544,7 @@ Additional information: ${additionalInformation}
           />
         </div>
       </div>
-      <div className="onvo-px-4 onvo-py-2 onvo-rounded-b-md onvo-bg-slate-100 dark:onvo-bg-slate-800 onvo-flex onvo-flex-row onvo-justify-between onvo-items-center">
+      <div className="onvo-px-4 onvo-py-2 onvo-rounded-b-md onvo-bg-black/20 dark:onvo-bg-white/20 onvo-flex onvo-flex-row onvo-justify-between onvo-items-center">
         <div className="onvo-flex onvo-flex-row onvo-gap-2 onvo-items-center">
           <InformationCircleIcon className="onvo-size-4 dark:onvo-text-slate-400" />
           <Text>

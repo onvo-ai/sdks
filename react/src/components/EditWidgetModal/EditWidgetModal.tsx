@@ -49,12 +49,12 @@ const Message: React.FC<{
   if (message.role !== "user") return <></>;
   return (
     <div className="onvo-message-wrapper onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3 onvo-group">
-      <Icon variant="shadow" icon={UserIcon} />
+      <Icon className="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10" variant="shadow" icon={UserIcon} />
 
       <div className="onvo-message-text onvo-w-full">
         {editing ? (
           <Textarea
-            defaultValue={message.content}
+            defaultValue={message.content} className="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10"
             onChange={(e) => setNewMessage(e.target.value)}
           />
         ) : (
@@ -84,7 +84,7 @@ const Message: React.FC<{
             </Button>
             <div className="onvo-flex-grow onvo-h-1" />
             <Button
-              className="onvo-py-1"
+              className="onvo-py-1 onvo-background-color onvo-border-black/10 dark:onvo-border-white/10"
               variant="secondary"
               onClick={() => {
                 setEditing(false);
@@ -93,23 +93,21 @@ const Message: React.FC<{
               Cancel
             </Button>
           </div>
-        ) : message.role === "user" ? (
+        ) : (
           <Icon
             onClick={() => setEditing(true)}
             variant="shadow"
-            className="onvo-message-edit-button onvo-absolute onvo-top-1 onvo-right-1 onvo-hidden group-hover:onvo-block"
+            className="onvo-message-edit-button onvo-background-color onvo-border-black/10 dark:onvo-border-white/10 onvo-absolute onvo-top-1 onvo-right-1 onvo-hidden group-hover:onvo-block"
             icon={PencilIcon}
             size="sm"
           />
-        ) : (
-          <></>
         )}
       </div>
     </div>
   );
 };
 
-export const EditWidgetModal: React.FC<{}> = ({}) => {
+export const EditWidgetModal: React.FC<{}> = ({ }) => {
   // EXTERNAL HOOKS
   const { backend, adminMode } = useBackend();
   const { refreshWidgets, dashboard } = useDashboard();
@@ -258,13 +256,13 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
         >
           <div
             className={
-              "onvo-foreground-color onvo-w-full onvo-left-0 onvo-top-0 onvo-z-10 onvo-flex onvo-flex-row onvo-justify-start onvo-items-center onvo-gap-4 onvo-border-b onvo-border-gray-200 onvo-p-2 dark:onvo-border-gray-800"
+              "onvo-foreground-color onvo-w-full onvo-left-0 onvo-top-0 onvo-z-10 onvo-flex onvo-flex-row onvo-justify-start onvo-items-center onvo-gap-4 onvo-border-b onvo-border-black/10 onvo-p-2 dark:onvo-border-white/10"
             }
           >
             <Icon
               icon={ChevronLeftIcon}
               variant="shadow"
-              className="onvo-ml-2"
+              className="onvo-ml-2 onvo-background-color onvo-border-black/10 dark:onvo-border-white/10"
               onClick={cleanup}
             />
 
@@ -304,7 +302,7 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
             </div>
           </div>
           <div className="onvo-relative onvo-flex onvo-flex-grow onvo-h-[calc(100%-52px)] onvo-w-full onvo-flex-col-reverse @xl/widgetmodal:onvo-flex-row">
-            <div className="onvo-relative onvo-flex-grow onvo-h-full onvo-w-full onvo-pt-3 onvo-border-r onvo-border-gray-200 dark:onvo-border-gray-800">
+            <div className="onvo-relative onvo-flex-grow onvo-h-full onvo-w-full onvo-pt-3 onvo-border-r onvo-border-black/10 dark:onvo-border-white/10">
               {tab === "editor" && (
                 <Button
                   variant="secondary"
@@ -321,12 +319,12 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
                 }}
                 className="onvo-h-full onvo-flex onvo-flex-col"
               >
-                <TabsList>
+                <TabsList className="onvo-border-black/10 dark:onvo-border-white/10">
                   <TabsTrigger value="chat">Chat</TabsTrigger>
                   {(adminMode ||
                     dashboard?.settings?.enable_widget_code_editor) && (
-                    <TabsTrigger value="editor">Code editor</TabsTrigger>
-                  )}
+                      <TabsTrigger value="editor">Code editor</TabsTrigger>
+                    )}
                   <TabsTrigger value="settings">Settings</TabsTrigger>
                 </TabsList>
                 <div className="onvo-relative onvo-flex-grow onvo-h-[calc(100%-33px)] onvo-w-full">
@@ -365,14 +363,15 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
                           "onvo-foreground-color onvo-w-full onvo-input-text-wrapper onvo-bg-white dark:onvo-bg-slate-800 onvo-z-10 onvo-pb-4 onvo-px-2"
                         }
                       >
-                        <SuggestionsBar
-                          onSelect={(val) => setNewMessage(val)}
-                        />
+                        <div className="onvo-relative onvo-mx-auto onvo-w-full onvo-max-w-2xl">
+                          <SuggestionsBar
+                            onSelect={(val) => setNewMessage(val)}
+                          /></div>
                         <div className="onvo-relative onvo-mx-auto onvo-flex onvo-w-full onvo-max-w-2xl onvo-flex-row onvo-items-center onvo-gap-2">
                           <Textarea
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
-                            className="onvo-ask-textarea onvo-background-color onvo-pr-[52px]"
+                            className="onvo-ask-textarea onvo-background-color onvo-pr-[52px] onvo-border-black/10 dark:onvo-border-white/10"
                             placeholder={`Ask for changes to your widget...`}
                             autoFocus
                             onKeyUp={(evt) => {
@@ -411,25 +410,25 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
                   </TabsContent>
                   {(adminMode ||
                     dashboard?.settings?.enable_widget_code_editor) && (
-                    <TabsContent
-                      value="editor"
-                      className="onvo-h-full onvo-w-full"
-                    >
-                      <Editor
-                        defaultLanguage="python"
-                        value={code}
-                        height="100%"
-                        options={{
-                          padding: {
-                            top: 10,
-                          },
-                        }}
-                        className="onvo-code-editor onvo-w-full"
-                        theme="vs-dark"
-                        onChange={(val) => setCode(val || "")}
-                      />
-                    </TabsContent>
-                  )}
+                      <TabsContent
+                        value="editor"
+                        className="onvo-h-full onvo-w-full"
+                      >
+                        <Editor
+                          defaultLanguage="python"
+                          value={code}
+                          height="100%"
+                          options={{
+                            padding: {
+                              top: 10,
+                            },
+                          }}
+                          className="onvo-code-editor onvo-w-full"
+                          theme="vs-dark"
+                          onChange={(val) => setCode(val || "")}
+                        />
+                      </TabsContent>
+                    )}
                   <TabsContent value="settings" className="onvo-h-full">
                     <div className="onvo-p-2">
                       <div className="onvo-flex onvo-flex-row onvo-items-center onvo-justify-between">
@@ -452,17 +451,17 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
                       <Input
                         placeholder="Title"
                         className="onvo-text-xs"
-                        value={title}
+                        value={title} inputClassName="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10"
                         onChange={(val) => setTitle(val.target.value)}
                         disabled={settings.title_hidden}
                       />
 
-                      <Divider />
+                      <Divider className=" onvo-border-black/10 dark:onvo-border-white/10" />
                       <Text className="onvo-text-xs">CSS id</Text>
                       <Input
                         placeholder="CSS id"
                         className="onvo-text-xs"
-                        value={settings.css_id}
+                        value={settings.css_id} inputClassName="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10"
                         onChange={(val) => {
                           setSettings((s: any) => ({
                             ...s,
@@ -476,7 +475,7 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
                       </Text>
                       <Input
                         placeholder="CSS class names"
-                        className="onvo-text-xs"
+                        className="onvo-text-xs" inputClassName="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10"
                         value={settings.css_classnames}
                         onChange={(val) => {
                           setSettings((s: any) => ({
@@ -486,7 +485,7 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
                         }}
                       />
 
-                      <Divider />
+                      <Divider className=" onvo-border-black/10 dark:onvo-border-white/10" />
                       <div className="onvo-mt-2 onvo-flex onvo-flex-row onvo-items-center onvo-justify-start onvo-gap-2">
                         <input
                           id="default-checkbox"
@@ -498,7 +497,7 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
                               disable_download_images: val.target.checked,
                             }));
                           }}
-                          className="onvo-w-4 onvo-h-4 onvo-text-blue-600 onvo-bg-gray-100 onvo-border-gray-300 onvo-rounded-md focus:onvo-ring-blue-500 dark:focus:onvo-ring-blue-600 dark:onvo-ring-offset-gray-800 focus:onvo-ring-2 dark:onvo-bg-gray-700 dark:onvo-border-gray-600"
+                          className="onvo-w-4 onvo-h-4 onvo-text-blue-600 onvo-background-color onvo-border-black/10 onvo-rounded-md focus:onvo-ring-blue-500 dark:focus:onvo-ring-blue-600 dark:onvo-ring-offset-gray-800 focus:onvo-ring-2 dark:onvo-border-white/10"
                         />
                         <Text className="onvo-text-xs">
                           Disable image downloads
@@ -515,7 +514,7 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
                               disable_download_reports: val.target.checked,
                             }));
                           }}
-                          className="onvo-w-4 onvo-h-4 onvo-text-blue-600 onvo-bg-gray-100 onvo-border-gray-300 onvo-rounded-md focus:onvo-ring-blue-500 dark:focus:onvo-ring-blue-600 dark:onvo-ring-offset-gray-800 focus:onvo-ring-2 dark:onvo-bg-gray-700 dark:onvo-border-gray-600"
+                          className="onvo-w-4 onvo-h-4 onvo-text-blue-600 onvo-background-color onvo-border-black/10 onvo-rounded-md focus:onvo-ring-blue-500 dark:focus:onvo-ring-blue-600 dark:onvo-ring-offset-gray-800 focus:onvo-ring-2 dark:onvo-border-white/10"
                         />
                         <Text className="onvo-text-xs">
                           Disable csv / excel downloads
@@ -528,8 +527,8 @@ export const EditWidgetModal: React.FC<{}> = ({}) => {
             </div>
             <div className="onvo-background-color onvo-flex onvo-flex-shrink-0 @xl/widgetmodal:onvo-flex-shrink onvo-flex-col onvo-justify-center onvo-w-full onvo-flex-grow onvo-relative onvo-p-4 onvo-overflow-y-auto onvo-bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:onvo-bg-[radial-gradient(#0f172a_1px,transparent_1px)] [background-size:16px_16px]">
               {loading && (
-                <div className="onvo-absolute onvo-top-0 onvo-left-0 onvo-bottom-0 onvo-right-0 onvo-z-10 onvo-backdrop-blur-md onvo-bg-white/50 dark:onvo-bg-gray-900/50 onvo-flex onvo-justify-center onvo-items-center">
-                  <Card className="onvo-loading-card onvo-flex onvo-flex-row onvo-gap-6 onvo-items-center !onvo-w-72">
+                <div className="onvo-absolute onvo-top-0 onvo-left-0 onvo-bottom-0 onvo-right-0 onvo-z-10 onvo-backdrop-blur-md onvo-bg-white/50 dark:onvo-bg-black-900/50 onvo-flex onvo-justify-center onvo-items-center">
+                  <Card className="onvo-loading-card onvo-foreground-color onvo-flex onvo-flex-row onvo-gap-6 onvo-items-center !onvo-w-72 onvo-border-white/10 dark:onvo-border-black-900/10">
                     <div role="status">
                       <svg
                         aria-hidden="true"

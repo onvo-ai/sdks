@@ -29,7 +29,7 @@ export const SuggestionsBar: React.FC<{ onSelect: (str: string) => void }> = ({
       {suggestions.map((a) => (
         <div
           key={a.name}
-          className="onvo-flex onvo-flex-shrink-0 onvo-flex-row onvo-items-center onvo-gap-1 onvo-bg-blue-50 dark:onvo-bg-blue-950 onvo-border onvo-border-blue-500 onvo-rounded-full onvo-py-1 onvo-px-2 hover:onvo-bg-blue-100 dark:hover:onvo-bg-blue-900 onvo-cursor-pointer"
+          className="onvo-background-color onvo-flex onvo-flex-shrink-0 onvo-flex-row onvo-items-center onvo-gap-1 onvo-bg-blue-50 dark:onvo-bg-blue-950 onvo-border onvo-border-blue-500 onvo-rounded-full onvo-py-1 onvo-px-2 hover:onvo-bg-blue-100 dark:hover:onvo-bg-blue-900 onvo-cursor-pointer"
           onClick={() => onSelect(a.value)}
         >
           <SparklesIcon className="onvo-h-4 onvo-w-4 onvo-text-blue-500" />
