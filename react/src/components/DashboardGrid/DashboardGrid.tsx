@@ -12,7 +12,7 @@ import { FilterBar } from "../FilterBar";
 import { EditWidgetModal } from "../EditWidgetModal";
 import { ImageWidgetModal } from "../ImageWidgetModal";
 
-export const DashboardGrid: React.FC<{}> = ({}) => {
+export const DashboardGrid: React.FC<{}> = ({ }) => {
   const { dashboard, widgets, setWidgets } = useDashboard();
   const { backend, adminMode } = useBackend();
 
@@ -26,29 +26,29 @@ export const DashboardGrid: React.FC<{}> = ({}) => {
       widgets.length === 0
         ? { lg: [] }
         : {
-            lg: widgets.map((i: Widget) => {
-              let layouts = i.layouts;
-              return {
-                i: i.id,
-                x: layouts.lg.x,
-                y: layouts.lg.y,
-                w: layouts.lg.w,
-                h: layouts.lg.h,
-                minH: 4,
-              };
-            }),
-            sm: widgets.map((i: Widget) => {
-              let layouts = i.layouts;
-              return {
-                i: i.id,
-                x: layouts.sm?.x || layouts.lg.x,
-                y: layouts.sm?.y || layouts.lg.y,
-                w: layouts.sm?.w || layouts.lg.w,
-                h: layouts.sm?.h || layouts.lg.h,
-                minH: 4,
-              };
-            }),
-          },
+          lg: widgets.map((i: Widget) => {
+            let layouts = i.layouts;
+            return {
+              i: i.id,
+              x: layouts.lg.x,
+              y: layouts.lg.y,
+              w: layouts.lg.w,
+              h: layouts.lg.h,
+              minH: 4,
+            };
+          }),
+          sm: widgets.map((i: Widget) => {
+            let layouts = i.layouts;
+            return {
+              i: i.id,
+              x: layouts.sm?.x || layouts.lg.x,
+              y: layouts.sm?.y || layouts.lg.y,
+              w: layouts.sm?.w || layouts.lg.w,
+              h: layouts.sm?.h || layouts.lg.h,
+              minH: 4,
+            };
+          }),
+        },
       (widgets || []).map((i: Widget) => (
         <div className="z-0 hover:z-[1]" key={i.id}>
           <ChartCard widget={i} />

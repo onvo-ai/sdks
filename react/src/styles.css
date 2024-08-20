@@ -76,28 +76,42 @@
   overflow-y: visible;
 }
 .rdg {
+  --rdg-background-color: var(--onvo-light-foreground-color) !important;
+  --rdg-header-background-color: var(--onvo-light-background-color) !important;
+  --rdg-row-hover-background-color: var(--onvo-light-background-color) !important;
   --rdg-color: var(--onvo-font-color);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 .onvo-dark .rdg {
-  --rdg-background-color: #101827 !important;
-  --rdg-header-background-color: #1f2937 !important;
-  --rdg-row-hover-background-color: #1f2937 !important;
+  --rdg-background-color: var(--onvo-dark-foreground-color) !important;
+  --rdg-header-background-color: var(--onvo-dark-background-color) !important;
+  --rdg-row-hover-background-color: var(--onvo-dark-background-color) !important;
   --rdg-color: var(--onvo-dark-font-color);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.rsw-editor {
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--onvo-light-background-color);
+  margin-top: 4px;
 }
 
 /* RICH TEXT EDITOR STYLES */
 .onvo-dark .rsw-editor {
-  border-color: #1e293b;
-  background-color: #020617;
-  margin-top: 4px;
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--onvo-dark-background-color);
+}
+
+.rsw-toolbar {
+  background-color: var(--onvo-light-foreground-color);
+  border-bottom-color: rgba(0, 0, 0, 0.1);
 }
 .onvo-dark .rsw-toolbar {
-  background-color: #1e293b;
-  border-bottom-color: #1e293b;
+  background-color: var(--onvo-dark-foreground-color);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 .onvo-dark .rsw-separator {
-  border-right-color: #020617;
+  border-right-color: var(--onvo-dark-background-color);
 }
 .onvo-dark .rsw-btn {
   color: #e2e8f0;

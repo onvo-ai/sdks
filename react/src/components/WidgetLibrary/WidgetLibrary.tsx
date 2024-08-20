@@ -155,7 +155,7 @@ const WidgetLibraryRaw: React.FC<{
               hideOptions={true}
               className="onvo-h-96 onvo-z-10"
               footer={
-                <div className="onvo-chart-card-dropdown-wrapper onvo-py-2 onvo-px-2 onvo-z-20 onvo-border-t onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-b-md onvo-bg-slate-50 dark:onvo-bg-slate-800 onvo-flex onvo-w-full onvo-justify-between onvo-flex-row onvo-items-center">
+                <div className="onvo-chart-card-dropdown-wrapper onvo-py-2 onvo-px-2 onvo-z-20 onvo-border-t onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-b-md onvo-background-color onvo-flex onvo-w-full onvo-justify-between onvo-flex-row onvo-items-center">
                   <div className="onvo-flex onvo-gap-2 onvo-items-center">
                     {adminMode && (
                       <Button
@@ -169,7 +169,7 @@ const WidgetLibraryRaw: React.FC<{
                   <div className="onvo-flex onvo-gap-2 onvo-items-center">
                     {AddToDashboardEnabled && (
                       <Button
-                        variant="secondary"
+                        variant="secondary" className="onvo-foreground-color onvo-border-black/10 dark:onvo-border-white/10"
                         onClick={() => addToDashboard(a)}
                       >
                         Add to dashboard

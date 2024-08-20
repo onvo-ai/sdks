@@ -158,9 +158,9 @@ const DropdownMenuItem = React.forwardRef<
       // disabled
       "data-[disabled]:onvo-pointer-events-none data-[disabled]:onvo-text-gray-400 data-[disabled]:hover:onvo-bg-none dark:data-[disabled]:onvo-text-gray-600",
       // focus
-      "focus-visible:onvo-bg-gray-100 focus-visible:dark:onvo-bg-gray-900",
+      "focus-visible:onvo-bg-black/10 focus-visible:dark:onvo-bg-white/10",
       // hover
-      "hover:onvo-bg-gray-100 hover:dark:onvo-bg-gray-900",
+      "hover:onvo-bg-black/10 hover:dark:onvo-bg-white/10",
       className
     )}
     {...props}

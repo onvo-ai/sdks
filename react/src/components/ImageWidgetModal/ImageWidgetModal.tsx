@@ -48,7 +48,7 @@ export const useImageWidgetModal = create<{
   ) => set({ open: op, widget: wid }),
 }));
 
-export const ImageWidgetModal: React.FC<{}> = ({}) => {
+export const ImageWidgetModal: React.FC<{}> = ({ }) => {
   const { dashboard, refreshWidgets } = useDashboard();
   const { backend, adminMode } = useBackend();
   const { open, setOpen, widget } = useImageWidgetModal();
@@ -175,13 +175,13 @@ export const ImageWidgetModal: React.FC<{}> = ({}) => {
         >
           <div
             className={
-              "onvo-foreground-color onvo-w-full onvo-left-0 onvo-top-0 onvo-z-10 onvo-flex onvo-flex-row onvo-justify-start onvo-items-center onvo-gap-4 onvo-border-b onvo-border-gray-200 onvo-p-2 dark:onvo-border-gray-800"
+              "onvo-foreground-color onvo-w-full onvo-left-0 onvo-top-0 onvo-z-10 onvo-flex onvo-flex-row onvo-justify-start onvo-items-center onvo-gap-4 onvo-border-b onvo-border-black/10 onvo-p-2 dark:onvo-border-white/10"
             }
           >
             <Icon
               icon={ChevronLeftIcon}
               variant="shadow"
-              className="onvo-ml-2"
+              className="onvo-ml-2 onvo-background-color onvo-border onvo-border-black/10 dark:onvo-border-white/10"
               onClick={() => setOpen(false)}
             />
 
@@ -205,18 +205,19 @@ export const ImageWidgetModal: React.FC<{}> = ({}) => {
             </div>
           </div>
           <div className="onvo-relative onvo-flex onvo-flex-grow onvo-h-[calc(100%-52px)] onvo-w-full onvo-flex-col-reverse @xl/widgetmodal:onvo-flex-row">
-            <div className="onvo-relative onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-h-full onvo-w-full onvo-p-4 onvo-border-r onvo-border-gray-200 dark:onvo-border-gray-800">
+            <div className="onvo-relative onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-h-full onvo-w-full onvo-p-4 onvo-border-r onvo-border-black/10 dark:onvo-border-white/10">
               <Text>Image URL</Text>
               <Input
                 placeholder="Type in a URL"
                 value={url}
+                inputClassName="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10"
                 onChange={(e) => setUrl(e.target.value)}
               />
 
               <Divider>
                 <Text>OR</Text>
               </Divider>
-              <Card className="onvo-relative onvo-flex onvo-h-auto onvo-cursor-pointer onvo-flex-row onvo-items-center onvo-justify-center onvo-py-10">
+              <Card className="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10 onvo-relative onvo-flex onvo-h-auto onvo-cursor-pointer onvo-flex-row onvo-items-center onvo-justify-center onvo-py-10">
                 <Icon icon={PaperClipIcon} />
                 <div className="onvo-ml-4 onvo-flex-grow">
                   <Title>Drag and drop an image here or click to add</Title>

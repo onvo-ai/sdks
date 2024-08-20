@@ -21,6 +21,7 @@ import { Button } from "../../tremor/Button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../tremor/Tabs";
 import { WidgetWizard } from "../../components/WidgetWizard";
 import { ChevronRightIcon, XMarkIcon } from "@heroicons/react/16/solid";
+import { useTheme } from "../Dashboard/useTheme";
 
 dayjs.extend(relativeTime);
 
@@ -38,7 +39,7 @@ const SimpleCreatorTool: React.FC<{ onSubmit: (val: string) => void }> = ({
   return (
     <div className=" onvo-relative onvo-mx-auto onvo-max-w-screen-lg onvo-flex onvo-w-full onvo-flex-col onvo-items-center onvo-justify-center">
       <Textarea
-        className="onvo-background-color onvo-min-h-[96px] !onvo-rounded-lg onvo-pr-[52px] onvo-z-10"
+        className="onvo-background-color onvo-min-h-[96px] !onvo-rounded-lg onvo-pr-[52px] onvo-z-10 onvo-border-black/20 dark:onvo-border-white/20"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder={`Describe the widget you want to create...`}
@@ -61,13 +62,13 @@ const SimpleCreatorTool: React.FC<{ onSubmit: (val: string) => void }> = ({
           }
         }}
       />
-      <div className="onvo-w-full onvo-pb-2 onvo-pt-3 -onvo-mt-2 onvo-border onvo-border-slate-200 onvo-bg-slate-100 dark:onvo-bg-slate-900 dark:onvo-border-slate-800 onvo-rounded-b-lg">
+      <div className="onvo-w-full onvo-pb-2 onvo-pt-3 -onvo-mt-2 onvo-border onvo-bg-black/10 dark:onvo-bg-white/10 onvo-border-black/20 dark:onvo-border-white/20 onvo-rounded-b-lg">
         <Text className="onvo-mt-0 onvo-text-center onvo-text-xs">
           Not sure how to write a prompt?{" "}
           <a
             href={
               dashboard?.settings?.help_url &&
-              dashboard?.settings?.help_url.trim() !== ""
+                dashboard?.settings?.help_url.trim() !== ""
                 ? dashboard?.settings?.help_url
                 : "https://onvo.ai/blog/writing-better-ai-prompts-for-dashboard-generation/"
             }
@@ -86,8 +87,9 @@ const CopilotRaw: React.FC<{
   trigger: React.ReactNode;
   variant: "fullscreen" | "copilot";
 }> = ({ trigger, variant, dashboardId }): React.ReactNode => {
-  const { backend, team, adminMode } = useBackend();
+  const { backend, team } = useBackend();
   const { dashboard, setId } = useDashboard();
+  const theme = useTheme();
 
   useEffect(() => {
     if (backend && (!dashboard || dashboard.id !== dashboardId)) {
@@ -231,7 +233,7 @@ const CopilotRaw: React.FC<{
       <dialog open={open}>
         <div
           className={twMerge(
-            "onvo-@container/questionmodal onvo-animate-dialogOpen onvo-z-50 onvo-fixed",
+            "onvo-@container/questionmodal onvo-animate-dialogOpen onvo-z-[9999] onvo-fixed",
             variant === "fullscreen"
               ? "onvo-h-full onvo-w-full onvo-left-0"
               : "onvo-h-[calc(100vh-40px)] onvo-w-[400px] onvo-right-5 onvo-bottom-5 onvo-rounded-lg onvo-overflow-hidden onvo-border onvo-border-slate-200 dark:onvo-border-slate-800 onvo-shadow-xl"
@@ -240,12 +242,12 @@ const CopilotRaw: React.FC<{
           <div className="onvo-question-modal-question-list onvo-flex onvo-flex-col onvo-foreground-color onvo-absolute onvo-w-full onvo-right-0 onvo-top-0 onvo-z-20 onvo-h-full">
             <div
               className={
-                "onvo-foreground-color onvo-top-0 onvo-w-full onvo-z-10 onvo-flex onvo-flex-row onvo-justify-between onvo-items-center onvo-gap-4 onvo-border-b onvo-border-gray-200 onvo-px-3 onvo-py-2 dark:onvo-border-gray-800"
+                "onvo-foreground-color onvo-top-0 onvo-w-full onvo-z-10 onvo-flex onvo-flex-row onvo-justify-between onvo-items-center onvo-gap-4 onvo-border-b onvo-px-3 onvo-border-black/10 onvo-py-2 dark:onvo-border-white/10"
               }
             >
               <Icon
                 icon={XMarkIcon}
-                variant="shadow"
+                variant="shadow" className="onvo-border-black/10 onvo-background-color dark:onvo-border-white/10"
                 onClick={() => {
                   setOpen(false);
                 }}
@@ -434,7 +436,7 @@ const CopilotRaw: React.FC<{
                         <a
                           href={
                             dashboard?.settings?.help_url &&
-                            dashboard?.settings?.help_url.trim() !== ""
+                              dashboard?.settings?.help_url.trim() !== ""
                               ? dashboard?.settings?.help_url
                               : "https://onvo.ai/blog/writing-better-ai-prompts-for-dashboard-generation/"
                           }

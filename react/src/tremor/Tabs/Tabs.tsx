@@ -36,7 +36,7 @@ const variantStyles: Record<TabsListVariant, string> = {
     // border color
     // "border-gray-200 dark:border-gray-800",
     // background color
-    "onvo-bg-gray-100 dark:onvo-bg-gray-800"
+    "onvo-bg-gray-100 dark:onvo-bg-gray-800 onvo-background-color"
   ),
 };
 
@@ -85,8 +85,8 @@ function getVariantStyles(tabVariant: TabsListVariant) {
         // hover
         "hover:onvo-text-gray-700 hover:dark:onvo-text-gray-200",
         // selected
-        " data-[state=active]:onvo-bg-white data-[state=active]:onvo-text-gray-900 data-[state=active]:onvo-shadow",
-        "data-[state=active]:dark:onvo-bg-gray-900 data-[state=active]:dark:onvo-text-gray-50",
+        " data-[state=active]:onvo-bg-black/10 data-[state=active]:onvo-text-gray-900 data-[state=active]:onvo-shadow",
+        "data-[state=active]:dark:onvo-bg-white/10 data-[state=active]:dark:onvo-text-gray-50",
         // disabled
         "disabled:onvo-pointer-events-none disabled:onvo-text-gray-400 disabled:dark:onvo-text-gray-600 disabled:onvo-opacity-50"
       );

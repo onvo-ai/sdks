@@ -76,7 +76,7 @@ export const useTextWidgetModal = create<{
   ) => set({ open: op, widget: wid }),
 }));
 
-export const TextWidgetModal: React.FC<{}> = ({}) => {
+export const TextWidgetModal: React.FC<{}> = ({ }) => {
   const { dashboard, refreshWidgets } = useDashboard();
   const { backend, adminMode } = useBackend();
   const { open, setOpen, widget } = useTextWidgetModal();
@@ -233,13 +233,13 @@ export const TextWidgetModal: React.FC<{}> = ({}) => {
         >
           <div
             className={
-              "onvo-foreground-color onvo-w-full onvo-left-0 onvo-top-0 onvo-z-10 onvo-flex onvo-flex-row onvo-justify-start onvo-items-center onvo-gap-4 onvo-border-b onvo-border-gray-200 onvo-p-2 dark:onvo-border-gray-800"
+              "onvo-foreground-color onvo-w-full onvo-left-0 onvo-top-0 onvo-z-10 onvo-flex onvo-flex-row onvo-justify-start onvo-items-center onvo-gap-4 onvo-border-b onvo-border-black/10 onvo-p-2 dark:onvo-border-white/10"
             }
           >
             <Icon
               icon={ChevronLeftIcon}
               variant="shadow"
-              className="onvo-ml-2"
+              className="onvo-ml-2 onvo-background-color onvo-border onvo-border-black/10 dark:onvo-border-white/10"
               onClick={() => setOpen(false)}
             />
 
@@ -261,11 +261,12 @@ export const TextWidgetModal: React.FC<{}> = ({}) => {
             </div>
           </div>
           <div className="onvo-relative onvo-flex onvo-flex-grow onvo-h-[calc(100%-52px)] onvo-w-full onvo-flex-col-reverse @xl/widgetmodal:onvo-flex-row">
-            <div className="onvo-relative onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-h-full onvo-w-full onvo-p-4 onvo-border-r onvo-border-gray-200 dark:onvo-border-gray-800">
+            <div className="onvo-relative onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-h-full onvo-w-full onvo-p-4 onvo-border-r onvo-border-black/10 dark:onvo-border-white/10">
               <Text>Title</Text>
               <Input
                 placeholder="Type in a title"
                 value={title}
+                inputClassName="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10"
                 onChange={(e) => setTitle(e.target.value)}
               />
               <div className="onvo-mt-2 onvo-flex onvo-items-center onvo-justify-between">
@@ -327,10 +328,10 @@ export const TextWidgetModal: React.FC<{}> = ({}) => {
               </div>
 
               <div className="onvo-mt-2 onvo-flex onvo-items-center onvo-justify-between">
-                <Card className="!onvo-p-0">
+                <Card className="!onvo-p-0 onvo-background-color">
                   <Accordion type="single" collapsible>
                     <AccordionItem value="item-1" className="onvo-border-b-0">
-                      <AccordionTrigger className="onvo-bg-slate-50 dark:onvo-bg-slate-800 onvo-px-3 onvo-rounded-md">
+                      <AccordionTrigger className="onvo-background-color onvo-px-3 onvo-rounded-md">
                         <div className="onvo-flex onvo-gap-2 onvo-items-center onvo-justify-start">
                           <SparklesIcon className="onvo-h-4 onvo-w-4" />
                           Generate text with AI
@@ -339,7 +340,7 @@ export const TextWidgetModal: React.FC<{}> = ({}) => {
                       <AccordionContent className="onvo-px-3 onvo-relative">
                         <Textarea
                           placeholder="Enter prompt for AI"
-                          className="onvo-mt-2"
+                          className="onvo-mt-2 onvo-foreground-color"
                           value={prompt}
                           onChange={(e) => setPrompt(e.target.value)}
                         />

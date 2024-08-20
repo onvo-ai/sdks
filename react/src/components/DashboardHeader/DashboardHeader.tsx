@@ -98,9 +98,8 @@ export const DashboardHeader: React.FC<{
 
   return (
     <section
-      className={`onvo-dashboard-header onvo-sticky onvo-z-10 onvo-border-b onvo-foreground-color onvo-border-gray-200 dark:onvo-border-gray-800 onvo-top-0 ${
-        className ? className : ""
-      }`}
+      className={`onvo-dashboard-header onvo-sticky onvo-z-10 onvo-border-b onvo-foreground-color onvo-border-black/10 dark:onvo-border-white/10 onvo-top-0 ${className ? className : ""
+        }`}
     >
       <main className="onvo-mx-auto onvo-px-6 onvo-py-3 lg:onvo-px-8 onvo-z-10 onvo-relative onvo-flex onvo-flex-col onvo-items-start onvo-justify-between onvo-gap-4 md:onvo-flex-row md:onvo-items-center">
         <div className="onvo-flex-grow">
@@ -125,12 +124,12 @@ export const DashboardHeader: React.FC<{
           {(ImageDownloadEnabled || ReportDownloadEnabled) && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="secondary" disabled={!dashboard}>
+                <Button className="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10" variant="secondary" disabled={!dashboard}>
                   Download{" "}
                   <ChevronDownIcon className="onvo-h-4 onvo-w-4 onvo-ml-1" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="onvo-min-w-56">
+              <DropdownMenuContent className="onvo-min-w-56 onvo-background-color onvo-border-black/10 dark:onvo-border-white/10">
                 {ReportDownloadEnabled && (
                   <>
                     <DropdownMenuLabel>Reports</DropdownMenuLabel>
@@ -153,7 +152,7 @@ export const DashboardHeader: React.FC<{
                   </>
                 )}
                 {ImageDownloadEnabled && ReportDownloadEnabled && (
-                  <DropdownMenuSeparator />
+                  <DropdownMenuSeparator className="onvo-border-black/10 dark:onvo-border-white/10" />
                 )}
                 {ImageDownloadEnabled && (
                   <>
