@@ -40,6 +40,7 @@ import {
 } from "../../tremor/Accordion";
 import { MessageType } from "./Copilot";
 import { useMaxHeight } from "../../lib/useMaxHeight";
+import { useTheme } from "../Dashboard/useTheme";
 
 dayjs.extend(relativeTime);
 
@@ -69,6 +70,7 @@ const QuestionMessage: React.FC<{
     const { backend, adminMode } = useBackend();
     const { dashboard, widgets, refreshWidgets } = useDashboard();
     const { lg, sm } = useMaxHeight();
+    const theme = useTheme();
 
     const [output, setOutput] = useState<any>();
     const [code, setCode] = useState("");
@@ -302,7 +304,7 @@ const QuestionMessage: React.FC<{
       if (!backend) return;
       toast.promise(
         () => {
-          return backend.question(questionId).export(index, format);
+          return backend.question(questionId).export(index, format, theme);
         },
         {
           loading: `Exporting widget as ${format}...`,

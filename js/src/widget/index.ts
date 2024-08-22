@@ -15,9 +15,9 @@ export class OnvoWidget extends OnvoBase {
    * @param {("svg" | "csv" | "xlsx" | "png" | "jpeg")} format - The format to export the widget in.
    * @return {Promise<Blob>} A promise that resolves to a Blob representing the exported widget.
    */
-  export(format: "svg" | "csv" | "xlsx" | "png" | "jpeg"): Promise<Blob> {
+  export(format: "svg" | "csv" | "xlsx" | "png" | "jpeg", theme: "light"|"dark" = "light"): Promise<Blob> {
     return this.fetchBlob(
-      "/api/widgets/" + this.#id + "/export?format=" + format
+      `/api/widgets/${this.#id}/export?theme=${theme}&format=${format}`
     ) as Promise<Blob>;
   }
   /**

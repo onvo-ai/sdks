@@ -1736,22 +1736,22 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@onvo-ai/js@^0.13.49":
-  version "0.13.49"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.49.tgz#ad6fe77de7e7bd7479aedd22339a2035bb91f028"
-  integrity sha512-x55duHBUtMN+ZII/y9CBfANSHhhs1vTrYtMh49uWTf2oukpyu8fzcA4kH1J7HQnB7BXg30/gsnhIbUngh/js4A==
+"@onvo-ai/js@^0.13.54":
+  version "0.13.54"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.54.tgz#011d9612cdfea634974101b5e31855a46f0d2749"
+  integrity sha512-Mkf0J3xR5vYQ2Y1HTuPqLozRwwtRi2pUnvPbhXB5Kytg6tb+aR/J9RLgCIOOhlFNFy00hzJqdNqDHUEbHG5r6g==
   dependencies:
     web-file-polyfill "^1.0.4"
 
-"@onvo-ai/react@^0.3.81":
-  version "0.3.81"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.3.81.tgz#0c33548f19f7a4e4f751adde842a7915baed3924"
-  integrity sha512-1fOpC/iua7typcIptQ51HZmQELtD06SFqfk/LTR9R9iDP09iVxWtFgjvs/7ep7rS4a/xzDeIsGKHyhFjQT/MNA==
+"@onvo-ai/react@^0.3.86":
+  version "0.3.86"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.3.86.tgz#acb89cd095f8caa099b4eaad1ab6aa302e5c7b42"
+  integrity sha512-n4qaszDmBwgljtyoiN96MoiCuQVv+1fApbciRqTNAVGRN+KkujY632abd5tgu/gS9h3FMJcOOmys5PwJlLYVJw==
   dependencies:
     "@heroicons/react" "^2.1.5"
     "@internationalized/date" "^3.5.4"
     "@monaco-editor/react" "^4.6.0"
-    "@onvo-ai/js" "^0.13.49"
+    "@onvo-ai/js" "^0.13.54"
     "@r2wc/react-to-web-component" "^2.0.3"
     "@radix-ui/react-accordion" "^1.1.2"
     "@radix-ui/react-checkbox" "^1.0.4"

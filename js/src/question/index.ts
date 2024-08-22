@@ -17,12 +17,12 @@ export class OnvoQuestion extends OnvoBase {
    */
   export(
     messageIndex: number,
-    format: "svg" | "csv" | "xlsx" | "png" | "jpeg"
+    format: "svg" | "csv" | "xlsx" | "png" | "jpeg", theme: "light"|"dark" = "light"
   ): Promise<Blob> {
     return this.fetchBlob(
       `/api/questions/${
         this.#id
-      }/export?format=${format}&messageIndex=${messageIndex}`
+      }/export?theme=${theme}&format=${format}&messageIndex=${messageIndex}`
     ) as Promise<Blob>;
   }
 }

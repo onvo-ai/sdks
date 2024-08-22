@@ -30,9 +30,9 @@ export class OnvoDashboard extends OnvoBase {
    * @param {("csv" | "xlsx" | "pdf" | "png" | "jpeg")} format - The format to export the dashboard in.
    * @return {Promise<Blob>} A promise that resolves to a Blob representing the exported dashboard.
    */
-  export(format: "csv" | "xlsx" | "pdf" | "png" | "jpeg"): Promise<Blob> {
+  export(format: "csv" | "xlsx" | "pdf" | "png" | "jpeg" | "pptx", theme: "light"|"dark" = "light"): Promise<Blob> {
     return this.fetchBlob(
-      "/api/dashboards/" + this.#id + "/export?format=" + format
+      `/api/dashboards/${this.#id}/export?theme=${theme}&format=${format}`
     );
   }
 
