@@ -1125,6 +1125,7 @@ type DashboardSettings = {
     can_delete_widgets: boolean;
     disable_download_images: boolean;
     disable_download_reports: boolean;
+    disable_download_documents: boolean;
     widget_limit?: number;
     enable_widget_code_editor?: boolean;
     help_url?: string;
@@ -1461,7 +1462,7 @@ declare class OnvoDashboard extends OnvoBase {
      * @param {("csv" | "xlsx" | "pdf" | "png" | "jpeg")} format - The format to export the dashboard in.
      * @return {Promise<Blob>} A promise that resolves to a Blob representing the exported dashboard.
      */
-    export(format: "csv" | "xlsx" | "pdf" | "png" | "jpeg"): Promise<Blob>;
+    export(format: "csv" | "xlsx" | "pdf" | "png" | "jpeg" | "pptx", theme?: "light" | "dark"): Promise<Blob>;
     /**
      * Summarizes the dashboard using the provided prompt.
      *
@@ -1578,7 +1579,7 @@ declare class OnvoWidget extends OnvoBase {
      * @param {("svg" | "csv" | "xlsx" | "png" | "jpeg")} format - The format to export the widget in.
      * @return {Promise<Blob>} A promise that resolves to a Blob representing the exported widget.
      */
-    export(format: "svg" | "csv" | "xlsx" | "png" | "jpeg"): Promise<Blob>;
+    export(format: "svg" | "csv" | "xlsx" | "png" | "jpeg", theme?: "light" | "dark"): Promise<Blob>;
     /**
      * Updates the prompts for the widget.
      *
@@ -1710,7 +1711,7 @@ declare class OnvoQuestion extends OnvoBase {
      * @param {("svg" | "csv" | "xlsx" | "png" | "jpeg")} format - The format to export the question in.
      * @return {Promise<Blob>} A promise that resolves to a Blob representing the exported question.
      */
-    export(messageIndex: number, format: "svg" | "csv" | "xlsx" | "png" | "jpeg"): Promise<Blob>;
+    export(messageIndex: number, format: "svg" | "csv" | "xlsx" | "png" | "jpeg", theme?: "light" | "dark"): Promise<Blob>;
 }
 
 declare class OnvoUtils extends OnvoBase {

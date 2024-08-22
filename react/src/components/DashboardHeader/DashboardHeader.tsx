@@ -9,6 +9,7 @@ import {
   ChevronDownIcon,
   DocumentChartBarIcon,
   PhotoIcon,
+  PresentationChartBarIcon,
 } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
 import { useBackend } from "../../layouts/Wrapper";
@@ -22,6 +23,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../tremor/DropdownMenu";
+import { useTheme } from "../../layouts/Dashboard/useTheme";
 
 dayjs.extend(relativeTime);
 
@@ -50,16 +52,17 @@ export const DashboardHeader: React.FC<{
   className?: string;
 }> = ({ children, className }) => {
   const { dashboard } = useDashboard();
+  const theme = useTheme();
   const { backend, adminMode } = useBackend();
 
   const exportDashboard = useCallback(
-    (format: "csv" | "xlsx" | "pdf" | "png" | "jpeg") => {
+    (format: "csv" | "xlsx" | "pdf" | "png" | "jpeg" | "pptx") => {
       if (!backend || !dashboard) {
         return;
       }
       toast.promise(
         async () => {
-          const blob = await backend.dashboard(dashboard.id).export(format);
+          const blob = await backend.dashboard(dashboard.id).export(format, theme);
           return window.URL.createObjectURL(blob);
         },
         {
@@ -84,6 +87,13 @@ export const DashboardHeader: React.FC<{
 
   const ImageDownloadEnabled = useMemo(() => {
     if (dashboard?.settings && dashboard.settings.disable_download_images)
+      return false;
+    return true;
+  }, [dashboard]);
+
+
+  const DocumentDownloadEnabled = useMemo(() => {
+    if (dashboard?.settings && dashboard.settings.disable_download_documents)
       return false;
     return true;
   }, [dashboard]);
@@ -121,7 +131,7 @@ export const DashboardHeader: React.FC<{
           )}
         </div>
         <div className="onvo-flex onvo-flex-row onvo-gap-2">
-          {(ImageDownloadEnabled || ReportDownloadEnabled) && (
+          {(ImageDownloadEnabled || ReportDownloadEnabled || DocumentDownloadEnabled) && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button className="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10" variant="secondary" disabled={!dashboard}>
@@ -143,7 +153,7 @@ export const DashboardHeader: React.FC<{
                       <DropdownMenuItem onClick={() => exportDashboard("csv")}>
                         <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                           <DropdownMenuIconWrapper>
-                            <DocumentChartBarIcon className="onvo-size-4 onvo-text-inherit" />
+                            <DocumentChartBarIcon className="onvo-size-4" />
                           </DropdownMenuIconWrapper>
                           <span>Download as CSV</span>
                         </span>
@@ -151,23 +161,41 @@ export const DashboardHeader: React.FC<{
                     </DropdownMenuGroup>
                   </>
                 )}
-                {ImageDownloadEnabled && ReportDownloadEnabled && (
+
+                {DocumentDownloadEnabled && ReportDownloadEnabled && (
+                  <DropdownMenuSeparator className="onvo-border-black/10 dark:onvo-border-white/10" />
+                )}
+                {DocumentDownloadEnabled && (
+                  <>
+                    <DropdownMenuLabel>Documents</DropdownMenuLabel>
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem onClick={() => exportDashboard("pdf")}>
+                        <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                          <DocumentChartBarIcon className="onvo-size-4" />
+                          <span>Download as PDF</span>
+                        </span>
+                      </DropdownMenuItem>
+
+                      <DropdownMenuItem onClick={() => exportDashboard("pptx")}>
+                        <span className="onvo-flex onvo-items-center onvo-gap-x-2">
+                          <PresentationChartBarIcon className="onvo-size-4" />
+                          <span>Download as Powerpoint</span>
+                        </span>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </>
+                )}
+                {ImageDownloadEnabled && (DocumentDownloadEnabled || ReportDownloadEnabled) && (
                   <DropdownMenuSeparator className="onvo-border-black/10 dark:onvo-border-white/10" />
                 )}
                 {ImageDownloadEnabled && (
                   <>
                     <DropdownMenuLabel>Images</DropdownMenuLabel>
                     <DropdownMenuGroup>
-                      <DropdownMenuItem onClick={() => exportDashboard("pdf")}>
-                        <span className="onvo-flex onvo-items-center onvo-gap-x-2">
-                          <PhotoIcon className="onvo-size-4" />
-                          <span>Download as PDF</span>
-                        </span>
-                      </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => exportDashboard("png")}>
                         <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                           <DropdownMenuIconWrapper>
-                            <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
+                            <PhotoIcon className="onvo-size-4" />
                           </DropdownMenuIconWrapper>
                           <span>Download as PNG</span>
                         </span>
@@ -175,7 +203,7 @@ export const DashboardHeader: React.FC<{
                       <DropdownMenuItem onClick={() => exportDashboard("jpeg")}>
                         <span className="onvo-flex onvo-items-center onvo-gap-x-2">
                           <DropdownMenuIconWrapper>
-                            <PhotoIcon className="onvo-size-4 onvo-text-inherit" />
+                            <PhotoIcon className="onvo-size-4" />
                           </DropdownMenuIconWrapper>
                           <span>Download as JPEG</span>
                         </span>

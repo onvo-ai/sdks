@@ -28,6 +28,7 @@ import {
 import { useTextWidgetModal } from "../TextWidgetModal";
 import { useImageWidgetModal } from "../ImageWidgetModal";
 import { useEditWidgetModal } from "../EditWidgetModal";
+import { useTheme } from "../../layouts/Dashboard/useTheme";
 
 const DragHandle = () => {
   return (
@@ -56,6 +57,7 @@ const ChartCard: React.FC<{
   const { setOpen: setTextModalOpen } = useTextWidgetModal();
   const { setOpen: setImageModalOpen } = useImageWidgetModal();
   const { backend, adminMode } = useBackend();
+  const theme = useTheme();
 
   const duplicate = async () => {
     let newObj: any = { ...widget };
@@ -105,7 +107,7 @@ const ChartCard: React.FC<{
     if (!backend) return;
     toast.promise(
       () => {
-        return backend.widget(widget.id).export(format);
+        return backend.widget(widget.id).export(format, theme);
       },
       {
         loading: `Exporting widget as ${format}...`,

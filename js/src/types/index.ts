@@ -47,6 +47,7 @@ export type DashboardSettings = {
 
   disable_download_images: boolean;
   disable_download_reports: boolean;
+  disable_download_documents: boolean;
 
   widget_limit?: number;
   enable_widget_code_editor?: boolean;
@@ -95,20 +96,20 @@ export type DataSource = Modify<
     columns: { title: string; description: string }[];
     sample_data: { [key: string]: any }[];
     config:
-      | CSVDatasourceConfig
-      | ExcelDatasourceConfig
-      | JSONDatasourceConfig
-      | APIDatasourceConfig
-      | AirtableDatasourceConfig
-      | GoogleSheetDatasourceConfig
-      | ZohoDatasourceConfig
-      | RedshiftDatasourceConfig
-      | MySQLDatasourceConfig
-      | MsSQLDatasourceConfig
-      | PostgreSQLDatasourceConfig
-      | RootfiDatasourceConfig
-      | MongoDBDatasourceConfig
-      | FirestoreDatasourceConfig;
+    | CSVDatasourceConfig
+    | ExcelDatasourceConfig
+    | JSONDatasourceConfig
+    | APIDatasourceConfig
+    | AirtableDatasourceConfig
+    | GoogleSheetDatasourceConfig
+    | ZohoDatasourceConfig
+    | RedshiftDatasourceConfig
+    | MySQLDatasourceConfig
+    | MsSQLDatasourceConfig
+    | PostgreSQLDatasourceConfig
+    | RootfiDatasourceConfig
+    | MongoDBDatasourceConfig
+    | FirestoreDatasourceConfig;
     parameters: { id: string; wrap?: string; default: string }[];
   }
 >;
@@ -151,14 +152,14 @@ export type Integration = Modify<
   Database["public"]["Tables"]["integrations"]["Row"],
   {
     config:
-      | RedshiftDatasourceConfig
-      | MySQLDatasourceConfig
-      | MsSQLDatasourceConfig
-      | PostgreSQLDatasourceConfig
-      | RootfiDatasourceConfig
-      | MongoDBDatasourceConfig
-      | OauthConfig
-      | FirestoreDatasourceConfig;
+    | RedshiftDatasourceConfig
+    | MySQLDatasourceConfig
+    | MsSQLDatasourceConfig
+    | PostgreSQLDatasourceConfig
+    | RootfiDatasourceConfig
+    | MongoDBDatasourceConfig
+    | OauthConfig
+    | FirestoreDatasourceConfig;
   }
 >;
 export type Automation = Database["public"]["Tables"]["automations"]["Row"];
