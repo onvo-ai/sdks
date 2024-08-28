@@ -41,6 +41,7 @@ import {
 import { MessageType } from "./Copilot";
 import { useMaxHeight } from "../../lib/useMaxHeight";
 import { useTheme } from "../Dashboard/useTheme";
+import { LogType } from "@onvo-ai/js";
 
 dayjs.extend(relativeTime);
 
@@ -147,8 +148,15 @@ const QuestionMessage: React.FC<{
               loading: use_in_library
                 ? "Adding widget to library..."
                 : "Adding widget to dashboard...",
-              success: () => {
+              success: (widget) => {
                 refreshWidgets(backend);
+                if (backend) {
+                  backend.logs.create({
+                    type: LogType.EditWidget,
+                    dashboard: widget.dashboard,
+                    widget: widget.id,
+                  })
+                }
                 if (use_in_library) {
                   return "Widget added to library";
                 } else {

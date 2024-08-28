@@ -170,3 +170,12 @@ export type ComprehensiveDashboard = Dashboard & {
   datasources: DataSource[];
   widgets: Widget[];
 };
+
+export type Log = Database["public"]["Tables"]["logs"]["Row"];
+export enum LogType {
+  ViewDashboard = "view-dashboard",
+  EditDashboard = "edit-dashboard",
+  CreateWidget = "create-widget",
+  DeleteWidget = "delete-widget",
+  EditWidget = "edit-widget",
+}

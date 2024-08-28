@@ -584,6 +584,75 @@ type Database = {
                     }
                 ];
             };
+            logs: {
+                Row: {
+                    account: string | null;
+                    created_at: string;
+                    dashboard: string | null;
+                    embed_user: string | null;
+                    id: string;
+                    team: string | null;
+                    type: string;
+                    widget: string | null;
+                };
+                Insert: {
+                    account?: string | null;
+                    created_at?: string;
+                    dashboard?: string | null;
+                    embed_user?: string | null;
+                    id?: string;
+                    team?: string | null;
+                    type: string;
+                    widget?: string | null;
+                };
+                Update: {
+                    account?: string | null;
+                    created_at?: string;
+                    dashboard?: string | null;
+                    embed_user?: string | null;
+                    id?: string;
+                    team?: string | null;
+                    type?: string;
+                    widget?: string | null;
+                };
+                Relationships: [
+                    {
+                        foreignKeyName: "public_logs_account_fkey";
+                        columns: ["account"];
+                        isOneToOne: false;
+                        referencedRelation: "accounts";
+                        referencedColumns: ["id"];
+                    },
+                    {
+                        foreignKeyName: "public_logs_dashboard_fkey";
+                        columns: ["dashboard"];
+                        isOneToOne: false;
+                        referencedRelation: "dashboards";
+                        referencedColumns: ["id"];
+                    },
+                    {
+                        foreignKeyName: "public_logs_embed_user_team_fkey";
+                        columns: ["embed_user", "team"];
+                        isOneToOne: false;
+                        referencedRelation: "embed_users";
+                        referencedColumns: ["id", "team"];
+                    },
+                    {
+                        foreignKeyName: "public_logs_team_fkey";
+                        columns: ["team"];
+                        isOneToOne: false;
+                        referencedRelation: "teams";
+                        referencedColumns: ["id"];
+                    },
+                    {
+                        foreignKeyName: "public_logs_widget_fkey";
+                        columns: ["widget"];
+                        isOneToOne: false;
+                        referencedRelation: "widgets";
+                        referencedColumns: ["id"];
+                    }
+                ];
+            };
             members: {
                 Row: {
                     account: string;
@@ -1219,6 +1288,14 @@ type ComprehensiveDashboard = Dashboard & {
     datasources: DataSource[];
     widgets: Widget[];
 };
+type Log = Database["public"]["Tables"]["logs"]["Row"];
+declare enum LogType {
+    ViewDashboard = "view-dashboard",
+    EditDashboard = "edit-dashboard",
+    CreateWidget = "create-widget",
+    DeleteWidget = "delete-widget",
+    EditWidget = "edit-widget"
+}
 
 /**
  * Endpoints for managing accounts.
@@ -1741,6 +1818,29 @@ declare class OnvoTeam extends OnvoBase {
     }>;
 }
 
+declare class OnvoLogs extends OnvoBase {
+    /**
+     * Lists all logs for a given dashboard.
+     *
+     * @returns {Promise<Log[]>} A promise that resolves to an array of logs.
+     */
+    list(): Promise<Log[]>;
+    /**
+     * Creates a new log.
+     *
+     * @param {Object} payload - The payload for the log creation.
+     * @param {string} payload.type - The type of log to create.
+     * @param {string} payload.dashboard - The ID of the dashboard to create the log for.
+     * @param {string} payload.widget - The ID of the widget to create the log for.
+     * @returns {Promise<Log>} A promise that resolves to the created log.
+     */
+    create(payload: {
+        type: LogType;
+        dashboard: string;
+        widget?: string;
+    }): Promise<Log>;
+}
+
 declare class Onvo extends OnvoBase {
     accounts: OnvoAccounts;
     teams: OnvoTeams;
@@ -1752,6 +1852,7 @@ declare class Onvo extends OnvoBase {
     widgets: OnvoWidgets;
     sessions: OnvoSessions;
     utils: OnvoUtils;
+    logs: OnvoLogs;
     automation: (automationId: string) => OnvoAutomation;
     dashboard: (dashboardId: string) => OnvoDashboard;
     embed_user: (embedUserId: string) => OnvoEmbedUser;
@@ -1764,4 +1865,4 @@ declare class Onvo extends OnvoBase {
     });
 }
 
-export { type APIDatasourceConfig, type APIKey, type Account, type AirtableDatasourceConfig, type Automation, type AutomationRun, type CSVDatasourceConfig, type ComprehensiveDashboard, type Dashboard, type DashboardDatasource, type DashboardFilter, type DashboardMeta, type DashboardSettings, type DataSource, type Database, type EmbedUser, type Enums, type ExcelDatasourceConfig, type FirestoreDatasourceConfig, type GoogleSheetDatasourceConfig, type Integration, type Invite, type JSONDatasourceConfig, type Json, type Member, type Modify, type MongoDBDatasourceConfig, type MsSQLDatasourceConfig, type MySQLDatasourceConfig, type OauthConfig, Onvo, type PostgreSQLDatasourceConfig, type Question, type RedshiftDatasourceConfig, type RootfiDatasourceConfig, type Session, type Subscription, type SubscriptionPlan, Table, type Tables, type TablesInsert, type TablesUpdate, type Team, type Widget, type WidgetMessage, type WidgetSettings, type ZohoDatasourceConfig, Onvo as default };
+export { type APIDatasourceConfig, type APIKey, type Account, type AirtableDatasourceConfig, type Automation, type AutomationRun, type CSVDatasourceConfig, type ComprehensiveDashboard, type Dashboard, type DashboardDatasource, type DashboardFilter, type DashboardMeta, type DashboardSettings, type DataSource, type Database, type EmbedUser, type Enums, type ExcelDatasourceConfig, type FirestoreDatasourceConfig, type GoogleSheetDatasourceConfig, type Integration, type Invite, type JSONDatasourceConfig, type Json, type Log, LogType, type Member, type Modify, type MongoDBDatasourceConfig, type MsSQLDatasourceConfig, type MySQLDatasourceConfig, type OauthConfig, Onvo, type PostgreSQLDatasourceConfig, type Question, type RedshiftDatasourceConfig, type RootfiDatasourceConfig, type Session, type Subscription, type SubscriptionPlan, Table, type Tables, type TablesInsert, type TablesUpdate, type Team, type Widget, type WidgetMessage, type WidgetSettings, type ZohoDatasourceConfig, Onvo as default };
