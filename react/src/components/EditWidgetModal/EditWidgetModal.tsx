@@ -7,7 +7,7 @@ import { Icon } from "../../tremor/Icon";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../tremor/Tabs";
 
 import { useEffect, useState } from "react";
-import { Widget, WidgetMessage, WidgetSettings } from "@onvo-ai/js";
+import { LogType, Widget, WidgetMessage, WidgetSettings } from "@onvo-ai/js";
 import {
   ArrowUpIcon,
   EyeIcon,
@@ -183,6 +183,13 @@ export const EditWidgetModal: React.FC<{}> = ({ }) => {
 
       updateStates(wid);
       setLoading(false);
+      if (backend) {
+        backend.logs.create({
+          type: LogType.EditWidget,
+          dashboard: widget.dashboard,
+          widget: widget.id,
+        })
+      }
     } catch (e: any) {
       toast.error("Failed to create widget: " + e.message);
       setLoading(false);
@@ -230,6 +237,13 @@ export const EditWidgetModal: React.FC<{}> = ({ }) => {
       async () => {
         let data = await backend?.widget(widget.id).executeCode(code);
         setOutput(data);
+        if (backend) {
+          backend.logs.create({
+            type: LogType.EditWidget,
+            dashboard: widget.dashboard,
+            widget: widget.id,
+          })
+        }
       },
       {
         loading: "Executing code...",
@@ -313,7 +327,7 @@ export const EditWidgetModal: React.FC<{}> = ({ }) => {
                 </Button>
               )}
               <Tabs
-                defaultValue="chat"
+                value={tab}
                 onValueChange={(val) => {
                   setTab(val as "chat" | "editor" | "settings");
                 }}

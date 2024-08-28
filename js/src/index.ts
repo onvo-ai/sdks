@@ -17,6 +17,7 @@ import { OnvoWidgets } from "./widgets";
 import { OnvoQuestion } from "./question";
 import { OnvoUtils } from "./utils";
 import { OnvoTeam } from "./team";
+import { OnvoLogs } from "./logs";
 export * from "./types";
 
 export class Onvo extends OnvoBase {
@@ -30,6 +31,7 @@ export class Onvo extends OnvoBase {
   widgets: OnvoWidgets;
   sessions: OnvoSessions;
   utils: OnvoUtils;
+  logs: OnvoLogs;
 
   automation: (automationId: string) => OnvoAutomation;
   dashboard: (dashboardId: string) => OnvoDashboard;
@@ -52,6 +54,7 @@ export class Onvo extends OnvoBase {
     this.sessions = new OnvoSessions(apiKey, options);
     this.widgets = new OnvoWidgets(apiKey, options);
     this.utils = new OnvoUtils(apiKey, options);
+    this.logs = new OnvoLogs(apiKey, options);
 
     this.dashboard = (dashboardId: string) => {
       return new OnvoDashboard(dashboardId, apiKey, options);

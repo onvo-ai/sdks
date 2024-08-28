@@ -62,7 +62,7 @@ const SimpleCreatorTool: React.FC<{ onSubmit: (val: string) => void }> = ({
           }
         }}
       />
-      <div className="onvo-w-full onvo-pb-2 onvo-pt-3 -onvo-mt-2 onvo-border onvo-bg-black/10 dark:onvo-bg-white/10 onvo-border-black/20 dark:onvo-border-white/20 onvo-rounded-b-lg">
+      <div className="onvo-w-full onvo-pb-2 onvo-pt-3 -onvo-mt-2 onvo-border onvo-bg-black/10 dark:onvo-bg-white/10 onvo-border-black/10 dark:onvo-border-white/20 onvo-rounded-b-lg">
         <Text className="onvo-mt-0 onvo-text-center onvo-text-xs">
           Not sure how to write a prompt?{" "}
           <a

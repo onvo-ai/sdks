@@ -36,14 +36,18 @@ export const useDashboard = create<DashboardState>((set, get) => ({
           ?.dashboard(id)
           .updateWidgetCache()
           .then((data) => {
-            set({
-              widgets: data,
-              loading: false,
-              dashboard: {
-                ...dash,
-                last_updated_at: new Date().toISOString(),
-              },
-            });
+
+            let id = get().id;
+            if (id === data[0].dashboard) {
+              set({
+                widgets: data,
+                loading: false,
+                dashboard: {
+                  ...dash,
+                  last_updated_at: new Date().toISOString(),
+                },
+              });
+            }
           });
       }
     });

@@ -8,6 +8,7 @@ import { DashboardHeader } from "../../components/DashboardHeader";
 import { DashboardGrid } from "../../components/DashboardGrid";
 import { Copilot } from "../Copilot";
 import { CreateToolbar } from "../../components/CreateToolbar";
+import { LogType } from "@onvo-ai/js";
 
 export const DashboardWrapper: React.FC<{
   id: string;
@@ -29,7 +30,7 @@ export const Dashboard: React.FC<{
   id: string;
   className?: string;
 }> = ({ id: dashboardId, className }): React.ReactNode => {
-  const { subscription, subscriptionLoaded } = useBackend();
+  const { subscription, subscriptionLoaded, backend } = useBackend();
   const theme = useTheme();
   const { dashboard } = useDashboard();
 
@@ -38,15 +39,24 @@ export const Dashboard: React.FC<{
   const paymentModalOpen =
     subscriptionLoaded && dashboard && subscription === undefined;
 
+  useEffect(() => {
+    if (dashboardId && backend) {
+
+      backend.logs.create({
+        type: LogType.ViewDashboard,
+        dashboard: dashboardId,
+      })
+    }
+  }, [dashboardId]);
+
   return (
     <DashboardWrapper id={dashboardId}>
       <div
         key={theme === "dark" ? "dark" : "light"}
-        className={`onvo-dashboard-context onvo-relative onvo-scrollbar-thumb-rounded-full onvo-scrollbar-track-transparent onvo-translate-x-0 onvo-h-full onvo-background-color onvo-flex onvo-flex-col ${
-          theme === "dark"
-            ? "onvo-dark onvo-scrollbar-thumb-slate-500"
-            : "onvo-scrollbar-thumb-slate-400"
-        } ${className}`}
+        className={`onvo-dashboard-context onvo-relative onvo-scrollbar-thumb-rounded-full onvo-scrollbar-track-transparent onvo-translate-x-0 onvo-h-full onvo-background-color onvo-flex onvo-flex-col ${theme === "dark"
+          ? "onvo-dark onvo-scrollbar-thumb-slate-500"
+          : "onvo-scrollbar-thumb-slate-400"
+          } ${className}`}
       >
         <style>{style}</style>
 

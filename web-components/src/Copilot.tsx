@@ -32,7 +32,7 @@ const ChatButton: React.FC<{
   };
 
   const labelStyle = {
-    color: "#cbd5e0",
+    color: "#e2e8f0",
     lineHeight: "1",
     width: "4rem",
   };
@@ -42,7 +42,7 @@ const ChatButton: React.FC<{
   }
 
   return (
-    <div style={buttonStyle} onClick={onClick}>
+    <div id="onvo-copilot-trigger" style={buttonStyle} onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

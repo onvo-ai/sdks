@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { toast } from "sonner";
-import { Widget } from "@onvo-ai/js";
+import { LogType, Widget } from "@onvo-ai/js";
 import {
   DocumentChartBarIcon,
   DocumentDuplicateIcon,
@@ -77,8 +77,14 @@ const ChartCard: React.FC<{
       },
       {
         loading: "Duplicating widget...",
-        success: () => {
+        success: (newWidget) => {
           refreshWidgets(backend);
+          backend.logs.create({
+            type: LogType.CreateWidget,
+            dashboard: widget.dashboard,
+            widget: newWidget.id,
+          })
+
           return "Widget duplicated";
         },
         error: (error) => "Error duplicating widget: " + error.message,
@@ -90,11 +96,15 @@ const ChartCard: React.FC<{
     if (!backend) return;
     toast.promise(
       () => {
-        return backend.widgets.delete(widget.id) as Promise<any>;
+        return backend.widgets.delete(widget.id);
       },
       {
         loading: "Deleting widget...",
         success: () => {
+          backend.logs.create({
+            type: LogType.DeleteWidget,
+            dashboard: widget.dashboard
+          });
           refreshWidgets(backend);
           return "Widget deleted";
         },
