@@ -21,7 +21,6 @@ import { Button } from "../../tremor/Button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../tremor/Tabs";
 import { WidgetWizard } from "../../components/WidgetWizard";
 import { ChevronRightIcon, XMarkIcon } from "@heroicons/react/16/solid";
-import { useTheme } from "../Dashboard/useTheme";
 
 dayjs.extend(relativeTime);
 
@@ -62,7 +61,7 @@ const SimpleCreatorTool: React.FC<{ onSubmit: (val: string) => void }> = ({
           }
         }}
       />
-      <div className="onvo-w-full onvo-pb-2 onvo-pt-3 -onvo-mt-2 onvo-border onvo-bg-black/10 dark:onvo-bg-white/10 onvo-border-black/10 dark:onvo-border-white/20 onvo-rounded-b-lg">
+      <div className="onvo-w-full onvo-pb-2 onvo-pt-3 -onvo-mt-2 onvo-border-solid onvo-border onvo-bg-black/10 dark:onvo-bg-white/10 onvo-border-black/10 dark:onvo-border-white/20 onvo-rounded-b-lg">
         <Text className="onvo-mt-0 onvo-text-center onvo-text-xs">
           Not sure how to write a prompt?{" "}
           <a
@@ -82,6 +81,7 @@ const SimpleCreatorTool: React.FC<{ onSubmit: (val: string) => void }> = ({
     </div>
   );
 };
+
 const CopilotRaw: React.FC<{
   dashboardId: string;
   trigger: React.ReactNode;
@@ -89,16 +89,9 @@ const CopilotRaw: React.FC<{
 }> = ({ trigger, variant, dashboardId }): React.ReactNode => {
   const { backend, team } = useBackend();
   const { dashboard, setId } = useDashboard();
-  const theme = useTheme();
-
-  useEffect(() => {
-    if (backend && (!dashboard || dashboard.id !== dashboardId)) {
-      setId(dashboardId, backend);
-    }
-  }, [dashboard, dashboardId, backend]);
-
   const scroller = useRef<HTMLDivElement>(null);
 
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [questionLoading, setQuestionLoading] = useState(false);
   const [query, setQuery] = useState("");
@@ -109,17 +102,26 @@ const CopilotRaw: React.FC<{
   );
 
   useEffect(() => {
+    if (dashboard && dashboard.id) {
+      setLoading(false);
+    }
+  }, [dashboard]);
+
+  useEffect(() => {
+    if (backend && (!dashboard || dashboard.id !== dashboardId) && !loading) {
+      setLoading(true);
+      setId(dashboardId, backend);
+    }
+  }, [dashboard, dashboardId, backend, loading]);
+
+
+  useEffect(() => {
     if (!(window as any).Onvo) {
       (window as any).Onvo = {};
     }
     (window as any).Onvo.setCopilotOpen = (val: boolean) => setOpen(val);
   }, []);
 
-  const scrollToBottom = () => {
-    if (scroller.current) {
-      scroller.current.scrollTop = scroller.current.scrollHeight;
-    }
-  };
 
   useEffect(() => {
     if (!open) {
@@ -139,6 +141,12 @@ const CopilotRaw: React.FC<{
       setMessages([]);
     }
   }, [selectedQuestion]);
+
+  const scrollToBottom = () => {
+    if (scroller.current) {
+      scroller.current.scrollTop = scroller.current.scrollHeight;
+    }
+  };
 
   const askQuestion = async (msg: MessageType[]) => {
     setMessages(msg);
@@ -233,16 +241,16 @@ const CopilotRaw: React.FC<{
       <dialog open={open}>
         <div
           className={twMerge(
-            "onvo-@container/questionmodal onvo-animate-dialogOpen onvo-z-[9999] onvo-fixed",
+            "onvo-root-style onvo-copilot-modal onvo-@container/questionmodal onvo-animate-dialogOpen onvo-z-[9999] onvo-fixed",
             variant === "fullscreen"
               ? "onvo-h-full onvo-w-full onvo-left-0"
-              : "onvo-h-[calc(100vh-40px)] onvo-w-[400px] onvo-right-5 onvo-bottom-5 onvo-rounded-lg onvo-overflow-hidden onvo-border onvo-border-slate-200 dark:onvo-border-slate-800 onvo-shadow-xl"
+              : "onvo-h-[calc(100vh-40px)] onvo-w-[480px] onvo-right-5 onvo-bottom-5 onvo-rounded-lg onvo-overflow-hidden onvo-border-solid onvo-border onvo-border-slate-200 dark:onvo-border-slate-800 onvo-shadow-xl"
           )}
         >
           <div className="onvo-question-modal-question-list onvo-flex onvo-flex-col onvo-foreground-color onvo-absolute onvo-w-full onvo-right-0 onvo-top-0 onvo-z-20 onvo-h-full">
             <div
               className={
-                "onvo-foreground-color onvo-top-0 onvo-w-full onvo-z-10 onvo-flex onvo-flex-row onvo-justify-between onvo-items-center onvo-gap-4 onvo-border-b onvo-px-3 onvo-border-black/10 onvo-py-2 dark:onvo-border-white/10"
+                "onvo-foreground-color onvo-top-0 onvo-w-full onvo-z-10 onvo-flex onvo-flex-row onvo-justify-between onvo-items-center onvo-gap-4 onvo-border-solid onvo-border-b onvo-px-3 onvo-border-black/10 onvo-py-2 dark:onvo-border-white/10"
               }
             >
               <Icon
@@ -272,7 +280,7 @@ const CopilotRaw: React.FC<{
                 + New widget
               </Button>
             </div>
-            <div className="onvo-flex onvo-flex-grow onvo-w-full onvo-h-[calc(100%-52px)] onvo-overflow-y-auto onvo-scrollbar-thin  onvo-flex-col ">
+            <div className="onvo-flex onvo-flex-grow onvo-w-full onvo-h-[calc(100%-52px)] onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-col ">
               {["home", "library", "history"].indexOf(tab) >= 0 && (
                 <div className="onvo-py-2 onvo-px-2 onvo-w-full onvo-max-w-screen-lg onvo-flex onvo-mx-auto onvo-flex-col onvo-gap-4">
                   {tab === "home" && (

@@ -10,11 +10,11 @@ const iconVariants = tv({
     variant: {
       simple: ["onvo-text-slate-900", "dark:onvo-text-slate-50"],
       shadow: [
-        "onvo-bg-white onvo-text-slate-900 onvo-border-slate-100 onvo-border onvo-shadow-md",
+        "onvo-bg-white onvo-text-slate-900 onvo-border-slate-100 onvo-border-solid onvo-border onvo-shadow-md",
         "dark:onvo-bg-slate-700 dark:onvo-text-slate-50 dark:onvo-border-slate-700",
       ],
       outlined: [
-        "onvo-bg-white onvo-text-slate-900 onvo-border-slate-900/60 onvo-ring-slate-900/20 onvo-border onvo-ring-2",
+        "onvo-bg-white onvo-text-slate-900 onvo-border-slate-900/60 onvo-ring-slate-900/20 onvo-border-solid onvo-border onvo-ring-2",
         "dark:onvo-bg-slate-700 dark:onvo-text-slate-50 dark:onvo-border-slate-50/60 dark:onvo-ring-slate-50/20",
       ],
       light: [
@@ -22,7 +22,7 @@ const iconVariants = tv({
         "dark:onvo-bg-slate-900 dark:onvo-text-slate-50",
       ],
       solid: [
-        "onvo-bg-slate-900 onvo-text-white onvo-border-white onvo-ring-slate-200 onvo-border-2 onvo-ring-1",
+        "onvo-bg-slate-900 onvo-text-white onvo-border-white onvo-ring-slate-200 onvo-border-solid onvo-border-2 onvo-ring-1",
         "dark:onvo-bg-slate-50 dark:onvo-text-slate-900 dark:onvo-border-slate-800 dark:onvo-ring-slate-700",
       ],
     },
@@ -58,7 +58,7 @@ const iconInnerVariants = tv({
 
 interface IconProps
   extends React.ComponentPropsWithoutRef<"span">,
-    VariantProps<typeof iconVariants> {
+  VariantProps<typeof iconVariants> {
   icon: React.ElementType;
 }
 

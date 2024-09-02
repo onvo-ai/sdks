@@ -8,9 +8,9 @@ const ChatButton: React.FC<{
 }> = ({ variant = "large", onClick }) => {
   const buttonStyle: any = {
     position: "fixed",
-    bottom: "1.25rem",
-    right: "1.25rem",
-    fontSize: "0.75rem",
+    bottom: "20px",
+    right: "20px",
+    fontSize: "12px",
     fontWeight: "600",
     borderRadius: "9999px",
     border: "1px solid #333",
@@ -18,23 +18,23 @@ const ChatButton: React.FC<{
     backgroundColor: "black",
     boxShadow:
       "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-    padding: "0.75rem",
+    padding: "12px",
     display: "flex",
     flexDirection: "row",
-    gap: "0.75rem",
+    gap: "12px",
     alignItems: "center",
     zIndex: 100,
   };
 
   const iconStyle = {
-    width: "1.75rem",
-    height: "1.75rem",
+    width: "28px",
+    height: "28px",
   };
 
   const labelStyle = {
     color: "#e2e8f0",
     lineHeight: "1",
-    width: "4rem",
+    width: "64px",
   };
 
   if (variant === "none") {

@@ -56,6 +56,8 @@ export type DashboardSettings = {
   enable_advanced_widget_creator?: boolean;
   copilot_title: string;
   copilot_description: string;
+
+  disable_automations?: boolean;
 };
 
 export interface DashboardMeta {

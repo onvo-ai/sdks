@@ -7,7 +7,10 @@ export class OnvoAutomations extends OnvoBase {
    * Fetches all the automations
    * @returns {Promise<Automation[]>} A promise that resolves to an array of Automation objects
    */
-  list(): Promise<Automation[]> {
+  list(filters?: { dashboard: string }): Promise<Automation[]> {
+    if (filters) {
+      return this.fetchBase("/api/automations?dashboard=" + filters.dashboard) as Promise<Automation[]>;
+    }
     return this.fetchBase("/api/automations") as Promise<Automation[]>;
   }
   /**

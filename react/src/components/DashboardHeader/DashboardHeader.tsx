@@ -24,6 +24,7 @@ import {
   DropdownMenuTrigger,
 } from "../../tremor/DropdownMenu";
 import { useTheme } from "../../layouts/Dashboard/useTheme";
+import { AutomationsModal, useAutomationsModal } from "../AutomationsModal";
 
 dayjs.extend(relativeTime);
 
@@ -51,6 +52,8 @@ export const DashboardHeader: React.FC<{
   children?: React.ReactNode;
   className?: string;
 }> = ({ children, className }) => {
+  const { setOpen } = useAutomationsModal();
+  const { subscriptionPlan } = useBackend();
   const { dashboard } = useDashboard();
   const theme = useTheme();
   const { backend, adminMode } = useBackend();
@@ -108,9 +111,10 @@ export const DashboardHeader: React.FC<{
 
   return (
     <section
-      className={`onvo-dashboard-header onvo-sticky onvo-z-10 onvo-border-b onvo-foreground-color onvo-border-black/10 dark:onvo-border-white/10 onvo-top-0 ${className ? className : ""
+      className={`onvo-dashboard-header onvo-sticky onvo-z-10 onvo-border-solid onvo-border-b onvo-foreground-color onvo-border-black/10 dark:onvo-border-white/10 onvo-top-0 ${className ? className : ""
         }`}
     >
+      <AutomationsModal />
       <main className="onvo-mx-auto onvo-px-6 onvo-py-3 lg:onvo-px-8 onvo-z-10 onvo-relative onvo-flex onvo-flex-col onvo-items-start onvo-justify-between onvo-gap-4 md:onvo-flex-row md:onvo-items-center">
         <div className="onvo-flex-grow">
           {dashboard ? (
@@ -131,6 +135,14 @@ export const DashboardHeader: React.FC<{
           )}
         </div>
         <div className="onvo-flex onvo-flex-row onvo-gap-2">
+          {(subscriptionPlan?.automations && !dashboard?.settings?.disable_automations) && (
+            <Button className="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10" variant="secondary"
+              onClick={() => {
+                setOpen(true);
+              }}
+            >
+              Schedule
+            </Button>)}
           {(ImageDownloadEnabled || ReportDownloadEnabled || DocumentDownloadEnabled) && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

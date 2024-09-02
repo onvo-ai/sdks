@@ -106,7 +106,7 @@ export const DashboardGrid: React.FC<{}> = ({ }) => {
         <ResponsiveGridLayout
           resizeHandle={
             editable ? (
-              <div className="onvo-dashboard-grid-handle react-resizable-handle onvo-absolute onvo-bottom-2 onvo-right-2 onvo-cursor-pointer onvo-rounded-br-lg onvo-border-b-[3px] onvo-border-r-[3px] onvo-border-gray-300 dark:onvo-border-white/30" />
+              <div className="onvo-dashboard-grid-handle react-resizable-handle onvo-absolute onvo-bottom-2 onvo-right-2 onvo-cursor-pointer onvo-rounded-br-lg onvo-border-solid onvo-border-b-[3px] onvo-border-r-[3px] onvo-border-gray-300 dark:onvo-border-white/30" />
             ) : (
               <></>
             )

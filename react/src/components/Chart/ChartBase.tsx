@@ -145,7 +145,7 @@ const ChartBase: React.FC<{
       >
         <Text className="onvo-text-xs onvo-font-semibold">
           Hold{" "}
-          <span className="onvo-rounded-[4px] onvo-px-1 onvo-py-0.5 onvo-border onvo-shadow-sm onvo-border-gray-200 onvo-bg-gray-100 dark:onvo-border-gray-600 dark:onvo-bg-gray-700 dark:onvo-text-gray-400">
+          <span className="onvo-rounded-[4px] onvo-px-1 onvo-py-0.5 onvo-border-solid onvo-border onvo-shadow-sm onvo-border-gray-200 onvo-bg-gray-100 dark:onvo-border-gray-600 dark:onvo-bg-gray-700 dark:onvo-text-gray-400">
             Shift
           </span>{" "}
           and drag to pan

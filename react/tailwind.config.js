@@ -1,4 +1,10 @@
 /** @type {import('tailwindcss').Config} */
+import svgToDataUri from "mini-svg-data-uri";
+import { scopedPreflightStyles, isolateInsideOfContainer } from 'tailwindcss-scoped-preflight';
+
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
 
 /* eslint-disable max-len */
 module.exports = {
@@ -18,7 +24,67 @@ module.exports = {
         '"Noto Color Emoji"',
       ],
     },
+    fontSize: {
+      xs: '12px',
+      sm: '14px',
+      base: '16px',
+      lg: '18px',
+      xl: '20px',
+      '2xl': '24px',
+      '3xl': '30px',
+      '4xl': '36px',
+      '5xl': '48px',
+      '6xl': '60px',
+      '7xl': '72px',
+    },
+    spacing: {
+      px: '1px',
+      0: '0',
+      0.5: '2px',
+      1: '4px',
+      1.5: '6px',
+      2: '8px',
+      2.5: '10px',
+      3: '12px',
+      3.5: '14px',
+      4: '16px',
+      5: '20px',
+      6: '24px',
+      7: '28px',
+      8: '32px',
+      9: '36px',
+      10: '40px',
+      11: '44px',
+      12: '48px',
+      14: '56px',
+      16: '64px',
+      20: '80px',
+      24: '96px',
+      28: '112px',
+      32: '128px',
+      36: '144px',
+      40: '160px',
+      44: '176px',
+      48: '192px',
+      52: '208px',
+      56: '224px',
+      60: '240px',
+      64: '256px',
+      72: '288px',
+      80: '320px',
+      96: '384px',
+    },
     extend: {
+      lineHeight: {
+        3: '12px',
+        4: '16px',
+        5: '20px',
+        6: '24px',
+        7: '28px',
+        8: '32px',
+        9: '36px',
+        10: '40px',
+      },
       keyframes: {
         hide: {
           from: { opacity: "1" },
@@ -93,5 +159,30 @@ module.exports = {
     require("@tailwindcss/container-queries"),
     require("@tailwindcss/forms"),
     require("tailwind-scrollbar"),
+    scopedPreflightStyles({
+      isolationStrategy: isolateInsideOfContainer('.onvo-root-style'),
+    }),
+    function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          "bg-grid": (value) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+            )}")`,
+          }),
+          "bg-grid-small": (value) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="8" height="8" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+            )}")`,
+          }),
+          "bg-dot": (value) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="1.6257413380501518"></circle></svg>`
+            )}")`,
+          }),
+        },
+        { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
+      );
+    },
   ],
 };

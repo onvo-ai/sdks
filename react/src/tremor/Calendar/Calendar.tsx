@@ -50,7 +50,7 @@ const NavigationButton = React.forwardRef<
           "onvo-text-gray-600 hover:onvo-text-gray-800",
           "dark:onvo-text-gray-400 hover:onvo-dark:text-gray-200",
           // border color
-          "onvo-border-gray-300 dark:onvo-border-gray-700",
+          "onvo-border-solid onvo-border-gray-300 dark:onvo-border-gray-700",
           // background color
           "hover:onvo-bg-gray-50 active:onvo-bg-gray-100",
           "hover:dark:onvo-bg-gray-900 active:dark:onvo-bg-gray-800",
@@ -82,14 +82,14 @@ type RangeProps = OmitKeys<DayPickerRangeProps, KeysToOmit>;
 
 type CalendarProps =
   | ({
-      mode: "single";
-    } & SingleProps)
+    mode: "single";
+  } & SingleProps)
   | ({
-      mode?: undefined;
-    } & SingleProps)
+    mode?: undefined;
+  } & SingleProps)
   | ({
-      mode: "range";
-    } & RangeProps);
+    mode: "range";
+  } & RangeProps);
 
 const Calendar = ({
   mode = "single",
@@ -202,7 +202,7 @@ const Calendar = ({
                       !previousMonth ||
                       (fromDate &&
                         addYears(currentMonth, -1).getTime() <
-                          fromDate.getTime())
+                        fromDate.getTime())
                     }
                     aria-label="Go to previous year"
                     onClick={goToPreviousYear}

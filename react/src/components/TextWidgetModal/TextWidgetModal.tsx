@@ -233,13 +233,13 @@ export const TextWidgetModal: React.FC<{}> = ({ }) => {
         >
           <div
             className={
-              "onvo-foreground-color onvo-w-full onvo-left-0 onvo-top-0 onvo-z-10 onvo-flex onvo-flex-row onvo-justify-start onvo-items-center onvo-gap-4 onvo-border-b onvo-border-black/10 onvo-p-2 dark:onvo-border-white/10"
+              "onvo-foreground-color onvo-w-full onvo-left-0 onvo-top-0 onvo-z-10 onvo-flex onvo-flex-row onvo-justify-start onvo-items-center onvo-gap-4 onvo-border-solid onvo-border-b onvo-border-black/10 onvo-p-2 dark:onvo-border-white/10"
             }
           >
             <Icon
               icon={ChevronLeftIcon}
               variant="shadow"
-              className="onvo-ml-2 onvo-background-color onvo-border onvo-border-black/10 dark:onvo-border-white/10"
+              className="onvo-ml-2 onvo-background-color onvo-border-solid onvo-border onvo-border-black/10 dark:onvo-border-white/10"
               onClick={() => setOpen(false)}
             />
 
@@ -261,7 +261,7 @@ export const TextWidgetModal: React.FC<{}> = ({ }) => {
             </div>
           </div>
           <div className="onvo-relative onvo-flex onvo-flex-grow onvo-h-[calc(100%-52px)] onvo-w-full onvo-flex-col-reverse @xl/widgetmodal:onvo-flex-row">
-            <div className="onvo-relative onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-h-full onvo-w-full onvo-p-4 onvo-border-r onvo-border-black/10 dark:onvo-border-white/10">
+            <div className="onvo-relative onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-h-full onvo-w-full onvo-p-4 onvo-border-solid onvo-border-r onvo-border-black/10 dark:onvo-border-white/10">
               <Text>Title</Text>
               <Input
                 placeholder="Type in a title"
@@ -285,7 +285,7 @@ export const TextWidgetModal: React.FC<{}> = ({ }) => {
                 </Tabs>
               </div>
               <Text className="onvo-mt-2">Description</Text>
-              <div className="onvo-min-h-48 onvo-max-w-full onvo-prose onvo-prose-sm dark:onvo-prose-invert">
+              <div className="onvo-min-h-48 onvo-max-w-full onvo-prose onvo-prose-slate onvo-prose-sm dark:onvo-prose-invert">
                 <EditorProvider>
                   <Editor
                     containerProps={{ style: { minHeight: 192 } }}

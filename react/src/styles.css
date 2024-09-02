@@ -163,3 +163,10 @@
     background-position: 0% 50%;
   }
 }
+
+.react-multi-email span[data-placeholder="true"]{
+  top: 2px !important;
+}
+.react-multi-email [data-tag] [data-tag-item] {
+  overflow-y: visible;
+}

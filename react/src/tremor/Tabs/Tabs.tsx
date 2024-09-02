@@ -26,7 +26,7 @@ interface TabsListProps
 const variantStyles: Record<TabsListVariant, string> = {
   line: cx(
     // base
-    "onvo-flex onvo-items-center onvo-justify-start onvo-border-b",
+    "onvo-flex onvo-items-center onvo-justify-start onvo-border-solid onvo-border-b",
     // border color
     "onvo-border-gray-200 dark:onvo-border-gray-800"
   ),
@@ -62,7 +62,7 @@ function getVariantStyles(tabVariant: TabsListVariant) {
     case "line":
       return cx(
         // base
-        "-onvo-mb-px onvo-items-center onvo-justify-center onvo-whitespace-nowrap onvo-border-b-2 onvo-border-transparent onvo-px-3 onvo-pb-3 onvo-text-sm onvo-font-medium onvo-transition-all",
+        "-onvo-mb-px onvo-items-center onvo-justify-center onvo-whitespace-nowrap onvo-border-solid onvo-border-b-2 onvo-border-transparent onvo-px-3 onvo-pb-3 onvo-text-sm onvo-font-medium onvo-transition-all",
         // text color
         "onvo-text-gray-500 dark:onvo-text-gray-500",
         // hover

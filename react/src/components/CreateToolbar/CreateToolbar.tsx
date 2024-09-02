@@ -115,18 +115,18 @@ export const CreateToolbar: React.FC<{ onClick?: () => void }> = ({
   return (
     <div
       className={
-        "onvo-relative onvo-flex onvo-justify-center onvo-gap-2 onvo-flex-row onvo-right-0 onvo-z-10 onvo-w-full onvo-p-3 onvo-foreground-color onvo-border-t onvo-border-black/10 dark:onvo-border-white/10"
+        "onvo-relative onvo-flex onvo-justify-center onvo-gap-2 onvo-flex-row onvo-right-0 onvo-w-full onvo-p-3 onvo-foreground-color onvo-border-solid onvo-border-t onvo-border-black/10 dark:onvo-border-white/10"
       }
     >
       {(dashboard?.settings?.can_ask_questions || adminMode) && (
         <div
           onClick={onClick}
-          className="onvo-background-color onvo-border-slate-900/60 onvo-ring-slate-900/20 onvo-border onvo-ring-2 dark:onvo-border-slate-50/60 dark:onvo-ring-slate-50/20 onvo-rounded-lg onvo-cursor-pointer onvo-h-[38px] onvo-z-10 onvo-pr-2 onvo-relative onvo-flex onvo-flex-shrink-0 onvo-w-64 onvo-flex-row onvo-items-center onvo-gap-2"
+          className="onvo-background-color onvo-border-slate-900/60 onvo-ring-slate-900/20 onvo-border-solid onvo-border onvo-ring-2 dark:onvo-border-slate-50/60 dark:onvo-ring-slate-50/20 onvo-rounded-lg onvo-cursor-pointer onvo-h-[38px] onvo-pr-2 onvo-relative onvo-flex onvo-flex-shrink-0 onvo-w-64 onvo-flex-row onvo-items-center onvo-gap-2"
         >
           <div className="onvo-size-7 onvo-ml-1 onvo-bg-blue-500 onvo-rounded-lg onvo-text-white onvo-flex onvo-justify-center onvo-items-center">
             <SparklesIcon className="onvo-size-5" />
           </div>
-          <Text className="onvo-z-10 onvo-flex-grow onvo-font-semibold">
+          <Text className=" onvo-flex-grow onvo-font-semibold">
             Create a widget with AI
           </Text>
         </div>
