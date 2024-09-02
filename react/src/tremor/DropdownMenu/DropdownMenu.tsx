@@ -69,7 +69,7 @@ const DropdownMenuSubMenuContent = React.forwardRef<
       collisionPadding={collisionPadding}
       className={cx(
         // base
-        "onvo-relative onvo-z-50 onvo-overflow-hidden onvo-rounded-md onvo-border onvo-p-1 onvo-shadow-xl onvo-shadow-black/[2.5%]",
+        "onvo-relative onvo-z-50 onvo-overflow-hidden onvo-rounded-md onvo-border-solid onvo-border onvo-p-1 onvo-shadow-xl onvo-shadow-black/[2.5%]",
         // widths
         "onvo-min-w-32",
         // heights
@@ -113,7 +113,7 @@ const DropdownMenuContent = React.forwardRef<
         ref={forwardedRef}
         className={cx(
           // base
-          "onvo-relative onvo-z-50 onvo-overflow-hidden onvo-rounded-md onvo-border onvo-p-1 onvo-shadow-xl onvo-shadow-black/[2.5%]",
+          "onvo-relative onvo-z-50 onvo-overflow-hidden onvo-rounded-md onvo-border-solid onvo-border onvo-p-1 onvo-shadow-xl onvo-shadow-black/[2.5%]",
           // widths
           "onvo-min-w-48",
           // heights

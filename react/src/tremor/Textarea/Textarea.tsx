@@ -14,7 +14,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         ref={forwardedRef}
         className={cx(
           // base
-          "onvo-flex onvo-min-h-[4rem] onvo-w-full onvo-rounded-md onvo-border onvo-px-3 onvo-py-1.5 onvo-shadow-sm onvo-outline-none onvo-transition-all sm:onvo-text-sm",
+          "onvo-flex onvo-min-h-[4rem] onvo-w-full onvo-rounded-md onvo-border-solid onvo-border onvo-px-3 onvo-py-1.5 onvo-shadow-sm onvo-outline-none onvo-transition-all sm:onvo-text-sm",
           // text color
           "onvo-text-slate-900 dark:onvo-text-slate-50",
           // border color

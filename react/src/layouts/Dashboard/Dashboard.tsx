@@ -16,6 +16,7 @@ export const DashboardWrapper: React.FC<{
 }> = ({ id: dashboardId, children }) => {
   const { backend } = useBackend();
   const { setId, refreshWidgets } = useDashboard();
+  const theme = useTheme();
 
   useEffect(() => {
     if (dashboardId && backend) {
@@ -53,7 +54,7 @@ export const Dashboard: React.FC<{
     <DashboardWrapper id={dashboardId}>
       <div
         key={theme === "dark" ? "dark" : "light"}
-        className={`onvo-dashboard-context onvo-relative onvo-scrollbar-thumb-rounded-full onvo-scrollbar-track-transparent onvo-translate-x-0 onvo-h-full onvo-background-color onvo-flex onvo-flex-col ${theme === "dark"
+        className={`onvo-root-style onvo-dashboard-context onvo-relative onvo-scrollbar-thumb-rounded-full onvo-scrollbar-track-transparent onvo-translate-x-0 onvo-h-full onvo-background-color onvo-flex onvo-flex-col ${theme === "dark"
           ? "onvo-dark onvo-scrollbar-thumb-slate-500"
           : "onvo-scrollbar-thumb-slate-400"
           } ${className}`}

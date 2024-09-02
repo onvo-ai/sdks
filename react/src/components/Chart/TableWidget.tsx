@@ -168,7 +168,7 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
       </Title>
       <DataGrid
         className={
-          "onvo-table-widget-data-grid onvo-fill-grid onvo-mt-3 onvo-h-full onvo-rounded-md onvo-border onvo-border-gray-200 dark:onvo-border-gray-800 " +
+          "onvo-table-widget-data-grid onvo-fill-grid onvo-mt-3 onvo-h-full onvo-rounded-md onvo-border-solid onvo-border onvo-border-gray-200 dark:onvo-border-gray-800 " +
           (theme === "dark" ? "rdg-dark" : "rdg-light")
         }
         defaultColumnOptions={{

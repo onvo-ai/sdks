@@ -83,7 +83,7 @@ const AccordionItem = React.forwardRef<
     ref={forwardedRef}
     className={cx(
       // base
-      "onvo-overflow-hidden onvo-border-b first:onvo-mt-0",
+      "onvo-overflow-hidden onvo-border-solid onvo-border-b first:onvo-mt-0",
       // border color
       "onvo-border-gray-200 dark:onvo-border-gray-800",
       className

@@ -132,7 +132,7 @@ const SelectContent = React.forwardRef<
         ref={forwardedRef}
         className={cx(
           // base
-          "onvo-relative onvo-z-50 onvo-overflow-hidden onvo-rounded-md onvo-border onvo-shadow-xl onvo-shadow-black/[2.5%]",
+          "onvo-relative onvo-z-50 onvo-overflow-hidden onvo-rounded-md onvo-border-solid onvo-border onvo-shadow-xl onvo-shadow-black/[2.5%]",
           // widths
           "onvo-min-w-[calc(var(--radix-select-trigger-width)-2px)] onvo-max-w-[95vw]",
           // heights
@@ -160,7 +160,7 @@ const SelectContent = React.forwardRef<
           className={cx(
             "onvo-p-1",
             position === "popper" &&
-              "onvo-h-[var(--radix-select-trigger-height)] onvo-w-full onvo-min-w-[calc(var(--radix-select-trigger-width))]"
+            "onvo-h-[var(--radix-select-trigger-height)] onvo-w-full onvo-min-w-[calc(var(--radix-select-trigger-width))]"
           )}
         >
           {children}

@@ -65,7 +65,7 @@ const TimeSegment = ({ segment, state }: TimeSegmentProps) => {
       ref={ref}
       className={cx(
         // base
-        "onvo-relative onvo-block onvo-w-full onvo-appearance-none onvo-rounded-md onvo-border onvo-px-2.5 onvo-py-1.5 onvo-text-left onvo-uppercase onvo-tabular-nums onvo-shadow-sm onvo-outline-none onvo-transition sm:onvo-text-sm",
+        "onvo-relative onvo-block onvo-w-full onvo-appearance-none onvo-rounded-md onvo-border-solid onvo-border onvo-px-2.5 onvo-py-1.5 onvo-text-left onvo-uppercase onvo-tabular-nums onvo-shadow-sm onvo-outline-none onvo-transition sm:onvo-text-sm",
         // border color
         "onvo-border-gray-300 dark:onvo-border-gray-800",
         // text color
@@ -158,7 +158,7 @@ TimeInput.displayName = "TimeInput";
 const triggerStyles = tv({
   base: [
     // base
-    "peer onvo-flex onvo-w-full onvo-cursor-pointer onvo-appearance-none onvo-items-center onvo-gap-x-2 onvo-truncate onvo-rounded-md onvo-border onvo-px-2 onvo-py-1.5 onvo-shadow-sm onvo-outline-none onvo-transition-all sm:onvo-text-sm",
+    "peer onvo-flex onvo-w-full onvo-cursor-pointer onvo-appearance-none onvo-items-center onvo-gap-x-2 onvo-truncate onvo-rounded-md onvo-border-solid onvo-border onvo-px-2 onvo-py-1.5 onvo-shadow-sm onvo-outline-none onvo-transition-all sm:onvo-text-sm",
     // background color
     "onvo-bg-white dark:onvo-bg-gray-950 ",
     // border color
@@ -187,7 +187,7 @@ const triggerStyles = tv({
 
 interface TriggerProps
   extends React.ComponentProps<"button">,
-    VariantProps<typeof triggerStyles> {
+  VariantProps<typeof triggerStyles> {
   placeholder?: string;
 }
 
@@ -239,7 +239,7 @@ const CalendarPopover = React.forwardRef<
         onOpenAutoFocus={(e) => e.preventDefault()}
         className={cx(
           // base
-          "onvo-relative onvo-z-50 onvo-w-fit onvo-rounded-md onvo-border onvo-text-sm onvo-shadow-xl onvo-shadow-black/[2.5%]",
+          "onvo-relative onvo-z-50 onvo-w-fit onvo-rounded-md onvo-border-solid onvo-border onvo-text-sm onvo-shadow-xl onvo-shadow-black/[2.5%]",
           // widths
           "onvo-min-w-[calc(var(--radix-select-trigger-width)-2px)] onvo-max-w-[95vw]",
           // border color
@@ -506,8 +506,8 @@ const SingleDatePicker = ({
     value
       ? new Time(value.getHours(), value.getMinutes())
       : defaultValue
-      ? new Time(defaultValue.getHours(), defaultValue.getMinutes())
-      : new Time(0, 0)
+        ? new Time(defaultValue.getHours(), defaultValue.getMinutes())
+        : new Time(0, 0)
   );
 
   const initialDate = React.useMemo(() => {
@@ -603,8 +603,8 @@ const SingleDatePicker = ({
       value
         ? new Time(value.getHours(), value.getMinutes())
         : defaultValue
-        ? new Time(defaultValue.getHours(), defaultValue.getMinutes())
-        : new Time(0, 0)
+          ? new Time(defaultValue.getHours(), defaultValue.getMinutes())
+          : new Time(0, 0)
     );
   }, [value, defaultValue]);
 
@@ -731,15 +731,15 @@ const RangeDatePicker = ({
     value?.from
       ? new Time(value.from.getHours(), value.from.getMinutes())
       : defaultValue?.from
-      ? new Time(defaultValue.from.getHours(), defaultValue.from.getMinutes())
-      : new Time(0, 0)
+        ? new Time(defaultValue.from.getHours(), defaultValue.from.getMinutes())
+        : new Time(0, 0)
   );
   const [endTime, setEndTime] = React.useState<TimeValue>(
     value?.to
       ? new Time(value.to.getHours(), value.to.getMinutes())
       : defaultValue?.to
-      ? new Time(defaultValue.to.getHours(), defaultValue.to.getMinutes())
-      : new Time(0, 0)
+        ? new Time(defaultValue.to.getHours(), defaultValue.to.getMinutes())
+        : new Time(0, 0)
   );
 
   const initialRange = React.useMemo(() => {
@@ -876,15 +876,15 @@ const RangeDatePicker = ({
       value?.from
         ? new Time(value.from.getHours(), value.from.getMinutes())
         : defaultValue?.from
-        ? new Time(defaultValue.from.getHours(), defaultValue.from.getMinutes())
-        : new Time(0, 0)
+          ? new Time(defaultValue.from.getHours(), defaultValue.from.getMinutes())
+          : new Time(0, 0)
     );
     setEndTime(
       value?.to
         ? new Time(value.to.getHours(), value.to.getMinutes())
         : defaultValue?.to
-        ? new Time(defaultValue.to.getHours(), defaultValue.to.getMinutes())
-        : new Time(0, 0)
+          ? new Time(defaultValue.to.getHours(), defaultValue.to.getMinutes())
+          : new Time(0, 0)
     );
   }, [value, defaultValue]);
 
@@ -893,9 +893,8 @@ const RangeDatePicker = ({
       return null;
     }
 
-    return `${
-      range.from ? formatDate(range.from, locale, showTimePicker) : ""
-    } - ${range.to ? formatDate(range.to, locale, showTimePicker) : ""}`;
+    return `${range.from ? formatDate(range.from, locale, showTimePicker) : ""
+      } - ${range.to ? formatDate(range.to, locale, showTimePicker) : ""}`;
   }, [range, locale, showTimePicker]);
 
   const onApply = () => {

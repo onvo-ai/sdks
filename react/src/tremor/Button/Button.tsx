@@ -9,7 +9,7 @@ import { cx, focusRing } from "../../lib/utils";
 const buttonVariants = tv({
   base: [
     // base
-    "onvo-relative onvo-inline-flex onvo-items-center onvo-justify-center onvo-rounded-md onvo-border onvo-px-3 onvo-py-1.5 onvo-text-center onvo-text-sm onvo-font-medium onvo-shadow-sm onvo-transition-all onvo-duration-100 onvo-ease-in-out",
+    "onvo-relative onvo-inline-flex onvo-items-center onvo-justify-center onvo-rounded-md onvo-border-solid onvo-border onvo-px-3 onvo-py-1.5 onvo-text-center onvo-text-sm onvo-font-medium onvo-shadow-sm onvo-transition-all onvo-duration-100 onvo-ease-in-out",
     // disabled
     "disabled:onvo-pointer-events-none disabled:onvo-shadow-none",
     // focus
@@ -94,7 +94,7 @@ const buttonVariants = tv({
 
 interface ButtonProps
   extends React.ComponentPropsWithoutRef<"button">,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   isLoading?: boolean;
   loadingText?: string;

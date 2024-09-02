@@ -10,7 +10,7 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
 const inputStyles = tv({
   base: [
     // base
-    "onvo-relative onvo-block onvo-w-full onvo-appearance-none onvo-rounded-md onvo-border onvo-px-2.5 onvo-py-1.5 onvo-shadow-sm onvo-outline-none onvo-transition sm:onvo-text-sm",
+    "onvo-relative onvo-block onvo-w-full onvo-appearance-none onvo-rounded-md onvo-border-solid onvo-border onvo-px-2.5 onvo-py-1.5 onvo-shadow-sm onvo-outline-none onvo-transition sm:onvo-text-sm",
     // border color
     "onvo-border-slate-200 dark:onvo-border-slate-800",
     // text color
@@ -49,7 +49,7 @@ const inputStyles = tv({
 
 interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputStyles> {
+  VariantProps<typeof inputStyles> {
   inputClassName?: string;
 }
 

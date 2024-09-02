@@ -32,8 +32,8 @@ class TextChart extends LineController {
       align === "start"
         ? "onvo-text-left"
         : align === "end"
-        ? "onvo-text-right"
-        : "onvo-text-center";
+          ? "onvo-text-right"
+          : "onvo-text-center";
     if (parent && subtitle) {
       let elems = parent.getElementsByClassName("onvo-separator");
       for (let i = 0; i < elems.length; i++) {
@@ -41,7 +41,7 @@ class TextChart extends LineController {
       }
       let div = document.createElement("div");
       div.className =
-        "onvo-separator onvo-overflow-y-hidden onvo-bottom-0 onvo-prose onvo-prose-sm dark:onvo-prose-invert " +
+        "onvo-separator onvo-overflow-y-hidden onvo-bottom-0 onvo-prose onvo-prose-slate onvo-prose-sm dark:onvo-prose-invert " +
         cssAlign;
       div.style.position = "absolute";
       div.style.left = canvas.left - 3 + "px";

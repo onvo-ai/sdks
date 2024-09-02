@@ -270,7 +270,7 @@ export const EditWidgetModal: React.FC<{}> = ({ }) => {
         >
           <div
             className={
-              "onvo-foreground-color onvo-w-full onvo-left-0 onvo-top-0 onvo-z-10 onvo-flex onvo-flex-row onvo-justify-start onvo-items-center onvo-gap-4 onvo-border-b onvo-border-black/10 onvo-p-2 dark:onvo-border-white/10"
+              "onvo-foreground-color onvo-w-full onvo-left-0 onvo-top-0 onvo-z-10 onvo-flex onvo-flex-row onvo-justify-start onvo-items-center onvo-gap-4 onvo-border-solid onvo-border-b onvo-border-black/10 onvo-p-2 dark:onvo-border-white/10"
             }
           >
             <Icon
@@ -316,7 +316,7 @@ export const EditWidgetModal: React.FC<{}> = ({ }) => {
             </div>
           </div>
           <div className="onvo-relative onvo-flex onvo-flex-grow onvo-h-[calc(100%-52px)] onvo-w-full onvo-flex-col-reverse @xl/widgetmodal:onvo-flex-row">
-            <div className="onvo-relative onvo-flex-grow onvo-h-full onvo-w-full onvo-pt-3 onvo-border-r onvo-border-black/10 dark:onvo-border-white/10">
+            <div className="onvo-relative onvo-flex-grow onvo-h-full onvo-w-full onvo-pt-3 onvo-border-solid onvo-border-r onvo-border-black/10 dark:onvo-border-white/10">
               {tab === "editor" && (
                 <Button
                   variant="secondary"

@@ -230,7 +230,7 @@ const QuestionMessage: React.FC<{
             ) : (
               <ErrorBoundary fallbackRender={({ error }) => <Text>{text}</Text>}>
                 <ReactMarkdown
-                  className="onvo-prose onvo-prose-sm dark:onvo-prose-invert "
+                  className="onvo-prose onvo-prose-slate onvo-prose-sm dark:onvo-prose-invert "
                   remarkPlugins={[remarkGfm]}
                 >
                   {text}
@@ -249,7 +249,7 @@ const QuestionMessage: React.FC<{
                         <ErrorBoundary
                           fallbackRender={({ error }) => <Text>{code}</Text>}
                         >
-                          <article className="onvo-question-assistant-code-wrapper onvo-prose onvo-prose-sm dark:onvo-prose-invert onvo-inline onvo-w-full">
+                          <article className="onvo-question-assistant-code-wrapper onvo-prose onvo-prose-slate onvo-prose-sm dark:onvo-prose-invert onvo-inline onvo-w-full">
                             <ReactMarkdown className="onvo-question-assistant-code -onvo-mt-5">
                               {"```json\n" + code + "\n```"}
                             </ReactMarkdown>
@@ -387,7 +387,7 @@ const QuestionMessage: React.FC<{
                   <ErrorBoundary
                     fallbackRender={({ error }) => <Text>{code}</Text>}
                   >
-                    <article className="onvo-question-assistant-code-wrapper onvo-prose onvo-prose-sm dark:onvo-prose-invert onvo-inline onvo-w-full">
+                    <article className="onvo-question-assistant-code-wrapper onvo-prose onvo-prose-slate onvo-prose-sm dark:onvo-prose-invert onvo-inline onvo-w-full">
                       <ReactMarkdown className="onvo-question-assistant-code -onvo-mt-5">
                         {"```python\n" + code + "\n```"}
                       </ReactMarkdown>
@@ -412,7 +412,7 @@ const QuestionMessage: React.FC<{
                 <ChartBase json={output} id={questionId} title={title} />
               </div>
               <div
-                className="onvo-chart-card-dropdown-wrapper onvo-py-2 onvo-px-2 onvo-z-20 onvo-border-t onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-b-md onvo-background-color onvo-flex onvo-w-full onvo-justify-between onvo-flex-row onvo-items-center"
+                className="onvo-chart-card-dropdown-wrapper onvo-py-2 onvo-px-2 onvo-z-20 onvo-border-solid onvo-border-t onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-b-md onvo-background-color onvo-flex onvo-w-full onvo-justify-between onvo-flex-row onvo-items-center"
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();

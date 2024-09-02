@@ -153,20 +153,19 @@ type Database = {
             automations: {
                 Row: {
                     created_at: string;
-                    created_by: string;
                     dashboard: string;
                     description: string | null;
-                    email_format: string;
+                    email_body: string;
+                    email_cc: string[] | null;
                     email_subject: string;
+                    email_to: string | null;
                     enabled: boolean;
                     id: string;
                     last_run_at: string | null;
                     last_updated_at: string;
-                    last_updated_by: string | null;
+                    method: string;
                     next_run_at: string | null;
                     output_format: string;
-                    recipient_type: string;
-                    recipients: string[] | null;
                     schedule: string;
                     team: string;
                     timezone: string;
@@ -174,20 +173,19 @@ type Database = {
                 };
                 Insert: {
                     created_at?: string;
-                    created_by: string;
                     dashboard: string;
                     description?: string | null;
-                    email_format: string;
+                    email_body: string;
+                    email_cc?: string[] | null;
                     email_subject: string;
+                    email_to?: string | null;
                     enabled?: boolean;
                     id?: string;
                     last_run_at?: string | null;
                     last_updated_at?: string;
-                    last_updated_by?: string | null;
+                    method: string;
                     next_run_at?: string | null;
                     output_format: string;
-                    recipient_type: string;
-                    recipients?: string[] | null;
                     schedule: string;
                     team: string;
                     timezone?: string;
@@ -195,20 +193,19 @@ type Database = {
                 };
                 Update: {
                     created_at?: string;
-                    created_by?: string;
                     dashboard?: string;
                     description?: string | null;
-                    email_format?: string;
+                    email_body?: string;
+                    email_cc?: string[] | null;
                     email_subject?: string;
+                    email_to?: string | null;
                     enabled?: boolean;
                     id?: string;
                     last_run_at?: string | null;
                     last_updated_at?: string;
-                    last_updated_by?: string | null;
+                    method?: string;
                     next_run_at?: string | null;
                     output_format?: string;
-                    recipient_type?: string;
-                    recipients?: string[] | null;
                     schedule?: string;
                     team?: string;
                     timezone?: string;
@@ -216,24 +213,10 @@ type Database = {
                 };
                 Relationships: [
                     {
-                        foreignKeyName: "automations_created_by_fkey";
-                        columns: ["created_by"];
-                        isOneToOne: false;
-                        referencedRelation: "accounts";
-                        referencedColumns: ["id"];
-                    },
-                    {
                         foreignKeyName: "automations_dashboard_fkey";
                         columns: ["dashboard"];
                         isOneToOne: false;
                         referencedRelation: "dashboards";
-                        referencedColumns: ["id"];
-                    },
-                    {
-                        foreignKeyName: "automations_last_updated_by_fkey";
-                        columns: ["last_updated_by"];
-                        isOneToOne: false;
-                        referencedRelation: "accounts";
                         referencedColumns: ["id"];
                     },
                     {
@@ -1201,6 +1184,7 @@ type DashboardSettings = {
     enable_advanced_widget_creator?: boolean;
     copilot_title: string;
     copilot_description: string;
+    disable_automations?: boolean;
 };
 interface DashboardMeta {
     created_by: Account;
@@ -1417,7 +1401,9 @@ declare class OnvoAutomations extends OnvoBase {
      * Fetches all the automations
      * @returns {Promise<Automation[]>} A promise that resolves to an array of Automation objects
      */
-    list(): Promise<Automation[]>;
+    list(filters?: {
+        dashboard: string;
+    }): Promise<Automation[]>;
     /**
      * Fetches an automation by its ID
      * @param {string} id - The ID of the automation

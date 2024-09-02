@@ -28,11 +28,11 @@ const QuestionSidebarCard: React.FC<{
   return (
     <div
       className={
-        "onvo-transition-all onvo-group onvo-relative onvo-flex onvo-w-full onvo-px-3 onvo-py-2 hover:onvo-bg-black/10 hover:onvo-dark:bg-white/10 onvo-rounded-lg onvo-border onvo-border-black/10 dark:onvo-border-white/10"
+        "onvo-transition-all onvo-group onvo-relative onvo-flex onvo-w-full onvo-px-3 onvo-py-2 hover:onvo-bg-black/10 hover:onvo-dark:bg-white/10 onvo-rounded-lg onvo-border-solid onvo-border onvo-border-black/10 dark:onvo-border-white/10"
       }
     >
       <div className="onvo-flex-grow onvo-cursor-pointer" onClick={onClick}>
-        <Text className="!onvo-text-md">{truncated}</Text>
+        <Text className="onvo-text-md">{truncated}</Text>
         <Label className="onvo-font-semibold onvo-text-xs">
           {dayjs(question.created_at).fromNow()}
         </Label>
@@ -150,7 +150,7 @@ const QuestionHistoryRaw: React.FC<{
           [1, 2, 3, 4, 5, 6].map((a) => (
             <div
               key={"question-history-loader-" + a}
-              className="onvo-transition-all onvo-group onvo-relative onvo-flex onvo-flex-col onvo-w-full onvo-px-3 onvo-py-2 onvo-rounded-lg onvo-border dark:onvo-border-slate-700"
+              className="onvo-transition-all onvo-group onvo-relative onvo-flex onvo-flex-col onvo-w-full onvo-px-3 onvo-py-2 onvo-rounded-lg onvo-border-solid onvo-border onvo-border-black/10 dark:onvo-border-white/10"
             >
               <div className="onvo-h-6 onvo-bg-slate-200 onvo-rounded-md dark:onvo-bg-slate-700 onvo-w-[95%] onvo-mb-1"></div>
               <div className="onvo-w-[30%] onvo-h-4 onvo-mb-2 onvo-bg-slate-200 onvo-rounded-md dark:onvo-bg-slate-700"></div>

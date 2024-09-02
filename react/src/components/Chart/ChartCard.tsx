@@ -32,7 +32,7 @@ import { useTheme } from "../../layouts/Dashboard/useTheme";
 
 const DragHandle = () => {
   return (
-    <div className="onvo-absolute -onvo-top-6 onvo-w-10 onvo-h-6 onvo-z-10 onvo-hidden group-hover/chartcard:onvo-flex  onvo-left-[50%] -onvo-ml-5 onvo-justify-center onvo-items-center onvo-foreground-color onvo-border onvo-border-b-0 onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-t-md">
+    <div className="onvo-absolute -onvo-top-6 onvo-w-10 onvo-h-6 onvo-z-10 onvo-hidden group-hover/chartcard:onvo-flex  onvo-left-[50%] -onvo-ml-5 onvo-justify-center onvo-items-center onvo-foreground-color onvo-border-solid onvo-border onvo-border-b-0 onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-t-md">
       <div className="onvo-chart-card-drag-handle  onvo-absolute onvo-grid-cols-4 onvo-py-1 onvo-cursor-move onvo-grid onvo-px-1 onvo-items-center onvo-justify-center onvo-h-6 onvo-w-10">
         <div className="onvo-h-[3px] onvo-w-[3px] onvo-ml-0.5 onvo-rounded-full onvo-bg-black/20 dark:onvo-bg-white/20"></div>
         <div className="onvo-h-[3px] onvo-w-[3px] onvo-ml-0.5 onvo-rounded-full onvo-bg-black/20 dark:onvo-bg-white/20"></div>

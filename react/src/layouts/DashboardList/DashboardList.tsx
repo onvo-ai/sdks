@@ -34,7 +34,7 @@ const DashboardCard: React.FC<{
     >
       <div
         className={
-          "onvo-relative onvo-rounded-lg onvo-border onvo-border-gray-200 onvo-bg-gray-50 onvo-object-contain onvo-object-top onvo-transition-all group-hover:onvo-shadow-lg dark:onvo-border-gray-700 dark:onvo-bg-gray-950 " +
+          "onvo-relative onvo-rounded-lg onvo-border-solid onvo-border onvo-border-gray-200 onvo-bg-gray-50 onvo-object-contain onvo-object-top onvo-transition-all group-hover:onvo-shadow-lg dark:onvo-border-gray-700 dark:onvo-bg-gray-950 " +
           (variant === "grid" ? "onvo-h-56 onvo-w-full" : "onvo-h-32 onvo-w-72")
         }
       >
@@ -121,7 +121,7 @@ export const DashboardList: React.FC<{
 
   return (
     <div
-      className={"onvo-dashboard-list onvo-w-full onvo-grid onvo-gap-4 " + cols}
+      className={"onvo-root-style onvo-dashboard-list onvo-w-full onvo-grid onvo-gap-4 " + cols}
     >
       {dashboards.map((a) => (
         <DashboardCard
