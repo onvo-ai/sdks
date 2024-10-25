@@ -11,7 +11,7 @@ import { Chart } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js";
 import { FunnelController, TrapezoidElement } from "chartjs-chart-funnel";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import zoomPlugin from "chartjs-plugin-zoom";
+import zoomPlugin from "@trullock/chartjs-plugin-zoom";
 
 import MetricChart from "./MetricChart";
 import TextChart from "./TextChart";
@@ -97,8 +97,11 @@ const ChartBase: React.FC<{
         zoom: {
           drag: {
             enabled: true,
+            backgroundColor: "rgba(59, 130, 246, 0.2)",
+            borderColor: "rgb(59, 130, 246)",
+            borderWidth: 2,
+            drawTime: "afterDraw"
           },
-
           pinch: {
             enabled: true,
           },

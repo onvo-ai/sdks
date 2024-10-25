@@ -25,7 +25,6 @@ export default [
         sourcemap: true,
         plugins: [],
       },
-
       {
         dir: "dist/esm",
         format: "esm",
@@ -38,14 +37,15 @@ export default [
       resolve({ browser: true }),
       commonjs(),
       postcss({
-        inject: {
-          insertAt: "top",
-        },
+        // inject: {
+        //   insertAt: "top",
+        // },
         config: {
           path: "./postcss.config.js",
         },
-        minimize: true,
+        minimize: false,
         extensions: [".css"],
+        extract: "styles.css"
       }),
       terser(),
     ],

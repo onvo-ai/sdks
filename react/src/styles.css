@@ -52,7 +52,16 @@
   background-image: none !important;
   width: 12px !important;
   height: 12px !important;
+  border-bottom: 3px solid #00000030;
+  border-right: 3px solid #00000030;
+  border-bottom-right-radius: 8px;
+  margin: 8px;
 }
+.onvo-dark .react-grid-item > .react-resizable-handle {
+  border-bottom: 3px solid #ffffff30;
+  border-right: 3px solid #ffffff30;
+}
+
 .react-grid-item:hover {
   z-index: 20;
 }
@@ -78,7 +87,9 @@
 .rdg {
   --rdg-background-color: var(--onvo-light-foreground-color) !important;
   --rdg-header-background-color: var(--onvo-light-background-color) !important;
-  --rdg-row-hover-background-color: var(--onvo-light-background-color) !important;
+  --rdg-row-hover-background-color: var(
+    --onvo-light-background-color
+  ) !important;
   --rdg-color: var(--onvo-font-color);
   border-color: rgba(0, 0, 0, 0.1);
 }
@@ -86,7 +97,9 @@
 .onvo-dark .rdg {
   --rdg-background-color: var(--onvo-dark-foreground-color) !important;
   --rdg-header-background-color: var(--onvo-dark-background-color) !important;
-  --rdg-row-hover-background-color: var(--onvo-dark-background-color) !important;
+  --rdg-row-hover-background-color: var(
+    --onvo-dark-background-color
+  ) !important;
   --rdg-color: var(--onvo-dark-font-color);
   border-color: rgba(255, 255, 255, 0.1);
 }
@@ -164,9 +177,25 @@
   }
 }
 
-.react-multi-email span[data-placeholder="true"]{
+.react-multi-email span[data-placeholder="true"] {
   top: 2px !important;
 }
 .react-multi-email [data-tag] [data-tag-item] {
   overflow-y: visible;
 }
+
+dialog {
+  border: none;
+}
+
+/* resizeHandle={(axis: string) => {
+  if (!editable) return <></>;
+  if (axis === "se") {
+    return (
+      <div className="onvo-dashboard-grid-handle onvo-cursor-se-resize react-resizable-handle onvo-absolute onvo-bottom-2 onvo-right-2 onvo-rounded-br-lg onvo-border-solid onvo-border-b-[3px] onvo-border-r-[3px] " />
+    );
+  }
+  return (
+    <div className="onvo-dashboard-grid-handle onvo-cursor-sw-resize react-resizable-handle onvo-absolute onvo-bottom-2 onvo-left-2 onvo-rounded-bl-lg onvo-border-solid onvo-border-b-[3px] onvo-border-l-[3px] onvo-border-gray-300 dark:onvo-border-white/30" />
+  );
+}} */

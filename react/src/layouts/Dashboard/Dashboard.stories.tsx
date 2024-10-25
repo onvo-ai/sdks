@@ -15,13 +15,14 @@ type Story = StoryObj<{
   baseUrl: string;
   id: string;
   adminMode: boolean;
+  variant: "default" | "pdf" | "pptx";
 }>;
 
 export const Standalone: Story = (args) => {
   return (
     <div className="onvo-h-screen onvo-w-screen">
       <Wrapper {...args}>
-        <Dashboard id={args.id}></Dashboard>
+        <Dashboard id={args.id} variant={args.variant}></Dashboard>
       </Wrapper>
     </div>
   );
@@ -32,6 +33,7 @@ Standalone.args = {
     "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFwcF9tZXRhZGF0YSI6eyJkYXNoYm9hcmRzIjpbImFlNWIxZGRlLTFmZjUtNDk2Ny1hZmUxLTYzOWI3NTVjNzEwMiJdLCJwYXJlbnRfdGVhbSI6ImVlNWIwOGM2LTUxNjctNDQyNS1iYmMzLWE3NDZmZTRhN2VhZCJ9LCJzdWIiOiI1ODk5Zjk5ZC1hNDQ5LTRiZmEtODc2OS0xOWMwOTdhYWYxZjYiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiaWF0IjoxNzE5MzA3MDgxfQ.230JQNigbv9HOSXms9m-JGKlpGveuD3-_bR3XdqRhEk",
   baseUrl: "http://localhost:3004",
   id: "ae5b1dde-1ff5-4967-afe1-639b755c7102",
+  variant: "default",
 };
 
 Standalone.parameters = { layout: "fullscreen" };

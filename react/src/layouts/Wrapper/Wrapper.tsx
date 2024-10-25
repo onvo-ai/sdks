@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Onvo, { Account, EmbedUser, Team } from "@onvo-ai/js";
-import { Toaster } from "sonner";
 import { Subscription, SubscriptionPlan } from "@onvo-ai/js";
 import { jwtDecode } from "jwt-decode";
 
@@ -43,13 +42,22 @@ export const Wrapper: React.FC<{
     const [team, setTeam] = useState<Team>();
     const [account, setAccount] = useState<Account>();
     const [embedUser, setEmbedUser] = useState<EmbedUser>();
+    const [backend, setBackend] = useState<Onvo | undefined>(undefined);
 
-    // Initialize Onvo backend with token and base URL
-    let backend = new Onvo(adminMode ? "" : token, {
-      endpoint: baseUrl,
-    });
+    useEffect(() => {
+      if (!baseUrl || baseUrl.trim() === "") return;
+      if (!token || token.trim() === "") return;
+      // Initialize Onvo backend with token and base URL
+      let back = new Onvo(token, {
+        endpoint: baseUrl,
+      });
+      setBackend(back);
+
+    }, [token, baseUrl, adminMode]);
 
     const getSubscription = async (teamId: string) => {
+      if (!backend) return;
+
       backend.teams.get(teamId).then(setTeam);
 
       backend
@@ -73,7 +81,7 @@ export const Wrapper: React.FC<{
     };
 
     useEffect(() => {
-      if (token && token !== "") {
+      if (token && token !== "" && backend) {
         let decoded = jwtDecode(token) as any;
         if (decoded.app_metadata.team) {
           backend.accounts.get(decoded.sub).then(setAccount);
@@ -84,7 +92,7 @@ export const Wrapper: React.FC<{
           decoded.app_metadata.team || decoded.app_metadata.parent_team
         );
       }
-    }, [token]);
+    }, [token, backend]);
 
     return (
       <Context.Provider
@@ -99,7 +107,6 @@ export const Wrapper: React.FC<{
           embedUser
         }}
       >
-        <Toaster position="bottom-right" richColors />
         {children}
       </Context.Provider>
     );

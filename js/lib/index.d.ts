@@ -54,15 +54,7 @@ type Database = {
                     phone_number?: string | null;
                     updated_at?: string | null;
                 };
-                Relationships: [
-                    {
-                        foreignKeyName: "users_id_fkey";
-                        columns: ["id"];
-                        isOneToOne: true;
-                        referencedRelation: "users";
-                        referencedColumns: ["id"];
-                    }
-                ];
+                Relationships: [];
             };
             api_keys: {
                 Row: {
@@ -518,6 +510,7 @@ type Database = {
                 Row: {
                     analyst_agent_model: string;
                     analyst_agent_provider: string;
+                    analyst_agent_type: Database["public"]["Enums"]["LLM hosting type"];
                     anthropic_api_key: string | null;
                     google_api_key: string | null;
                     groq_api_key: string | null;
@@ -525,13 +518,14 @@ type Database = {
                     openai_api_key: string | null;
                     programmer_agent_model: string;
                     programmer_agent_provider: string;
+                    programmer_agent_type: Database["public"]["Enums"]["LLM hosting type"];
                     team: string;
-                    type: Database["public"]["Enums"]["LLM hosting type"];
                     updated: boolean;
                 };
                 Insert: {
                     analyst_agent_model?: string;
                     analyst_agent_provider?: string;
+                    analyst_agent_type?: Database["public"]["Enums"]["LLM hosting type"];
                     anthropic_api_key?: string | null;
                     google_api_key?: string | null;
                     groq_api_key?: string | null;
@@ -539,13 +533,14 @@ type Database = {
                     openai_api_key?: string | null;
                     programmer_agent_model?: string;
                     programmer_agent_provider?: string;
+                    programmer_agent_type?: Database["public"]["Enums"]["LLM hosting type"];
                     team: string;
-                    type?: Database["public"]["Enums"]["LLM hosting type"];
                     updated?: boolean;
                 };
                 Update: {
                     analyst_agent_model?: string;
                     analyst_agent_provider?: string;
+                    analyst_agent_type?: Database["public"]["Enums"]["LLM hosting type"];
                     anthropic_api_key?: string | null;
                     google_api_key?: string | null;
                     groq_api_key?: string | null;
@@ -553,8 +548,8 @@ type Database = {
                     openai_api_key?: string | null;
                     programmer_agent_model?: string;
                     programmer_agent_provider?: string;
+                    programmer_agent_type?: Database["public"]["Enums"]["LLM hosting type"];
                     team?: string;
-                    type?: Database["public"]["Enums"]["LLM hosting type"];
                     updated?: boolean;
                 };
                 Relationships: [
@@ -1018,106 +1013,13 @@ type Enums<PublicEnumNameOrOptions extends keyof PublicSchema["Enums"] | {
 } ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"] : never = never> = PublicEnumNameOrOptions extends {
     schema: keyof Database;
 } ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName] : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"] ? PublicSchema["Enums"][PublicEnumNameOrOptions] : never;
-
-type OauthConfig = {
-    access_token: string;
-    refresh_token: string;
-    access_expires_at: string;
-    refresh_expires_at: string;
-};
-type APIDatasourceConfig = {
-    url?: string;
-    type?: "json" | "csv" | "xml";
-    method?: "GET" | "POST";
-    headers?: string;
-    body?: string;
-    transform?: string;
-};
-type CSVDatasourceConfig = {
-    url?: string;
-    filename?: string;
-};
-type ExcelDatasourceConfig = {
-    url?: string;
-    filename?: string;
-    sheetName?: string;
-};
-type JSONDatasourceConfig = {
-    url?: string;
-    filename?: string;
-    transform?: string;
-};
-type RedshiftDatasourceConfig = {
-    host: string;
-    port: string;
-    user: string;
-    password: string;
-    database: string;
-    query: string;
-};
-type MySQLDatasourceConfig = {
-    host: string;
-    user: string;
-    port: string;
-    password: string;
-    database: string;
-    query: string;
-};
-type MsSQLDatasourceConfig = {
-    server: string;
-    port: string;
-    user: string;
-    password: string;
-    database: string;
-    query: string;
-};
-type PostgreSQLDatasourceConfig = {
-    host: string;
-    port: string;
-    database: string;
-    user: string;
-    password: string;
-    query: string;
-};
-type RootfiDatasourceConfig = {
-    company_id: number;
-    resource: string;
-};
-type MongoDBDatasourceConfig = {
-    url: string;
-    database: string;
-    collection: string;
-};
-type AirtableDatasourceConfig = {
-    baseId: string;
-    baseName: string;
-    tableId: string;
-    tableName: string;
-};
-type GoogleSheetDatasourceConfig = {
-    docId: string;
-    sheetId: number;
-    sheetName: string;
-};
-type ZohoDatasourceConfig = {
-    product: string;
-    module: string;
-};
-type FirestoreDatasourceConfig = {
-    type: string;
-    project_id: string;
-    private_key_id: string;
-    private_key: string;
-    client_email: string;
-    client_id: string;
-    auth_uri: string;
-    token_uri: string;
-    auth_provider_x509_cert_url: string;
-    client_x509_cert_url: string;
-    universe_domain: string;
-    databaseURL: string;
-    collection: string;
-};
+type CompositeTypes<PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"] | {
+    schema: keyof Database;
+}, CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database;
+} ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"] : never = never> = PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database;
+} ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName] : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"] ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions] : never;
 
 type Modify<A, B extends DeepPartialAny<A>> = {
     [K in keyof A | keyof B]: K extends keyof A ? K extends keyof B ? A[K] extends AnyObject ? B[K] extends AnyObject ? Modify<A[K], B[K]> : B[K] : B[K] : A[K] : B[K];
@@ -1157,41 +1059,36 @@ declare enum Table {
 }
 
 type DashboardSettings = {
+    filters: boolean;
     theme: "dark" | "light" | "auto";
+    font: string;
     dark_background: string;
     dark_foreground: string;
     dark_text: string;
     light_background: string;
     light_foreground: string;
     light_text: string;
-    border_radius: number;
-    font: string;
-    grid_spacing: number;
     hide_header: boolean;
+    grid_spacing: number;
     custom_css: string;
-    filters: boolean;
+    copilot_title: string;
+    copilot_description: string;
+    help_url?: string;
+    enable_advanced_widget_creator?: boolean;
+    enable_widget_insights?: boolean;
     can_ask_questions: boolean;
     can_edit_widgets: boolean;
     can_edit_widget_layout: boolean;
     can_create_widgets: boolean;
     can_delete_widgets: boolean;
+    disable_automations?: boolean;
+    enable_widget_code_editor?: boolean;
+    widget_limit?: number;
     disable_download_images: boolean;
     disable_download_reports: boolean;
     disable_download_documents: boolean;
-    widget_limit?: number;
-    enable_widget_code_editor?: boolean;
-    help_url?: string;
-    enable_advanced_widget_creator?: boolean;
-    copilot_title: string;
-    copilot_description: string;
-    disable_automations?: boolean;
+    pdf_orientation?: "portrait" | "landscape";
 };
-interface DashboardMeta {
-    created_by: Account;
-    last_updated_by?: Account;
-    widgets: number;
-    datasources: number;
-}
 type WidgetSettings = {
     disable_download_images: boolean;
     disable_download_reports: boolean;
@@ -1210,6 +1107,12 @@ type WidgetMessage = {
     role: "user" | "assistant";
     content: string;
 };
+interface DashboardMeta {
+    created_by: Account;
+    last_updated_by?: Account;
+    widgets: number;
+    datasources: number;
+}
 type Invite = Database["public"]["Tables"]["invites"]["Row"];
 type Member = Database["public"]["Tables"]["members"]["Row"];
 type Team = Database["public"]["Tables"]["teams"]["Row"];
@@ -1222,7 +1125,7 @@ type DataSource = Modify<Database["public"]["Tables"]["datasources"]["Row"], {
     sample_data: {
         [key: string]: any;
     }[];
-    config: CSVDatasourceConfig | ExcelDatasourceConfig | JSONDatasourceConfig | APIDatasourceConfig | AirtableDatasourceConfig | GoogleSheetDatasourceConfig | ZohoDatasourceConfig | RedshiftDatasourceConfig | MySQLDatasourceConfig | MsSQLDatasourceConfig | PostgreSQLDatasourceConfig | RootfiDatasourceConfig | MongoDBDatasourceConfig | FirestoreDatasourceConfig;
+    config: any;
     parameters: {
         id: string;
         wrap?: string;
@@ -1264,14 +1167,11 @@ type Session = Modify<Database["public"]["Tables"]["sessions"]["Row"], {
 }>;
 type Question = Database["public"]["Tables"]["questions"]["Row"];
 type Integration = Modify<Database["public"]["Tables"]["integrations"]["Row"], {
-    config: RedshiftDatasourceConfig | MySQLDatasourceConfig | MsSQLDatasourceConfig | PostgreSQLDatasourceConfig | RootfiDatasourceConfig | MongoDBDatasourceConfig | OauthConfig | FirestoreDatasourceConfig;
+    config: any;
 }>;
 type Automation = Database["public"]["Tables"]["automations"]["Row"];
 type AutomationRun = Database["public"]["Tables"]["automation_runs"]["Row"];
-type ComprehensiveDashboard = Dashboard & {
-    datasources: DataSource[];
-    widgets: Widget[];
-};
+type LLMSettings = Database["public"]["Tables"]["llm_settings"]["Row"];
 type Log = Database["public"]["Tables"]["logs"]["Row"];
 declare enum LogType {
     ViewDashboard = "view-dashboard",
@@ -1851,4 +1751,4 @@ declare class Onvo extends OnvoBase {
     });
 }
 
-export { type APIDatasourceConfig, type APIKey, type Account, type AirtableDatasourceConfig, type Automation, type AutomationRun, type CSVDatasourceConfig, type ComprehensiveDashboard, type Dashboard, type DashboardDatasource, type DashboardFilter, type DashboardMeta, type DashboardSettings, type DataSource, type Database, type EmbedUser, type Enums, type ExcelDatasourceConfig, type FirestoreDatasourceConfig, type GoogleSheetDatasourceConfig, type Integration, type Invite, type JSONDatasourceConfig, type Json, type Log, LogType, type Member, type Modify, type MongoDBDatasourceConfig, type MsSQLDatasourceConfig, type MySQLDatasourceConfig, type OauthConfig, Onvo, type PostgreSQLDatasourceConfig, type Question, type RedshiftDatasourceConfig, type RootfiDatasourceConfig, type Session, type Subscription, type SubscriptionPlan, Table, type Tables, type TablesInsert, type TablesUpdate, type Team, type Widget, type WidgetMessage, type WidgetSettings, type ZohoDatasourceConfig, Onvo as default };
+export { type APIKey, type Account, type Automation, type AutomationRun, type CompositeTypes, type Dashboard, type DashboardDatasource, type DashboardFilter, type DashboardMeta, type DashboardSettings, type DataSource, type Database, type EmbedUser, type Enums, type Integration, type Invite, type Json, type LLMSettings, type Log, LogType, type Member, type Modify, Onvo, type Question, type Session, type Subscription, type SubscriptionPlan, Table, type Tables, type TablesInsert, type TablesUpdate, type Team, type Widget, type WidgetMessage, type WidgetSettings, Onvo as default };

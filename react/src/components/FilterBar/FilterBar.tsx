@@ -107,6 +107,7 @@ export const FilterBar = () => {
                     [a.parameter]: e.join(","),
                   });
                 }}
+                className="onvo-max-w-64"
                 items={options.map((opt) => ({
                   label: opt,
                   value: opt,

@@ -12,7 +12,7 @@ import { FilterBar } from "../FilterBar";
 import { EditWidgetModal } from "../EditWidgetModal";
 import { ImageWidgetModal } from "../ImageWidgetModal";
 
-export const DashboardGrid: React.FC<{}> = ({ }) => {
+export const DashboardGrid: React.FC<{ className?: string }> = ({ className }) => {
   const { dashboard, widgets, setWidgets } = useDashboard();
   const { backend, adminMode } = useBackend();
 
@@ -71,7 +71,7 @@ export const DashboardGrid: React.FC<{}> = ({ }) => {
     return (
       <div
         className={
-          "onvo-dashboard-grid-wrapper onvo-overflow-y-auto onvo-flex-grow onvo-pt-2 onvo-font-override onvo-background-color onvo-relative onvo-w-full"
+          "onvo-dashboard-grid-wrapper onvo-overflow-y-auto onvo-flex-grow onvo-pt-2 onvo-font-override onvo-background-color onvo-relative onvo-w-full " + (className || "")
         }
       ></div>
     );
@@ -83,7 +83,7 @@ export const DashboardGrid: React.FC<{}> = ({ }) => {
     return (
       <div
         className={
-          "onvo-dashboard-grid-wrapper onvo-overflow-y-auto onvo-flex-grow onvo-pt-2 onvo-font-override onvo-background-color onvo-relative onvo-w-full"
+          "onvo-dashboard-grid-wrapper onvo-overflow-y-auto onvo-flex-grow onvo-pt-2 onvo-font-override onvo-background-color onvo-relative onvo-w-full " + (className || "")
         }
       >
         <TextWidgetModal />
@@ -99,24 +99,20 @@ export const DashboardGrid: React.FC<{}> = ({ }) => {
 
       <div
         className={
-          "onvo-dashboard-grid-wrapper onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-font-override onvo-background-color onvo-w-full"
+          "onvo-dashboard-grid-wrapper onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-font-override onvo-background-color onvo-w-full " + (className || "")
         }
       >
         <FilterBar />
         <ResponsiveGridLayout
-          resizeHandle={
-            editable ? (
-              <div className="onvo-dashboard-grid-handle react-resizable-handle onvo-absolute onvo-bottom-2 onvo-right-2 onvo-cursor-pointer onvo-rounded-br-lg onvo-border-solid onvo-border-b-[3px] onvo-border-r-[3px] onvo-border-gray-300 dark:onvo-border-white/30" />
-            ) : (
-              <></>
-            )
-          }
+          resizeHandles={["se", "sw"]}
+
           draggableHandle=".onvo-chart-card-drag-handle"
           className="onvo-dashboard-grid-layout onvo-layout"
           rowHeight={10}
+          compactType="vertical"
           margin={[spacing, spacing]}
           breakpoints={{ lg: 768, sm: 480 }}
-          cols={{ lg: 12, sm: 3 }}
+          cols={{ lg: 12, sm: 4 }}
           isDraggable={editable}
           isResizable={editable}
           layouts={layouts}
@@ -136,21 +132,18 @@ export const DashboardGrid: React.FC<{}> = ({ }) => {
                 layouts: {
                   lg: {
                     ...i.layouts.lg,
-                    ...{
-                      h: lgLayout.h,
-                      w: lgLayout.w,
-                      x: lgLayout.x,
-                      y: lgLayout.y,
-                    },
+                    h: lgLayout.h,
+                    w: lgLayout.w,
+                    x: lgLayout.x,
+                    y: lgLayout.y,
+
                   },
                   sm: {
                     ...i.layouts.sm,
-                    ...{
-                      h: smLayout.h,
-                      w: smLayout.w,
-                      x: smLayout.x,
-                      y: smLayout.y,
-                    },
+                    h: smLayout.h,
+                    w: smLayout.w,
+                    x: smLayout.x,
+                    y: smLayout.y,
                   },
                 },
               };
@@ -168,6 +161,7 @@ export const DashboardGrid: React.FC<{}> = ({ }) => {
 
             if (dashboard && editable && updatedWidgets.length > 0) {
               setWidgets(newWidgets);
+
               updatedWidgets.forEach((i) => {
                 backend?.widgets.update(i.id, {
                   layouts: i.layouts,

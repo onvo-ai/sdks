@@ -136,7 +136,7 @@ export const MultiSelect: React.FC<{
               e.stopPropagation();
             }}
           />
-          <div className="onvo-p-0">
+          <div className="onvo-p-0 onvo-max-h-72 onvo-overflow-y-auto onvo-overflow-x-hidden">
             {data.map((item) => (
               <div
                 onClick={(e) => {

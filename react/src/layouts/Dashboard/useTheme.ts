@@ -17,6 +17,7 @@ export const useTheme = () => {
     );
     defaults.font.family =
       "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
+
     let newTheme: "light" | "dark" =
       prefersColorScheme === "dark" ? "dark" : "light";
     if (dashboard && dashboard.settings) {
@@ -75,14 +76,6 @@ export const useTheme = () => {
 
       setTheme(newTheme);
     }
-    return () => {
-      r.style.setProperty("--onvo-background-color", "");
-      r.style.setProperty("--onvo-foreground-color", "");
-      r.style.setProperty("--onvo-font-override", "");
-
-      defaults.font.family =
-        "'Inter','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-    };
   }, [dashboard, prefersColorScheme]);
 
   return theme;
