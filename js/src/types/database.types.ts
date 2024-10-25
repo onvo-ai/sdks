@@ -34,15 +34,7 @@ export type Database = {
           phone_number?: string | null
           updated_at?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "users_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       api_keys: {
         Row: {
@@ -498,6 +490,7 @@ export type Database = {
         Row: {
           analyst_agent_model: string
           analyst_agent_provider: string
+          analyst_agent_type: Database["public"]["Enums"]["LLM hosting type"]
           anthropic_api_key: string | null
           google_api_key: string | null
           groq_api_key: string | null
@@ -505,13 +498,14 @@ export type Database = {
           openai_api_key: string | null
           programmer_agent_model: string
           programmer_agent_provider: string
+          programmer_agent_type: Database["public"]["Enums"]["LLM hosting type"]
           team: string
-          type: Database["public"]["Enums"]["LLM hosting type"]
           updated: boolean
         }
         Insert: {
           analyst_agent_model?: string
           analyst_agent_provider?: string
+          analyst_agent_type?: Database["public"]["Enums"]["LLM hosting type"]
           anthropic_api_key?: string | null
           google_api_key?: string | null
           groq_api_key?: string | null
@@ -519,13 +513,14 @@ export type Database = {
           openai_api_key?: string | null
           programmer_agent_model?: string
           programmer_agent_provider?: string
+          programmer_agent_type?: Database["public"]["Enums"]["LLM hosting type"]
           team: string
-          type?: Database["public"]["Enums"]["LLM hosting type"]
           updated?: boolean
         }
         Update: {
           analyst_agent_model?: string
           analyst_agent_provider?: string
+          analyst_agent_type?: Database["public"]["Enums"]["LLM hosting type"]
           anthropic_api_key?: string | null
           google_api_key?: string | null
           groq_api_key?: string | null
@@ -533,8 +528,8 @@ export type Database = {
           openai_api_key?: string | null
           programmer_agent_model?: string
           programmer_agent_provider?: string
+          programmer_agent_type?: Database["public"]["Enums"]["LLM hosting type"]
           team?: string
-          type?: Database["public"]["Enums"]["LLM hosting type"]
           updated?: boolean
         }
         Relationships: [
@@ -1038,5 +1033,20 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
   ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+  : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+  | keyof PublicSchema["CompositeTypes"]
+  | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+  ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+  : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
+  ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
   : never
 

@@ -95,7 +95,9 @@ DropdownMenuSubMenuContent.displayName = "DropdownMenuSubMenuContent";
 
 const DropdownMenuContent = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitives.Content>,
-  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitives.Content>
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitives.Content> & {
+    container?: any
+  }
 >(
   (
     {
@@ -104,11 +106,12 @@ const DropdownMenuContent = React.forwardRef<
       collisionPadding = 8,
       align = "center",
       loop = true,
+      container = document.body,
       ...props
     },
     forwardedRef
   ) => (
-    <DropdownMenuPrimitives.Portal>
+    <DropdownMenuPrimitives.Portal container={container}>
       <DropdownMenuPrimitives.Content
         ref={forwardedRef}
         className={cx(

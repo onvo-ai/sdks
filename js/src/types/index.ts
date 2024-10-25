@@ -1,71 +1,45 @@
 import { Database } from "./database.types";
-import {
-  RedshiftDatasourceConfig,
-  MySQLDatasourceConfig,
-  MsSQLDatasourceConfig,
-  PostgreSQLDatasourceConfig,
-  RootfiDatasourceConfig,
-  MongoDBDatasourceConfig,
-  AirtableDatasourceConfig,
-  GoogleSheetDatasourceConfig,
-  ZohoDatasourceConfig,
-  FirestoreDatasourceConfig,
-  OauthConfig,
-  CSVDatasourceConfig,
-  ExcelDatasourceConfig,
-  JSONDatasourceConfig,
-  APIDatasourceConfig,
-} from "./datasources";
 import { Modify } from "./utils";
 
 export * from "./database.types";
 export * from "./tables";
-export * from "./datasources";
 export * from "./utils";
 
 export type DashboardSettings = {
+  filters: boolean;
+
   theme: "dark" | "light" | "auto";
+  font: string;
   dark_background: string;
   dark_foreground: string;
   dark_text: string;
   light_background: string;
   light_foreground: string;
   light_text: string;
-  border_radius: number;
-  font: string;
-  grid_spacing: number;
   hide_header: boolean;
+  grid_spacing: number;
   custom_css: string;
 
-  filters: boolean;
+  copilot_title: string;
+  copilot_description: string;
+  help_url?: string;
+  enable_advanced_widget_creator?: boolean;
+  enable_widget_insights?: boolean;
 
   can_ask_questions: boolean;
   can_edit_widgets: boolean; // used to be editable
   can_edit_widget_layout: boolean; // used to be editable
   can_create_widgets: boolean; // used to be editable
   can_delete_widgets: boolean; // used to be editable
+  disable_automations?: boolean;
+  enable_widget_code_editor?: boolean;
+  widget_limit?: number;
 
   disable_download_images: boolean;
   disable_download_reports: boolean;
   disable_download_documents: boolean;
-
-  widget_limit?: number;
-  enable_widget_code_editor?: boolean;
-
-  help_url?: string;
-  enable_advanced_widget_creator?: boolean;
-  copilot_title: string;
-  copilot_description: string;
-
-  disable_automations?: boolean;
+  pdf_orientation?: "portrait" | "landscape";
 };
-
-export interface DashboardMeta {
-  created_by: Account;
-  last_updated_by?: Account;
-  widgets: number;
-  datasources: number;
-}
 
 export type WidgetSettings = {
   disable_download_images: boolean;
@@ -87,7 +61,12 @@ export type WidgetMessage = {
   role: "user" | "assistant";
   content: string;
 };
-
+export interface DashboardMeta {
+  created_by: Account;
+  last_updated_by?: Account;
+  widgets: number;
+  datasources: number;
+}
 export type Invite = Database["public"]["Tables"]["invites"]["Row"];
 export type Member = Database["public"]["Tables"]["members"]["Row"];
 export type Team = Database["public"]["Tables"]["teams"]["Row"];
@@ -97,21 +76,7 @@ export type DataSource = Modify<
   {
     columns: { title: string; description: string }[];
     sample_data: { [key: string]: any }[];
-    config:
-    | CSVDatasourceConfig
-    | ExcelDatasourceConfig
-    | JSONDatasourceConfig
-    | APIDatasourceConfig
-    | AirtableDatasourceConfig
-    | GoogleSheetDatasourceConfig
-    | ZohoDatasourceConfig
-    | RedshiftDatasourceConfig
-    | MySQLDatasourceConfig
-    | MsSQLDatasourceConfig
-    | PostgreSQLDatasourceConfig
-    | RootfiDatasourceConfig
-    | MongoDBDatasourceConfig
-    | FirestoreDatasourceConfig;
+    config: any;
     parameters: { id: string; wrap?: string; default: string }[];
   }
 >;
@@ -153,27 +118,17 @@ export type Question = Database["public"]["Tables"]["questions"]["Row"];
 export type Integration = Modify<
   Database["public"]["Tables"]["integrations"]["Row"],
   {
-    config:
-    | RedshiftDatasourceConfig
-    | MySQLDatasourceConfig
-    | MsSQLDatasourceConfig
-    | PostgreSQLDatasourceConfig
-    | RootfiDatasourceConfig
-    | MongoDBDatasourceConfig
-    | OauthConfig
-    | FirestoreDatasourceConfig;
+    config: any;
   }
 >;
 export type Automation = Database["public"]["Tables"]["automations"]["Row"];
 export type AutomationRun =
   Database["public"]["Tables"]["automation_runs"]["Row"];
 
-export type ComprehensiveDashboard = Dashboard & {
-  datasources: DataSource[];
-  widgets: Widget[];
-};
+export type LLMSettings = Database["public"]["Tables"]["llm_settings"]["Row"];
 
 export type Log = Database["public"]["Tables"]["logs"]["Row"];
+
 export enum LogType {
   ViewDashboard = "view-dashboard",
   EditDashboard = "edit-dashboard",

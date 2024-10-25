@@ -15,6 +15,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Dashboard, DashboardMeta } from "@onvo-ai/js";
 import r2wc from "@r2wc/react-to-web-component";
+import { useTheme } from "../Dashboard/useTheme";
 dayjs.extend(relativeTime);
 
 const DashboardCard: React.FC<{
@@ -96,6 +97,7 @@ export const DashboardList: React.FC<{
 }> = ({ columns = 3, onClickItem, variant = "grid" }): React.ReactNode => {
   const [dashboards, setDashboards] = useState<any[]>([]);
   const { backend } = useBackend();
+  const theme = useTheme();
 
   useEffect(() => {
     if (backend) {

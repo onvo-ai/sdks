@@ -113,63 +113,66 @@ export const CreateToolbar: React.FC<{ onClick?: () => void }> = ({
   }
 
   return (
-    <div
-      className={
-        "onvo-relative onvo-flex onvo-justify-center onvo-gap-2 onvo-flex-row onvo-right-0 onvo-w-full onvo-p-3 onvo-foreground-color onvo-border-solid onvo-border-t onvo-border-black/10 dark:onvo-border-white/10"
-      }
-    >
-      {(dashboard?.settings?.can_ask_questions || adminMode) && (
-        <div
-          onClick={onClick}
-          className="onvo-background-color onvo-border-slate-900/60 onvo-ring-slate-900/20 onvo-border-solid onvo-border onvo-ring-2 dark:onvo-border-slate-50/60 dark:onvo-ring-slate-50/20 onvo-rounded-lg onvo-cursor-pointer onvo-h-[38px] onvo-pr-2 onvo-relative onvo-flex onvo-flex-shrink-0 onvo-w-64 onvo-flex-row onvo-items-center onvo-gap-2"
-        >
-          <div className="onvo-size-7 onvo-ml-1 onvo-bg-blue-500 onvo-rounded-lg onvo-text-white onvo-flex onvo-justify-center onvo-items-center">
-            <SparklesIcon className="onvo-size-5" />
-          </div>
-          <Text className=" onvo-flex-grow onvo-font-semibold">
-            Create a widget with AI
-          </Text>
-        </div>
-      )}
+    <>
+      <div
+        className={
+          "onvo-absolute onvo-z-50 onvo-shadow-xl onvo-rounded-full onvo-bottom-4 onvo-flex onvo-justify-start onvo-gap-1 onvo-flex-row onvo-left-[50%] -onvo-ml-[160px] onvo-w-[320px] onvo-p-2 onvo-foreground-color onvo-border-solid onvo-border onvo-border-black/10 dark:onvo-border-white/10"
+        }
+      >
+        {(dashboard?.settings?.can_ask_questions || adminMode) && (
+          <div
+            onClick={onClick}
+            className="onvo-group onvo-relative onvo-cursor-pointer onvo-flex onvo-flex-row onvo-gap-2 onvo-items-center onvo-background-color onvo-rounded-full onvo-border-solid onvo-border onvo-border-black/10 dark:onvo-border-white/10"
+          >
 
-      {(dashboard?.settings?.can_create_widgets || adminMode) && (
-        <>
-          <Tooltip content="Create an image widget">
-            <Icon
-              variant="outlined"
-              onClick={(e) => {
-                e.preventDefault();
-                setImageModalOpen(true);
-              }}
-              size="md"
-              className="onvo-background-color"
-              icon={PhotoIcon}
-            />
-          </Tooltip>
-          <Tooltip content="Create a text widget">
-            <Icon
-              variant="outlined"
-              onClick={(e) => {
-                e.preventDefault();
-                setTextModalOpen(true);
-              }} className="onvo-background-color"
-              size="md"
-              icon={LanguageIcon}
-            />
-          </Tooltip>
-          <Tooltip content="Create a divider">
-            <Icon
-              variant="outlined"
-              onClick={(e) => {
-                e.preventDefault();
-                addDividerWidget();
-              }}
-              size="md" className="onvo-background-color"
-              icon={DivideIcon}
-            />
-          </Tooltip>
-        </>
-      )}
-    </div>
+            <div className="onvo-size-10 group-hover:onvo-w-full onvo-overflow-x-hidden onvo-ease-in-out onvo-duration-300 onvo-transition-all onvo-bg-blue-500 onvo-rounded-full onvo-text-white onvo-flex onvo-justify-start onvo-items-center onvo-absolute onvo-left-0 onvo-top-0">
+              <Text className="onvo-flex-shrink-0 onvo-relative onvo-whitespace-nowrap onvo-left-12 onvo-text-white onvo-font-semibold !onvo-w-28 onvo-mr-2">
+                Ask AI...
+              </Text>
+            </div>
+            <div className="onvo-size-10 onvo-z-10 onvo-bg-blue-500 onvo-rounded-full onvo-text-white onvo-flex onvo-justify-center onvo-items-center">
+              <SparklesIcon className="onvo-size-5" />
+            </div>
+            <Text className=" onvo-flex-grow onvo-font-semibold onvo-w-28 onvo-mr-2">
+              Ask AI...
+            </Text>
+          </div>
+        )}
+
+        {(dashboard?.settings?.can_create_widgets || adminMode) && (
+          <>
+            <Tooltip content="Create an image widget">
+              <div
+                onClick={(e) => {
+                  e.preventDefault();
+                  setImageModalOpen(true);
+                }}
+                className="onvo-group onvo-transition-all onvo-size-10 onvo-background-color hover:onvo-bg-blue-500 onvo-rounded-full onvo-text-white onvo-flex onvo-justify-center onvo-items-center onvo-border-solid onvo-border onvo-border-black/10 dark:onvo-border-white/10">
+                <PhotoIcon className="onvo-size-6 onvo-text-blue-500 group-hover:!onvo-text-white onvo-transition-all" />
+              </div>
+            </Tooltip>
+            <Tooltip content="Create a text widget">
+              <div
+                onClick={(e) => {
+                  e.preventDefault();
+                  setTextModalOpen(true);
+                }}
+                className="onvo-group onvo-transition-all onvo-size-10 onvo-background-color hover:onvo-bg-blue-500 onvo-rounded-full onvo-text-white onvo-flex onvo-justify-center onvo-items-center onvo-border-solid onvo-border onvo-border-black/10 dark:onvo-border-white/10">
+                <LanguageIcon className="onvo-size-6 onvo-text-blue-500 group-hover:!onvo-text-white onvo-transition-all" />
+              </div>
+            </Tooltip>
+            <Tooltip content="Create a divider">
+              <div
+                onClick={(e) => {
+                  e.preventDefault();
+                  addDividerWidget();
+                }}
+                className="onvo-group onvo-transition-all onvo-size-10 onvo-background-color hover:onvo-bg-blue-500 onvo-rounded-full onvo-text-white onvo-flex onvo-justify-center onvo-items-center onvo-border-solid onvo-border onvo-border-black/10 dark:onvo-border-white/10">
+                <DivideIcon className="onvo-size-6 onvo-text-blue-500 group-hover:!onvo-text-white onvo-transition-all" />
+              </div>
+            </Tooltip>
+          </>
+        )}
+      </div></>
   );
 };

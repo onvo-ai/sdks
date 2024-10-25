@@ -9,6 +9,7 @@ import { DashboardGrid } from "../../components/DashboardGrid";
 import { Copilot } from "../Copilot";
 import { CreateToolbar } from "../../components/CreateToolbar";
 import { LogType } from "@onvo-ai/js";
+import { Toaster } from "sonner";
 
 export const DashboardWrapper: React.FC<{
   id: string;
@@ -30,7 +31,8 @@ export const DashboardWrapper: React.FC<{
 export const Dashboard: React.FC<{
   id: string;
   className?: string;
-}> = ({ id: dashboardId, className }): React.ReactNode => {
+  variant?: "default" | "pdf" | "pptx"
+}> = ({ id: dashboardId, className, variant = "default" }): React.ReactNode => {
   const { subscription, subscriptionLoaded, backend } = useBackend();
   const theme = useTheme();
   const { dashboard } = useDashboard();
@@ -48,7 +50,7 @@ export const Dashboard: React.FC<{
         dashboard: dashboardId,
       })
     }
-  }, [dashboardId]);
+  }, [dashboardId, backend]);
 
   return (
     <DashboardWrapper id={dashboardId}>
@@ -60,6 +62,7 @@ export const Dashboard: React.FC<{
           } ${className}`}
       >
         <style>{style}</style>
+        <Toaster position="bottom-right" richColors />
 
         {paymentModalOpen && (
           <div className="onvo-absolute onvo-top-0 onvo-left-0 onvo-right-0 onvo-bottom-0 onvo-bg-black/50 onvo-z-[1000] onvo-backdrop-blur-md onvo-flex onvo-justify-center onvo-items-center">
@@ -80,13 +83,16 @@ export const Dashboard: React.FC<{
           </div>
         )}
 
-        <DashboardHeader />
-        <DashboardGrid />
-        <Copilot
-          dashboardId={dashboardId}
-          variant="fullscreen"
-          trigger={<CreateToolbar />}
-        />
+        {(!variant || variant === "default") && (
+          <DashboardHeader />)}
+        <DashboardGrid className="onvo-pb-20" />
+        {(!variant || variant === "default") && (
+          <Copilot coupled
+            dashboardId={dashboardId}
+            variant="fullscreen"
+            trigger={<CreateToolbar />}
+          />
+        )}
       </div>
     </DashboardWrapper>
   );

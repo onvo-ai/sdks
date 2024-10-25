@@ -1,15 +1,18 @@
 import r2wc from "@r2wc/react-to-web-component";
 import { Wrapper, Copilot } from "@onvo-ai/react";
 import React from "react";
+// @ts-ignore
+import css from '!!css-loader?{"sourceMap":false,"exportType":"string"}!./sonner.css';
 
 const ChatButton: React.FC<{
   variant: "none" | "small" | "large";
   onClick?: () => void;
-}> = ({ variant = "large", onClick }) => {
+  offsets: { bottom?: number; right?: number };
+}> = ({ variant = "large", onClick, offsets }) => {
   const buttonStyle: any = {
     position: "fixed",
-    bottom: "20px",
-    right: "20px",
+    bottom: (offsets.bottom || 20) + "px",
+    right: (offsets.right || 20) + "px",
     fontSize: "12px",
     fontWeight: "600",
     borderRadius: "9999px",
@@ -35,6 +38,7 @@ const ChatButton: React.FC<{
     color: "#e2e8f0",
     lineHeight: "1",
     width: "64px",
+    margin: 0, fontFamily: "Inter, Helvetica, Arial, sans-serif",
   };
 
   if (variant === "none") {
@@ -80,18 +84,24 @@ const OnvoCopilot = ({
   dashboardId,
   copilotVariant,
   iconVariant,
+  buttonRightOffset,
+  buttonBottomOffset,
 }: {
   userToken: string;
   baseUrl: string;
   dashboardId: string;
   copilotVariant: "fullscreen" | "copilot";
   iconVariant: "none" | "small" | "large";
+  buttonRightOffset: number;
+  buttonBottomOffset: number;
 }) => {
   return (
     <Wrapper token={userToken} baseUrl={baseUrl}>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@onvo-ai/react/dist/styles.css" />
+      <style>{css}</style>
       <Copilot
         dashboardId={dashboardId}
-        trigger={<ChatButton variant={iconVariant} />}
+        trigger={<ChatButton offsets={{ bottom: buttonBottomOffset, right: buttonRightOffset }} variant={iconVariant} />}
         variant={copilotVariant}
       />
     </Wrapper>
@@ -99,11 +109,14 @@ const OnvoCopilot = ({
 };
 
 export const CopilotWC = r2wc(OnvoCopilot, {
+  shadow: "closed",
   props: {
     userToken: "string",
     baseUrl: "string",
     dashboardId: "string",
     copilotVariant: "string",
     iconVariant: "string",
+    buttonRightOffset: "number",
+    buttonBottomOffset: "number",
   },
 });

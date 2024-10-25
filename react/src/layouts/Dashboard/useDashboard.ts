@@ -4,6 +4,7 @@ import Onvo, { Dashboard, Widget } from "@onvo-ai/js";
 interface DashboardState {
   id: string | undefined;
   loading: boolean;
+  refreshing: boolean;
   dashboard: Dashboard | undefined;
   widgets: Widget[];
   setId: (id: string, backend: Onvo) => void;
@@ -16,6 +17,7 @@ interface DashboardState {
 export const useDashboard = create<DashboardState>((set, get) => ({
   id: undefined,
   loading: false,
+  refreshing: false,
   dashboard: undefined,
   widgets: [],
   setId: (id, backend) => {
@@ -30,8 +32,9 @@ export const useDashboard = create<DashboardState>((set, get) => ({
 
       if (
         !loading &&
-        new Date(dash.last_updated_at).getTime() + 300000 < new Date().getTime()
+        new Date(dash.last_updated_at).getTime() + 60000 < new Date().getTime()
       ) {
+        set({ refreshing: true });
         backend
           ?.dashboard(id)
           .updateWidgetCache()
@@ -42,6 +45,7 @@ export const useDashboard = create<DashboardState>((set, get) => ({
               set({
                 widgets: data,
                 loading: false,
+                refreshing: false,
                 dashboard: {
                   ...dash,
                   last_updated_at: new Date().toISOString(),

@@ -3,7 +3,7 @@ import { Button } from "../../tremor/Button";
 import { Text } from "../../tremor/Text";
 import { Card } from "../../tremor/Card";
 import { Icon } from "../../tremor/Icon";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import React from "react";
 import { useBackend } from "../Wrapper";
 import remarkGfm from "remark-gfm";
@@ -72,6 +72,9 @@ const QuestionMessage: React.FC<{
     const { dashboard, widgets, refreshWidgets } = useDashboard();
     const { lg, sm } = useMaxHeight();
     const theme = useTheme();
+
+    const elementRef = useRef<any>(null);
+
 
     const [output, setOutput] = useState<any>();
     const [code, setCode] = useState("");
@@ -321,7 +324,7 @@ const QuestionMessage: React.FC<{
             let a = document.createElement("a");
             a.download = title + "." + format;
             a.href = blobUrl;
-            document.body.appendChild(a);
+            elementRef.current.appendChild(a);
             a.click();
             a.remove();
             return "Widget exported";
@@ -370,7 +373,7 @@ const QuestionMessage: React.FC<{
     }, [logo]);
     if (role === "assistant" && (!answer || answer.trim() === "")) return null;
     return (
-      <div className="onvo-question-message-assistant onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3">
+      <div ref={elementRef} className="onvo-question-message-assistant onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3">
         {LogoIcon}
         <div className="onvo-w-full">
           {adminMode && code.trim() !== "" && (
@@ -452,11 +455,11 @@ const QuestionMessage: React.FC<{
                     </Button>
                   )}
                   {(ImageDownloadEnabled || ReportDownloadEnabled) && (
-                    <DropdownMenu>
+                    <DropdownMenu modal={false}>
                       <DropdownMenuTrigger asChild>
                         <Icon variant="shadow" className="onvo-foreground-color onvo-border-black/10 dark:onvo-border-white/10" icon={ArrowDownTrayIcon} />
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="onvo-min-w-56 onvo-background-color onvo-border-black/10 dark:onvo-border-white/10">
+                      <DropdownMenuContent container={elementRef.current} className="onvo-min-w-56 onvo-background-color onvo-border-black/10 dark:onvo-border-white/10">
                         {ReportDownloadEnabled && (
                           <>
                             <DropdownMenuLabel>Reports</DropdownMenuLabel>

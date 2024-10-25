@@ -1602,10 +1602,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@onvo-ai/js@^0.13.61":
-  version "0.13.61"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.61.tgz#50d14d699a6dee6f9db3f03b95f1e9e49ca83933"
-  integrity sha512-7PAlww8TWgxoWD6VJaTfkjlqHMAtdgrwH6cf8HZIpQPEwoS7hshz5VGnShVvaQMzPJyREQdCwzRgD1v4FscYRg==
+"@onvo-ai/js@^0.13.62":
+  version "0.13.62"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.13.62.tgz#4fa50e19b2aa21ea1be6640b59b530935587b5f6"
+  integrity sha512-+QGf3SYb7Mjq86sPQR7gdHD3/UozwLaT8vUSwTA5p3MOTethCHE/XvIEVFBwjVPcOfMim7HsAbt2acd/Y1SCKQ==
   dependencies:
     web-file-polyfill "^1.0.4"
 
@@ -3164,6 +3164,14 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
+"@trullock/chartjs-plugin-zoom@^2.1.6":
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/@trullock/chartjs-plugin-zoom/-/chartjs-plugin-zoom-2.1.6.tgz#6bc4a4ed483398682c23855b8da8760f89728bcf"
+  integrity sha512-bNXS2m55K0aL8rg7iZWnPcNIos/WVxB2dtpzbQfcD3969rkSf9Nvpr+hmW3KN+28eiGU8Gl0IT70QAilAY3rHQ==
+  dependencies:
+    "@types/hammerjs" "^2.0.45"
+    hammerjs "^2.0.8"
+
 "@trysound/sax@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
@@ -3315,6 +3323,11 @@
   integrity sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==
   dependencies:
     "@types/node" "*"
+
+"@types/hammerjs@^2.0.45":
+  version "2.0.46"
+  resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.46.tgz#381daaca1360ff8a7c8dff63f32e69745b9fb1e1"
+  integrity sha512-ynRvcq6wvqexJ9brDMS4BnBLzmr0e14d6ZJTEShTBWKymQiHwlAyGu0ZPEFI2Fh1U53F7tN9ufClWM5KvqkKOw==
 
 "@types/hast@^3.0.0":
   version "3.0.4"
@@ -4362,13 +4375,6 @@ chartjs-plugin-datalabels@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/chartjs-plugin-datalabels/-/chartjs-plugin-datalabels-2.2.0.tgz#369578e131d743c2e34b5fbe2d3f9335f6639b8f"
   integrity sha512-14ZU30lH7n89oq+A4bWaJPnAG8a7ZTk7dKf48YAzMvJjQtjrgg5Dpk9f+LbjCF6bpx3RAGTeL13IXpKQYyRvlw==
-
-chartjs-plugin-zoom@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/chartjs-plugin-zoom/-/chartjs-plugin-zoom-2.0.1.tgz#3db76f92a4741e46cb148cb966181c1b1a974abc"
-  integrity sha512-ogOmLu6e+Q7E1XWOCOz9YwybMslz9qNfGV2a+qjfmqJYpsw5ZMoRHZBUyW+NGhkpQ5PwwPA/+rikHpBZb7PZuA==
-  dependencies:
-    hammerjs "^2.0.8"
 
 check-error@^1.0.3:
   version "1.0.3"
@@ -9273,10 +9279,10 @@ react-error-boundary@^4.0.12:
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-react-grid-layout@^1.4.4:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/react-grid-layout/-/react-grid-layout-1.4.4.tgz#0bdb19d6db061556868fef1f430cc8c14d21f131"
-  integrity sha512-7+Lg8E8O8HfOH5FrY80GCIR1SHTn2QnAYKh27/5spoz+OHhMmEhU/14gIkRzJOtympDPaXcVRX/nT1FjmeOUmQ==
+react-grid-layout@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-grid-layout/-/react-grid-layout-1.5.0.tgz#b6cc9412b58cf8226aebc0df7673d6fa782bdee2"
+  integrity sha512-WBKX7w/LsTfI99WskSu6nX2nbJAUD7GD6nIXcwYLyPpnslojtmql2oD3I2g5C3AK8hrxIarYT8awhuDIp7iQ5w==
   dependencies:
     clsx "^2.0.0"
     fast-equals "^4.0.3"
@@ -9926,10 +9932,10 @@ smob@^1.0.0:
   resolved "https://registry.yarnpkg.com/smob/-/smob-1.5.0.tgz#85d79a1403abf128d24d3ebc1cdc5e1a9548d3ab"
   integrity sha512-g6T+p7QO8npa+/hNx9ohv1E5pVCmWrVCUzUXJyLdMmftX6ER0oiWY/w9knEonLpnOp6b6FenKnMfR8gqwWdwig==
 
-sonner@^1.4.3:
-  version "1.4.41"
-  resolved "https://registry.yarnpkg.com/sonner/-/sonner-1.4.41.tgz#ff085ae4f4244713daf294959beaa3e90f842d2c"
-  integrity sha512-uG511ggnnsw6gcn/X+YKkWPo5ep9il9wYi3QJxHsYe7yTZ4+cOd1wuodOUmOpFuXL+/RE3R04LczdNCDygTDgQ==
+sonner@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/sonner/-/sonner-1.5.0.tgz#af359f817063318415326b33aab54c5d17c747b7"
+  integrity sha512-FBjhG/gnnbN6FY0jaNnqZOMmB73R+5IiyYAw8yBj7L54ER7HB3fOSE5OFiQiE2iXWxeXKvg6fIP4LtVppHEdJA==
 
 source-map-js@^1.0.1, source-map-js@^1.2.0:
   version "1.2.0"

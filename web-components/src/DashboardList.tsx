@@ -16,6 +16,7 @@ const OnvoDashboardList = ({
 }) => {
   return (
     <Wrapper token={userToken} baseUrl={baseUrl}>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@onvo-ai/react/dist/styles.css" />
       <DashboardList
         columns={numColumns}
         variant={listVariant}
@@ -26,6 +27,7 @@ const OnvoDashboardList = ({
 };
 
 export const DashboardListWC = r2wc(OnvoDashboardList, {
+  shadow: "closed",
   props: {
     userToken: "string",
     baseUrl: "string",

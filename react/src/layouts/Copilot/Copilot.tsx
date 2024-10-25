@@ -4,7 +4,7 @@ import { Icon } from "../../tremor/Icon";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 import { ArrowUpIcon } from "@heroicons/react/24/outline";
 import QuestionMessage from "./QuestionMessage";
 import { QuestionHistory } from "../../components/QuestionHistory";
@@ -21,6 +21,7 @@ import { Button } from "../../tremor/Button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../tremor/Tabs";
 import { WidgetWizard } from "../../components/WidgetWizard";
 import { ChevronRightIcon, XMarkIcon } from "@heroicons/react/16/solid";
+import { useTheme } from "../Dashboard/useTheme";
 
 dayjs.extend(relativeTime);
 
@@ -86,9 +87,11 @@ const CopilotRaw: React.FC<{
   dashboardId: string;
   trigger: React.ReactNode;
   variant: "fullscreen" | "copilot";
-}> = ({ trigger, variant, dashboardId }): React.ReactNode => {
+  coupled?: boolean;
+}> = ({ trigger, variant, dashboardId, coupled }): React.ReactNode => {
   const { backend, team } = useBackend();
   const { dashboard, setId } = useDashboard();
+  const theme = useTheme();
   const scroller = useRef<HTMLDivElement>(null);
 
   const [loading, setLoading] = useState(false);
@@ -239,14 +242,16 @@ const CopilotRaw: React.FC<{
   return (
     <>
       <dialog open={open}>
+
         <div
           className={twMerge(
-            "onvo-root-style onvo-copilot-modal onvo-@container/questionmodal onvo-animate-dialogOpen onvo-z-[9999] onvo-fixed",
+            "onvo-root-style onvo-copilot-modal onvo-@container/questionmodal onvo-foreground-color onvo-animate-dialogOpen onvo-z-[9999] onvo-fixed",
             variant === "fullscreen"
               ? "onvo-h-full onvo-w-full onvo-left-0"
               : "onvo-h-[calc(100vh-40px)] onvo-w-[480px] onvo-right-5 onvo-bottom-5 onvo-rounded-lg onvo-overflow-hidden onvo-border-solid onvo-border onvo-border-slate-200 dark:onvo-border-slate-800 onvo-shadow-xl"
           )}
         >
+          {!coupled && <Toaster position="bottom-right" richColors />}
           <div className="onvo-question-modal-question-list onvo-flex onvo-flex-col onvo-foreground-color onvo-absolute onvo-w-full onvo-right-0 onvo-top-0 onvo-z-20 onvo-h-full">
             <div
               className={

@@ -6,6 +6,7 @@ import { useDashboard } from "../../layouts/Dashboard/useDashboard";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {
+  ArrowPathIcon,
   ChevronDownIcon,
   DocumentChartBarIcon,
   PhotoIcon,
@@ -28,7 +29,7 @@ import { AutomationsModal, useAutomationsModal } from "../AutomationsModal";
 
 dayjs.extend(relativeTime);
 
-export const LastUpdatedBadge: React.FC<{ date: string }> = ({ date }) => {
+export const LastUpdatedBadge: React.FC<{ date: string, refreshing: boolean }> = ({ date, refreshing }) => {
   const [key, setKey] = useState(date);
 
   useEffect(() => {
@@ -41,8 +42,16 @@ export const LastUpdatedBadge: React.FC<{ date: string }> = ({ date }) => {
     };
   }, []);
 
+  if (refreshing) {
+    return (
+      <Badge key="refreshing-badge" className="onvo-last-updated-badge ml-2">
+        <ArrowPathIcon className="onvo-size-3 onvo-animate-spin" />
+        Auto refreshing...
+      </Badge>
+    );
+  }
   return (
-    <Badge key={key} className="onvo-last-updated-badge">
+    <Badge key={key} className="onvo-last-updated-badge ml-2">
       Last updated {dayjs(date).fromNow()}
     </Badge>
   );
@@ -53,10 +62,9 @@ export const DashboardHeader: React.FC<{
   className?: string;
 }> = ({ children, className }) => {
   const { setOpen } = useAutomationsModal();
-  const { subscriptionPlan } = useBackend();
-  const { dashboard } = useDashboard();
+  const { dashboard, refreshing } = useDashboard();
   const theme = useTheme();
-  const { backend, adminMode } = useBackend();
+  const { backend, adminMode, subscriptionPlan } = useBackend();
 
   const exportDashboard = useCallback(
     (format: "csv" | "xlsx" | "pdf" | "png" | "jpeg" | "pptx") => {
@@ -111,11 +119,14 @@ export const DashboardHeader: React.FC<{
 
   return (
     <section
-      className={`onvo-dashboard-header onvo-sticky onvo-z-10 onvo-border-solid onvo-border-b onvo-foreground-color onvo-border-black/10 dark:onvo-border-white/10 onvo-top-0 ${className ? className : ""
-        }`}
+      className={`onvo-@container/onvo-dashboard-header onvo-background-color onvo-dashboard-header onvo-sticky onvo-z-10 onvo-top-0 ${className ? className : ""}`}
+      style={{
+        boxShadow: `0px 8px 4px ${theme === "dark" ? dashboard?.settings?.dark_background : dashboard?.settings?.light_background}`,
+      }}
+
     >
       <AutomationsModal />
-      <main className="onvo-mx-auto onvo-px-6 onvo-py-3 lg:onvo-px-8 onvo-z-10 onvo-relative onvo-flex onvo-flex-col onvo-items-start onvo-justify-between onvo-gap-4 md:onvo-flex-row md:onvo-items-center">
+      <main className="onvo-mx-auto onvo-px-3 onvo-py-3 lg:onvo-px-3 onvo-z-10 onvo-relative onvo-flex onvo-flex-col onvo-items-start onvo-justify-between onvo-gap-4 @lg/onvo-dashboard-header:onvo-flex-row @lg/onvo-dashboard-header:onvo-items-center">
         <div className="onvo-flex-grow">
           {dashboard ? (
             <>
@@ -123,8 +134,9 @@ export const DashboardHeader: React.FC<{
                 {dashboard?.title || " "}
               </Metric>
               <Label className="onvo-dashboard-header-description onvo-font-override">
-                {dashboard?.description || " "}{" "}
-                <LastUpdatedBadge date={dashboard.last_updated_at} />
+                {dashboard?.description || " "}
+                {" "}
+                <LastUpdatedBadge refreshing={refreshing} date={dashboard.last_updated_at} />
               </Label>
             </>
           ) : (
@@ -136,7 +148,7 @@ export const DashboardHeader: React.FC<{
         </div>
         <div className="onvo-flex onvo-flex-row onvo-gap-2">
           {(subscriptionPlan?.automations && !dashboard?.settings?.disable_automations) && (
-            <Button className="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10" variant="secondary"
+            <Button className="onvo-foreground-color onvo-border-black/10 dark:onvo-border-white/10" variant="secondary"
               onClick={() => {
                 setOpen(true);
               }}
@@ -144,9 +156,9 @@ export const DashboardHeader: React.FC<{
               Schedule
             </Button>)}
           {(ImageDownloadEnabled || ReportDownloadEnabled || DocumentDownloadEnabled) && (
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
               <DropdownMenuTrigger asChild>
-                <Button className="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10" variant="secondary" disabled={!dashboard}>
+                <Button className="onvo-foreground-color onvo-border-black/10 dark:onvo-border-white/10" variant="secondary" disabled={!dashboard}>
                   Download{" "}
                   <ChevronDownIcon className="onvo-h-4 onvo-w-4 onvo-ml-1" />
                 </Button>
