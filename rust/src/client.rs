@@ -72,6 +72,121 @@ impl OnvoApiClient {
 
         response.json::<T>().await.map_err(ApiError::from)
     }
+
+    /// Sends a POST request to the API.
+    ///
+    /// # Arguments
+    ///
+    /// * `path` - The path to the API endpoint.
+    /// * `data` - The data to send with the request.
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing the response body.
+    ///
+    /// # Errors
+    ///
+    /// * `ApiError` - If the response status code is not success
+    pub async fn post<T: serde::Serialize, U: serde::de::DeserializeOwned>(
+        &self,
+        path: &str,
+        data: &T,
+    ) -> Result<U, ApiError> {
+        let url = format!("{}/{}", self.endpoint, path);
+
+        let mut headers = HeaderMap::new();
+        headers.insert("Content-Type", HeaderValue::from_static("application/json"));
+        headers.insert("x-api-key", HeaderValue::from_str(&self.api_key).unwrap());
+
+        let response = self
+            .client
+            .post(&url)
+            .headers(headers)
+            .json(data)
+            .send()
+            .await?;
+
+        if !response.status().is_success() {
+            let status = response.status();
+            let text = response.text().await?;
+            return Err(ApiError::from_status(status, text));
+        }
+
+        response.json::<U>().await.map_err(ApiError::from)
+    }
+
+    /// Sends a PUT request to the API.
+    ///
+    /// # Arguments
+    ///
+    /// * `path` - The path to the resource.
+    /// * `data` - The data to send.
+    ///
+    /// # Returns
+    ///
+    /// A future that resolves to the response body.
+    ///
+    /// # Errors
+    ///
+    /// * `ApiError` - If the response status code is not success
+    pub async fn put<T: serde::Serialize, U: serde::de::DeserializeOwned>(
+        &self,
+        path: &str,
+        data: &T,
+    ) -> Result<U, ApiError> {
+        let url = format!("{}/{}", self.endpoint, path);
+
+        let mut headers = HeaderMap::new();
+        headers.insert("Content-Type", HeaderValue::from_static("application/json"));
+        headers.insert("x-api-key", HeaderValue::from_str(&self.api_key).unwrap());
+
+        let response = self
+            .client
+            .put(&url)
+            .headers(headers)
+            .json(data)
+            .send()
+            .await?;
+
+        if !response.status().is_success() {
+            let status = response.status();
+            let text = response.text().await?;
+            return Err(ApiError::from_status(status, text));
+        }
+
+        response.json::<U>().await.map_err(ApiError::from)
+    }
+
+    /// Sends a DELETE request to the API.
+    ///
+    /// # Arguments
+    ///
+    /// * `path` - The path to the API endpoint.
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing the response body.
+    ///
+    /// # Errors
+    ///
+    /// * `ApiError` - If the response status code is not success
+    pub async fn delete<U: serde::de::DeserializeOwned>(&self, path: &str) -> Result<U, ApiError> {
+        let url = format!("{}/{}", self.endpoint, path);
+
+        let mut headers = HeaderMap::new();
+        headers.insert("Content-Type", HeaderValue::from_static("application/json"));
+        headers.insert("x-api-key", HeaderValue::from_str(&self.api_key).unwrap());
+
+        let response = self.client.delete(&url).headers(headers).send().await?;
+
+        if !response.status().is_success() {
+            let status = response.status();
+            let text = response.text().await?;
+            return Err(ApiError::from_status(status, text));
+        }
+
+        response.json::<U>().await.map_err(ApiError::from)
+    }
 }
 
 #[cfg(test)]
