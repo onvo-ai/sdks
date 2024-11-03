@@ -79,7 +79,55 @@ mod tests {
     use super::*;
     use mockito::{mock, server_url};
     use reqwest::StatusCode;
+    use serial_test::serial;
     use tokio;
+
+    #[test]
+    #[serial]
+    fn test_new_with_provided_values() {
+        let test_endpoint = "https://api.example.com";
+        let test_api_key = "test_api_key";
+
+        let client = OnvoApiClient::new(Some(test_endpoint), Some(test_api_key));
+
+        assert_eq!(client.endpoint, test_endpoint);
+        assert_eq!(client.api_key, test_api_key);
+    }
+
+    #[test]
+    #[serial]
+    fn test_new_with_environment_variables() {
+        env::set_var("ONVO_API_ENDPOINT", "https://api.example.com");
+        env::set_var("ONVO_API_KEY", "env_api_key");
+
+        let client = OnvoApiClient::new(None, None);
+
+        assert_eq!(client.endpoint, "https://api.example.com");
+        assert_eq!(client.api_key, "env_api_key");
+
+        env::remove_var("ONVO_API_ENDPOINT");
+        env::remove_var("ONVO_API_KEY");
+    }
+
+    #[test]
+    #[serial]
+    #[should_panic]
+    fn test_new_missing_endpoint_and_api_key() {
+        env::remove_var("ONVO_API_ENDPOINT");
+        env::remove_var("ONVO_API_KEY");
+
+        OnvoApiClient::new(None, None);
+    }
+
+    #[test]
+    #[serial]
+    #[should_panic]
+    fn test_new_missing_api_key() {
+        env::set_var("ONVO_API_ENDPOINT", "https://api.example.com");
+        env::remove_var("ONVO_API_KEY");
+
+        OnvoApiClient::new(None, None);
+    }
 
     #[tokio::test]
     async fn test_get_success() {
