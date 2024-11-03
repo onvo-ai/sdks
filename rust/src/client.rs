@@ -1,32 +1,44 @@
+use std::env;
+
 use crate::errors::ApiError;
 use reqwest::{
     header::{HeaderMap, HeaderValue},
-    Client as RClient,
+    Client as rClient,
 };
 
-/// Api client holds the HTTP client, the server end-point and the headers to send with the request.
-pub struct ApiClient {
+/// Api client holds the HTTP client, the server end-point and the API Key to send with the request.
+pub struct OnvoApiClient {
     /// Endpoint
     endpoint: String,
 
     /// HTTP / Reqwest client
-    client: RClient,
+    client: rClient,
 
-    /// Headers to send with the request
-    headers: HeaderMap,
+    /// API Key
+    api_key: String,
 }
 
-impl ApiClient {
-    /// Creates a new ApiClient
-    pub fn new(endpoint: &str, api_key: &str) -> Self {
-        let mut headers = HeaderMap::new();
-        headers.insert("x-api-key", HeaderValue::from_str(api_key).unwrap());
-        headers.insert("Content-Type", HeaderValue::from_static("application/json"));
+impl OnvoApiClient {
+    /// Creates a new OnvoApiClient.
+    /// If you don't provide an endpoint, the endpoint is taken from the environment variable `ONVO_API_ENDPOINT`.
+    /// If you don't provide an API key, the API key is taken from the environment variable `ONVO_API_KEY`.
+    pub fn new(endpoint: Option<&str>, api_key: Option<&str>) -> Self {
+        let endpoint = endpoint
+            .map(|e| e.to_string())
+            .or_else(|| env::var("ONVO_API_ENDPOINT").ok())
+            .expect(
+                "You must provide an endpoint or set the ONVO_API_ENDPOINT environment variable.",
+            );
+
+        let api_key = api_key
+            .map(|k| k.to_string())
+            .or_else(|| env::var("ONVO_API_KEY").ok())
+            .expect("You must provide an API key or set the ONVO_API_KEY environment variable.");
 
         Self {
-            endpoint: endpoint.to_string(),
-            client: RClient::new(),
-            headers,
+            endpoint,
+            api_key,
+            client: rClient::new(),
         }
     }
 
@@ -45,15 +57,12 @@ impl ApiClient {
     /// * `ApiError` - If the response status code is not success
     pub async fn get<T: serde::de::DeserializeOwned>(&self, path: &str) -> Result<T, ApiError> {
         let url = format!("{}/{}", self.endpoint, path);
-        let response = self
-            .client
-            .get(&url)
-            .headers(self.headers.clone())
-            .send()
-            .await?;
 
-        // print response status
-        println!("Response status: {}", response.status());
+        let mut headers = HeaderMap::new();
+        headers.insert("Content-Type", HeaderValue::from_static("application/json"));
+        headers.insert("x-api-key", HeaderValue::from_str(&self.api_key).unwrap());
+
+        let response = self.client.get(&url).headers(headers).send().await?;
 
         if !response.status().is_success() {
             let status = response.status();
@@ -83,7 +92,7 @@ mod tests {
             .with_body(r#"{"id": 1, "name": "Alice"}"#)
             .create();
 
-        let api_client = ApiClient::new(&server_url(), API_KEY);
+        let api_client = OnvoApiClient::new(Some(&server_url()), Some(API_KEY));
 
         #[derive(Debug, serde::Deserialize)]
         struct TestResponse {
@@ -109,7 +118,7 @@ mod tests {
             .with_body(r#"{"id": 1, "name": "Alice"}"#)
             .create();
 
-        let api_client = ApiClient::new(&server_url(), "wrong_key");
+        let api_client = OnvoApiClient::new(Some(&server_url()), Some("wrong_key"));
 
         #[derive(Debug, serde::Deserialize)]
         struct TestResponse {
