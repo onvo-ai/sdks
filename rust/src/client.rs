@@ -70,6 +70,7 @@ impl OnvoApiClient {
             return Err(ApiError::from_status(status, text));
         }
 
+        // Get the response body as a string
         response.json::<T>().await.map_err(ApiError::from)
     }
 
@@ -170,7 +171,7 @@ impl OnvoApiClient {
     /// # Errors
     ///
     /// * `ApiError` - If the response status code is not success
-    pub async fn delete<U: serde::de::DeserializeOwned>(&self, path: &str) -> Result<U, ApiError> {
+    pub async fn delete(&self, path: &str) -> Result<(), ApiError> {
         let url = format!("{}/{}", self.endpoint, path);
 
         let mut headers = HeaderMap::new();
@@ -184,8 +185,7 @@ impl OnvoApiClient {
             let text = response.text().await?;
             return Err(ApiError::from_status(status, text));
         }
-
-        response.json::<U>().await.map_err(ApiError::from)
+        Ok(())
     }
 }
 

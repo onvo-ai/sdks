@@ -19,6 +19,9 @@ impl<'a> Accounts<'a> {
     ///
     /// A list of accounts.
     ///
+    /// # Errors
+    ///
+    /// * `ApiError` - If the request failed.
     pub async fn list(&self) -> Result<Vec<Account>, ApiError> {
         self.client.get("/accounts").await
     }
@@ -33,6 +36,9 @@ impl<'a> Accounts<'a> {
     ///
     /// A specific account.
     ///
+    /// # Errors
+    ///
+    /// * `ApiError` - If the request failed.
     pub async fn get(&self, id: &str) -> Result<Account, ApiError> {
         self.client.get(&format!("/accounts/{}", id)).await
     }
