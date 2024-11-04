@@ -13,10 +13,6 @@ impl<'a> Datasources<'a> {
 
     /// List all datasources
     ///
-    /// # Arguments
-    ///
-    /// * `id` - ID of the datasource
-    ///
     /// # Returns
     ///
     /// A list of datasources
@@ -24,7 +20,6 @@ impl<'a> Datasources<'a> {
     /// # Error
     ///
     /// * `ApiError` - Error returned by the API
-    ///
     pub async fn list(&self) -> Result<Vec<Datasource>, ApiError> {
         self.client.get("/datasources").await
     }

@@ -14,10 +14,6 @@ impl<'a> Automations<'a> {
 
     /// List all automations
     ///
-    /// # Arguments
-    ///
-    /// * `id` - The automation id
-    ///
     /// # Returns
     ///
     /// * `Vec<Automation>` - The list of automations
