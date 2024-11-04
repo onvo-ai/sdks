@@ -1,7 +1,6 @@
 mod helpers;
 
 use onvo_ai::resources::teams::{api::Teams, models::Team};
-use reqwest::header::WARNING;
 
 #[tokio::test]
 async fn test_list_teams_integration() {
