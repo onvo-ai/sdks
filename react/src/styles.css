@@ -84,12 +84,11 @@
 .rdg-cell[role="columnheader"] {
   overflow-y: visible;
 }
+
 .rdg {
-  --rdg-background-color: var(--onvo-light-foreground-color) !important;
-  --rdg-header-background-color: var(--onvo-light-background-color) !important;
-  --rdg-row-hover-background-color: var(
-    --onvo-light-background-color
-  ) !important;
+  --rdg-background-color: var(--onvo-foreground-color) !important;
+  --rdg-header-background-color: var(--onvo-background-color) !important;
+  --rdg-row-hover-background-color: var(--onvo-background-color) !important;
   --rdg-color: var(--onvo-font-color);
   border-color: rgba(0, 0, 0, 0.1);
 }
@@ -105,7 +104,7 @@
 }
 .rsw-editor {
   border-color: rgba(0, 0, 0, 0.1);
-  background-color: var(--onvo-light-background-color);
+  background-color: var(--onvo-background-color);
   margin-top: 4px;
 }
 
@@ -116,7 +115,7 @@
 }
 
 .rsw-toolbar {
-  background-color: var(--onvo-light-foreground-color);
+  background-color: var(--onvo-foreground-color);
   border-bottom-color: rgba(0, 0, 0, 0.1);
 }
 .onvo-dark .rsw-toolbar {

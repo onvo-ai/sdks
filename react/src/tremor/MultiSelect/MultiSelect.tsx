@@ -7,6 +7,7 @@ import { cx, focusRing } from "../../lib/utils";
 import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 import { Checkbox } from "../Checkbox";
+import { Button } from "../Button";
 
 export const MultiSelect: React.FC<{
   items: { value: string; label: string }[];
@@ -14,6 +15,7 @@ export const MultiSelect: React.FC<{
   defaultValue?: string[];
   value?: string[];
   placeholder?: string;
+  footer?: boolean;
   onValueChange: (val: string[]) => void;
 }> = ({
   items,
@@ -22,6 +24,7 @@ export const MultiSelect: React.FC<{
   value,
   onValueChange,
   placeholder,
+  footer
 }) => {
     const [open, setOpen] = useState(false);
     const [internalValue, setInternalValue] = useState<string[]>([]);
@@ -123,13 +126,14 @@ export const MultiSelect: React.FC<{
           </div>
         </PopoverTrigger>
         <PopoverContent
-          className="onvo-p-1 onvo-z-50 !onvo-foreground-color"
+          className="!onvo-p-0 onvo-z-50 !onvo-foreground-color"
           style={{ width: width || 100 }}
         >
           <Input
             type="search"
             placeholder="Search"
             className="onvo-mb-1"
+            inputClassName="!onvo-rounded-b-none"
             onChange={(e) => {
               setQuery(e.target.value);
               e.preventDefault();
@@ -171,6 +175,21 @@ export const MultiSelect: React.FC<{
               </div>
             ))}
           </div>
+          {footer && (
+            <div className="onvo-flex onvo-flex-row onvo-justify-between onvo-gap-2 onvo-mt-2 onvo-py-1 onvo-px-2 onvo-border-t onvo-border-slate-200 dark:onvo-border-slate-800 onvo-items-center">
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  setInternalValue([]);
+                }}>Deselect all</Button>
+              <Button
+                variant="ghost"
+                className="!onvo-text-blue-500"
+                onClick={() => {
+                  setInternalValue(items.map((a) => a.value));
+                }}>Select all</Button>
+            </div>
+          )}
         </PopoverContent>
       </Popover>
     );

@@ -6,9 +6,14 @@ import { useDashboard } from "../../layouts/Dashboard/useDashboard";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {
+  AdjustmentsHorizontalIcon,
+  ArrowDownIcon,
+  ArrowDownTrayIcon,
   ArrowPathIcon,
   ChevronDownIcon,
+  ClockIcon,
   DocumentChartBarIcon,
+  FunnelIcon,
   PhotoIcon,
   PresentationChartBarIcon,
 } from "@heroicons/react/24/outline";
@@ -26,6 +31,8 @@ import {
 } from "../../tremor/DropdownMenu";
 import { useTheme } from "../../layouts/Dashboard/useTheme";
 import { AutomationsModal, useAutomationsModal } from "../AutomationsModal";
+import { Popover, PopoverContent, PopoverTrigger } from "../../tremor/Popover";
+import { FilterBar } from "../FilterBar";
 
 dayjs.extend(relativeTime);
 
@@ -119,7 +126,7 @@ export const DashboardHeader: React.FC<{
 
   return (
     <section
-      className={`onvo-@container/onvo-dashboard-header onvo-background-color onvo-dashboard-header onvo-sticky onvo-z-10 onvo-top-0 ${className ? className : ""}`}
+      className={`onvo-@container/onvo-dashboard-header onvo-background-color onvo-dashboard-header onvo-sticky onvo-z-50 onvo-top-0 ${className ? className : ""}`}
       style={{
         boxShadow: `0px 8px 4px ${theme === "dark" ? dashboard?.settings?.dark_background : dashboard?.settings?.light_background}`,
       }}
@@ -147,19 +154,36 @@ export const DashboardHeader: React.FC<{
           )}
         </div>
         <div className="onvo-flex onvo-flex-row onvo-gap-2">
+          {dashboard?.settings?.filters && dashboard.filters.length > 0 && (
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button className="onvo-foreground-color onvo-border-black/10 dark:onvo-border-white/10" variant="secondary"
+
+                >
+                  <AdjustmentsHorizontalIcon className="onvo-size-4 onvo-mr-1" />
+                  Filters
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="!onvo-p-0 onvo-w-[320px]">
+                <FilterBar />
+              </PopoverContent>
+            </Popover>)}
           {(subscriptionPlan?.automations && !dashboard?.settings?.disable_automations) && (
             <Button className="onvo-foreground-color onvo-border-black/10 dark:onvo-border-white/10" variant="secondary"
               onClick={() => {
                 setOpen(true);
               }}
             >
+              <ClockIcon className="onvo-size-4 onvo-mr-1" />
               Schedule
             </Button>)}
           {(ImageDownloadEnabled || ReportDownloadEnabled || DocumentDownloadEnabled) && (
             <DropdownMenu modal={false}>
               <DropdownMenuTrigger asChild>
                 <Button className="onvo-foreground-color onvo-border-black/10 dark:onvo-border-white/10" variant="secondary" disabled={!dashboard}>
-                  Download{" "}
+
+                  <ArrowDownTrayIcon className="onvo-size-4 onvo-mr-1" />
+                  Download
                   <ChevronDownIcon className="onvo-h-4 onvo-w-4 onvo-ml-1" />
                 </Button>
               </DropdownMenuTrigger>

@@ -45,7 +45,7 @@ export class OnvoDatasources extends OnvoBase {
   update(id: string, body: Partial<DataSource>): Promise<DataSource> {
     return this.fetchBase(
       "/api/datasources/" + id,
-      "POST",
+      "PUT",
       body
     ) as Promise<DataSource>;
   }
@@ -70,7 +70,7 @@ export class OnvoDatasources extends OnvoBase {
   ): Promise<DataSource> {
     return this.fetchBase(
       "/api/datasources",
-      "PUT",
+      "POST",
       body
     ) as Promise<DataSource>;
   }

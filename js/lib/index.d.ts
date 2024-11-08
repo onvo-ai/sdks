@@ -1096,12 +1096,26 @@ type WidgetSettings = {
     css_id?: string;
     css_classnames?: string;
 };
+interface DatasourceFilter {
+    column: string;
+    type: 'text' | 'number' | 'date';
+    label: string;
+}
 type DashboardFilter = {
-    title: string;
-    type: "picker" | "multi-picker" | "date-picker";
-    options: string;
-    default: string;
-    parameter: string;
+    label: string;
+    type: "text";
+    options: string[];
+    values: string[];
+} | {
+    label: string;
+    type: "number";
+    options: [number, number];
+    values: [number, number];
+} | {
+    label: string;
+    type: "date";
+    options: [string, string];
+    values: [string, string];
 };
 type WidgetMessage = {
     role: "user" | "assistant";
@@ -1131,6 +1145,7 @@ type DataSource = Modify<Database["public"]["Tables"]["datasources"]["Row"], {
         wrap?: string;
         default: string;
     }[];
+    filters: DatasourceFilter[];
 }>;
 type EmbedUser = Database["public"]["Tables"]["embed_users"]["Row"];
 type Subscription = Database["public"]["Tables"]["subscriptions"]["Row"];
@@ -1751,4 +1766,4 @@ declare class Onvo extends OnvoBase {
     });
 }
 
-export { type APIKey, type Account, type Automation, type AutomationRun, type CompositeTypes, type Dashboard, type DashboardDatasource, type DashboardFilter, type DashboardMeta, type DashboardSettings, type DataSource, type Database, type EmbedUser, type Enums, type Integration, type Invite, type Json, type LLMSettings, type Log, LogType, type Member, type Modify, Onvo, type Question, type Session, type Subscription, type SubscriptionPlan, Table, type Tables, type TablesInsert, type TablesUpdate, type Team, type Widget, type WidgetMessage, type WidgetSettings, Onvo as default };
+export { type APIKey, type Account, type Automation, type AutomationRun, type CompositeTypes, type Dashboard, type DashboardDatasource, type DashboardFilter, type DashboardMeta, type DashboardSettings, type DataSource, type Database, type DatasourceFilter, type EmbedUser, type Enums, type Integration, type Invite, type Json, type LLMSettings, type Log, LogType, type Member, type Modify, Onvo, type Question, type Session, type Subscription, type SubscriptionPlan, Table, type Tables, type TablesInsert, type TablesUpdate, type Team, type Widget, type WidgetMessage, type WidgetSettings, Onvo as default };

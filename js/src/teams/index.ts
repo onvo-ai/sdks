@@ -27,6 +27,6 @@ export class OnvoTeams extends OnvoBase {
    * @returns {Promise<Team>} A promise that resolves to the updated Team object.
    */
   update(id: string, body: Partial<Team>): Promise<Team> {
-    return this.fetchBase("/api/teams/" + id, "POST", body) as Promise<Team>;
+    return this.fetchBase("/api/teams/" + id, "PUT", body) as Promise<Team>;
   }
 }
