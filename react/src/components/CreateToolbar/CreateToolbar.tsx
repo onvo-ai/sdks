@@ -116,7 +116,7 @@ export const CreateToolbar: React.FC<{ onClick?: () => void }> = ({
     <>
       <div
         className={
-          "onvo-absolute onvo-z-50 onvo-shadow-xl onvo-rounded-full onvo-bottom-4 onvo-flex onvo-justify-start onvo-gap-1 onvo-flex-row onvo-left-[50%] -onvo-ml-[160px] onvo-w-[320px] onvo-p-2 onvo-foreground-color onvo-border-solid onvo-border onvo-border-black/10 dark:onvo-border-white/10"
+          "onvo-absolute onvo-z-40 onvo-shadow-xl onvo-rounded-full onvo-bottom-4 onvo-flex onvo-justify-start onvo-gap-1 onvo-flex-row onvo-left-[50%] -onvo-ml-[160px] onvo-w-[320px] onvo-p-2 onvo-foreground-color onvo-border-solid onvo-border onvo-border-black/10 dark:onvo-border-white/10"
         }
       >
         {(dashboard?.settings?.can_ask_questions || adminMode) && (

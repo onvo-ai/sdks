@@ -40,7 +40,7 @@ export class OnvoAutomations extends OnvoBase {
   update(id: string, body: Partial<Automation>): Promise<Automation> {
     return this.fetchBase(
       "/api/automations/" + id,
-      "POST",
+      "PUT",
       body
     ) as Promise<Automation>;
   }
@@ -52,7 +52,7 @@ export class OnvoAutomations extends OnvoBase {
   create(body: Partial<Automation>): Promise<Automation> {
     return this.fetchBase(
       "/api/automations",
-      "PUT",
+      "POST",
       body
     ) as Promise<Automation>;
   }

@@ -48,7 +48,7 @@ export class OnvoWidgets extends OnvoBase {
   update(id: string, body: Partial<Widget>): Promise<Widget> {
     return this.fetchBase(
       "/api/widgets/" + id,
-      "POST",
+      "PUT",
       body
     ) as Promise<Widget>;
   }
@@ -59,6 +59,6 @@ export class OnvoWidgets extends OnvoBase {
    * @return {Promise<Widget>} A promise that resolves to the created widget.
    */
   create(body: Omit<Widget, "id" | "created_at">): Promise<Widget> {
-    return this.fetchBase("/api/widgets", "PUT", body) as Promise<Widget>;
+    return this.fetchBase("/api/widgets", "POST", body) as Promise<Widget>;
   }
 }

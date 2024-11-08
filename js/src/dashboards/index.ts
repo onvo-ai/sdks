@@ -45,7 +45,7 @@ export class OnvoDashboards extends OnvoBase {
   update(id: string, body: Partial<Dashboard>): Promise<Dashboard> {
     return this.fetchBase(
       "/api/dashboards/" + id,
-      "POST",
+      "PUT",
       body
     ) as Promise<Dashboard>;
   }
@@ -67,6 +67,6 @@ export class OnvoDashboards extends OnvoBase {
       | "team"
     >
   ): Promise<Dashboard> {
-    return this.fetchBase("/api/dashboards", "PUT", body) as Promise<Dashboard>;
+    return this.fetchBase("/api/dashboards", "POST", body) as Promise<Dashboard>;
   }
 }

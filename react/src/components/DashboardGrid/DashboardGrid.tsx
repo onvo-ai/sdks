@@ -102,7 +102,6 @@ export const DashboardGrid: React.FC<{ className?: string }> = ({ className }) =
           "onvo-dashboard-grid-wrapper onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-font-override onvo-background-color onvo-w-full " + (className || "")
         }
       >
-        <FilterBar />
         <ResponsiveGridLayout
           resizeHandles={["se", "sw"]}
 

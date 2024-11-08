@@ -45,6 +45,8 @@ describe("Widgets", () => {
         disable_download_reports: false,
         title_hidden: false,
       },
+      use_as_example: false,
+      use_in_library: false,
       code: `import pandas as pd
 import numpy as np
 

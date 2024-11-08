@@ -48,13 +48,26 @@ export type WidgetSettings = {
   css_id?: string;
   css_classnames?: string;
 };
-
+export interface DatasourceFilter {
+  column: string;
+  type: 'text' | 'number' | 'date';
+  label: string;
+}
 export type DashboardFilter = {
-  title: string;
-  type: "picker" | "multi-picker" | "date-picker";
-  options: string;
-  default: string;
-  parameter: string;
+  label: string;
+  type: "text";
+  options: string[];
+  values: string[];
+} | {
+  label: string;
+  type: "number";
+  options: [number, number];
+  values: [number, number];
+} | {
+  label: string;
+  type: "date";
+  options: [string, string];
+  values: [string, string];
 };
 
 export type WidgetMessage = {
@@ -78,6 +91,7 @@ export type DataSource = Modify<
     sample_data: { [key: string]: any }[];
     config: any;
     parameters: { id: string; wrap?: string; default: string }[];
+    filters: DatasourceFilter[];
   }
 >;
 export type EmbedUser = Database["public"]["Tables"]["embed_users"]["Row"];

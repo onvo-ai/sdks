@@ -59,7 +59,7 @@ export class OnvoQuestions extends OnvoBase {
   update(id: string, body: Partial<Question>): Promise<Question> {
     return this.fetchBase(
       "/api/questions/" + id,
-      "POST",
+      "PUT",
       body
     ) as Promise<Question>;
   }

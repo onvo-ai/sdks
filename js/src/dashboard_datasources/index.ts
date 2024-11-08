@@ -35,7 +35,7 @@ export class OnvoDashboardDatasources extends OnvoBase {
   link(datasourceId: string): Promise<DashboardDatasource> {
     return this.fetchBase(
       "/api/dashboards/" + this.#dashboardId + "/datasources",
-      "PUT",
+      "POST",
       {
         datasourceId: datasourceId,
       }
@@ -51,7 +51,7 @@ export class OnvoDashboardDatasources extends OnvoBase {
   linkMultiple(datasourceIds: string[]): Promise<DashboardDatasource> {
     return this.fetchBase(
       "/api/dashboards/" + this.#dashboardId + "/datasources",
-      "PUT",
+      "POST",
       {
         datasourceIds: datasourceIds,
       }

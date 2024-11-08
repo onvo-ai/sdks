@@ -49,6 +49,11 @@ export const Variants: Story = (args) => (
       items={data}
       value={["relaxed-button-down"]}
     />
+    <MultiSelect
+      onValueChange={(e) => console.log(e)}
+      items={data}
+      value={["relaxed-button-down"]} footer
+    />
   </div>
 );
 Variants.args = {};
