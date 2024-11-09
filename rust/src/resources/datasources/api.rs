@@ -55,7 +55,7 @@ impl<'a> Datasources<'a> {
     ///
     /// * `ApiError` - Error returned by the API
     pub async fn create(&self, body: &Datasource) -> Result<Datasource, ApiError> {
-        self.client.put("/datasources", body).await
+        self.client.post("/datasources", body).await
     }
 
     /// Initialize a datasource
@@ -92,9 +92,7 @@ impl<'a> Datasources<'a> {
     ///
     /// * `ApiError` - Error returned by the API
     pub async fn update(&self, id: &str, body: &Datasource) -> Result<Datasource, ApiError> {
-        self.client
-            .post(&format!("/datasources/{}", id), body)
-            .await
+        self.client.put(&format!("/datasources/{}", id), body).await
     }
 
     /// Deletes a datasource

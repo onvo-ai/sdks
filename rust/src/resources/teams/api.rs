@@ -60,6 +60,6 @@ impl<'a> Teams<'a> {
     ///
     /// * `ApiError` - If the request failed
     pub async fn update(&self, id: &str, data: &Team) -> Result<Team, ApiError> {
-        self.client.post(&format!("/teams/{}", id), data).await
+        self.client.put(&format!("/teams/{}", id), data).await
     }
 }

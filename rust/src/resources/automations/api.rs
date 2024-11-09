@@ -77,7 +77,7 @@ impl<'a> Automations<'a> {
     ///
     /// * `ApiError` - If the request failed
     pub async fn create(&self, data: &Automation) -> Result<Automation, ApiError> {
-        self.client.put("/automations", data).await
+        self.client.post("/automations", data).await
     }
 
     /// Updates an automation.
@@ -95,9 +95,7 @@ impl<'a> Automations<'a> {
     ///
     ///  * `ApiError` - If the request failed.
     pub async fn update(&self, id: &str, data: &Automation) -> Result<Automation, ApiError> {
-        self.client
-            .post(&format!("/automations/{}", id), data)
-            .await
+        self.client.put(&format!("/automations/{}", id), data).await
     }
 
     /// Deletes an automation.

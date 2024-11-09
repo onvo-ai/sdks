@@ -148,7 +148,10 @@ async fn test_update_automation_integration() {
         email_to: None,
     };
     let result = automations.update(&id, &updated_automation).await;
-    assert!(result.is_ok());
+    match result {
+        Ok(_) => {}
+        Err(e) => panic!("Error: {:?}", e),
+    }
 }
 
 #[tokio::test]
