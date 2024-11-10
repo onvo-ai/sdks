@@ -158,6 +158,48 @@ impl OnvoApiClient {
         response.json::<U>().await.map_err(ApiError::from)
     }
 
+    /// Sends a PATCH request to the API.
+    ///
+    /// # Arguments
+    ///
+    /// * `path` - The path to the resource.
+    /// * `data` - The data to send.
+    ///
+    /// # Returns
+    ///
+    /// A future that resolves to the response body.
+    ///
+    /// # Errors
+    ///
+    /// * `ApiError` - If the response status code is not success
+    pub async fn patch<T: serde::Serialize, U: serde::de::DeserializeOwned>(
+        &self,
+        path: &str,
+        data: &T,
+    ) -> Result<U, ApiError> {
+        let url = format!("{}/{}", self.endpoint, path);
+
+        let mut headers = HeaderMap::new();
+        headers.insert("Content-Type", HeaderValue::from_static("application/json"));
+        headers.insert("x-api-key", HeaderValue::from_str(&self.api_key).unwrap());
+
+        let response = self
+            .client
+            .patch(&url)
+            .headers(headers)
+            .json(data)
+            .send()
+            .await?;
+
+        if !response.status().is_success() {
+            let status = response.status();
+            let text = response.text().await?;
+            return Err(ApiError::from_status(status, text));
+        }
+
+        response.json::<U>().await.map_err(ApiError::from)
+    }
+
     /// Sends a DELETE request to the API.
     ///
     /// # Arguments

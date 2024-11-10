@@ -18,6 +18,9 @@ pub enum ApiError {
 
     #[error("Unexpected response status: {0}, {1}")]
     Unexpected(StatusCode, String),
+
+    #[error("An internal error occurred when processing the request: {0}")]
+    InternalError(String),
 }
 
 impl ApiError {

@@ -13,6 +13,7 @@ thiserror = "1.0.48"
 url = "2.4.1"
 tokio = { version = "1", features = ["full"] }
 chrono = "0.4.38"
+regex = "1.11.1"
 
 [dev-dependencies]
 mockito = "0.31"
