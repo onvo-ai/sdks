@@ -163,7 +163,7 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
 
   return (
     <div className="onvo-table-widget onvo-h-full onvo-flex onvo-flex-col onvo-relative">
-      <Title className="onvo-table-widget-title onvo-text-md onvo-text-gray-600 dark:onvo-text-gray-500 onvo-font-override onvo-my-0">
+      <Title className="onvo-table-widget-title onvo-text-md !onvo-text-[#111] dark:!onvo-text-[#ddd] onvo-font-override onvo-my-0">
         {data.options.plugins.title.text}
       </Title>
       <DataGrid

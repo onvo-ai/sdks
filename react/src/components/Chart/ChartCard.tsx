@@ -32,7 +32,7 @@ import { useTheme } from "../../layouts/Dashboard/useTheme";
 
 const DragHandle = () => {
   return (
-    <div className="onvo-absolute -onvo-top-6 onvo-w-10 onvo-h-6 onvo-z-10 onvo-hidden group-hover/chartcard:onvo-flex  onvo-left-[50%] -onvo-ml-5 onvo-justify-center onvo-items-center onvo-foreground-color onvo-border-solid onvo-border onvo-border-b-0 onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-t-md">
+    <div className="onvo-absolute -onvo-top-6 onvo-w-10 onvo-h-6 onvo-z-10 onvo-hidden group-hover/chartcard:onvo-flex onvo-transition-all onvo-left-[50%] -onvo-ml-5 onvo-justify-center onvo-items-center onvo-foreground-color onvo-border-solid onvo-border onvo-border-b-0 onvo-border-black/5 dark:onvo-border-white/10 onvo-rounded-t-md">
       <div className="onvo-chart-card-drag-handle  onvo-absolute onvo-grid-cols-4 onvo-py-1 onvo-cursor-move onvo-grid onvo-px-1 onvo-items-center onvo-justify-center onvo-h-6 onvo-w-10">
         <div className="onvo-h-[3px] onvo-w-[3px] onvo-ml-0.5 onvo-rounded-full onvo-bg-black/20 dark:onvo-bg-white/20"></div>
         <div className="onvo-h-[3px] onvo-w-[3px] onvo-ml-0.5 onvo-rounded-full onvo-bg-black/20 dark:onvo-bg-white/20"></div>
@@ -175,7 +175,7 @@ const ChartCard: React.FC<{
     return (
       <div
         className={
-          "onvo-group/chartcard onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
+          "onvo-group/chartcard  onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
           (className || "")
         }
       >
@@ -184,8 +184,9 @@ const ChartCard: React.FC<{
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Icon
-                className="onvo-z-20 onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
+                className="onvo-z-20 group-hover/chartcard:onvo-opacity-100 onvo-transition-all onvo-opacity-0  onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
                 icon={EllipsisVerticalIcon}
+                variant="shadow"
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="onvo-min-w-56">
@@ -224,8 +225,9 @@ const ChartCard: React.FC<{
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Icon
-                className="onvo-z-20 onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
+                className="onvo-z-20 group-hover/chartcard:onvo-opacity-100 onvo-transition-all onvo-opacity-0 onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
                 icon={EllipsisVerticalIcon}
+                variant="shadow"
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="onvo-min-w-56">
@@ -278,7 +280,7 @@ const ChartCard: React.FC<{
     return (
       <div
         className={
-          "onvo-group/chartcard onvo-rounded-md onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
+          "onvo-group/chartcard onvo-rounded-md onvo-transition-all onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
           (className || "")
         }
       >
@@ -287,8 +289,9 @@ const ChartCard: React.FC<{
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Icon
-                className="onvo-z-20 onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
+                className="onvo-z-20 group-hover/chartcard:onvo-opacity-100 onvo-opacity-0 onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
                 icon={EllipsisVerticalIcon}
+                variant="shadow"
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="onvo-min-w-56">
@@ -367,8 +370,9 @@ const ChartCard: React.FC<{
                   e.stopPropagation();
                   e.preventDefault();
                 }}
-                className="onvo-z-20 onvo-cursor-pointer onvo-absolute onvo-top-1 onvo-right-1"
+                className="onvo-z-20 onvo-transition-all group-hover/chartcard:onvo-opacity-100 onvo-opacity-0 onvo-cursor-pointer !onvo-text-gray-500 onvo-absolute onvo-top-1 onvo-right-1"
                 icon={EllipsisVerticalIcon}
+                variant="shadow"
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="onvo-min-w-56 onvo-background-color onvo-border-black/10 dark:onvo-border-white/10">

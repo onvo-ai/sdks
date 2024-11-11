@@ -59,7 +59,7 @@ export const LastUpdatedBadge: React.FC<{ date: string, refreshing: boolean }> =
   }
   return (
     <Badge key={key} className="onvo-last-updated-badge ml-2">
-      Last updated {dayjs(date).fromNow()}
+      Updated {dayjs(date).fromNow()}
     </Badge>
   );
 };
@@ -133,14 +133,14 @@ export const DashboardHeader: React.FC<{
 
     >
       <AutomationsModal />
-      <main className="onvo-mx-auto onvo-px-3 onvo-py-3 lg:onvo-px-3 onvo-z-10 onvo-relative onvo-flex onvo-flex-col onvo-items-start onvo-justify-between onvo-gap-4 @lg/onvo-dashboard-header:onvo-flex-row @lg/onvo-dashboard-header:onvo-items-center">
+      <main className="onvo-mx-auto onvo-px-5 onvo-py-4 onvo-z-10 onvo-relative onvo-flex onvo-flex-col onvo-items-start onvo-justify-between onvo-gap-4 @lg/onvo-dashboard-header:onvo-flex-row @lg/onvo-dashboard-header:onvo-items-center">
         <div className="onvo-flex-grow">
           {dashboard ? (
             <>
-              <Metric className="onvo-dashboard-header-title onvo-font-override onvo-text-xl">
+              <Metric className="onvo-dashboard-header-title dark:!onvo-text-white !onvo-text-black onvo-font-override !onvo-font-medium onvo-text-2xl">
                 {dashboard?.title || " "}
               </Metric>
-              <Label className="onvo-dashboard-header-description onvo-font-override">
+              <Label className="onvo-dashboard-header-description !onvo-font-normal onvo-font-override">
                 {dashboard?.description || " "}
                 {" "}
                 <LastUpdatedBadge refreshing={refreshing} date={dashboard.last_updated_at} />

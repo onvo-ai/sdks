@@ -48,6 +48,7 @@
 }
 
 /* REACT GRID STYLING */
+
 .react-grid-item > .react-resizable-handle {
   background-image: none !important;
   width: 12px !important;
@@ -56,10 +57,15 @@
   border-right: 3px solid #00000030;
   border-bottom-right-radius: 8px;
   margin: 8px;
+  opacity: 0;
+  transition: all 0.15s ease-in-out;
 }
 .onvo-dark .react-grid-item > .react-resizable-handle {
   border-bottom: 3px solid #ffffff30;
   border-right: 3px solid #ffffff30;
+}
+.react-grid-item:hover > .react-resizable-handle {
+  opacity: 1;
 }
 
 .react-grid-item:hover {

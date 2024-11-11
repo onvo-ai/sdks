@@ -8,7 +8,6 @@ import { useDashboard } from "../../layouts/Dashboard/useDashboard";
 import { useBackend } from "../../layouts/Wrapper";
 import { TextWidgetModal } from "../TextWidgetModal";
 
-import { FilterBar } from "../FilterBar";
 import { EditWidgetModal } from "../EditWidgetModal";
 import { ImageWidgetModal } from "../ImageWidgetModal";
 
@@ -104,7 +103,6 @@ export const DashboardGrid: React.FC<{ className?: string }> = ({ className }) =
       >
         <ResponsiveGridLayout
           resizeHandles={["se", "sw"]}
-
           draggableHandle=".onvo-chart-card-drag-handle"
           className="onvo-dashboard-grid-layout onvo-layout"
           rowHeight={10}
@@ -115,6 +113,7 @@ export const DashboardGrid: React.FC<{ className?: string }> = ({ className }) =
           isDraggable={editable}
           isResizable={editable}
           layouts={layouts}
+          containerPadding={[20, 10]}
           onLayoutChange={(layout: any, allLayouts: any) => {
             if (!dashboard || !editable) return;
 

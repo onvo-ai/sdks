@@ -18,6 +18,7 @@ import TextChart from "./TextChart";
 import { WidgetSettings } from "@onvo-ai/js";
 import ImageChart from "./ImageChart";
 import { DividerChart, DividerPlugin } from "./DividerChart";
+import { useTheme } from "../../layouts/Dashboard/useTheme";
 
 ChartJS.register([
   FunnelController,
@@ -39,6 +40,7 @@ const ChartBase: React.FC<{
 }> = ({ json, id, title, settings }) => {
   const chartRef = useRef<any>();
   const [zoomed, setZoomed] = useState(false);
+  const theme = useTheme();
 
   const resetZoom = () => {
     chartRef.current?.resetZoom();
@@ -63,8 +65,9 @@ const ChartBase: React.FC<{
       fullSize: true,
       font: {
         size: output.type === "text" ? 24 : 18,
-        weight: output.type === "text" ? 600 : 600,
+        weight: 500,
       },
+      color: theme === "dark" ? "#ddd" : "#111",
       padding: output.options.plugins.title?.padding || {
         bottom: 5,
       },
@@ -113,7 +116,7 @@ const ChartBase: React.FC<{
       };
     }
     return output;
-  }, [json, title]);
+  }, [json, title, theme]);
 
   return (
     <ErrorBoundary
