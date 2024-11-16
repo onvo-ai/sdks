@@ -1,21 +1,25 @@
 mod helpers;
 
-use onvo_ai::resources::accounts::api::Accounts;
-
 #[tokio::test]
 async fn test_list_accounts_integration() {
-    let api_client = helpers::setup_client();
+    let onvo = helpers::setup_client();
 
-    let accounts = Accounts::new(api_client);
+    let accounts = onvo.accounts();
     let result = accounts.list().await;
 
+    match &result {
+        Ok(_) => {}
+        Err(err) => {
+            print!("Error: {:?}", err);
+        }
+    }
     assert!(result.is_ok());
 }
 
 #[tokio::test]
 async fn test_get_account_integration() {
-    let api_client = helpers::setup_client();
-    let accounts = Accounts::new(api_client);
+    let onvo = helpers::setup_client();
+    let accounts = onvo.accounts();
 
     let account_id = accounts
         .list()

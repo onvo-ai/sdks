@@ -1,11 +1,11 @@
 mod helpers;
 
-use onvo_ai::resources::automations::{api::Automations, models::Automation};
+use onvo_ai::resources::automations::models::Automation;
 
 #[tokio::test]
 async fn test_list_automations_integration() {
-    let client = helpers::setup_client();
-    let automations = Automations::new(&client);
+    let onvo = helpers::setup_client();
+    let automations = onvo.automations();
     let result = automations.list().await;
     match &result {
         Ok(_) => {}
@@ -18,8 +18,8 @@ async fn test_list_automations_integration() {
 
 #[tokio::test]
 async fn test_get_account_integration() {
-    let client = helpers::setup_client();
-    let automations = Automations::new(&client);
+    let onvo = helpers::setup_client();
+    let automations = onvo.automations();
     let result = automations
         .list()
         .await
@@ -34,8 +34,8 @@ async fn test_get_account_integration() {
 
 #[tokio::test]
 async fn test_get_runs_integration() {
-    let client = helpers::setup_client();
-    let automations = Automations::new(&client);
+    let onvo = helpers::setup_client();
+    let automations = onvo.automations();
     let result = automations
         .list()
         .await
@@ -51,8 +51,8 @@ async fn test_get_runs_integration() {
 
 #[tokio::test]
 async fn test_create_automation_integration() {
-    let client = helpers::setup_client();
-    let automations = Automations::new(&client);
+    let onvo = helpers::setup_client();
+    let automations = onvo.automations();
     let result = automations
         .create(&Automation {
             id: None,
@@ -90,8 +90,8 @@ async fn test_create_automation_integration() {
 
 #[tokio::test]
 async fn test_update_automation_integration() {
-    let client = helpers::setup_client();
-    let automations = Automations::new(&client);
+    let onvo = helpers::setup_client();
+    let automations = onvo.automations();
 
     // Create a dummy automation to update later
     let automation_payload = &Automation {
@@ -156,8 +156,8 @@ async fn test_update_automation_integration() {
 
 #[tokio::test]
 async fn test_delete_automation_integration() {
-    let client = helpers::setup_client();
-    let automations = Automations::new(&client);
+    let onvo = helpers::setup_client();
+    let automations = onvo.automations();
 
     // Create a dummy automation to delete later
     let result = automations

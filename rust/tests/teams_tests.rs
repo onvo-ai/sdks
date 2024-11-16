@@ -4,9 +4,9 @@ use onvo_ai::resources::teams::{api::Teams, models::Team};
 
 #[tokio::test]
 async fn test_list_teams_integration() {
-    let api_client = helpers::setup_client();
+    let onvo = helpers::setup_client();
 
-    let teams = Teams::new(api_client);
+    let teams = onvo.teams();
     let result = teams.list().await;
 
     assert!(result.is_ok());
@@ -14,8 +14,8 @@ async fn test_list_teams_integration() {
 
 #[tokio::test]
 async fn test_get_team_integration() {
-    let api_client = helpers::setup_client();
-    let teams = Teams::new(api_client);
+    let onvo = helpers::setup_client();
+    let teams = onvo.teams();
 
     let team_id = teams
         .list()
@@ -31,8 +31,8 @@ async fn test_get_team_integration() {
 
 #[tokio::test]
 async fn test_update_team_integration() {
-    let api_client = helpers::setup_client();
-    let teams = Teams::new(api_client);
+    let onvo = helpers::setup_client();
+    let teams = onvo.teams();
 
     let team_id = teams
         .list()

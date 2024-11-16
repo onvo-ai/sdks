@@ -1,15 +1,12 @@
 mod helpers;
 
 use helpers::generate_id;
-use onvo_ai::resources::embed_users::{
-    api::EmbedUsers,
-    models::{EmbedUser, Metadata},
-};
+use onvo_ai::resources::embed_users::models::{EmbedUser, Metadata};
 
 #[tokio::test]
 async fn test_list_embed_users_integration() {
-    let client = helpers::setup_client();
-    let embed_users = EmbedUsers::new(&client);
+    let onvo = helpers::setup_client();
+    let embed_users = onvo.embed_users();
     let result = embed_users.list().await;
     match &result {
         Ok(_) => {}
@@ -22,8 +19,8 @@ async fn test_list_embed_users_integration() {
 
 #[tokio::test]
 async fn test_get_embed_user_integration() {
-    let client = helpers::setup_client();
-    let embed_users = EmbedUsers::new(&client);
+    let onvo = helpers::setup_client();
+    let embed_users = onvo.embed_users();
 
     // Get the first embed user's id
     let id: String = embed_users
@@ -45,8 +42,8 @@ async fn test_get_embed_user_integration() {
 
 #[tokio::test]
 async fn test_create_embed_user_integration() {
-    let client = helpers::setup_client();
-    let embed_users = EmbedUsers::new(&client);
+    let onvo = helpers::setup_client();
+    let embed_users = onvo.embed_users();
     let result = embed_users
         .upsert(&EmbedUser {
             name: "test".to_string(),
@@ -74,8 +71,8 @@ async fn test_create_embed_user_integration() {
 // TODO: Enable this back. Could not get to create any questions.
 // Hence cannot test any deletions as well.
 async fn test_delete_embed_users_integration() {
-    let client = helpers::setup_client();
-    let embed_users = EmbedUsers::new(&client);
+    let onvo = helpers::setup_client();
+    let embed_users = onvo.embed_users();
 
     // Create a dummy embed user
     let result = embed_users

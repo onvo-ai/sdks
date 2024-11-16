@@ -1,13 +1,12 @@
 mod helpers;
 
-use chrono::naive;
-use onvo_ai::resources::datasources::{api::Datasources, models::Datasource};
+use onvo_ai::resources::datasources::models::Datasource;
 
 #[tokio::test]
 async fn test_list_datasources_integration() {
-    let api_client = helpers::setup_client();
+    let onvo = helpers::setup_client();
 
-    let teams = Datasources::new(api_client);
+    let teams = onvo.datasources();
     let result = teams.list().await;
 
     assert!(result.is_ok());
@@ -15,8 +14,8 @@ async fn test_list_datasources_integration() {
 
 #[tokio::test]
 async fn test_get_datasource_integration() {
-    let api_client = helpers::setup_client();
-    let datasources = Datasources::new(api_client);
+    let onvo = helpers::setup_client();
+    let datasources = onvo.datasources();
 
     // Create some dummy data
     let datasource = &Datasource {
@@ -52,8 +51,8 @@ async fn test_get_datasource_integration() {
 
 #[tokio::test]
 async fn test_create_datasource_integration() {
-    let api_client = helpers::setup_client();
-    let datasources = Datasources::new(api_client);
+    let onvo = helpers::setup_client();
+    let datasources = onvo.datasources();
 
     let datasource = &Datasource {
         title: "Test datasource".to_string(),
@@ -83,8 +82,8 @@ async fn test_create_datasource_integration() {
 
 #[tokio::test]
 async fn test_update_datasource_integration() {
-    let api_client = helpers::setup_client();
-    let datasources = Datasources::new(api_client);
+    let onvo = helpers::setup_client();
+    let datasources = onvo.datasources();
 
     let datasource = &Datasource {
         title: "Test datasource".to_string(),
@@ -131,8 +130,8 @@ async fn test_update_datasource_integration() {
 
 #[tokio::test]
 async fn test_delete_datasource_integration() {
-    let api_client = helpers::setup_client();
-    let datasources = Datasources::new(api_client);
+    let onvo = helpers::setup_client();
+    let datasources = onvo.datasources();
 
     let datasource = datasources
         .create(&Datasource {

@@ -1,12 +1,10 @@
 mod helpers;
 
-use onvo_ai::resources::sessions::api::Sessions;
-
 #[tokio::test]
 async fn test_list_sessions_integration() {
-    let api_client = helpers::setup_client();
+    let onvo = helpers::setup_client();
 
-    let sessions = Sessions::new(api_client);
+    let sessions = onvo.sessions();
     let result = sessions.list("09720600-cab3-4486-bc14-10f014f573a5").await;
 
     assert!(result.is_ok());
@@ -14,9 +12,9 @@ async fn test_list_sessions_integration() {
 
 #[tokio::test]
 async fn test_revoke_sessions_integrated() {
-    let api_client = helpers::setup_client();
+    let onvo = helpers::setup_client();
 
-    let sessions = Sessions::new(api_client);
+    let sessions = onvo.sessions();
     let result = sessions
         .revoke("09720600-cab3-4486-bc14-10f014f573a5")
         .await;
@@ -28,9 +26,9 @@ async fn test_revoke_sessions_integrated() {
 TODO: Fix no dashboard found issue
 Error `Unexpected(400, \"{\\\"message\\\":\\\"No dashboard found\\\"}`"]
 async fn test_upsert_session_integrated() {
-    let api_client = helpers::setup_client();
+    let onvo = helpers::setup_client();
 
-    let sessions = Sessions::new(api_client);
+    let sessions = onvo.sessions();
     let result = sessions
         .upsert(
             "09720600-cab3-4486-bc14-10f014f573a5",
