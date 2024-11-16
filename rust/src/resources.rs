@@ -1,5 +1,6 @@
 pub mod accounts;
 pub mod automations;
+pub mod dashboards;
 pub mod datasources;
 pub mod embed_users;
 pub mod questions;

@@ -20,9 +20,9 @@ async fn test_list_widgets_integration() {
 }
 
 #[tokio::test]
-#[ignore]
-// TODO: Check why this test is failing? It can't seem to find the dashboard..
-// Error: `Unexpected(400, "{\"message\":\"Dashboard does not exist\"}")`
+#[ignore = "
+TODO: Check why this test is failing? It can't seem to find the dashboard..
+Error: `Unexpected(400, \"{\\\"message\\\":\\\"Dashboard does not exist\\\"}\")`"]
 async fn test_create_widgets_integration() {
     let api_client = helpers::setup_client();
     let questions = Questions::new(&api_client);

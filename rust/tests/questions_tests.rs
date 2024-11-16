@@ -17,9 +17,7 @@ async fn test_list_questions_integration() {
 }
 
 #[tokio::test]
-#[ignore]
-// TODO: Check why this test is failing? It can't seem to find the dashboard..
-// Error: `Unexpected(400, "{\"message\":\"Dashboard does not exist\"}")`
+#[ignore = "TODO: Check why this test is failing? It can't seem to find the dashboard. Error: Unexpected(400, \"{\\\"message\\\":\\\"Dashboard does not exist\\\"}\")"]
 async fn test_create_questions_integration() {
     let client = helpers::setup_client();
     let questions = Questions::new(&client);
@@ -36,9 +34,10 @@ async fn test_create_questions_integration() {
 }
 
 #[tokio::test]
-#[ignore]
-// TODO: Enable this back. Could not get to create any questions.
-// Hence cannot test any deletions as well.
+#[ignore = "
+TODO: Enable this back. Could not get to create any questions.
+Hence cannot test any deletions as well.
+"]
 async fn test_delete_question_integration() {
     let client = helpers::setup_client();
     let questions = Questions::new(&client);

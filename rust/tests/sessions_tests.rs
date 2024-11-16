@@ -24,9 +24,9 @@ async fn test_revoke_sessions_integrated() {
 }
 
 #[tokio::test]
-#[ignore]
-// TODO: Fix no dashboard found issue
-// Error: `Unexpected(400, "{\"message\":\"No dashboard found\"}`
+#[ignore = "
+TODO: Fix no dashboard found issue
+Error `Unexpected(400, \"{\\\"message\\\":\\\"No dashboard found\\\"}`"]
 async fn test_upsert_session_integrated() {
     let api_client = helpers::setup_client();
 
