@@ -31,7 +31,7 @@ ONVO_API_ENDPOINT="https://dashboard.onvo.ai/api"
 Here's an example of how to use the package to interact with the Onvo platform:
 
 ```rust
-from onvo_ai import Onvo
+use onvo_ai::Onvo;
 
 // Initialize the Onvo struct with your API key, will default to ENV variables if not given.
 let onvo = Onvo::new(endpoint=Some("https://dashboard.onvo.ai/api"), api_key=Some("your_api_key_here"));
