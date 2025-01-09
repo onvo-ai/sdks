@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/js",
-  "version": "0.14.17",
+  "version": "0.14.18",
   "description": "The javascript SDK for Onvo AI dashboard builder",
   "main": "./lib/index.js",
   "module": "./lib/esm/index.js",
