@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/react",
-  "version": "0.5.19",
+  "version": "0.5.20",
   "description": "The react SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "module": "dist/esm/index.js",
@@ -29,6 +29,7 @@
   "dependencies": {
     "@heroicons/react": "^2.1.5",
     "@internationalized/date": "^3.5.6",
+    "@kurkle/color": "^0.3.4",
     "@monaco-editor/react": "^4.6.0",
     "@onvo-ai/chartjs-chart-map": "^0.0.124",
     "@onvo-ai/js": "^0.14.18",
