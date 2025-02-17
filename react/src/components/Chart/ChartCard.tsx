@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { toast } from "sonner";
 import { LogType, Widget } from "@onvo-ai/js";
@@ -52,23 +52,17 @@ const ChartCard: React.FC<{
   hideOptions?: boolean;
   footer?: React.ReactNode;
 }> = ({ widget, className, footer, hideOptions }) => {
-  const { dashboard, refreshWidgets, widgets } = useDashboard();
+  const { dashboard, refreshWidgets } = useDashboard();
   const { setOpen: setEditModalOpen } = useEditWidgetModal();
   const { setOpen: setTextModalOpen } = useTextWidgetModal();
   const { setOpen: setImageModalOpen } = useImageWidgetModal();
   const { backend, adminMode } = useBackend();
   const theme = useTheme();
+  const cardRef = useRef(null);
 
   const duplicate = async () => {
     let newObj: any = { ...widget };
     delete newObj.id;
-
-    let limit = dashboard?.settings?.widget_limit || 100;
-    if (widgets.length >= limit) {
-      return toast.error(
-        `You can only have ${limit} widgets in your dashboard. Please delete some of your widgets first or contact the administrator.`
-      );
-    }
 
     if (!backend) return;
     toast.promise(
@@ -173,7 +167,7 @@ const ChartCard: React.FC<{
 
   if (output.type === "divider") {
     return (
-      <div
+      <div ref={cardRef}
         className={
           "onvo-group/chartcard  onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
           (className || "")
@@ -189,7 +183,7 @@ const ChartCard: React.FC<{
                 variant="shadow"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="onvo-min-w-56">
+            <DropdownMenuContent container={cardRef.current} className="onvo-min-w-56 onvo-z-50">
               {deletable && (
                 <DropdownMenuGroup>
                   <DropdownMenuItem onClick={deleteWidget}>
@@ -214,7 +208,7 @@ const ChartCard: React.FC<{
       sub = sub.join("<br />");
     }
     return (
-      <div
+      <div ref={cardRef}
         className={
           "onvo-group/chartcard onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
           (className || "")
@@ -230,7 +224,7 @@ const ChartCard: React.FC<{
                 variant="shadow"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="onvo-min-w-56">
+            <DropdownMenuContent container={cardRef.current} className="onvo-min-w-56 onvo-z-50">
               {widget_editable && (
                 <DropdownMenuGroup>
                   <DropdownMenuItem
@@ -278,7 +272,7 @@ const ChartCard: React.FC<{
 
   if (output.type === "image") {
     return (
-      <div
+      <div ref={cardRef}
         className={
           "onvo-group/chartcard onvo-rounded-md onvo-transition-all onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
           (className || "")
@@ -294,7 +288,7 @@ const ChartCard: React.FC<{
                 variant="shadow"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="onvo-min-w-56">
+            <DropdownMenuContent container={cardRef.current} className="onvo-min-w-56 onvo-z-50">
               {widget_editable && (
                 <DropdownMenuGroup>
                   <DropdownMenuItem
@@ -338,10 +332,11 @@ const ChartCard: React.FC<{
 
   return (
     <Card
+      ref={cardRef}
       key={widget.id}
       id={widget.settings?.css_id}
       className={
-        "onvo-chart-card onvo-h-full onvo-group/chartcard onvo-foreground-color onvo-relative -onvo-z-[1] onvo-flex onvo-flex-col onvo-px-0 onvo-py-0 " +
+        "onvo-chart-card onvo-h-full onvo-group/chartcard onvo-foreground-color onvo-relative onvo-flex onvo-flex-col onvo-px-0 onvo-py-0 " +
         (className || "") +
         " " +
         (widget.settings?.css_classnames ? widget.settings?.css_classnames : "")
@@ -375,7 +370,7 @@ const ChartCard: React.FC<{
                 variant="shadow"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="onvo-min-w-56 onvo-background-color onvo-border-black/10 dark:onvo-border-white/10">
+            <DropdownMenuContent container={cardRef.current} className="onvo-min-w-56 onvo-background-color onvo-border-black/10 dark:onvo-border-white/10 onvo-z-50">
               {(addable || widget_editable) && (
                 <>
                   <DropdownMenuLabel>Edit widget</DropdownMenuLabel>

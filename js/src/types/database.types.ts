@@ -433,18 +433,21 @@ export type Database = {
           config: Json
           created_at: string
           provider: string
+          status: string
           team: string
         }
         Insert: {
           config?: Json
           created_at?: string
           provider: string
+          status?: string
           team: string
         }
         Update: {
           config?: Json
           created_at?: string
           provider?: string
+          status?: string
           team?: string
         }
         Relationships: [
@@ -497,6 +500,7 @@ export type Database = {
           ollama_api_url: string | null
           openai_api_key: string | null
           programmer_agent_model: string
+          programmer_agent_prompt: string | null
           programmer_agent_provider: string
           programmer_agent_type: Database["public"]["Enums"]["LLM hosting type"]
           team: string
@@ -512,6 +516,7 @@ export type Database = {
           ollama_api_url?: string | null
           openai_api_key?: string | null
           programmer_agent_model?: string
+          programmer_agent_prompt?: string | null
           programmer_agent_provider?: string
           programmer_agent_type?: Database["public"]["Enums"]["LLM hosting type"]
           team: string
@@ -527,6 +532,7 @@ export type Database = {
           ollama_api_url?: string | null
           openai_api_key?: string | null
           programmer_agent_model?: string
+          programmer_agent_prompt?: string | null
           programmer_agent_provider?: string
           programmer_agent_type?: Database["public"]["Enums"]["LLM hosting type"]
           team?: string
@@ -731,25 +737,31 @@ export type Database = {
       }
       subscription_plans: {
         Row: {
+          accounts: number | null
           automations: boolean
-          integrations: boolean
+          connected_datasources: number
+          copilot: boolean
+          custom_llm: boolean
+          embed_users: number
           name: string
-          users: number | null
-          widgets: number
         }
         Insert: {
+          accounts?: number | null
           automations?: boolean
-          integrations?: boolean
+          connected_datasources?: number
+          copilot?: boolean
+          custom_llm?: boolean
+          embed_users?: number
           name: string
-          users?: number | null
-          widgets?: number
         }
         Update: {
+          accounts?: number | null
           automations?: boolean
-          integrations?: boolean
+          connected_datasources?: number
+          copilot?: boolean
+          custom_llm?: boolean
+          embed_users?: number
           name?: string
-          users?: number | null
-          widgets?: number
         }
         Relationships: []
       }
@@ -905,12 +917,6 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      can_create_widget: {
-        Args: {
-          p_auth: Json
-        }
-        Returns: boolean
-      }
       check_id_in_dashboards: {
         Args: {
           id: string
@@ -930,10 +936,9 @@ export type Database = {
         }
         Returns: boolean
       }
-      stripe_can_create_datasource: {
+      stripe_can_create_embed_user: {
         Args: {
           organisation: string
-          type: string
         }
         Returns: boolean
       }

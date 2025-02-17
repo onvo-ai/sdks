@@ -9,7 +9,9 @@ export class OnvoDashboards extends OnvoBase {
    * @return {Promise<(Dashboard & {_meta: DashboardMeta})[]>} A promise that resolves to an array of dashboards.
    */
   list(): Promise<(Dashboard & { _meta: DashboardMeta })[]> {
-    return this.fetchBase("/api/dashboards") as Promise<
+    return this.fetchBase("/api/dashboards").catch((e) => {
+      throw e;
+    }) as Promise<
       (Dashboard & { _meta: DashboardMeta })[]
     >;
   }
@@ -20,7 +22,9 @@ export class OnvoDashboards extends OnvoBase {
    * @return {Promise<Dashboard>} A promise that resolves to the dashboard.
    */
   get(id: string): Promise<Dashboard & { _meta: DashboardMeta }> {
-    return this.fetchBase("/api/dashboards/" + id) as Promise<
+    return this.fetchBase("/api/dashboards/" + id).catch((e) => {
+      throw e;
+    }) as Promise<
       Dashboard & { _meta: DashboardMeta }
     >;
   }

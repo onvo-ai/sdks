@@ -13,6 +13,7 @@ describe("Dashboards", () => {
     );
   });
 
+
   it("should create dashboard", async () => {
     newDashboard = await onvo.dashboards.create({
       title: "My Dashboard",
@@ -44,6 +45,7 @@ describe("Dashboards", () => {
     expect(dashboard.id).toEqual(newDashboard.id);
     expect(dashboard.title).toBeDefined();
   });
+
 
   it("should update dashboard", async () => {
     let dashboard = await onvo.dashboards.update(newDashboard.id, {

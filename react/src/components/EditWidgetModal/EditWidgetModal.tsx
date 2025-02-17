@@ -27,6 +27,13 @@ import { Divider } from "../../tremor/Divider";
 import { twMerge } from "tailwind-merge";
 import { create } from "zustand";
 
+const hashCode = function (s: string) {
+  return s.split("").reduce(function (a, b) {
+    a = ((a << 5) - a) + b.charCodeAt(0);
+    return a & a;
+  }, 0);
+}
+
 export const useEditWidgetModal = create<{
   open: boolean;
   widget: Widget | undefined;
@@ -336,7 +343,7 @@ export const EditWidgetModal: React.FC<{}> = ({ }) => {
                 <TabsList className="onvo-border-black/10 dark:onvo-border-white/10">
                   <TabsTrigger value="chat">Chat</TabsTrigger>
                   {(adminMode ||
-                    dashboard?.settings?.enable_widget_code_editor) && (
+                    dashboard?.settings?.can_edit_widget_code) && (
                       <TabsTrigger value="editor">Code editor</TabsTrigger>
                     )}
                   <TabsTrigger value="settings">Settings</TabsTrigger>
@@ -423,7 +430,7 @@ export const EditWidgetModal: React.FC<{}> = ({ }) => {
                     </div>
                   </TabsContent>
                   {(adminMode ||
-                    dashboard?.settings?.enable_widget_code_editor) && (
+                    dashboard?.settings?.can_edit_widget_code) && (
                       <TabsContent
                         value="editor"
                         className="onvo-h-full onvo-w-full"
@@ -580,7 +587,7 @@ export const EditWidgetModal: React.FC<{}> = ({ }) => {
                     id={widget?.id || ""}
                     title={title}
                     settings={settings}
-                    key={title + JSON.stringify(settings)}
+                    key={title + hashCode(JSON.stringify(settings) + JSON.stringify(output))}
                   />
                 )}
               </Card>

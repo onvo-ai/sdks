@@ -33,14 +33,11 @@ export const Dashboard: React.FC<{
   className?: string;
   variant?: "default" | "pdf" | "pptx"
 }> = ({ id: dashboardId, className, variant = "default" }): React.ReactNode => {
-  const { subscription, subscriptionLoaded, backend } = useBackend();
+  const { backend } = useBackend();
   const theme = useTheme();
-  const { dashboard } = useDashboard();
+  const { dashboard, unauthorized } = useDashboard();
 
   const style = dashboard?.settings?.custom_css || "";
-
-  const paymentModalOpen =
-    subscriptionLoaded && dashboard && subscription === undefined;
 
   useEffect(() => {
     if (dashboardId && backend) {
@@ -64,7 +61,7 @@ export const Dashboard: React.FC<{
         <style>{style}</style>
         <Toaster position="bottom-right" richColors />
 
-        {paymentModalOpen && (
+        {unauthorized && (
           <div className="onvo-absolute onvo-top-0 onvo-left-0 onvo-right-0 onvo-bottom-0 onvo-bg-black/50 onvo-z-[1000] onvo-backdrop-blur-md onvo-flex onvo-justify-center onvo-items-center">
             <Card className="onvo-max-w-screen-md">
               <Title>Dashboard unavailable</Title>

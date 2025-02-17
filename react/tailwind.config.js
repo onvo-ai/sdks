@@ -8,7 +8,7 @@ const {
 
 /* eslint-disable max-len */
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./lib/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: "selector",
   prefix: "onvo-",
   theme: {

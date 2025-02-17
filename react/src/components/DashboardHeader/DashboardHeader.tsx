@@ -1,19 +1,17 @@
 import { Badge } from "../../tremor/Badge";
 import { Label, Metric } from "../../tremor/Text";
 import { Button } from "../../tremor/Button";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDashboard } from "../../layouts/Dashboard/useDashboard";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {
   AdjustmentsHorizontalIcon,
-  ArrowDownIcon,
   ArrowDownTrayIcon,
   ArrowPathIcon,
   ChevronDownIcon,
   ClockIcon,
   DocumentChartBarIcon,
-  FunnelIcon,
   PhotoIcon,
   PresentationChartBarIcon,
 } from "@heroicons/react/24/outline";
@@ -71,7 +69,8 @@ export const DashboardHeader: React.FC<{
   const { setOpen } = useAutomationsModal();
   const { dashboard, refreshing } = useDashboard();
   const theme = useTheme();
-  const { backend, adminMode, subscriptionPlan } = useBackend();
+  const { backend, adminMode } = useBackend();
+  const headerRef = useRef(null);
 
   const exportDashboard = useCallback(
     (format: "csv" | "xlsx" | "pdf" | "png" | "jpeg" | "pptx") => {
@@ -87,7 +86,11 @@ export const DashboardHeader: React.FC<{
           loading: `Exporting dashboard as ${format}...`,
           success: (url: string) => {
             let a = document.createElement("a");
-            a.download = dashboard.title + "." + format;
+            if (format === "csv") {
+              a.download = dashboard.title + ".zip";
+            } else {
+              a.download = dashboard.title + "." + format;
+            }
             a.href = url;
             document.body.appendChild(a);
             a.click();
@@ -125,8 +128,8 @@ export const DashboardHeader: React.FC<{
   if (dashboard?.settings?.hide_header && !adminMode) return <></>;
 
   return (
-    <section
-      className={`onvo-@container/onvo-dashboard-header onvo-background-color onvo-dashboard-header onvo-sticky onvo-z-50 onvo-top-0 ${className ? className : ""}`}
+    <section ref={headerRef}
+      className={`onvo-@container/onvo-dashboard-header onvo-leading-tight onvo-background-color onvo-dashboard-header onvo-sticky onvo-z-50 onvo-top-0 ${className ? className : ""}`}
       style={{
         boxShadow: `0px 8px 4px ${theme === "dark" ? dashboard?.settings?.dark_background : dashboard?.settings?.light_background}`,
       }}
@@ -137,7 +140,7 @@ export const DashboardHeader: React.FC<{
         <div className="onvo-flex-grow">
           {dashboard ? (
             <>
-              <Metric className="onvo-dashboard-header-title dark:!onvo-text-white !onvo-text-black onvo-font-override !onvo-font-medium onvo-text-2xl">
+              <Metric className="onvo-dashboard-header-title !onvo-font-semibold dark:!onvo-text-white !onvo-text-black onvo-font-override onvo-text-xl">
                 {dashboard?.title || " "}
               </Metric>
               <Label className="onvo-dashboard-header-description !onvo-font-normal onvo-font-override">
@@ -168,7 +171,7 @@ export const DashboardHeader: React.FC<{
                 <FilterBar />
               </PopoverContent>
             </Popover>)}
-          {(subscriptionPlan?.automations && !dashboard?.settings?.disable_automations) && (
+          {(dashboard?.settings?.can_schedule_reports) && (
             <Button className="onvo-foreground-color onvo-border-black/10 dark:onvo-border-white/10" variant="secondary"
               onClick={() => {
                 setOpen(true);
@@ -187,7 +190,7 @@ export const DashboardHeader: React.FC<{
                   <ChevronDownIcon className="onvo-h-4 onvo-w-4 onvo-ml-1" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="onvo-min-w-56 onvo-background-color onvo-border-black/10 dark:onvo-border-white/10">
+              <DropdownMenuContent container={headerRef.current} className="onvo-min-w-56 onvo-background-color onvo-border-black/10 dark:onvo-border-white/10">
                 {ReportDownloadEnabled && (
                   <>
                     <DropdownMenuLabel>Reports</DropdownMenuLabel>

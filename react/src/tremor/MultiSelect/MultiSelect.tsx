@@ -148,7 +148,7 @@ export const MultiSelect: React.FC<{
                   e.stopPropagation();
                   let exists = internalValue.find((a) => a === item.value);
                   let newValues = internalValue.filter((a) => a !== item.value);
-                  if (!exists) {
+                  if (exists === undefined) {
                     newValues.push(item.value);
                   }
                   setInternalValue(newValues);

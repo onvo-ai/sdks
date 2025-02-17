@@ -107,13 +107,6 @@ const QuestionMessage: React.FC<{
           e.preventDefault();
           e.stopPropagation();
 
-          let limit = dashboard?.settings?.widget_limit || 100;
-          if (widgets.length >= limit) {
-            return toast.error(
-              `You can only have ${limit} widgets in your dashboard. Please delete some of your widgets first or contact the administrator.`
-            );
-          }
-
           let newObj: any = {
             title: title,
             layouts: {

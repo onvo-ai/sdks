@@ -59,6 +59,7 @@
   margin: 8px;
   opacity: 0;
   transition: all 0.15s ease-in-out;
+  z-index: 10;
 }
 .onvo-dark .react-grid-item > .react-resizable-handle {
   border-bottom: 3px solid #ffffff30;
@@ -84,8 +85,11 @@
   margin-top: 12px;
 }
 .rdg a {
-  text-decoration: underline;
-  color: #3366cc;
+  text-decoration: none;
+  color: #fff;
+  background: #3b82f6;
+  border-radius: 16px;
+  padding: 4px 12px;
 }
 .rdg-cell[role="columnheader"] {
   overflow-y: visible;
@@ -108,8 +112,74 @@
   --rdg-color: var(--onvo-dark-font-color);
   border-color: rgba(255, 255, 255, 0.1);
 }
+
+.rsw-ce {
+  flex: 1 0 auto;
+  padding: 0.5rem;
+}
+
+.rsw-ce:focus {
+  outline: 1px solid #668;
+}
+
+.rsw-ce[contentEditable="true"]:empty:not(:focus):before {
+  color: grey;
+  content: attr(placeholder);
+  pointer-events: none;
+}
+
+.rsw-html {
+  background: transparent;
+  border: none;
+  font-family: monospace, "Courier New";
+}
+
+.rsw-separator {
+  align-self: stretch;
+  border-right: 1px solid #ddd;
+  display: flex;
+  margin: 0 3px;
+}
+
+.rsw-dd {
+  box-sizing: border-box;
+  outline: none;
+}
+
+.rsw-btn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: #222;
+  font-size: 1em;
+  height: 2em;
+  outline: none;
+  padding: 0;
+  width: 2em;
+}
+
+.rsw-btn:hover {
+  background: #eaeaea;
+}
+
+.rsw-btn[data-active="true"] {
+  background: #e0e0e0;
+}
+
+.rsw-toolbar {
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  background-color: var(--onvo-foreground-color);
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
 .rsw-editor {
-  border-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.375rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  overflow: hidden;
   background-color: var(--onvo-background-color);
   margin-top: 4px;
 }
@@ -120,10 +190,6 @@
   background-color: var(--onvo-dark-background-color);
 }
 
-.rsw-toolbar {
-  background-color: var(--onvo-foreground-color);
-  border-bottom-color: rgba(0, 0, 0, 0.1);
-}
 .onvo-dark .rsw-toolbar {
   background-color: var(--onvo-dark-foreground-color);
   border-bottom-color: rgba(255, 255, 255, 0.1);

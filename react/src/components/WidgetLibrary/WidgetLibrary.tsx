@@ -63,13 +63,6 @@ const WidgetLibraryRaw: React.FC<{
     // @ts-ignore
     delete newObj.id;
 
-    let limit = dashboard?.settings?.widget_limit || 100;
-    if (widgets.length >= limit) {
-      return toast.error(
-        `You can only have ${limit} widgets in your dashboard. Please delete some of your widgets first or contact the administrator.`
-      );
-    }
-
     if (!backend) return;
 
     toast.promise(
