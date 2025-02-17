@@ -272,18 +272,19 @@ const CopilotRaw: React.FC<{
                 <ChevronRightIcon className="onvo-hidden @xl/questionmodal:onvo-block onvo-h-4 onvo-w-4 dark:onvo-fill-slate-500" />
                 <Label>{dashboard?.settings?.copilot_title || "Copilot"}</Label>
               </div>
-              <Button
-                variant="primary"
-                className="onvo-flex-shrink-0"
-                onClick={() => {
-                  setSelectedQuestion(undefined);
-                  setMessages([]);
-                  setQuery("");
-                  setTab("home");
-                }}
-              >
-                + New widget
-              </Button>
+              {tab === "home" ? <div></div> : (
+                <Button
+                  variant="primary"
+                  className="onvo-flex-shrink-0"
+                  onClick={() => {
+                    setSelectedQuestion(undefined);
+                    setMessages([]);
+                    setQuery("");
+                    setTab("home");
+                  }}
+                >
+                  + New widget
+                </Button>)}
             </div>
             <div className="onvo-flex onvo-flex-grow onvo-w-full onvo-h-[calc(100%-52px)] onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-col ">
               {["home", "library", "history"].indexOf(tab) >= 0 && (

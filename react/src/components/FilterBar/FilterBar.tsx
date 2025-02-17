@@ -173,7 +173,7 @@ export const FilterBar = () => {
                     }}
                     className="onvo-max-w-full"
                     items={filter.options.map((opt) => ({
-                      label: opt,
+                      label: opt === "" ? "(blank)" : opt,
                       value: opt,
                     }))}
                   />

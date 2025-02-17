@@ -18,30 +18,28 @@ export default class OnvoBase {
     body?: any,
     isForm?: boolean
   ): Promise<any> {
-    try {
-      let headers: any = {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-      };
-      if (this.#apiKey && this.#apiKey.trim() !== "") {
-        headers["x-api-key"] = this.#apiKey;
-      }
-      if (!isForm) {
-        headers["Content-Type"] = "application/json";
-      }
-      const response = await fetch(this.endpoint + url, {
-        method: method || "GET",
-        headers: headers,
-        body: isForm ? body : body ? JSON.stringify(body) : undefined,
-      });
-      if (!response.ok) {
-        let data: any = await response.text();
-        throw new Error(data);
-      }
+    let headers: any = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    };
+    if (this.#apiKey && this.#apiKey.trim() !== "") {
+      headers["x-api-key"] = this.#apiKey;
+    }
+    if (!isForm) {
+      headers["Content-Type"] = "application/json";
+    }
+    const response = await fetch(this.endpoint + url, {
+      method: method || "GET",
+      headers: headers,
+      body: isForm ? body : body ? JSON.stringify(body) : undefined,
+    });
+
+    if (!response.ok) {
+      let data: any = await response.json();
+      throw new Error(data.message);
+    } else {
       let data = await response.json();
       return data;
-    } catch (error: any) {
-      throw new Error("Error in making the request: " + error.message);
     }
   }
 

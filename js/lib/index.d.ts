@@ -453,18 +453,21 @@ type Database = {
                     config: Json;
                     created_at: string;
                     provider: string;
+                    status: string;
                     team: string;
                 };
                 Insert: {
                     config?: Json;
                     created_at?: string;
                     provider: string;
+                    status?: string;
                     team: string;
                 };
                 Update: {
                     config?: Json;
                     created_at?: string;
                     provider?: string;
+                    status?: string;
                     team?: string;
                 };
                 Relationships: [
@@ -517,6 +520,7 @@ type Database = {
                     ollama_api_url: string | null;
                     openai_api_key: string | null;
                     programmer_agent_model: string;
+                    programmer_agent_prompt: string | null;
                     programmer_agent_provider: string;
                     programmer_agent_type: Database["public"]["Enums"]["LLM hosting type"];
                     team: string;
@@ -532,6 +536,7 @@ type Database = {
                     ollama_api_url?: string | null;
                     openai_api_key?: string | null;
                     programmer_agent_model?: string;
+                    programmer_agent_prompt?: string | null;
                     programmer_agent_provider?: string;
                     programmer_agent_type?: Database["public"]["Enums"]["LLM hosting type"];
                     team: string;
@@ -547,6 +552,7 @@ type Database = {
                     ollama_api_url?: string | null;
                     openai_api_key?: string | null;
                     programmer_agent_model?: string;
+                    programmer_agent_prompt?: string | null;
                     programmer_agent_provider?: string;
                     programmer_agent_type?: Database["public"]["Enums"]["LLM hosting type"];
                     team?: string;
@@ -751,25 +757,31 @@ type Database = {
             };
             subscription_plans: {
                 Row: {
+                    accounts: number | null;
                     automations: boolean;
-                    integrations: boolean;
+                    connected_datasources: number;
+                    copilot: boolean;
+                    custom_llm: boolean;
+                    embed_users: number;
                     name: string;
-                    users: number | null;
-                    widgets: number;
                 };
                 Insert: {
+                    accounts?: number | null;
                     automations?: boolean;
-                    integrations?: boolean;
+                    connected_datasources?: number;
+                    copilot?: boolean;
+                    custom_llm?: boolean;
+                    embed_users?: number;
                     name: string;
-                    users?: number | null;
-                    widgets?: number;
                 };
                 Update: {
+                    accounts?: number | null;
                     automations?: boolean;
-                    integrations?: boolean;
+                    connected_datasources?: number;
+                    copilot?: boolean;
+                    custom_llm?: boolean;
+                    embed_users?: number;
                     name?: string;
-                    users?: number | null;
-                    widgets?: number;
                 };
                 Relationships: [];
             };
@@ -925,12 +937,6 @@ type Database = {
             [_ in never]: never;
         };
         Functions: {
-            can_create_widget: {
-                Args: {
-                    p_auth: Json;
-                };
-                Returns: boolean;
-            };
             check_id_in_dashboards: {
                 Args: {
                     id: string;
@@ -950,10 +956,9 @@ type Database = {
                 };
                 Returns: boolean;
             };
-            stripe_can_create_datasource: {
+            stripe_can_create_embed_user: {
                 Args: {
                     organisation: string;
-                    type: string;
                 };
                 Returns: boolean;
             };
@@ -1060,6 +1065,7 @@ declare enum Table {
 
 type DashboardSettings = {
     filters: boolean;
+    cache_refresh_interval?: number;
     theme: "dark" | "light" | "auto";
     font: string;
     dark_background: string;
@@ -1081,9 +1087,8 @@ type DashboardSettings = {
     can_edit_widget_layout: boolean;
     can_create_widgets: boolean;
     can_delete_widgets: boolean;
-    disable_automations?: boolean;
-    enable_widget_code_editor?: boolean;
-    widget_limit?: number;
+    can_schedule_reports?: boolean;
+    can_edit_widget_code?: boolean;
     disable_download_images: boolean;
     disable_download_reports: boolean;
     disable_download_documents: boolean;
@@ -1705,20 +1710,6 @@ declare class OnvoUtils extends OnvoBase {
     }>;
 }
 
-declare class OnvoTeam extends OnvoBase {
-    #private;
-    constructor(id: string, apiKey: string, options?: {
-        endpoint: string;
-    });
-    /**
-     * Gets the subscription for the datasource
-     * @returns {Promise<Subscription & {subscription_plans: SubscriptionPlan}>} A promise that resolves to a subcription.
-     */
-    getSubscription(): Promise<Subscription & {
-        subscription_plans: SubscriptionPlan;
-    }>;
-}
-
 declare class OnvoLogs extends OnvoBase {
     /**
      * Lists all logs for a given dashboard.
@@ -1760,7 +1751,6 @@ declare class Onvo extends OnvoBase {
     datasource: (datasourceId: string) => OnvoDatasource;
     widget: (widgetId: string) => OnvoWidget;
     question: (questionId: string) => OnvoQuestion;
-    team: (teamId: string) => OnvoTeam;
     constructor(apiKey: string, options?: {
         endpoint: string;
     });

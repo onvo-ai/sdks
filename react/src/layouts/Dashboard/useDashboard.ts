@@ -7,6 +7,7 @@ interface DashboardState {
   refreshing: boolean;
   dashboard: Dashboard | undefined;
   widgets: Widget[];
+  unauthorized: boolean;
   setId: (id: string, backend: Onvo) => void;
   setDashboard: (dashboard: Dashboard | undefined) => void;
   setWidgets: (widgets: Widget[]) => void;
@@ -20,19 +21,20 @@ export const useDashboard = create<DashboardState>((set, get) => ({
   refreshing: false,
   dashboard: undefined,
   widgets: [],
+  unauthorized: false,
   setId: (id, backend) => {
     let loading = get().loading;
     set({ id, loading: true });
-
     backend.dashboards.get(id).then((dash) => {
       set({
         dashboard: dash,
         loading: false,
       });
-
+      const interval = dash.settings?.cache_refresh_interval || 5;
+      const nextUpdate = new Date(dash.last_updated_at).getTime() + (interval * 60000);
       if (
         !loading &&
-        new Date(dash.last_updated_at).getTime() + 60000 < new Date().getTime()
+        nextUpdate < new Date().getTime()
       ) {
         set({ refreshing: true });
         backend
@@ -54,7 +56,11 @@ export const useDashboard = create<DashboardState>((set, get) => ({
             }
           });
       }
-    });
+    }).catch((e) => {
+      if (e.message === "Your subscription is not active") {
+        set({ unauthorized: true });
+      }
+    })
   },
   setDashboard: (dashboard) => set({ dashboard }),
   setWidgets: (widgets) => set({ widgets }),
@@ -70,6 +76,10 @@ export const useDashboard = create<DashboardState>((set, get) => ({
     if (!id) return;
     await backend.dashboards.get(id).then((dash) => {
       set({ dashboard: dash });
-    });
-  },
+    }).catch((e) => {
+      if (e.message === "Your subscription is not active") {
+        set({ unauthorized: true });
+      }
+    })
+  }
 }));

@@ -11,10 +11,26 @@ import { MultiSelect } from "../../tremor/MultiSelect";
 import { useTheme } from "../../layouts/Dashboard/useTheme";
 
 function urlify(text: string) {
-  var urlRegex = /(https?:\/\/[^\s]+)/g;
-  return (text + "").replace(urlRegex, function (url) {
-    let properUrl = url.search("http") !== -1 ? url : "https://" + url;
-    return '<a target="_blank" href="' + properUrl + '">' + url + "</a>";
+  // Regex to detect markdown links: [text](url)
+  const markdownLinkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+  // Regex to detect standalone URLs: https://example.com
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+
+  let text1 = text + "";
+  // First, replace markdown links
+  text1 = text1.replace(markdownLinkRegex, function (_, linkText, url) {
+
+    let properUrl = url.startsWith("http") ? url : "https://" + url;
+    return `<a target="_blank" href="${properUrl}">${linkText}</a>`;
+  });
+
+  if (text1 !== text) {
+    return text1;
+  }
+  // Next, replace standalone URLs (avoiding already replaced markdown links)
+  return text1.replace(urlRegex, function (url) {
+    let properUrl = url.startsWith("http") ? url : "https://" + url;
+    return `<a target="_blank" href="${properUrl}">${url}</a>`;
   });
 }
 
@@ -163,7 +179,7 @@ const TableWidget: React.FC<{ data: any }> = ({ data }) => {
 
   return (
     <div className="onvo-table-widget onvo-h-full onvo-flex onvo-flex-col onvo-relative">
-      <Title className="onvo-table-widget-title onvo-text-md onvo-text-gray-600 dark:onvo-text-gray-500 onvo-font-override onvo-my-0">
+      <Title className="onvo-table-widget-title onvo-text-md !onvo-text-[#111] dark:!onvo-text-[#ddd] onvo-font-override onvo-my-0">
         {data.options.plugins.title.text}
       </Title>
       <DataGrid

@@ -12,27 +12,30 @@ export default meta;
 
 type Story = StoryObj<typeof MultiSelect>;
 
-const data = [
-  {
-    value: "dress-shirt-striped",
-    label: "Striped Dress Shirt",
-  },
-  {
-    value: "relaxed-button-down",
-    label: "Relaxed Fit Button Down",
-  },
-  {
-    value: "slim-button-down",
-    label: "Slim Fit Button Down",
-  },
-  {
-    value: "dress-shirt-solid",
-    label: "Solid Dress Shirt",
-  },
-  {
-    value: "dress-shirt-check",
-    label: "Check Dress Shirt",
-  },
+const data = [{
+  value: "",
+  label: ""
+},
+{
+  value: "dress-shirt-striped",
+  label: "Striped Dress Shirt",
+},
+{
+  value: "relaxed-button-down",
+  label: "Relaxed Fit Button Down",
+},
+{
+  value: "slim-button-down",
+  label: "Slim Fit Button Down",
+},
+{
+  value: "dress-shirt-solid",
+  label: "Solid Dress Shirt",
+},
+{
+  value: "dress-shirt-check",
+  label: "Check Dress Shirt",
+},
 ];
 
 export const Variants: Story = (args) => (

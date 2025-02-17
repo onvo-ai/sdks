@@ -5,31 +5,56 @@ import { Button } from "../../tremor/Button";
 import TableWidget from "./TableWidget";
 import React, { useMemo, useRef, useState } from "react";
 
-import "chart.js/auto";
 import "chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm";
 import { Chart } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js";
-import { FunnelController, TrapezoidElement } from "chartjs-chart-funnel";
-import ChartDataLabels from "chartjs-plugin-datalabels";
-import zoomPlugin from "@trullock/chartjs-plugin-zoom";
-
-import MetricChart from "./MetricChart";
-import TextChart from "./TextChart";
 import { WidgetSettings } from "@onvo-ai/js";
+import { useTheme } from "../../layouts/Dashboard/useTheme";
+
+import { MetricChart, MetricPlugin } from "./MetricChart";
+import TextChart from "./TextChart";
 import ImageChart from "./ImageChart";
 import { DividerChart, DividerPlugin } from "./DividerChart";
+import { FunnelController, TrapezoidElement, } from "chartjs-chart-funnel";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+import zoomPlugin from "chartjs-plugin-zoom";
+import { PolygonController, PolylineController, MarkerController, MapPlugin, MapController } from "@onvo-ai/chartjs-chart-map";
+import { MatrixController, MatrixElement } from 'chartjs-chart-matrix';
+import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
+import { SankeyController, Flow } from 'chartjs-chart-sankey';
 
-ChartJS.register([
+import "chart.js/auto";
+
+function transparentize(hexColor: string, opacity: number) {
+  // Convert opacity to hex value
+  let alphaHex = Math.round(opacity * 255).toString(16);
+  if (alphaHex.length === 1) {
+    alphaHex = "0" + alphaHex;
+  }
+
+  // Return the hex color with the alpha value
+  return hexColor + alphaHex;
+}
+
+ChartJS.register(
+  PolygonController, PolylineController, MarkerController, MapController,
   FunnelController,
   TrapezoidElement,
   MetricChart,
+  MetricPlugin,
   TextChart,
   ImageChart,
   DividerPlugin,
   DividerChart,
   ChartDataLabels,
   zoomPlugin,
-]);
+  WordCloudController,
+  WordElement,
+  SankeyController,
+  Flow,
+  MatrixController,
+  MatrixElement
+);
 
 const ChartBase: React.FC<{
   json: any;
@@ -39,6 +64,7 @@ const ChartBase: React.FC<{
 }> = ({ json, id, title, settings }) => {
   const chartRef = useRef<any>();
   const [zoomed, setZoomed] = useState(false);
+  const theme = useTheme();
 
   const resetZoom = () => {
     chartRef.current?.resetZoom();
@@ -63,8 +89,9 @@ const ChartBase: React.FC<{
       fullSize: true,
       font: {
         size: output.type === "text" ? 24 : 18,
-        weight: output.type === "text" ? 600 : 600,
+        weight: 600,
       },
+      color: theme === "dark" ? "#ddd" : "#111",
       padding: output.options.plugins.title?.padding || {
         bottom: 5,
       },
@@ -100,7 +127,6 @@ const ChartBase: React.FC<{
             backgroundColor: "rgba(59, 130, 246, 0.2)",
             borderColor: "rgb(59, 130, 246)",
             borderWidth: 2,
-            drawTime: "afterDraw"
           },
           pinch: {
             enabled: true,
@@ -112,8 +138,27 @@ const ChartBase: React.FC<{
         },
       };
     }
+    if (output.type === "matrix") {
+      output.data.datasets = output.data.datasets.map((dataset: any, index: number) => {
+        return {
+          ...dataset,
+          backgroundColor: (context: any) => {
+            const value = context.dataset.data[context.dataIndex].v;
+            const max = Math.max(...dataset.data.map((d: any) => d.v));
+            const opacity = (value / max);
+            var alpha = opacity === undefined ? 0.5 : (1 - opacity);
+            return transparentize(dataset.baseColor || "#22c55e", alpha);
+          },
+          borderWidth: 2,
+          borderColor: theme === "dark" ? "#0f172a" : "#ffffff",
+          width: ({ chart }: { chart: any }) => (chart.chartArea || {}).width / chart.scales.x.ticks.length,
+          height: ({ chart }: { chart: any }) => (chart.chartArea || {}).height / chart.scales.y.ticks.length
+        };
+      });
+    }
+    output.options.theme = theme;
     return output;
-  }, [json, title]);
+  }, [json, title, theme]);
 
   return (
     <ErrorBoundary
@@ -134,12 +179,13 @@ const ChartBase: React.FC<{
               (zoomed ? "onvo-h-[calc(100%-40px)]" : "onvo-h-full")
             }
           >
-            <Chart ref={chartRef} id={id} {...chartConfig} />
+            <Chart ref={chartRef} plugins={chartConfig.type === "map" ? [MapPlugin] : []} key={id + theme} {...chartConfig} />
           </div>
         )
       ) : (
         <></>
       )}
+
       <div
         className={
           "onvo-overflow-y-hidden onvo-w-full onvo-mt-1 onvo-px-2 onvo-transition-all onvo-bg-gray-50 dark:onvo-bg-gray-800 onvo-rounded-md onvo-flex onvo-flex-row onvo-items-center onvo-justify-between " +

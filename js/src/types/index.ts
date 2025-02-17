@@ -8,6 +8,8 @@ export * from "./utils";
 export type DashboardSettings = {
   filters: boolean;
 
+  cache_refresh_interval?: number; // in minutes
+
   theme: "dark" | "light" | "auto";
   font: string;
   dark_background: string;
@@ -31,9 +33,8 @@ export type DashboardSettings = {
   can_edit_widget_layout: boolean; // used to be editable
   can_create_widgets: boolean; // used to be editable
   can_delete_widgets: boolean; // used to be editable
-  disable_automations?: boolean;
-  enable_widget_code_editor?: boolean;
-  widget_limit?: number;
+  can_schedule_reports?: boolean;
+  can_edit_widget_code?: boolean;
 
   disable_download_images: boolean;
   disable_download_reports: boolean;
