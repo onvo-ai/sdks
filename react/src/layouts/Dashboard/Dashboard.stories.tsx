@@ -34,6 +34,7 @@ Standalone.args = {
   baseUrl: "http://localhost:3004",
   id: "ae5b1dde-1ff5-4967-afe1-639b755c7102",
   variant: "default",
+  adminMode: false,
 };
 
 Standalone.parameters = { layout: "fullscreen" };

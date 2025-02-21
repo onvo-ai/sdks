@@ -864,7 +864,6 @@ export type Database = {
           settings: Json
           team: string
           title: string
-          use_as_example: boolean | null
           use_in_library: boolean | null
         }
         Insert: {
@@ -878,7 +877,6 @@ export type Database = {
           settings?: Json
           team: string
           title: string
-          use_as_example?: boolean | null
           use_in_library?: boolean | null
         }
         Update: {
@@ -892,7 +890,6 @@ export type Database = {
           settings?: Json
           team?: string
           title?: string
-          use_as_example?: boolean | null
           use_in_library?: boolean | null
         }
         Relationships: [
@@ -936,6 +933,13 @@ export type Database = {
         }
         Returns: boolean
       }
+      stripe_can_create_dashboard_datasource: {
+        Args: {
+          organisation: string
+          dashboard_id: string
+        }
+        Returns: boolean
+      }
       stripe_can_create_embed_user: {
         Args: {
           organisation: string
@@ -943,6 +947,18 @@ export type Database = {
         Returns: boolean
       }
       stripe_can_create_invite: {
+        Args: {
+          organisation: string
+        }
+        Returns: boolean
+      }
+      stripe_can_create_llm_settings: {
+        Args: {
+          organisation: string
+        }
+        Returns: boolean
+      }
+      stripe_can_read_dashboard: {
         Args: {
           organisation: string
         }

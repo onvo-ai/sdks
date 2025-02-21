@@ -1,4 +1,4 @@
-import { Textarea } from "../../tremor/Textarea";
+
 import { Input } from "../../tremor/Input";
 import { Label, Text, Title } from "../../tremor/Text";
 import { Button } from "../../tremor/Button";
@@ -8,24 +8,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../tremor/Tabs";
 
 import { useEffect, useState } from "react";
 import { LogType, Widget, WidgetMessage, WidgetSettings } from "@onvo-ai/js";
-import {
-  ArrowUpIcon,
-  EyeIcon,
-  EyeSlashIcon,
-  PencilIcon,
-} from "@heroicons/react/24/outline";
+
 import Editor from "@monaco-editor/react";
 import { toast } from "sonner";
 import ChartBase from "../Chart/ChartBase";
-import { SuggestionsBar } from "../SuggestionsBar";
 import React from "react";
-import { UserIcon } from "@heroicons/react/24/solid";
 import { useBackend } from "../../layouts/Wrapper";
 import { useDashboard } from "../../layouts/Dashboard/useDashboard";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import { Divider } from "../../tremor/Divider";
 import { twMerge } from "tailwind-merge";
 import { create } from "zustand";
+import { PromptInput } from "../PromptInput";
+import { QuestionMessage } from "../QuestionMessage";
 
 const hashCode = function (s: string) {
   return s.split("").reduce(function (a, b) {
@@ -43,76 +37,6 @@ export const useEditWidgetModal = create<{
   widget: undefined,
   setOpen: (op: boolean, wid?: Widget) => set({ open: op, widget: wid }),
 }));
-
-const Message: React.FC<{
-  message: WidgetMessage;
-  onDelete: () => void;
-  onEdit: (msg: string) => void;
-}> = ({ message, onEdit, onDelete }) => {
-  const [editing, setEditing] = useState(false);
-
-  const [newMessage, setNewMessage] = useState(message.content);
-
-  if (message.role !== "user") return <></>;
-  return (
-    <div className="onvo-message-wrapper onvo-relative onvo-mb-3 onvo-flex onvo-flex-row onvo-items-start onvo-justify-start onvo-gap-3 onvo-group">
-      <Icon className="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10" variant="shadow" icon={UserIcon} />
-
-      <div className="onvo-message-text onvo-w-full">
-        {editing ? (
-          <Textarea
-            defaultValue={message.content} className="onvo-background-color onvo-border-black/10 dark:onvo-border-white/10"
-            onChange={(e) => setNewMessage(e.target.value)}
-          />
-        ) : (
-          <Text>{message.content}</Text>
-        )}
-
-        {editing ? (
-          <div className="onvo-message-edit-options onvo-flex onvo-flex-row onvo-gap-2 onvo-mt-2">
-            <Button
-              className="onvo-py-1"
-              onClick={() => {
-                onEdit(newMessage);
-                setEditing(false);
-              }}
-            >
-              Regenerate chart
-            </Button>
-            <Button
-              className="onvo-py-1"
-              variant="destructive"
-              onClick={() => {
-                onDelete();
-                setEditing(false);
-              }}
-            >
-              Delete prompt
-            </Button>
-            <div className="onvo-flex-grow onvo-h-1" />
-            <Button
-              className="onvo-py-1 onvo-background-color onvo-border-black/10 dark:onvo-border-white/10"
-              variant="secondary"
-              onClick={() => {
-                setEditing(false);
-              }}
-            >
-              Cancel
-            </Button>
-          </div>
-        ) : (
-          <Icon
-            onClick={() => setEditing(true)}
-            variant="shadow"
-            className="onvo-message-edit-button onvo-background-color onvo-border-black/10 dark:onvo-border-white/10 onvo-absolute onvo-top-1 onvo-right-1 onvo-hidden group-hover:onvo-block"
-            icon={PencilIcon}
-            size="sm"
-          />
-        )}
-      </div>
-    </div>
-  );
-};
 
 export const EditWidgetModal: React.FC<{}> = ({ }) => {
   // EXTERNAL HOOKS
@@ -260,6 +184,51 @@ export const EditWidgetModal: React.FC<{}> = ({ }) => {
     );
   };
 
+  const Preview = (<div className="onvo-h-full onvo-w-full onvo-p-4 onvo-background-color onvo-bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:onvo-bg-[radial-gradient(#0f172a_1px,transparent_1px)] [background-size:16px_16px] onvo-flex onvo-justify-center onvo-items-center">
+    {loading && (
+      <div className="onvo-absolute onvo-top-0 onvo-left-0 onvo-bottom-0 onvo-right-0 onvo-z-10 onvo-backdrop-blur-md onvo-bg-white/50 dark:onvo-bg-black-900/50 onvo-flex onvo-justify-center onvo-items-center">
+        <Card className="onvo-loading-card onvo-foreground-color onvo-flex onvo-flex-row onvo-gap-6 onvo-items-center !onvo-w-72 onvo-border-white/10 dark:onvo-border-black-900/10">
+          <div role="status">
+            <svg
+              aria-hidden="true"
+              className="onvo-inline onvo-w-10 onvo-h-10 onvo-text-gray-200 onvo-animate-spin dark:onvo-text-gray-600 onvo-fill-blue-600"
+              viewBox="0 0 100 101"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                fill="currentColor"
+              />
+              <path
+                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                fill="currentFill"
+              />
+            </svg>
+          </div>
+          <Title>Regenerating chart</Title>
+        </Card>
+      </div>
+    )}
+
+    <Card
+      className={
+        "onvo-foreground-color onvo-relative onvo-flex onvo-w-full onvo-flex-col onvo-py-3 " +
+        (output?.type === "metric"
+          ? "onvo-h-32"
+          : "onvo-h-72 @xl/widgetmodal:onvo-h-96")
+      }
+    >
+      {output && (
+        <ChartBase
+          json={output}
+          title={title}
+          settings={settings}
+          key={title + hashCode(JSON.stringify(settings) + JSON.stringify(output))}
+        />
+      )}
+    </Card></div>)
+
   return (
     <>
       <dialog open={open}>
@@ -316,100 +285,71 @@ export const EditWidgetModal: React.FC<{}> = ({ }) => {
             </div>
           </div>
           <div className="onvo-relative onvo-flex onvo-flex-grow onvo-h-[calc(100%-52px)] onvo-w-full onvo-flex-col-reverse @xl/widgetmodal:onvo-flex-row">
-            <div className="onvo-relative onvo-flex-grow onvo-h-full onvo-w-full onvo-pt-3">
+            <div className="onvo-relative onvo-flex-grow onvo-h-full onvo-w-full onvo-pt-2 onvo-max-w-3xl">
 
-              <div className="onvo-relative onvo-flex-grow onvo-h-[calc(100%-33px)] onvo-w-full onvo-flex onvo-flex-col">
+              <div className="onvo-relative onvo-flex-grow onvo-h-[calc(100%-16px)] onvo-w-full onvo-flex onvo-flex-col">
                 <div className="onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-pt-4 onvo-px-4 onvo-w-full">
-                  {messages.map((a, index) => (
-                    <Message
-                      key={"message-" + index}
-                      message={a}
-                      onDelete={() => {
-                        let newMessages = messages.filter(
-                          (m, i) => i !== index
-                        );
-                        requestEditWidget(newMessages);
-                        setMessages(newMessages);
-                      }}
-                      onEdit={(msg) => {
-                        let newMessages = messages.map((m, i) => {
-                          if (i === index) {
-                            return {
-                              ...m,
-                              content: msg,
-                            };
-                          }
-                          return m;
-                        });
-                        requestEditWidget(newMessages);
-                        setMessages(newMessages);
-                      }}
-                    />
-                  ))}
+                  <div className="onvo-relative onvo-mx-auto onvo-w-full">
+                    {messages.map((message, index) => (
+                      <QuestionMessage
+                        key={"message-" + index}
+                        message={message}
+                        isLast={index === messages.length - 1}
+                        onDownload={() => { }}
+                        onAdd={() => { }}
+                        onReply={(msg) => {
+                          let newMessages = [...messages, {
+                            role: "user" as const,
+                            content: msg,
+                          }];
+                          requestEditWidget(newMessages);
+                          setMessages(newMessages);
+                        }}
+                        onEdit={(msg) => {
+                          let newMessages = messages.map((m, i) => {
+                            if (i === index) {
+                              return {
+                                ...m,
+                                content: msg,
+                              };
+                            }
+                            return m;
+                          });
+                          requestEditWidget(newMessages);
+                          setMessages(newMessages);
+                        }}
+                      />
+                    ))}</div>
                 </div>
-                <div
-                  className={
-                    "onvo-foreground-color onvo-w-full onvo-input-text-wrapper onvo-bg-white dark:onvo-bg-slate-800 onvo-z-10 onvo-pb-4 onvo-px-2"
-                  }
-                >
-                  <div className="onvo-relative onvo-mx-auto onvo-w-full onvo-max-w-2xl">
-                    <SuggestionsBar
-                      onSelect={(val) => setNewMessage(val)}
-                    /></div>
-                  <div className="onvo-relative onvo-mx-auto onvo-flex onvo-w-full onvo-max-w-2xl onvo-flex-row onvo-items-center onvo-gap-2">
-                    <Textarea
-                      value={newMessage}
-                      onChange={(e) => setNewMessage(e.target.value)}
-                      className="onvo-ask-textarea onvo-background-color onvo-pr-[52px] onvo-border-black/10 dark:onvo-border-white/10"
-                      placeholder={`Ask for changes to your widget...`}
-                      autoFocus
-                      onKeyUp={(evt) => {
-                        if (evt.key === "Enter" && !evt.shiftKey) {
-                          requestEditWidget([
-                            ...messages,
-                            { role: "user", content: newMessage },
-                          ]);
-                          setMessages((m) => [
-                            ...m,
-                            { role: "user", content: newMessage },
-                          ]);
-                          setNewMessage("");
-                        }
-                      }}
-                    />
-                    <Icon
-                      className="onvo-absolute onvo-right-2 onvo-top-2 onvo-z-10"
-                      icon={ArrowUpIcon}
-                      variant="solid"
-                      onClick={() => {
-                        requestEditWidget([
-                          ...messages,
-                          { role: "user", content: newMessage },
-                        ]);
-                        setMessages((m) => [
-                          ...m,
-                          { role: "user", content: newMessage },
-                        ]);
-                        setNewMessage("");
-                      }}
-                    />
-                  </div>
-                </div>
+                <div className="onvo-px-4">
+                  <PromptInput
+                    url={dashboard?.settings?.help_url}
+                    onSubmit={(msg) => {
+                      setMessages([...messages, {
+                        role: "user",
+                        content: msg
+                      }])
+                      requestEditWidget([...messages, {
+                        role: "user",
+                        content: msg
+                      }])
+                      setNewMessage("")
+                    }} /></div>
               </div>
             </div>
-            <div className="onvo-border onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-lg onvo-m-4 onvo-flex onvo-flex-shrink-0 @xl/widgetmodal:onvo-flex-shrink onvo-flex-col onvo-justify-center onvo-w-full onvo-flex-grow onvo-relative onvo-overflow-y-auto">
+            <div className="onvo-border onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-2xl onvo-m-4 onvo-ml-0 onvo-flex onvo-flex-shrink-0 @xl/widgetmodal:onvo-flex-shrink onvo-flex-col onvo-justify-center onvo-w-full onvo-flex-grow onvo-relative onvo-overflow-y-auto">
 
               {tab === "editor" && (
                 <Button
                   variant="secondary"
-                  className="!onvo-absolute onvo-top-12 onvo-right-2 onvo-z-10"
+                  className="!onvo-absolute onvo-top-[62px] onvo-right-2 onvo-z-10"
                   onClick={executeCode}
                 >
                   Execute code
                 </Button>
               )}
 
-              <div className="onvo-mb-2 onvo-p-2 onvo-w-full onvo-flex onvo-flex-row onvo-items-center onvo-justify-between onvo-gap-2">
+              <div className="onvo-border-b onvo-border-black/10 dark:onvo-border-white/10 onvo-p-3 onvo-w-full onvo-flex onvo-flex-row onvo-items-center onvo-justify-between onvo-gap-2">
                 <Text className="onvo-text-sm">Title</Text>
                 <Input
                   placeholder="Title"
@@ -418,69 +358,25 @@ export const EditWidgetModal: React.FC<{}> = ({ }) => {
                   onChange={(val) => setTitle(val.target.value)}
                 />
               </div>
-              <Tabs
-                value={tab}
-                onValueChange={(val) => {
-                  setTab(val as "chart" | "editor");
-                }}
-                className="onvo-h-full onvo-flex onvo-flex-col"
-              >
-                <TabsList className="onvo-border-black/10 dark:onvo-border-white/10">
-                  <TabsTrigger value="chart">Chart</TabsTrigger>
-                  {(adminMode ||
-                    dashboard?.settings?.can_edit_widget_code) && (
-                      <TabsTrigger value="editor">Code editor</TabsTrigger>
-                    )}
-                </TabsList>
-                <TabsContent value="chart" className="onvo-h-full">
-                  <div className="onvo-h-full onvo-w-full onvo-p-4 onvo-background-color onvo-bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:onvo-bg-[radial-gradient(#0f172a_1px,transparent_1px)] [background-size:16px_16px] onvo-flex onvo-justify-center onvo-items-center">
-                    {loading && (
-                      <div className="onvo-absolute onvo-top-0 onvo-left-0 onvo-bottom-0 onvo-right-0 onvo-z-10 onvo-backdrop-blur-md onvo-bg-white/50 dark:onvo-bg-black-900/50 onvo-flex onvo-justify-center onvo-items-center">
-                        <Card className="onvo-loading-card onvo-foreground-color onvo-flex onvo-flex-row onvo-gap-6 onvo-items-center !onvo-w-72 onvo-border-white/10 dark:onvo-border-black-900/10">
-                          <div role="status">
-                            <svg
-                              aria-hidden="true"
-                              className="onvo-inline onvo-w-10 onvo-h-10 onvo-text-gray-200 onvo-animate-spin dark:onvo-text-gray-600 onvo-fill-blue-600"
-                              viewBox="0 0 100 101"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                fill="currentColor"
-                              />
-                              <path
-                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                fill="currentFill"
-                              />
-                            </svg>
-                          </div>
-                          <Title>Regenerating chart</Title>
-                        </Card>
-                      </div>
-                    )}
-
-                    <Card
-                      className={
-                        "onvo-foreground-color onvo-relative onvo-flex onvo-w-full onvo-flex-col onvo-py-3 " +
-                        (output?.type === "metric"
-                          ? "onvo-h-32"
-                          : "onvo-h-72 @xl/widgetmodal:onvo-h-96")
-                      }
-                    >
-                      {output && (
-                        <ChartBase
-                          json={output}
-                          id={widget?.id || ""}
-                          title={title}
-                          settings={settings}
-                          key={title + hashCode(JSON.stringify(settings) + JSON.stringify(output))}
-                        />
+              {adminMode ? (
+                <Tabs
+                  value={tab}
+                  onValueChange={(val) => {
+                    setTab(val as "chart" | "editor");
+                  }}
+                  className="onvo-h-full onvo-flex onvo-flex-col"
+                >
+                  <TabsList className="onvo-mt-3 onvo-border-black/10 dark:onvo-border-white/10">
+                    <TabsTrigger value="chart">Chart</TabsTrigger>
+                    {(adminMode ||
+                      dashboard?.settings?.can_edit_widget_code) && (
+                        <TabsTrigger value="editor">Code editor</TabsTrigger>
                       )}
-                    </Card></div>
-                </TabsContent>
-                {(adminMode ||
-                  dashboard?.settings?.can_edit_widget_code) && (
+                  </TabsList>
+                  <TabsContent value="chart" className="onvo-h-full">
+                    {Preview}
+                  </TabsContent>
+                  {adminMode && (
                     <TabsContent
                       value="editor"
                       className="onvo-h-full onvo-w-full"
@@ -536,7 +432,7 @@ export const EditWidgetModal: React.FC<{}> = ({ }) => {
                         </div></div>
                     </TabsContent>
                   )}
-              </Tabs>
+                </Tabs>) : Preview}
             </div>
           </div>
         </div>

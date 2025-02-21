@@ -25,7 +25,7 @@ export const Primary: Story = (args) => {
                     <div className="onvo-grid onvo-grid-cols-3 onvo-gap-2 onvo-w-full onvo-p-4">
                         {["start", "center", "end"].map(horizontalAlignment => (
                             <div className="onvo-relative onvo-h-32 onvo-border onvo-border-gray-200" key={horizontalAlignment + labelAlignment}>
-                                <ChartBase title="Hello World" id={"1234" + horizontalAlignment + labelAlignment} json={{
+                                <ChartBase title="Hello World" key={horizontalAlignment + labelAlignment} json={{
                                     "data": {
                                         "datasets": [
                                             {

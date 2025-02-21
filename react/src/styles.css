@@ -18,7 +18,9 @@
   --onvo-dark-font-color: #64748b;
   --onvo-dark-font-override: inherit;
 }
-
+textarea::-webkit-resizer {
+  display: none;
+}
 .onvo-foreground-color {
   background-color: var(--onvo-foreground-color);
 }
@@ -76,7 +78,7 @@
   display: none !important;
 }
 .react-grid-placeholder {
-  border-radius: 8px;
+  border-radius: 16px;
   background-color: #3366cc33 !important;
 }
 

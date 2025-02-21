@@ -1,27 +1,25 @@
-import { Textarea } from "../../tremor/Textarea";
 import { Label, Metric, Text } from "../../tremor/Text";
 import { Icon } from "../../tremor/Icon";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { toast, Toaster } from "sonner";
-import { ArrowUpIcon } from "@heroicons/react/24/outline";
-import QuestionMessage from "./QuestionMessage";
+import { QuestionMessage } from "../../components/QuestionMessage";
 import { QuestionHistory } from "../../components/QuestionHistory";
 import React from "react";
-import { SuggestionsBar } from "../../components/SuggestionsBar";
 import { useBackend } from "../Wrapper";
 import { useDashboard } from "../Dashboard/useDashboard";
 import { ChartLoader } from "../../components/ChartLoader";
-import { Question } from "@onvo-ai/js";
+import { LogType, Question } from "@onvo-ai/js";
 
 import { twMerge } from "tailwind-merge";
 import { WidgetLibrary } from "../../components/WidgetLibrary";
-import { Button } from "../../tremor/Button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../tremor/Tabs";
 import { WidgetWizard } from "../../components/WidgetWizard";
 import { ChevronRightIcon, XMarkIcon } from "@heroicons/react/16/solid";
 import { useTheme } from "../Dashboard/useTheme";
+import { PromptInput } from "../../components/PromptInput";
+import { useMaxHeight } from "../../lib/useMaxHeight";
 
 dayjs.extend(relativeTime);
 
@@ -31,57 +29,6 @@ export interface MessageType {
   tool_calls?: any[];
 }
 
-const SimpleCreatorTool: React.FC<{ onSubmit: (val: string) => void }> = ({
-  onSubmit,
-}) => {
-  const [value, setValue] = useState("");
-  const { dashboard } = useDashboard();
-  return (
-    <div className=" onvo-relative onvo-mx-auto onvo-max-w-screen-lg onvo-flex onvo-w-full onvo-flex-col onvo-items-center onvo-justify-center">
-      <Textarea
-        className="onvo-background-color onvo-min-h-[96px] !onvo-rounded-lg onvo-pr-[52px] onvo-z-10 onvo-border-black/20 dark:onvo-border-white/20"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        placeholder={`Describe the widget you want to create...`}
-        autoFocus
-        onKeyUp={(evt) => {
-          if (evt.key === "Enter" && !evt.shiftKey) {
-            onSubmit(value);
-            setValue("");
-          }
-        }}
-      />
-      <Icon
-        className="onvo-absolute onvo-right-3 onvo-top-3 onvo-z-10"
-        variant="solid"
-        icon={ArrowUpIcon}
-        onClick={() => {
-          if (value.trim() !== "") {
-            onSubmit(value);
-            setValue("");
-          }
-        }}
-      />
-      <div className="onvo-w-full onvo-pb-2 onvo-pt-3 -onvo-mt-2 onvo-border-solid onvo-border onvo-bg-black/10 dark:onvo-bg-white/10 onvo-border-black/10 dark:onvo-border-white/20 onvo-rounded-b-lg">
-        <Text className="onvo-mt-0 onvo-text-center onvo-text-xs">
-          Not sure how to write a prompt?{" "}
-          <a
-            href={
-              dashboard?.settings?.help_url &&
-                dashboard?.settings?.help_url.trim() !== ""
-                ? dashboard?.settings?.help_url
-                : "https://onvo.ai/blog/writing-better-ai-prompts-for-dashboard-generation/"
-            }
-            target="_blank"
-            className="onvo-text-blue-500"
-          >
-            Check out this article
-          </a>
-        </Text>
-      </div>
-    </div>
-  );
-};
 
 const CopilotRaw: React.FC<{
   dashboardId: string;
@@ -90,14 +37,14 @@ const CopilotRaw: React.FC<{
   coupled?: boolean;
 }> = ({ trigger, variant, dashboardId, coupled }): React.ReactNode => {
   const { backend, team } = useBackend();
-  const { dashboard, setId } = useDashboard();
+  const { dashboard, setId, refreshWidgets } = useDashboard();
   const theme = useTheme();
   const scroller = useRef<HTMLDivElement>(null);
+  const { lg, sm } = useMaxHeight();
 
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [questionLoading, setQuestionLoading] = useState(false);
-  const [query, setQuery] = useState("");
   const [selectedQuestion, setSelectedQuestion] = useState<Question>();
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [tab, setTab] = useState<"home" | "history" | "library" | "chat">(
@@ -117,14 +64,12 @@ const CopilotRaw: React.FC<{
     }
   }, [dashboard, dashboardId, backend, loading]);
 
-
   useEffect(() => {
     if (!(window as any).Onvo) {
       (window as any).Onvo = {};
     }
     (window as any).Onvo.setCopilotOpen = (val: boolean) => setOpen(val);
   }, []);
-
 
   useEffect(() => {
     if (!open) {
@@ -155,6 +100,113 @@ const CopilotRaw: React.FC<{
     if (scroller.current) {
       scroller.current.scrollTop = scroller.current.scrollHeight;
     }
+  };
+
+
+  const addToDashboard = async (message: string | any, library?: boolean) => {
+    if (!selectedQuestion || !dashboard || !team) return;
+
+    let textContent =
+      typeof message === "string"
+        ? message
+        : message.map((a: any) => (a.type === "text" ? a.text : "")).join("\n");
+    let output = {} as any;
+    let code = "";
+
+    if ((textContent || "").search("```") >= 0) {
+      if (textContent.split("```python")[1]) {
+        let code = textContent.split("```python")[1].split("```")[0].trim();
+        code = code;
+      }
+      if (textContent.split("```json")[1]) {
+        let out = textContent.split("```json")[1].split("```")[0].trim();
+        output = JSON.parse(out);
+      }
+    }
+
+    const title = output?.options?.plugins?.title?.text || "Chart";
+
+    let newObj: any = {
+      title: title,
+      layouts: {
+        lg: {
+          x: 0,
+          y: lg,
+          w: 4,
+          h: output.type === "metric" ? 8 : 20,
+        },
+        sm: {
+          x: 0,
+          y: sm,
+          w: 3,
+          h: output.type === "metric" ? 8 : 20,
+        },
+      },
+      messages: messages.filter((a) => (a.role === "user" || a.role === "assistant") && a.content && (a.content + "").trim() !== ""),
+      dashboard: dashboard.id,
+      team: team.id || "",
+      code: code,
+      cache: output,
+      created_at: new Date().toISOString(),
+      settings: {},
+      use_in_library: library
+    };
+
+    if (!backend) return;
+
+    toast.promise(
+      () => {
+        return backend.widgets.create(newObj);
+      },
+      {
+        loading: library
+          ? "Adding widget to library..."
+          : "Adding widget to dashboard...",
+        success: (widget) => {
+          refreshWidgets(backend);
+          if (backend) {
+            backend.logs.create({
+              type: LogType.EditWidget,
+              dashboard: widget.dashboard,
+              widget: widget.id,
+            })
+          }
+          if (library) {
+            return "Widget added to library";
+          } else {
+            return "Widget added to dashboard";
+          }
+        },
+        error: (error) =>
+          library
+            ? "Error adding widget to library: " + error.message
+            : "Error adding widget to dashboard: " + error.message,
+      }
+    );
+  };
+
+
+  const exportWidget = (index: number, format: "svg" | "png" | "csv" | "xlsx" | "jpeg") => {
+    if (!backend || !selectedQuestion) return;
+    toast.promise(
+      () => {
+        return backend.question(selectedQuestion?.id).export(index, format, theme);
+      },
+      {
+        loading: `Exporting widget as ${format}...`,
+        success: (blob) => {
+          let blobUrl = window.URL.createObjectURL(blob);
+          let a = document.createElement("a");
+          a.download = "Download." + format;
+          a.href = blobUrl;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          return "Widget exported";
+        },
+        error: (error) => "Error exporting widget: " + error.message,
+      }
+    );
   };
 
   const askQuestion = async (msg: MessageType[]) => {
@@ -194,24 +246,13 @@ const CopilotRaw: React.FC<{
       return null;
     }
 
-    return messages.map((a, index) => (
+    return messages.map((message, index) => (
       <QuestionMessage
         key={
           (selectedQuestion?.id || "null") + "-" + messages.length + "-" + index
         }
-        logo={team?.logo || ""}
-        messages={messages}
-        index={index}
-        dashboardId={dashboard?.id}
-        teamId={dashboard?.team || selectedQuestion?.team || undefined}
-        questionId={selectedQuestion?.id || "null"}
-        onDelete={() => {
-          let newMessages = messages.filter((m, i) => i < index);
-          backend?.questions.update(selectedQuestion?.id || "null", {
-            messages: newMessages as any,
-          });
-          setMessages(newMessages);
-        }}
+        message={message}
+        isLast={index === messages.length - 1}
         onReply={(msg) => {
           let newMessages = [
             ...messages,
@@ -221,6 +262,9 @@ const CopilotRaw: React.FC<{
             },
           ];
           askQuestion(newMessages);
+        }}
+        onDownload={(format) => {
+          exportWidget(index, format);
         }}
         onEdit={(msg) => {
           let newMessages = messages
@@ -236,10 +280,13 @@ const CopilotRaw: React.FC<{
             .filter((m, i) => i <= index);
           askQuestion(newMessages);
         }}
-        onClose={() => {
-          setSelectedQuestion(undefined);
-          setMessages([]);
-          setOpen(false);
+        onAdd={(library) => {
+          addToDashboard(message.content, library).then(() => {
+
+            setSelectedQuestion(undefined);
+            setMessages([]);
+            setOpen(false);
+          });
         }}
       />
     ));
@@ -251,10 +298,10 @@ const CopilotRaw: React.FC<{
 
         <div
           className={twMerge(
-            "onvo-root-style onvo-copilot-modal onvo-@container/questionmodal onvo-foreground-color onvo-animate-dialogOpen onvo-z-[9999] onvo-fixed",
+            "onvo-root-style onvo-copilot-modal onvo-@container/questionmodal onvo-foreground-color onvo-animate-dialogOpen onvo-z-[50] onvo-fixed",
             variant === "fullscreen"
               ? "onvo-h-full onvo-w-full onvo-left-0"
-              : "onvo-h-[calc(100vh-40px)] onvo-w-[480px] onvo-right-5 onvo-bottom-5 onvo-rounded-lg onvo-overflow-hidden onvo-border-solid onvo-border onvo-border-slate-200 dark:onvo-border-slate-800 onvo-shadow-xl"
+              : "onvo-h-[calc(100vh-40px)] onvo-w-[480px] onvo-right-5 onvo-bottom-5 onvo-rounded-2xl onvo-overflow-hidden onvo-border-solid onvo-border onvo-border-slate-200 dark:onvo-border-slate-800 onvo-shadow-xl"
           )}
         >
           {!coupled && <Toaster position="bottom-right" richColors />}
@@ -279,19 +326,7 @@ const CopilotRaw: React.FC<{
                 <ChevronRightIcon className="onvo-hidden @xl/questionmodal:onvo-block onvo-h-4 onvo-w-4 dark:onvo-fill-slate-500" />
                 <Label>{dashboard?.settings?.copilot_title || "Copilot"}</Label>
               </div>
-              {tab === "home" ? <div></div> : (
-                <Button
-                  variant="primary"
-                  className="onvo-flex-shrink-0"
-                  onClick={() => {
-                    setSelectedQuestion(undefined);
-                    setMessages([]);
-                    setQuery("");
-                    setTab("home");
-                  }}
-                >
-                  + New widget
-                </Button>)}
+              <div></div>
             </div>
             <div className="onvo-flex onvo-flex-grow onvo-w-full onvo-h-[calc(100%-52px)] onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-col ">
               {["home", "library", "history"].indexOf(tab) >= 0 && (
@@ -315,7 +350,9 @@ const CopilotRaw: React.FC<{
                             value="simple"
                             className="onvo-w-full onvo-mt-2"
                           >
-                            <SimpleCreatorTool
+                            <PromptInput
+                              hideSuggestions={true}
+                              url={dashboard?.settings?.help_url}
                               onSubmit={(val) => {
                                 let newMessages = [
                                   ...messages,
@@ -325,7 +362,6 @@ const CopilotRaw: React.FC<{
                                   },
                                 ];
                                 askQuestion(newMessages);
-                                setQuery("");
                                 setTab("chat");
                               }}
                             />
@@ -350,7 +386,9 @@ const CopilotRaw: React.FC<{
                           </TabsContent>
                         </Tabs>
                       ) : (
-                        <SimpleCreatorTool
+                        <PromptInput
+                          hideSuggestions={true}
+                          url={dashboard?.settings?.help_url}
                           onSubmit={(val) => {
                             let newMessages = [
                               ...messages,
@@ -376,10 +414,10 @@ const CopilotRaw: React.FC<{
 
                   {(tab === "home" || tab === "history") && (
                     <QuestionHistory
+                      variant="default"
                       onSelect={(q) => {
                         setSelectedQuestion(q);
                         setMessages([]);
-                        setQuery("");
                         setTab("chat");
                       }}
                       onExpanded={(bool) =>
@@ -394,82 +432,51 @@ const CopilotRaw: React.FC<{
               )}
 
               {tab === "chat" && (
-                <>
-                  <div
-                    className="onvo-flex onvo-w-full onvo-flex-grow onvo-flex-col onvo-gap-4 onvo-overflow-y-auto onvo-scrollbar-thin onvo-px-2 onvo-py-2"
-                    ref={scroller}
-                  >
-                    <div className="onvo-flex onvo-flex-col onvo-relative onvo-mx-auto onvo-w-full onvo-max-w-screen-lg">
-                      {questionMessageList}
-                      {questionLoading && (
-                        <ChartLoader
-                          variant="message"
-                          logo={team?.logo || ""}
-                        />
-                      )}
+                <div className="onvo-flex onvo-flex-row onvo-w-full onvo-h-full">
+                  <QuestionHistory
+                    variant="sidebar"
+                    onSelect={(q) => {
+                      setSelectedQuestion(q);
+                      setMessages([]);
+                      setTab("chat");
+                    }}
+                    selectedId={selectedQuestion?.id}
+                    onNew={() => {
+                      setSelectedQuestion(undefined);
+                      setMessages([]);
+                      setTab("home");
+                    }}
+                    onExpanded={(bool) =>
+                      bool ? setTab("history") : setTab("home")
+                    }
+                    onDelete={() => {
+                      setSelectedQuestion(undefined);
+                    }}
+                  />
+                  <div className="onvo-w-full onvo-h-full onvo-flex onvo-flex-col">
+                    <div
+                      className="onvo-flex onvo-w-full onvo-flex-grow onvo-flex-col onvo-gap-4 onvo-overflow-y-auto onvo-scrollbar-thin onvo-px-2 onvo-py-2"
+                      ref={scroller}
+                    >
+                      <div className="onvo-flex onvo-flex-col onvo-relative onvo-mx-auto onvo-w-full onvo-max-w-screen-md">
+                        {questionMessageList}
+                        {questionLoading && (
+                          <ChartLoader variant="message" />
+                        )}
+                      </div>
                     </div>
+                    <PromptInput url={dashboard?.settings?.help_url} className="onvo-mb-4" onSubmit={val => {
+                      let newMessages = [
+                        ...messages,
+                        {
+                          role: "user" as const,
+                          content: val,
+                        },
+                      ];
+                      askQuestion(newMessages);
+                    }} />
                   </div>
-                  <div className="onvo-relative onvo-mx-auto onvo-mb-2 onvo-mt-4 onvo-w-full onvo-max-w-screen-lg onvo-px-2">
-                    {messages.length > 0 && (
-                      <SuggestionsBar onSelect={(val) => setQuery(val)} />
-                    )}
-                    <div className="onvo-relative onvo-flex onvo-w-full onvo-flex-col onvo-items-center onvo-justify-center onvo-gap-2">
-                      <Textarea
-                        className="onvo-background-color onvo-min-h-[58px] onvo-pr-[52px]"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        placeholder={`Describe the widget you want to create...`}
-                        autoFocus
-                        onKeyUp={(evt) => {
-                          if (evt.key === "Enter" && !evt.shiftKey) {
-                            let newMessages = [
-                              ...messages,
-                              {
-                                role: "user" as const,
-                                content: query,
-                              },
-                            ];
-                            askQuestion(newMessages);
-                            setQuery("");
-                          }
-                        }}
-                      />
-                      <Icon
-                        className="onvo-absolute onvo-right-3 onvo-top-3 onvo-z-10"
-                        variant="solid"
-                        icon={ArrowUpIcon}
-                        onClick={() => {
-                          if (query.trim() !== "") {
-                            let newMessages = [
-                              ...messages,
-                              {
-                                role: "user" as const,
-                                content: query,
-                              },
-                            ];
-                            askQuestion(newMessages);
-                            setQuery("");
-                          }
-                        }}
-                      />
-                      <Text className="onvo-mt-0 onvo-text-center onvo-text-xs">
-                        Not sure how to write a prompt?{" "}
-                        <a
-                          href={
-                            dashboard?.settings?.help_url &&
-                              dashboard?.settings?.help_url.trim() !== ""
-                              ? dashboard?.settings?.help_url
-                              : "https://onvo.ai/blog/writing-better-ai-prompts-for-dashboard-generation/"
-                          }
-                          target="_blank"
-                          className="onvo-text-blue-500"
-                        >
-                          Check out this article
-                        </a>
-                      </Text>
-                    </div>
-                  </div>
-                </>
+                </div>
               )}
             </div>
           </div>

@@ -143,7 +143,7 @@ export const FilterBar = () => {
 
       <div className="onvo-foreground-color onvo-flex onvo-flex-col onvo-gap-2 onvo-justify-start onvo-items-start">
 
-        <div className="onvo-w-full onvo-py-2 onvo-px-3 onvo-flex onvo-flex-row onvo-items-center onvo-justify-between onvo-border-b onvo-border-black/10">
+        <div className="onvo-w-full onvo-py-3 onvo-px-4 onvo-flex onvo-flex-row onvo-items-center onvo-justify-between onvo-border-b onvo-border-black/10">
           <Title className="onvo-font-semibold onvo-text-md">Filters</Title>
         </div>
         <div className="onvo-flex onvo-flex-col onvo-py-2 onvo-px-3 onvo-gap-2 onvo-w-full">

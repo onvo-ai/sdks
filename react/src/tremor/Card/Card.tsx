@@ -17,7 +17,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ref={forwardedRef}
         className={cx(
           // base
-          "onvo-relative onvo-w-full onvo-rounded-md onvo-border-solid onvo-border onvo-p-6 onvo-text-left onvo-shadow-sm",
+          "onvo-relative onvo-w-full onvo-rounded-2xl onvo-border-solid onvo-border onvo-p-6 onvo-text-left onvo-shadow-sm",
           // background color
           " onvo-bg-white dark:onvo-bg-[#090E1A]",
           // border color

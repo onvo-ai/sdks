@@ -59,7 +59,7 @@ const WidgetLibraryRaw: React.FC<{
   };
 
   const addToDashboard = async (wid: Widget) => {
-    let newObj = { ...wid, use_in_library: false, use_as_example: false };
+    let newObj = { ...wid, use_in_library: false };
     // @ts-ignore
     delete newObj.id;
 
@@ -148,7 +148,7 @@ const WidgetLibraryRaw: React.FC<{
               hideOptions={true}
               className="onvo-h-96 onvo-z-10"
               footer={
-                <div className="onvo-chart-card-dropdown-wrapper onvo-py-2 onvo-px-2 onvo-z-20 onvo-border-solid onvo-border-t onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-b-md onvo-background-color onvo-flex onvo-w-full onvo-justify-between onvo-flex-row onvo-items-center">
+                <div className="onvo-chart-card-dropdown-wrapper onvo-py-2 onvo-px-2 onvo-z-20 onvo-border-solid onvo-border-t onvo-border-black/5 dark:onvo-border-white/10 onvo-rounded-b-2xl onvo-background-color onvo-flex onvo-w-full onvo-justify-between onvo-flex-row onvo-items-center">
                   <div className="onvo-flex onvo-gap-2 onvo-items-center">
                     {adminMode && (
                       <Button

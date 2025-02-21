@@ -40,12 +40,7 @@ describe("Widgets", () => {
           h: 3,
         },
       },
-      settings: {
-        disable_download_images: false,
-        disable_download_reports: false,
-        title_hidden: false,
-      },
-      use_as_example: false,
+      settings: {},
       use_in_library: false,
       code: `import pandas as pd
 import numpy as np

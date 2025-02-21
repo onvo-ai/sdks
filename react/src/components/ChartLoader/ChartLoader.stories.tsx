@@ -18,7 +18,6 @@ export const Variants: Story = (args) => (
     <ChartLoader variant="message" />
     <ChartLoader
       variant="message"
-      logo="https://steelbluemedia.com/wp-content/uploads/2019/06/new-google-favicon-512.png"
     />
   </div>
 );

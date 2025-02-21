@@ -124,7 +124,6 @@ export const ImageWidgetModal: React.FC<{}> = ({ }) => {
             h: 10,
           },
         },
-        use_as_example: false,
         use_in_library: false,
         cache: cache,
         title: url,
@@ -264,7 +263,6 @@ export const ImageWidgetModal: React.FC<{}> = ({ }) => {
                       },
                     },
                   }}
-                  id={widget?.id || ""}
                   title={""}
                 />
               </div>

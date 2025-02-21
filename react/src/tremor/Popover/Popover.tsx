@@ -70,9 +70,9 @@ const PopoverContent = React.forwardRef<
           avoidCollisions
           className={cx(
             // base
-            "onvo-max-h-[var(--radix-popper-available-height)] onvo-min-w-60 onvo-overflow-hidden onvo-rounded-md onvo-border-solid onvo-border onvo-p-2.5 onvo-text-sm onvo-shadow-md",
+            "onvo-max-h-[var(--radix-popper-available-height)] onvo-min-w-60 onvo-overflow-hidden onvo-rounded-2xl onvo-border-solid onvo-border onvo-p-2.5 onvo-text-sm onvo-shadow-md",
             // border color
-            "onvo-border-gray-300 dark:onvo-border-gray-800",
+            "onvo-border-gray-200 dark:onvo-border-gray-800",
             // text color
             "onvo-text-gray-900 dark:onvo-text-gray-50",
             // background color

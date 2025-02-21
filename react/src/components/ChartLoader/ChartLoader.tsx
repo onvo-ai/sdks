@@ -1,7 +1,5 @@
-import { Logo } from "../Logo";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "../../tremor/Card";
-import { Icon } from "../../tremor/Icon";
 import { Label } from "../../tremor/Text";
 
 const ProgressBar = () => {
@@ -68,34 +66,16 @@ const ChartPlaceholder: React.FC<{
 );
 
 export const ChartLoader: React.FC<{
-  logo?: string;
   className?: string;
   variant: "message" | "card";
-}> = ({ logo, variant, className }) => {
+}> = ({ variant, className }) => {
   if (variant === "card") {
     return <ChartPlaceholder className={className} />;
   }
 
-  const LogoIcon = useMemo(() => {
-    return logo && logo.trim() !== "" ? (
-      <Icon
-        variant="shadow"
-        className="!onvo-p-0"
-        icon={() => (
-          <img
-            src={logo}
-            className="onvo-object-contain onvo-rounded-md onvo-h-[32px] onvo-w-[32px]"
-          />
-        )}
-      />
-    ) : (
-      <Icon variant="shadow" icon={() => <Logo height={20} width={20} />} />
-    );
-  }, [logo]);
 
   return (
     <div className="onvo-loader-question-modal onvo-relative onvo-flex onvo-flex-row onvo-gap-3 onvo-items-start onvo-justify-start onvo-w-full">
-      {LogoIcon}
       <div className="onvo-w-full onvo-flex onvo-flex-col onvo-gap-2">
         <Label className="onvo-mt-2">
           ✨ Auto-magically generating your widget...

@@ -24,7 +24,7 @@ export const Primary: Story = (args) => {
       <Wrapper {...args}>
         <DashboardWrapper id={args.id}>
           <div className=" onvo-w-full onvo-relative onvo-max-w-screen-lg onvo-mx-auto">
-            <QuestionHistory onExpanded={() => {}} onSelect={(q) => {}} />
+            <QuestionHistory variant="default" onExpanded={() => { }} onSelect={(q) => { }} />
           </div>
         </DashboardWrapper>
       </Wrapper>

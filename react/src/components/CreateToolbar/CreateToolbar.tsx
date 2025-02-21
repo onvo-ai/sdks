@@ -88,7 +88,6 @@ export const CreateToolbar: React.FC<{ onClick?: () => void }> = ({
           h: 4,
         },
       },
-      use_as_example: false,
       use_in_library: false,
       cache: cache,
       title: "Divider",

@@ -186,7 +186,6 @@ export const TextWidgetModal: React.FC<{}> = ({ }) => {
             h: 10,
           },
         },
-        use_as_example: false,
         use_in_library: false,
         cache: cache,
         title: title,
@@ -379,7 +378,6 @@ export const TextWidgetModal: React.FC<{}> = ({ }) => {
                       },
                     },
                   }}
-                  id={widget?.id || ""}
                   title={title}
                 />
               </div>

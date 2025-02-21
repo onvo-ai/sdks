@@ -36,7 +36,7 @@ const DropdownMenuSubMenuTrigger = React.forwardRef<
     ref={forwardedRef}
     className={cx(
       // base
-      "onvo-relative onvo-flex onvo-cursor-default onvo-select-none onvo-items-center onvo-rounded onvo-py-1.5 onvo-pl-2 onvo-pr-1 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
+      "onvo-relative onvo-flex onvo-cursor-default onvo-select-none onvo-items-center onvo-rounded-2xl onvo-py-1.5 onvo-pl-2 onvo-pr-1 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
       // text color
       "onvo-text-gray-900 dark:onvo-text-gray-50",
       // disabled
@@ -69,7 +69,7 @@ const DropdownMenuSubMenuContent = React.forwardRef<
       collisionPadding={collisionPadding}
       className={cx(
         // base
-        "onvo-relative onvo-z-50 onvo-overflow-hidden onvo-rounded-md onvo-border-solid onvo-border onvo-p-1 onvo-shadow-xl onvo-shadow-black/[2.5%]",
+        "onvo-relative onvo-z-[9999] onvo-overflow-hidden onvo-rounded-2xl onvo-border-solid onvo-border onvo-p-1 onvo-shadow-xl onvo-shadow-black/[2.5%]",
         // widths
         "onvo-min-w-32",
         // heights
@@ -116,7 +116,7 @@ const DropdownMenuContent = React.forwardRef<
         ref={forwardedRef}
         className={cx(
           // base
-          "onvo-relative onvo-z-50 onvo-overflow-hidden onvo-rounded-md onvo-border-solid onvo-border onvo-p-1 onvo-shadow-xl onvo-shadow-black/[2.5%]",
+          "onvo-relative onvo-z-[9999] onvo-overflow-hidden onvo-rounded-2xl onvo-border-solid onvo-border onvo-p-1 onvo-shadow-xl onvo-shadow-black/[2.5%]",
           // widths
           "onvo-min-w-48",
           // heights
@@ -155,7 +155,7 @@ const DropdownMenuItem = React.forwardRef<
     ref={forwardedRef}
     className={cx(
       // base
-      "group/DropdownMenuItem onvo-relative onvo-flex onvo-cursor-pointer onvo-select-none onvo-items-center onvo-rounded onvo-py-1.5 onvo-pl-2 onvo-pr-1 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
+      "group/DropdownMenuItem onvo-relative onvo-flex onvo-cursor-pointer onvo-select-none onvo-items-center onvo-rounded-2xl onvo-py-1.5 onvo-pl-2 onvo-pr-1 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
       // text color
       "onvo-text-gray-900 dark:onvo-text-gray-50",
       // disabled
@@ -206,7 +206,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
       ref={forwardedRef}
       className={cx(
         // base
-        "onvo-relative onvo-flex onvo-cursor-pointer onvo-select-none onvo-items-center onvo-gap-x-2 onvo-rounded onvo-py-1.5 onvo-pl-8 onvo-pr-1 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
+        "onvo-relative onvo-flex onvo-cursor-pointer onvo-select-none onvo-items-center onvo-gap-x-2 onvo-rounded-2xl onvo-py-1.5 onvo-pl-8 onvo-pr-1 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
         // text color
         "onvo-text-gray-900 dark:onvo-text-gray-50",
         // disabled
@@ -263,7 +263,7 @@ const DropdownMenuRadioItem = React.forwardRef<
     ref={forwardedRef}
     className={cx(
       // base
-      "group/DropdownMenuRadioItem onvo-relative onvo-flex onvo-cursor-pointer onvo-select-none onvo-items-center onvo-gap-x-2 onvo-rounded onvo-py-1.5 onvo-pl-8 onvo-pr-1 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
+      "group/DropdownMenuRadioItem onvo-relative onvo-flex onvo-cursor-pointer onvo-select-none onvo-items-center onvo-gap-x-2 onvo-rounded-2xl onvo-py-1.5 onvo-pl-8 onvo-pr-1 onvo-outline-none onvo-transition-colors data-[state=checked]:onvo-font-semibold sm:onvo-text-sm",
       // text color
       "onvo-text-gray-900 dark:onvo-text-gray-50",
       // disabled

@@ -58,10 +58,9 @@ ChartJS.register(
 
 const ChartBase: React.FC<{
   json: any;
-  id: string;
   title: string;
   settings?: WidgetSettings;
-}> = ({ json, id, title, settings }) => {
+}> = ({ json, title }) => {
   const chartRef = useRef<any>();
   const [zoomed, setZoomed] = useState(false);
   const theme = useTheme();
@@ -176,7 +175,7 @@ const ChartBase: React.FC<{
               (zoomed ? "onvo-h-[calc(100%-40px)]" : "onvo-h-full")
             }
           >
-            <Chart ref={chartRef} plugins={chartConfig.type === "map" ? [MapPlugin] : []} key={id + theme} {...chartConfig} />
+            <Chart ref={chartRef} plugins={chartConfig.type === "map" ? [MapPlugin] : []} key={theme} {...chartConfig} />
           </div>
         )
       ) : (

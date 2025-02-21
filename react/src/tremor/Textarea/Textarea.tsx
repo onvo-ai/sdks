@@ -1,5 +1,5 @@
 import React from "react";
-
+import TextareaAutosize from 'react-autosize-textarea';
 import { cx, focusInput, hasErrorInput } from "../../lib/utils";
 
 interface TextareaProps
@@ -10,7 +10,8 @@ interface TextareaProps
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, hasError, ...props }: TextareaProps, forwardedRef) => {
     return (
-      <textarea
+      // @ts-ignore
+      <TextareaAutosize
         ref={forwardedRef}
         className={cx(
           // base

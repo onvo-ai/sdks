@@ -91,7 +91,7 @@ class ImageChart extends LineController {
     if (!ctx) return;
     let width = this.chart.width;
     let height = this.chart.height;
-    let radius = 6;
+    let radius = 24;
 
     var img = new Image();
     img.src = url;

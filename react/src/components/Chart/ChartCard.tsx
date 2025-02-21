@@ -165,7 +165,7 @@ const ChartCard: React.FC<{
     return (
       <div ref={cardRef}
         className={
-          "onvo-group/chartcard  onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
+          "onvo-group/chartcard onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
           (className || "")
         }
       >
@@ -174,7 +174,7 @@ const ChartCard: React.FC<{
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Icon
-                className="onvo-z-20 group-hover/chartcard:onvo-opacity-100 onvo-transition-all onvo-opacity-0  onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
+                className="!onvo-rounded-full onvo-z-20 group-hover/chartcard:onvo-opacity-100 onvo-transition-all onvo-opacity-0  onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
                 icon={EllipsisVerticalIcon}
                 variant="shadow"
               />
@@ -193,7 +193,7 @@ const ChartCard: React.FC<{
             </DropdownMenuContent>
           </DropdownMenu>
         )}
-        <ChartBase json={output} id={widget.id} title="" />
+        <ChartBase json={output} title="" />
         {footer}
       </div>
     );
@@ -215,7 +215,7 @@ const ChartCard: React.FC<{
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Icon
-                className="onvo-z-20 group-hover/chartcard:onvo-opacity-100 onvo-transition-all onvo-opacity-0 onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
+                className="!onvo-rounded-full onvo-z-20 group-hover/chartcard:onvo-opacity-100 onvo-transition-all onvo-opacity-0 onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
                 icon={EllipsisVerticalIcon}
                 variant="shadow"
               />
@@ -260,7 +260,7 @@ const ChartCard: React.FC<{
             </DropdownMenuContent>
           </DropdownMenu>
         )}
-        <ChartBase json={output} id={widget.id} title={widget.title} />
+        <ChartBase json={output} title={widget.title} />
         {footer}
       </div>
     );
@@ -270,7 +270,7 @@ const ChartCard: React.FC<{
     return (
       <div ref={cardRef}
         className={
-          "onvo-group/chartcard onvo-rounded-md onvo-transition-all onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
+          "onvo-group/chartcard onvo-rounded-2xl onvo-transition-all onvo-relative onvo-h-full onvo-w-full onvo-py-0 !onvo-bg-transparent !onvo-border-0 !onvo-ring-0 !onvo-shadow-none onvo-px-0 " +
           (className || "")
         }
       >
@@ -279,7 +279,7 @@ const ChartCard: React.FC<{
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Icon
-                className="onvo-z-20 group-hover/chartcard:onvo-opacity-100 onvo-opacity-0 onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
+                className="!onvo-rounded-full onvo-z-20 group-hover/chartcard:onvo-opacity-100 onvo-opacity-0 onvo-cursor-pointer onvo-font-override onvo-absolute onvo-top-1 onvo-right-1"
                 icon={EllipsisVerticalIcon}
                 variant="shadow"
               />
@@ -320,7 +320,7 @@ const ChartCard: React.FC<{
             </DropdownMenuContent>
           </DropdownMenu>
         )}
-        <ChartBase json={output} id={widget.id} title={""} />
+        <ChartBase json={output} title={""} />
         {footer}
       </div>
     );
@@ -361,7 +361,7 @@ const ChartCard: React.FC<{
                   e.stopPropagation();
                   e.preventDefault();
                 }}
-                className="onvo-z-20 onvo-transition-all group-hover/chartcard:onvo-opacity-100 onvo-opacity-0 onvo-cursor-pointer !onvo-text-gray-500 onvo-absolute onvo-top-1 onvo-right-1"
+                className="!onvo-rounded-full onvo-z-20 onvo-transition-all group-hover/chartcard:onvo-opacity-100 onvo-opacity-0 onvo-cursor-pointer !onvo-text-gray-500 onvo-absolute onvo-top-1 onvo-right-1"
                 icon={EllipsisVerticalIcon}
                 variant="shadow"
               />
@@ -477,7 +477,6 @@ const ChartCard: React.FC<{
         <ChartBase
           json={output}
           title={widget.title}
-          id={widget.id}
           settings={widget.settings}
         />
       </div>
