@@ -85,8 +85,8 @@ const SimpleCreatorTool: React.FC<{ onSubmit: (val: string) => void }> = ({
 
 const CopilotRaw: React.FC<{
   dashboardId: string;
-  trigger: React.ReactNode;
   variant: "fullscreen" | "copilot";
+  trigger?: React.ReactNode;
   coupled?: boolean;
 }> = ({ trigger, variant, dashboardId, coupled }): React.ReactNode => {
   const { backend, team } = useBackend();
@@ -133,6 +133,12 @@ const CopilotRaw: React.FC<{
       setSelectedQuestion(undefined);
     }
   }, [open]);
+
+  useEffect(() => {
+    if (!trigger) {
+      setOpen(true);
+    }
+  }, [trigger]);
 
   useEffect(() => {
     if (selectedQuestion) {
@@ -255,16 +261,17 @@ const CopilotRaw: React.FC<{
           <div className="onvo-question-modal-question-list onvo-flex onvo-flex-col onvo-foreground-color onvo-absolute onvo-w-full onvo-right-0 onvo-top-0 onvo-z-20 onvo-h-full">
             <div
               className={
-                "onvo-foreground-color onvo-top-0 onvo-w-full onvo-z-10 onvo-flex onvo-flex-row onvo-justify-between onvo-items-center onvo-gap-4 onvo-border-solid onvo-border-b onvo-px-3 onvo-border-black/10 onvo-py-2 dark:onvo-border-white/10"
+                "onvo-foreground-color onvo-h-12 onvo-top-0 onvo-w-full onvo-z-10 onvo-flex onvo-flex-row onvo-justify-between onvo-items-center onvo-gap-4 onvo-border-solid onvo-border-b onvo-px-3 onvo-border-black/10 onvo-py-2 dark:onvo-border-white/10"
               }
             >
-              <Icon
-                icon={XMarkIcon}
-                variant="shadow" className="onvo-border-black/10 onvo-background-color dark:onvo-border-white/10"
-                onClick={() => {
-                  setOpen(false);
-                }}
-              />
+              {trigger ? (
+                <Icon
+                  icon={XMarkIcon}
+                  variant="shadow" className="onvo-border-black/10 onvo-background-color dark:onvo-border-white/10"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                />) : <div></div>}
               <div className="onvo-flex onvo-w-full @xl/questionmodal:onvo-w-auto onvo-flex-row onvo-gap-1 onvo-justify-start onvo-items-center">
                 <Text className="onvo-hidden @xl/questionmodal:onvo-block">
                   {dashboard?.title}
@@ -468,7 +475,7 @@ const CopilotRaw: React.FC<{
           </div>
         </div>
       </dialog>
-      {React.cloneElement(trigger as React.ReactElement, {
+      {trigger && React.cloneElement(trigger as React.ReactElement, {
         onClick: (e: React.MouseEvent) => {
           setOpen(true);
         },

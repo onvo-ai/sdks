@@ -1095,9 +1095,6 @@ type DashboardSettings = {
     pdf_orientation?: "portrait" | "landscape";
 };
 type WidgetSettings = {
-    disable_download_images: boolean;
-    disable_download_reports: boolean;
-    title_hidden: boolean;
     css_id?: string;
     css_classnames?: string;
 };

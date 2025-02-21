@@ -1624,10 +1624,10 @@
     chart.js "^4.4.1"
     simplify-js "^1.2.4"
 
-"@onvo-ai/js@^0.14.18":
-  version "0.14.18"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.14.18.tgz#57235106c47fab3e74d09d4a2312f601292e292d"
-  integrity sha512-oYA4BmiFS2TeNAscgyZClf8GZXYu+bS3SlkmLBINTWa/Ju90+5yG+SjiS3vbrBPJZEU1qDyIQEcxLFLE4Wc7jQ==
+"@onvo-ai/js@^0.14.19":
+  version "0.14.19"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.14.19.tgz#9530972d534d30c9879ecaab05ada61b94e059b2"
+  integrity sha512-s4MRzUyAYZi88+J67xg8InwORdn/sMWlEJ+NMZynkBE4xFIFh2lS/NAgIjJmWUckk9l3qV8BQkhC4AS3fC7TGA==
   dependencies:
     web-file-polyfill "^1.0.4"
 

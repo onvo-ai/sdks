@@ -11,15 +11,23 @@ import { MultiSelect } from "../../tremor/MultiSelect";
 import { useTheme } from "../../layouts/Dashboard/useTheme";
 
 function urlify(text: string) {
+  // Regex to detect markdown images: ![alt text](url)
+  const markdownImageRegex = /!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g;
   // Regex to detect markdown links: [text](url)
   const markdownLinkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
   // Regex to detect standalone URLs: https://example.com
   const urlRegex = /(https?:\/\/[^\s]+)/g;
 
   let text1 = text + "";
-  // First, replace markdown links
-  text1 = text1.replace(markdownLinkRegex, function (_, linkText, url) {
 
+  // First, replace markdown images
+  text1 = text1.replace(markdownImageRegex, function (_, altText, url) {
+    let properUrl = url.startsWith("http") ? url : "https://" + url;
+    return `<img style="height:28px;width:28px;object-fit:contain;object-position:50% 50%;" src="${properUrl}" alt="${altText}" />`;
+  });
+
+  // Next, replace markdown links
+  text1 = text1.replace(markdownLinkRegex, function (_, linkText, url) {
     let properUrl = url.startsWith("http") ? url : "https://" + url;
     return `<a target="_blank" href="${properUrl}">${linkText}</a>`;
   });
@@ -27,7 +35,8 @@ function urlify(text: string) {
   if (text1 !== text) {
     return text1;
   }
-  // Next, replace standalone URLs (avoiding already replaced markdown links)
+
+  // Finally, replace standalone URLs (avoiding already replaced markdown links and images)
   return text1.replace(urlRegex, function (url) {
     let properUrl = url.startsWith("http") ? url : "https://" + url;
     return `<a target="_blank" href="${properUrl}">${url}</a>`;

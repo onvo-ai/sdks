@@ -26,11 +26,6 @@ export class MetricChart extends LineController {
     const height = this.chart.chartArea.height;
     const width = this.chart.chartArea.width;
 
-    // @ts-ignore
-    const label = meta.label || "";
-    let value = numeral(pt0).value()
-      ? numeral(pt0).format("0,0.[00]")
-      : pt0 + "";
 
   }
 }
@@ -140,7 +135,13 @@ export const MetricPlugin = {
 
     const dataset = chart.data.datasets[0];
 
-    drawChart(ctx, dataset.data[0], dataset.label, {
+    // @ts-ignore
+    const label = dataset.label || "";
+    let value = numeral(dataset.data[0]).value()
+      ? numeral(dataset.data[0]).format("0,0.[00]")
+      : dataset.data[0] + "";
+
+    drawChart(ctx, value, label, {
       left: chart.chartArea.left,
       top: chart.chartArea.top,
       height: chart.chartArea.height,

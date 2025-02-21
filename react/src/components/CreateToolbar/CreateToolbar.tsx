@@ -95,11 +95,7 @@ export const CreateToolbar: React.FC<{ onClick?: () => void }> = ({
       team: dashboard.team,
       code: code,
       messages: [],
-      settings: {
-        disable_download_images: false,
-        disable_download_reports: false,
-        title_hidden: true,
-      },
+      settings: {},
     });
     refreshWidgets(backend);
   };

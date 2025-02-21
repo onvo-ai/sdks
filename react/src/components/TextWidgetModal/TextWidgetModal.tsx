@@ -193,11 +193,7 @@ export const TextWidgetModal: React.FC<{}> = ({ }) => {
         team: dashboard.team,
         code: code,
         messages: [],
-        settings: {
-          disable_download_images: false,
-          disable_download_reports: false,
-          title_hidden: false,
-        },
+        settings: {},
       });
     }
     setOpen(false);
@@ -228,7 +224,7 @@ export const TextWidgetModal: React.FC<{}> = ({ }) => {
       <dialog open={open}>
         <div
           className={twMerge(
-            "onvo-@container/widgetmodal onvo-h-full onvo-animate-dialogOpen onvo-w-full onvo-z-50 onvo-fixed onvo-left-0 onvo-foreground-color"
+            "onvo-@container/widgetmodal onvo-h-full onvo-animate-dialogOpen onvo-w-full onvo-z-50 onvo-fixed onvo-top-0 onvo-left-0 onvo-foreground-color"
           )}
         >
           <div
@@ -261,7 +257,7 @@ export const TextWidgetModal: React.FC<{}> = ({ }) => {
             </div>
           </div>
           <div className="onvo-relative onvo-flex onvo-flex-grow onvo-h-[calc(100%-52px)] onvo-w-full onvo-flex-col-reverse @xl/widgetmodal:onvo-flex-row">
-            <div className="onvo-relative onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-h-full onvo-w-full onvo-p-4 onvo-border-solid onvo-border-r onvo-border-black/10 dark:onvo-border-white/10">
+            <div className="onvo-relative onvo-overflow-y-auto onvo-scrollbar-thin onvo-flex-grow onvo-h-full onvo-w-full onvo-p-4 onvo-flex onvo-flex-col onvo-justify-center">
               <Text>Title</Text>
               <Input
                 placeholder="Type in a title"
@@ -358,7 +354,7 @@ export const TextWidgetModal: React.FC<{}> = ({ }) => {
                 </Card>
               </div>
             </div>
-            <div className="onvo-background-color onvo-flex onvo-flex-shrink-0 @xl/widgetmodal:onvo-flex-shrink onvo-flex-col onvo-justify-center onvo-w-full onvo-flex-grow onvo-relative onvo-p-4 onvo-overflow-y-auto onvo-bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:onvo-bg-[radial-gradient(#0f172a_1px,transparent_1px)] [background-size:16px_16px]">
+            <div className="onvo-border onvo-border-black/10 dark:onvo-border-white/10 onvo-rounded-lg onvo-m-4 onvo-background-color onvo-flex onvo-flex-shrink-0 @xl/widgetmodal:onvo-flex-shrink onvo-flex-col onvo-justify-center onvo-w-full onvo-flex-grow onvo-relative onvo-p-4 onvo-overflow-y-auto onvo-bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:onvo-bg-[radial-gradient(#0f172a_1px,transparent_1px)] [background-size:16px_16px]">
               <div
                 className={"onvo-relative onvo-flex onvo-w-full onvo-flex-col"}
               >

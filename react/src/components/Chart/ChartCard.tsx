@@ -151,16 +151,12 @@ const ChartCard: React.FC<{
     if (adminMode) return true;
     if (dashboard?.settings && dashboard.settings.disable_download_images)
       return false;
-    if (widget.settings && widget.settings.disable_download_images)
-      return false;
     return true;
   }, [dashboard, widget, adminMode]);
 
   const ReportDownloadEnabled = useMemo(() => {
     if (adminMode) return true;
     if (dashboard?.settings && dashboard.settings.disable_download_reports)
-      return false;
-    if (widget.settings && widget.settings.disable_download_reports)
       return false;
     return true;
   }, [dashboard, widget, adminMode]);

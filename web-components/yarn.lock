@@ -1353,6 +1353,19 @@
   dependencies:
     tslib "^2.4.0"
 
+"@googlemaps/js-api-loader@1.16.8":
+  version "1.16.8"
+  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-1.16.8.tgz#1595a2af80ca07e551fc961d921a2437d1cb3643"
+  integrity sha512-CROqqwfKotdO6EBjZO/gQGVTbeDps5V7Mt9+8+5Q+jTg5CRMi3Ii/L9PmV3USROrt2uWxtGzJHORmByxyo9pSQ==
+
+"@googlemaps/markerclusterer@2.5.3", "@googlemaps/markerclusterer@^2.5.3":
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/@googlemaps/markerclusterer/-/markerclusterer-2.5.3.tgz#9f891ce7e8e161775f3a3e2c9f66956810284591"
+  integrity sha512-x7lX0R5yYOoiNectr10wLgCBasNcXFHiADIBdmn7jQllF2B5ENQw5XtZK+hIw4xnV0Df0xhN4LN98XqA5jaiOw==
+  dependencies:
+    fast-deep-equal "^3.1.3"
+    supercluster "^8.0.1"
+
 "@heroicons/react@^2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-2.1.5.tgz#1e13f34976cc542deae92353c01c8b3d7942e9ba"
@@ -1736,22 +1749,39 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@onvo-ai/js@^0.14.0":
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.14.0.tgz#ee8339c7f22e80968a6b2a189bf3b78f3da65e44"
-  integrity sha512-lm7NNPupLpNn6JPshLscDrNUVQ2j6FwILzYxbaGiR5K/qsvcsCjIhv3lhk+EcQgtFUNTIznqjzC+7U6po8ZNAA==
+"@onvo-ai/chartjs-chart-map@^0.0.134":
+  version "0.0.134"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/chartjs-chart-map/-/chartjs-chart-map-0.0.134.tgz#77650a2932f5f395c841a83d68e2688252c99ff7"
+  integrity sha512-N12R8lnNvyJuzUJJzEcVsy5gbG2jiXltPxZHvAjDJCS8UfQyiiaDpOf8pi8b7OGnwknoOUh1PdJQpsCH26VsqA==
+  dependencies:
+    "@googlemaps/markerclusterer" "^2.5.3"
+    chart.js "^4.4.1"
+    simplify-js "^1.2.4"
+
+"@onvo-ai/js@^0.14.18":
+  version "0.14.18"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.14.18.tgz#57235106c47fab3e74d09d4a2312f601292e292d"
+  integrity sha512-oYA4BmiFS2TeNAscgyZClf8GZXYu+bS3SlkmLBINTWa/Ju90+5yG+SjiS3vbrBPJZEU1qDyIQEcxLFLE4Wc7jQ==
   dependencies:
     web-file-polyfill "^1.0.4"
 
-"@onvo-ai/react@^0.5.9":
-  version "0.5.9"
-  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.5.9.tgz#21e2e88228876017aa0380330d656e5984b57220"
-  integrity sha512-ilWCTUwQq52le2Gux7EDWW5lB/hDNOVwX/yr+eXhfhE2rQMHkXPPjP8KcTrSVyKksQE3+PNcc7acO6mWD16N4A==
+"@onvo-ai/js@^0.14.19":
+  version "0.14.19"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/js/-/js-0.14.19.tgz#9530972d534d30c9879ecaab05ada61b94e059b2"
+  integrity sha512-s4MRzUyAYZi88+J67xg8InwORdn/sMWlEJ+NMZynkBE4xFIFh2lS/NAgIjJmWUckk9l3qV8BQkhC4AS3fC7TGA==
+  dependencies:
+    web-file-polyfill "^1.0.4"
+
+"@onvo-ai/react@^0.5.35":
+  version "0.5.35"
+  resolved "https://registry.yarnpkg.com/@onvo-ai/react/-/react-0.5.35.tgz#f767f6a8eedd7ae1255c98e800fde93ec582bc80"
+  integrity sha512-B3VFTx+jyoNnJAMtwqMqUS2K3r6FC/lfBvJ5Z6g3oakqkwEvQ3CtQBepRUJwwZA20ZzAgLetXReB1LrF53mPUw==
   dependencies:
     "@heroicons/react" "^2.1.5"
     "@internationalized/date" "^3.5.6"
     "@monaco-editor/react" "^4.6.0"
-    "@onvo-ai/js" "^0.14.0"
+    "@onvo-ai/chartjs-chart-map" "^0.0.134"
+    "@onvo-ai/js" "^0.14.18"
     "@r2wc/react-to-web-component" "^2.0.3"
     "@radix-ui/react-accordion" "^1.1.2"
     "@radix-ui/react-checkbox" "^1.0.4"
@@ -1763,13 +1793,17 @@
     "@radix-ui/react-tabs" "^1.0.4"
     "@radix-ui/react-tooltip" "^1.1.2"
     "@react-aria/datepicker" "^3.11.4"
+    "@react-google-maps/api" "^2.20.3"
     "@react-stately/datepicker" "^3.10.3"
     "@remixicon/react" "^4.5.0"
     "@storybook/addon-styling-webpack" "^1.0.0"
     "@tailwindcss/container-queries" "^0.1.1"
-    chart.js "^4.4.0"
+    chart.js "^4.4.1"
     chartjs-adapter-dayjs-4 "^1.0.4"
     chartjs-chart-funnel "^4.1.8"
+    chartjs-chart-matrix "^2.0.1"
+    chartjs-chart-sankey "^0.14.0"
+    chartjs-chart-wordcloud "^4.4.4"
     chartjs-gauge "^0.3.0"
     chartjs-plugin-datalabels "^2.2.0"
     chartjs-plugin-zoom "^2.1.0"
@@ -2366,6 +2400,28 @@
     "@swc/helpers" "^0.5.0"
     clsx "^2.0.0"
 
+"@react-google-maps/api@^2.20.3":
+  version "2.20.6"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/api/-/api-2.20.6.tgz#8463a4db10dd2764b14da4bfe942a584693eb4b3"
+  integrity sha512-frxkSHWbd36ayyxrEVopSCDSgJUT1tVKXvQld2IyzU3UnDuqqNA3AZE4/fCdqQb2/zBQx3nrWnZB1wBXDcrjcw==
+  dependencies:
+    "@googlemaps/js-api-loader" "1.16.8"
+    "@googlemaps/markerclusterer" "2.5.3"
+    "@react-google-maps/infobox" "2.20.0"
+    "@react-google-maps/marker-clusterer" "2.20.0"
+    "@types/google.maps" "3.58.1"
+    invariant "2.2.4"
+
+"@react-google-maps/infobox@2.20.0":
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/infobox/-/infobox-2.20.0.tgz#7c3dd1821c9f1e1e92570f37419b97f6f956c7ee"
+  integrity sha512-03PJHjohhaVLkX6+NHhlr8CIlvUxWaXhryqDjyaZ8iIqqix/nV8GFdz9O3m5OsjtxtNho09F/15j14yV0nuyLQ==
+
+"@react-google-maps/marker-clusterer@2.20.0":
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/marker-clusterer/-/marker-clusterer-2.20.0.tgz#6b64177843a60c66e0ebaf85037a47ecd07007df"
+  integrity sha512-tieX9Va5w1yP88vMgfH1pHTacDQ9TgDTjox3tLlisKDXRQWdjw+QeVVghhf5XqqIxXHgPdcGwBvKY6UP+SIvLw==
+
 "@react-stately/datepicker@^3.10.3":
   version "3.10.3"
   resolved "https://registry.yarnpkg.com/@react-stately/datepicker/-/datepicker-3.10.3.tgz#4c7ea07cc1e0d145c8ce1ad406ca44470e654c4c"
@@ -2730,6 +2786,18 @@
   dependencies:
     "@types/node" "*"
 
+"@types/d3-cloud@^1.2.9":
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/@types/d3-cloud/-/d3-cloud-1.2.9.tgz#82f7010de8fc4812eb8d68274befd84c7ca6f991"
+  integrity sha512-5EWJvnlCrqTThGp8lYHx+DL00sOjx2HTlXH1WRe93k5pfOIhPQaL63NttaKYIbT7bTXp/USiunjNS/N4ipttIQ==
+  dependencies:
+    "@types/d3" "^3"
+
+"@types/d3@^3":
+  version "3.5.53"
+  resolved "https://registry.yarnpkg.com/@types/d3/-/d3-3.5.53.tgz#2b4ffe34f7f40e14cc9556fd624370e4597d72f7"
+  integrity sha512-8yKQA9cAS6+wGsJpBysmnhlaaxlN42Qizqkw+h2nILSlS+MAG2z4JdO6p+PJrJ+ACvimkmLJL281h157e52psQ==
+
 "@types/debug@^4.0.0":
   version "4.1.12"
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.12.tgz#a155f21690871953410df4b6b6f53187f0500917"
@@ -2797,6 +2865,11 @@
     "@types/express-serve-static-core" "^4.17.33"
     "@types/qs" "*"
     "@types/serve-static" "*"
+
+"@types/google.maps@3.58.1":
+  version "3.58.1"
+  resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.58.1.tgz#71ce3dec44de1452f56641d2c87c7dd8ea964b4d"
+  integrity sha512-X9QTSvGJ0nCfMzYOnaVs/k6/4L+7F5uCS+4iUmkLEls6J9S/Phv+m/i3mDeyc49ZBgwab3EFO1HEoBY7k98EGQ==
 
 "@types/graceful-fs@^4.1.2":
   version "4.1.9"
@@ -4033,10 +4106,10 @@ chart.js@^2.8.0:
     chartjs-color "^2.1.0"
     moment "^2.10.2"
 
-chart.js@^4.4.0:
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-4.4.3.tgz#3b2e11e7010fefa99b07d0349236f5098e5226ad"
-  integrity sha512-qK1gkGSRYcJzqrrzdR6a+I0vQ4/R+SoODXyAjscQ/4mzuNzySaMCd+hyVxitSY1+L2fjPD1Gbn+ibNqRmwQeLw==
+chart.js@^4.4.1:
+  version "4.4.7"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-4.4.7.tgz#7a01ee0b4dac3c03f2ab0589af888db296d896fa"
+  integrity sha512-pwkcKfdzTMAU/+jNosKhNL2bHtJc/sSmYgVbuGTEDhzkrhmyihmP7vUc/5ZK9WopidMDHNe3Wm7jOd/WhuHWuw==
   dependencies:
     "@kurkle/color" "^0.3.0"
 
@@ -4052,6 +4125,24 @@ chartjs-chart-funnel@^4.1.8:
   dependencies:
     "@types/chroma-js" "^2.4.4"
     chroma-js "^2.4.2"
+
+chartjs-chart-matrix@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/chartjs-chart-matrix/-/chartjs-chart-matrix-2.0.1.tgz#f6f04413f244f6c08c4bfeee8a7117c64069c5a2"
+  integrity sha512-BGfeY+/PHnITyDlc7WfnKJ1RyOfgOzIqWp/gxzzl7pUjyoGzHDcw51qd2xJF9gdT9Def7ZwOnOMm8GJUXDxI0w==
+
+chartjs-chart-sankey@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/chartjs-chart-sankey/-/chartjs-chart-sankey-0.14.0.tgz#c6595168b1e9feffe193afff40ef125fc068e38e"
+  integrity sha512-MrU3lE73TE9kALy4MjWFlfcwf4R1EN/DBvhHxmv9n4AHap//JLKjlJTLIZwHsUjDsYo0B8PuMkrJODwfirEZUA==
+
+chartjs-chart-wordcloud@^4.4.4:
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/chartjs-chart-wordcloud/-/chartjs-chart-wordcloud-4.4.4.tgz#516dc40e1013163beb16150fe19daaa2b4f47900"
+  integrity sha512-9ruQX5CjfBwpO31mYqniD3BQ9YTCHxWe52eoUl9Z3ecNQWF3OCHeDVv7lHe8ca1NBihfCgoRa3Y0eBGwBmgwcw==
+  dependencies:
+    "@types/d3-cloud" "^1.2.9"
+    d3-cloud "^1.2.7"
 
 chartjs-color-string@^0.6.0:
   version "0.6.0"
@@ -4575,6 +4666,18 @@ csstype@^3.0.2:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.3.tgz#d80ff294d114fb0e6ac500fbf85b60137d7eff81"
   integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
+
+d3-cloud@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/d3-cloud/-/d3-cloud-1.2.7.tgz#5a733c4bae43238cbb4760bb8f2d15912a8ad7a5"
+  integrity sha512-8TrgcgwRIpoZYQp7s3fGB7tATWfhckRb8KcVd1bOgqkNdkJRDGWfdSf4HkHHzZxSczwQJdSxvfPudwir5IAJ3w==
+  dependencies:
+    d3-dispatch "^1.0.3"
+
+d3-dispatch@^1.0.3:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/d3-dispatch/-/d3-dispatch-1.0.6.tgz#00d37bcee4dd8cd97729dd893a0ac29caaba5d58"
+  integrity sha512-fVjoElzjhCEy+Hbn8KygnmMS7Or0a9sI2UzGwoB7cCtvI1XpVN9GpoYlnb3xt2YV66oXYb1fLJ8GMvP4hdU1RA==
 
 damerau-levenshtein@^1.0.8:
   version "1.0.8"
@@ -6325,7 +6428,7 @@ intl-messageformat@^10.1.0:
     "@formatjs/icu-messageformat-parser" "2.7.8"
     tslib "^2.4.0"
 
-invariant@^2.2.4:
+invariant@2.2.4, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -7338,6 +7441,11 @@ jwt-decode@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-4.0.0.tgz#2270352425fd413785b2faf11f6e755c5151bd4b"
   integrity sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==
+
+kdbush@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/kdbush/-/kdbush-4.0.2.tgz#2f7b7246328b4657dd122b6c7f025fbc2c868e39"
+  integrity sha512-WbCVYJ27Sz8zi9Q7Q0xHC+05iwkm3Znipc2XTlrnJbsHMYktW4hPhXUE8Ys1engBrvffoSCqbil1JQAa7clRpA==
 
 keyv@^4.5.3:
   version "4.5.4"
@@ -10124,6 +10232,11 @@ signal-exit@^4.0.1:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-4.1.0.tgz#952188c1cbd546070e2dd20d0f41c0ae0530cb04"
   integrity sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==
 
+simplify-js@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/simplify-js/-/simplify-js-1.2.4.tgz#7aab22d6df547ffd40ef0761ccd82b75287d45c7"
+  integrity sha512-vITfSlwt7h/oyrU42R83mtzFpwYk3+mkH9bOHqq/Qw6n8rtR7aE3NZQ5fbcyCUVVmuMJR6ynsAhOfK2qoah8Jg==
+
 sisteransi@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.5.tgz#134d681297756437cc05ca01370d3a7a571075ed"
@@ -10484,6 +10597,13 @@ sucrase@^3.32.0:
     mz "^2.7.0"
     pirates "^4.0.1"
     ts-interface-checker "^0.1.9"
+
+supercluster@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/supercluster/-/supercluster-8.0.1.tgz#9946ba123538e9e9ab15de472531f604e7372df5"
+  integrity sha512-IiOea5kJ9iqzD2t7QJq/cREyLHTtSmUT6gQsweojg9WH2sYJqZK9SswTu6jrscO6D1G5v5vYZ9ru/eq85lXeZQ==
+  dependencies:
+    kdbush "^4.0.2"
 
 supports-color@^5.3.0:
   version "5.5.0"

@@ -79,10 +79,7 @@ const ChartBase: React.FC<{
       output.options.plugins?.subtitle?.text?.trim() !== "";
 
     output.options.plugins.title = {
-      display:
-        settings && settings.title_hidden === true
-          ? false
-          : output.options.plugins?.title?.display || true,
+      display: (title || output.options.plugins.title?.text || "").trim() === "" ? false : true,
       text: title || output.options.plugins.title?.text || "",
       align: output.options.plugins.title?.align || "start",
       position: output.options.plugins.title?.position || "top",
