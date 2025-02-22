@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/react",
-  "version": "0.5.41",
+  "version": "0.5.42",
   "description": "The react SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "module": "dist/esm/index.js",
@@ -75,7 +75,7 @@
     "react-multi-email": "^1.0.25",
     "react-simple-wysiwyg": "^3.0.2",
     "remark-gfm": "^4.0.0",
-    "sonner": "^1.5.0",
+    "sonner": "^2.0.1",
     "tailwind-merge": "^2.3.0",
     "tailwind-variants": "^0.2.1",
     "use-prefers-color-scheme": "^1.1.3",
