@@ -1,6 +1,6 @@
 {
   "name": "@onvo-ai/web-components",
-  "version": "0.0.53",
+  "version": "0.0.54",
   "description": "The web component SDK for Onvo AI dashboard builder",
   "repository": "https://github.com/onvo-ai/sdks",
   "type": "module",
@@ -8,7 +8,7 @@
   "main": "build/static/js/main.js",
   "dependencies": {
     "@onvo-ai/js": "^0.14.19",
-    "@onvo-ai/react": "^0.5.47",
+    "@onvo-ai/react": "^0.5.48",
     "@r2wc/react-to-web-component": "2.0.1",
     "loader-utils": "3.2.1",
     "react": "18.2.0",
