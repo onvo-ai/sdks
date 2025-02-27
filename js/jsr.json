@@ -1,5 +1,0 @@
-{
-  "name": "@onvo/js",
-  "version": "0.13.19",
-  "exports": "./src/index.ts"
-}
