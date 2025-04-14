@@ -144,3 +144,8 @@ lib/
 # Ruby
 .yardoc
 doc
+
+.vscode
+
+# Go
+*.exe
