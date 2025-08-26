@@ -7,13 +7,15 @@ const OnvoDashboard = ({
   userToken,
   baseUrl,
   dashboardId,
+  googleMapsApiKey,
 }: {
   userToken: string;
   baseUrl: string;
   dashboardId: string;
+  googleMapsApiKey: string;
 }) => {
   return (
-    <Wrapper token={userToken} baseUrl={baseUrl}>
+    <Wrapper token={userToken} baseUrl={baseUrl} googleMapsApiKey={googleMapsApiKey}>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@onvo-ai/react/dist/styles.css" />
       <style>{css}</style>
       <Dashboard id={dashboardId} />
@@ -26,5 +28,6 @@ export const DashboardWC = r2wc(OnvoDashboard, {
     userToken: "string",
     baseUrl: "string",
     dashboardId: "string",
+    googleMapsApiKey: "string",
   },
 });

@@ -4,29 +4,27 @@ This web components package can be used to display the list of dashboards availa
 
 ## Installation
 
-You can install this UI library using npm or yarn:
+In your frontend environment, install the @onvo-ai/react package, this lets you display the list of dashboards, individual dashboards, and the copilot component.
 
-```bash
+```html
+<script src="http://cdn.jsdelivr.net/npm/@onvo-ai/web-components"></script>
+```
+
+```sh
 npm install @onvo-ai/web-components
 ```
 
-```bash
+```sh
 yarn add @onvo-ai/web-components
-```
-
-You can also include it as a script tag in your html web pages
-
-```html
-<!-- Load the latest version (RECOMMENDED) -->
-<script src="http://cdn.jsdelivr.net/npm/@onvo-ai/web-components"></script>
-
-<!-- Load a specific version -->
-<script src="http://cdn.jsdelivr.net/npm/@onvo-ai/web-components@0.0.16"></script>
 ```
 
 ## Usage
 
-To use this demo UI library in your project, import the components you need from the library and use them in your React components.
+Begin by creating an API key by going to https://dashboard.onvo.ai/settings/api-keys , filling in a name for your API key and clicking Generate.
+
+Next, use this token to setup a backend endpoint that can fetch the user access token from a secure environment.
+
+You can then use this token to render the web components in your frontend environment.
 
 ```html
 <script src="http://cdn.jsdelivr.net/npm/@onvo-ai/web-components"></script>
@@ -60,31 +58,59 @@ To use this demo UI library in your project, import the components you need from
 ></onvo-copilot>
 ```
 
-## Copilot component
+## Library reference
 
-You can also programmatically control the opening and closing of the copilot component using the `Onvo.setCopilotOpen()` method
+### Dashboard List
 
-```javascript
-// Opening the copilot component
-Onvo.setCopilotOpen(true);
+The Dashboard list provides a list of all the dashboards an embed user has access to. You can render it as a list or as a grid and you get a callback when a dashboard is clicked.
 
-// Closing the copilot component
-Onvo.setCopilotOpen(false);
+```html
+<script>
+  function clickHandler(dashboard) {
+    console.log("Dashboard clicked");
+    console.log(dashboard);
+  }
+</script>
+
+<onvo-dashboard-list
+  base-url="https://dashboard.onvo.ai"
+  list-variant="list|grid"
+  on-click-item="clickHandler"
+  num-columns="3"
+  user-token="..."
+></onvo-dashboard-list>
 ```
 
-## Contributing
+### Dashboard
 
-You can fork the repository and make a pull request with your changes. Make sure to also update the docs with any relevant changes you have made.
+This component is used to show a single dashboard.
 
-### Steps
+```html
+<onvo-dashboard
+  base-url="https://dashboard.onvo.ai"
+  user-token="..."
+  dashboard-id="31f4f9ec-3881-448a-b3e7-02485290ca9f"
+></onvo-dashboard>
+```
 
-- Fork the repository.
-- Clone the repository to your local machine.
-- Install the dependencies using `npm install`.
-- View the components in the browser using `npm run storybook`.
-- Make your changes.
-- Test the changes using `npm test`.
-- Build the library using `npm run build`.
-- Commit the changes and push them to your forked repository.
-- Publish the package on [npm](https://www.npmjs.com/).
-- Install and use the package in your project.
+### Copilot
+
+This component allows a user to ask questions to the dashboard and create new widgets. You can also programmatically control the opening and closing of the copilot component using the `Onvo.setCopilotOpen()` method
+
+```html
+<onvo-copilot
+  base-url="https://dashboard.onvo.ai"
+  user-token="..."
+  icon-variant="none|small|large"
+  dashboard-id="31f4f9ec-3881-448a-b3e7-02485290ca9f"
+  copilot-variant="fullscreen|copilot"
+></onvo-copilot>
+
+<script>
+  // Opening the copilot component
+  Onvo.setCopilotOpen(true);
+
+  // Closing the copilot component
+  Onvo.setCopilotOpen(false);
+</script>
+```
