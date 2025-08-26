@@ -86,6 +86,7 @@ const OnvoCopilot = ({
   iconVariant,
   buttonRightOffset,
   buttonBottomOffset,
+  googleMapsApiKey,
 }: {
   userToken: string;
   baseUrl: string;
@@ -94,9 +95,10 @@ const OnvoCopilot = ({
   iconVariant: "none" | "small" | "large";
   buttonRightOffset: number;
   buttonBottomOffset: number;
+  googleMapsApiKey: string;
 }) => {
   return (
-    <Wrapper token={userToken} baseUrl={baseUrl}>
+    <Wrapper token={userToken} baseUrl={baseUrl} googleMapsApiKey={googleMapsApiKey}>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@onvo-ai/react/dist/styles.css" />
       <style>{css}</style>
       <Copilot
@@ -118,5 +120,6 @@ export const CopilotWC = r2wc(OnvoCopilot, {
     iconVariant: "string",
     buttonRightOffset: "number",
     buttonBottomOffset: "number",
+    googleMapsApiKey: "string",
   },
 });
